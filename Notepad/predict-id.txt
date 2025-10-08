@@ -4,26 +4,26 @@
 
 
 =====DATABASE YANG DIUBAH=====
-ALTER TABLE `leadspeek_users` 
+ALTER TABLE `leadspeek_users` ✅
 - tambahkan enum leadspeek_type 'predict'
 
-CREATE TABLE `leadspeek_businnes_lists`
+CREATE TABLE `leadspeek_business_lists` ✅
 - id BIGINT autoincrement
 - slug VARCHAR(50) DEFAULT NULL
 - name VARCHAR(50) DEFAULT NULL
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
-CREATE TABLE `leadspeek_crm_lists`
+CREATE TABLE `leadspeek_crm_lists`✅
 - id BIGINT autoincrement
 - slug VARCHAR(50) DEFAULT NULL
 - name VARCHAR(50) DEFAULT NULL
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
-CREATE TABLE `leadspeek_businnes`
+CREATE TABLE `leadspeek_business` ✅
 - id BIGINT autoincrement
-- leadspeek_api_id VARCHAR(20) DEFAULT NULL
+- leadspeek_api_id VARCHAR(20) DEFAULT NULL -> jangan lupa samakan collate nya di sandbox dan live
 - website VARCHAR(255) DEFAULT NULL -> Website
 - business_type ENUM('b2c','b2b') DEFAULT 'b2c' -> Campaign Type
 - business_name varchar(255) DEFAULT NULL -> Campaign name
@@ -31,18 +31,15 @@ CREATE TABLE `leadspeek_businnes`
 - business_specify VARCHAR(255) DEFAULT NULL -> Please specify your industry
 - business_description TEXT DEFAULT NULL -> What does your business do?
 - business_competitors TEXT DEFAULT NULL -> Who are your main competitors?
-- national_targeting ENUM('T', 'F') DEFAULT F -> Your Ideal Customers are from National Targeting
-- state VARCHAR(255) DEFAULT NULL -> Your Ideal Customers are from State
-- zip TEXT DEFAULT NULL -> Your Ideal Customers are from ZIP
 - upload_customer_list VARCHAR(100) DEFAULT NULL -> How would you like to upload your customer list?
 - crm_id TINYINT UNSIGNED DEFAULT NULL -> Connect your CRM
 - crm_key TEXT DEFAULT NULL -> CRM API Key
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
-CREATE TABLE `leadspeek_customer`
+CREATE TABLE `leadspeek_customers` ✅
 - id BIGINT autoincrement
-- leadspeek_api_id VARCHAR(20) DEFAULT NULL
+- leadspeek_api_id VARCHAR(20) DEFAULT NULL -> jangan lupa samakan collate nya di sandbox dan live
 - media_id int
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
