@@ -1,0 +1,536 @@
+AGENCY COMPANY ID = 121
+{"local":{"Monthly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.2"}}
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.2"}}
+', '8e651522e38256f2'))
+WHERE id = 109 and company_id = 121;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"2.00","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.2"}}
+', '8e651522e38256f2'))
+WHERE id = 144 and company_id = 121;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"1.21","LeadspeekCostperlead":"1.21","LeadspeekMinCostMonth":"1.21","LeadspeekLeadsPerday":"10"},"Monthly":{"LeadspeekPlatformFee":"1.22","LeadspeekCostperlead":"1.22","LeadspeekMinCostMonth":"1.22","LeadspeekLeadsPerday":"10"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Prepaid":{"LeadspeekPlatformFee":"1.23","LeadspeekCostperlead":"1.23","LeadspeekMinCostMonth":"1.23"}},"locator":{"Weekly":{"LocatorPlatformFee":"1.3","LocatorCostperlead":"1.3","LocatorMinCostMonth":"1.3","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.3"},"Monthly":{"LocatorPlatformFee":"1.3","LocatorCostperlead":"1.3","LocatorMinCostMonth":"1.3","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.3"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.3"},"Prepaid":{"LocatorPlatformFee":"1.3","LocatorCostperlead":"1.3","LocatorMinCostMonth":"1.3"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.3"}}
+', '8e651522e38256f2'))
+WHERE id = 143 and company_id = 133;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0.7","LeadspeekCostperlead":"0.9","LeadspeekMinCostMonth":"0.8","LeadspeekLeadsPerday":"2"},"Monthly":{"LeadspeekPlatformFee":"0.3","LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0.4","LeadspeekLeadsPerday":"3"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0.4","LeadspeekPlatformFee":"0.3"}},"locator":{"Weekly":{"LocatorPlatformFee":"0.5","LocatorCostperlead":"1.6","LocatorMinCostMonth":"1","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.6"},"Monthly":{"LocatorPlatformFee":"0.64","LocatorCostperlead":"1.6","LocatorMinCostMonth":"0.64","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.6"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.6","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"1.6"},"Prepaid":{"LocatorCostperlead":"1.23","LocatorMinCostMonth":"1.5","LocatorPlatformFee":"1.4"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.6"},"enhance":{"Weekly":{"EnhancePlatformFee":"0.25","EnhanceCostperlead":"1","EnhanceMinCostMonth":"0.5","EnhanceLeadsPerday":"10"},"Monthly":{"EnhancePlatformFee":"0.45","EnhanceCostperlead":"0.21","EnhanceMinCostMonth":"0.65","EnhanceLeadsPerday":"10"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"10"},"Prepaid":{"EnhanceCostperlead":"1.9","EnhanceMinCostMonth":"1.8","EnhancePlatformFee":"1.7"}}}', '8e651522e38256f2'))
+WHERE id = 127 and company_id = 90;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"},"enhance":{"name":"Enhance ID","url":"enhanceid"}}', '8e651522e38256f2'))
+WHERE id = 16 and company_id = 22;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"1.23","LeadspeekCostperlead":"1.23","LeadspeekMinCostMonth":"1.23","LeadspeekLeadsPerday":"0"},"Monthly":{"LeadspeekPlatformFee":"1.23","LeadspeekCostperlead":"1.23","LeadspeekMinCostMonth":"1.23","LeadspeekLeadsPerday":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"0"},"Prepaid":{"LeadspeekPlatformFee":"1.23","LeadspeekCostperlead":"1.23","LeadspeekMinCostMonth":"1.23","LeadspeekLeadsPerday":"50"}},"locator":{"Weekly":{"LocatorPlatformFee":"0.50","LocatorCostperlead":"0.50","LocatorMinCostMonth":"0.50","LocatorLeadsPerday":"10","LeadspeekLeadsPerday":"0"},"Monthly":{"LocatorPlatformFee":"0.51","LocatorCostperlead":"0.51","LocatorMinCostMonth":"0.51","LocatorLeadsPerday":"10","LeadspeekLeadsPerday":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekLeadsPerday":"0"},"Prepaid":{"LocatorPlatformFee":"0.53","LocatorCostperlead":"0.53","LocatorMinCostMonth":"0.53","LocatorLeadsPerday":"10"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"0"}}', '8e651522e38256f2'))
+WHERE id = 141 and company_id = 134;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":".10","LeadspeekMinCostMonth":"5"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"}},"locator":{"Weekly":{"LocatorPlatformFee":"100","LocatorCostperlead":"0.5","LocatorMinCostMonth":"2"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0.95","LocatorMinCostMonth":"0"}}}', '8e651522e38256f2'))
+WHERE id = 5 and company_id = 1;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"}}', '8e651522e38256f2'))
+WHERE id = 16 and company_id = 22;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"},"enhance":{"name":"Enhance ID","url":"enhanceid"}}', '8e651522e38256f2'))
+WHERE id = 16 and company_id = 22;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 149 and company_id = 22;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"0.80","clientcapleadpercentage":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 149 and company_id = 22;
+
+
+==========================================================================rootcostagency==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"1.25","LeadspeekMinCostMonth":"1","LeadspeekPlatformFee":"0.5"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.95","LeadspeekMinCostMonth":"0.75","LeadspeekPlatformFee":"0.5"},"Prepaid":{"LeadspeekCostperlead":"1","LeadspeekMinCostMonth":"0.75","LeadspeekPlatformFee":"0.25"}},"locator":{"Monthly":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"1","LocatorPlatformFee":"0.5"},"OneTime":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"0.65","LocatorPlatformFee":"0.35"},"Prepaid":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"0.75","LocatorPlatformFee":"0.25"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.8"}}', '8e651522e38256f2'))
+WHERE id = 14 and company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.4"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE id = 14 and company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.6","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.6","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.6","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.6"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE id = 14 and company_id = 22;
+==========================================================================rootcostagency==========================================================================
+
+==========================================================================costagency==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0.3","LeadspeekPlatformFee":"0.2"},"OneTime":{"LeadspeekCostperlead":"0.65","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.3","LeadspeekMinCostMonth":"0.2","LeadspeekPlatformFee":"0.1"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0.4","LeadspeekPlatformFee":"0.3"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0.3","LocatorPlatformFee":"0.2"},"OneTime":{"LocatorCostperlead":"0.95","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.3","LocatorMinCostMonth":"0.2","LocatorPlatformFee":"0.1"},"Prepaid":{"LocatorCostperlead":"0.5","LocatorMinCostMonth":"0.4","LocatorPlatformFee":"0.3"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.95"}}', '8e651522e38256f2'))
+WHERE id = 70 and company_id = 85;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0.3","LeadspeekPlatformFee":"0.2"},"OneTime":{"LeadspeekCostperlead":"0.65","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.3","LeadspeekMinCostMonth":"0.2","LeadspeekPlatformFee":"0.1"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0.4","LeadspeekPlatformFee":"0.3"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0.3","LocatorPlatformFee":"0.2"},"OneTime":{"LocatorCostperlead":"0.95","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.3","LocatorMinCostMonth":"0.2","LocatorPlatformFee":"0.1"},"Prepaid":{"LocatorCostperlead":"0.5","LocatorMinCostMonth":"0.4","LocatorPlatformFee":"0.3"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.95"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.23","EnhanceMinCostMonth":"0.22","EnhancePlatformFee":"0.21"},"OneTime":{"EnhanceCostperlead":"0.95","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.13","EnhanceMinCostMonth":"0.12","EnhancePlatformFee":"0.11"},"Prepaid":{"EnhanceCostperlead":"0.33","EnhanceMinCostMonth":"0.32","EnhancePlatformFee":"0.31"}}}', '8e651522e38256f2'))
+WHERE id = 70 and company_id = 85;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.3"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE id = 202 and company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.3"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Weekly":{"B2bCostperlead":"0.8","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"0.8","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.8","B2bMinCostMonth":"0","B2bPlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE id = 202 and company_id = 164;
+==========================================================================costagency==========================================================================
+
+==========================================================================clientdefaultprice==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"3.11","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"4.11","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"5.11","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"3.22","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"4.22","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"5.22","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"3.33","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"4.33","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"5.33","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"8"}}', '8e651522e38256f2'))
+WHERE id = 216 and company_id = 165;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"3.11","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"3.12","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"3.13","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"5"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"3.21","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"3.22","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6","LeadspeekCostperlead":"8"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"3.23","LocatorMinCostMonth":"0","LocatorLeadsPerday":"6"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"3.31","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"3.32","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"3.33","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"7"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"8"}}', '8e651522e38256f2'))
+WHERE id = 216 and company_id = 165;
+==========================================================================clientdefaultprice==========================================================================
+
+==========================================================================agencydefaultprice==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.11","LeadspeekMinCostMonth":"0"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.12","LeadspeekMinCostMonth":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.13","LeadspeekMinCostMonth":"0"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.21","LocatorMinCostMonth":"0"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.22","LocatorMinCostMonth":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.23","LocatorMinCostMonth":"0"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.23"}}', '8e651522e38256f2'))
+WHERE id = 215 and company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.11","LeadspeekMinCostMonth":"0"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.12","LeadspeekMinCostMonth":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.13","LeadspeekMinCostMonth":"0"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.21","LocatorMinCostMonth":"0"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.22","LocatorMinCostMonth":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.23","LocatorMinCostMonth":"0"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.31","EnhanceMinCostMonth":"0"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.32","EnhanceMinCostMonth":"0"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.33","EnhanceMinCostMonth":"0"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.23"}}', '8e651522e38256f2'))
+WHERE id = 215 and company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.11","LeadspeekMinCostMonth":"0"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.12","LeadspeekMinCostMonth":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1.13","LeadspeekMinCostMonth":"0"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.21","LocatorMinCostMonth":"0"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.22","LocatorMinCostMonth":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.23","LocatorMinCostMonth":"0"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.31","EnhanceMinCostMonth":"0"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.32","EnhanceMinCostMonth":"0"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"1.33","EnhanceMinCostMonth":"0"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.23"},"b2b":{"Weekly":{"B2bCostperlead":"1.41","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"1.42","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"1.43","B2bMinCostMonth":"0","B2bPlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE id = 215 and company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"4","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"7","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"2","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"5","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"8","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"3.11","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"25"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"6.1","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"25"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"25"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"9","EnhanceMinCostMonth":"0","EnhanceLeadsPerday":"25"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"8"}}', '8e651522e38256f2'))
+WHERE id = 218 and company_id = 167;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"1","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"4","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"7","LeadspeekMinCostMonth":"0","LeadspeekLeadsPerday":"10"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"2","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"5","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10","LeadspeekCostperlead":"8"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"8","LocatorMinCostMonth":"0","LocatorLeadsPerday":"10"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"8"}}', '8e651522e38256f2'))
+WHERE id = 218 and company_id = 167;
+==========================================================================agencydefaultprice==========================================================================
+
+==========================================================================customsidebarleadmenu==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"},"enhance":{"name":"Enhance ID","url":"enhanceid"}}', '8e651522e38256f2'))
+WHERE id = 169 AND company_id = 85;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID ACH","url":"siteidach"},"locator":{"name":"Search ID ACH","url":"searchidach"},"enhance":{"name":"Enhance ID ACH","url":"enhanceidach"}}', '8e651522e38256f2'))
+WHERE id = 495 AND company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID ACH","url":"siteidach"},"locator":{"name":"Search ID ACH","url":"searchidach"},"enhance":{"name":"Enhance ID ACH","url":"enhanceidach"},"b2b":{"name":"B2B ID ACH","url":"b2bidach"}}', '8e651522e38256f2'))
+WHERE id = 495 AND company_id = 164;
+==========================================================================customsidebarleadmenu==========================================================================
+
+==========================================================================rootcustomsidebarleadmenu==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"}}', '8e651522e38256f2'))
+WHERE id = 16 AND company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID Root","url":"siteidroot"},"locator":{"name":"Search ID Root","url":"searchidroot"},"enhance":{"name":"Enhance ID Root","url":"enhanceidroot"}}', '8e651522e38256f2'))
+WHERE id = 16 AND company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID Root","url":"siteidroot"},"locator":{"name":"Search ID Root","url":"searchidroot"},"enhance":{"name":"Enhance ID Root","url":"enhanceidroot"},"b2b":{"name":"B2B ID Root","url":"b2bidroot"}}', '8e651522e38256f2'))
+WHERE id = 16 AND company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 172 AND company_id = 85;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site AI","url":"siteai"},"locator":{"name":"Search AI","url":"searchai"}}', '8e651522e38256f2'))
+WHERE id = 26 AND company_id = 39;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site AI","url":"siteai"},"locator":{"name":"Search AI","url":"searchai"},"enhance":{"name":"Enhance AI","url":"enhanceai"}}', '8e651522e38256f2'))
+WHERE id = 25 AND company_id = 39;
+==========================================================================rootcustomsidebarleadmenu==========================================================================
+
+==========================================================================rootdefaultmodules==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true}]}', '8e651522e38256f2'))
+WHERE id = 629 AND company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 629 AND company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}', '8e651522e38256f2'))
+WHERE id = 629 AND company_id = 22;
+==========================================================================rootdefaultmodules==========================================================================
+
+
+==========================================================================agencysidebar==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 AND company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 AND company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":false},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 AND company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 AND company_id = 164;
+==========================================================================agencysidebar==========================================================================
+
+
+==========================================================================agencydefaultmodules==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 257 AND company_id = 164;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}', '8e651522e38256f2'))
+WHERE id = 257 AND company_id = 164;
+==========================================================================agencydefaultmodules==========================================================================
+
+==========================================================================clientsidebar==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE id = 205 AND company_id = 165;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}', '8e651522e38256f2'))
+WHERE id = 205 AND company_id = 165;
+==========================================================================clientsidebar==========================================================================
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"testmode":{"nonwhitelabelling":{"monthly":"price_1Ni6hMDM4tqHDWNMltqptvcA","monthlyprice":"48","yearly":"price_1Ni6hMDM4tqHDWNMrgu596V3","yearlyprice":"576"},"whitelabeling":{"monthly":"price_1Ni6fiDM4tqHDWNMplAq0l1w","monthlyprice":"149","yearly":"price_1Ni6fiDM4tqHDWNMvGL2froM","yearlyprice":"1500"},"free":"price_1Ni6ifDM4tqHDWNMxJtmKoWl","freeprice":"0"},"livemode":{"nonwhitelabelling":{"monthly":"xx","monthlyprice":"0","yearly":"xx","yearlyprice":"0"},"whitelabeling":{"monthly":"xx","monthlyprice":"0","yearly":"xx","yearlyprice":"0"},"free":"xx","freeprice":"0"}}', '8e651522e38256f2'))
+WHERE id = 26 AND company_id = 39;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"1","LeadspeekCostperlead":"3","LeadspeekMinCostMonth":"2"},"Monthly":{"LeadspeekPlatformFee":"1","LeadspeekCostperlead":"1","LeadspeekMinCostMonth":"1"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekCostperlead":"1.4","LeadspeekMinCostMonth":"1.3","LeadspeekPlatformFee":"1.2"}},"locator":{"Weekly":{"LocatorPlatformFee":"0.5","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0.6"},"Monthly":{"LocatorPlatformFee":"0.7","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0.8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorCostperlead":"1.1","LocatorMinCostMonth":"1","LocatorPlatformFee":"0.9"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.1"}}', '8e651522e38256f2'))
+WHERE id = 79 and company_id = 85;
+
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Weekly":{"LeadspeekPlatformFee":"1","LeadspeekCostperlead":"3","LeadspeekMinCostMonth":"2"},"Monthly":{"LeadspeekPlatformFee":"1","LeadspeekCostperlead":"1","LeadspeekMinCostMonth":"1"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekCostperlead":"1.4","LeadspeekMinCostMonth":"1.3","LeadspeekPlatformFee":"1.2"}},"locator":{"Weekly":{"LocatorPlatformFee":"0.5","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0.6"},"Monthly":{"LocatorPlatformFee":"0.7","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0.8"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"1.1","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorCostperlead":"1.1","LocatorMinCostMonth":"1","LocatorPlatformFee":"0.9"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"1.1"},"enhance":{"Weekly":{"EnhancePlatformFee":"0.25","EnhanceCostperlead":"1","EnhanceMinCostMonth":"0.5"},"Monthly":{"EnhancePlatformFee":"0.45","EnhanceCostperlead":"0.21","EnhanceMinCostMonth":"0.65"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0"},"Prepaid":{"EnhanceCostperlead":"1.9","EnhanceMinCostMonth":"1.8","EnhancePlatformFee":"1.7"}}}
+', '8e651522e38256f2'))
+WHERE id = 79 and company_id = 85;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"0.80","clientcapleadpercentage":"","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"50","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"50","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+
+
+
+INSERT INTO company_settings (company_id, setting_name, setting_value, created_at, updated_at)
+VALUES(
+    22,
+    TO_BASE64(AES_ENCRYPT('abc', '8e651522e38256f2')),
+    TO_BASE64(AES_ENCRYPT('abc', '8e651522e38256f2')),
+    now(),
+    now()
+);
+
+
+==========================================================================rootminspend==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"enabled":"T","startobilldays":"60","startobillmonths":"2","minspend":"500","excludecompanyid":"872,977,962,1007,1023"}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootminspend' and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"enabled":"T","startobilldays":"60","startobillmonths":"2","minspend":"30","excludecompanyid":"872,977,962,1007,1023"}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootminspend' and company_id = 22;
+==========================================================================rootminspend==========================================================================
+
+
+
+==========================================================================rootsetting==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"0.8","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"50","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"0.8","clientcapleadpercentage":"","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"50","clientminleadday":"25","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 183 and company_id = 22;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 184 and company_id = 39;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"0.8","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 184 and company_id = 39;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"50","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 184 and company_id = 39;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"defaultfreeplan":"T","defaultpaymentterm":"Prepaid","defaultagencypercentagecommission":"0.10","clientcaplead":"","clientcapleadpercentage":"","clientminleadday":"","deadlinedistribution":"21"}', '8e651522e38256f2'))
+WHERE id = 184 and company_id = 39;
+==========================================================================rootsetting==========================================================================
+
+
+==========================================================================rootfee==========================================================================
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "62.5","feepercentagedom": "37.5","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootcomsr":"acct_1O7AfpEju4Cax7y5","rootcomae":"acct_1O7AfpEju4Cax7y5"}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","rootfeeaccid":"","rootcomsr":"","rootcomae":""}', '8e651522e38256f2'))
+WHERE id = 55 and company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob": "","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE id = 55 and company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "62.5","feepercentagedom": "37.5","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootcomsr":"","rootcomae":""}
+', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "13.4","feepercentagemob": "33","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootfeeaccidmob":"acct_1O6lrQRWePGsh3sz","rootcomsr":"","rootcomae":""}
+', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "13.4","feepercentagemob": "33","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootfeeaccidmob":"acct_1O6lrQRWePGsh3sz","rootcomsr":"acct_1O7AfpEju4Cax7y5","rootcomsrval":"0.5","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "13.4","feepercentagemob": "33","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootfeeaccidmob":"acct_1O6lrQRWePGsh3sz","rootcomsr":"acct_1O7AfpEju4Cax7y5","rootcomsrval":"0.8","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "13.4","feepercentagemob": "33","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootfeeaccidmob":"acct_1O6lrQRWePGsh3sz","rootcomsr":"acct_1O7AfpEju4Cax7y5","rootcomsrval":"0.5","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+-- UNTUK GO MOBILE
+UPDATE company_settings 
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.10","feesearchid":"1.29","feeenhanceid":"0.25","feepercentageemm": "53.6","feepercentagedom": "13.4","feepercentagemob": "33","rootfeeaccid":"acct_1NmwbjRZMZ1VVyLL","rootcomsr":"acct_1O7AfpEju4Cax7y5","rootcomae":"acct_1O7AfpEju4Cax7y5"}', '8e651522e38256f2'))
+
+-- SETINGAN ROOR FEE TERBARU
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob": "","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2')) WHERE id = 55 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob": "","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2')) WHERE id = 55 and company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feeb2b":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob":"","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2')) WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootfee' and company_id = 22;
+
+jika di mobile "rootfeeaccid" ini punya mobile dan "rootfeeaccidmob" ini punya dominator
+jika di dominator "rootfeeaccid" ini punya dominator dan "rootfeeaccidmob" ini punya mobile, tapi dalam hal dominator kita tidak transfer ke situ
+nilai 0.2, 0.25, 0.3, 0.35 itu hanya dummy untuk test 
+logic unik
+- jika rootcomfeeval ini ada value, maka akan override rootcomsr
+- jika rootcomfeeval1 ini ada value, maka akan override rootcomae
+-- mobile
+{"feesiteid":"0.1","feesearchid":"1.80","feeenhance":"0.25","feeb2b":"0.25","feepercentageemm": "53.6","feepercentagedom": "33","feepercentagemob": "13.4","rootfeeaccid":"aaa","rootfeeaccidmob":"bbb","rootcomfee":"ccc","rootcomfeeval":"0.1","rootcomfee1":"ddd","rootcomfeeval1":"0.12","rootcomsr":"eee","rootcomsrval":"0.14","rootcomae":"fff","rootcomaeval":"0.16"}
+--dominator
+{"feesiteid":"0.1","feesearchid":"1.80","feeenhance":"0.25","feeb2b":"0.25","feepercentageemm": "62.5","feepercentagedom": "37.5","feepercentagemob": "","rootfeeaccid":"aaa","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"eee","rootcomsrval":"0.1","rootcomae":"fff","rootcomaeval":"0.1"}
+--emm
+{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feeb2b":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob":"","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}
+==========================================================================rootfee==========================================================================
+
+
+
+==========================================================================rootsmtp==========================================================================
+{"host":"smtp.gmail.com","port":"465","username":"agieswahyudi@gmail.com","password":"azmm lqvh fniy nzpd","security":"ssl"}
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feeb2b":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob":"","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2')) WHERE id = 55 and company_id = 22;
+==========================================================================rootsmtp==========================================================================
+
+==========================================================================agencyplan==========================================================================
+-- EMM
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"testmode":{"nonwhitelabelling":{"monthly":"price_1MBJuTCm8XcQag44Mek0vZ2l","monthlyprice":"48","yearly":"price_1MBJuTCm8XcQag44Tkr2XrGL","yearlyprice":"576"},"whitelabeling":{"monthly":"price_1MBJvXCm8XcQag44R8l5uFTR","monthlyprice":"149","yearly":"price_1MBJvXCm8XcQag44tsbir3Fj","yearlyprice":"1500"},"free":"price_1M6v81Cm8XcQag44pvgpAf1D","freeprice":"0"},"livemode":{"nonwhitelabelling":{"monthly":"price_1MBWmhCm8XcQag44eGhk0k3Z","monthlyprice":"48","yearly":"price_1MBWmhCm8XcQag44hRNP5Oeh","yearlyprice":"576"},"whitelabeling":{"monthly":"price_1MBWnOCm8XcQag44bOCL5PCc","monthlyprice":"149","yearly":"price_1MBWnOCm8XcQag44N2sSQu5I","yearlyprice":"1500"},"free":"price_1MBWo7Cm8XcQag44lhijmoNW","freeprice":"0"}}', '8e651522e38256f2')) WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencyplan' and company_id = 22;
+
+-- JIDAN
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"testmode":{"nonwhitelabelling":{"monthly":"price_1MBJuTCm8XcQag44Mek0vZ2l","monthlyprice":"48","yearly":"price_1MBJuTCm8XcQag44Tkr2XrGL","yearlyprice":"576"},"whitelabeling":{"monthly":"price_1MBJvXCm8XcQag44R8l5uFTR","monthlyprice":"149","yearly":"price_1MBJvXCm8XcQag44tsbir3Fj","yearlyprice":"1500"},"free":"price_1R29gaRwyPH0xNSi9OIW1KDY","freeprice":"0"},"livemode":{"nonwhitelabelling":{"monthly":"price_1MBWmhCm8XcQag44eGhk0k3Z","monthlyprice":"48","yearly":"price_1MBWmhCm8XcQag44hRNP5Oeh","yearlyprice":"576"},"whitelabeling":{"monthly":"price_1MBWnOCm8XcQag44bOCL5PCc","monthlyprice":"149","yearly":"price_1MBWnOCm8XcQag44N2sSQu5I","yearlyprice":"1500"},"free":"price_1MBWo7Cm8XcQag44lhijmoNW","freeprice":"0"}}', '8e651522e38256f2')) WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencyplan' and company_id = 22;
+==========================================================================rootsmtp==========================================================================
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.1","feesearchid":"1.80","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "33","feepercentagemob": "13.4","rootfeeaccid":"aaa","rootfeeaccidmob":"bbb","rootcomfee":"ccc","rootcomfeeval":"0.7","rootcomfee1":"ddd","rootcomfeeval1":"0.8","rootcomsr":"eee","rootcomsrval":"0.9","rootcomae":"fff","rootcomaeval":"1"}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.25","feesearchid":"1.80","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "33","feepercentagemob": "13.4","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0.25","feesearchid":"1.80","feeenhance":"0.25","feepercentageemm": "53.6","feepercentagedom": "33","feepercentagemob": "13.4","rootfeeaccid":"aaa","rootfeeaccidmob":"bbb","rootcomfee":"ccc","rootcomfeeval":"0.5","rootcomfee1":"ddd","rootcomfeeval1":"0.6","rootcomsr":"eee","rootcomsrval":"0.7","rootcomae":"fff","rootcomaeval":"0.8"}', '8e651522e38256f2'))
+WHERE id = 56 and company_id = 39;
+
+
+-- ROOT STRIPE
+-- EMM
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"secretkey":"sk_test_51JfPxmCm8XcQag448r5GD73vW7LYqOOFB5vZ9HZq0VxSt2IatxB0m4ia4ppQ6JjkVHGOQjbdDJZqjF1sUiKNVlpK00jWd9gfoH","publishablekey":"pk_test_51JfPxmCm8XcQag44ltZ9LJoZALUwRgUZCzQQOPhvdes7hOgHPVYWwepB22v9Mkq4Ga44U3Ny0ExQSHzfRpOwrQPz00OevLINmJ"}', '8e651522e38256f2'))
+WHERE id = 15 and company_id = 22;
+
+-- JIDAN
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"secretkey":"sk_test_51Q0EgYRwyPH0xNSidS2HFQuXdOHpLu7JNje8qDqtCrqAS0EqB8MQwE6tU5EJzdHdIsTipZURex9b8qsS1POd5eAb00PmMNQSLx","publishablekey":"pk_test_51Q0EgYRwyPH0xNSiuIiWswwS7uShWy3nXwDBH0TeMgMTpqtGrHK77IX9qpCqDav18nhSPQFKLcAlRemySaplQofo00kqHoramp"}', '8e651522e38256f2'))
+WHERE id = 15 and company_id = 22;
+
+Your account is secured
+llmu-jpkf-fmum-jcby-oglj
+
+11212332356
+412345678
+
+acc_email
+acc_ba_id
+status_acc
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"secretkey":"sk_test_51Q0EgYRwyPH0xNSidS2HFQuXdOHpLu7JNje8qDqtCrqAS0EqB8MQwE6tU5EJzdHdIsTipZURex9b8qsS1POd5eAb00PmMNQSLx","publishablekey":"pk_test_51Q0EgYRwyPH0xNSiuIiWswwS7uShWy3nXwDBH0TeMgMTpqtGrHK77IX9qpCqDav18nhSPQFKLcAlRemySaplQofo00kqHoramp"}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as 'rootstripe' and company_id = 39;
+
+
+
+
+
+
+{"local":{"Weekly":{"LeadspeekPlatformFee":"1","LeadspeekCostperlead":"3","LeadspeekMinCostMonth":"2"},"Monthly":{"LeadspeekPlatformFee":"10","LeadspeekCostperlead":"12","LeadspeekMinCostMonth":"11"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekPlatformFee":"19","LeadspeekCostperlead":"21","LeadspeekMinCostMonth":"20"}},"locator":{"Weekly":{"LocatorPlatformFee":"4","LocatorCostperlead":"24","LocatorMinCostMonth":"5"},"Monthly":{"LocatorPlatformFee":"13","LocatorCostperlead":"24","LocatorMinCostMonth":"14"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"24","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorPlatformFee":"22","LocatorCostperlead":"24","LocatorMinCostMonth":"23"}},"enhance":{"Weekly":{"EnhancePlatformFee":"7","EnhanceCostperlead":"9","EnhanceMinCostMonth":"8"},"Monthly":{"EnhancePlatformFee":"16","EnhanceCostperlead":"18","EnhanceMinCostMonth":"17"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0"},"Prepaid":{"EnhancePlatformFee":"25","EnhanceCostperlead":"27","EnhanceMinCostMonth":"26"}},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"24"}}
+
+usersalesrepresentative
+useraccountexecutive
+userreferralaccount
+
+-- punya emm googleauthconf
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"web":{"client_id":"345501263824-are3skfsdnp65imgcsqoagn03sog43gr.apps.googleusercontent.com","project_id":"emm-beta","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","redirect_uris":["http://datalocal.exactmatchmarketing.com/auth/google-spreadSheet/callback","http://datalocal.exactmatchmarketing.com/auth/google/callback","https://databeta.exactmatchmarketing.com/auth/google/callback","https://databeta.exactmatchmarketing.com/auth/google-spreadSheet/callback"],"javascript_origins":["http://applocal.exactmatchmarketing.com:8080","https://appbeta.exactmatchmarketing.com"]}}', '8e651522e38256f2'))
+WHERE id = 13 and company_id = 22;
+
+-- punya jidan googleauthconf
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"web":{"client_id":"680769010109-tipdbk4v71epf5napmvtfmfdsciuvg35.apps.googleusercontent.com","project_id":"red-archive-445013-r3","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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"}}', '8e651522e38256f2'))
+WHERE id = 13 and company_id = 22;
+
+
+1. uang murni sebesar $100, masuk ke Dominator sebesar 37.5% yaitu $37.5, sisanya menjadi $62.5 
+2. uang murni sebesar $100, masuk ke Mobile sebesar 33% yaitu $33, dan masuk ke Dominator sebesar 13.4% yaitu $13.4, sisanya menjadi $53.6
+
+1. From a net amount of $100 for root Emm, 37.5% ($37.50) is allocated to root Dominator, leaving a remaining balance of $62.50.
+2. From a net amount of $100 for root Emm, 33% ($33.00) is allocated to root Mobile and 13.4% ($13.40) to root Dominator, leaving a remaining balance of $53.60.
+
+
+
+curl -i -X PUT -H "X-App-Key: xxxx-xx-xx-xx-xxxxxx" -H "X-User-Key: xxxx-xx-xx-xx-xxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "campaign": {
+          "campaign_type_id": 1
+        }
+      }' \
+  "https://app.simpli.fi/api/organizations/8/campaigns/644"
+
+
+
+
+
+
+

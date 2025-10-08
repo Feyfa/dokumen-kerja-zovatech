@@ -1,0 +1,132 @@
+use emm_sandbox;
+-- 
+TRUNCATE TABLE clean_id_errors;
+TRUNCATE TABLE clean_id_export;
+TRUNCATE TABLE clean_id_file;
+TRUNCATE TABLE clean_id_md5;
+TRUNCATE TABLE clean_id_result;
+TRUNCATE TABLE clean_id_result_advance_1;
+TRUNCATE TABLE clean_id_result_advance_2;
+TRUNCATE TABLE clean_id_result_advance_3;
+TRUNCATE TABLE topup_cleanids;
+update topup_agencies set balance_amount = 1, topup_status = 'progress' where total_amount = 1 AND company_id = @company_id_jidanach;
+update topup_agencies set balance_amount = 2, topup_status = 'queue' where total_amount = 2 AND company_id = @company_id_jidanach;
+update topup_agencies set balance_amount = 3, topup_status = 'queue' where total_amount = 3 AND company_id = @company_id_jidanach;
+update topup_agencies set balance_amount = 4, topup_status = 'queue' where total_amount = 4 AND company_id = @company_id_jidanach;
+update topup_agencies set balance_amount = 5, topup_status = 'queue' where total_amount = 5 AND company_id = @company_id_jidanach;
+update topup_agencies set balance_amount = 10, topup_status = 'queue' where total_amount = 10 AND company_id = @company_id_jidanach;
+delete FROM leadspeek_invoices WHERE invoice_type = 'clean_id' AND company_id = @company_id_jidanach;
+delete from report_analytics where leadspeek_type = 'clean_id';
+delete from failed_lead_records where leadspeek_type = 'clean_id';
+
+
+
+--
+
+
+
+select * from clean_id_errors; -- untuk menampung error
+select * from clean_id_export; -- untuk download
+select * from clean_id_file; -- untuk container md5 atau sekali process api
+select * from clean_id_md5; -- untuk list md5 sekali process api
+select * from clean_id_result; -- untuk result basic
+select * from clean_id_result_advance_1; -- untuk result advanced 1
+select * from clean_id_result_advance_2; -- untuk result advanced 3
+select * from clean_id_result_advance_3; -- untuk result advanced 2
+select * from topup_cleanids; -- untuk topup_cleandids
+--
+SET @company_id_jidanach := 164;
+SELECT * FROM `topup_agencies` where company_id = @company_id_jidanach order by id asc;
+SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id_jidanach order by id asc;
+select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
+--
+select * from failed_lead_records where leadspeek_type = 'clean_id';
+select * from report_analytics where leadspeek_type = 'clean_id' order by id desc;
+--
+select * from persons where FIND_IN_SET(id, @person_ids);
+select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email from person_emails where email_encrypt in (
+	"78e63b99eaa18437f46b56cea8e7b220",
+    "8bc64c9c289d18a05dd9652422208f05",
+    "8dba134974fd2681332f7194e4e17711",
+ 	"6d30f2e60dcdab0ce437e9c4066b1082",
+    "df19e366cfa7f01166b4929fb35fc37f",
+    "1600844aa311fd8df30c0e6b2cc3ad51",
+    "697f116c75fbeaf384e33df8f86516e4",
+    "512ab114b277e3b4aad9fb5eb9b0cdf8",
+    "3a60885ca65f5be99d14e17933220aaa",
+    "d18fa68148cf6bdb08db8c8228d0616d",
+    "77923622fd09a3f6ef187d82971ba3cd",
+    "3d06deaa536581946ba9dd665232fe09",
+    "7cf9e71b7cef1edcb3c786b8f04b4b92",
+    "cf75592604f42a98883f86918100fdf3",
+    "e1f8fc7ce39f7799b0542416aa3eceb2",
+    "d264abd0a46ce4d6a9c1a1fc9deaf2f7",
+    "1bd323891a53cda51c80d729f3b15455",
+    "78347e6ed4cd3fed7fb7a1e8d53538aa",
+    "93b76b90c2f8e1d433832d0a00c999f9",
+    "a72acb561a6b078895468c756c7a6efa"
+);
+select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4)  from person_emails where person_id = 7793;
+SET @person_ids := '7793';
+select @person_ids;
+select * from person_names where FIND_IN_SET(person_id, @person_ids);
+select * from person_phones where FIND_IN_SET(person_id, @person_ids);
+select * from person_addresses where FIND_IN_SET(person_id, @person_ids);
+select * from person_advance_1 where FIND_IN_SET(person_id, @person_ids);
+select * from person_advance_2 where FIND_IN_SET(person_id, @person_ids);
+select * from person_advance_3 where FIND_IN_SET(person_id, @person_ids);
+--
+delete from persons where FIND_IN_SET(id, @person_ids);
+delete from person_emails where FIND_IN_SET(person_id, @person_ids);
+delete from person_names where FIND_IN_SET(person_id, @person_ids);
+delete from person_phones where FIND_IN_SET(person_id, @person_ids);
+delete from person_addresses where FIND_IN_SET(person_id, @person_ids);
+delete from person_advance_1 where FIND_IN_SET(person_id, @person_ids);
+delete from person_advance_2 where FIND_IN_SET(person_id, @person_ids);
+delete from person_advance_3 where FIND_IN_SET(person_id, @person_ids);
+--
+SET @company_id_jidanach := 164;
+select amount, last_balance_amount, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanach@gmail.com';
+select *, cost_cleanid_advanced from users where company_id in (@company_id_jidanach) and user_type = 'userdownline';
+--
+select 
+	id,
+	company_id ,
+	user_api_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) as token,
+	expired_at,
+	created_at,
+	updated_at
+from open_api_tokens where company_id= @company_id_jidanach and expired_at = '2752215596';
+--
+select * from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+josep@gmail.com';
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 622;
+--
+select * from failed_jobs;
+--
+select * from services_agreement where user_id = 279 and feature_id = (select id from master_features where slug = 'data_wallet');
+-- 
+select * from global_settings where setting_name = 'bigdbm_token';
+
+select * from topup_cleanids;
+
+select * from person_emails where email_encrypt in ('8bc64c9c289d18a05dd9652422208f05');
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1536 @@
+SIMPLIFY
+
+1. GENERAL INFO
+	- Campaign Name = adalah nama untuk campaign
+	- Frequency Capping = adalah frequency untuk muncul iklan dalam rentang waktu berapa kali, misal saya ingin iklan muncul 5 kali dalam 1 jam
+
+2. Budget
+	- Max Bid = batasan price untuk total budget spend 
+ 	- Monthly Budget = harga per bulan yang harus di bayar dalam 1 bulan
+ 	- Daily Budget = harga per hari yang di bayar, ini mencerminkan dari monthly budged / 30
+ 	- Goal = 
+
+3. Addressable Audiences 
+	- Select Audiance from Existing Campaigns = 
+	- Local Audiance List = 
+
+4. ADS
+	- Media Type =
+	- Destination URL = 
+	
+5. Inserted Media List
+
+Audience adalah targeting iklan
+ADS adalah media untuk iklan, biaanya bentuknya foto, nah di ads ini ada url. maksud dari url tersebut adalah ketika gambar di klik oleh user, maka dia akan redirect ke url tersebut
+
+Penjelasan Tentang Audience
+https://chatgpt.com/s/t_68774102b15081919b09fa0dfb5921ce
+
+untuk digital ocean
+/users/media
+
+
+----------TABLE YANG DITAMBAHKAN----------
+leadspeek_media
+1. id BIGINT
+2. user_id BIGINT
+3. media_name var_char(255)
+4. total_address unsigned int
+5. destination_url varchar(255)
+6. size_file unsigned int
+7. dimension_img varchar(20)
+8. created_at
+9. updated_at
+----------TABLE YANG DITAMBAHKAN----------	
+120X120
+
+
+
+
+table yang ditambah di leadspeek_users
+ALTER TABLE `leadspeek_users`
+ADD COLUMN `frequency_capping_impressions` TINYINT UNSIGNED DEFAULT 1 AFTER `simplifi_selected_media`,
+ADD COLUMN `frequency_capping_hours` TINYINT UNSIGNED DEFAULT 1 AFTER `frequency_capping_impressions`,
+ADD COLUMN `max_bid` FLOAT DEFAULT 0 AFTER `frequency_capping_hours`,
+ADD COLUMN `monthly_budget` FLOAT DEFAULT 0 AFTER `max_bid`,
+ADD COLUMN `daily_budget` FLOAT DEFAULT 0 AFTER `monthly_budget`,
+ADD COLUMN `goal_type` ENUM('none', 'cpc', 'ctr', 'cpa','') DEFAULT NULL AFTER `daily_budget`,
+ADD COLUMN `goal_value` FLOAT DEFAULT 0 AFTER `goal_type`,
+ADD COLUMN `device_type` VARCHAR(255) COLLATE utf8mb4_0900_ai_ci DEFAULT NULL AFTER `goal_value`;
+
+ALTER TABLE `leadspeek_invoices`
+ADD COLUMN `frequency_capping_impressions` TINYINT UNSIGNED DEFAULT 0 AFTER `platform_cost_leads`,
+ADD COLUMN `frequency_capping_hours` TINYINT UNSIGNED DEFAULT 0 AFTER `frequency_capping_impressions`,
+ADD COLUMN `max_bid` FLOAT DEFAULT 0 AFTER `frequency_capping_hours`,
+ADD COLUMN `monthly_budget` FLOAT DEFAULT 0 AFTER `max_bid`,
+ADD COLUMN `daily_budget` FLOAT DEFAULT 0 AFTER `monthly_budget`
+ADD COLUMN `goal_type` ENUM('none', 'cpc', 'ctr', 'cpa','') DEFAULT NULL AFTER `daily_budget`,
+ADD COLUMN `goal_value` FLOAT DEFAULT 0 AFTER `goal_type`,
+ADD COLUMN `agency_markup` INT UNSIGNED DEFAULT 0 AFTER `goal_value`;
+
+campaign id: 4590088 | campaign type: simplifi | frequency capping impressions: undefined | frequency capping hours: 1 | max bid: $10 | monthly budget: $100 | daily budget: $3.33 | goal type: CPA | goal value: $2 | agency markup: 25%
+
+
+desktop|mobile|tablet|connected tv
+
+1. harga client = Monthly Budget
+2. harga agency = (Monthly Budget * (100 - agency markup)) / (100)
+
+example
+- Monthly Budget = $100
+- agency markup = 25%
+
+1. harga client = 100 = $100
+2. harga agency = (100 * (100 - 25)) / (100)
+			= (100 * 75) / (100)
+			= $75
+4. profit agency = $100 - $75 = $25
+3. profit root di emm = $75
+4. profit root setelah bayar simplifi = $75 / 2 = $37.5 <- ini adalah monthly budget di simplifi
+5. pembagian ke sales = $37.5 * 0.1 = $3.75
+			
+			
+Are you sure want to active this campaign?
+
+Activing this will authorize following charges
+	* A frequency capping of 10 imps/per 1 hour
+	* A max bid of $10 CPM
+	* A monthly budget of $100
+	* A daily budget of $3.33
+	* A goal of $2 CPA -> jika none hapus kata of nya
+	* A agency markup of 25% -> ini muncul hanya untuk agency saja
+	
+This campaign will charge immediately. The Client cost is $281.00 and your Agency cost is $196.
+
+campaign id: 4590088 | campaign type: simplifi | frequency capping impressions: undefined | frequency capping hours: 1 | max bid: $10 | monthly budget: $100 | daily budget: $3.33 | goal type: CPA | goal value: $2 | agency markup: 25%
+
+count_leads         = 100
+price_lead 	    = 3 // harga client
+platform_price_lead = 1 // harga agency
+root_price_lead     = 0.25 // harga root dom
+
+1. step awal
+profit agency = (price_lead - platform_price_lead) = (3 - 1) = 2
+profit emm    = platform_price_lead = 1
+
+2. step kedua
+emm transfer ke dom = (platform_price_lead - root_price_lead) = (1 - 0.25) = 0.75
+
+3. profit final ke-2 root
+emm = 0.25
+dom = 0.75
+
+---------------------------------------------------
+
+1. step awal
+profit agency = (price_lead - platform_price_lead) = (300 - 100) = 200
+profit emm    = platform_price_lead = 100
+
+2. step kedua
+emm transfer ke dom = (platform_price_lead - root_price_lead) = 1 - 0.25 = 0.75
+
+3. profit final ke-2 root
+emm = 0.25
+dom = 0.75
+
+
+campaign id di simplifi yang lagi di play: 4592336 , Dimas Waiting Charge
+500532 = Jidan ACH AGENCY BETA - 225037
+500533 = Dimas CLIENT BETA - 233049
+536141 = Jidan ACH DOM Businnes AGENCY BETA - 223105
+https://app.simpli.fi/organizations/520898/campaigns/4590088
+
+- monthly budget $100.
+- agency markup 10%. 
+- maka charge client $100. 
+- charge agency $90. 
+- profit agency $100 - $90 = $10. 
+- profit root emm $90. 
+- bayar simplifi $90 / 2 = $45
+- profit root emm final = $45
+- transfer ke sales tidak custom commission = $45 * 0.1 = $4.5
+	* sr = $4.5
+	* ar = $4.5
+	* ae = $4.5
+- transfer ke root mob = ($45 * 33%) = $14.85 
+	* $14.85
+- transfer ke root dom = ($45 * 13.4%) = $6.03
+	* $6.03
+- transfer ke sales root =
+	* rootCommissionSRAcc = ccc = (0.1 * 24.12)  = 2.412
+	* rootCommissionAEAcc = ddd = (0.12 * 24.12) = 2.8944
+- keuntungan emm final = 45 - (14.85 + 6.03 + 2.412 + 2.8944 + 4.5 + 4.5 + 4.5)
+                       = 5.3136
+	  
+List Budget
+1. Max Bid is $10
+2. Monthly Budget is $100 , $50
+3. Daily Budget is $3.33 , $1.67
+4. Goal is $2 CPA
+5. Agency Markup is 25%
+
+	
+Client Calculations                | Agency Calculation
+1. Estimate cost client is $100    | 1. Estimate profit is 
+				             |	(Monthly Budget * Agency Markup) = 25
+				             | 2. Estimate cost agency is
+				             |    (Monthly Budget - Profit Agency) = 75
+
+
+1. Your Max Bid is $10            | 1. Your Max Bid is $10
+2. Monthly Budget is $100         | 2. Monthly Budget is $100
+3. Daily Budget is $3.33          | 3. Daily Budget is $3.33
+4. Goal $2 CPA                    | 4. Goal $2 CPA 
+5. Estimate cost client           | 5. Agency Markup 30%
+   ($100)                         | 6. 
+
+$profitAgency = ($usrInfo[0]->monthly_budget * $usrInfo[0]->agency_markup) / 100; // hitung profit agency dulu
+$platformfee = ($usrInfo[0]->monthly_budget - $profitAgency); // hitung harga agency
+mb - ((mb * am) / 100) apakah sama dengan (mb * (100 - am)) / 100 -> ya jawaban chatgpt sama   
+
+
+Monthly Budget = 2.5
+Agency Markup = 30%
+
+========================
+YANG HARUS DIKERJAKAN
+
+1. buat ui untuk financial setting ✅
+2. ubah format send email ketika charge campaign ✅
+3. implementasi root fee commission yang mirip seperti enhance dan b2b. saat charge simplifi ✅
+4. saat campaign masih stop itu bisa edit monthly budget, daily budget, cpm, goal dari sisi emm atau simplifi ✅
+   saat play itu cuman bisa edit daily budget dari sisi emm atau simplifi. monthly budget, cpm, goal bisa di edit dari sisi emm saja di simplifi tidak berubah ✅
+   saat campaign telah di play dan di stop lagi, kan masih punya budget. nah saat di play lagi check dulu budget nya sudah habis atau belum, jika masih ada maka jangan di charge ✅
+
+5. buat api untuk play dan stop campaign simplifi ✅
+
+6. buat cronjob untuk new budget/auto topup campaign simplifi
+	- 1 hari sebelum end date ✅
+	- jika gagal charge, maka di stop campaign nya ✅
+
+7. buat informasi di financial price total spend, total remaining, total campaign budget jika budget nya 1 ✅
+
+8. buat history budget ✅
+9. buat informasi di financial price total spend, total remaining, total campaign budget jika budget nya lebih dari 1 ✅
+	- misal sekarang tanggal 2025-09-29
+	- saya punya budget seperti ini
+		budgetHistory: [
+			{
+				"id": 1,
+				"start_date": "2025-09-01",
+				"end_date": "2025-09-30",
+				"total_budget": 12
+			},
+			{
+				"id": 2,
+				"start_date": "2025-10-01",
+				"end_date": "2025-10-30",
+				"total_budget": 12
+			},
+		],
+	- kan ke 2 budget tersebut end date nya masih di atas waktu sekarang, maka dalam kasus ini kita ambil end date yang di atas now, order by start_date asc, first
+10. * buat sistem kalo budget diubah ditengah jalan dan status nya saat running ✅
+    * buat sistem kalo budget pernah dibeli dan stop, lalu belum expired, dan ubah daily budget lebih besar, maka ketika play charge sisanya (progress)
+		- misal dari 10 hari beli monthly budget $10. daily budget nya menjadi $1 
+		- di hari 1-5 itu sudah habis $5. remaining budget nya $5.
+		- di hari ke-6 user update monthly budget lebih besar dari monthly budget di awal misal $20 dengan asumsi per hari $2
+		- berarti perhitungannya begini. 
+   			* remaining budget $5. 
+   			* daily $2
+   			* total yang harus dibayar = (daily budget * sisa hari) - remaining budget = ($2 * 5) - $5 = $5 	
+11. coba check lagi ketika task beta dibuat, apakah bisa cuman menampilkan module hanya ke beberapa agency saja
+========================
+
+campaign id: 4612361 | campaign type: simplifi | frequency capping impressions: 10 | frequency capping hours: 1 | max bid: $1 | monthly budget: $30 | daily budget: $1 | goal type: CTR | goal value: 0.5% | agency markup: 20%
+
+LeadspeekIsBudgetPaid
+
+1. jika cc berhasil (progress)
+2. jika cc gagal
+
+
+Thank you for your business with Exact Match Marketing!
+An invoice has been created for the generated leads for Dimas 165 - Dimas Charge Campaign #4590088 and the credit card ending in 4242 has been automatically charged.
+
+Payment Term   : Prepaid
+Invoice Status : Customer's Credit Card Successfully Charged
+Invoice Number : 20250828-1120-2791
+Max Bid        : $10 CPM
+Monthly Budget : $100
+Daily Budget   : $3.33
+Goal           : $2 CPA
+Agency Markup  : 30%
+---------------------------------------------
+Client Cost    : $100.00
+Agency Cost    : $20
+Agency Profit  : $31
+
+
+=============================================
+skenario
+1 ✅
+- campaign stop, belom pernah play
+- budget plan belom expired maupun sudah expired
+- ketika update financial
+	- start date dan end date diperbarui sekarang
+	- cpm, total budget, daily budget, goal berubah di emm dan simplifi
+
+2. ✅
+- campaign stop, sudah pernah play
+- budget plan belom expired, dan sudah pernah di charge
+- ketika update financial
+	- cpm, total budget, daily budget, goal berubah di emm
+	- daily budget dan goal berubah di simplifi
+	- cpm, total budget TIDAK berubah di simplifi karena itu buat next
+	
+3. ✅
+- campaign stop, sudah pernah play
+- budget plan sudah expired
+- ketika update financial
+	- buat budget baru
+	- start date dan end date sekarang
+	- cpm, total_budget, daily_budget, goal berubah di emm dan simplifi
+
+4. ✅
+- campaign stop, sudah pernah play
+- budget plan belom expired, dan sudah belom di charge /* ini bisa terjadi ketika campaign stop dan budget sebelumnya expired, dan dia buat budget baru namun belom di charge */
+- ketika update financial
+	- start date dan end date diperbarui sekarang
+	- cpm, total budget, daily budget, goal berubah di emm dan simplifi
+		
+5. ✅
+- campaign play 
+- budget plan belom expired 
+- ketika update financial 
+	- cpm, total budget, daily budget, goal berubah di emm 
+	- daily budget dan goal berubah di simplifi 
+	- cpm, total budget TIDAK berubah di simplifi karena itu buat next 
+
+6. ✅
+- campaign stop, namun budget sudah di beli dan belom expired
+- ketika di play lagi maka akan charge lagi
+=============================================
+6. 
+- ketika charge ke stripe 
+- selalu pakai stripe tidak pakai data wallet 
+- tidak transfer ke sales 
+- tidak transfer ke root commission, karena only di emm saja 
+=============================================
+
+=============================================
+PASANGAN HARGA YANG BAGUS
+1. 
+- Monthly Budget = $75 
+- Daily Budget = $2.5
+- Agency Markup = 20%
+- Estimate cost client is = $75
+- Estimate profit agency is = $15
+- Estimate cost agency is : $60
+
+2. 
+- Monthly Budget = $2.85 
+- Daily Budget = $0.1
+- Agency Markup = 30%
+- Estimate cost client is = $2.85
+- Estimate profit agency is = $0.85
+- Estimate cost agency is : $2.00
+=============================================
+
+Org ID : 520898 | jidanagencyemm3 AGENCY BETA - 061430
+Org ID : 500533 | Jidan ACH AGENCY BETA - 225037
+
+============================================
+SESI 1
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-472 = "show ui for budget information"
+JD-TASK-EMM-472-DEV-SYNC
+
+FILE
+* front
+* * front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+
+DATA
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\SimplifiController.php
+* data\app\Services\SimpliFiService.php
+
+
+-----------------------------------------------------------------------
+|               DARI SISI EMM (sudah jalan 10 hari)                   |
+-----------------------------------------------------------------------
+| Daily Budget | Total Spen | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.1         | $0.855     | $1.995          | $2.85                 |
+-----------------------------------------------------------------------
+
+hitung lompatannya berapa = 2.85 / 1 = 2.85
+Total Spen EMM = 0.3 * 2.85 = 0.855
+Total Remaining EMM = 0.7 * 2.85 = 1.995
+
+-----------------------------------------------------------------------
+|              DARI SISI SIMPLIFI (sudah jalan 10 hari)               |
+-----------------------------------------------------------------------
+| Daily Budget | Total Spen | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.03        | $0.3       | $0.7            | $1.00                 |
+-----------------------------------------------------------------------
+
+
+SKENARIO
+1. jika input <= db_invoices, abaikan, selesai
+
+2. jika input > db_invoices, ini serius, example
+	- misal di hari ke 11 saya ubah monthly budget menjadi $5
+	- cost client = $5 - $1.995 = $3.005
+	- profit agency = $3.005 * 30% = $0.9015
+	- cost agency = $3.005 - $0.9015 = $2.1035
+	- profit emm ke-1 = $2.1035
+	- bayar simplifi = $2.1035 / 2 = $1.051
+	- profit emm = $2.1035 - $1.051 = $1.0525
+	
+2.1 bagaimana monthly budget si simplifi
+	- dari perhitungan diatas emm kan bayar $1.051
+	- monthly budget nya = $0.7 + $1.051 = $1.751
+	
+============================================	
+
+	campaign budget expired yang lagi di test
+
+============================================
+SESI 2
+
+-----------------------------------------------------------------------
+|          DARI SISI EMM (sudah jalan 20 hari, +10 hari)              |
+-----------------------------------------------------------------------
+| Daily Budget | Total Spen | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.17        | $3.135     | $1.855          | $5                    |
+-----------------------------------------------------------------------
+
+hitung lompatannya berapa = $5 / $1.751 = 2.85
+Total Spend EMM = 1.1 * 2.85 = 3.135
+Total Remaining EMM = 0.651 * 2.85 = 1.855
+
+perhitungan daily budget di simplifi
+- sisa hari = 31 - 10 = 21
+- daily budget = $1.751 / 21 = $0.08
+
+-----------------------------------------------------------------------
+|          DARI SISI SIMPLIFI (sudah jalan 20 hari, +10 hari)         |
+-----------------------------------------------------------------------
+| Daily Budget | Total Spen | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.08        | $1.1       | $0.651          | $1.751                |
+-----------------------------------------------------------------------
+
+============================================
+
+
+1. ketika status stop belom beli budget ✅
+- posisi diam, maka hanya muncul start date, end date, total campaign budget
+
+2. ketika status stop sudah beli budget 
+- posisi diam, maka hanya muncul start date, end date, total spend, total remaining, total campaign budget
+- posisi edit, maka muncul juga previous total spend, dan previouse campaign budget
+
+3. ketika play dan pasti sudah beli budget
+
+
+
+
+
+
+=============================================================================================
+*Since the remaining budget is $5.00 and you changed the daily budget to $0.5 for the period from 2025-09-25 (today) to 2025-10-09 (end date) a total of 15 (days) the calculation is as follows:
+
+daily budget = 0.5
+sisa hari = 15 days
+total budget untuk 15 days = $0.5 * 15 days = $7.5
+remaining budget = $5
+total client cost = $7.5 - $5 = $2
+Agency Markup is = 20%
+profit agency = $2 * 20% = $0.4
+cost agency = $2 - $0.4 = $1.6
+bayar simplifi = $1.6 / 2 = $0.8
+final profit = $0.8
+
+
+campaign berharap dari tanggal 2025-09-25 - 2025-10-09, itu sehari jadi $0.5. maka 
+15 * 0.5 = 7.5
+
+Total Daily           = $0.50 (tetep)
+Total Spend           = $2.50 (tetep)
+Total Remaining       = (Previous Remaining = $5.00) 
+				   (berubah menjadi) 
+				   ($7.5)
+Total Campaign Budget = (Previous Campaign Budget = $7.5) 
+				   (berubah menjadi) 
+				   (total_spend + total_remaining) 
+				   ($2.50 + $7.5)
+				   ($10)
+
+SISA 15 HARI
+
+-----------------------------------------------------------------------
+|              DARI SISI SIMPLIFI                                          |
+-----------------------------------------------------------------------	   
+| Total Daily | Total Spend | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.4       | $3       | $1           | $4                |
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+|              DARI SISI SIMPLIFI  (SEBELUM DIRUBAH)                  |
+-----------------------------------------------------------------------
+| Total Daily | Total Spend | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.4        | $2          | $2              | $4                    |
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+|              DARI SISI SIMPLIFI  (SEBELUM DIRUBAH)                  |
+-----------------------------------------------------------------------
+| Total Daily | Total Spend | Total Remaining | Total Campaign Budget |
+-----------------------------------------------------------------------
+| $0.4        | $2          | $4              | $6                    |
+-----------------------------------------------------------------------
+
+
+
+
+
+di emm
+a = $6.00
+b = $8.00
+c = $14.00
+
+di simplifi
+a = $2.4
+b = $3.2
+c = $5.6
+
+=============================================================================================
+
+=============================================================================================
+Buat Cronjob Untuk Auto Topup Budget
+
+Start Date | End Date
+2025-09-12 | 2025-10-12
+
+$now_carbon = Carbon::now();
+$now_date = $now_carbon->format('Y-m-d');
+$one_day_after_now = $now_carbon->copy()->addDay();
+if($one_day_after_now == $budget_end_date)
+
+| Now Date   | One Day After Now | Two Day After Now | Result 	|
+| 2025-10-10 | 2025-10-11        | 2025-10-12        | ✅   	|
+
+
+1. auto topup budget terjadi 1 hari sebelum end date budget (progress)
+2. jika auto topup budget gagal, maka stop campaign tersebut
+=============================================================================================
+
+di LeadspeekUser.php
+'audience_status',
+'retargeting_audience_simplifi_id',
+'addressable_audience_simplifi_id',
+'frequency_capping_impressions',
+'frequency_capping_hours',
+'max_bid',
+'monthly_budget',
+'daily_budget',
+'goal_type',
+'goal_value',
+'device_type',
+'agency_markup',
+
+CheckNewBudgetSimplifiCommand
+protected $signature = 'command:checknewbudgetsimplifi';
+
+public function handle(WebhookController $webhookController, SimpliFiService $simpliFiService)
+{
+    date_default_timezone_set('America/Chicago');
+    set_time_limit(0);
+
+    $now_carbon = Carbon::now();
+    $now_date = $now_carbon->format('Y-m-d');
+    $one_day_after_now = $now_carbon->copy()->addDay();
+    $two_day_after_now = $now_carbon->copy()->addDays(2);
+
+    $campaigns = LeadspeekUser::select(
+                                    'leadspeek_users.id','leadspeek_users.url_code','leadspeek_users.company_id as clientowner','leadspeek_users.report_type','leadspeek_users.report_sent_to','leadspeek_users.admin_notify_to','leadspeek_users.leadspeek_api_id','leadspeek_users.last_balance_leads',
+                                    'leadspeek_users.active','leadspeek_users.disabled','leadspeek_users.active_user','leadspeek_users.leadspeek_organizationid','leadspeek_users.leadspeek_campaignsid','leadspeek_users.gtminstalled','leadspeek_users.leadspeek_locator_state','leadspeek_users.leadspeek_locator_require',
+                                    'leadspeek_users.leadspeek_locator_zip','leadspeek_users.leads_amount_notification','leadspeek_users.total_leads','leadspeek_users.ongoing_leads','leadspeek_users.last_lead_added','leadspeek_users.spreadsheet_id','leadspeek_users.advance_information','leadspeek_users.campaign_information_type_local',
+                                    'leadspeek_users.filename','leadspeek_users.report_frequency_id','leadspeek_users.lp_max_lead_month','leadspeek_users.lp_min_cost_month','leadspeek_users.cost_perlead','leadspeek_users.paymentterm','leadspeek_users.leadspeek_type',
+                                    'leadspeek_users.lp_enddate','leadspeek_users.platformfee','leadspeek_users.hide_phone','leadspeek_users.campaign_name','leadspeek_users.campaign_enddate','leadspeek_users.phoneenabled','leadspeek_users.homeaddressenabled',
+                                    'leadspeek_users.lp_limit_leads','leadspeek_users.lp_limit_freq','leadspeek_users.lp_limit_startdate','leadspeek_users.report_frequency','leadspeek_users.report_frequency_unit','leadspeek_users.last_lead_check','leadspeek_users.start_billing_date',
+                                    'leadspeek_users.user_id','leadspeek_users.is_send_email_prepaid','leadspeek_users.created_at','leadspeek_users.embedded_lastreminder','leadspeek_users.trysera','leadspeek_users.topupoptions','leadspeek_users.leadsbuy','leadspeek_users.stopcontinual','leadspeek_users.continual_buy_options',
+                                    'users.name','users.customer_payment_id','users.customer_card_id','users.email','users.company_parent','users.company_root_id','users.payment_status',
+                                    'companies.id as company_id','companies.company_name'
+                                )
+                                ->join('users','leadspeek_users.user_id','=','users.id')
+                                ->join('companies','users.company_id','=','companies.id')
+                                ->where('users.active','=','T')
+                                ->where('users.user_type','=','client')
+                                ->where('leadspeek_type', 'simplifi')
+                                ->where(function ($query) {
+                                    $query->where(function($query) {
+                                        $query->whereNotNull('leadspeek_organizationid')
+                                                ->where('leadspeek_organizationid', '<>', '');
+                                    })->where(function ($query) {
+                                        $query->whereNotNull('leadspeek_campaignsid')
+                                                ->where('leadspeek_campaignsid', '<>', '');
+                                    });
+                                })
+                                ->where(function ($query) {
+                                    $query->where(function ($query) {
+                                        /* PLAY */
+                                        $query->where('leadspeek_users.active','=','T')
+                                            ->where('leadspeek_users.disabled','=','F')
+                                            ->where('leadspeek_users.active_user','=','T');
+                                        /* PLAY */
+                                    })
+                                    ->orWhere(function ($query) {
+                                        /* PAUSED ON PLAY */
+                                        $query->where('leadspeek_users.active','=','F')
+                                            ->where('leadspeek_users.disabled','=','F')
+                                            ->where('leadspeek_users.active_user','=','T');
+                                        /* PAUSED ON PLAY */
+                                    });
+                                })
+                                ->get();
+
+    if(count($campaigns) == 0)
+    {
+        Log::info("Campaign Simplifi Empty For Check New Budget Simplifi");
+        return;
+    }
+
+    foreach($campaigns as $campaigns)
+    {
+        /* VARIABLE */
+        $leadspeek_api_id = $campaign->leadspeek_api_id ?? null;
+        $leadspeek_organizationid = $campaign->leadspeek_organizationid ?? null;
+        $leadspeek_campaignsid = $campaign->leadspeek_campaignsid ?? null;
+        $Leadspeek_goal_type = $campaign->goal_type ?? "";
+        $Leadspeek_goal_value = $campaign->goal_value ?? "";
+        $Leadspeek_daily_budget = $campaign->daily_budget ?? "";
+        $Leadspeek_max_bid = $campaign->max_bid ?? 0;
+        $Leadspeek_monthly_budget = $campaign->monthly_budget ?? 0;
+        $Leadspeek_agency_markup = $campaign->agency_markup ?? 0;
+        /* VARIABLE */
+
+        /* GET BUDGET PLAN CAMPAIGN */
+        $budget_plans_all = $simpliFiService->get_budget_plans_campaign($leadspeek_campaignsid);
+        $budget_plan_first = collect($budget_plans_all['budget_plans'] ?? [])->sortByDesc('start_date')->first(); // ambil yang paling terbaru
+        $budget_plan_id = $budget_plan_first['id'] ?? "";
+        $budget_start_date = $budget_plan_first['start_date'] ?? "";
+        $budget_end_date = $budget_plan_first['end_date'] ?? "";
+        info('get_budget_plans_campaign', ['budget_plan_first' => $budget_plan_first, 'budget_plan_id' => $budget_plan_id, 'budget_start_date' => $budget_start_date, 'budget_end_date' => $budget_end_date]);
+        /* GET BUDGET PLAN CAMPAIGN */
+
+        if($one_day_after_now == $budget_end_date) // jika end date tinggal 1 hari dari sekarang, maka auto topup campaign
+        {
+            try 
+            {
+                /* SETUP FOR UPDATE CAMPAIGN */
+                $campaign_goal = null;
+                if(in_array($Leadspeek_goal_type, ['cpa', 'cpc', 'ctr']))
+                    $campaign_goal  = [
+                        'goal_type' => $Leadspeek_goal_type,
+                        'goal_value' => $Leadspeek_goal_value
+                    ];
+                $campaign_settings = [
+                    'daily_budget' => $Leadspeek_daily_budget,
+                    'campaign_goal' => $campaign_goal,
+                    'bid_type_id' => 1,
+                    'bid' => number_format($Leadspeek_max_bid / 2,2,'.',''),
+                ];
+                $simpliFiService->update_campaign($leadspeek_organizationid, $leadspeek_campaignsid, $campaign_settings);
+                /* SETUP FOR UPDATE CAMPAIGN */
+
+                /*  SETUP FOR ADD BUDGET */
+                $total_budget = $this->calculateTotalBudget($Leadspeek_monthly_budget, $Leadspeek_agency_markup);
+                $budget_plans_data = [
+                    'start_date' => $two_day_after_now->format('Y-m-d'),
+                    'end_date' => $two_day_after_now->copy()->addDays(30)->toDateString(),
+                    'total_budget' => $total_budget,
+                ];
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                // info(['LeadspeekAgencyMarkup' => $LeadspeekAgencyMarkup,'LeadspeekMonthlyBudget' => $LeadspeekMonthlyBudget,'total_budget' => $total_budget,]);
+                $simpliFiService->add_budget_plans_to_campaign($leadspeek_campaignsid, $budget_plans_data);
+                /*  SETUP FOR ADD BUDGET */
+
+                /* CHARGE CLIENT */
+                // $webhookController->chargeClient();
+                /* CHARGE CLIENT */ 
+            }
+            catch(\Exception $e) 
+            {
+                Log::info("Error Renew Budget For CampaignID {$leadspeek_api_id} In Class CheckNewBudgetSimplifiCommand.php", ['message' => $e->getMessage()]);
+            }
+        }
+    }
+}
+
+$mode = "manipulate"; 
+
+Budget Calculations         
+1. Max Bid is $1 CPM
+2. Monthly Budget is $60.00
+3. Daily Budget is $2
+4. Goal is 0	.5% CTR
+5. Agency Markup is 20%
+6. Remaining Days Is 30
+
+Client Calculations
+1. Previous Remaining Budget Is $30
+2. Estimate Cost Mothly Budget For 30 Days
+   (Daily Budget x Remaining Days) :
+   ($2 x 30 Days) : $60
+3. Estimate cost client is :
+   (Cost Mothly Budget For 30 Days - Previous Remaining Budget) : 
+   ($60 - $30) : $30
+   
+Agency Calculations
+1. Estimate profit agency is :
+   (Cost Client x Agency Markup%) :
+   ($30.00 x 20%) : $6.00
+2. Estimate cost agency is :
+   (Cost Client - Profit Agency) :
+   ($30.00 - $6.00) : $24.00
+   
+   
+<!-- ${{ formatPrice(LeadspeekDailyBudget * LeadspeekRemainingDays) }} LeadspeekTotalBudgetByRemainingDays -->
+<!-- ${{ formatPrice((LeadspeekDailyBudget * LeadspeekRemainingDays) - LeadspeekPreviousRemaining) }} LeadspeekCostClientByRemainingDays -->
+<!-- ${{ formatPrice(((LeadspeekDailyBudget * LeadspeekRemainingDays) - LeadspeekPreviousRemaining) * (LeadspeekAgencyMarkup) / 100) }} LeadspeekProfitAgencyByRemainingDays -->
+<!-- ${{ formatPrice(((LeadspeekDailyBudget * LeadspeekRemainingDays) - LeadspeekPreviousRemaining) - (((LeadspeekDailyBudget * LeadspeekRemainingDays) - LeadspeekPreviousRemaining) * (LeadspeekAgencyMarkup) / 100)) }} LeadspeekCostAgencyByRemainingDays -->
+
+
+This campaign will charge immediately. The Client cost is $100 and your Agency cost is $75.00. I understand that the purchase of prepaid contacts is non-refundable.
+
+
+
+
+processChargeClientByRemainingDays()
+
+
+
+$dataSimplifi = [
+    'chargeType' => 'increase_budget',
+    'leadspeekMaxBid' => $leadspeekMaxBid,
+    'leadspeekMonthlyBudget' => $leadspeekMonthlyBudget,
+    'leadspeekDailyBudget' => $leadspeekDailyBudget,
+    'leadspeekGoalValue' => $leadspeekGoalValue,
+    'leadspeekGoalType' => $leadspeekGoalType,
+    'leadspeekAgencyMarkup' => $leadspeekAgencyMarkup,
+    'costAgencyByRemainingDays' => $costAgencyByRemainingDays
+];
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-472
+
+FILE
+* front
+* * front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+* * front\src\store\store.js
+* * front\src\main.js
+* * front\src\pages\Layout\DashboardLayout.vue
+* * front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+* * front\src\plugins\global.js
+
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\SimplifiController.php
+* data\app\Services\SimpliFiService.php
+* data\routes\api.php
+
+---------------------------------------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-472
+
+FILE
+* app\Console\Commands\CheckNewBudgetSimplifiCommand.php
+* app\Http\Controllers\WebhookController.php
+* app\Services\SimpliFiService.php
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\MarketingController.php
+* app\Models\LeadspeekInvoice.php
+* resources\views\emails\tryseramatchlistcharge.blade.php
+* app\Models\LeadspeekUser.php
+
+a = rp125 * 1000000
+b = Rp122 * 1000000
+
+https://dashboard.stripe.com/acct_1Q6QZdRqffKQJCJM/test/customers -> ini yang salah
+https://dashboard.stripe.com/acct_1RgkgtG8KExmzAxX/test/customers -> ini yang benar
+
+tidak ada yang perlu di takuti kecuali ketakutan itu sendiri
+
+82125436027
+
+utf8mb4_general_ci
+
+- 	beli campaign ✅
+	start date = 2025-09-18
+	end date = 2025-10-17
+	total daily = $0.25
+	Total Campaign Budget = $7.5
+
+- 	di tanggal 2025-10-16 terjadi auto topup (progress)
+	start date = 2025-10-18
+	end date = 2025-11-16
+	
+	di emm
+	total daily = $0.25
+	total spend = $7
+	total remaining = $0.75
+	Total Campaign Budget = $7.5
+	
+	di simplifi
+	total daily = $0.1
+	total spend = $2.8
+	total remaining = $0.2
+	Total Campaign Budget = $3
+	
+- 	di tanggal 2025-10-16 ubah daily budget menjadi 1
+	maka akan ubah total budget yang pakai tanggal start date nya 2025-09-18, bukan yang 2025-09-19
+	
+A campaign Feature that allows you to limit, or cap
+
+
+campaign id: 4618471 | campaign type: simplifi | frequency capping impressions: 10 | frequency capping hours: 1 | max bid: $1 | monthly budget: $7.5 | daily budget: $0.25 | goal type: cpc | goal value: $1 | agency markup: 20%
+
+
+
+<!-- CLEAN ID -->
+<sidebar-item
+    class="--sidebar-custom-item"
+    :showBeta="true"
+    :link="{
+    name: 'Clean ID',
+    icon: 'fa-solid fa-file-import',
+    path: '/cleanid'
+    }"
+    v-if="(this.$global.menuLeadsPeek && this.$global.menuUserType != 'client' && this.$global.creditcardsetup && this.$global.stripeaccountconnected && this.$global.idsys == this.$global.masteridsys && this.$global.apiMode)">
+</sidebar-item>
+<!-- CLEAN ID -->
+
+
+<!-- simplfi -->
+<sidebar-item
+    class="--sidebar-custom-item"
+    :showBeta="this.$global.betaFeature.simplifi_module.is_beta && (this.$global.betaFeature.simplifi_module.apply_to_all_agency || this.$global.isBeta)"
+    :link="{
+        name: this.$global.globalModulNameLink.simplfi.name,
+        icon: 'fa-solid fa-rectangle-ad',
+        path: '/' + this.$global.globalModulNameLink.simplfi.url + '/campaign-management'
+    }"
+    v-if="((this.$global.menuLeadsPeek && this.$global.menuUserType != 'client' && (!this.$global.agencyPaymentFailed || this.$global.globalviewmode) && !this.$global.systemUser && this.$global.creditcardsetup && this.$global.stripeaccountconnected) || (this.$global.menuLeadsPeek && this.$global.menuLeadsPeek_typeLocator == 'locator' && this.$global.menuUserType == 'client' && !this.$global.systemUser)) && this.$global.idsys == this.$global.masteridsys && this.validateBetaFeature('simplifi_module')">
+</sidebar-item>
+<!-- simplfi -->
+
+(this.$global.menuLeadsPeek && this.$global.menuUserType != 'client' && this.$global.creditcardsetup && this.$global.stripeaccountconnected && this.$global.idsys == this.$global.masteridsys && this.$global.apiMode)
+
+untuk simplifi baru
+v-if="this.$global.menuLeadsPeek && this.$global.menuUserType != 'client' && (!this.$global.agencyPaymentFailed || this.$global.globalviewmode) && !this.$global.systemUser && this.$global.creditcardsetup && this.$global.stripeaccountconnected && this.$global.idsys == this.$global.masteridsys && this.validateBetaFeature('simplifi_module')"
+
+
+
+
+
+store.js
+- retrieveUserData(context, data) {}) -> ini ketika login maka akan menjalankan ini untuk mengambil detail
+                                      -> product name dan product url juga awalnya dapat dari sini
+
+rootcustomsidebarleadmenu -> ini settingan untuk root
+customsidebarleadmenu -> ini untuk settingan agency
+
+GeneralSetting.vue
+tempLeadsLocalUrl: this.leadsLocalUrl,
+tempLeadsLocatorUrl: this.leadsLocatorUrl,
+tempLeadsEnhanceUrl: this.leadsEnhanceUrl,
+tempLeadsB2bUrl: this.leadsB2bUrl,
+keyup_modulename(module,name) -> ketika keyup input product name dan product url
+save_general_custommenumodule() -> ini ketika product name dan url di save
+validationProductUrl() -> ini untuk validasi product url sebelum di save
+validateProductname() -> ini untuk validasi product name sebelum di save
+http://applocal.emmsandbox.com:8080/user/profile-setup
+ConfigurationController.php
+'rootsidemenu' => $rootsidebarleadmenu, 'sidemenu' => $customsidebarleadmenu
+
+localStorage userData
+leadsimplifiname
+leadsimplifiurl      
+
+hal yang pasti terjadi
+1. pastikan jika root sudah punya product name dan url simplifi. dan agency sudah ada settingan customsidebarleadmenu namun belum ada simplifi maka ambil dari root 
+
+hal aneh
+1. ketika edit product url, maka tidak ke save di root maupun di agency, ini terjadi ketika view mode maupun tidak view mode ✅     
+
+skenario 
+1. jika belum ada leadsimplifiname dan leadsimplifiurl di locastorage nya, maka pakai base nya dari global
+2. pastikan jika root sudah punya product name dan url simplifi. dan agency sudah ada settingan customsidebarleadmenu namun belum ada simplifi maka ambil dari root            
+
+
+==========================DATABASE UNTUK DEFAULT PRICE GENERAL SETTING (OLD)==========================
+1. rootagencydefaultprice
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "1",
+        "FirstName_LastName_MailingAddress": "1",
+        "FirstName_LastName_MailingAddress_Phone": "1"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Monthly": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Weekly": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    }
+}
+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
+/k4=
+
+2. rootsetting
+{
+    "defaultfreeplan": "T",
+    "defaultpaymentterm": "Prepaid",
+    "defaultagencypercentagecommission": "0.10",
+    "clientcaplead": "",
+    "clientcapleadpercentage": "50",
+    "clientminleadday": "",
+    "deadlinedistribution": "21"
+}
+HeA3GjDxn2luiy2gjYJKZgvKyWs24PRBBh8qwfZOehVbarE1R2s0W9JGvAnvWS0pwyiyhbkoObQ4
+vhBvP90KIjMzv9aWmCQ30ojJsPEo4RjHAvaPxqCZhQNomAC6LGiA9ujyj+a22JIdqNSNWmpQmeFJ
+2PqVa+AXxPFy0vVdnvxGAJuai3un0GVcUl/keZF9r47D+HU0Ex4gOVIFBg4JZxwpEY+Tv49voXYV
+PWVL9viLuwIqJgCphUF1q0jaoXebVGaz/51nrbXRlBrh9Sp4Ng==
+==========================DATABASE UNTUK DEFAULT PRICE GENERAL SETTING (OLD)==========================	
+
+
+==========================DATABASE UNTUK DEFAULT PRICE GENERAL SETTING (NEW)==========================
+JANGAN LUPA TAMBAHKAN SETTINGAN INI KE ROOT LAIN
+
+1. rootagencydefaultprice
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "1",
+        "FirstName_LastName_MailingAddress": "1",
+        "FirstName_LastName_MailingAddress_Phone": "1"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Monthly": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Weekly": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "simplifi": {
+        "Prepaid": {
+            "SimplifiMaxBid": "12",
+            "SimplifiDailyBudget": "5",
+            "SimplifiAgencyMarkup": "0"
+        }
+    }
+}
+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
+
+
+
+2. rootsetting
+{
+    "defaultfreeplan": "T",
+    "defaultpaymentterm": "Prepaid",
+    "defaultagencypercentagecommission": "0.10",
+    "clientcaplead": "",
+    "clientcapleadpercentage": "50",
+    "clientminleadday": "",
+    "deadlinedistribution": "21",
+    "maxBid": {
+        "minimum": "8"
+    },
+    "dailyBudget": {
+        "minimum": "5"
+    }
+}
+HeA3GjDxn2luiy2gjYJKZgvKyWs24PRBBh8qwfZOehVbarE1R2s0W9JGvAnvWS0pwyiyhbkoObQ4
+vhBvP90KIjMzv9aWmCQ30ojJsPEo4RjHAvaPxqCZhQNomAC6LGiA9ujyj+a22JIdqNSNWmpQmeFJ
+2PqVa+AXxPFy0vVdnvxGAJuai3un0GVcUl/keZF9r47D+HU0Ex4gOVIFBg4JZxwpEY+Tv49voXYV
+PWVL9viLuwIqJgCphUF1q0jaoXebzNsQiIsReaa3Y8cw/k9d+6Q0akCEjoFihK7fZjX+QMDZJ7jY
+72PzMB85r/s9zXlHr3Y8DxClk5QhyO5G9mT74g==
+==========================DATABASE UNTUK DEFAULT PRICE GENERAL SETTING (NEW)==========================	
+
+GeneralSetting.vue
+<h4>Default Retail Prices	
+this.initial_default_price();		
+this.$store.dispatch('getGeneralSetting', {
+SimplifiMaxBid: '0',
+SimplifiDailyBudget: '0',
+SimplifiAgencyMarkup: '0',
+
+Config\Client.vue
+handlePriceSet()
+border-left: none;
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+
+berarti tinggal ini saja
+$companygroup[$index]["SimplifiMaxBid"]
+$companygroup[$index]["SimplifiDailyBudget"]
+$companygroup[$index]["SimplifiAgencyMarkup"]
+
+
+btc
+- 1.850.000.000 - 1.950.000.000
+
+xrp
+- 47.000 - 50.000 = 6.38%
+- 47.000 - 51.000 = 8.51%
+- 47.000 - 54.000 = 14.89%
+
+
+
+
+
+
+
+
+
+
+Downline -> NodeTree -> Tree
+
+akses dom sandbox
+harrison+internetdominator@exactmatchmarketing.com
+123456
+
+database yang perlu di tambahkan di root nya saja adalah
+rootdefaultmodules = {"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}
+
+waktu itu pas b2b yang perlu di tambahkan adalah
+rootcustomsidebarleadmenu
+rootcostagency
+rootagencydefaultprice
+rootdefaultmodules
+
+sekarang untuk simplifi hanya menambahkan rootdefaultmodules saja
+{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}
+
+hal hal penting di userSetup
+checkSetupCompleteClient -> disini ada pengecekan bertahap dari tiap url module. disitulah 	
+
+hal hal penting di global
+this.$global.agencyfilteredmodules 
+- diambil dari GetRoleList
+- jadi awalnya ambil dari rootcustomsidebarleadmenu, lalu ambil agencysidebar, nah lalu di cek jika agencysidebar nya ada yang false, akan unset parameter dari rootcustomsidebarleadmenu
+
+this.$global.agencyDefaultModules 
+- diambil dari GetRoleList
+- jadi awalnya ambil dari rootcustomsidebarleadmenu, lalu ambil agencydefaultmodules atau rootdefaultmodules. rootdefaultmodules itu sudah pasti ada, nah agencydefaultmodules jika tidak ada maka akan di true in
+
+this.$global.agencysidebar diambil dari getDomainorSubInfo
+this.$global.clientsidebar diambil dari checkUserSetupComplete
+
+main.js
+global.agencyfilteredmodules = response.agencyFilteredModules;
+global.agencyDefaultModules = response.agencyDefaultModules;
+global.agencysidebar = response.agencysidebar;
+global.clientsidebar = response.clientsidebar;
+
+bentukobject
+global.agencyfilteredmodules = {
+    "local": {
+        "name": "Site ID",
+        "url": "siteid"
+    },
+    "locator": {
+        "name": "Search ID",
+        "url": "searchid"
+    },
+    "enhance": {
+        "name": "Enhance ID",
+        "url": "enhanceid"
+    },
+    "b2b": {
+        "name": "B2B ID",
+        "url": "b2bid"
+    },
+    "simplifi": {
+        "name": "Simplifi ID",
+        "url": "simplifiid"
+    }
+}
+response.agencyDefaultModules = [
+    {
+        "type": "local",
+        "status": true
+    },
+    {
+        "type": "locator",
+        "status": true
+    },
+    {
+        "type": "enhance",
+        "status": true
+    },
+    {
+        "type": "b2b",
+        "status": true
+    }
+]
+response.agencysidebar = {
+    "local": true,
+    "locator": true,
+    "enhance": true,
+    "b2b": true,
+    "simplifi": {
+        "name": "Simplifi ID",
+        "url": "simplifiid"
+    }
+}
+
+Downline.vue
+rootmodules = this.$global.agencyfilteredmodules
+
+GeneralSetting.vue
+Set Default Products for Agencies
+defaultModule 
+
+Config\Client.vue
+selectedModulesCreate
+selectedModules = row.selected_side_bar
+
+http://jidanach.emmsandbox.com:8080/simplifiach/campaign-management
+
+Testing Binary Products
+site|search|enhance|b2b|simplifi
+0|0|0|0|0 ✅
+0|0|0|0|1 ✅
+0|0|0|1|0 ✅
+0|0|0|1|1 ✅
+0|0|1|0|0 ✅
+0|0|1|0|1 ✅
+0|0|1|1|0 ✅
+0|0|1|1|1 ✅
+0|1|0|0|0 ✅
+0|1|0|0|1 ✅
+0|1|0|1|0 ✅
+0|1|0|1|1 ✅
+0|1|1|0|0 ✅
+0|1|1|0|1 ✅
+0|1|1|1|0 ✅
+0|1|1|1|1 ✅
+1|0|0|0|0 ✅
+1|0|0|0|1 ✅
+1|0|0|1|0 ✅
+1|0|0|1|1 ✅
+1|0|1|0|0 ✅
+1|0|1|0|1 ✅
+1|0|1|1|0 ✅
+1|0|1|1|1 ✅
+1|1|0|0|0 ✅
+1|1|0|0|1 ✅
+1|1|0|1|0 ✅
+1|1|0|1|1 ✅
+1|1|1|0|0 ✅
+1|1|1|0|1 ✅
+1|1|1|1|0 ✅
+1|1|1|1|1 ✅
+
+
+
+UPDATE company_settings SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2')) 
+WHERE id = 253 and company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules';
+
+UPDATE company_settings SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2')) 
+WHERE id = 2609 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules';
+
+
+
+
+FRONT
+* front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+* front\src\pages\Modules\Auth\User\UserSetup.vue
+* front\src\components\Tree\NodeTree.vue
+* front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+* front\src\main.js
+* front\src\pages\Layout\DashboardLayout.vue
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+* front\src\pages\Modules\Auth\LeedspeekB2b\ClientV1.vue
+
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\OpenApiController.php
+
+
+---ini web yang sudah saya buat--- 
+1. saya sudah buat frontend pakai vue2 node 14.21.3 
+2. saya sudah buat backend pakai laravel 8 php 7.4 
+---ini web yang sudah saya buat--- 
+
+---ini yang saya akan buat--- 
+3. nah karena mcp hanya ada untuk node js saja. kalo misalnya saya bikin express js gimana. jadi saya bikin routingan sendiri supaya bisa di hit oleh frontend vue saya. nanti di express sendiri saya bikin mcp sendiri
+---ini yang saya akan buat---
+
+kaya gitu mungkin tidak
+
+CHECK 
+LOCAL 
+ENHANCE
+B2B
+
+1. ketika setup fee dan monthly fee nya 0 maka tidak charge dan tidak send email. dan akan langsung stop 
+2. ketika setup nya atau monthly fee nya diatas 1, maka akan charge dan akan send email. dan tidak akan langsung stop 
+
+
+4639447
+4627427
+4627423
+4627059
+4625338
+4620472
+4620423
+
+client_id  = 72c04483bd100f3025c458ab7f
+secret_key = 2f285b1a229add8de6d73fe10f381dd274f3e8994d4150a9db7d86a28375e5e8ac08ac7c4b3b0d0f08866c2c7fe03f68c60e4a75bbd8dc2e4e44951dd1a303a3e709ba12f2f31b7faf312026c27f6753b7b778
+
+"watt": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://d3qbgyi0xnnqpn.cloudfront.net/mcp",
+        "--header",
+        "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY3AiOlsidXNlOnRvb2xzIl0sInN1YiI6IjJjOWU0NzAwLWEzMmYtNDJjYi04MTEwLWMzZjNkYzYyZTI1N0BleGFtcGxlLmNvbSIsImV4cCI6MTc2NzIwMzMzMCwiaWF0IjoxNzU5NDI3MzMwfQ.6jvpytYh-aR8GfIk9ToPc5XrRbe00fj5jQyHMA_QPpI"
+      ]
+}
+
+"watt": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://testing/mcp",
+        "--header",
+        "Authorization: Bearer jidantest"
+      ]
+}
+
+{
+    "mcpServers": {
+		"watt": {
+			"command": "npx",
+			"args": [
+		        "mcp-remote",
+		        "https://testing.cloudfront.net/mcp",
+		        "--header",
+		        "Authorization: Bearer testing"
+            ]
+		}
+	}
+}
+
+{
+	"mcpServers": {
+		"watt": {
+			"command": "npx",
+			"args": [
+		        "mcp-remote",
+		        "https://d3qbgyi0xnnqpn.cloudfront.net/mcp",
+		        "--header",
+		        "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY3AiOlsidXNlOnRvb2xzIl0sInN1YiI6IjJjOWU0NzAwLWEzMmYtNDJjYi04MTEwLWMzZjNkYzYyZTI1N0BleGFtcGxlLmNvbSIsImV4cCI6MTc2NzIwMzMzMCwiaWF0IjoxNzU5NDI3MzMwfQ.6jvpytYh-aR8GfIk9ToPc5XrRbe00fj5jQyHMA_QPpI"
+		      ]
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

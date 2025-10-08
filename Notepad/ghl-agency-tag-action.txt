@@ -1,0 +1,56 @@
+{
+	"api_key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im5vRnpOUU5wbjVjdTZQa3VrMDhBIiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ2Njg3ODU4MDU4LCJzdWIiOiJoQzBvTURoYXhJM2tWRjRSQ3V4VSJ9.gXpJNfwUFFrvqAygZJivFrrcMmgKINRdF7gwrcDMm2s"
+	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im1yY0lUaXNHZ2M1WURmUFd5dzltIiwiY29tcGFueV9pZCI6IkhHUXJlU2NHdkN6dHp6VjZkbW1tIiwidmVyc2lvbiI6MSwiaWF0IjoxNzExMzg5NDE1MzA0LCJzdWIiOiJ1c2VyX2lkIn0.5SHN4yW_nrpRGjAEuWg-oNQtWHq-Wkz5EScPUhMN8_Q
+}
+
+
+Jadi sekarang EMM kan punya GHL , jadi Enterprise (saat ini hanya EMM) bisa konek ke GHL lalu tiap kali agency daftar kita bisa insert ke kontak dan tambahin Tag setiap action yang dilakukan agency tersebut:
+
+1. "account-created" tag is added as soon as their account is created, through either the front end, or back end, and before they agree to the terms of service. ✅
+2. "agreement-signed" tag is added when the agree to the terms of service and successfully pay the onboarding fee. ✅
+3. "stripe-connected" when they connect stripe. (nanti)
+4. "whitelabel-setup" is added when they have "True" for Status Domain and also Status SMTP
+5. "campaign-started" is added when they have at least one campaign started ✅
+6. "over-min-spend" is added whenever they pass their monthly anniversary over minimum spend (progress)
+7. "under-min-spend" is added whenever they pass their monthly anniversary under minimum spend 
+8. "manual-bill-enabled" is added If Status Manual Bill is True ✅
+
+
+Hi Admin,
+
+An Error Occurred While Connecting The Client Lead Connector.
+
+User Type : Client
+Company ID : 5361
+Company Name : Tanya Badillo of N2
+Personal Name : Trent Soles
+Personal Email : trentsoles+n2-tanyabadillo@gmail.com
+Function Name : gohighlevelv2OauthCallbackProcessClient
+Error Message : #3 Client error: POST https://services.leadconnectorhq.com/oauth/token resulted in a 401 Unauthorized response: {"error":"UnAuthorized!","error_description":"Invalid client credentials!"}
+
+Pertanyaan Charge Campaign Simplifi
+1. charge campaign simplifi di root dominator dan mobile. itu bagaimana pembagian root fee nya
+2. charge campaign simplifi pembagian untuk sales custom commission fixed itu bagaimana
+
+
+
+
+
+
+https://marketplace.gohighlevel.com/oauth/chooselocation?response_type=code&redirect_uri=https%3A%2F%2Fsitesettingsapi.com%2Fleadconnectorv2%2Foauth%2Fcallback%2Fview&client_id=680b2d7481da0206006784ea-m9wf9mb0&scope=contacts.readonly+contacts.write+locations%2Ftags.write+locations%2Ftags.readonly+locations%2FcustomFields.readonly+locations%2FcustomFields.write+opportunities.readonly+opportunities.write&state=eyJjb21wYW55X2lkIjo0NDk0LCJzdWJkb21haW5fdXJsIjoiaHR0cHM6XC9cL2FwcC5leGFjdG1hdGNobWFya2V0aW5nLmNvbVwvaW50ZWdyYXRpb25zXC8zJTdEIiwiZW5hYmxlX3NlbmRncmlkIjowLCJ1c2VyX2lkX2xvZ2luIjoxNzIsInVzZXJfaXAiOiIiLCJjdXN0b21fZmllbGRzX2dlbmVyYWwiOiJbXCJDb250YWN0IElkXCIsXCJDbGljayBEYXRlXCIsXCJFbWFpbCAyXCIsXCJQaG9uZSAyXCIsXCJBZGRyZXNzIDJcIixcIktleXdvcmRcIl0iLCJjdXN0b21fZmllbGRzX2IyYiI6IltcIkVtcGxveWVlIElEXCIsXCJDb21wYW55XCIsXCJDb21wYW55IFBob25lXCIsXCJDb21wYW55IFdlYnNpdGVcIixcIk51bWJlciBvZiBFbXBsb3llZXNcIixcIlNhbGVzIFZvbHVtZVwiLFwiWWVhciBGb3VuZGVkXCIsXCJKb2IgVGl0bGVcIixcIkxldmVsXCIsXCJKb2IgZnVuY3Rpb25cIixcIkhlYWRxdWFydGVzIEJyYW5jaFwiLFwiTkFJQ1MgQ29kZVwiLFwiTGFzdCBTZWVuIERhdGVcIixcIkxpbmtlZCBJblwiXSIsImN1c3RvbV9maWVsZHNfYWR2YW5jZSI6IltcIklkZW50aWZpY2F0aW9uXCIsXCJDb250YWN0IEluZm9ybWF0aW9uXCIsXCJIb3VzZSBhbmQgUmVhbCBFc3RhdGVcIixcIkZpbmFuY2lhbCBJbmZvcm1hdGlvblwiLFwiSG91c2Vob2xkIEluZm9ybWF0aW9uXCIsXCJJbnRlcmVzdHMgYW5kIEFmZmluaXRpZXNcIixcIk9jY3VwYXRpb25cIixcIk1hcmtldGluZyBJbmRpY2F0b3JzXCIsXCJMb2NhdGlvbiBhbmQgQ2Vuc3VzIERhdGFcIixcIk1pc2NlbGxhbmVvdXNcIl0ifQ%3D%3D&user_type=client
+
+EMM-SANBDOX-APP
+JD-TASK-EMM-483
+except csrf for connect gohighlevel v2
+
+
+
+
+
+
+
+
+
+
+
+

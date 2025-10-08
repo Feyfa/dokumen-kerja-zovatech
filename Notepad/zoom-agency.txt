@@ -1,0 +1,195 @@
+ZOOM AGENCY
+
+---------------
+CATATAN
+di async integrationItemClick()
+const campaign_webhook = await this.getCampaignZapierDetails({campaign_id: this.selectedRowData.id})
+const campaign_tags = await this.getCampaignZapierTags({campaign_id: this.selectedRowData.id})
+const agency_webhook = await this.getAgencyZapierDetails({ company_id: this.selectedRowData.company_id})
+const agency_tags = await this.getAgencyZapierTags({ company_id: this.selectedRowData.company_id})
+
+ConfigApp\Client.vue
+handleIntegrationItemClick() -> ini tiap integration di click
+handleIntegrationClick() -> ini terjadi ketika icon integration client di click
+saveIntegrationSettingslocal() -> untuk save di client management
+
+Leedspeek\V1Client.vue
+isAgencyZoomFetching: false,
+agencyZoomEnable: false,
+agencyZoomTestEnable: false,
+agencyZoomWebhook: [''],
+defaultAgencyZoomWebhook: false
+integrationItemClick() -> terjadi ketika item integration nya di click
+saveIntegrationConfiguration() -> untuk save integation
+---------------
+
+---------------
+CATATAN
+di client punya 3 webhoook zapier
+- https://hooks.zapier.com/hooks/catch/19216083/2n8o94m/
+- https://hooks.zapier.com/hooks/catch/19216083/123456/
+- https://hooks.zapier.com/hooks/catch/19216083/aaaaaa/
+
+saat save url di campaign, misal saya sebelumnya punya url ini
+- https://hooks.zapier.com/hooks/catch/19216083/2n8o94m/
+- https://hooks.zapier.com/hooks/catch/19216083/123456/
+
+nah saya ingin ubah menjadi 
+- https://hooks.zapier.com/hooks/catch/19216083/2n8o94m/
+- https://hooks.zapier.com/hooks/catch/19216083/123456/
+- https://hooks.zapier.com/hooks/catch/19216083/aaaaaa/
+
+nah itu tidak bisa di save karena bug di kondisi ini, kondisi check jika url nya sama maka jangan di ubah
+if (implode('|',$request->zapier_webhook) != $root_zap_data->api_key && !empty($request->zapier_webhook)) {
+    $urls = implode('|',$request->zapier_webhook); 
+    $zap_data->zap_webhook = $urls;
+}
+
+intinya adalah jika url di campaign sama dengan url di cliebnt maka zap_webhook nya diisi null saja
+---------------
+
+---------------
+SAAT SEND TEST
+- site id basic
+"payload": {
+    "Clickdate": "2025-09-11",
+    "Firstname": "John",
+    "Lastname": "Doe",
+    "Keyword": "Testing - Send Contact",
+    "Email1": "johndoe1-20250910235839-43919974@example.com",
+    "Email2": "johndoe2-20250910235839-43919974@example.com",
+    "Address1": "John Doe Address 1",
+    "Address2": "John Doe Address 2",
+    "City": "San Francisco",
+    "State": "California",
+    "Zip": "91234",
+    "Phone1": "555-123-4567",
+    "Phone2": "555-987-6543"
+}
+
+"payload": {
+    "Clickdate": "2025-09-11",
+    "Firstname": "John",
+    "Lastname": "Doe",
+    "Keyword": "Testing - Send Contact",
+    "Email1": "johndoe1-20250910235754-43919974@example.com",
+    "Email2": "johndoe2-20250910235754-43919974@example.com",
+    "Address1": "John Doe Address 1",
+    "Address2": "John Doe Address 2",
+    "City": "San Francisco",
+    "State": "California",
+    "Zip": "91234",
+    "Phone1": "555-123-4567",
+    "Phone2": "555-987-6543",
+    "phone3": "Phone 3",
+    "taxBillMailingInformation": "Tax Bill Mailing Information",
+    "dwellingType": "Dwelling Type",
+    "homeOwner": "Home Owner",
+    "homeOwnerOrdinal": "Home Owner Ordinal",
+    "lengthOfResidence": "Length of Residence",
+    "homePrice": "Home Price",
+    "homeValue": "Home Value",
+    "medianHomeValue": "Median Home Value",
+    "livingSqft": "Living Sqft",
+    "yearBuiltOriginal": "Year Built Original",
+    "yearBuiltRange": "Year Built Range",
+    "lotNumber": "Lot Number",
+    "legalDescription": "Legal Description",
+    "landSqft": "Land Sqft",
+    "garageSqft": "Garage Sqft",
+    "subdivision": "Subdivision",
+    "zoningCode": "Zoning Code",
+    "householdIncome": "Household Income",
+    "medianHouseholdIncome": "Median Household Income",
+    "householdNetWorth": "Household Net Worth",
+    "medianHouseholdNetWorth": "Median Household Net Worth",
+    "discretionaryIncome": "Discretionary Income",
+    "creditScoreMedian": "Credit Score Median",
+    "creditScoreRange": "Credit Score Range",
+    "numberOfAdultsInHousehold": "Number of Adults in Household",
+    "numberOfChildrenInHousehold": "Number of Children in Household",
+    "numberOfPeopleInHousehold": "Number of People in Household",
+    "childrenAged03InHousehold": "Children Aged 0-3 in Household",
+    "childrenAged46InHousehold": "Children Aged 4-6 in Household",
+    "childrenAged79InHousehold": "Children Aged 7-9 in Household",
+    "childrenAged1012InHousehold": "Children Aged 10-12 in Household",
+    "childrenAged1318InHousehold": "Children Aged 13-18 in Household",
+    "childrenInHousehold": "Children in Household",
+    "cooking": "Cooking",
+    "gardening": "Gardening",
+    "music": "Music",
+    "diy": "DIY",
+    "books": "Books",
+    "travelVacation": "Travel Vacation",
+    "healthBeautyProducts": "Health Beauty Products",
+    "petOwner": "Pet Owner",
+    "photography": "Photography",
+    "fitness": "Fitness",
+    "epicurean": "Epicurean",
+    "occupationCategory": "Occupation Category",
+    "occupationType": "Occupation Type",
+    "occupationDetail": "Occupation Detail",
+    "magazineSubscriber": "Magazine Subscriber",
+    "charityInterest": "Charity Interest",
+    "likelyCharitableDonor": "Likely Charitable Donor",
+    "cbsa": "Cbsa",
+    "censusBlock": "Census Block",
+    "censusBlockGroup": "Census Block Group",
+    "censusTract": "Census Tract",
+    "voter": "Voter",
+    "urbanicity": "Urbanicity"
+}
+
+- search id
+
+---------------
+
+INSERT INTO integration_list
+(name, slug, logo, `type`, status, referralcode, custom_fields, created_at)
+VALUES('Agency Zoom', 'agencyzoom', 'fa-diagram-project', 'mail', 1, '', '', CURRENT_TIMESTAMP);
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-567 = "feat add integration agency zoom"
+JD-TASK-EMM-567-DEV-SYNC
+
+FILE
+FRONT
+* front\src\assets\css\emm.css
+* front\src\pages\Integration\IntegrationDetail.vue
+* front\src\pages\Integration\Integrations.vue
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+* front\src\pages\Modules\Auth\LeedspeekB2b\ClientV1.vue
+* front\src\pages\Modules\Auth\LeedspeekEnhance\ClientV1.vue
+* front\src\pages\Modules\Auth\LeedspeekLocator\V1Client.vue
+* front\src\store\store.js
+
+DATA
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\IntegrationController.php
+* data\app\Http\Controllers\SendgridController.php
+* data\app\Http\Controllers\AgencyZoomController.php
+* data\app\Models\LeadspeekUser.php
+* data\routes\api.php
+
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-567 = "feat add integration agency zoom"
+JD-TASK-EMM-567-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* app\Models\LeadspeekUser.php
+
+
+
+
+
+
+
+
+
+

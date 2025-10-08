@@ -1,0 +1,983 @@
+NEXT TASK
+CLEAN ID
+NA-TASK-EMM-341 -> clean id
+
+setiap upload md5, create job per 10 md5 dengan redis
+insert ke table baru
+
+30052025
+-> cari dulu ke tbl person -> baru ke bigdbm (sama kayak yg udah ada, tapi tanpa ke towerdata atau bigdbm pii)
+-> untuk b2b juga sama ga ke towerdata dan pii
+
+jalanin pake
+php artisan queue:work redis --queue=clean_id
+php artisan queue:work redis --queue=retry_clean_id
+
+php artisan queue:work --queue=cleanID_export
+
+php artisan queue:restart; php artisan cache:clear
+
+TANYA :
+- cek ke opt_outlist dan suppression_list	
+- kalo opt_outlist -> root			
+- kalo suppresion_list -> campaign atau client, sedangkan clean id dasarnya agency
+FIX : cek hanya ke optoutlist versi root. suppression list kan versi client atau campaign, jadi gak cek
+
+-------------DATABASE YANG DIUBAH-------------
+{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}}
+
+leadspeek_type -> enum di tambahkan clean_id di table `report_analytics`
+leadspeek_type -> enum yang ditambahkan clean_id di table `failed_lead_records`
+
+invoice_type -> enum ditambahkan clean_id di table `leadspeek_invoice`
+clean_file_id -> field ditambahkan di table `report_analytics` bigint, default null
+clean_file_id -> field ditambahkan di table `failed_lead_records` bigint, default null
+clean_file_id -> field ditambahkan di table `leadspeek_invoice` 	, default null
+status -> enum diubah menjadi 'pending','done','error' di table `clean_id_file`
+
+clean_id_errors -> table baru
+clean_id_export -> table baru
+clean_id_file -> table baru
+clean_id_md5 -> table baru
+clean_id_result -> table baru
+clean_id_result_advance_1 -> table baru
+clean_id_result_advance_2 -> table baru
+clean_id_result_advance_3 -> table baru
+topup_cleanids -> table baru
+-------------DATABASE YANG DIUBAH-------------
+
+
+-------------FINALLY DATABASE YANG DIUBAH-------------
+- tambahkan enum 'clean_id' di table `leadspeek_invoice`
+- tambahkan enum 'clean_id di table `report_analytics`
+- tambahkan enum 'clean_id di table `failed_lead_records`
+- ALTER TABLE leadspeek_invoice ADD COLUMN clean_file_id BIGINT UNSIGNED DEFAULT NULL;
+- ALTER TABLE report_analytics ADD COLUMN clean_file_id BIGINT DEFAULT NULL;
+- ALTER TABLE failed_lead_records ADD COLUMN clean_file_id BIGINT DEFAULT NULL;
+
+- clean_id_errors
+- clean_id_export
+- clean_id_file
+- clean_id_md5
+- clean_id_result
+- clean_id_result_advance_1
+- clean_id_result_advance_2
+- clean_id_result_advance_3
+- topup_cleanids
+-------------FINALLY DATABASE YANG DIUBAH-------------
+
+
+$changeFieldAdvancedInformation = [
+'mobile_phone_3' => 'phone3',
+'yr_built_orig' => 'year_built_original',
+'yr_built_range' => 'year_built_range',
+'income_household' => 'household_income',
+'income_midpts_household' => 'median_household_income',
+'net_worth_household' => 'household_net_worth',
+'net_worth_midpt_household' => 'median_household_net_worth',
+'credit_midpts' => 'credit_score_median',
+'credit_range' => 'credit_score_range',
+'num_adults_household' => 'number_of_adults_in_household',
+'num_children_household' => 'number_of_children_in_household',
+'num_persons_household' => 'number_of_people_in_household',
+'children_household' => 'children_in_household'
+];
+
+-------------ENV YANG DITAMBAH-------------
+APISERVER_URL="http://apilocal.emmsandbox.com"
+-------------ENV YANG DITAMBAH-------------
+
+nhaggerty76@$$$
+hekehed@canonspark.com
+john.quigley@fellowshipepc.org
+avtuvy@gmail.com
+nhaggerty76@gmail.com = 6d30f2e60dcdab0ce437e9c4066b1082
+egepper@hotmail.com = 78e63b99eaa18437f46b56cea8e7b220
+ptrhrt57@gmail.com = 8bc64c9c289d18a05dd9652422208f05
+jbaucum@msn.com = 8dba134974fd2681332f7194e4e17711
+78e63b99eaa18437f46b56cea8e7b220
+8bc64c9c289d18a05dd9652422208f05
+8dba134974fd2681332f7194e4e17711
+8735136c57a61e11c161bd246cbc7872
+df19e366cfa7f01166b4929fb35fc37f
+1600844aa311fd8df30c0e6b2cc3ad51
+697f116c75fbeaf384e33df8f86516e4
+512ab114b277e3b4aad9fb5eb9b0cdf8
+3a60885ca65f5be99d14e17933220aaa
+d18fa68148cf6bdb08db8c8228d0616d
+a72acb561a6b078895468c756c7a6efa
+a72acb561a6b078895468c756c7a6efa
+
+    "message": "Your total price is $20.00, but your wallet balance is only $15. You need a minimum balance of $20.00 to complete this transaction."
+
+
+-----------YANG HARUS DIKERJAKAN-----------
+- validasi di ui jangan 0 cost per lead nya ✅
+- buat open api get cost per lead include juga dengan advanced ✅
+- buat parmeter `cleanid_name` di clean id upload itu jadi optional ✅
+- tambahkan route di opne api untuk list upload id
+- validasi jika data wallet 0 ✅
+- buat field untuk advanced_information ✅
+- validasi yang array md5 maximal ✅
+- buat job ulang ketika failed job sebanyak 3 kali dengan jeda 1 menit ✅
+- pindahkan price ke agency list ✅
+- integrasi clean id ui untuk ✅
+- buat history clean id pakai loading, search, dan filter ✅
+- beberapa field advanced saat result hasilnya kurang sesuai ✅
+- logic require_email ✅
+- tambahkan total md5, found, not found, duplicate_md5 ketika get result di api dan di ui nya ✅
+- tambahkan pesan bahwa maximal 100 md5, dan harga untuk cost agency nya ✅
+- export csv pakai yang biasa dahulu ✅
+
+- tampilkan balance wallet di clean id dan saat apapun yang terjadi balance di page clean id harus selaras dengan di data wallet ✅
+- hapus card basic dan advanced dan untuk select hanya sediakan advanced saja dan check all semua options nya ✅
+- untuk history untuk modules hanya sediakan advanced ✅
+- untuk history untuk type 'Raw Text API' ubah jadi 'API' saja ✅
+- ketika balance kurang di app, maka langsung muncul swal yang memberitahu bahwa balance kurang, dan ada button go to data wallet (progress)
+- otomatis bisa deteksi email atau md5
+-----------YANG HARUS DIKERJAKAN-----------
+
+-----------TESTING-----------
+- jika basic tanpa piih apapun maka akan error ✅
+- jika advanced tanpa pilih apapun maka akan error ✅
+- jika terdapat md5 yang tidak valid maka akan error ✅
+- jika uang nya kurang maka akan error dan dibatalkan (progress)
+
+
+
+1.
+- cost per lead = 2
+- count md5 = 10
+- total cost = 2 * 10 = 20
+- balance amount = 90
+- remaining balance = 70
+
+2. special case
+di table topup_cleanid, misalnya kebetulan cost_cleanid nya sangat tinggi dan balance_amount nya rendah
+cost_cleanid | balance_amount
+10 | 1 , remainingCostCleanId = 0 
+9 | 2 , remainingCostCleanId = 9
+7 | 3 , remainingCostCleanId = 7
+0 | 4 , remainingCostCleanId = 4
+
+1. tidak pakai parameter module ✅
+2. pakai parameter module basic ✅
+3. pakai parameter module advanced, namun tidak pakai parameter advanced_information ✅
+4. pakai parameter module advanced, namun pakai parameter advanced_information ✅
+5. pakai parameter module basic, namun pakai parameetr advanced_information, maka advanced_information nya jadi null ✅
+6. test jika terjadi error maka akan ulang sebanyak 3 kali dengan jeda 1 menit (nanti)
+
+TEST BASIC
+1. di person utama tidak ada, maka akan ambil dari bigdbm, function process_BIGDBM_towerdata() ✅
+2. di person utama ada maka akan ambil dari person, function dataExistOnDB() ✅
+3. di person utama ada dan sudah expired lebih 7 lari, maka akan ambil lagi dari bigbdm dataNotExistOnDBBIG() ✅
+
+TEST ADVANCED
+1. di person utama tidak ada, di person advanced juga tidak ada, maka akan ambil dari bigbdm, function process_BIGDBM_advanced() ✅
+2. di person utama ada, di person advanced tidak ada, maka akan ambil dari bigbdm hanya untuk advanced saja dataNotExistOnDBBIG() dan process_BIGDBM_advanced_exists() ✅
+3. di person utama ada, di person advanced juga ada, maka akan ambil dari database person, function dataExistOnDB() ✅
+4. di person utama ada, di person advanced juga ada, tapi sudah expired lebih dari 7 hari, maka akan ambil lagi dari bigbdm, function dataNotExistOnDBBIG() dan process_BIGDBM_advanced_exists() ✅
+-----------TESTING-----------
+
+
+-------------update-------------
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 22
+
+-- UNTUK EMM
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency' and company_id = 22 and id = 14
+
+-- UNTUK DOM
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency' and company_id = 39 and id = 23
+
+AIPreneursAPIDev
+
+http://AIPreneursAPIDev.emmsandbox.com:8080/sso?token=f811beabe461edf7788ed8bd801e1586172ef0d27f14621d816067b0ba7d49000806c733e2b2cf1f3b6196c7cdf6c7658cb4630e885919079d336f464353e0f7c7cb8b3c53611d500028e65de89894d2f369f8ed468710d45f348c9409566989980b197b29
+
+AIPreneurs.com
+http://aipreneurs.com:8080/sso?token=9916b2795d7f655cdabfbc12019b174a5b5523403ff01c80a0acd2b962b113262956054c2a064553e711be822b8809dc2bd0b09e7fd1b7a6ec7f9ff4aa08677683f91d382f13c7c501b7e38eb81b65243c4ca9eaf9eee4b452db08070dce85a71fa0a8189c0fca2af2
+http://AIPreneurs.com:8080/sso?token=e76e033a74d096961d4101a075735c0791776292ffc5f1f63fb1d3dfadb91cd07d4a15d032ee5333092290653b4aac66854276b5a81906743944df24348d34021b4849957641648d0816893d57f59b09aad08cec93131746e1c952fdb138b5505bac3d1a7351e7979121be43
+-------------update-------------
+
+//// QUEERYY 
+
+"md5": [
+	"78e63b99eaa18437f46b56cea8e7b220",
+	"d18fa68148cf6bdb08db8c8228d0616d",
+	"77923622fd09a3f6ef187d82971ba3cd",
+	"3d06deaa536581946ba9dd665232fe09",
+	"7cf9e71b7cef1edcb3c786b8f04b4b92",
+	"cf75592604f42a98883f86918100fdf3",
+	"e1f8fc7ce39f7799b0542416aa3eceb2",
+	"d264abd0a46ce4d6a9c1a1fc9deaf2f7",
+	"1bd323891a53cda51c80d729f3b15455",
+	"78347e6ed4cd3fed7fb7a1e8d53538aa",
+	"93b76b90c2f8e1d433832d0a00c999f9",
+	"a72acb561a6b078895468c756c7a6efa"
+]
+
+$totalPriceCleanId
+$remainingpriceCleanId
+
+$status = 'found';
+$msg_description = 'Basic information Found From BIGDBM';
+
+$msg_description = 'Basic information Not Found From BIGDBM';
+$status = 'not_found';
+
+/** REPORT ANALYTIC */
+$this->controller->UpsertReportAnalytics($file_id,$leadspeektype,'bigbdmemail');
+/** REPORT ANALYTIC */
+
+ALTER TABLE report_analytics MODIFY COLUMN leadspeek_type enum('local','locator','enhance','b2b','clean_id') DEFAULT 'local' NOT NULL;
+
+//// table baru
+
+CREATE TABLE clean_id_file (
+	id BIGINT auto_increment NOT NULL,
+	file_name varchar(256) NULL,
+	file LONGBLOB NULL,
+	status ENUM('uploaded','done','error') DEFAULT 'uploaded' NULL,
+	user_id bigint NULL,
+	total_jobs int NULL,
+	jobs_completed int NULL,
+	retry_jobs INT DEFAULT 0 NULL,
+	file_type ENUM('Upload','Manual','Raw Text API') NULL,
+	entries int NULL,
+	module varchar(100) NULL,
+	advance_information varchar(100) NULL,
+	phoneenabled enum('T','F') NULL,
+	homeaddressenabled enum('T','F') NULL,
+	require_email enum('T','F') NULL,
+	gtminstalled enum('T','F') NULL,
+	created_at TIMESTAMP NULL,
+	updated_at TIMESTAMP NULL,
+	CONSTRAINT clean_id_file_pk PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE clean_id_md5 (
+	id BIGINT auto_increment NOT NULL,
+	file_id BIGINT NULL,
+	md5 varchar(256) NULL,
+	status ENUM('processing','found','not_found','duplicate_md5','invalid_format_md5','error') DEFAULT 'processing' NULL,
+	description text NULL,
+	created_at TIMESTAMP NULL,
+	updated_at TIMESTAMP NULL,
+	CONSTRAINT clean_id_md5_pk PRIMARY KEY (id)
+);
+
+
+CREATE TABLE clean_id_result (
+	id BIGINT auto_increment NOT NULL,
+	file_id BIGINT NULL,
+	md5_id BIGINT NULL,
+	bigdbm_id varchar(256) NULL,
+	first_name varchar(256) NULL,
+	last_name varchar(256) NULL,
+	address varchar(256) NULL,
+	address2 varchar(256) NULL,
+	city varchar(256) NULL,
+	state varchar(256) NULL,
+	zip varchar(256) NULL,
+	phone varchar(256) NULL,
+	phone2 varchar(256) NULL,
+	email varchar(256) NULL,
+	email2 varchar(256) NULL,
+	created_at TIMESTAMP NULL,
+	updated_at TIMESTAMP NULL,
+	CONSTRAINT clean_id_result_pk PRIMARY KEY (id)
+);
+
+
+
+//// buat export
+CREATE TABLE clean_id_export (
+	id BIGINT auto_increment NOT NULL,
+	user_id BIGINT NULL,
+	client_id BIGINT NULL,
+	file_id BIGINT NULL,
+	status ENUM('processing','done') NULL,
+	file_path varchar(256) NULL,
+	created_at TIMESTAMP NULL,
+	updated_at TIMESTAMP NULL,
+	CONSTRAINT clean_id_export_pk PRIMARY KEY (id)
+)
+
+//// result b2b
+CREATE TABLE `clean_id_result_b2b` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `file_id` bigint DEFAULT NULL,
+  `md5_id` bigint DEFAULT NULL,
+  `employee_id` varchar(256) DEFAULT NULL,
+  `company_name` text,
+  `company_website` text,
+  `phone_1_employee` varchar(50) DEFAULT NULL,
+  `phone_1_company` varchar(50) DEFAULT NULL,
+  `num_employees` varchar(256) DEFAULT NULL,
+  `sales_volume` varchar(256) DEFAULT NULL,
+  `year_founded` varchar(25) DEFAULT NULL,
+  `job_title` varchar(256) DEFAULT NULL,
+  `level` varchar(256) DEFAULT NULL,
+  `job_function` varchar(256) DEFAULT NULL,
+  `headquarters_branch` varchar(256) DEFAULT NULL,
+  `naics_code` varchar(256) DEFAULT NULL,
+  `last_seen_date` varchar(256) DEFAULT NULL,
+  `linked_in` text,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) 
+
+//// result advance
+CREATE TABLE `clean_id_result_advance_1` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_id` bigint DEFAULT NULL,
+  `md5_id` bigint DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `gender_aux` varchar(50) DEFAULT NULL,
+  `age_aux` varchar(5) DEFAULT NULL,
+  `birth_year_aux` varchar(25) DEFAULT NULL,
+  `generation` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `income_household` varchar(255) DEFAULT NULL,
+  `income_midpts_household` varchar(255) DEFAULT NULL,
+  `net_worth_household` varchar(255) DEFAULT NULL,
+  `net_worth_midpt_household` varchar(255) DEFAULT NULL,
+  `discretionary_income` varchar(255) DEFAULT NULL,
+  `credit_midpts` varchar(255) DEFAULT NULL,
+  `credit_range` varchar(255) DEFAULT NULL,
+  `occupation_category` varchar(255) DEFAULT NULL,
+  `occupation_detail` varchar(255) DEFAULT NULL,
+  `occupation_type` varchar(255) DEFAULT NULL,
+  `voter` varchar(255) DEFAULT NULL,
+  `urbanicity` varchar(255) DEFAULT NULL,
+  `mobile_phone_1` varchar(20) DEFAULT NULL,
+  `mobile_phone_2` varchar(20) DEFAULT NULL,
+  `mobile_phone_3` varchar(20) DEFAULT NULL,
+  `mobile_phone_1_dnc` varchar(255) DEFAULT NULL,
+  `mobile_phone_2_dnc` varchar(255) DEFAULT NULL,
+  `mobile_phone_3_dnc` varchar(255) DEFAULT NULL,
+  `tax_bill_mailing_address` text,
+  `tax_bill_mailing_city` varchar(255) DEFAULT NULL,
+  `tax_bill_mailing_county` varchar(255) DEFAULT NULL,
+  `tax_bill_mailing_fips` varchar(25) DEFAULT NULL,
+  `tax_bill_mailing_state` varchar(25) DEFAULT NULL,
+  `tax_bill_mailing_zip` varchar(25) DEFAULT NULL,
+  `tax_bill_mailing_zip4` varchar(25) DEFAULT NULL,
+  `num_adults_household` varchar(50) DEFAULT NULL,
+  `num_children_household` varchar(50) DEFAULT NULL,
+  `num_persons_household` varchar(50) DEFAULT NULL,
+  `child_aged_0_3_household` varchar(50) DEFAULT NULL,
+  `child_aged_4_6_household` varchar(50) DEFAULT NULL,
+  `child_aged_7_9_household` varchar(50) DEFAULT NULL,
+  `child_aged_10_12_household` varchar(50) DEFAULT NULL,
+  `child_aged_13_18_household` varchar(50) DEFAULT NULL,
+  `children_household` varchar(50) DEFAULT NULL,
+  `has_email` varchar(10) DEFAULT NULL,
+  `has_phone` varchar(10) DEFAULT NULL,
+  `magazine_subscriber` varchar(10) DEFAULT NULL,
+  `charity_interest` varchar(50) DEFAULT NULL,
+  `likely_charitable_donor` varchar(50) DEFAULT NULL,
+  `donor_affinity` varchar(50) DEFAULT NULL,
+  `dwelling_type` varchar(255) DEFAULT NULL,
+  `home_owner` varchar(255) DEFAULT NULL,
+  `home_owner_ordinal` varchar(10) DEFAULT NULL,
+  `length_of_residence` varchar(50) DEFAULT NULL,
+  `home_price` varchar(50) DEFAULT NULL,
+  `home_value` varchar(50) DEFAULT NULL,
+  `median_home_value` varchar(50) DEFAULT NULL,
+  `land_sqft` varchar(150) DEFAULT NULL,
+  `living_sqft` varchar(150) DEFAULT NULL,
+  `yr_built_orig` varchar(25) DEFAULT NULL,
+  `yr_built_range` varchar(25) DEFAULT NULL,
+  `lot_number` varchar(25) DEFAULT NULL,
+  `legal_description` text,
+  `garage_sqft` varchar(150) DEFAULT NULL,
+  `subdivision` varchar(255) DEFAULT NULL,
+  `zoning_code` varchar(255) DEFAULT NULL,
+  `cooking` varchar(5) DEFAULT NULL,
+  `gardening` varchar(5) DEFAULT NULL,
+  `music` varchar(5) DEFAULT NULL,
+  `diy` varchar(5) DEFAULT NULL,
+  `books` varchar(5) DEFAULT NULL,
+  `travel_vacation` varchar(5) DEFAULT NULL,
+  `health_beauty_products` varchar(5) DEFAULT NULL,
+  `pet_owner` varchar(5) DEFAULT NULL,
+  `photography` varchar(5) DEFAULT NULL,
+  `fitness` varchar(5) DEFAULT NULL,
+  `epicurean` varchar(5) DEFAULT NULL,
+  `cbsa` varchar(25) DEFAULT NULL,
+  `census_block` varchar(255) DEFAULT NULL,
+  `census_block_group` varchar(255) DEFAULT NULL,
+  `census_tract` varchar(255) DEFAULT NULL,
+  `aerobics` varchar(5) DEFAULT NULL,
+  `african_american_affinity` varchar(5) DEFAULT NULL,
+  `amex_card` varchar(255) DEFAULT NULL,
+  `antiques` varchar(5) DEFAULT NULL,
+  `apparel_accessory_affinity` varchar(5) DEFAULT NULL,
+  `apparel_affinity` varchar(5) DEFAULT NULL,
+  `arts_and_crafts` varchar(5) DEFAULT NULL,
+  `asian_affinity` varchar(50) DEFAULT NULL,
+  `auto_affinity` varchar(50) DEFAULT NULL,
+  `auto_racing_affinity` varchar(50) DEFAULT NULL,
+  `aviation_affinity` varchar(50) DEFAULT NULL,
+  `bank_card` varchar(255) DEFAULT NULL,
+  `bargain_hunter_affinity` varchar(50) DEFAULT NULL,
+  `baseball` varchar(5) DEFAULT NULL,
+  `baseball_affinity` varchar(50) DEFAULT NULL,
+  `basketball` varchar(5) DEFAULT NULL,
+  `basketball_affinity` varchar(50) DEFAULT NULL,
+  `beauty_affinity` varchar(50) DEFAULT NULL,
+  `bible_affinity` varchar(50) DEFAULT NULL,
+  `Bird_watching` varchar(5) DEFAULT NULL,
+  `birds_affinity` varchar(50) DEFAULT NULL,
+  `blue_collar` varchar(5) DEFAULT NULL,
+  `boating_sailing` varchar(50) DEFAULT NULL,
+  `boating_sailing_affinity` varchar(50) DEFAULT NULL,
+  `business_affinity` varchar(50) DEFAULT NULL,
+  `camping_hiking` varchar(5) DEFAULT NULL,
+  `camping_hiking_climbing_affinity` varchar(50) DEFAULT NULL,
+  `cars_interest` varchar(5) DEFAULT NULL,
+  `cat_owner` varchar(5) DEFAULT NULL,
+  `catalog_affinity` varchar(50) DEFAULT NULL,
+  `cigars` varchar(50) DEFAULT NULL,
+  `classical_music` varchar(5) DEFAULT NULL,
+  `coins` varchar(5) DEFAULT NULL,
+  `collectibles_affinity` varchar(50) DEFAULT NULL,
+  `college_affinity` varchar(50) DEFAULT NULL,
+  `computers_affinity` varchar(50) DEFAULT NULL,
+  `continuity_program_affinity` varchar(50) DEFAULT NULL,
+  `cooking_affinity` varchar(50) DEFAULT NULL,
+  `cosmetics` varchar(5) DEFAULT NULL,
+  `country_music` varchar(5) DEFAULT NULL,
+  `crafts_affinity` varchar(50) DEFAULT NULL,
+  `credit_card` varchar(5) DEFAULT NULL,
+  `credit_repair_affinity` varchar(50) DEFAULT NULL,
+  `crochet_affinity` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+
+
+CREATE TABLE `clean_id_result_advance_2` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_id` bigint DEFAULT NULL,
+  `md5_id` bigint DEFAULT NULL,
+  `diet_affinity` varchar(50) DEFAULT NULL,
+  `dieting` varchar(5) DEFAULT NULL,
+  `do_it_yourself_affinity` varchar(50) DEFAULT NULL,
+  `dog_owner` varchar(5) DEFAULT NULL,
+  `doll_collector` varchar(5) DEFAULT NULL,
+  `education` text,
+  `education_ordinal` varchar(50) DEFAULT NULL,
+  `education_seekers_affinity` varchar(50) DEFAULT NULL,
+  `ego_affinity` varchar(50) DEFAULT NULL,
+  `entertainment_interest` varchar(50) DEFAULT NULL,
+  `figurines_collector` varchar(50) DEFAULT NULL,
+  `fine_arts_collector` varchar(50) DEFAULT NULL,
+  `fishing` varchar(5) DEFAULT NULL,
+  `fishing_affinity` varchar(50) DEFAULT NULL,
+  `fitness_affinity` varchar(50) DEFAULT NULL,
+  `football` varchar(5) DEFAULT NULL,
+  `football_affinity` varchar(50) DEFAULT NULL,
+  `gambling` varchar(5) DEFAULT NULL,
+  `gambling_affinity` varchar(50) DEFAULT NULL,
+  `games_affinity` varchar(50) DEFAULT NULL,
+  `gardening_affinity` varchar(50) DEFAULT NULL,
+  `generation_ordinal` varchar(50) DEFAULT NULL,
+  `golf` varchar(5) DEFAULT NULL,
+  `golf_affinity` varchar(50) DEFAULT NULL,
+  `gourmet_affinity` varchar(50) DEFAULT NULL,
+  `grandparents_affinity` varchar(50) DEFAULT NULL,
+  `health_affinity` varchar(50) DEFAULT NULL,
+  `healthy_living` varchar(50) DEFAULT NULL,
+  `healthy_living_interest` varchar(50) DEFAULT NULL,
+  `high_tech_affinity` varchar(50) DEFAULT NULL,
+  `hispanic_affinity` varchar(50) DEFAULT NULL,
+  `hockey` varchar(5) DEFAULT NULL,
+  `hockey_affinity` varchar(50) DEFAULT NULL,
+  `home_decor` varchar(5) DEFAULT NULL,
+  `home_improvement_interest` varchar(50) DEFAULT NULL,
+  `home_office_affinity` varchar(50) DEFAULT NULL,
+  `home_study` varchar(255) DEFAULT NULL,
+  `hunting` varchar(5) DEFAULT NULL,
+  `hunting_affinity` varchar(50) DEFAULT NULL,
+  `jazz` varchar(5) DEFAULT NULL,
+  `kids_apparel_affinity` varchar(50) DEFAULT NULL,
+  `knit_affinity` varchar(50) DEFAULT NULL,
+  `knitting_quilting_sewing` varchar(50) DEFAULT NULL,
+  `luxury_life` varchar(50) DEFAULT NULL,
+  `married` varchar(5) DEFAULT NULL,
+  `median_income` varchar(50) DEFAULT NULL,
+  `mens_apparel_affinity` varchar(50) DEFAULT NULL,
+  `mens_fashion_affinity` varchar(50) DEFAULT NULL,
+  `mortgage_age` varchar(50) DEFAULT NULL,
+  `mortgage_amount` varchar(50) DEFAULT NULL,
+  `mortgage_loan_type` varchar(255) DEFAULT NULL,
+  `mortgage_refi_age` varchar(50) DEFAULT NULL,
+  `mortgage_refi_amount` varchar(50) DEFAULT NULL,
+  `mortgage_refi_type` varchar(255) DEFAULT NULL,
+  `motor_racing` varchar(5) DEFAULT NULL,
+  `motorcycles` varchar(5) DEFAULT NULL,
+  `motorcycles_affinity` varchar(50) DEFAULT NULL,
+  `movies` varchar(5) DEFAULT NULL,
+  `nascar` varchar(5) DEFAULT NULL,
+  `needlepoint_affinity` varchar(50) DEFAULT NULL,
+  `new_credit_offered_household` varchar(255) DEFAULT NULL,
+  `num_credit_lines_household` varchar(50) DEFAULT NULL,
+  `num_generations_household` varchar(50) DEFAULT NULL,
+  `outdoors` varchar(5) DEFAULT NULL,
+  `outdoors_affinity` varchar(50) DEFAULT NULL,
+  `owns_investments` varchar(50) DEFAULT NULL,
+  `owns_mutual_funds` varchar(255) DEFAULT NULL,
+  `owns_stocks_and_bonds` varchar(50) DEFAULT NULL,
+  `owns_swimming_pool` varchar(255) DEFAULT NULL,
+  `personal_finance_affinity` varchar(50) DEFAULT NULL,
+  `personality` varchar(255) DEFAULT NULL,
+  `plates_collector` varchar(50) DEFAULT NULL,
+  `pop_density` varchar(255) DEFAULT NULL,
+  `premium_amex_card` varchar(255) DEFAULT NULL,
+  `premium_card` varchar(255) DEFAULT NULL,
+  `premium_income_household` varchar(255) DEFAULT NULL,
+  `premium_income_midpt_household` varchar(255) DEFAULT NULL,
+  `quilt_affinity` varchar(50) DEFAULT NULL,
+  `religious_music` varchar(5) DEFAULT NULL,
+  `rhythm_and_blues` varchar(5) DEFAULT NULL,
+  `rock_music` varchar(5) DEFAULT NULL,
+  `running` varchar(5) DEFAULT NULL,
+  `rv` varchar(5) DEFAULT NULL,
+  `scuba` varchar(5) DEFAULT NULL,
+  `self_improvement` varchar(5) DEFAULT NULL,
+  `sewing_affinity` varchar(50) DEFAULT NULL,
+  `single_family_dwelling` varchar(5) DEFAULT NULL,
+  `snow_skiing` varchar(5) DEFAULT NULL,
+  `snow_skiing_affinity` varchar(50) DEFAULT NULL,
+  `soccer` varchar(5) DEFAULT NULL,
+  `soccer_affinity` varchar(50) DEFAULT NULL,
+  `soft_rock` varchar(5) DEFAULT NULL,
+  `soho_business` varchar(5) DEFAULT NULL,
+  `sports_memoribilia_collector` varchar(5) DEFAULT NULL,
+  `stamps` varchar(5) DEFAULT NULL,
+  `sweepstakes_affinity` varchar(50) DEFAULT NULL,
+  `tennis` varchar(5) DEFAULT NULL,
+  `tennis_affinity` varchar(50) DEFAULT NULL,
+  `tobacco_affinity` varchar(50) DEFAULT NULL,
+  `travel_affinity` varchar(50) DEFAULT NULL,
+  `travel_cruise_affinity` varchar(5) DEFAULT NULL,
+  `travel_cruises` varchar(50) DEFAULT NULL,
+  `travel_personal` varchar(5) DEFAULT NULL,
+  `travel_rv_affinity` varchar(50) DEFAULT NULL,
+  `travel_US_affinity` varchar(50) DEFAULT NULL,
+  `truck_owner` varchar(5) DEFAULT NULL,
+  `trucks_affinity` varchar(50) DEFAULT NULL,
+  `tv_movies_affinity` varchar(50) DEFAULT NULL,
+  `veteran_household` varchar(255) DEFAULT NULL,
+  `walking` varchar(5) DEFAULT NULL,
+  `weight_lifting` varchar(5) DEFAULT NULL,
+  `wildlife_affinity` varchar(50) DEFAULT NULL,
+  `womens_apparel_affinity` varchar(50) DEFAULT NULL,
+  `Womens_fashion_affinity` varchar(50) DEFAULT NULL,
+  `woodworking` varchar(5) DEFAULT NULL,
+  `male_aux` varchar(50) DEFAULT NULL,
+  `political_contributor_aux` varchar(50) DEFAULT NULL,
+  `political_party_aux` varchar(255) DEFAULT NULL,
+  `financial_power` varchar(50) DEFAULT NULL,
+  `mortgage_open_1st_intent` varchar(5) DEFAULT NULL,
+  `mortgage_open_2nd_intent` varchar(5) DEFAULT NULL,
+  `mortgage_new_intent` varchar(5) DEFAULT NULL,
+  `mortgage_refinance_intent` varchar(5) DEFAULT NULL,
+  `automotive_loan_intent` varchar(5) DEFAULT NULL,
+  `bank_card_intent` varchar(5) DEFAULT NULL,
+  `personal_loan_intent` varchar(5) DEFAULT NULL,
+  `retail_card_intent` varchar(5) DEFAULT NULL,
+  `student_loan_cons_intent` varchar(5) DEFAULT NULL,
+  `student_loan_intent` varchar(5) DEFAULT NULL,
+  `qtr3_baths` varchar(50) DEFAULT NULL,
+  `ac_type` varchar(50) DEFAULT NULL,
+  `acres` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) 
+
+
+CREATE TABLE `clean_id_result_advance_3` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_id` bigint DEFAULT NULL,
+  `md5_id` bigint DEFAULT NULL,
+  `additions_square_feet` varchar(25) DEFAULT NULL,
+  `assess_val_impr` varchar(200) DEFAULT NULL,
+  `assess_val_lnd` varchar(200) DEFAULT NULL,
+  `assess_val_prop` varchar(200) DEFAULT NULL,
+  `bldg_style` varchar(25) DEFAULT NULL,
+  `bsmt_sqft` varchar(25) DEFAULT NULL,
+  `bsmt_type` varchar(25) DEFAULT NULL,
+  `build_sqft_assess` varchar(200) DEFAULT NULL,
+  `business` varchar(25) DEFAULT NULL,
+  `combined_statistical_area` text,
+  `metropolitan_division` text,
+  `middle` varchar(150) DEFAULT NULL,
+  `middle_2` varchar(150) DEFAULT NULL,
+  `mkt_ip_perc` varchar(25) DEFAULT NULL,
+  `mobile_home` varchar(25) DEFAULT NULL,
+  `mrtg_due` varchar(50) DEFAULT NULL,
+  `mrtg_intrate` varchar(200) DEFAULT NULL,
+  `mrtg_refi` varchar(200) DEFAULT NULL,
+  `mrtg_term` varchar(200) DEFAULT NULL,
+  `mrtg_type` varchar(200) DEFAULT NULL,
+  `mrtg2_amt` varchar(200) DEFAULT NULL,
+  `mrtg2_date` varchar(50) DEFAULT NULL,
+  `mrtg2_deed_type` varchar(200) DEFAULT NULL,
+  `mrtg2_due` varchar(50) DEFAULT NULL,
+  `mrtg2_equity` varchar(200) DEFAULT NULL,
+  `mrtg2_intrate` varchar(200) DEFAULT NULL,
+  `mrtg2_inttype` varchar(200) DEFAULT NULL,
+  `mrtg2_refi` varchar(200) DEFAULT NULL,
+  `mrtg2_term` varchar(200) DEFAULT NULL,
+  `mrtg2_type` varchar(200) DEFAULT NULL,
+  `mrtg3_amt` varchar(200) DEFAULT NULL,
+  `mrtg3_date` varchar(50) DEFAULT NULL,
+  `mrtg3_deed_type` varchar(200) DEFAULT NULL,
+  `mrtg3_due` varchar(50) DEFAULT NULL,
+  `mrtg3_equity` varchar(200) DEFAULT NULL,
+  `mrtg3_inttype` varchar(200) DEFAULT NULL,
+  `mrtg3_refi` varchar(200) DEFAULT NULL,
+  `mrtg3_term` varchar(200) DEFAULT NULL,
+  `mrtg3_type` varchar(200) DEFAULT NULL,
+  `msa_code` varchar(25) DEFAULT NULL,
+  `number_bedrooms` varchar(25) DEFAULT NULL,
+  `number_bldgs` varchar(25) DEFAULT NULL,
+  `number_fireplace` varchar(25) DEFAULT NULL,
+  `number_park_spaces` varchar(25) DEFAULT NULL,
+  `number_rooms` varchar(25) DEFAULT NULL,
+  `own_biz` varchar(25) DEFAULT NULL,
+  `owner_occupied` varchar(25) DEFAULT NULL,
+  `ownership_relation` varchar(25) DEFAULT NULL,
+  `owner_type_description` varchar(25) DEFAULT NULL,
+  `estimated_value` varchar(200) DEFAULT NULL,
+  `ext_type` varchar(200) DEFAULT NULL,
+  `finish_square_feet2` varchar(200) DEFAULT NULL,
+  `fireplace` varchar(25) DEFAULT NULL,
+  `first` varchar(200) DEFAULT NULL,
+  `first_2` varchar(200) DEFAULT NULL,
+  `found_type` varchar(25) DEFAULT NULL,
+  `fr_feet` varchar(25) DEFAULT NULL,
+  `fuel_type` varchar(25) DEFAULT NULL,
+  `full_baths` varchar(200) DEFAULT NULL,
+  `half_baths` varchar(25) DEFAULT NULL,
+  `garage_type` varchar(25) DEFAULT NULL,
+  `grnd_sqft` varchar(25) DEFAULT NULL,
+  `heat_type` varchar(25) DEFAULT NULL,
+  `hmstd` varchar(200) DEFAULT NULL,
+  `impr_appr_val` varchar(200) DEFAULT NULL,
+  `imprval` varchar(25) DEFAULT NULL,
+  `imprval_type` varchar(25) DEFAULT NULL,
+  `land_appr_val` varchar(200) DEFAULT NULL,
+  `landval` varchar(25) DEFAULT NULL,
+  `landval_type` varchar(25) DEFAULT NULL,
+  `last` varchar(200) DEFAULT NULL,
+  `last_2` varchar(200) DEFAULT NULL,
+  `lat` varchar(200) DEFAULT NULL,
+  `lender_name` text,
+  `lender2_name` text,
+  `lender3_name` text,
+  `loan_amt` varchar(200) DEFAULT NULL,
+  `loan_date` varchar(200) DEFAULT NULL,
+  `loan_to_val` varchar(200) DEFAULT NULL,
+  `lon` varchar(200) DEFAULT NULL,
+  `markval` varchar(200) DEFAULT NULL,
+  `markval_type` varchar(25) DEFAULT NULL,
+  `patio_porch` varchar(200) DEFAULT NULL,
+  `patio_square_feet` varchar(200) DEFAULT NULL,
+  `pool` varchar(200) DEFAULT NULL,
+  `porch_square_feet` varchar(200) DEFAULT NULL,
+  `previous_assessed_value` varchar(200) DEFAULT NULL,
+  `prop_type` varchar(25) DEFAULT NULL,
+  `rate_type` varchar(200) DEFAULT NULL,
+  `rec_date` varchar(50) DEFAULT NULL,
+  `roof_covtype` varchar(200) DEFAULT NULL,
+  `roof_shapetype` varchar(200) DEFAULT NULL,
+  `sale_amt` varchar(200) DEFAULT NULL,
+  `sale_amt_pr` varchar(200) DEFAULT NULL,
+  `sale_date` varchar(200) DEFAULT NULL,
+  `sale_type_pr` varchar(200) DEFAULT NULL,
+  `sales_type` varchar(25) DEFAULT NULL,
+  `sell_name` text,
+  `sewer_type` varchar(25) DEFAULT NULL,
+  `site_quality` varchar(25) DEFAULT NULL,
+  `std_address` text,
+  `std_city` text,
+  `std_state` text,
+  `std_zip` text,
+  `std_zip4` text,
+  `stories_number` varchar(25) DEFAULT NULL,
+  `suffix` varchar(200) DEFAULT NULL,
+  `suffix_2` varchar(200) DEFAULT NULL,
+  `tax_yr` varchar(200) DEFAULT NULL,
+  `tax_improvement_percent` varchar(25) DEFAULT NULL,
+  `title_co` varchar(200) DEFAULT NULL,
+  `tot_baths_est` varchar(200) DEFAULT NULL,
+  `ttl_appr_val` varchar(200) DEFAULT NULL,
+  `ttl_bld_sqft` varchar(200) DEFAULT NULL,
+  `ttl_tax` varchar(200) DEFAULT NULL,
+  `unit_number` varchar(25) DEFAULT NULL,
+  `vet_exempt` varchar(200) DEFAULT NULL,
+  `water_type` varchar(25) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
+
+
+----------------------------------------------------
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "- integration clean id in ui - add message in text area md5 for cost agency and limit maximum md5 - add column found, not_found, duplicate in history clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+FRONT
+- front\src\assets\css\emm.css
+- front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+- front\src\store\store.js
+- front\src\components\Tree\Tree.vue
+- front\src\pages\Layout\DashboardLayout.vue
+- front\src\App.vue
+- front\src\components\TabsShadcn\index.vue
+- front\src\components\index.js
+- front\src\components\SelectClientDropdownDashboard.vue
+- front\src\routes\routes.js
+- front\src\components\Inputs\TextArea.vue
+	
+DATA
+- data\app\Exports\AnalyticExport.php
+- data\app\Exports\CleanIDResultExport.php
+- data\app\Exports\FailedLeadRecordExport.php
+- data\app\Exports\TransactionHistoryDirectPayment.php
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\Controller.php
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Http\Controllers\OpenApiController.php
+- data\app\Models\FailedLeadRecord.php
+- data\app\Models\ReportAnalytic.php
+- data\app\Models\User.php
+- data\routes\api.php
+- data\app\Models\CleanIDError.php
+- data\app\Models\LeadspeekInvoice.php
+- data\app\Models\TopupCleanId.php
+- data\app\Jobs\CleanIDExportJob.php
+- data\app\Models\CleanIDExport.php
+- data\routes\web.php
+----------------------------------------
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "- progress clean id - add field in report analytic and failed leadrecord clean_file_id for clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\UploadController.php
+- app\Jobs\CleanIDJob.php
+- app\Jobs\RetryMD5CleanIDJob.php
+- app\Models\CleanIDFile.php
+- app\Models\FailedLeadRecord.php
+- app\Models\ReportAnalytic.php
+- app\Models\User.php
+- app\Services\BigDBM.php
+- app\Services\CleanID.php
+- app\Models\CleanIDError.php
+- app\Models\LeadspeekInvoice.php
+- app\Models\TopupCleanId.php
+- routes\api.php
+- app\Http\Controllers\WebhookController.php
+- app\Jobs\CleanIDExportJob.php
+- app\Models\CleanIdAdvance.php
+- app\Models\CleanIdAdvance2.php
+- app\Models\CleanIdAdvance3.php
+- app\Models\CleanIDExport.php
+- app\Models\CleanIDMd5.php
+- app\Models\CleanIDResultB2B.php
+- app\Models\CleanIDResult.php
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "- integration clean id in ui - add message in text area md5 for cost agency and limit maximum md5 - add column found, not_found, duplicate in history clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+FRONT
+- front\src\assets\css\emm.css
+- front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+- front\src\store\store.js
+- front\src\components\Tree\Tree.vue
+- front\src\pages\Layout\DashboardLayout.vue
+- front\src\App.vue
+- front\src\components\TabsShadcn\index.vue
+- front\src\components\index.js
+- front\src\components\SelectClientDropdownDashboard.vue
+- front\src\routes\routes.js
+- front\src\components\Inputs\TextArea.vue
+	
+DATA
+- data\app\Exports\AnalyticExport.php
+- data\app\Exports\CleanIDResultExport.php
+- data\app\Exports\FailedLeadRecordExport.php
+- data\app\Exports\TransactionHistoryDirectPayment.php
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\Controller.php
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Http\Controllers\OpenApiController.php
+- data\app\Models\FailedLeadRecord.php
+- data\app\Models\ReportAnalytic.php
+- data\app\Models\User.php
+- data\routes\api.php
+- data\app\Models\CleanIDError.php
+- data\app\Models\LeadspeekInvoice.php
+- data\app\Models\TopupCleanId.php
+- data\app\Jobs\CleanIDExportJob.php
+- data\app\Models\CleanIDExport.php
+- data\routes\web.php
+----------------------------------------
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "- progress clean id - add field in report analytic and failed leadrecord clean_file_id for clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\UploadController.php
+- app\Jobs\CleanIDJob.php
+- app\Jobs\RetryMD5CleanIDJob.php
+- app\Models\CleanIDFile.php
+- app\Models\FailedLeadRecord.php
+- app\Models\ReportAnalytic.php
+- app\Models\User.php
+- app\Services\BigDBM.php
+- app\Services\CleanID.php
+- app\Models\CleanIDError.php
+- app\Models\LeadspeekInvoice.php
+- app\Models\TopupCleanId.php
+- routes\api.php
+- app\Http\Controllers\WebhookController.php
+- app\Jobs\CleanIDExportJob.php
+- app\Models\CleanIdAdvance.php
+- app\Models\CleanIdAdvance2.php
+- app\Models\CleanIdAdvance3.php
+- app\Models\CleanIDExport.php
+- app\Models\CleanIDMd5.php
+- app\Models\CleanIDResultB2B.php
+- app\Models\CleanIDResult.php
+----------------------------------------
+SETUP QUEUE DAN REDIS
+1. aplikasi redis menggunakan redis insight, download disini https://redis.io/downloads/#Redis_Insight
+2. php artisan queue:work redis --queue=clean_id
+   php artisan queue:work redis --queue=retry_clean_id
+----------------------------------------
+- tambahkan enum 'clean_id' di table `leadspeek_invoice`
+- tambahkan enum 'clean_id di table `report_analytics`
+- tambahkan enum 'clean_id di table `failed_lead_records`
+
+- ALTER TABLE leadspeek_invoice ADD COLUMN clean_file_id BIGINT UNSIGNED DEFAULT NULL;
+- ALTER TABLE report_analytics ADD COLUMN clean_file_id BIGINT DEFAULT NULL;
+- ALTER TABLE failed_lead_records ADD COLUMN clean_file_id BIGINT DEFAULT NULL;
+
+- clean_id_errors
+- clean_id_export
+- clean_id_file
+- clean_id_md5
+- clean_id_result
+- clean_id_result_advance_1
+- clean_id_result_advance_2
+- clean_id_result_advance_3
+- topup_cleanids
+
+- tambahkan bentuk json di company_settings setting_name rootcostagency "clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}
+----------------------------------------
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "- add balance in page clean id - hidden basic information and default options advanced check all - when funds are insufficient then a swal appears"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+FRONT
+- front\src\components\SidebarPlugin\SideBar.vue
+- front\src\components\Tree\Tree.vue
+- front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+- front\src\plugins\global.js
+- front\src\store\store.js
+
+DATA
+- data\app\Exports\CleanIDResultExport.php
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Http\Controllers\OpenApiController.php
+- data\routes\api.php
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "automatic detect md5 or email when process clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\UploadController.php
+- app\Jobs\CleanIDJob.php
+- app\Jobs\RetryMD5CleanIDJob.php
+- app\Services\CleanID.php
+
+FRONT
+- front\src\components\SidebarPlugin\SideBar.vue
+- front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+- front\src\plugins\global.js
+
+DATA
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Http\Controllers\OpenApiController.php
+
+
+- app\Http\Controllers\UploadController.php
+
+
+
+
+
+
+
+
+
+& "C:\Program Files\nodejs\npx.cmd" mcp-remote https://d3qbgyi0xnnqpn.cloudfront.net/mcp --transport stream --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY3AiOlsidXNlOnRvb2xzIl0sInN1YiI6IjJjOWU0NzAwLWEzMmYtNDJjYi04MTEwLWMzZjNkYzYyZTI1N0BleGFtcGxlLmNvbSIsImV4cCI6MTc2NzIwMzMzMCwiaWF0IjoxNzU5NDI3MzMwfQ.6jvpytYh-aR8GfIk9ToPc5XrRbe00fj5jQyHMA_QPpI"
+
+
+
+

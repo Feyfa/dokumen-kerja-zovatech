@@ -1,0 +1,640 @@
+NEW MODULE B2B
+
+SELECT 
+	id,
+    company_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+    setting_name,
+    setting_value
+FROM `company_settings` where company_id = 22;
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('', '8e651522e38256f2'))
+WHERE id = 14 and company_id = 22;
+
+-----------------------------------b2b-----------------------------------
+YANG HARUS DITAMBAH SECARA HARDCODE DI ROOT NYA SAJA
+- rootcostagency 
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.32","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.31","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.33","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.31"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.42","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.41","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.43","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.52","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.51","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.53","B2bMinCostMonth":"0","B2bPlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency' and company_id = 22;
+
+
+- rootcustomsidebarleadmenu
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID Root","url":"siteidroot"},"locator":{"name":"Search ID Root","url":"searchidroot"},"enhance":{"name":"Enhance ID Root","url":"enhanceidroot"},"b2b":{"name":"B2B ID Root","url":"b2bidroot"}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcustomsidebarleadmenu' and company_id = 22;
+
+
+- rootfee
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feeb2b":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob": "","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootfee' and company_id = 22;
+
+
+- rootdefaultmodules (tidak wajib, kalau sebelumnya belum ada)
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true}]}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules' and company_id = 22;
+
+
+- integration_list clickfunnels custom_fields
+[{"name":"First Name","disabled":true,"type":"general"},{"name":"Last Name","disabled":true,"type":"general"},{"name":"Email","disabled":true,"type":"general"},{"name":"Phone Number","disabled":true,"type":"general"},{"name":"Id Campaign","disabled":false,"type":"general"},{"name":"Id Contact","disabled":false,"type":"general"},{"name":"Click Date","disabled":false,"type":"general"},{"name":"Email 2","disabled":false,"type":"general"},{"name":"Phone 2","disabled":false,"type":"general"},{"name":"Country","disabled":false,"type":"general"},{"name":"State","disabled":false,"type":"general"},{"name":"City","disabled":false,"type":"general"},{"name":"Postal Code","disabled":false,"type":"general"},{"name":"Address 1","disabled":false,"type":"general"},{"name":"Address 2","disabled":false,"type":"general"},{"name":"Keyword","disabled":false,"type":"general"},{"name":"Employee ID","disabled":false,"type":"b2b"},{"name":"Company Name","disabled":false,"type":"b2b"},{"name":"Company Website","disabled":false,"type":"b2b"},{"name":"Number of Employees","disabled":false,"type":"b2b"},{"name":"Sales Volume","disabled":false,"type":"b2b"},{"name":"Year Founded","disabled":false,"type":"b2b"},{"name":"Job Title","disabled":false,"type":"b2b"},{"name":"Level","disabled":false,"type":"b2b"},{"name":"Job function","disabled":false,"type":"b2b"},{"name":"Headquartes Branch","disabled":false,"type":"b2b"},{"name":"NAICS Code","disabled":false,"type":"b2b"},{"name":"Last Seen Date","disabled":false,"type":"b2b"},{"name":"Linked In","disabled":false,"type":"b2b"}]
+-----------------------------------b2b-----------------------------------
+
+
+
+-----------------------------------enhance-----------------------------------
+- rootcostagency 
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"0.8","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.4"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency' and company_id = 22;
+
+
+- rootcustomsidebarleadmenu
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID Root","url":"siteidroot"},"locator":{"name":"Search ID Root","url":"searchidroot"},"enhance":{"name":"Enhance ID Root","url":"enhanceidroot"}}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcustomsidebarleadmenu' AND company_id = 22;
+
+
+- rootfee
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"feesiteid":"0","feesearchid":"0","feeenhance":"0","feepercentageemm": "","feepercentagedom": "","feepercentagemob": "","rootfeeaccid":"","rootfeeaccidmob":"","rootcomfee":"","rootcomfeeval":"","rootcomfee1":"","rootcomfeeval1":"","rootcomsr":"","rootcomsrval":"","rootcomae":"","rootcomaeval":""}', '8e651522e38256f2')) WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootfee' and company_id = 22;
+
+
+- rootdefaultmodules
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true}]}', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules' AND company_id = 22;
+
+
+- integration_list clickfunnels custom_fields
+[{"name":"First Name","disabled":true},{"name":"Last Name","disabled":true},{"name":"Email","disabled":true},{"name":"Phone Number","disabled":true},{"name":"Id Campaign","disabled":false},{"name":"Id Contact","disabled":false},{"name":"Click Date","disabled":false},{"name":"Email 2","disabled":false},{"name":"Phone 2","disabled":false},{"name":"Country","disabled":false},{"name":"State","disabled":false},{"name":"City","disabled":false},{"name":"Postal Code","disabled":false},{"name":"Address 1","disabled":false},{"name":"Address 2","disabled":false},{"name":"Keyword","disabled":false}]
+-----------------------------------enhance-----------------------------------
+
+
+WORKER
+php artisan queue:work --queue=create_list_b2b,check_status_b2b,distribution_b2b,send_lead_b2b
+
+php artisan queue:work --queue=create_list_b2b
+php artisan queue:work --queue=check_status_b2b
+php artisan queue:work --queue=distribution_b2b
+php artisan queue:work --queue=send_lead_b2b
+
+lai813938-lqi145953-8row
+
+main.js
+global.agencyfilteredmodules = response.agencyFilteredModules; (sama dengan rootcustomsidebarleadmenu)
+global.agency_side_menu = response.agency_side_menu ✅
+global.agencyDefaultModules = response.agencyDefaultModules
+
+GeneralSetting.vue
+@keyup="set_fee('b2b','B2BPlatformFee');"
+@blur="handleFormatCurrency('b2b','B2BPlatformFee')"	
+paymentTermChange
+paymentTermStatus
+const moduleAgency = this.$global.agencyDefaultModules        
+const agencyFilterModules = this.$global.agencyfilteredmodules
+Your Wholesale cost per contact is {{ ' ' }}
+save_general_custommenumodule
+saveDefaultModule
+
+Tree.vue
+@keyup="set_fee('b2b','B2bMinCostMonth');"
+@blur="handleFormatCurrency('b2b','B2bMinCostMonth')"
+priceSetClick
+
+Leadspeek/Dashboard.vue
+checkPermissionMenu
+@change="onCampaignTypeChange(selects.campaignTypeSelected);"
+
+ConfigApp/Client.vue
+@keyup="set_fee('b2b','B2bLeadsPerday');"
+@blur="handleFormatCurrency('b2b','B2bLeadsPerday')"
+handlePriceSet
+
+Leadspeekb2b/ClientV1.vue
+this.GetClientList(); dispatch('GetLeadsPeekClientList')
+this.GetClientListAll(); store.dispatch('GetLeadsPeekClientList')
+this.initial_default_price();
+this.getMasterAgencyCost();
+this.resetAgencyCost();
+this.paymentTermChange();
+ProcessAddEditClient;
+CreateLeadsPeekClient
+UpdateLeadsPeekClient
+newcampaign.asec5_6 (Do you want to cap the amount of leads you receive per day?)
+onCompanyChange
+
+SideBar.vue
+this.$global.selectsGroupCompany.companyGroupList = response.params;
+
+UserSetup\SecondStep.vue
+validate()
+
+UserController.php
+public function update(Request $request)
+private function save_step_two($request)
+
+SKENARIO
+- costagency sudah ada local,locator,enhance belum ada b2b. rootcostagency sudah ada b2b. maka costagency b2b ikut rootcostagency b2b ✅
+- customsidebarleadmenu sudah ada local,locator,enhance belum ada b2b. rootcustomsidebarleadmenu sudah ada b2b. maka customsidebarleadmenu b2b ikut rootcustomsidebarleadmenu b2b ✅ 
+- agencydefaultprice sudah ada local,locator,enhance belum ada b2b. rootcostagency sudah ada b2b. maka agencydefaultprice b2b ikut rootcostagency b2b ✅
+- clientdefaultprice sudah ada local,locator,enhance belum ada b2b. agencydefaultprice sudah ada local,locator,enhance belum ada b2b. maka clientdefaultprice b2b ikut rootcostagency b2b ✅
+- clientdefaultprice belum ada local,locator,enhance,b2b. agencydefaultprice sudah ada local,locator,enhance belum ada b2b. maka clientdefaultprice local,locator,enhance ikut agencydefaultprice local,locator,enhance dan clientdefaultprice b2b ikut rootcostagency b2b ✅
+- agencysidebar sudah ada local,locator,enhance belum ada b2b. root sudah siap dengan b2b. maka agencysidebar b2b menjadi true ✅
+- agencydefaultmodules sudah ada local,locator,enhance belum ada b2b. root sudah siap dengan b2b. maka agencydefaultmodules b2b menjadi true ✅
+- Ketika user sudah login dan sudah mempunyai data leadb2bname = 'xxx' dan leadb2burl = 'xxx' di localstorage dan root ingin mematikan b2b di rootcustomsidebarleadmenu. maka Ketika pindah route leadb2bname dan leadb2burl menjadi null di localstorage ✅
+- Ketika user sudah login dan belum mempunyai data leadb2bname = null dan leadb2burl = null di localstorage dan root ingin menyalakan b2b di rootcustomsidebarleadmenu. maka Ketika pindah route leadb2bname dan leadb2burl menjadi terisi di localstorage ✅
+
+(AGENCYSIDEBAR)
+BIASA
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar belum ada b2b (00) ✅
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar sudah ada (01) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar belum ada (10) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar sudah ada (11) ✅
+
+(CLIENTSIDEBAR)
+BIASA
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar belum ada b2b, clientsidebar belum ada b2b (000) ✅
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar belum ada b2b, clientsidebar sudah ada b2b (001) ✅
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar sudah ada b2b, clientsidebar belum ada b2b (010) ✅
+rootcustomsidebarleadmenu belum ada b2b, agencysidebar sudah ada b2b, clientsidebar sudah ada b2b (011) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar belum ada b2b, clientsidebar belum ada b2b (100) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar belum ada b2b, clientsidebar sudah ada b2b (101) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar sudah ada b2b, clientsidebar belum ada b2b (110) ✅
+rootcustomsidebarleadmenu sudah ada b2b, agencysidebar sudah ada b2b, clientsidebar sudah ada b2b (111) ✅
+
+http://datalocal.emmsandbox.com/leadspeek/report/lead/export/165/590/2024-12-08 11:00:00/2024-12-10 10:59:59
+
+http://jidanach.emmsandbox.com:8080/sso?token=abb3b6978c8d714ef613571058881671084f4ac1e3f8cf4e953588cf2a84badb6bb06a1c3011c0fbc502c40d2f1546f6aaa841c1daae3aa89cd9251bcd0409710459cf26e5e82b88802eb1d3122a5f3f39ed28faedbddd2eb7b0ea68d723fcd507907574febc2fa6696bc57999
+
+
+BUG
+- awal rootcustomsidebarleadmenu ada local,locator,enhance,b2b. lalu ubah clientsidebar menjadi loca:true,locator:true,enhance:false,b2b:true. ditengah jalan rootcustomsidebarleadmenu berubah menjadi local,locator,enhance. di client selalu refresh
+- clientsidebar menjadi local:false,locator:false,enhance:false,b2b:true, maka dashboard di sidebar tidak muncul, namun akses ke url dashboard b2b mnasih bisa
+
+B2B SUDAH ADA DI ROOTCUSTOMSIDEBARLEADMENU, AGENCYSIDEBAR BELUM ADA B2B, DAN CLIENTSIDEBARBELUM BELUM ADA B2B. ACTIVE B2B ✅
+
+B2B SUDAH ADA DI ROOTCUSTOMSIDEBARLEADMENU, AGENCYSIDEBAR BELUM ADA B2B, DAN CLIENTSIDEBARBELUM SUDAH ADA B2B.
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+
+
+B2B SUDAH ADA DI ROOTCUSTOMSIDEBARLEADMENU, AGENCYSIDEBAR BELUM ADA B2B. ACTIVE B2B ✅
+
+B2B SUDAH ADA DI ROOTCUSTOMSIDEBARLEADMENU, AGENCYSIDEBAR SUDAH ADA B2B
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅ (ada bug, saat bukan client price dan agency default price, modulnya muncul namun tidak auto ke click modulnya)
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+
+
+B2B BELUM ADA DI ROOTCUSTOMSIDEBARLEADMENU
+- CLIENT
+ENHANCE|SEARCH|SITE
+0 0 0 ✅
+0 0 1 ✅
+0 1 0 ✅
+0 1 1 ✅
+1 0 0 ✅
+1 0 1 ✅
+1 1 0 ✅
+1 1 1 ✅
+- AGENCY
+ENHANCE|SEARCH|SITE
+0 0 0 ✅
+0 0 1 ✅
+0 1 0 ✅
+0 1 1 ✅
+1 0 0 ✅
+1 0 1 ✅
+1 1 0 ✅
+1 1 1 
+
+B2B SUDAH ADA DI ROOTCUSTOMSIDEBARLEADMENU
+- CLIENT
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅ (ada bug dan udah solve)
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+- AGENCY
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+
+
+$contentHeader[] = array(
+'ID',
+'ClickDate',
+'First Name',
+'Last Name',
+'Email1',
+'Email2',
+'Phone1',
+'Phone2',
+'Address1',
+'Address2',
+'City',
+'State',
+'Zipcode',
+'Keyword',
+'Jobs',
+'Linkedin',
+'Facebook',
+'Instagram'
+);
+
+"returnData": {
+        "0414478cedc84f8bed45521fb506c4f0": [
+            {
+                "EmployeeID": "645964375",
+                "First_Name": "Jon",
+                "Last_Name": "Kross",
+                "Company_Name": "XTEND TECHNOLOGIES",
+                "Company_Website": "XTENDPC.COM",
+                "Num_Employees": "1 TO 49",
+                "Sales_Volume": "LESS THAN $500.000",
+                "Year_Founded": "1999",
+                "Job_Title": "SALES STAFF",
+                "Level": "STAFF",
+                "Job_Function": "SALES",
+                "Headquarters_Branch": "0",
+                "NAICS_CODE": "441310",
+                "Address": "7981 Broadview Rd",
+                "City": "Broadview Heights",
+                "State": "OH",
+                "Zip5": "44147",
+                "B2B_Email": "jkross@xtendav.com",
+                "LastSeenDate": "09/01/2023",
+                "LinkedIn": ""
+            }
+        ]
+    }
+
+['Company_Name','Company_Website','Num_Employees','Sales_Volume','Year_Founded','Job_Title','Level','Job_Function','Headquarters_Branch','NAICS_CODE','LastSeenDate','LinkedIn']
+
+
+ACTIVE CAMPAIGN (PREPAID) ✅
+client to agency
+- cost_perlead = 1.2
+- platformfee = 1.5
+- lp_min_cost_month = 1
+- total leads = 75
+- total_cost = (75 * 1.2) + 1.5 = 91.5
+
+agency to root
+- cost_perlead = 0.6
+- platformfee = 0.3
+- lp_min_cost_month = 0
+- total_leads = 75
+- total_cost = (75 * 0.6) + 0.3 = 45.3
+
+ACTIVE CAMPAIGN (WEEKLY/MONTHLY) ✅
+client to agency
+- setup fee = 1.5
+- campaign fee per week = 1
+- total_cost = 1.5 + 1 = 2.5
+
+agency to root
+- setup fee = 0.3
+- campaign fee per week = 0.3
+- total_cost = 0.6
+
+STOP CAMPAIGN (WEEKLY/MONTHLY) ✅
+
+========ROOTCOMMISSION========
+- ACTIVE CAMPAIGN SEBAGAI DOMINATOR (ENHANCE PREPAID)✅
+- STOP CAMPAIGN SEBAGAI DOMINATOR (ENHANCE WEEKLY/MONTHLY)✅
+- ACTIVE CAMPAIGN SEBAGAI DOMINATOR (LOCAL PREPAID)
+- STOP CAMPAIGN SEBAGAI DOMINATOR (LOCAL WEEKLY/MONTHLY)
+
+- ACTIVE CAMPAIGN SEBAGAI MOBILE (ENHANCE PREPAID) ✅
+- STOP CAMPAIGN SEBAGAI MOBILE (ENHANCE WEEKLY/MONTHLY) ✅
+- ACTIVE CAMPAIGN SEBAGAI MOBILE (LOCAL PREPAID) ✅
+- STOP CAMPAIGN SEBAGAI MOBILE (LOCAL WEEKLY/MONTHLY) 
+========ROOTCOMMISSION========
+
+========SALESCOMMISSION========
+- ACTIVE CAMPAIGN (PREPAID)✅
+- STOP CAMPAIGN (WEEKLY, MONTHLY)✅
+========SALESCOMMISSION========
+
+========FAILEDCHARGE========
+- ACTIVE CAMPAIGN PREPAID, MAKA KARTU MERAH DAN TIDAK HUTANG 
+- STOP CAMPAIGN WEEKLY, MAKA KARTU MERAH DAN HUTANG DAN SEMUA CAMPAIGN CLIENT TERSEBUT PAUSED
+========FIALEDCHARGE========
+
+
+
+
+========SYNCB2B========
+- B2B Exclusion List ✅
+- B2B Validate Min Lead Prepaid One Time ✅
+- B2B Disabled How Many Contact When CostPerLead zero and CampaignFeePerMonth Is Greate Than 0 ✅
+- B2B Validate Input In Price ✅
+- B2B Lepas Validate 0.4 dan 0.45
+- B2B SVL ✅
+- B2B Click Funnels And Custom Field Click Funnel
+========SYNCB2B========
+
+
+
+SKENARIO
+- rootcostagency = 0.45, costagency sudah ada b2b = 0.4, cost_perlead = 0.4, beli prepaid 7 leads, Harga Client = (0.4 * 7) = 2.8, Harga Agency (0.4 * 7) = 2.8 ✅
+- rootcostagency = 0.45, costagency sudah ada b2b = 0.4, cost_perlead = 0.5, beli prepaid 7 leads, Harga Client = (0.5 * 7) = 3.5, Harga Agency (0.4 * 7) = 2.8 ✅
+- rootcostagency = 0.45, costagency sudah ada b2b = 0.5, cost_perlead = 1, beli prepaid 7 leads, Harga Client = (1 * 7) = 7, Harga Agency (0.5 * 7) = 3.5 ✅
+- rootcostagency = 0.45, costagency sudah ada b2b = 0.4, cost_perlead = 0.2, beli prepaid 7 leads, Harga Client = (0.4 * 7) = 2.8, Harga Agency (0.4 * 7) = 2.8 ✅
+
+- rootcostagency = 0.55, costagency belum ada b2b ikut rootcostagency = 0.55, cost_perlead = 0.55, beli prepaid 7 leads, Harga Client = (0.55 * 7) = 3.85, Harga Agency (0.55 * 7) = 3.85 ✅
+- rootcostagency = 0.55, costagency belum ada b2b ikut rootcostagency = 0.55, cost_perlead = 0.8, beli prepaid 7 leads, Harga Client = (0.8 * 7) = 5.6, Harga Agency (0.55 * 7) = 3.85 ✅
+- rootcostagency = 0.55, costagency belum ada b2b ikut rootcostagency = 1, cost_perlead = 2, beli prepaid 7 leads, Harga Client = (2 * 7) = 14, Harga Agency (1 * 7) = 7 ✅
+- rootcostagency = 0.55, costagency belum ada b2b ikut rootcostagency = 0.55, cost_perlead = 0.3, beli prepaid 7 leads, Harga Client = (0.55 * 7) = 3.85, Harga Agency (0.55 * 7) = 3.85
+
+
+
+
+
+B2B SUDAH ADA DI rootcustomsidebarleadmenu (AGENCY)
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+
+B2B SUDAH ADA DI rootcustomsidebarleadmenu (CLIENT)
+B2B|ENHANCE|SEARCH|SITE
+0 0 0 0 ✅
+0 0 0 1 ✅
+0 0 1 0 ✅
+0 0 1 1 ✅
+0 1 0 0 ✅
+0 1 0 1 ✅
+0 1 1 0 ✅
+0 1 1 1 ✅
+1 0 0 0 ✅
+1 0 0 1 ✅
+1 0 1 0 ✅
+1 0 1 1 ✅
+1 1 0 0 ✅
+1 1 0 1 ✅
+1 1 1 0 ✅
+1 1 1 1 ✅
+
+
+TEST THIRD PARTY B2B
+- gohighlevel (progress)
+- mailboxpower
+- clickfunnels
+- zapier
+- sendgrid
+- kartra
+
+
+{"contactId":"dXCmS1245nmDmPcDlAnl","clickDateId":"hdSoKoa4p5V48TWXOBCb","email2Id":"g6fGRIdKytqaLK6aLDsU","phone2Id":"WBydZgKmW62KFJ4wxTbB","address2Id":"DqK2VPAANr5uv3QRMG69","keywordId":"Q6DQc9UnkCfKzdTNlr2U"}
+
+
+{
+  "email": "jhondoe@gmail.com",
+  "full_name": "Jhon Doe Personal",
+  "company_name": "Jhon Doe Company",
+  "is_send_email": "1",
+  "password": "123456",
+  "phone_number": "(222) 555-01234",
+  "phone_country_code": "US",
+  "phone_country_calling_code": "1",
+  "integration": {
+    "1": {
+      "apikey": "ABCDEFGHIJKLMN"
+    }
+  }
+}
+
+
+YANG UDAH DIKERJAIN
+
+ghl_api_key
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im1yY0lUaXNHZ2M1WURmUFd5dzltIiwiY29tcGFueV9pZCI6IkhHUXJlU2NHdkN6dHp6VjZkbW1tIiwidmVyc2lvbiI6MSwiaWF0IjoxNzExMzg5NDE1MzA0LCJzdWIiOiJ1c2VyX2lkIn0.5SHN4yW_nrpRGjAEuWg-oNQtWHq-Wkz5EScPUhMN8_Q
+["Number of Employees","Click Date","Email 2","Phone 2","Address 2","Keyword","Contact Id"]
+
+
+CREATE CAMPAIGN
+require_email|mail_address|phone_number
+F|F|F (progress)
+F|F|T 
+F|T|F 
+F|T|T 
+T|F|F 
+T|F|T 
+T|T|F 
+T|T|T 
+
+
+UPDATE CAMPAIGN
+require_email|mail_address|phone_number
+F|F|F ✅
+F|F|T ✅
+F|T|F ✅
+F|T|T ✅
+T|F|F ✅
+T|F|T ✅
+T|T|F ✅
+T|T|T ✅
+
+
+
+
+Employee ID
+Company Name
+Company Phone
+Company Website
+Num Employees
+Sales Volume
+Year Founded
+Job Title
+Level
+Job Function
+Headquarters Branch
+NAICS CODE
+LastSeenDate
+LinkedIn
+
+
+
+
+
+
+
+
+
+
+UPDATE leadspeek_reports
+SET phone = TO_BASE64(AES_ENCRYPT('334455','8e651522e38256f2'))
+WHERE id in(9841141742900764);
+
+
+
+
+
+-- ENHANCE
+{
+    id: '12',
+    title: '0 Serve(s)',
+    subTitle: 'Total Serves',
+    type: 'primary',
+    icon: 'fas fa-sort-amount-up',
+    footer: 'Successful Enhance ID serve data',
+    showCard:true,
+},
+{
+    id: '13',
+    title: '$0',
+    subTitle: 'Total Revenue',
+    type: 'primary',
+    icon: 'fas fa-dollar-sign',
+    footer: 'Enhance ID serve revenue',
+    showCard:true,
+},
+{
+    id: '14',
+    title: '0 Active',
+    subTitle: 'Total Active',
+    type: 'primary',
+    icon: 'fas fa-sort-amount-up',
+    footer: 'Enhance ID active campaign',
+    showCard:true,
+}
+
+
+-- B2B
+{
+    id: '22',
+    title: '10 Serve(s)',
+    subTitle: 'Total Serves',
+    type: 'primary',
+    icon: 'fas fa-sort-amount-up',
+    footer: 'Successful B2B ID serve data',
+    showCard:true,
+},
+{
+    id: '23',
+    title: '$10',
+    subTitle: 'Total Revenue',
+    type: 'primary',
+    icon: 'fas fa-dollar-sign',
+    footer: 'B2B ID serve revenue',
+    showCard:true,
+},
+{
+    id: '24',
+    title: '10 Active',
+    subTitle: 'Total Active',
+    type: 'primary',
+    icon: 'fas fa-sort-amount-up',
+    footer: 'B2B ID active campaign',
+    showCard:true,
+},
+
+
+all = http://datalocal.emmsandbox.com/api/configuration/report-analytics/2025-01-02
+emm = http://datalocal.emmsandbox.com/api/configuration/report-analytics/2025-01-02/2025-04-04/0/0/22
+dom = http://datalocal.emmsandbox.com/api/configuration/report-analytics/2025-01-02/2025-04-04/0/0/39
+
+all = block 1.1 -> enhance block if -> enhance block 1.9
+emm = block 1.1 -> block 3.1 -> enhance block if -> enhance block 1.3 -> enhance block 1.7
+dom = block 1.1 -> block 3.1-> enhance block if -> enhance block 1.3 -> enhance block 1.6
+
+Successful B2B ID serve data = serveclient
+B2B ID serve revenue = platformfee
+B2B ID active campaign = activecampaign
+
+KETIKA DOWNLOAD CSV ITU AKAN MENDOWNLOAD ALL DARI ROOT EMM + ROOT DOM
+
+1. Ketika auto topup prepaid failed, itu tidak charge agency dan tidak membuat red card agency ✅
+2. Ketika auto topup prepaid failed, campaign tetep play, dan stop continual nya menjadi 'T' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

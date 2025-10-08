@@ -1,0 +1,847 @@
+ghl v2
+
+SELECT 
+	id,
+    company_id,
+    integration_slug,
+    CONVERT(AES_DECRYPT(FROM_bASE64(api_key), '8e651522e38256f2') USING utf8mb4) as api_key,
+    app_id,
+    password,
+    enable_sendgrid,
+    subdomain,
+    workspace_id,
+    custom_fields,
+    version,
+    tokens
+FROM `companies_integration_settings` where company_id = 165 and integration_slug = 'gohighlevel';
+
+SELECT 
+	id,
+    company_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+    setting_name,
+    setting_value
+FROM `company_settings` where company_id = 22;
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"contactId":"jidan","clickDateId":"jidan","email2Id":"jidan","phone2Id":"WBydZgKmW62KFJ4wxTbB","address2Id":"DqK2VPAANr5uv3QRMG69","keywordId":"Q6DQc9UnkCfKzdTNlr2U","genderId":"pj8FGceo512DmTeCP5u5","generationId":"2EKF67iSWH1QHn6a8zQg","maritalStatusId":"oQvgTlSD6fNpAa2PIwMy","phone3Id":"bXK07yTeiuO78k455sG7","taxBillMailingInformationId":"jx8DhyACu4nXonsm8tKw","dwellingTypeId":"DniNbOL9GLGuLmCSucT2","homeOwnerId":"yzpAmgvV6v4M0YEBt2Hn","homeOwnerOrdinalId":"bpgML6R3yr1xSz4tfz4C","lengthOfResidenceId":"4EWulF058PR8q4uDqPs5","homePriceId":"tfrvNCLfqaPTChh5Y0FX","homeValueId":"0et44Rg6xnURpVrLKrRp","medianHomeValueId":"gWgdhi2ePnQg2Xjddtdv","livingSqftId":"Sh0qsrBYaNECX3pVwQDr","yearBuiltOriginalId":"Yotseev44qfWH9w4fDRC","yearBuiltRangeId":"cZ0XOzC2Xi9QJ8Ii8vpz","lotNumberId":"4idkKi9eR3ExvCYdOch1","legalDesciptionId":"Gyeuhd4Y5HHMMZNVxQln","landSqftId":"vTOofuSVTTT902nXreti","garageSqftId":"HO6x1SFPzQ8pg2ASmoat","subdivisionId":"RIX7a7gPP036SQyeSepX","zoningCodeId":"mHXNKZ4poxFMKF3T0gqD","householdIncomeId":"IerrS9Te29ZxNh7qMqWD","medianHouseholdIncomeId":"3PyeIJRm7dGdvYRZqSIV","houseHoldNetworthId":"tD2U45toBHWHe6vBRdAl","medianHouseHoldNetworthId":"ypp5dPMpDZ6C3eXHX7Zo","discretionaryIncomeId":"DuMWEJTv5K17KMJ6BGNr","creditScoreMedianId":"VMv4ANnIpgfeqpp60y8C","creditScoreRangeId":"uHnyvfOttMynfnJPHQHT","numOfAdultsInHHId":"ng1bVtoKitbEDSPcQ6fa","numOfChildrenInHHId":"8tSZy9QgqUxhBlCkBsYn","numOfPeopleInHHId":"tyRzqX8YDXDbw6cJR87h","childrenAged0_3InHHId":"zBYs5AruDJHZ1qiDNCYg","childrenAged4_6InHHId":"lVIxFqkAyWM6insBbtAL","childrenAged7_9InHHId":"bGY7T6CnDkRr0ONrGvwm","childrenAged10_12InHHId":"gVk8aM4hPll4jsGDTFsu","childrenAged13_18InHHId":"wIjDYWp90Gm4F09UYgD0","childrenInHHId":"vFyI5431dhAdfbYvb83k","cookingId":"OMsJQzp9o3puiKPdXmeH","gardeningId":"Ze0J3Z2NprkpbDwSZmDz","musicId":"kdqmGjnvikVzlr1oIir5","diyId":"3TGuRnGCulCusAs9Iol8","booksId":"hc5ih7wj1ajnrLA3143w","travelVacationId":"0lzcdhrfzZts2itfWXvk","healthBeautyProductsId":"tCX5GdiIvEKIiSeLi8Yt","petOwnerId":"EtSlSjrFnqSxePgXJMfm","photographyId":"axbCf5NixxAB3uxGsXPK","fitnessId":"4Q8WHszDrenQoDMa5BKf","epicureanId":"Ho3o4NEyOYZHr7m39NhD","occupationCategoryId":"j3S1ODHzHJID3gVIb9Dp","occupationTypeId":"rJpL4HxAhnY6WHVaKxhp","occupationDetailId":"B9L6QboKrcUxeY7xgBXf","magazineSubscriberId":"5t4VgiQqeurKB6YM4r5k","charityInterestId":"MH89k6JRkrn6TDLEhahJ","likelyCharitableDonorId":"OPm7SOvkJfqHBPiGilRC","cbsaId":"DCDwotB83kLupVQgYqlJ","censusBlockId":"Xa2x5yiD2sShp7m6hoUR","censusBlockGroupId":"yNnnTmnCFHFwbU2FkEGk","censusTractId":"iY66C6HPV1bXBj1PJ3ww","voterId":"gJue6iBUOlSx2sveVaaF","urbanicityId":"Cgs9RYbPGQbBMUoi5Nv8","employeeIDId":"uVEzl5RnhK6IqQ7Jvm5a","companyNameId":"upbN50tq9p7VBk4HwcLG","companyPhoneId":"fHBG05Zyekohd5yvZKmA","companyWebsiteId":"pW622GJEdMGobVUXRKhG","numEmployeesId":"8zqgDfsRTIfU5c6a66ZY","salesVolumeId":"OFJsCulIKIcvtYkTTAbn","yearFoundedId":"cpSRhzynmcq8NyWNddFv","jobTitleId":"kdc0zCpGVGKEGBNrSLN0","levelId":"Hez5cJ9T4EP7PXIQudrO","jobFunctionId":"5oLkVaSAILwjWPDG0HV3","headquartersBranchId":"NYQZuPN8GihGJkKplnzR","naicsCodeId":"tVR8z2Vqy46Ve7jFFzLc","lastSeenDateId":"31YSNe1JuQd4Kp28j5Yt","linkedInId":"PYzjZXoC1xtTrBE2T6rE"}', '8e651522e38256f2'))
+WHERE company_id = 165 AND CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'gohlcustomfields';
+
+ghl v1 api key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im1yY0lUaXNHZ2M1WURmUFd5dzltIiwiY29tcGFueV9pZCI6IkhHUXJlU2NHdkN6dHp6VjZkbW1tIiwidmVyc2lvbiI6MSwiaWF0IjoxNzExMzg5NDE1MzA0LCJzdWIiOiJ1c2VyX2lkIn0.5SHN4yW_nrpRGjAEuWg-oNQtWHq-Wkz5EScPUhMN8_Q
+
+code=
+bf52b37518aa415716494acd0f7ff5ed0534415a
+
+marketplace gohighlevel
+https://marketplace.gohighlevel.com
+user  : sendi.yadi@gmail.com
+new user : muhammadjidan703@gmail.com
+pass : qwert123
+
+Test App
+client id: 67f890e1acd0d3495982f9ec-m9c9thu3
+client secret: a8c33479-11fc-4ce1-bc09-eeefdf7614ca
+
+Jidan App
+client id: 67fc95b55eb4de2db9bed2b6-m9gm14pu
+Client Secret: 13836921-d041-497b-966b-0b61177d5ccf
+
+gohighlevel
+https://app.gohighlevel.com/
+harrison@exactmatchmarketing.com
+Z0vat3chid!
+
+Agency Testing
+Account  : Jidan Agency Testing
+email    : muhammadjidan703@gmail.com
+password : Kalkulus314+#
+
+contacts.readonly contacts.write locations/tags.write locations/tags.readonly locations/customFields.readonly locations/customFields.write opportunities.readonly opportunities.write
+yang ditambahkan di companies_integration_settings
+
+{
+    "response": {
+        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJtSDRESXFmTkZIOHpUWW16YkxaOSIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYtbWRmdHBlYXUiLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJtSDRESXFmTkZIOHpUWW16YkxaOSIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29udGFjdHMucmVhZG9ubHkiLCJjb250YWN0cy53cml0ZSIsImxvY2F0aW9ucy90YWdzLndyaXRlIiwibG9jYXRpb25zL3RhZ3MucmVhZG9ubHkiLCJsb2NhdGlvbnMvY3VzdG9tRmllbGRzLnJlYWRvbmx5IiwibG9jYXRpb25zL2N1c3RvbUZpZWxkcy53cml0ZSIsImNvbXBhbmllcy5yZWFkb25seSIsInVzZXJzLnJlYWRvbmx5Iiwib2F1dGgud3JpdGUiLCJvYXV0aC5yZWFkb25seSJdLCJjbGllbnQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYiLCJ2ZXJzaW9uSWQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYiLCJjbGllbnRLZXkiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYtbWRmdHBlYXUiLCJhZ2VuY3lQbGFuIjoiYWdlbmN5X21vbnRobHlfNDk3In0sImlhdCI6MTc1MzI2ODE0MC41MTQsImV4cCI6MTc1MzM1NDU0MC41MTR9.gRHuYoN9UeHk_uz-BxfFTkfEc8zdy9GzC_JJ2orZfWAIqT2-KJ9DbNUbzXnS48u0Eybj5XCD7QgCop8y37XjPEF2dexfdsc515LIuak2giSxxgq9-JJ4y0nIiuRXkfCozHHhkIMMbM6aegwbjesY5dAJ8voLoAwbC5_-JtAJ3fPjBeokTsRxanEPH-3Vj6MplFKyIrO2OJwhkS8c4uF93B293hLOwvKdm87dXfhgjtUON-Lf6eqQOnnO6fN4W16q9QrH09iMyrhX5jZB0iI8DO3QUsAF_Zh7UwDgQgHjENCcnkgaK98nSVpxqIm1qqYXfV8diLeBkxd2t81SaYSG6sABLLCWh2R-_zFjD_5vuakIILxzVYV7pxhH9_e7qezqavWzcRy28KTaIyM5MPLhAtZ8bLzhXUnGuDc6UdS1YSNezxMBWxbg7TpiyU53AN_g7_uNQ08KPC9-8gb9zt90_P5unA6gNEqMG6PIZPrbG2avCGt8MJ89l2xVolct_RGCAlUS64jl8hdGl-SMeNZwpi08YQX_a0fZSOc6J0UPG1rfUjlxMcSv14XRRo232v00fXojyEyW-BaSZ1jZ6BIGO0LzGUB_EIPgCd5MyGa5Z7H0RVEECvjZLYdkabS3FCeYurIL6hNwqD2tzZ7-VtsQs3mtoYxm39NgEUqgDnJGUPk",
+        "token_type": "Bearer",
+        "expires_in": 86399,
+        "refresh_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJtSDRESXFmTkZIOHpUWW16YkxaOSIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYtbWRmdHBlYXUiLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJtSDRESXFmTkZIOHpUWW16YkxaOSIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29udGFjdHMucmVhZG9ubHkiLCJjb250YWN0cy53cml0ZSIsImxvY2F0aW9ucy90YWdzLndyaXRlIiwibG9jYXRpb25zL3RhZ3MucmVhZG9ubHkiLCJsb2NhdGlvbnMvY3VzdG9tRmllbGRzLnJlYWRvbmx5IiwibG9jYXRpb25zL2N1c3RvbUZpZWxkcy53cml0ZSIsImNvbXBhbmllcy5yZWFkb25seSIsInVzZXJzLnJlYWRvbmx5Iiwib2F1dGgud3JpdGUiLCJvYXV0aC5yZWFkb25seSJdLCJjbGllbnQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYiLCJ2ZXJzaW9uSWQiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYiLCJjbGllbnRLZXkiOiI2N2ZjOTViNTVlYjRkZTJkYjliZWQyYjYtbWRmdHBlYXUifSwiaWF0IjoxNzUzMjY4MTQwLjUyMywiZXhwIjoxNzg0ODA0MTQwLjUyMywidW5pcXVlSWQiOiIyOWQ4MWFmZC02MDg5LTRlZGUtYjUxMy00NWVjYTdlOWQ2YTkiLCJ2IjoiMiJ9.LnxIWBGGbuFeJYzbxLhR2L-4b4MUKosOtwU8HZh142k_LqRboFMq3lIdPlz-BnLqv7__tS-VZHJjmSW2VzL5A4QDSlDWpan7cBz_WCozkJuT73jRR0CqOO66CudBTIVsHkoS0bNIeg02uuKsyx-8sV5pu_A4BemC7UBj6NDeFUgFRkRwGONzgwQgea0AjVPsN7gMaa2cdYrFJMN4ymfHxZ6mSIl_SZzElYfevsjKfq13M9FUxTUq13SYOJ9qwinfAgj86E4NM9RY_4CT9uQAB_DJNxEQbVFqtRds3cnJiCwKe1XO4WHy4inTfDrawU-Er7wLk1cloVIZA_slg7RaEIKD5Avg8of4eKcvhIJ73lgVrtOn81JMwZhc1oNRoonh69TFlVqWybIrNIk1KVsKPvxG8J_44ETNAscPd8yf4JiE5zyG9TxyE5j4Rzknejn_tL1vCb473uhy-brPRJXoHCgi230xOKsIpGIjMCbExvkJz-prRhjeDsVt1w3Pj94UTSFK79h8f95HAOKJ1RBCi-gBzn5IiF11zAIiB4rYBHmO01DW4UFCYqCHpVrsPH1FqkVWQHMfViKZDkP3giUB1aSKKz4orNB1kMnNqSm0B0PgHXWj6Aw48imab-laIUoM36SPfAWKn32-7wrUYEzY83utm3F8n-2NZr1rHSVxPfo",
+        "scope": "contacts.readonly contacts.write locations/tags.write locations/tags.readonly locations/customFields.readonly locations/customFields.write companies.readonly users.readonly",
+        "refreshTokenId": "6880bfac14d1f4723ffb24b0",
+        "userType": "Company",
+        "companyId": "mH4DIqfNFH8zTYmzbLZ9",
+        "isBulkInstallation": true,
+        "userId": "uVDtQqrCKvpgEWygAhib"
+    }
+}
+
+ngrok http --host-header=applocal.emmsandbox.com 8080
+https://9bea1033a97b.ngrok-free.app
+
+yang ditambahkan di env
+GHLV2_BASE_URL="https://marketplace.gohighlevel.com"
+GHLV2_CLIENT_ID="67fc95b55eb4de2db9bed2b6-m9gm14pu"
+GHLV2_CLIENT_SECRET="13836921-d041-497b-966b-0b61177d5ccf"
+GHLV2_SCOPE="contacts.readonly contacts.write locations/tags.write locations/tags.readonly locations/customFields.readonly locations/customFields.write"
+
+https://www.youtube.com/watch?v=NfukdHZcYM8&t=73s
+https://www.youtube.com/watch?v=3DPvBnMsK1g
+
+
+
+STEP STEP NYA
+1. saat membuat marketplace tambahkan custom page ke arah https://app.emmsandbox.com, only agency
+2. ketika user gohighlevel lain install. maka akan mengarahkan ke https://app.emmsandbox.com?code=1234567890 namun. nah kan sudah dapat code nya ya. nah dari kode itu bisa mengetahui nama agency nya dan data diri yang install
+3. setelah dapat data dirinya maka daftarkan sebagai agency, namun ketika sudah ada sudah ada maka tambahkan apa gitu misalnya "namaagency_{$epochtime}_{$stringacak}"
+4. setelah berhasil daftar agency maka akan login sebagai sso
+
+LANGKAH LANGKAH PAKAI NGROK UNTUK EMM-SANDBOX-APP, SAYA HARAP ANDA SUDAH INSTALL NGROK, KALO BELOM CARI TAU SENDIRI LAH
+
+1. pertama di terminal jalankan perintah ini
+* ngrok http --host-header=applocal.emmsandbox.com 8080
+lalu akan menghasilkan url https seperti ini example
+* https://9bea1033a97b.ngrok-free.app
+
+2. kedua mau login sebagai siapa? katakanlah root yang subdomainnya applocal.emmsandbox.com. ganti subdomain di table `companies` dari applocal.emmsandbox.com -> 9bea1033a97b.ngrok-free.app
+
+3. ketiga buka terminal, masuk ke folder data di project EMM-SANDBOX-APP, jalankan perintah ini
+* php artisan serve
+maka akan menghasilkan url ini
+* http://127.0.0.1:8000
+
+4. keempat buka .env di folder front cari key yang namanya VUE_APP_DATASERVER_URL isi dengan url ini http://127.0.0.1:8000
+5. sudah selesai anda sekarang menggunakan url ini https://9bea1033a97b.ngrok-free.app
+
+https://43271b1ad0b1.ngrok-free.app
+
+http://datalocal.emmsandbox.com/api/configuration/onboarding/set
+
+https://43271b1ad0b1.ngrok-free.app/sso-iframe?state=eyJnaGxfY29tcGFueV9pZCI6Im1INERJcWZORkg4elRZbXpiTFo5IiwidG9rZW4iOiJlNWVhZWUyYjQ5MTQwZWE0ODA3NzI4NzIwNzcwNjkyMTRkMThkNjUxZDc1YTJkMGEyNzkxYTViMzFiYzMyMmFhNDYxMWNkYmY2ODY4NjA2OTFjMjFiMiJ9
+
+bug saat setupcomplite()
+
+npm run build 
+npx serve -s dist -l 8080 
+ngrok start --all --config "C:\wamp64\www\EMM-SANDBOX-APP\data\storage\app\ngrok.json"
+ngrok http 8080
+
+http://jidanagencyemm1.emmsandbox.com:8080/sso?token=4aec21ab627c7cf35dc407adf82ac75f0a9cdbcc05d3660155c5d6503ecac9512620cfdff1587c5aba4f612cbcae77221bf81ed4b035b1471ff1dac410d44860b01c38cfbe07322eaee2f38ccbbc8f0aa973e27d4a7bf8bc66a775360d179820f89a24b34db7
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im1yY0lUaXNHZ2M1WURmUFd5dzltIiwiY29tcGFueV9pZCI6IkhHUXJlU2NHdkN6dHp6VjZkbW1tIiwidmVyc2lvbiI6MSwiaWF0IjoxNzExMzg5NDE1MzA0LCJzdWIiOiJ1c2VyX2lkIn0.5SHN4yW_nrpRGjAEuWg-oNQtWHq-Wkz5EScPUhMN8_Q
+
+SKENARIO OPERASI = (GET_TAG, SAVE_TAG, SEND_TEST GHL)
+1. coba connect v1, belum connect v2. maka akan create semua custom field ✅
+2. sudah connect v1, belum connect v2. maka operasi diatas pakai v1 ✅
+
+3. sudah connect v1, coba connect v2, maka akan connect, maka akan reset semua custom field dan akan buat ulang semua custom field ✅
+4. sudah connect v1, sudah connect v2. maka operasi diatas pakai v2 ✅
+5. pakai v2 namun token expired, maka refresh token, jalan operasi diatas ✅
+5. sudah connect v1, sudah connect v2, disconnect. maka akan hapus tokens ghl v2 saja, apikey v1 nya masih tetep ada ✅
+
+6. belum ada v1, coba connect v2. maka akan get access token dan create semua custom field ✅
+7. belum connect v1, sudah connect v2. maka operasi diatas pakai v2 ✅
+8. belum ada v1, sudah connect v2, disconnect v2. maka akan hapus integrations_setting, gohlcustomfields di company_setting, custom_fields_advance_gohighlevel dan custom_fields_advance_gohighlevel di global settings✅
+
+
+
+.el-message-box__wrapper
+
+el-message-box__content -> padding: 15px 15px 10px 15px
+el-message-box__input -> padding-top: 5px;
+.el-message-box__header -> padding: 15px 14px 10px;
+
+ENV YANG DITAMBAH, (pakai marketplace Jidan 2 App)
+- GHLV2_BASE_URL="https://marketplace.gohighlevel.com"
+- GHLV2_CLIENT_ID="6800b9d21ce741717dab166b-m9l3ec95"
+- GHLV2_CLIENT_SECRET="3c1e200e-4cbd-4dd7-acb5-83d519f293e3"
+- GHLV2_SCOPE="contacts.readonly contacts.write locations/tags.write locations/tags.readonly locations/customFields.readonly locations/customFields.write opportunities.readonly opportunities.write"
+
+
+-divider-
+
+EMM-SANDBOX-API
+JD-TASK-EMM-260 = "- create function for opration gohighlevel v2 - use api gohighlevel v2 when user have connected"
+JD-TASK-EMM-260-DEV-SYNC
+
+FILE
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\WebhookController.php
+- app\Models\IntegrationSettings.php
+- config\services.php
+
+ENV YANG DITAMBAH, (pakai marketplace Jidan 2 App)
+- GHLV2_BASE_URL="https://marketplace.gohighlevel.com"
+- GHLV2_CLIENT_ID="6800b9d21ce741717dab166b-m9l3ec95"
+- GHLV2_CLIENT_SECRET="3c1e200e-4cbd-4dd7-acb5-83d519f293e3"
+- GHLV2_SCOPE="contacts.readonly contacts.write locations/tags.write locations/tags.readonly locations/customFields.readonly locations/customFields.write opportunities.readonly opportunities.write"
+-divider-
+DATABASE TAMBAH FIELD DI `companies_integration_settings`
+ALTER TABLE companies_integration_settings
+ADD COLUMN version INT NULL DEFAULT NULL,
+ADD COLUMN token TEXT NULL DEFAULT NULL;
+
+
+
+-----------DATABASE YANG DIUBAH-----------
+1. tambahkan field company_ghl_id varchar(100) default null, table companies
+2. tambahkan field ghl_tokens text default null, table companies
+3. tambahkan field ghl_custom_menus text default null, table companies
+4. tambahkan field ghl_credentials_id bigint default null, table companies
+5. tambahkan field not_remove enum T F, table sso_access_tokens
+6. tambahkan settingan global_settings untuk credentials ghl
+-----------DATABASE YANG DIUBAH-----------
+
+-----------YANG HARUS DIKERJAKAN-----------
+1. ganti auto login pakai cara sso open api, dan saat sso ditambahkan parameter untuk disable_first_charge ini bikin field baru, disable_minimum_spend ini pakai field di users exclude_minimum_spend ✅
+2. di redirect url oauth. cek agency ghl nya punya domain atau tidak. jika punya maka redirect ke domain tersebut dan jika tidak maka muncul view saja bahwa anda sudah berhasil install ✅
+3. buat webhook saat uninstall itu hapus custom menu dan hapus agency di emm ✅
+
+4. buat generate oauth url untuk agency connect ✅
+5. handle ketika redirect url saat agency connect ✅
+6. ketika disconnect gohighlevel maka akan remove custom menu link ✅
+
+7. buat token sso untuk gohighlevel ini tidak pernah di delete ✅
+8. benerin webhook ketika delete	 ✅
+9. buat button create iframe untuk client ✅
+10. kasih opsi untuk defined nama menu nya apa ✅
+
+11. saat create client kasih options untuk langsung create iframe ke sub account mana , dari list sub account yang belum pernah di pilih ✅
+
+12. saat connect public agency baru, kasih input untuk define nama custom menu nya apa
+	- jika ada domain redirect ke domain tersebut ✅
+	- jika tidak ada domain tampilkan ui bahwa success connect ke exacth match marketing public ✅
+13. ubah blade untuk emm private seperti di atas ✅
+15. ubah blade untuk leadconnector seperti di atas ✅
+16. ubah ui loading saat process ✅
+14. saat connect public agency existing dan sudah connect ghl. maka kasih animasi bahwa anda sudah pernah
+	- jika ada domain maka redirect ke domain tersebut ✅
+	- jika tidak ada domain tampilkan ui bahwa anda sudah pernah connect ke exacth match marketing ✅
+15. saat connect public agency existing dan belum connect ghl. maka arah kan agar dia connect ke emm private, dan kasih input untuk define nama custom menu nya apa
+	- jika ada domain maka redirect ke domain tersebut ✅
+	- jika tidak ada domain tampilkan ui bahwa success connect ke exacth match marketing private dan berikan alasan karena anda sudah pernah daftar di emm maka anda akan install di emm private ✅
+16. validasi email apakah sudah digunakan atau tidak, ngikutin cara di ConfigurationController create
+-----------YANG HARUS DIKERJAKAN-----------
+
+$checkCreatedIframe = $this->gohighlevelv2CheckCreatedIframeDB($company_id);
+                        $ghlV2CreatedIframe = (isset($checkCreatedIframe['exists']) && $checkCreatedIframe['exists'] === true);
+
+
+Lead Connector Local Private
+Client ID : 6888e0eb3b9bf854994f3d06-mdpgk9x4
+Client Secret : 984bf9f8-2bd6-4af7-919e-ae14e5889631
+
+Exact Match Marketing Local Private
+Client ID : 6888d84d6b9c0a27d216ecec-mdph7li2
+Client Secret : ebcbd277-1484-42e5-86ec-444e1b6f9c91
+
+http://datalocal.emmsandbox.com/leadconnectorv2/oauth/callback/public/view
+http://datalocal.emmsandbox.com/leadconnectorv2/oauth/callback/view
+
+transitionLoadingToResult
+
+Client error: `POST https://services.leadconnectorhq.com/oauth/token` resulted in a `400 Bad Request` response:
+{"error":"invalid_grant","error_description":"Invalid grant: authorization code is invalid"}
+
+
+
+
+
+
+
+
+http://127.0.0.1:8000/api/configuration/user/22/all/22/userdownline/0/0/JIDAN?Page=1&Filters=%7B%22directPayment%22:%7B%22active%22:false%7D,%22paymentFailed%22:%7B%22active%22:false%7D,%22isUserGenerateApi%22:%7B%22active%22:false%7D,%22isOpenApiMode%22:%7B%22active%22:false%7D%7D
+
+
+info@power
+
+
+
+THIS IS AN APP I CREATED IN MY LOCAL
+1. Exact Match Marketing Local Private 
+2. Lead Connector Local Private 
+ 
+
+
+
+SCENARIO GHL PRIVATE AGENCY & CLIENT
+1. connecting emm agencies to ghl ✅
+2. connecting the client to the app lead connector 
+   - Note, before the client can create an iframe, he must connect to the apps lead connector. This connection is only useful for entering contacts from emm to the ghl sub account. ✅ 
+   - Now I will try to test send test contact ✅
+3. create iframe for client ✅
+4. test delete iframe client, then it will delete iframe client ✅
+5. test disconnect gohighlevel agency, then it will delete agency iframe ✅
+
+You Are Now Connected To Lead Connector
+You Have Not Yet Connected To Lead Connector
+
+
+You Have Created An Iframe In The Lead Connector
+You Have Not Created At Iframe In The Lead Connector
+
+You Have Connected An Iframe In Lead Connector
+You Have Not Connected An Iframe In Lead Connector
+
+
+$salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
+DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(companies.company_name), '$salt') USING utf8mb4)")                       
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-483 = "- add options create iframe when add client and list sub account - clean code info logging"
+JD-TASK-EMM-483-DEV-SYNC
+
+FILE
+FRONT
+- front\src\pages\Integration\IntegrationDetail.vue
+- front\src\pages\Modules\Auth\ConfigApp\Client.vue
+- front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+- front\src\store\store.js
+
+DATA
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\GohighlevelController.php
+- data\app\Http\Controllers\IntegrationController.php
+- data\app\Http\Controllers\OpenApiController.php
+- data\app\Http\Controllers\GeneralController.php
+- data\app\Http\Controllers\Controller.php
+- data\app\Models\Company.php
+- data\app\Models\SsoAccessToken.php
+- data\routes\api.php
+- data\routes\web.php
+- data\resources\views\gohighlevelv2-oauth-callback.blade.php
+- data\resources\views\gohighlevelv2-oauth-callback-public.blade.php
+
+DATABASE
+ALTER TABLE `companies`
+ADD COLUMN `company_ghl_id` VARCHAR(100) DEFAULT NULL,
+ADD COLUMN `ghl_tokens` TEXT DEFAULT NULL,
+ADD COLUMN `ghl_custom_menus` TEXT DEFAULT NULL,
+ADD COLUMN `ghl_credentials_id` BIGINT DEFAULT NULL;
+
+ALTER TABLE `sso_access_tokens`
+ADD COLUMN `not_remove` ENUM('T', 'F') DEFAULT NULL;
+
+global_settings
+- credentials_ghl_emm_private
+- {"base_url":"https://marketplace.gohighlevel.com","client_id":"6888d84d6b9c0a27d216ecec-mdph7li2","client_secret":"ebcbd277-1484-42e5-86ec-444e1b6f9c91","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"6888d84d6b9c0a27d216ecec"}
+
+- credentials_ghl_emm_public
+- {"base_url":"https://marketplace.gohighlevel.com","client_id":"6888decb3b9bf85afd4cdff7-mdphajo4","client_secret":"591c01df-1069-421f-aaa4-6f5ffb0c4a2a","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"6888decb3b9bf85afd4cdff7"}
+
+INSERT INTO `global_settings` (`company_id`, `setting_name`, `setting_value`, `created_at`, `updated_at`) VALUES
+(22, 'credentials_ghl_emm_private', '{"base_url":"https://marketplace.gohighlevel.com","client_id":"6888d84d6b9c0a27d216ecec-mdph7li2","client_secret":"ebcbd277-1484-42e5-86ec-444e1b6f9c91","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"6888d84d6b9c0a27d216ecec"}', NOW(), NOW()),
+(22, 'credentials_ghl_emm_public', '{"base_url":"https://marketplace.gohighlevel.com","client_id":"6888d84d6b9c0a27d216ecec-mdph7li2","client_secret":"ebcbd277-1484-42e5-86ec-444e1b6f9c91","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"6888d84d6b9c0a27d216ecec"}', NOW(), NOW());
+
+
+
+Exact Match Marketing Sandbox Private
+- client_id     = 688cb175e320d49adb331172-mdsstl3o
+- client_secret = 7b6fc178-46e1-49ac-b872-12ff82e847dc
+https://data.emmsandbox.com/leadconnectorv2/oauth/callback/view
+
+https://data.emmsandbox.com/api/gohighlevel/webhook
+
+INSERT INTO `global_settings` (`company_id`, `setting_name`, `setting_value`, `created_at`, `updated_at`) VALUES
+(22, 'credentials_ghl_emm_private', '{"base_url":"https://marketplace.gohighlevel.com","client_id":"688cb175e320d49adb331172-mdsstl3o","client_secret":"7b6fc178-46e1-49ac-b872-12ff82e847dc","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"688cb175e320d49adb331172"}', NOW(), NOW());
+
+INSERT INTO `global_settings` (`company_id`, `setting_name`, `setting_value`, `created_at`, `updated_at`) VALUES
+(22, 'credentials_ghl_emm_public', '{"base_url":"https://marketplace.gohighlevel.com","client_id":"6888decb3b9bf85afd4cdff7-mdphajo4","client_secret":"591c01df-1069-421f-aaa4-6f5ffb0c4a2a","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","app_id":"6888decb3b9bf85afd4cdff7"}', NOW(), NOW());
+
+
+http://datalocal.emmsandbox.com/leadconnectorv2/oauth/callback/public/view
+
+Akun Sub Account Gohighlevel anda sekarang sudah terhubung ke lead connector. sekarang sistem bisa mengakses untuk menambahkan contact ke sub account gohighlevel anda
+
+data\resources\views\gohighlevelv2-oauth-callback-public.blade.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+simulation of installing the gohighlevel public marketplace application
+
+1. First, I'll try installing the public app, but no agency has used this email address yet, support@exactmatchmarketing.com. After installing the app, it will create an agency in EMM. ✅
+
+2. Second, I'll try installing the public app. However, this email address, support@exactmatchmarketing.com, belongs to an existing agency. So, when I click "install" on the public app, I'll be redirected to the private app..
+	- I'll try uninstalling the app that was installed earlier. This will remove the custom agency menu link. ✅
+	- To prove that this institution is connected to a private application, I tried to uninstall the public application, then the special menu link will not be deleted, because the institution is actually connected to a private application. ✅
+	
+	
+https://drive.google.com/file/d/1CrGRBg6WrjGhgBXayktxMH-o2NKO6bCn/view?usp=sharing
+	
+https://muhammadjidan.ap.ngrok.io/sso?token=ae09e4cf47f279a6b7716034f02689cd6fe985605fc78b4a1b371cec896b7ac1e7a4c6a29d1aaf419c4aa9a93ecff8edd61563641403e17c7de557b8a51930193bda8861bc05fbef89e989e787141671b393df2d952c498bdb23c62c4e1ee4b8b0dee555d73f
+
+https://muhammadjidan.ap.ngrok.io/sso?token=eb894f13dda99db68ca83671da2473b938d606d632f78e43365b8d51a4869a714eeab5f47d1031d6498a0febf8497114df51f1fc0486ec3db66437bee41db1269d608ec1acfb558116150486204a25027b0353e1257e546663615dbfadedf65ef5631ac649
+
+
+fisikamodern00+jidanagencyemm11@gmail.com
+
+#dcdfe6
+
+sudah konek :
+”You Have Created a Single Sign On Link For This Client”
+button:
+”Remove SSO Link”
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-483 = "change wording for gohighlevel"
+JD-TASK-EMM-483-DEV-SYNC
+
+FILE
+FRONT
+- front\src\pages\Integration\IntegrationDetail.vue
+- front\src\pages\Modules\Auth\ConfigApp\Client.vue
+- front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+
+DATA
+- data\app\Http\Controllers\GeneralController.php
+- data\app\Http\Controllers\GohighlevelController.php
+- data\app\Http\Controllers\IntegrationController.php
+- data\app\Models\Company.php
+- data\resources\views\gohighlevelv2-oauth-callback.blade.php
+- data\resources\views\gohighlevelv2-oauth-callback-public.blade.php
+
+
+ALTER TABLE `companies`
+ADD COLUMN `ghl_first_time_connect` TINYINT(1) DEFAULT NULL;
+
+
+zovatechtesting+jumat08@gmail.com
+
+
+
+FRONT
+
+- front\src\pages\Integration\IntegrationDetail.vue
+- front\src\pages\Modules\Auth\ConfigApp\Client.vue
+- front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+- front\src\store\store.js
+
+DATA
+
+- data\app\Http\Controllers\GeneralController.php
+- data\app\Http\Controllers\GohighlevelController.php
+- data\app\Http\Controllers\IntegrationController.php
+- data\app\Models\IntegrationSettings.php
+- data\resources\views\gohighlevelv2-oauth-callback.blade.php
+- data\routes\api.php
+
+private function dummySubAccounts($limit = 0, $skip = 0)
+{
+    sleep(1);
+    $subAccounts = [];
+    for($i = 1; $i <= 100; $i++)
+    {
+        $subAccounts[] = [
+            'id' => $i,
+            'name' => "Sub Account $i"
+        ];
+    }
+
+    $subAccounts = array_slice($subAccounts, $skip, $limit);
+
+    return [
+        'locations' => $subAccounts
+    ];
+}
+
+DATA
+- data\app\Http\Controllers\IntegrationController.php
+
+FRONT
+- front\src\pages\Integration\IntegrationDetail.vue
+- front\src\pages\Modules\Auth\ConfigApp\Client.vue
+- front\src\store\store.js
+
+
+
+SKENARIO NYA ADALAH
+1. client udah buat iframe, mau connect lead connector (contact) milik client tadi (progress)
+2. agency udah buat iframe, mau connect lead connector (contact) milik client
+
+
+we're sorry, but we couldn't complete your request
+
+ghlv2CheckClientFirstTimeConnect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JADI SAYA NEMU SESUATU ANEH SAAT CONNECT LEAD CONNECTOR (CONTACT) DI IFRAME
+1. connect melalui web itu berjalan dengan baik ✅
+ 	- setelah berhail login akan diarahkan ke page LeadConnector Sandbox
+2. connect melalui iframe itu tidak berjalan dengan baik (test)
+	- kita coba yang dari iframe
+	- sebelum itu logout dahulu di app.gohighlevel.com
+	- setelah berhasil login, halam di iframe tidak mengarahkan ke page LeadConnector Sandbox
+	- solusi nya paling saat connect ghl kan diarahkan ke url lain. nah kalo bukanya dari iframe, itu membuka url nya benar benar di luar iframe nya 
+	
+pak saya nemun hal aneh saat connect lead connector (contact)
+1. kalo di web itu kan bakal diarahkan ke url ini untuk melakukan oauth. nah kalo di web kita sendiri itu berhasil pak
+2. cuman kalo connect lead connector (contact) dari iframe, dia bakal stuck ke page login terus, padahal sebelumnya sudah berhasil login
+
+==========================
+Minimum Spend Configuration
+Set the required minimum monthly spend for your agency. The system will track and ensure this target is met each month.
+
+Connect Your Lead Connector Account
+Select the sub-accounts from your Lead Connector account to add as clients and create your custom menu.
+
+openHelpModalCreateSubAccountLeadConnector()
+closeHelpModalCreateSubAccountLeadConnector()
+createClientFromSubAccountLeadConnector()
+toggleSubAccountLeadConnector()
+checkActionSubAccountLeadConnector()
+filteredSubAccounts() -> computed
+modals.createSubAccountLeadConnector
+searchSubAccountLeadConnector: -> data 
+subAccountLeadConnector: [ -> data
+	{
+	    id : 1,
+	    email : 'Johndoe@gmail.com',
+	    company : 'Digital Marketing Pro', 
+	    location_id : '121212122',
+	    comapny_id : '1212121212',
+	    isExistsAnotherPlatform : false,
+	    isExistsClient: false,
+	}
+],
+subAccountLeadConnectorSelected: []
+isGhlV2GetListSubAccountsAll: false,
+isGhlV2CreateClientFromSubAccount: false,
+
+
+Route::post('/gohighlevelv2/create-iframe/client', 'IntegrationController@gohighlevelv2CreateIframeClient');
+this
+.$store
+.dispatch('createIframeGhlv2Client', {
+    company_id: this.selectedRowData.company_id, // company_id client
+    company_parent: this.$store.getters.userData.company_id, // company_id agency
+    custom_menu_name: value,
+    user_ip: this.$store.getters.userData.ip_login,
+    location_id: this.selects.ghlv2SubAccount,
+})
+
+
+Route::delete('/gohighlevelv2/delete-iframe/client', 'IntegrationController@gohighlevelv2DeleteIframeClient');
+this
+.$store
+.dispatch('deleteIframeGhlv2Client', {
+    company_id: this.selectedRowData.company_id, // company_id client
+    company_parent: this.$store.getters.userData.company_id, // company_id agency
+    user_ip: this.$store.getters.userData.ip_login,
+})
+
+Route::get('/jidantest', 'IntegrationController@jidantest');
+public function jidantest()
+{
+	$salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
+	$email = 'fisikamodern00+dimas@gmail.com';
+	$company_id = 164;
+	$clientExists = User::select('users.*', 'companies.ghl_custom_menus', 'companies.company_name')
+                        ->leftJoin('companies', 'companies.id', '=', 'users.company_id')
+                        ->where(DB::raw("CONVERT(AES_DECRYPT(FROM_BASE64(users.email), '$salt') USING utf8mb4)"), $email)
+                        ->where('users.active', 'T')
+                        ->where('users.company_parent', $company_id)
+                        ->where('users.user_type', 'client')
+                        ->first();     
+  	return response()->json(['clientExists' => $clientExists]);
+}
+==========================
+
+
+
+fisikamodern00+sandboxexampleghl@gmail.com
+
+
+for($i = 0; $i < 20; $i++)
+{
+    $url = "https://services.leadconnectorhq.com/locations/search";
+    $headers = [
+        'Accept' => 'application/json',
+        'Authorization' => "Bearer {$access_token}",
+        'Version' => '2021-07-28',
+    ];
+    $query = [
+        'limit' => $limit,
+        'skip' => $skip
+    ];
+    $parameter = [
+        'headers' => $headers,
+        'query' => $query
+    ];
+
+    $response = $http->get($url, $parameter);
+    $response = json_decode($response->getBody(), true);
+    $locations = $response['locations'] ?? [];
+    $countLocations = is_array($locations) ? count($locations) : 0;
+    // info(__FUNCTION__, ['count_locations' => count($locations), 'locations' => $locations]);
+
+    foreach($locations as $item)
+    {
+        $location_id = $item['id'] ?? ''; 
+        $location_name = $item['name'] ?? ''; 
+        if(!empty($location_id) && !empty($location_name) && !in_array($location_id, $listExcludeLocationIds))
+        {
+            $listSubAccounts[] = [
+                'id' => $location_id,
+                'name' => $location_name,
+            ];
+        }
+    }
+    // info('', ['count_listSubAccounts' => count($listSubAccounts)]);
+
+    if($countLocations == 0)
+    {
+        // info('masuk break');
+        break;
+    }
+    else 
+    {
+        if(count($listSubAccounts) == 0)
+        {
+            $page += 1;
+            $skip = ($page - 1) * $limit;
+            $countLocations = 0;
+        }
+        else 
+        {
+            // info('masuk break');
+            break;
+        }
+    }
+}
+
+update all email from 'noreply@exactmatchmarketing.com' to 'support@exactmatchmarketing.com'
+
+INI DARI OPEN API
+{
+    "companyID": 829,
+    "idsys": 22,
+    "userType": "client",
+    "ClientCompanyName": "a1759382233",
+    "ClientFullName": "a1759382233",
+    "ClientEmail": "fisikamodern00+a1759382233@gmail.com",
+    "ClientPass": "123456",
+    "ClientPhone": null,
+    "ClientPhoneCountryCode": null,
+    "ClientPhoneCountryCallingCode": null,
+    "ClientDomain": "",
+    "disabledreceivedemail": "F",
+    "disabledaddcampaign": "F",
+    "inOpenApi": true,
+    "isSendEmail": true,
+    "selectedmodules": [
+        {
+            "type": "local",
+            "status": true
+        },
+        {
+            "type": "locator",
+            "status": true
+        },
+        {
+            "type": "enhance",
+            "status": true
+        },
+        {
+            "type": "b2b",
+            "status": true
+        },
+        {
+            "type": "simplifi",
+            "status": true
+        }
+    ]
+}
+
+
+INI DARI CREATE CLIENT CONFIGURATIONCONTROLLER
+{
+    "companyID": 164,
+    "userType": "client",
+    "ClientCompanyName": "a1759382570",
+    "ClientFullName": "a1759382570",
+    "ClientEmail": "fisikamodern00+a1759382570@gmail.com",
+    "ClientPhone": "(201) 222-2222",
+    "ClientPhoneCountryCode": "US",
+    "ClientPhoneCountryCallingCode": "1",
+    "ClientDomain": null,
+    "disabledreceivedemail": "F",
+    "disabledaddcampaign": "F",
+    "idsys": 22,
+    "selectedmodules": [
+        {
+            "type": "local",
+            "status": true
+        },
+        {
+            "type": "locator",
+            "status": true
+        },
+        {
+            "type": "enhance",
+            "status": true
+        },
+        {
+            "type": "b2b",
+            "status": true
+        },
+        {
+            "type": "simplifi",
+            "status": true
+        }
+    ],
+    "TokenId": null,
+    "Amount": null,
+    "enablephonenumber": "F",
+    "editorspreadsheet": "F",
+    "location_id": "noFzNQNpn5cu6Pkuk08A",
+    "custom_menu_name": "a1759382570",
+    "ip_login": "125.165.47.159|Asia/Jakarta"
+}
+
+
+
+GOHIGHLEVEL
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im5vRnpOUU5wbjVjdTZQa3VrMDhBIiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ2Njg3ODU4MDU4LCJzdWIiOiJoQzBvTURoYXhJM2tWRjRSQ3V4VSJ9.gXpJNfwUFFrvqAygZJivFrrcMmgKINRdF7gwrcDMm2s
+- ketika 2 2 nya belum connect ✅
+- ketika ghlv2 sudah connect saja ✅ 
+- ketika api key sudah connect saja ✅
+- ketika 2 2 nya sudah connect (progress)
+
+SENDGRID
+ZAPIER
+MAILBOXPOWER
+KATRA
+CLICKFUNNELS
+AGENCYZOOM
+
+TASK-EMM-607
+https://sdsd.emmsandbox.com/sso?token=ec59cb813e161b44773319adf68ca322dabe0114669c12c918c11ae9ea6ab36b10097296bc36b85946238bff0f418184447767417f15d58aa3070dc1a933d6f1bc07e146b184a5dda4c5e3fd289821e4a4562e3b5fba5c12acccdf192fe23f2b35ca7f24bb
+
+add validate minimum max bid and daily budget
+- change wording destination url
+
+TASK-EMM-608
+fix campaign data empty when click edit and add agency markup 40% and 50%
+
+FILE
+FRONT
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+* front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+
+DATA
+* data\app\Http\Controllers\SimplifiController.php
+
+https://web2mailbox.com/sso?token=83b26616d4cde95e233025cff00e5c3b19562f20b98b6040eb08a943e0d2731cb73abec4e7d7073689189c2aac553401ed2d06aeb2625eba2a4e3e9e689f9cd779418f4126f1e5a1ce26da946b45019a6665793c5f12ef4cf2d754131a229ff712acf33677fb567730&time=1759466353062
+
+
+
+
+
+
+
+
+1. sendgrid = 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
+2. lead connector = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6Im5vRnpOUU5wbjVjdTZQa3VrMDhBIiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ2Njg3ODU4MDU4LCJzdWIiOiJoQzBvTURoYXhJM2tWRjRSQ3V4VSJ9.gXpJNfwUFFrvqAygZJivFrrcMmgKINRdF7gwrcDMm2s
+3. webhook zapier = https://hooks.zapier.com/hooks/catch/19216083/u4j0vtw/
+4. mailboxpower = JNZJSZS23C5XFFGH4CXGB6NTMWH
+5. katra api_key = iJnFUWLc && api_password = rszDUmngGwPC
+6. clickfunnles api_key = QnoDp-1bLFe0_MIcYMtdDTOk7FmS8umtAXZIgO0MayU && subdomain = myworkspaceec7af && workspace_id = vMdBbz
+7. agencyzoom = https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d807
+
+
+
+Integration Settings for 
+handleIntegrationClick()
+handleIntegrationItemClick()
+saveIntegrationSettingslocal()
+isIntegrationItemsFetch: false
+
+ghlV2Connected
+
+this.btnConnectDisconnectGhlv2Text = "Activate Contact Sync"
+this.btnConnectDisconnectGhlv2Text = 'Deactivate Contact Sync';
+
+
+SiteId
+Add integrations to campaign
+handleIntegrationClick()
+saveIntegrationConfiguration()
+selectedRowData.sendgrid_is_active -> sendgrid
+selectedRowData.kartra_is_active -> katra
+selectedRowData.ghl_is_active -> ghl, kartra
+zapierEnable -> zapier
+selectedRowData.mbp_is_active -> mailboxpower
+selectedRowData.clickfunnels_is_active -> clickfunnels
+agencyZoomEnable -> agencyzoom
+
+JD-TASK-EMM-610 = "save integration without close modal integrations"
+JD-TASK-EMM-610-DV-SYNC
+
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+* front\src\pages\Modules\Auth\LeedspeekB2b\ClientV1.vue
+* front\src\pages\Modules\Auth\LeedspeekEnhance\ClientV1.vue
+* front\src\pages\Modules\Auth\LeedspeekLocator\V1Client.vue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

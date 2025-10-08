@@ -1,0 +1,598 @@
+prepaid siteid monthly
+
+--------------------------------------------------
+PERHITUNGAN PREPAID CONTINUAL Limit Per Month ✅
+HARGA BAYAR CLIENT KE AGENCY
+- setufee = 2
+- campaignfeepermonth = 1 
+- costpercontact = 1 
+- leadreceive = 500
+- formula = 2 + (1 * 500) = 502
+
+KEUNTUNGAN AGENCY 
+- selisih setufee = 2 - 0.2 = 1.8
+- selisih campaignfeepermonth = 1 - 0.2 = 0.8 
+- selisih costpercontact = 1 - 0.45 = 0.55
+- leadreceive = 500
+- formula = 1.8 + (0.55 * 500) = 276.8
+
+HARGA BAYAR AGENCY
+- master setufee = 0.2
+- master campaignfeepermonth = 0.2 
+- master costpercontact = 0.45
+- leadreceive = 500
+- formula = 0.2 + (0.45 * 500) = 225.2
+
+WORDING ACTIVE CAMPAIGN
+"This campaign is set up for prepaid billing and will charge immediately. The Client cost is $502.00 and your Agency's cost is $225.20. It will automatically rebill when the campaign falls to 500 contacts available."
+--------------------------------------------------
+
+--------------------------------------------------
+PERHITUNGAN PREPAID CONTINUAL Limit Per Day, Weekly ✅
+HARGA BAYAR CLIENT KE AGENCY
+- setufee = 2
+- campaignfeepermonth = 1 
+- costpercontact = 1 
+- leadreceive = 500
+- continualduration = Weekly
+- formula = 2 + (500 * 7 * 1) = 3502
+
+KEUNTUNGAN AGENCY 
+- selisih setufee = 2 - 0.2 = 1.8
+- selisih campaignfeepermonth = 1 - 0.2 = 0.8 
+- selisih costpercontact = 1 - 0.45 = 0.55
+- leadreceive = 500
+- continualduration = Weekly
+- formula = 1.8 + (500 * 7 * 0.55) = 1926.8
+
+HARGA BAYAR AGENCY
+- master setufee = 0.2
+- master campaignfeepermonth = 0.2 
+- master costpercontact = 0.45
+- leadreceive = 500
+- continualduration = Weekly
+- formula = 0.2 + (500 * 7 * 0.45) = 1575.2
+
+WORDING ACTIVE CAMPAIGN
+"This campaign is set up for prepaid billing and will charge immediately. The Client cost is $3,502.00 and your Agency's cost is $1,575.20. It will automatically rebill when the campaign falls to 500 contacts available."
+--------------------------------------------------
+
+--------------------------------------------------
+PERHITUNGAN PREPAID CONTINUAL Limit Per Day, Monthly ✅
+HARGA BAYAR CLIENT KE AGENCY
+- setufee = 2
+- campaignfeepermonth = 1 
+- costpercontact = 1 
+- leadreceive = 500
+- continualduration = Monthly
+- formula = 2 + (500 * 7 * 4 * 1) = 14002
+
+KEUNTUNGAN AGENCY 
+- selisih setufee = 2 - 0.2 = 1.8
+- selisih campaignfeepermonth = 1 - 0.2 = 0.8 
+- selisih costpercontact = 1 - 0.45 = 0.55
+- leadreceive = 500
+- continualduration = Monthly
+- formula = 1.8 + (500 * 7 * 4 * 0.55) = 7701.8
+
+HARGA BAYAR AGENCY
+- master setufee = 0.2
+- master campaignfeepermonth = 0.2 
+- master costpercontact = 0.45
+- leadreceive = 500
+- continualduration = Monthly
+- formula = 0.2 + (500 * 7 * 4 * 0.45) = 6300.2
+
+WORDING ACTIVE CAMPAIGN
+"This campaign is set up for prepaid billing and will charge immediately. The Client cost is $14,002.00 and your Agency's cost is $6,300.20. It will automatically rebill when the campaign falls to 500 contacts available."
+--------------------------------------------------
+
+
+
+--------------------------------------------------
+PERHITUNGAN PREPAID ONETIME (PROGRESS)
+HARGA BAYAR CLIENT KE AGENCY
+- setufee = 2
+- campaignfeepermonth = 1 
+- costpercontact = 1 
+- contactstobuy = 100
+- formula = 2 + (1 * 100) = 102
+
+KEUNTUNGAN AGENCY 
+- selisih setufee = 2 - 0.2 = 1.8
+- selisih campaignfeepermonth = 1 - 0.2 = 0.8 
+- selisih costpercontact = 1 - 0.45 = 0.55
+- contactstobuy = 100
+- formula = 1.8 + (100 * 0.55) = 56.8
+
+HARGA BAYAR AGENCY
+- master setufee = 0.2
+- master campaignfeepermonth = 0.2 
+- master costpercontact = 0.45
+- contactstobuy = 100
+- formula = 0.2 + (100 * 0.45) = 45.2
+
+WORDING ACTIVE CAMPAIGN
+"This campaign is set up for prepaid billing and will charge immediately. The Client cost is $102.00 and your Agency's cost is $45.20."
+--------------------------------------------------
+
+--------------------------------------------------
+SKENARIO BELI CAMPAIGN PERTAMA continual, weekly, limit day ✅
+- active campaign prepaid (continual, limit day, Weekly, how many leads = 1, total leads = 7). akan beli sebanyak 7 leads ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit day, Weekly, how many leads = 1, total leads = 7). check (remaining leads < how many leads),(7 < 1),false. maka tidak akan beli lagi ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit day, Weekly, how many leads = 8, total leads = 56). check (remaining leads < how many leads),(7 < 8),true. maka akan beli sebanyak 56 leads ✅
+--------------------------------------------------
+
+--------------------------------------------------
+SKENARIO BELI CAMPAIGN PERTAMA continual, monthly, limit day (progress)
+- active campaign prepaid (continual, limit day, Monthly, how many leads = 1, total leads = 28). akan beli sebanyak 28 leads ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit day, Monthly, how many leads = 1, total leads = 28). check (remaining leads < how many leads),(28 < 1),false. maka tidak akan beli lagi ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit day, Monthly, how many leads = 29, total leads = 812). check (remaining leads < how many leads),(28 < 29),true. maka akan beli sebanyak 812 leads ✅
+--------------------------------------------------
+
+
+--------------------------------------------------
+SKENARIO BELI CAMPAIGN PERTAMA continual, limit month (progress)
+- active campaign prepaid (continual, limit month, how many leads = 50, total leads = 50). akan beli sebanyak 50 leads ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit month, how many leads = 50, total leads = 50). check (remaining leads < how many leads),(50 < 50),false. maka tidak akan beli lagi ✅
+- lalu stop campaign ✅
+- active campaign prepaid (continual, limit month, how many leads = 55, total leads = 55). check (remaining leads < how many leads),(50 < 55),true. maka akan beli sebanyak 55 leads ✅
+--------------------------------------------------
+
+
+
+--------------------------------------------------
+PROGRESS PREPAID SITE ID IN EMM-SANDBOX-API
+1. membuat logic untuk paused on run
+--------------------------------------------------
+
+
+
+--------------------------------------------------
+SKENARIO GETLEADWEBHOOK PREPAID SITE LIMIT MONTHLY
+1. beli prepaid, continual, limit monthly, 5 contact. lalu simulasikan getleadwebhook dan habiskan lead nya, Ketika habis maka akan paused on run, bukan stop
+--------------------------------------------------
+
+
+
+
+PAUSE ON RUN 
+active = F | disabled = F | active_user = T
+PAUSED 
+active = F | disabled = T | active_user = T
+PLAY
+active = T | disabled = F | active_user = T
+
+has reached
+
+V1Client.vue
+handlePriceSet() ->buka modal price
+lp_limit_freq
+this.selectsAppModule.LeadsLimitSelect = row.lp_limit_freq;
+
+var _estleadspermonth = ((this.LeadspeekLimitLead * 7) * this.t_freq) * this.t_LeadspeekCostperlead;
+this.t_estleadspermonth = this.formatPrice(_estleadspermonth);
+
+this.t_profit = this.formatPrice(this.t_LeadspeekMinCostMonth + _estleadspermonth); // weekly / monthly
+this.t_profit = this.formatPrice(this.t_LeadspeekPlatformFee + (_estleadspermonth)); // prepaid continual monthly
+this.t_profit = this.formatPrice(this.t_LeadspeekPlatformFee + (_estleadspermonth / 4)); // prepaid continual weekly
+
+this.t_LeadspeekCostperlead = this.LeadspeekCostperlead - this.m_LeadspeekCostperlead;
+
+width: 20%;
+
+el-tabs
+el-tab-pane
+
+selectsAppModule: {
+                AppModuleSelect: 'LeadsPeek',
+                AppModule: [
+                    // { value: 'Ads Design', label: 'Ads Design' },
+                    // { value: 'Campaign', label: 'Campaign' },
+                    { value: 'LeadsPeek', label: 'LeadsPeek' },
+                ],
+                LeadsLimitSelect: 'Day',
+                LeadsLimit: [
+                    //{ value: 'Month', label: 'Month'},
+                    { value: 'Day', label: 'Day' },
+                    //{ value: 'Max', label: 'Max'},
+                ],
+            },
+
+validateMinLeadLimitMonth()
+validationLeadToBuy()
+prepaidLimitType()
+setModuleCost()
+paymentTermChange()
+
+.client-payment-modal-form-helper-text{
+    color:#6b7280 !important;
+    font-size:12px;
+    font-weight: 400;
+    line-height: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+(selectsPaymentTerm.PaymentTermSelect == 'Prepaid' && prepaidType == 'continual')
+
+activePauseClient()
+process_activePauseClient()
+
+<div class="client-payment-modal-form-label">
+                        How many contacts per day does the client want to receive?
+                    </div>
+
+<div class="client-payment-modal-form-label">
+                        <!-- How many contacts per day does the client want to receive? -->
+                        How many contacts per 
+                        <span v-if="prepaidType == 'continual'">{{ selectsAppModule.LeadsLimitSelect }}</span>
+                        <spanv v-else>day</spanv>
+                        does the client want to receive?
+                    </div>
+
+<div class="col-12 col-md-6">
+                                    <el-switch
+                                        v-model="contiDurationSelection"
+                                        active-text="Monthly"
+                                        inactive-text="Weekly"
+                                        @change='updateWeeklyMonthlyToggle'
+                                        >
+                                    </el-switch>
+                                    <!-- <p>{{contiDurationSelection ? 'Monthly' : 'Weekly'}} leads count will be: {{ contiDurationSelection ? (LeadspeekLimitLead * 7 ) * 4 : (LeadspeekLimitLead * 7)  }}</p> -->
+                                    <p v-if="prepaidType == 'continual'">Number of contacts to buy: <b>{{totalLeads.continualTopUp  }}</b> contact(S)</p>     
+                                </div>
+
+play campaign prepaid, start_billing_date =  2025-02-13 21:44:56
+pause campaign prepaid, start_billing_date = 2025-02-13 21:44:56
+play campaign prepaid, start_billing_date =  2025-02-13 21:50:30
+pause campaign prepaid, start_billing_date = 2025-02-13 21:50:30
+play campaign prepaid, start_billing_date =  2025-02-13 21:50:30
+
+$clientLimitLeads = $cl['lp_limit_leads'];
+$clientLimitFreq = $cl['lp_limit_freq'];
+$clientLimitStartDate = ($cl['lp_limit_startdate'] == null || $cl['lp_limit_startdate'] == '0000-00-00')?'':$cl['lp_limit_startdate'];
+
+$clientPaymentTerm = $cl['paymentterm'];
+$clientPlatformfee = $cl['platformfee'];
+$clientMaxperTerm = $cl['lp_max_lead_month'];
+
+
+stopcontinual
+active
+disabled
+active_user
+is_send_email_prepaid
+user_id
+report_sent_to
+company_name
+campaign_name
+company_parent
+email
+
+
+
+
+
+
+
+--------------------------------------------------
+SKENARIO GETLEADWEBHOOK PREPAID SITE LIMIT MONTHLY
+1. beli prepaid, continual, limit monthly, 5 contact. lalu simulasikan getleadwebhook dan habiskan lead nya, Ketika habis maka akan paused on run, bukan stop (progress)
+2. coba jalankan cronjob untuk prepaid limit month, dan kebetulan leads sudah habis, maka akan charge campaign fee per month client, agency. charge auto topup client, agency
+3. coba jalankan cronjob untuk prepaid limit month, dan kebetulan leads belum habis, maka akan charge campaign fee per month client saja
+--------------------------------------------------
+
+
+--------------------------------------------------
+Harga client to agency = Setup Fee + (Cost per contact * contacts per month);
+		       = 1 + (1 * 5)
+                       = 6
+
+Harga agency to root = Setup Fee + (Cost per contact * contacts per month);
+		     = 0.5 + (0.5 * 5)
+                     = 3
+--------------------------------------------------
+
+
+--------------------------------------------------
+start_billing_date            = 
+start_billing_date_next_month =  
+anggap Waktu sekarang         = 
+
+(start_billing_date_next_month <= waktu_sekarang)
+
+charge campaign fee per month client ke agency = 
+charge campaign fee per month agency ke root   =
+
+Harga client to agency = Setup Fee + (Cost per contact * contacts per month);
+		       = 
+                       = 
+
+Harga agency to root = Setup Fee + (Cost per contact * contacts per month);
+		     = 
+                     = 
+
+--------------------------------------------------
+
+
+
+
+
+
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-103 = "add validation for onetime minimum 50 lead"
+
+FILE
+FRONT
+- C:\wamp64\www\EMM-SANDBOX\front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+- C:\wamp64\www\EMM-SANDBOX\front\src\pages\Modules\Auth\LeedspeekEnhance\ClientV1.vue
+- C:\wamp64\www\EMM-SANDBOX\front\src\pages\Modules\Auth\LeedspeekLocator\V1Client.vue
+- C:\wamp64\www\EMM-SANDBOX\front\src\store\store.js
+- C:\wamp64\www\EMM-SANDBOX\front\src\assets\css\emm.css
+
+DATA
+- C:\wamp64\www\EMM-SANDBOX\data\app\Http\Controllers\LeadspeekController.php
+
+----------------------------------------------------------------------------------------------------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-103 = "- clean code, command info - change status paused on run to run when charge prepaid continual limit monthly"
+
+FILE
+- app\Http\Controllers\MarketingController.php
+- app\Http\Controllers\WebhookController.php
+- routes\api.php
+
+
+This campaign is set up for prepaid billing and will charge immediately. The Client cost is $10.00 and your Agency's cost is $5.10. It will automatically rebill when the campaign falls to 50 contacts available.
+
+
+
+
+----------------------------------------------------------------------------------------------------
+SCENARIO 1
+- [25 Feb 2025] beli prepaid, continual, limit monthly, 20 contact. lalu simulasikan getleadwebhook.
+- [20 March 2025] sisa contact 0. 
+- [25 March 2025] cronjob hit maka akan auto topup sebanyak 20 leads.
+
+SCENARIO 2 ✅
+- [25 Feb 2025] beli prepaid, continual, limit monthly, 50 contact. lalu simulasikan getleadwebhook.
+- [25 March 2025] sisa contact 30. cronjob hit, maka charge campaign fee dan update last_balance_leads = 30.
+- [30 March 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_leads - sisa_contact_25_march), (50 - 30), 20 contact
+- [5 April 2025] sisa contact 0, cronjob hit, maka terjadi apa apa
+- [20 April 2025] sisa contact 0, cronjob hit, maka terjadi apa apa
+- [25 April 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 50 contact
+
+SCENARIO 3 
+- [24 Feb 2025] beli prepaid, continual, limit monthly, 100 contact, lalu simulasikan getleadwebhook✅
+- [24 March 2025] sisa contact 20, cronjob hit, maka charge campaign fee dan update last_balance_leads = 20✅
+- [28 March 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_lead - sisa_contact_24_march), (100 - 20). 80 contact✅
+- [24 April 2025] sisa contact 10, cronjob hit, maka charge campaign fee dan update last_balance_leads = 10✅
+- [20 May 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_lead - sisa_contact_24_april), (100 - 10), 90 contact✅
+- [21 May 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa✅
+- [24 May 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 100 contact✅
+- [24 June 2025] sisa contact 60, cronjob hit, maka charge campaign fee dan update last_balance_leads = 60✅
+- [29 June 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_lead - sisa_contact_24_june), (100 -  60), 40 contact✅
+- [30 June 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa
+- [24 July 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 100 contact
+
+SCENARIO 4 ✅
+- [24 Feb 2025] beli prepaid, continual, limit monthly, 50 contact, lalu simulasikan getleadwebhook
+- [24 March 2025] sisa contact 50, cronjob hit, maka charge campaign fee dan update last_balance_leads = 50
+- [30 March 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa
+- [10 April 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa
+- [24 April 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 50 contact
+
+SCENARIO 5 ✅
+- [24 Feb 2025] beli prepaid, continual, limit monthly 50 contact, lalu simulasikan getleadwebhook ✅
+- [10 March 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 24Feb-24March sudah terpenuhi 50 contact ✅
+- [11 March 2025] update lp_limit_leads 100 ✅
+- [11 March 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 24Feb-24March sudah terpenuhi 50 contact✅
+- [24 March 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 100 contact✅
+- [24 April 2025] sisa contact 80, cronjob hit, maka charge campaign fee dan update last_balance_leads = 80;✅
+- [30 April 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_leads - sisa_contact_24_april), (100 - 80), 20 contact✅
+- [1 Mei 2025] sisa contact 10, cronjob hit, maka tidak terjadi apa apa✅
+- [10 Mei 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 24April-24Mei sudah terpenuhi 100 contact✅
+- [24 Mei 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup sebanyak 100 contact✅
+- [24 Juni 2025] sisa contact 80, cronjob hit, maka charge campaign fee dan update last_balance_leads = 80 ✅
+- [24 July 2025] sisa contact 30, cronjob hit, maka charge campaign fee dan update last_balance_leads = 30 ✅
+- [24 Agu 2025] sisa contact 0, cronjob hit, maka charge campaign fee + topup 100 contact
+----------------------------------------------------------------------------------------------------
+
+24 Feb play => 200
+25 Feb => Update lp_limit_lead = 50
+24 March => 100 => campaign fee => update last_balance_lead 100
+30 Macrh => 0 => (50 - 100) = -50, tidak topup karena cycle 24Feb-24March sudah terpenuhi 50 leads, bahkan lebih dari 50 leads
+24 April => campaign fee
+
+
+
+----------------------------------------------------------------------------------------------------
+1 . Scenario Ke-1
+Play 24 Feb => 100 leads
+20 March => 0
+21 March => 0
+24 March => 100 leads => Monthly fee
+
+2. Scenario Ke-2
+Play 24 Feb => 100 leads
+24 March => 20 leads => campaign fee
+28 March => 0 => akan topup 80,(100-20) leads
+24 April => Campaign fee => sisa 10 leads
+20 May => 0 => akan top up 90,(100-10) leads
+21 May => 0
+24 May => campaign fee + top up 100 leads
+24 June => campaign fee => sisa 60 leads
+29 June => 0 => popup = 40 leads
+30 June => 0
+24 July => campaign fee + top up 100 leads
+
+3. Skenario Ke-3
+Play 24 Feb => 100 leads
+24 March => left 20 leads => campaign fee
+3 April => 0 => 80 leads
+24 April =>left 20 leads => campaign fee charge
+15 May => 0 left => top up 80 leads
+24 May => 0 => campaign fee + 100 leads
+
+1. Case Spesial Ke-1
+Play 24 Feb => 100 Leads
+24 March => 100 Leads => campaign fee saja
+30 March => 0 Leads => di 24 March sisanya 100 Leads, maka akan topup 0 Leads karena (lp_limit_leads - sisa_di_24_Feb), (100 - 100) => karena selisih nya 0 leads, maka tidak mungkin untuk auto topup sebanyak 0 leads, maka dalam hal ini topup sebanyak lp_limit_leads leads
+
+2. Case Spesial Ke-2
+Play 24 Feb => 100 Leads
+24 March => 100 Leads => campaign fee saja
+28 March => client ubah di ui lp_limit_leads menjadi 50 Leads => ini tidak akan terjadi apa apa
+30 March => 0 Leads => di 24 March sisanya 100 Leads, maka akan topup -50 Leads, karena (lp_limit_leads - sisa_di_24_Feb), (50 - 100) => karena selisih nya dibawah 0 leads, maka tidak mungkin untuk auto topup sebanyak -50 leads, maka dalam hal ini topup sebanyak lp_limit_leads leads
+----------------------------------------------------------------------------------------------------
+
+
+// kalau Prepaid di lewatkan saja, karena untuk Prepaid trigger dari paused on run ke run itu di function processchargeprepaidcostmonth
+NEW NEW NEW 2025-09-08 
+----------------------------------------------------------------------------------------------------
+SCENARIO 1 ✅
+- [8 Sep 2025] beli prepaid, continual, limit monthly, 50 contact. lalu simulasikan getleadwebhook.
+- [1 Oct 2025] sisa contact 0.
+- [8 Oct 2025] cronjob hit maka akan auto topup sebanyak 50 leads.
+
+
+
+SCENARIO 2 ✅
+- [8 Sep 2025] beli prepaid, continual, limit monthly, 50 contact. lalu simulasikan getleadwebhook.
+- [8 Oct 2025] sisa contact 30. cronjob hit, maka charge campaign fee dan update last_balance_leads = 30.
+- [10 Oct 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_leads - sisa_contact_8_oct), (50 - 30), 20 contact
+- [1 Nov 2025] sisa contact 0, cronjob hit, maka terjadi apa apa
+- [2 Nov 2025] sisa contact 0, cronjob hit, maka terjadi apa apa
+- [8 Nov 2025] sisa contact 0, cronjob hit, maka charge campaign fee dan topup sebanyak 50 contact
+
+SCENARIO 3 ✅
+- [8 Sep 2025] beli prepaid, continual, limit monthly, 50 contact. lalu simulasikan getleadwebhook.
+- [20 Sep 2025] sisa contact 0
+- [8 Oct 2025] sisa contact 0, cronjob hit, topup sebanyak 50 contact, namun cc client error, campaign langsung stop
+
+SCENARIO 4 (manual bill) ✅
+- [9 Sep 2025] beli prepaid, continual, limit monthly, 50 contact. lalu simulasikan getleadwebhook.
+- [20 Sep 2025] sisa contact 0
+- [9 Oct 2025] sisa contact 0, cronjob hit, topup sebanyak 50 contact, namun cc agency error, maka campaign langsung stop
+
+SCENARIO 5 (progress) 
+- [9 Sep 2025] beli prepaid, continual, limit monthly 50 contact, lalu simulasikan getleadwebhook ✅
+- [1 Oct 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 9Sep-9Oct sudah terpenuhi 50 contact ✅
+- [2 Oct 2025] update lp_limit_leads 100 ✅
+- [2 Oct 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 9Sep-9Oct sudah terpenuhi 50 contact ✅
+- [9 Oct 2025] sisa contact 0, cronjob hit, maka charge campaign fee dan topup sebanyak 100 contact ✅
+- [9 Nov 2025] sisa contact 80, cronjob hit, maka charge campaign fee dan update last_balance_leads = 80; ✅
+- [20 Nov 2025] sisa contact 0, cronjob hit, maka topup sebanyak (lp_limit_leads - sisa_contact_9_nov), (100 - 80), 20 contact ✅
+- [21 Nov 2025] sisa contact 10, cronjob hit, maka tidak terjadi apa apa ✅
+- [22 Nov 2025] sisa contact 0, cronjob hit, maka tidak terjadi apa apa, karena cycle 9Nov-9Des sudah terpenuhi 100 contact ✅
+
+- ubah lp_invoice_date nya menjadi NULL untuk test, start_billing_date tetep di 2025-11-09 00:00:00
+
+- [9 Des 2025] cronjob hit, maka charge campaign fee aja ✅
+- [20 Des 2025] sisa contact 0, cronjob hit, maka topup sebanyak 100 contact ✅
+
+- [9 Jan 2026] cronjob hit, maka charge campaign fee aja ✅
+- [20 Jan 2026] sisa contact 80, cronjob hit, maka update last_balance_leads = 80 ✅
+
+- [9 Feb 2026] cronjob hit, maka charge campaign fee aja ✅
+- [20 Feb 2026] sisa contact 30, cronjob hit, maka update last_balance_leads = 30 ✅
+
+- [9 March 2026] cronjob hit, maka charge campaign fee aja ✅
+- [20 March 2026] sisa contact 0, cronjob hit, maka topup sebanyak 100 contact ✅
+----------------------------------------------------------------------------------------------------
+
+
+ALTER TABLE leadspeek_users
+ADD COLUMN lp_invoice_date DATETIME NULL AFTER start_billing_date;
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-562 = "fix update date for next auto top up campaign prepaid limit monthly and fix history data wallet"
+JD-TASK-EMM-562-DEV-SYNC
+
+FILE
+FRONT
+* front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+
+DATA
+* data\app\Exports\TransactionHistoryDirectPayment.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Models\LeadspeekUser.php
+
+----
+
+
+EMM-SANBDOX-API
+JD-TASK-EMM-562 = "fix update date for next auto top up campaign prepaid limit monthly"
+JD-TASK-EMM-562-DEV-SYNC
+
+FILE
+* app\Http\Controllers\MarketingController.php
+* app\Http\Controllers\WebhookController.php
+* app\Models\LeadspeekUser.php
+
+Evolusi Sistem Operasi
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

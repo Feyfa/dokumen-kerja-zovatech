@@ -1,0 +1,131 @@
+PREPAID SEND EMAIL
+
+beli 14 contact lalu ubah lead per day nya menjadi 5, 
+(5 x 2) >= 14 false
+(5 x 2) >= 13 false
+(5 x 2) >= 12 false
+(5 x 2) >= 11 false
+(5 x 2) >= 10 true
+
+$searchArray = array('[campaign-module-name]','[campaign-name]','[campaign-id]','[campaign-spreadsheet-url]');
+                    $replaceArray = array($campaignModuleName,$campaigndetails[0]['campaign_name'],'#' . $campaignID,$spreadsheeturl);
+                    $emailContent = str_replace($searchArray,$replaceArray,$emailContent);
+
+check_email_template
+$this->br2nl(view('emails.client_billingunsuccessful')->render())
+
+CUSTOM EMAIL CONTENT
+
+is_send_email_prepaid = 'F' true
+clientLimitLeads = 15
+remainingBalance = 23
+
+clientLimitLeads < $remainingBalance
+15 < 23 true
+
+(2 * $clientLimitLeads) >= remainingBalance
+(2 x 15) >= 23 true
+
+{{-- contact per day is: [leads-per-day] contacts
+remaining balance is: [remaining-balance] contacts<br/> --}}
+
+
+
+EMM-SANDBOX-APP
+JD-NOTIFY-PREPAID-TOPUP-TWO-DAYS-LIMIT = "create dynamic email content fo campaign prepaid limit"
+
+FILE
+FRONT
+- C:\wamp64\www\EMM-SANDBOX\front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+
+DATA
+- C:\wamp64\www\EMM-SANDBOX\data\app\Http\Controllers\ConfigurationController.php
+- C:\wamp64\www\EMM-SANDBOX\data\app\Http\Controllers\Controller.php
+- C:\wamp64\www\EMM-SANDBOX\data\app\Http\Controllers\LeadspeekController.php
+- C:\wamp64\www\EMM-SANDBOX\data\app\Models\LeadspeekUser.php
+- C:\wamp64\www\EMM-SANDBOX\data\resources\views\emails\prepaidtopuptwodaylimitclient.blade.php
+
+-----------------------------------------
+
+EMM-SANDBOX-API
+JD-NOTIFY-PREPAID-TOPUP-TWO-DAYS-LIMIT = "rename template agency-personal-name to company-personal-name"
+
+FILE
+- C:\wamp64\www\EMM-SANDBOX-API\app\Http\Controllers\Controller.php
+- C:\wamp64\www\EMM-SANDBOX-API\app\Http\Controllers\WebhookController.php
+- C:\wamp64\www\EMM-SANDBOX-API\app\Models\LeadspeekUser.php
+- C:\wamp64\www\EMM-SANDBOX-API\resources\views\emails\prepaidtopuptwodaylimitagency.blade.php
+- C:\wamp64\www\EMM-SANDBOX-API\resources\views\emails\prepaidtopuptwodaylimitclient.blade.php
+
+
+FIELD YANG DITAMBAH DI leadspeek_users
+- is_send_email_prepaid enum('T','F') default:F null:yes
+
+{"access_token":"ya29.a0AS3H6NyJeY7lYnhOXO_fpo92PIvjb44j26orZZlOmq2jcn_szgRG2LM9KByUQpAcLmYH5bUtu-VW_DHgbi8DbUcKHb2MCeRrK8OzNn1_KPUkAtQ8FSQ4G9D4Mf5uoODoCY9GpetoTZYyRNkMq67UQi9yhPYJ0oyWceY1LmO1W7lLn2_f7_H07Ld4RJo-rreby6UMq8IdPgaCgYKAfsSARYSFQHGX2MiCC3lAoX6BkId8xt6_mVvsw0209","expires_in":3599,"scope":"https:\/\/www.googleapis.com\/auth\/spreadsheets https:\/\/www.googleapis.com\/auth\/drive.file","token_type":"Bearer","created":1757321912,"refresh_token":"1\/\/010uQ03s3xvXGCgYIARAAGAESNwF-L9IrXsWawH0Bs2FMVIEuS-eXAScMejHOFsUGMuQYsXse88itbLKWzhCSUsAeJnTPdcL8J-8"}
+
+
+
+
+
+
+test_email_content
+this.emailupdatemodule = 'em_campaignprepaidlimit';
+this.emailupdatemodule
+this.emailtemplate.title
+this.emailtemplate.fromAddress
+this.emailtemplate.fromName
+this.emailtemplate.fromReplyto
+this.emailtemplate.subject
+this.emailtemplate.content
+this.modals.emailtemplate
+
+emailtemplateerror
+
+emailtemplateerror: {
+            title:'',
+            subject: '',
+            content: '',
+            fromAddress: '',
+            fromName: '',
+            fromReplyto: '',
+        },
+
+<span style="color:#942434; font-size: .75rem;">*Minimum cost per contact is ${{ minimumCostPerLead }},but it can also be $0</span>
+
+
+Kepada Yang Terhormat [client-name],
+
+Berita bagus, kampanye Anda berjalan lancar, dan prospek baru diidentifikasi setiap hari.
+
+Kami ingin memberi Anda informasi singkat bahwa kampanye Anda ([campaign-name]) saat ini memiliki sisa data sekitar 2 hari sebelum pengisian ulang otomatis dipicu.
+
+Jika Anda memiliki pertanyaan atau perlu menyesuaikan pengaturan Anda, silakan hubungi kami di [company-email].
+
+Salam Hormat,
+[company-personal-name]
+[company-name]
+[company-email]
+
+----------------------------------------------------------------------
+
+BLOCK1
+client name : [client-name]
+client firstname : [client-firstname]
+client email : [client-email]
+client-new-password : [client-new-password]
+client-company-name : [client-company-name]
+
+BLOCK2
+company name : [company-name]
+company personal name : [company-personal-name]
+company domain : [company-domain]
+company subdomain : [company-subdomain]
+company email : [company-email]
+
+BLOCK3
+campaign module name : [campaign-module-name]
+campaign name : [campaign-name]
+campaign id : [campaign-id]
+campaign spreadsheet url : [campaign-spreadsheet-url]
+
+

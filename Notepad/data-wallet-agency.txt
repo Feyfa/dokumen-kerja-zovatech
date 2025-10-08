@@ -1,0 +1,1163 @@
+DATA WALLET AGENCY
+
+SELECT 
+	id,
+    company_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+    CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+    setting_name,
+    setting_value
+FROM `company_settings` where company_id = 22;
+
+select * 
+from users
+where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanagencydom1@gmail.com';
+
+SELECT 
+	id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(acc_connect_id), '8e651522e38256f2') USING utf8mb4) as acc_connect_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(acc_prod_id), '8e651522e38256f2') USING utf8mb4) as acc_prod_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(acc_email), '8e651522e38256f2') USING utf8mb4) as acc_email,
+    CONVERT(AES_DECRYPT(FROM_bASE64(acc_ba_id), '8e651522e38256f2') USING utf8mb4) as acc_ba_id,
+    CONVERT(AES_DECRYPT(FROM_bASE64(acc_holder_name), '8e651522e38256f2') USING utf8mb4) as acc_holder_name,
+    CONVERT(AES_DECRYPT(FROM_bASE64(ba_name), '8e651522e38256f2') USING utf8mb4) as ba_name,
+    CONVERT(AES_DECRYPT(FROM_bASE64(ba_route), '8e651522e38256f2') USING utf8mb4) as ba_route,
+    CONVERT(AES_DECRYPT(FROM_bASE64(package_id), '8e651522e38256f2') USING utf8mb4) as package_id,
+    status_acc
+FROM `company_stripes` where company_id = 169;
+
+punya jidanagencyemm1
+id = 59
+acc_connect_id = acct_1QA2AxRok8KFhJz2
+acc_prod_id = 
+acc_email = jidanagencyemm1+testing@gmail.com
+acc_ba_id = ba_1QA2EZRok8KFhJz2IxV0viga
+acc_holder_name = 
+ba_name = 
+ba_route =
+package_id = price_1MBJvXCm8XcQag44tsbir3Fj
+
+
+===============================
+SideBar.vue
+isShowStopContinualDirectPayment -> untuk hidden stop continual
+showModalPrepaidDirectPayment() -> untuk check aggrement dan membuka modal data wallet
+openPrepaidDirectPayment() -> untuk mengambil detail data wallet
+===============================
+
+saya nemu case di refund campaign begini pak.
+
+misal sebelumnya beli campaign prepaid pakai stripe dengan harga client $20 dan harga agency $10. nah saat di refund maka harga agency tadi $10 masuk ke data wallet. nah kalo $20 client itu di kemanain pak? apa perlu di refund juga di stripe nya. karena yang sekarang client pakai stripe ngga ada data walet.
+
+===============================
+store.js
+===============================
+isProcessRefundPrepaid
+
+
+===============================
+DB::transaction
+- jadikan sebuah function terlebih dahulu
+===============================
+
+===============================
+field yang ditambah di table `topup_agencies`
+- expired_at datetime default null
+enum yang ditambahkan di table `topup_agencies` field payment_type
+- refund_campaign
+enum yang ditambahkan di table `leadspeek_invoices` field payment_type
+- refund_campaign
+===============================
+
+
+===============================
+1. data wallet itu global
+2. auto topup data wallet hanya ketika manual bill OR sudah aggree api developer. kalau ke 2 itu tidak ada maka sistem auto topup tidak ada (ui = ✅, logic = belum)
+3. minimum spend itu di charge selalu dari stripe nya, nah nominal yang di charge di stripe nya di masukin ke dalam data wallet
+4. data wallet hanya untuk charge prepaid saja 
+===============================
+
+
+===============================
+jika balance 
+===============================
+
+
+===============================
+update topup_agencies set balance_amount = 15, topup_status = 'progress' where total_amount = 15 AND company_id = 164;
+update topup_agencies set balance_amount = 20, topup_status = 'queue' where total_amount = 20 AND company_id = 164;
+update topup_agencies set balance_amount = 25, topup_status = 'queue' where total_amount = 25 AND company_id = 164;
+===============================
+
+
+==============================================================================================================================================================================
+EMM-SANDBOX-APP
+SCENARIO
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency success, cc client success
+1. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $3.5, maka charge $3.5, your balance = $56.5, success ✅
+2. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $35, maka charge $35, your balance = $25, success ✅
+3. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $40, maka charge $40, your balance = $20, success ✅
+4. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $55, maka charge $55, your balance = $5, topup $25, your balance = $30, success ✅
+5. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $60, maka charge $60, your balance = $0, topup $25, your balance = $25, success ✅
+6. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $70, maka topup $25, your balance = $85, charge $70, your balance = $15, success ✅
+7. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $105, maka topup $25, topup $25, your balance = 110, charge $105, your balance = $5, topup $25, your balance = $30, success ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency success, cc client error
+1. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $35, maka charge $35, cc client error your balance tetap = $60, error ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency error, cc client success
+1. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $55, maka charge $55, your balance = $5, topup $25 cc agency error, tidak refund client, success ✅
+2. your balance = $60, auto topup ($60 x 10% = $6), beli prepaid dengan Harga $140 client dan $70 agency, maka topup $25 cc agency error, your balance = $60, refund client, error ✅
+==============================================================================================================================================================================
+
+
+==============================================================================================================================================================================
+EMM-SANDBOX-APP
+SCENARIO
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency success, cc client success
+1. your balance = $60, beli prepaid dengan Harga $3.5, maka charge $3.5, your balance = $56.5, success ✅
+2. your balance = $60, beli prepaid dengan Harga $35, maka charge $35, your balance = $25, success  ✅	
+3. your balance = $60, beli prepaid dengan Harga $40, maka charge $40, your balance = $20, success ✅	
+4. your balance = $60, beli prepaid dengan Harga $55, maka charge $55, your balance = $5, success ✅
+5. your balance = $60, beli prepaid dengan Harga $60, maka charge $60, your balance = $0, success ✅
+6. your balance = $60, beli prepaid dengan Harga $70, maka charge $60 wallet, sisa $10 pakai stripe success ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency success, cc client error
+1. your balance = $60, beli prepaid dengan Harga $70, maka charge $70, cc client error your balance tetap = $60, error ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency error, cc client success
+1. your balance = $60, beli prepaid dengan Harga $55, maka charge $55, your balance = $5, success ✅
+2. your balance = $60, beli prepaid dengan Harga $70, maka charge client $120, charge $60 data wallet, sisa $10 pakai stripe, cc agency error, revert topup agency, your balance = $60, refund client ✅
+==============================================================================================================================================================================
+
+
+==============================================================================================================================================================================
+EMM-SANDBOX-APP
+SCENARIO
+tentang = stop campaign weekly/monthly
+1. stop campaign weekly/monthly dengan cc client success dan cc agency success ✅
+2. stop campaign weekly/monthly dengan cc client success dan cc agency error ✅
+3. stop campaign weekly/monthly dengan cc client error dan cc agency success ✅
+4. stop campaign weekly/monthly dengan cc client error dan cc agency error 
+
+tentang = stop campaign weekly/monthly
+1. play campaign weekly/monthly, setupfee > 0, dengan cc client success dan cc agency success ✅
+2. play campaign weekly/monthly, setupfee > 0, dengan cc client success dan cc agency error ✅
+3. play campaign weekly/monthly, setupfee > 0, dengan cc client error dan cc agency success ✅
+4. play campaign weekly/monthly, setupfee > 0, dengan cc client error dan cc agency error 
+==============================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://jidanach.emmsandbox.com:8080/sso?token=2de96b98ace1cf4481b39f71ab0d873cec409a6c48e2d20a3069f36169bb79e7c93ca32477a1ec2463dbc4803a861085edd24ef9ac8211dd4bcb758991af14568419f21324ae75b364101e89d74a714d49c7a01f8cdf6ad373277bd4fead229e322aa21634592b480ac4
+
+
+
+
+
+
+
+
+
+
+
+
+===============================
+update topup_agencies set balance_amount = 15, topup_status = 'progress' where total_amount = 15 AND company_id = 164;
+update topup_agencies set balance_amount = 20, topup_status = 'queue' where total_amount = 20 AND company_id = 164;
+update topup_agencies set balance_amount = 25, topup_status = 'queue' where total_amount = 25 AND company_id = 164;
+===============================
+
+==============================================================================================================================================================================
+BALANCE = 60
+
+CLIENT = 140.00
+AGENCY = 70
+SALES1 = 7
+SALES2 = 7
+SALES3 = 7
+
+EMM-SANDBOX-API
+SCENARIO
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency success, cc client success
+1. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $7, maka charge $7, your balance = $53, success ✅
+2. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $14, maka charge $14, your balance = $46, success ✅
+3. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $35, maka charge $35, your balance = $25, success ✅
+4. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $56, maka charge $56, your balance = $4, topup $25, your balance = $29, success ✅
+5. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $70, maka topup $25, your balance = $85, charge $70, your balance = $15, success ✅
+6. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $105, maka topup $25, topup $25, your balance = $110 auto topup ($110 x 10% = $11), charge $105, your balance = $5, topup $25, your balance = $30, success ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency success, cc client error
+1. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup dengan Harga $49, maka charge $49, cc client error your balance tetap = $60, campaign stopcontinual T, error ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual F, cc agency error, cc client success 
+1. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup Harga $56, maka charge $56, your balance = $4, topup $25 cc agency error, tidak refund client, success ✅
+2. your balance = $60, auto topup ($60 x 10% = $6), campaign prepaid autotopup Harga $70, maka charge client $140 dan agency $70, topup $25 cc agency error, revert topup agency, your balance = $60, refund client, campaign stopcontinual T, error ✅
+==============================================================================================================================================================================
+
+
+==============================================================================================================================================================================
+BALANCE = 60
+
+HARGA CLIENT = 140.00, awalnya berhasil
+HARGA AGENCY = 70.00, nah $10 pakai stripe, error, maka revert $60 ke data wallet, refund client
+TRANSFER SALES1 = 7
+TRANSFER SALES2 = 7
+TRANSFER SALES3 = 7
+
+EMM-SANDBOX-APP
+SCENARIO
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency success, cc client success
+1. your balance = $60, campaign prepaid autotopup dengan Harga $3.5, maka charge $3.5, your balance = $56.5, success ✅
+2. your balance = $60, campaign prepaid autotopup dengan Harga $35, maka charge $35, your balance = $25, success ✅
+3. your balance = $60, campaign prepaid autotopup dengan Harga $56, maka charge $56, your balance = $5, success ✅
+4. your balance = $60, campaign prepaid autotopup dengan Harga $70, maka charge $60 wallet, sisa $10 pakai stripe success ✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency success, cc client error
+1. your balance = $60, campaign prepaid autotopup dengan Harga $70, maka charge $70, cc client error your balance tetap = $60, campaign stopcontinual T, error✅
+
+tentang = jika agency beli lebih dari 1 prepaid amount. manual bill F, aggreee developer T, stop continual T, cc agency error, cc client success
+1. your balance = $60, campaign prepaid autotopup dengan Harga $56, maka charge $56, your balance = $4, success ✅
+2. your balance = $60, campaign prepaid autotopup dengan Harga $70, maka charge client $140, charge $60 data wallet, sisa $10 pakai stripe, cc agency error, revert topup agency, your balance = $60, refund client, campaign stopcontinual T, error ✅
+==============================================================================================================================================================================
+
+
+==============================================================================================================================================================================
+SKENARIO
+1. pastikan data wallet hanya muncul di agency emm saja ✅
+2. ketika data wallet topup manual maka langsung transfer ke sales 5% ✅
+3. ketika data wallet auto topup maka langsung transfer ke sales 5% ✅
+4. ketika minimumspend kan sama aja topup data wallet. nah itu juga langsung transfer ke sales 5% ✅
+5. ketika hutang minimumspend saat bayar. itu langsung transfer ke sales 5% ✅
+==============================================================================================================================================================================
+
+
+
+
+===============================
+update topup_agencies set balance_amount = 20, topup_status = 'progress' where total_amount = 20 AND company_id = 164;
+update topup_agencies set balance_amount = 30, topup_status = 'queue' where total_amount = 30 AND company_id = 164;
+===============================
+
+
+
+Option 1
+example:
+Agency Not Manual Bill or Developer API enabled (data wallet not have auto topup)
+Client Cost : $80
+Agency Cost: $60
+
+Agency Data Wallet : $40 (this value already "split" when get from minimum spend or manual topup)
+
+a. client cost not zero 
+so when they buy prepaid what system do:
+1. charge client to stripe $80 with application fee $20
+2. get from Agency Data wallet $40 ($40 + $20 = $60) go to root stripe
+3. root stripe will "split" from $20 (only $20 because $40 already get from data wallet which is already "split") to root profit (non EMM) and sales commission
+
+agency dom
+UPDATE company_stripes
+SET 
+	acc_connect_id = TO_BASE64(AES_ENCRYPT('acct_1QBJKSRoNFkZA9eP', '8e651522e38256f2')),
+	acc_ba_id = TO_BASE64(AES_ENCRYPT('ba_1QBJv1RoNFkZA9ePh6posESq', '8e651522e38256f2'))
+WHERE company_id = 568
+acct_1QBJKSRoNFkZA9eP
+ba_1QBJv1RoNFkZA9ePh6posESq
+
+sales dom
+UPDATE users
+SET 
+	acc_connect_id = TO_BASE64(AES_ENCRYPT('acct_1QAAL32KLAtpgFVd', '8e651522e38256f2')),
+	acc_ba_id = TO_BASE64(AES_ENCRYPT('ba_1QAAQS2KLAtpgFVdTWtT19dl', '8e651522e38256f2'))
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidandomsales@gmail.com';
+
+
+=============================================================NOT MANUAL BILL AND ENABLE DEVELOPER API=============================================================
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 50
+- input data wallet = 50
+- card agency = success
+- card client = error
+- stop continual = F
+1. karena stop continual F dan balance kurang, maka topup dahulu sebesar $50 dan transfer sales. balance menjadi $100. maka charge agency $70. balance $30 threshold, ($100 * 10% = 10)✅
+2. charge client sebesar 140, karena client error revert topup agency yang sudah digunakan jadi balance agency masih sisa $100, dan tidak transfer sales dari app_fee_amount✅
+
+BUG (SUDAH DI FIX)
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 50
+- input data wallet = 50
+- card agency = success
+- card client = error
+- stop continual = T
+1. karena balance kurang, maka charge agency $50 dari data wallet dan sisanya $20 pakai app_fee_amount ✅
+2. charge client $140 dan agency app_fee_amount $20, karena cc client error, maka revert $50 ke topup agency nya dan tidak transfer ke sales ✅
+
+
+- Prepaid
+- client = 140 
+- agency = 70
+- data wallet = 50
+- input data wallet = 50
+- card agency = error
+- card client = success
+- stop continual = F
+1. karena balance kurang, maka coba auto topup data wallet sebanyak $50, karena agency error maka transaksi batal dan tidak berlanjut (progress) ✅
+
+
+- Prepaid
+- client = 94.50
+- agency = 47.25
+- data wallet = 50
+- input data wallet = 50
+- card agency = error
+- card client = success
+- stop continual = F
+1. charge agency 47.25 dari wallet, balance = 2.75, karena dibawah treshold (50 * 10% = 5) maka coba auto topup wallet, karena agency card error. maka gagal auto topup namun success charge agency ✅
+2. charge client sebesar 94.50 dan success ✅
+3. karena charge agency dan client success maka berhasil. ✅
+
+
+- Prepaid
+- client = 0
+- agency = 47.6
+- data wallet = 50
+- input data wallet = 50
+- card agency = error
+- card client = success
+- stop continual = F
+1. charge agency 47.6 dari data wallet, balance 2.4, karena dibawah treshold (50 * 10% = 5) coba topup data wallet sebesar $50. karena agency card error. maka gagal auto topup namun success charge agency nya ✅
+
+
+- Prepaid
+- client = 0
+- agency = 47.6
+- data wallet = 50
+- input data wallet = 50
+- card agency = success
+- card client = success
+- stop continual = F
+1. charge agency 47.6 dari data wallet, balance 2.4, karena dibawah treshold (50 * 10% = 5) coba topup data wallet sebesar $50 dan transfer ke sales 5%. maka success auto topup dan charge agency nya ✅
+
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 50
+- input data wallet = 50
+- card agency = success
+- card client = success
+- stop continual = T
+1. karena balance kurang dan stop continual T. maka charge agency sebesar $50 dari data wallet. sisanya $20 menggunakan application fee amount ✅
+2. charge client sebesar $140 dan application_fee_amount = $20 ✅
+3. transfer ke sales dari application_fee_amount $20 * 0.1 = 2 ✅
+
+
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 50
+- input data wallet = 50
+- card agency = success
+- card client = success
+- stop continual = F
+1. karena balance kurang dan stop continual F. maka coba auto topup sebesar $50 transfer ke sales, balance $100, treshold ($100 * 10% = 10), charge $70 dari data wallet, balance $30 ✅
+2. charge client sebesar $140 tanpa application fee amount ✅
+=============================================================NOT MANUAL BILL AND ENABLE DEVELOPER API=============================================================
+
+
+
+
+
+=============================================================NOT MANUAL BILL AND DISABLE DEVELOPER API=============================================================
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 50
+- card agency = success
+- card client = success
+1. karena balance kurang tidak punya fitur auto topup, maka charge sebesar $50 dari data wallet, dan sisanya $20 dengan application_fee_amount ✅
+2. charge client $140 dengan application_fee_amount $20, transfer ke sales dari $20 itu ✅
+
+
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 0
+- card agency = success
+- card client = success
+1. karena data wallet 0, maka charge client $140 dan agency application_fee_amount $70 pakai stripe ✅
+2. transfer ke sales dari $70 * 0.1 = $7✅
+
+
+- Prepaid
+- client = 0
+- agency = 28
+- data wallet = 0
+- card agency = success
+- card client = success
+1. karena data wallet 0, maka tidak charge client, dan charge agency $28 dari stripe✅
+2. transfer ke sales dari ($28 * 0.1 = 2.8)✅
+=============================================================NOT MANUAL BILL AND DISABLE DEVELOPER API=============================================================
+
+
+
+
+
+
+=============================================================MANUAL BILL=============================================================
+- prepaid
+- agency = 70
+- data wallet = 50
+- card agency = success
+- card client = success
+- stop continual T
+1. karena data wallet kurang, maka charge $50 dari data wallet, dan sisanya $20 pakai stripe 
+2. transfer ke sales dari $20, jadi $20 * 0.1 = 2
+=============================================================MANUAL BILL=============================================================
+
+
+
+
+
+
+
+
+
+=============================================================AGENCY IN DOMINATOR, NOT MANUAL BILL=============================================================
+- Prepaid
+- client = 140
+- agency = 70
+- data wallet = 20, sebenarnya ini tidak kepakai karena data wallet hanya ada di emm saja
+- card agency = success
+- card client = success
+1. karena di dom tidak pakai data wallet, maka charge client $140 dan agency $70 menggunakan application_fee_amount ✅
+2. transfer ke sales sebesar $70 * 0.1 = $7; ✅
+3. transfer ke root ✅
+
+
+- Weekly
+- client = $3
+- agency = $0
+- data wallet = 20, sebenarnya ini tidak kepakai karena data wallet hanya ada di emm saja
+- card agency = success 
+- card client = success
+1. karena di dom tidak pakai data wallet, maka charge client $3 dan agency $0 menggunakan application_fee_amount 
+2. transfer ke sales
+=============================================================AGENCY IN DOMINATOR, NOT MANUAL BILL=============================================================
+
+
+
+
+=============================================================AGENCY IN DOMINATOR, MANUAL BILL=============================================================
+- Prepaid
+- agency = 70
+- data wallet = 20, sebenarnya ini tidak kepakai karena data wallet hanya ada di emm saja
+- card agency = success
+- card client = success
+1. karena di dom tidak pakai data wallet, maka charge agency langsung saja $70 ✅
+2. transfer ke sales sebesar 70 * 0.1 = $7 ✅
+3. transfer ke root ✅
+=============================================================AGENCY IN DOMINATOR, MANUAL BILL=============================================================
+
+
+=============================================================TEST WEEKLY=============================================================
+- manual bill F
+- play weekly
+- cost client 2
+- cost agency 0
+1. ketika di play charge client $2 dari stripe bukan dari data wallet ✅
+
+- manual bill F
+- stop weekly
+- cost client 20
+- cost agency 10
+1. ketika di stop maka charge client $20 dan agency with app_fee_amount $10. lalu bagi" ke sales dari $10 itu, dan ga pakai data wallet ✅
+
+- manual bill F
+- stop weekly
+- cost client 20
+- cost agency 10
+1. ketika process invoice, maka charge client $20 dan agency with app_fee_amount $10. lalu bagi" ke sales dari $10 itu, dan ga pakai data wallet ✅
+
+- manual bill T
+- stop weekly
+- cost client 20
+- cost agency 10
+1. ketika di stop maka charge client $20 dan agency with app_fee_amount $10. lalu bagi" ke sales dari $10 itu, dan ga pakai data wallet ✅
+
+- manual bill T
+- stop weekly
+- cost client 20
+- cost agency 10
+1. ketika process invoice, maka charge client $20 dan agency with app_fee_amount $10. lalu bagi" ke sales dari $10 itu, dan ga pakai data wallet ✅
+=============================================================TEST WEEKLY=============================================================
+
+
+
+=============================================================FINNALY TEST=============================================================
+(SPECIAL CASE)
+- manual bill F
+- not agree developer
+- prepaid
+- client = 140
+- agency = 70
+- wallet = 50
+- cc client sucess
+- cc agency success
+1. saat play campaign, karena data wallet kurang, maka charge dulu $50 dari data wallet, dan sisanya $20 pakai app_fee_amount ✅
+2. charge client $140 dan $20 pakai app_fee_amount ✅
+3. transfer ke sales dari $20 * 0.1 = $2 ✅
+
+- manual bill F
+- not agree developer
+- prepaid
+- client = 280
+- agency = 140
+- wallet = 50
+- cc client sucess
+- cc agency success
+1. saat auto topup campaign, karena data wallet kurang, maka charge dulu dari $50 data wallet, dan sisanya $90 pakai app_fee_amount✅
+2. charge client $140 dan $90 pakai app_fee_amount✅
+3. transfer ke sales dari $90 * 0.1 = $9✅
+
+- manual bill F
+- not agree developer
+- prepaid
+- client = 70
+- agency = 35
+- wallet = 50
+- cc client sucess
+- cc agency success
+1. karena data wallet cukup, maka charge $35 pakai data wallet, balance wallet $15 ✅
+2. charge client $70 tanpa app_fee_amount, dan tidak bagi" ke sales ✅
+
+
+
+----------
+
+
+
+- manual bill F
+- agree developer
+- prepaid
+- client = 140
+- agency = 70
+- wallet = 50
+- input wallet = 50
+- cc client sucess
+- cc agency success
+1. karena data walet tidak cukup, maka auto topup data wallet sebesar $50 transfer ke sales 5%, balance $100, lalu charge $70 dari data wallet, balance $30 ✅
+2. charge client $140 tanpa app_fee_amount ✅
+
+- manual bill F
+- agree developer
+- prepaid
+- client = 210
+- agency = 105
+- wallet = 50
+- input wallet = 50
+- cc client sucess
+- cc agency success
+1. saat auto topup campaign, karena data wallet kurang, maka auto topup data wallet sebesar $50 transfer sales 5%, balance $100, topup $50 transfer sales 5%, balance $150. charge $105 dari wallet, balance $45 ✅
+2. charge client $210 tanpa app_fee_amount ✅
+
+- manual bill F 
+- not agree developer 
+- prepaid 
+- client = 98 
+- agency = 49
+- wallet = 50 
+- cc client sucess 
+- cc agency success 
+1. saat auto topup campaign, karena data wallet cukup, maka charge, maka charge $49 pakai data wallet, balance $1, karena dibawah treshold maka charge $50 transfer sales 5%. ✅
+2. charge client $98 tanpa app_fee_amount ✅
+
+
+
+----------
+
+
+
+- manual bill T
+- prepaid
+- agency = 70
+- wallet = 50
+- input wallet = 30
+- stop continual = F
+- cc client sucess
+- cc agency success
+1. karena data wallet kurang, maka topup dulu $50 transfer sales 5%, dan charge agency $70, balance $30
+
+- manual bill T
+- prepaid
+- agency = 49
+- wallet = 50
+- input wallet = 30
+- stop continual = F
+- cc client sucess
+- cc agency success
+1. karena cukup, charge $49 pakai wallet, balance $1, karena dibwah treshold (50 * 10% = 5), auto topup $30 transfer sales 5%.
+
+(SPECIAL CASE)
+- manual bill T
+- prepaid
+- agency = 70
+- wallet = 50
+- input wallet = 30
+- stop continual = T
+- cc client sucess
+- cc agency success
+1. karena data wallet kurang, charge $50 pakai data wallet, sisanya $20 pakai stripe transfer sales 0.1 ✅
+
+- manual bill T
+- prepaid
+- agency = 70
+- wallet = 50
+- input wallet = 30
+- stop continual = F
+- cc client sucess
+- cc agency success
+1. saat auto topup campaign, karena data wallet kurang, maka topup dulu $30 transfer sales 5%, balance $80, charge $70 dari wallet, balance $10 ✅
+
+- manual bill T
+- prepaid
+- agency = 49
+- wallet = 50
+- input wallet = 30
+- stop continual = F
+- cc client sucess
+- cc agency success
+1. saat auto topup campaign, charge $49 dari wallet, balance $1, topup $30 transfer sales 5%. ✅
+
+- manual bill T
+- prepaid
+- agency = 70
+- wallet = 0
+- input wallet = 30
+- stop continual = F
+- cc client sucess
+- cc agency success
+1. play campaign charge $70 dari stripe, bagi" ke sales 0.1 ✅
+
+
+
+----------
+
+
+
+- manual bill F
+- prepaid
+- client 70
+- agency = 35
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency sucess
+- cc client error
+1. play campaign, karena balance cukup,charge agency $35 dari wallet, balance $15 ✅
+2. charge client $70 tanpa app_fee_amount, karena cc client error, maka revert charge $35 tadi, balance wallet masih $50, client red card ✅
+
+- manual bill F
+- prepaid
+- client 140
+- agency = 70
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency sucess
+- cc client error
+1. play campaign. karena balance kurang maka topup dulu $50 transfer sales 5%, balance $100, charge $70 dari data wallet, balance $30 ✅
+2. charge client 140 tanpa app_fee_amount, karena cc error, maka revert charge $70 tadi, balance wallet masih $100, client red card ✅
+
+- manual bill F
+- prepaid
+- client 98
+- agency = 49
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency errorr
+- cc client success
+1. charge agency $49 dari data wallet. balance $1, auto topup $50 karena cc nya error, transaksi campaign berhasil auto topup nya gagal ✅
+2. charge client $98 tanpa app_fee_amount ✅
+
+- manual bill F
+- prepaid
+- client 140
+- agency = 70
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency errorr
+- cc client success
+1. karena wallet kurang, maka topup dahulu sebesar $50, nah karena cc agency error, maka transaksi langsung batal ✅
+
+- manual bill F
+- prepaid
+- client 140
+- agency = 70
+- wallet = 50
+- input wallet = 50
+- stop continual = T
+- cc agency errorr
+- cc client success
+1. karena data wallet kurang, charge $50 dari data wallet, sisanya $20 pakai app_fee_amount (progress)
+2. charge client $140 dan app_fee_amount $20. transfer $20 ke sales 0.1 
+
+
+
+------
+
+
+
+- manual bill T
+- prepaid
+- agency = 49
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency error
+1. charge $49 pakai data wallet, balance $1, auto topup karena dibawah treshold, namun karena cc agency error maka gagal auto topup wallet, namun berhasil topup campaign, dan ga bagi" sales ✅
+
+- manual bill T
+- prepaid
+- agency = 70
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency error
+1. karena data wallet kurang dan stopcontinue F, maka coba auto topup $50, karena cc gagal maka transaksi gagal 
+
+- manual bill T
+- prepaid
+- agency = 140
+- wallet = 50
+- input wallet = 50
+- stop continual = F
+- cc agency success
+1. karena data wallet kurang dan stopcontinual F, maka topup wallet $50 transfer sales 5%, balance $100, topup wallet $50 transfer sales 5%, balance 150, charge $140 dari data wallet, 
+
+- manual bill T
+- prepaid
+- agency = 140
+- wallet = 50
+- input wallet = 50
+- stop continual = T
+- cc agency success
+1. karena data wallet kurang dan stopcontinue T, maka charge $50 pakai data wallet, sisanya $90 pakai stripe, transfer ke sales dari $90 
+=============================================================FINNALY TEST=============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add info in function charge client
+
+access token
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMzBmNjYyOGQ2MzhkNjAyMjZiZmEzYWQwZDRiY2M3ODhkNDE5YzAyZTBhMTUwZjg3MzE0MTljOTI1MzMzYzQ1ZDExMmY0NGJlOTAzNzZlN2MiLCJpYXQiOjE3NTE0MzkyNzIsIm5iZiI6MTc1MTQzOTI3MiwiZXhwIjoxNzUxNDQyODcyLCJzdWIiOiIyNzkiLCJzY29wZXMiOltdfQ.J_oB05FPOObWJZjAFKXUWcsYpxAC-j1M1ani0Ft920lqk15Msq1aIKQTJUxq1JyxI2U16x-R-LLBYrsOHfKUuLKf3KrY2s4bgWZDLypOh0J6ZsWhwxQxcJEsy5GITkwzo1Cv37REhyMAG8tnhNIchoe2DIOJM8nlw-JXQVKcMKOwh901hvENlz3EfB5-LLYgItxFaddF23sIi9_L3A6gYPpaUyXdwd_i2ZmUj3FxCphIVOVFaTKw7dus6mz5LnWnVUrW8ASq5R8jkdFLdjxWBBx7K7-KzvK0tj9FQ0jZXVMCl4hW-2b4A__1Ecfthk4Jcw1K9N5aXZQ_sAR0SRSF8pKhMwU-e_od3iebVmb252DbDRr44Kx8yXe0KCI02vAYBQKaF3U82qPBXg9es-Di8d2XlffKF6NU3T2AyGpserFI03SQYtbfqPddFfKHejWkIXZHNerB9WbA9uZ3GfM3KzENZsT5TgQLdD8Dbvvz9yQEsCNtF8lLDVQa-4UsMc2BBfakagbkyNakQRh106cXOQPrIvYcxRyecN1VU_F0nWAuyMW7cLCRuj7PkCTxZicpbz2IsepfpGCIARwucFL6eMgC6BR1Bagblmv8X9ywsJdqYenLzEVDfdvPcLfUtk6OqVWqzXSLNKXUPhYr0s5oYeFjqO0KAP9W_KejRpVx13Y
+
+refresh token
+def50200e71582ac2927133188e5324728c9b1c01f6d4f89ad0bcfa795609de951844907d26ecff4effe38fd475a46f6b11d1ed0dbcf64099ca03c07ab1f94a17061385256cd6f3edd42d599e246dcd2ba7c1fb7a21fc12690b485cfd942ae87df1228df2497112cb5b5178922fb359a235d8ed3c46b1b18905573ea4d051e29b406beaa9c24be7d2f5e6ffb7ac8b43c942eef721714c58d3d7ffeff7e5ec4c40e4119d404dc79072b02a1b7e462331db5b3db8a29fbd3aab9e53f5ec8752a0c68369ab04de465a82b700c7ae4191fc29cc00af68760a8ad091228795fe97dd194d6dbe044fb19974dfe9314b91270d8e3bde844b215001514b88cd755e67d672d2e6560ef779a11a25e09cfc8a2d75eebf1063a073ab2f95771d5adcbb351040e09960267eb4258c2454cb9ebc3ec36e9dd5d53c96e919c533ea7330bc527ce79627512e5bea11ec9e2681d950d96704ad219227fdab01a6f679cf82d406dd4281a67
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-403 = "add info in function charge client"
+JD-TASK-EMM-403-DEV-SYNC
+
+FILE
+FRONT
+- front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+- front\src\pages\Modules\Auth\LeedspeekB2b\ClientV1.vue
+- front\src\pages\Modules\Auth\LeedspeekEnhance\ClientV1.vue
+- front\src\pages\Modules\Auth\LeedspeekLocator\V1Client.vue
+- front\src\main.js
+- front\src\components\SidebarPlugin\SideBar.vue
+- front\src\plugins\global.js
+
+DATA
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Http\Controllers\Controller.php
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\GeneralController.php
+- data\resources\views\emails\salesfee.blade.php
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-403 = "add info in function charge client"
+JD-TASK-EMM-403-DEV-SYNC
+
+FILE
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\WebhookController.php
+- app\Http\Controllers\MarketingController.php
+- resources\views\emails\salesfee.blade.php
+
+EMM-SANDBOX-API
+JD-TASK-EMM-461 = "Audit Security Route Api Server"
+JD-TASK-EMM-461-DEV-SYNC
+
+FILE
+- app\Http\Kernel.php
+- app\Http\Controllers\WebhookController.php
+- app\Http\Middleware\checkBearerToken2.php
+- routes\api.php
+
+
+--------------------------
+1. Topup Email (I am assuming that this will replace the current email notice for minimum spend? If so we should include that part also in this that shows their spend calculated as part of the minimum.?)
+
+From: Data Wallet Notifications <sandboxqaemail@gmail.com> ✅
+Date: Sen, 23 Jun 2025 pukul 12.26
+Subject: Data Wallet Top Up Notice For [AgencyName] ✅
+
+Data Wallet Top Up Via Minimum Spend ✅
+Dear [Agency Name] ✅
+
+This email is to inform you that your Minimum Spend has successfully been processed, is deposited in your Data Wallet, and is available to be used on any campaigns. ✅
+
+Date : 06-23-2025 ✅
+Total Wholesale Spend : $0.00 ✅
+Minimum platform spend: $0.00 ✅
+Minimum spend billing: $0.00 ✅
+Top Up Amount: $149.00
+Current Data Wallet Balance : $298
+Next month minimum spend: $149.00
+
+If you have any questions, please contact us at customercare@‌gmail.com.
+Thank You
+--------------------------
+
+
+
+
+
+--------------------------
+1. Agency Balance Expired
+
+From: Data Wallet Notifications <sandboxqaemail@gmail.com>
+Date: Sen, 23 Jun 2025 pukul 12.11
+Subject: Data Wallet Balance Expiration
+
+ 
+
+Data Wallet Balance Expiration
+Dear [Agency Name]
+
+This email is to inform you that a portion of your data wallet balance amounting to $149.00 has expired, as it was not utilized within one year from 2025 June 22 to 2026 June 22. Your previous remaining balance was $298.00, and your current remaining balance is now $149.00.
+
+If you have any questions, please contact us at customercare@‌gmail.com.
+
+Thank You
+--------------------------
+
+
+
+
+
+--------------------------
+1. Agency Campaign Refund ✅
+
+From: Data Wallet Notifications <sandboxqaemail@gmail.com> 
+Date: Sen, 23 Jun 2025 pukul 12.28
+Subject: Campaign Data Refunded Successfully ✅
+
+Campaign Data Refunded Successfully ✅
+Dear [Agency Name] ✅
+
+This email is to inform you that the data balance from the below campaign was successfully deposited in your data wallet and is available to be used in other campaigns.✅
+
+Campaign ID : 29484235 ✅
+Campaign Name : Dimas Enhance Prepaid ✅
+Campaign Type : Enhance ID ✅
+Transaction Date : 06-23-2025 00:28:15 ✅
+Total Contacts : 70 ✅
+Total Wholesale Cost: $350.00 ✅
+Current Data Wallet Balance : $498 ✅
+
+If you have any questions, please contact us at customercare@‌gmail.com. ✅
+Thank You ✅
+--------------------------
+
+scenario 
+1. data wallet belum di agree -> maka jangan pakai data wallet
+2. data wallet sudah di agree, belum pernah di setup amount nya 0, balance nya ada -> sifatnya seperti stop_continual
+
+- balance = 50 (progress)
+- agency cost = 35
+- client cost = 70 
+
+NOT MANUAL BILL
+1. data wallet belum di agree, balance 0, maka agency pakai cc ✅
+2. data wallet belum di agree, balance diatas 0, maka agency tetep pakai cara biasa ✅
+3. data wallet sudah di agree, balance di atas 0, custom amount nya 0, maka sifatnya sama seperti stop continual ✅
+4. data wallet sudah agree, balance 5, custom amount 50 ✅
+
+MANUAL BILL
+1. data wallet belum di agree, balance 0, maka agency pakai cc ✅
+2. data wallet belum di agree, balance diatas 0, maka agency tetep pakai cara biasa ✅
+3. data wallet sudah di agree, balance di atas 0, custom amount nya 0, maka sifatnya sama seperti stop continual ✅
+4. data wallet sudah agree, balance 5, custom amount 50 ✅
+
+
+Sorry, this campaign cannot be started because your client's credit card charge failed. Please check your client's payment details and try again.
+
+
+
+SideBar.vue
+<p style="margin-bottom: 0px; font-weight: 600;">
+    Automatic top-up will occur when your pre-purchased amount drops below 10% of 
+    <!-- <span v-if="balanceDirectPayment > 0">${{ lastBalanceAmountDirectPayment }}, which is ${{ (10 * lastBalanceAmountDirectPayment / 100).toFixed(2) }}</span> -->
+    <span v-if="balanceDirectPayment > 0">${{ amountDirectPayment }}, which is ${{ (10 * amountDirectPayment / 100).toFixed(2) }}</span>
+    <span v-else>last setup amount</span>
+</p>
+balanceDirectPayment -> balance data wallet
+savePrepaidDirectPayment() -> button untuk save data wallert
+chargePrepaidDirectPayment() -> button untuk menampilkan swal sebelum charge data wallet
+processChargePrepaidDirectPayment() -> process untuk charge data wallet
+
+
+======YANG HARUS DIKERJAKAN======
+1. 
+- ketika save prepaid direct payment, cek dulu 10% dari custom amount apakah dibawah dari balance sekarang. 
+- ketika 10% dari custom amount > current balance. maka munculkan swal untuk memberi tahu bahwa ini akan charge sekarang
+======YANG HARUS DIKERJAKAN======
+
+======SKENARIO======
+IN APP
+1. ✅
+- balance $20
+- custom amount = $200. 
+- 10% dari custom amount = $20
+- charge prepaid, cost client = $14, cost agency = $10
+- sisa balance menjadi $20 - $10 = $10
+- karena sisa balance dibawah dari 10% dari custom amount ($10 < $20). maka akan auto topup lagi sebesar $200.
+- sisa balance menjadi $210
+
+2. ✅
+- balance $20
+- custom amount = $200
+- 10% dari custom amount = $20
+- charge prepaid, cost client = bebas, cost agency = $210
+- karena balance nya kurang, maka akan topup lagi sebesar $200.
+- balance menjadi $220
+- 10% dari custom amount = $20
+- sekarang charge agency sebesar $210
+- sisa balance menjadi $220 - $210 = $10
+- karena sisa balance dibawah dari 10% dari custom amount ($10 < $20). maka akan topup lagi sebesar $200
+- sisa balance menjadi $210
+
+
+
+
+
+
+IN API
+1. ✅
+- balance $20
+- custom amount = $200. 
+- 10% dari custom amount = $20
+- charge prepaid, cost client = $19.6, cost agency = $9.8
+- sisa balance menjadi $20 - $9.8 = $10.2
+- karena sisa balance dibawah dari 10% dari custom amount ($10.2 < $20). maka akan auto topup lagi sebesar $200.
+- sisa balance menjadi $210.2 
+
+2. (progress)
+- balance $20 
+- custom amount = $200
+- 10% dari custom amount = $20
+- charge prepaid, cost client = bebas, cost agency = $210.7
+- karena balance nya kurang, maka akan topup lagi sebesar $200.
+- balance menjadi $220
+- 10% dari custom amount = $20
+- sekarang charge agency sebesar $210.7
+- sisa balance menjadi $220 - $210.7 = $9.3
+- karena sisa balance dibawah dari 10% dari custom amount ($9.3 < $20). maka akan topup lagi sebesar $200
+- sisa balance menjadi $209.3
+======SKENARIO======
+
+
+
+
+===============FILE================
+1. Sidebar.vue
+- isStopContinualDirectPayment: false -> stopcontinual = true | continual topup = false
+- customAmountDirectPayment: false -> custom amount
+- amountDirectPayment: 0 -> ini adalah amount select user
+- stopContinualTopupDirectPayment() -> process langsung mengubah stop continual
+- onActiveIndexAmount(value) -> ini ketika ubah card amount data wallet
+- openPrepaidDirectPayment() -> untuk membuka modal data wallet
+- savePrepaidDirectPayment() -> untuk save data wallet 
+- chargePrepaidDirectPayment() -> untuk memunculkan swal sebelum charge
+- processChargePrepaidDirectPayment() -> process untuk charge
+- showModalPrepaidDirectPayment() -> untuk membuak data wallet
+
+<div class="col-12" @click="saveOrChangePrepaidDirectPayment">
+	{ btnSaveOrChangePrepaidDirectPayment }}
+</div>
+
+const userData = this.$store.getters.userData
+const payload = {
+    user_id: userData.id,
+    feature_id: this.$global.betaFeature.data_wallet.id
+}
+
+this.$store.dispatch('getMarketingServicesAgreementFeature', payload).then(response => {
+    if(response.status == 'T') {
+    this.openPrepaidDirectPayment();
+    } else {
+    this.modals.billingAgreementDirectPayment = true;
+    }
+}).catch(error => {
+    this.$notify({
+    type: 'danger',
+    message: 'Something went wrong, please try again later',
+    icon: 'fas fa-bug'
+    })
+})
+===============FILE================
+
+
+TANGGAL 10/7/2025 10:49
+======YANG HARUS DIKERJAKAN======
+- tambahkan kotak $0 dan jika di klik $0 maka button stop continual topup nya T, jika dipilih selain $0 maka button continual topup nya F ✅
+- buat button nya dynamic sesuai amount nya, jika 0 itu save, jika diatas 0 charge, dan jangan lupa memberikan swal nya ✅
+- Ubah wording button "charge" menjadi "Top Up Balance" ✅
+- pastikan juga ketika dia pilih amount nya 0, maka tidak akan menyebabkan error seperti waktu kemarin saat telfon daniel 
+- jika users belom aggree, maka setiap pindah page muncul aggreement nya (progress)
+======YANG HARUS DIKERJAKAN======
+
+
+ the 12-month contract including the minimum spend requirement set forth in Addendum C of the Service and Billing Agreement. 
+
+fisikamodern00+jidanagencyemm23@gmail.com
+fisikamodern00+jidanagencyemm23@gmail.com
+
+
+UserSetup.vue
+- ThirdStep.vue
+- ExistingCreditCard.vue
+- UpdateCreditCard.vue
+- FirstStep
+- SecondStep
+- FinishStep.vue
+
+struktur di agency yang sudah bayar saat create agency oleh root
+1 [ExistingCreditCard.vue , UpdateCreditCard.vue]
+2 [FirstStep.vue , SecondStep.vue]
+3 [FinishStep.vue]
+- ExistingCreditCard.vue = userServiceAgreementConfirm ✅
+- UpdateCreditCard.vue = processUpdateCard
+
+struktur di agency yang belum bayar di awal
+1 [ThirdStep.vue]
+2 [FirstStep.vue , SecondStep.vue]
+3 [FinishStep.vue]
+- ThirdStep.vue = paymentcustomersetup ✅
+
+struktur di client
+1 [FirstStep.vue , SecondStep.vue]
+2 [ThirdStep.vue]
+3 [FinishStep.vue]
+
+Aggreement Credit Card Letak File Nya Di = ServiceBillingAgreement.vue -> HtmlTemplateRenderer.vue
+nanti bakal ambil raw htmlnya di FileController@getDocumentAgreement dan bakal membaca dari table agreement_files
+
+Keyword yang bakal dicari
+/service-billing-agreement?version=2
+minimum_spend_v2
+dispatch('getMinSpendV2'
+
+minimum_spend_v2
+https://emmspaces.nyc3.digitaloceanspaces.com/docs/Updated%208-19-25%20_%20Agency%20Marketing%20Services%20Agreement%20(4874-9036-4350.4).html
+
+minimum_spend_v3
+https://emmspaces.nyc3.cdn.digitaloceanspaces.com/docs/Updated%2010-07-25%20_%20Agency%20Marketing%20Services%20Agreement.html
+
+INSERT INTO emm_sandbox.agreement_files
+(name, url, created_at, updated_at)
+VALUES('minimum_spend_v3', 'https://emmspaces.nyc3.cdn.digitaloceanspaces.com/docs/Updated%2010-07-25%20_%20Agency%20Marketing%20Services%20Agreement.html', NOW(), NOW());
+
+isMinSpendV3
+this.$store.dispatch('getMinSpendV3', {
+
+jidanagencyemm41.emmsandbox.com
+c:/wamp64/www/emm-sandbox-app/data/public/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

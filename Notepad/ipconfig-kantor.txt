@@ -1,0 +1,5 @@
+IPCONFIG KANTOR
+
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns

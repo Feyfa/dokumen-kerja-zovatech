@@ -1,0 +1,178 @@
+CARD FAILED
+4000000000000341
+4000000000003220 3D SECURITY
+
+CARD SUCCESS
+4242424242424242
+
+FILE YANG DIUBAH CRONJOB PREPAID FEE PER MONTH
+- C:\wamp64\www\EMM-SANDBOX-API\app\Http\Controllers\MarketingController.php
+- C:\wamp64\www\EMM-SANDBOX-API\app\Models\User.php
+- C:\wamp64\www\EMM-SANDBOX-API\routes\api.php
+
+UPDATE failed_lead_records SET invoice_id = null, total_amount = null
+
+ACH ACCOUNT
+ROUTING NUMBER : 110000000
+Account number
+000123456789 pm_usBankAccount_success
+000111111113 pm_usBankAccount_accountClosed
+000111111116 pm_usBankAccount_noAccount
+000222222227 pm_usBankAccount_insufficientFunds
+000333333335 pm_usBankAccount_debitNotAuthorized
+000444444440 pm_usBankAccount_invalidCurrency
+000666666661 pm_usBankAccount_failMicrodeposits
+000555555559 pm_usBankAccount_dispute -
+000000000009 pm_usBankAccount_processing -
+000777777771 pm_usBankAccount_weeklyLimitExceeded
+
+
+<base-button @click="validateCC('');" id="btnupdcc" size="sm" class="pull-right"
+                                    style="height:40px">
+                                    Update
+                                </base-button>
+this.processUpdateCard(action);
+this.processAddCard(action);
+onSubmitBankAccount
+this.btncardupdate
+
+
+<div class="col-sm-12 col-md-12 col-lg-12 mr-0 ml-0">
+                                <p v-if="currCardHolder != ''">{{currCardHolder}}</p>
+                                <p v-if="currCardlastdigit != ''">Card Number :
+                                    &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+                                    {{currCardlastdigit}}</p>
+                                <p v-if="currCardType != ''">Card Type : {{currCardType}}</p>
+                            </div>
+
+btnAchupdate: false,
+
+currAchHolderName: '',
+            currAchHolderType: '',
+            currAchRoutingNumber: '',
+            currAchLastDigit: '',
+
+Select a payment method
+statusBank pending failed verified
+
+onSubmitPendingVerification
+firstMutationAmountBank
+lastMutationAmountBank
+
+this.$notify({
+                              type: 'success',
+                              message: 'Your settings have been saved.',
+                              icon: 'tim-icons icon-bell-55'
+                          }); 
+
+
+handleSelectPaymentType
+handleSelectPaymentType(value){
+            this.selectPayment = value
+        },
+
+selectedPaymentMethod
+
+<div style="display: flex; gap: 1rem">
+                        <div style="display: flex; align-items: center; gap: .25rem">
+                            <input type="radio" id="credit_card" value="credit_card" v-model="paymentType" @change="changePaymentType">
+                            <label for="credit_card">credit card</label>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: .25rem">
+                            <input type="radio" id="bank_account" value="bank_account" v-model="paymentType" @change="changePaymentType">
+                            <label for="bank_account">bank account</label>
+                        </div>
+                    </div>
+
+
+this.$store.dispatch('processUpdateBankAccount', {
+                accountType: this.formBankAccount.accountType,
+                accountName: this.formBankAccount.accountName,
+                routingNumber: this.formBankAccount.routingNumber,
+                accountNumber: this.formBankAccount.accountNumber,
+                action: action,
+                userID: this.ClientActiveID,
+                companyParentID: this.companyID
+            })
+
+
+modals.pricesetup
+sadjkasdnasjkdnasjkdn
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 mr-0 ml-0 d-flex justify-content-center align-items-center">
+                        <div>
+                            <p>Jidan</p>
+                            <p>Account type : jidan</p>
+                            <p>Routing Number : 13313</p>
+                            <p>Card Number : 
+                                &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+                                0182</p>
+                        </div>
+                    </div>
+                </div>
+
+row.payment_status row.payment_ach_status
+handleSelectPaymentType
+failed_payment_type
+
+queriedData
+
+:class="(props.row.payment_type == 'credit_card') ? (props.row.payment_status == 'failed' ? 'disabled' : '') : (props.row.payment_ach_status == 'failed' ? 'disabled' : '')"
+:class="(props.row.payment_type == 'credit_card' && props.row.payment_status == 'failed') ? 'disabled' : (props.row.payment_type == 'bank_account' && props.row.payment_ach_status == 'failed')"
+
+TERAKHIR 4:23
+		
+TEST CHARGE PAKAI CREDIT CARD > BIKIN ERROR
+TEST PAKAI BANK ACCOUNT > BIKIN ERROR
+
+
+$statusPayment = 'paid';
+                        $errorstripe = '';
+                        $platformfee_charge = true;
+
+UPDATE `leadspeek_users`
+SET active = 'F', disabled = 'T', active_user = 'F'
+where leadspeek_api_id = 375928;
+
+
+SELECT * FROM `leadspeek_users` where leadspeek_api_id = 375928;
+
+
+processRechargeExisting
+
+payment_status
+payment_ach_status
+
+payment_message_error: '',
+            payment_ach_message_error: ''
+
+WEBHOOK STRIPE
+Your pairing code is: assure-lucky-uplift-brisk
+This pairing code verifies your authentication with Stripe.
+Press Enter to open the browser or visit https://dashboard.stripe.com/stripecli/confirm_auth?t=6qOFxOz3DoET770NHJOYiT5I78QH6b55 (^C to quit)
+
+stripe listen --forward-to http://127.0.0.1:8000/api/webhook/stripe/ach jika saya ingin menggunakan ini bagaimana http://127.0.0.1:8000
+
+swift-prefer-smile-lively
+
+UPDATE leasdspeek_users
+SET 
+	active = 'F',
+	disabled = 'T',
+	active_users = 'F'
+WHERE leadspeek_api_id = 813938; 
+	
+id, invoice_id, metada, created_at,updated_at
+
+blocked_type
+zerobounce
+optoutlist
+supressionlist
+reidentification
+location
+
+
+
+
+
+

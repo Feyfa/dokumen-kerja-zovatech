@@ -1,0 +1,69 @@
+if (trim($searchKey) != '') {
+                $salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
+                
+                $user->where(function($query) use ($searchKey,$salt) {
+                    $query->orWhere(DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(companies.company_name), '" . $salt . "') USING utf8mb4)"),'like','%' . $searchKey . '%')
+                    ->orWhere(DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(users.name), '" . $salt . "') USING utf8mb4)"),'like','%' . $searchKey . '%')
+                    ->orWhere(DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(users.email), '" . $salt . "') USING utf8mb4)"),'like','%' . $searchKey . '%')
+                    ->orWhere(DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(users.phonenum), '" . $salt . "') USING utf8mb4)"),'like','%' . $searchKey . '%')
+                    ->orWhere(DB::raw("DATE_FORMAT(users.created_at,'%m-%d-%Y')"),'like','%' . $searchKey . '%');
+                });
+            }
+            
+            
+saya punya variable inAgencyList. bisa tidak jika inAgencyList === true maka 
+
+->orWhere('leadspeek_users.leadspeek_api_id','like','%' . $searchKey . '%');
+
+gitu
+color: #ddd
+font-size: 0.80rem
+
+--UTAMA--
+companies.readonly ✅
+users.readonly ✅
+custom-menu-link.readonly ✅
+custom-menu-link.write ✅
+locations.readonly ✅
+
+--TAMBAHAN--
+saas/location.write ✅
+saas/company.write ✅
+snapshots.readonly ✅
+
+
+FRONT
+* front\src\components\Tree\NodeTree.vue
+* front\src\pages\Modules\Auth\ConfigApp\Downline.vue
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\plugins\global.js
+* front\src\store\store.js
+
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Models\User.php
+
+
+
+{"base_url":"https://marketplace.gohighlevel.com","client_id":"688cb175e320d49adb331172-mdsstl3o","client_secret":"7b6fc178-46e1-49ac-b872-12ff82e847dc","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly","app_id":"688cb175e320d49adb331172"}
+
+
+
+{"base_url":"https://marketplace.gohighlevel.com","client_id":"688cb175e320d49adb331172-mdsstl3o","client_secret":"7b6fc178-46e1-49ac-b872-12ff82e847dc","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","app_id":"688cb175e320d49adb331172"}
+
+
+{"base_url":"https://marketplace.gohighlevel.com","client_id":"688cb175e320d49adb331172-mdsstl3o","client_secret":"7b6fc178-46e1-49ac-b872-12ff82e847dc","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","app_id":"688cb175e320d49adb331172"}
+
+admin123
+Zovatech
+terserah12
+
+
+
+
+
+
+
+
+
+

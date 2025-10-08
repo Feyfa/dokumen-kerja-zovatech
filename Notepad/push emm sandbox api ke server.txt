@@ -1,0 +1,40 @@
+1. buka vsc EMM-SANDBOX-API
+2. buka putty, masukan username "zovatech4", ketik "sudo bash", masukan password
+3. jika ada perubahan commit dan push di sourcetree, ini akan push ke repo github
+4. masuk ke putty ketik "cd /var/repo/apibeta.git", lalu ketik "git push live master", ini akan push ke repo di server
+5. ketik putty "cd /var/www/api.exactmatchmarketing.com/html/" untuk masuk ke path project laravel nya
+
+
+cd /var/www/api.exactmatchmarketing.com/html/storage/logs
+
+sudo supervisorctl stop all
+sudo supervisorctl start queue-suppressionlist:*
+
+[program:queue-suppressionlist]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/api.exactmatchmarketing.com/html/artisan queue:work --max-time=3600
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=root
+numprocs=2
+redirect_stderr=true
+stdout_logfile=/var/www/api.exactmatchmarketing.com/html/storage/logs//worker.log
+stopwaitsecs=3600
+
+
+cd /etc/supervisor/conf.d/
+
+queue-suppressionlist
+
+command=php /var/www/api.exactmatchmarketing.com/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+
+
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status
+
+
+
+
