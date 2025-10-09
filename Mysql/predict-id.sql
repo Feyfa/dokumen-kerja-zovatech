@@ -33,12 +33,14 @@ select * from leadspeek_customers;
 --
 select * from leadspeek_crm_lists;
 --
-truncate leadspeek_business_lists;
-truncate leadspeek_crm_lists;
-truncate leadspeek_business;
-truncate leadspeek_customer;
+-- truncate leadspeek_business_lists;
+-- truncate leadspeek_crm_lists;
+-- truncate leadspeek_business;
+-- truncate leadspeek_customer;
 --
 select * from leadspeek_crm_lists;
+--
+select * from leadspeek_media;
 
 
 

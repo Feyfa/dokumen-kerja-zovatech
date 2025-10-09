@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 09, 2025 at 12:07 PM
+-- Generation Time: Oct 09, 2025 at 12:08 PM
 -- Server version: 8.3.0
 -- PHP Version: 7.4.33
 
@@ -24,21 +24,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `leadspeek_customers`
+-- Table structure for table `leadspeek_customer_campaigns`
 --
 
-DROP TABLE IF EXISTS `leadspeek_customers`;
-CREATE TABLE IF NOT EXISTS `leadspeek_customers` (
+DROP TABLE IF EXISTS `leadspeek_customer_campaigns`;
+CREATE TABLE IF NOT EXISTS `leadspeek_customer_campaigns` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `customer_list_name` varchar(255) DEFAULT NULL,
-  `total_customer` int UNSIGNED DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `size_file` int UNSIGNED DEFAULT NULL,
+  `leadspeek_api_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `customer_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

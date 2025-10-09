@@ -1,5 +1,9 @@
 ======YANG HARUS DIKERJAKAN======
-- membuat dummy campaign predict tapi ngga dummy dummy banget. nanti disimpan di leadspeek_users dengan leadspeek_type = predict 
+membuat dummy campaign predict tapi ngga dummy dummy banget. nanti disimpan di leadspeek_users dengan leadspeek_type = predict 
+- validasi di step 1 ✅
+- validasi di step 2 
+- validasi di step 4, input harus diisi dengan number aja
+- fix bug integration settings
 ======YANG HARUS DIKERJAKAN======
 
 
@@ -7,40 +11,46 @@
 ALTER TABLE `leadspeek_users` ✅
 - tambahkan enum leadspeek_type 'predict'
 
-CREATE TABLE `leadspeek_business_lists` ✅
-- id BIGINT autoincrement
+CREATE table `leadspeak_business_resources`
+- id BIGINT UNSIGNED autoincrement
+- type ENUM('industry','crm','campaign_type','customer_list_source')
 - slug VARCHAR(50) DEFAULT NULL
-- name VARCHAR(50) DEFAULT NULL
-- created_at TIMESTAMP DEFAULT NULL
-- updated_at TIMESTAMP DEFAULT NULL
-
-CREATE TABLE `leadspeek_crm_lists`✅
-- id BIGINT autoincrement
-- slug VARCHAR(50) DEFAULT NULL
-- name VARCHAR(50) DEFAULT NULL
+- name VARCHAR(100) DEFAULT NULL
+- label VARCHAR(255) DEFAULT NULL
+- description TEXT DEFAULT NULL
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
 CREATE TABLE `leadspeek_business` ✅
-- id BIGINT autoincrement
+- id BIGINT UNSIGNED autoincrement
 - leadspeek_api_id VARCHAR(20) DEFAULT NULL -> jangan lupa samakan collate nya di sandbox dan live
 - website VARCHAR(255) DEFAULT NULL -> Website
-- business_type ENUM('b2c','b2b') DEFAULT 'b2c' -> Campaign Type
+- business_type_id INT UNSIGNED -> Campaign Type
 - business_name varchar(255) DEFAULT NULL -> Campaign name
-- business_id TINYINT UNSIGNED DEFAULT NULL -> Business industry
+- business_industry_id INT UNSIGNED DEFAULT NULL -> Business industry
 - business_specify VARCHAR(255) DEFAULT NULL -> Please specify your industry
 - business_description TEXT DEFAULT NULL -> What does your business do?
 - business_competitors TEXT DEFAULT NULL -> Who are your main competitors?
-- upload_customer_list VARCHAR(100) DEFAULT NULL -> How would you like to upload your customer list?
-- crm_id TINYINT UNSIGNED DEFAULT NULL -> Connect your CRM
+- upload_customer_list_id INT UNSIGNED DEFAULT NULL -> How would you like to upload your customer list?
+- crm_id INT UNSIGNED DEFAULT NULL -> Connect your CRM
 - crm_key TEXT DEFAULT NULL -> CRM API Key
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
-CREATE TABLE `leadspeek_customers` ✅
-- id BIGINT autoincrement
+CREATE TABLE `leadspeek_customers`
+- id BIGINT UNSIGNED autoincrement
+- user_id BIGINT UNSIGNED DEFAULT NULL
+- customer_list_name VARCHAR(255) DEFAULT NULL
+- total_customer INT UNSIGNED DEFAULT NULL
+- url VARCHAR(255) DEFAULT NULL
+- size_file INT UNSIGNED INT DEFAULT NULL
+- created_at TIMESTAMP DEFAULT NULL
+- updated_at TIMESTAMP DEFAULT NULL
+
+CREATE TABLE `leadspeek_customer_campaigns` ✅
+- id BIGINT UNSIGNED autoincrement
 - leadspeek_api_id VARCHAR(20) DEFAULT NULL -> jangan lupa samakan collate nya di sandbox dan live
-- media_id int
+- customer_id INT UNSIGNED DEFAULT NULL
 - created_at TIMESTAMP DEFAULT NULL
 - updated_at TIMESTAMP DEFAULT NULL
 
@@ -65,8 +75,8 @@ CREATE TABLE `leadspeek_customers` ✅
 
 
 
-======FILE======
- 
+======FILE APP======
+
 LeedspeekPredict/Client.vue
 - selectsCompany.companySelected: ''
 - ClientCampaignName: ''
@@ -74,5 +84,47 @@ LeedspeekPredict/Client.vue
 - err_companySelect:false,
 - err_campaignName: false,
 - err_campaignType: false,
+
 - validationCreateCampaignStep()
-======FILE======
+- clearErrorInput(variableName)
+
+- campaignBusinessInfo.name: '', -> Business name
+- campaignBusinessInfo.website: '' -> Website
+- campaignBusinessInfo.industry: '' -> Business industry
+- campaignBusinessInfo.customIndustry -> Please specify your industry
+- campaignBusinessInfo.businessDescription -> What does your business do?
+- campaignBusinessInfo.competitors -> Who are your main competitors?
+- campaignBusinessInfo.customerUploadSources -> How would you like to upload your customer list?
+- campaignBusinessInfo.crmProvider -> Connect your CRM
+- campaignBusinessInfo.crmApiKey -> CRM API Key
+
+- err_campaignBusinessName: false,
+- err_campaignBusinessWebsite: false,
+- err_campaignBusinessIndustry: false,
+- err_campaignBusinessCustomIndustry: false,
+- err_campaignBusinessDescription: false,
+- err_campaignBusinessCompetitors: false,
+- err_campaignBusinessCustomerUploadSources: false,
+- err_campaignBusinessCrmProvider: false,
+- err_campaignBusinessCrmApiKey: false,
+
+- newcampaign.asec5_4_0_0 -> checkbox national targeting
+- newcampaign.asec5_4_0_1 -> State
+    - selects.state -> v-model dari input select state
+- newcampaign.asec5_4_0_3 -> Zip Code
+    - newcampaign.asec5_3 -> v-model input zipcode
+
+- err_campaignCustomersFrom: false,
+- err_campaignState: false,
+- err_campaignZipCode: false,
+
+- businessIndustries: [],
+- crmOptions: []
+======FILE APP======
+
+
+======FILE API======
+Route::post('/customer-predict/upload', 'UploadController@customerPredictUpload');
+======FILE API======
+
+

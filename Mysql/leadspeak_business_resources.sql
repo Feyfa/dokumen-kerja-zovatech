@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 09, 2025 at 12:07 PM
+-- Generation Time: Oct 09, 2025 at 12:08 PM
 -- Server version: 8.3.0
 -- PHP Version: 7.4.33
 
@@ -24,17 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `leadspeek_customers`
+-- Table structure for table `leadspeak_business_resources`
 --
 
-DROP TABLE IF EXISTS `leadspeek_customers`;
-CREATE TABLE IF NOT EXISTS `leadspeek_customers` (
+DROP TABLE IF EXISTS `leadspeak_business_resources`;
+CREATE TABLE IF NOT EXISTS `leadspeak_business_resources` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `customer_list_name` varchar(255) DEFAULT NULL,
-  `total_customer` int UNSIGNED DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `size_file` int UNSIGNED DEFAULT NULL,
+  `type` enum('industry','crm','campaign_type','customer_list_source') DEFAULT NULL,
+  `slug` varchar(50) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `description` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
