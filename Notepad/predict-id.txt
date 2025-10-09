@@ -67,4 +67,12 @@ CREATE TABLE `leadspeek_customers` ✅
 
 ======FILE======
  
+LeedspeekPredict/Client.vue
+- selectsCompany.companySelected: ''
+- ClientCampaignName: ''
+- ClientCampaignType: '',
+- err_companySelect:false,
+- err_campaignName: false,
+- err_campaignType: false,
+- validationCreateCampaignStep()
 ======FILE======
