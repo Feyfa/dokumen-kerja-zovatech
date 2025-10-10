@@ -110,9 +110,9 @@ LeedspeekPredict/Client.vue
 
 - newcampaign.asec5_4_0_0 -> checkbox national targeting
 - newcampaign.asec5_4_0_1 -> State
-    - selects.state -> v-model dari input select state
+    - selects.state: [] atau newCampaign.asec5_4: [] -> v-model dari input select state
 - newcampaign.asec5_4_0_3 -> Zip Code
-    - newcampaign.asec5_3 -> v-model input zipcode
+    - newcampaign.asec5_3: '' -> v-model input zipcode
 
 - err_campaignCustomersFrom: false,
 - err_campaignState: false,
@@ -196,6 +196,7 @@ LeedspeekPredict/Client.vue
 
 - isCustomerUploadSourceSelected(option)
 - isCampaignTypeSelected(option) 
+- isCampaignTypeSelectedRow(option, business_type_id) 
 - isOtherIndustry()
 
 - messagesChat: [
@@ -226,6 +227,10 @@ The client will be charged an initial fee $549 at the start of the campaign, and
     
 }
 
+- simplifiCampaignSelected: [],
+- simplifiCampaignsOptions: [],
+- isSimplifiFetching: false,
+
 ======FILE APP======
 
 
@@ -234,3 +239,58 @@ Route::post('/customer-predict/upload', 'UploadController@customerPredictUpload'
 ======FILE API======
 
 
+b2c = https://docs.google.com/spreadsheets/d/1f--p4QNiKtWo8p3aAscgzqziIP2l85PGuYy7GJ04MvY/edit?usp=sharing
+b2b = https://docs.google.com/spreadsheets/d/1wJRFF4XsEW6T63ih7FW-gvWYCVVE6Pg_QvTGwgpc554/edit?usp=sharing
+
+EMM-SANDBOX-API
+JD-TASK-EMM-619 = "progress upload customer for predict id"
+JD-TASK-EMM-619-DEV-SYNC
+
+FILE
+* app\Http\Controllers\UploadController.php
+* app\Models\LeadspeekCustomer.php
+* routes\api.php
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-619 = "clear code for debugging"
+JD-TASK-EMM-619-DEV-SYNC
+
+FILE
+FRONT
+* front\src\components\LLMChatWindow.vue
+* front\src\components\Pages\Campaign\IntegrationModalBody.vue
+* front\src\pages\Modules\Auth\LeedspeekPredict\Client.vue
+* front\src\store\store.js
+* front\src\components\CampaignFinancials.vue
+* front\src\components\Modals\AddLocalUserClient.vue
+* front\src\components\Tables\UserClient.vue
+* front\src\components\Inputs\ZipCodeTextArea.vue
+* front\public\samplefile\sample-customer-predict.csv
+* front\src\pages\Layout\DashboardLayout.vue
+
+DATA
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\PredictController.php
+* data\app\Models\LeadspeekBusiness.php
+* data\app\Models\LeadspeekBusinessResource.php
+* data\app\Models\LeadspeekCustomer.php
+* data\app\Models\LeadspeekCustomerCampaign.php
+* data\app\Services\PredictService.php
+* data\config\services.php
+* data\routes\api.php
+* data\app\Http\Controllers\ClickFunnelsController.php
+
+NEW CAMPAIGN 0
+jika $0 maka kosong
+di simplifi ad masih ada array []
+
+users/media
+
+
+
+clickfunnels_is_active
+simplifi_is_active
+mbp_is_active
+kartra_is_active
+ghl_is_active
+sendgrid_is_active

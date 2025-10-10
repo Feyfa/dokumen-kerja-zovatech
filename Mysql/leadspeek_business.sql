@@ -34,7 +34,7 @@ CREATE TABLE `leadspeek_business` (
   `business_type_id` int(10) UNSIGNED DEFAULT NULL,
   `business_name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `business_industry_id` int(10) UNSIGNED DEFAULT NULL,
-  `business_specify` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `business_custom_industry` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `business_description` text CHARACTER SET utf8mb4,
   `business_competitors` text CHARACTER SET utf8mb4,
   `upload_customer_list_ids` varchar(255) DEFAULT NULL,
