@@ -31,7 +31,7 @@ CREATE TABLE `leadspeek_business` ✅
 - business_specify VARCHAR(255) DEFAULT NULL -> Please specify your industry
 - business_description TEXT DEFAULT NULL -> What does your business do?
 - business_competitors TEXT DEFAULT NULL -> Who are your main competitors?
-- upload_customer_list_id INT UNSIGNED DEFAULT NULL -> How would you like to upload your customer list?
+- upload_customer_list_ids INT UNSIGNED DEFAULT NULL -> How would you like to upload your customer list?
 - crm_id INT UNSIGNED DEFAULT NULL -> Connect your CRM
 - crm_key TEXT DEFAULT NULL -> CRM API Key
 - created_at TIMESTAMP DEFAULT NULL
@@ -118,8 +118,114 @@ LeedspeekPredict/Client.vue
 - err_campaignState: false,
 - err_campaignZipCode: false,
 
-- businessIndustries: [],
-- crmOptions: []
+- campaignBusinessInfo:{
+    name:'',
+    website:'',
+    idealCustomers:'',
+    businessDescription:'',
+    competitors:'',
+    industry:'',
+    customIndustry:'',
+    businessType:'',
+    customerUploadSources: [],
+    crmProvider:'',
+    crmApiKey:''
+},
+
+- campaignBusinessInfo.industry: '' -> v-model
+- businessIndustries: [ -> list
+    { 
+        id: 1, 
+        slug: 'advertising_and_marketing', 
+        name: 'Advertising & Marketing' 
+    },
+    { 
+        id: 2, 
+        slug: 'aerospace_and_defense', 
+        name: 'Aerospace & Defense' 
+    },
+]
+
+- campaignBusinessInfo.crmProvider: '' -> v-model
+- crmOptions: [ -> list
+    { 
+        id: 1, 
+        slug: 'hubspot', 
+        name: 'HubSpot' 
+    },
+    { 
+        id: 2, 
+        slug: 'salesforce', 
+        name: 'Salesforce' 
+    },
+]
+
+- campaignBusinessInfo.customerUploadSources: [] -> v-model
+- customerUploadSourceOptions: [ -> list
+    {
+        id: 1,
+        slug: 'crm',
+        name: 'CRM',
+    },
+    { 
+        id: 2,
+        slug: 'local',
+        name: 'Local List',
+    }
+],
+
+- ClientCampaignType: '' -> v-model
+- campaignTypeOptions: [ -> list
+    {
+        id: 1,
+        slug: 'b2c', // slug
+        name: 'B2C', // name
+        label: 'Individual Consumers ($349 per month)', // label
+        description: 'Includes an Ideal Customer Profile of your target customers, plus daily updates on individuals that match it. (B2C)', // description
+        price: 349,
+    },
+    {
+        id: 2,
+        slug: 'b2b',
+        name: 'B2B',
+        label: 'Business Customers ($899 per month)',
+        description: 'Includes an Ideal Customer Profile of your target businesses, plus daily updates on companies that match it. (B2B)',
+        price: 899,
+    }
+]
+
+- isCustomerUploadSourceSelected(option)
+- isCampaignTypeSelected(option) 
+- isOtherIndustry()
+
+- messagesChat: [
+    {
+        assistant: { text: "Hi there! I've generated a campaign based on your inputs. You can refine it further by asking me to make changes or provide more details. For example, you can ask me to adjust the target audience, modify the ad copy, or suggest different keywords. Let's make this campaign perfect for you!" },
+        user: null
+        // user:null
+    },
+],
+
+- updateCreateCampaignStep()
+- campaignCreateActiveStep: ''
+
+- platformFeeModel: '' -> Setup Fee
+- m_LeadspeekPlatformFee: '' -> Your Wholesale Setup Fee is $0
+
+- minCostMonthModel: '' -> Monthly Campaign Fee
+- m_LeadspeekMinCostMonth: '' -> our Month Wholesale Campaign Fee $0
+
+1. Your Set Up Fee Profit $0.00
+2. Your Monthly Fee profit $0.00
+The client will be charged an initial fee $549 at the start of the campaign, and after 30 days, a recurring monthly charge of $499 will apply.
+
+- value: {
+    leadspeek_api_id: '',
+    id: '',
+    company_id: '',
+    
+}
+
 ======FILE APP======
 
 

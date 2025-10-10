@@ -16,35 +16,21 @@ select
 	id,
 	leadspeek_api_id,
 	CONVERT(AES_DECRYPT(FROM_bASE64(website), '8e651522e38256f2') USING utf8mb4) as website,
-	business_type,
+	business_type_id,
 	CONVERT(AES_DECRYPT(FROM_bASE64(business_name), '8e651522e38256f2') USING utf8mb4) as business_name,
-	business_id,
+	business_industry_id,
 	CONVERT(AES_DECRYPT(FROM_bASE64(business_specify), '8e651522e38256f2') USING utf8mb4) as business_specify,
 	CONVERT(AES_DECRYPT(FROM_bASE64(business_description), '8e651522e38256f2') USING utf8mb4) as business_description,
 	CONVERT(AES_DECRYPT(FROM_bASE64(business_competitors), '8e651522e38256f2') USING utf8mb4) as business_competitors,
-	upload_customer_list,
+	upload_customer_list_ids,
 	crm_id,
 	CONVERT(AES_DECRYPT(FROM_bASE64(crm_key), '8e651522e38256f2') USING utf8mb4) as crm_key,
 	created_at,
 	updated_at
 from leadspeek_business;
-select * from leadspeek_business;
+
+select * from leadspeek_business_resources;
+
 select * from leadspeek_customers;
---
-select * from leadspeek_crm_lists;
---
--- truncate leadspeek_business_lists;
--- truncate leadspeek_crm_lists;
--- truncate leadspeek_business;
--- truncate leadspeek_customer;
---
-select * from leadspeek_crm_lists;
---
-select * from leadspeek_media;
-
-
-
-
-
 
 

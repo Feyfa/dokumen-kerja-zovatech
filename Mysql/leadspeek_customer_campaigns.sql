@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Oct 09, 2025 at 12:08 PM
--- Server version: 8.3.0
+-- Host: localhost:8889
+-- Generation Time: Oct 10, 2025 at 03:05 AM
+-- Server version: 5.7.39
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -27,15 +27,33 @@ SET time_zone = "+00:00";
 -- Table structure for table `leadspeek_customer_campaigns`
 --
 
-DROP TABLE IF EXISTS `leadspeek_customer_campaigns`;
-CREATE TABLE IF NOT EXISTS `leadspeek_customer_campaigns` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `leadspeek_api_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `customer_id` bigint UNSIGNED DEFAULT NULL,
+CREATE TABLE `leadspeek_customer_campaigns` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `leadspeek_api_id` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `customer_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `leadspeek_customer_campaigns`
+--
+ALTER TABLE `leadspeek_customer_campaigns`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `leadspeek_customer_campaigns`
+--
+ALTER TABLE `leadspeek_customer_campaigns`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
