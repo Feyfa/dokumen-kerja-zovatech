@@ -127,7 +127,20 @@ LeedspeekPredict/Client.vue
     industry:'',
     customIndustry:'',
     businessType:'',
-    customerUploadSources: [],
+    customerUploadSources: {
+        local: {
+            id: 51,
+            slug: "local",
+            name: "Local List",
+            value: false
+        },
+        crm: {
+            id: 52,
+            slug: "crm",
+            name: "CRM",
+            value: false
+        }
+    }
     crmProvider:'',
     crmApiKey:''
 },
@@ -160,7 +173,7 @@ LeedspeekPredict/Client.vue
     },
 ]
 
-- campaignBusinessInfo.customerUploadSources: [] -> v-model
+- campaignBusinessInfo.customerUploadSources: {} -> v-model
 - customerUploadSourceOptions: [ -> list
     {
         id: 1,
@@ -211,25 +224,29 @@ LeedspeekPredict/Client.vue
 - campaignCreateActiveStep: ''
 
 - platformFeeModel: '' -> Setup Fee
-- m_LeadspeekPlatformFee: '' -> Your Wholesale Setup Fee is $0
+- LeadspeekPlatformFee: '0',
+- m_LeadspeekPlatformFee: '0' -> Your Wholesale Setup Fee is $0
 
 - minCostMonthModel: '' -> Monthly Campaign Fee
-- m_LeadspeekMinCostMonth: '' -> our Month Wholesale Campaign Fee $0
+- LeadspeekMinCostMonth: '0',
+- m_LeadspeekMinCostMonth: '0' -> our Month Wholesale Campaign Fee $0
 
 1. Your Set Up Fee Profit $0.00
 2. Your Monthly Fee profit $0.00
 The client will be charged an initial fee $549 at the start of the campaign, and after 30 days, a recurring monthly charge of $499 will apply.
 
-- value: {
-    leadspeek_api_id: '',
-    id: '',
-    company_id: '',
-    
-}
-
 - simplifiCampaignSelected: [],
 - simplifiCampaignsOptions: [],
 - isSimplifiFetching: false,
+
+- clearCampaignForm()
+
+- selectCrmChange()
+- customerUploadSourcesChange();
+
+- initCustomerUploadSources()
+- initCampaignType()
+- initCrmOptions()
 
 ======FILE APP======
 
@@ -286,11 +303,59 @@ di simplifi ad masih ada array []
 
 users/media
 
-
-
 clickfunnels_is_active
 simplifi_is_active
 mbp_is_active
 kartra_is_active
 ghl_is_active
 sendgrid_is_active
+
+
+Salam semuanya ada revisi ya mungkin nambah tapi moga2 ngk:
+
+1. Jika di klik diluar Modal untuk create campaign predict ID, modalnya hilang dan harus alik create campaign lagi, bisa nak ya di antisipasi untuk click biar modal ngk tutup sendiri ✅
+
+2. Di step 2 untuk yang "how would you like to upload your customer list?" Ganti jadi checkbox aja. ✅
+
+3. Dan,kalau saya unselect CRM dan select lagi lalu pilih GHL api key tidak auto refil, harusnya setiap pilih GHL api key pasti auto refil ✅
+
+4. Harusnya ada tombol "cancel", jadi kalau saya tutup tapi tekan tombol "create campaign" data Latanya masih muncul, kalau klik tombol cancel akan haps semua ✅
+
+5. Habis campaign created isi modal create campaignnya harus balik seperti semula (reset) ✅
+
+5. Harga campaign typenya tlg diganti $299 B2C and $799 B2B ingot ngaruh ke financial ya ✅
+
+6. Perlu ada spacing di chat window antara pertanyaan dengan jawaban, tambahkan spacing between ✅
+
+7. Di step 3 ada beberapa yg mau di update, dibikin seolah olah lebih nyata ✅
+
+Jadi sebelum generate ICP yg tergantung campaign type ada tulisan muncul dengan delay 3 detik per tulisannya
+
+Starting ICP Agent
+
+Analyzing Business Data
+
+Uploading Customer List
+
+Building Customer Similarity Profile
+
+Finding Target Data Clusters
+
+Building ICP
+
+Setelah ini baru keluarin ICPnya yg tergantung campaign typenya
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-619 = "update feature predict id 11 oct 2025"
+JD-TASK-EMM-619-DEV-SYNC
+
+FILE
+FRONT
+* front/src/components/LLMChatWindow.vue
+* front/src/components/Modal.vue
+* front/src/components/Pages/Campaign/IntegrationModalBody.vue
+* front/src/pages/Modules/Auth/LeedspeekPredict/Client.vue
+
+DATA
+* data/app/Services/PredictService.php

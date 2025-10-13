@@ -36,10 +36,23 @@ select * from leadspeek_business_resources;
 select * from leadspeek_customers;
 
 
+select 
+	active,
+	disabled,
+	active_user, 
+	CONVERT(AES_DECRYPT(FROM_bASE64(campaign_name), '8e651522e38256f2') USING utf8mb4) as campaign_name, 
+	leadspeek_type,
+	leadspeek_api_id,
+	national_targeting,
+	leadspeek_locator_state,
+	leadspeek_locator_zip,
+	leadspeek_users.* 
+from leadspeek_users where leadspeek_type = 'predict';
+select * from leadspeek_business;
+
+select active,disabled,active_user, CONVERT(AES_DECRYPT(FROM_bASE64(campaign_name), '8e651522e38256f2') USING utf8mb4), leadspeek_type, leadspeek_users.* from leadspeek_users where leadspeek_type = 'simplifi' limit 1;
 select active,disabled,active_user, CONVERT(AES_DECRYPT(FROM_bASE64(campaign_name), '8e651522e38256f2') USING utf8mb4), leadspeek_type, leadspeek_users.* from leadspeek_users where leadspeek_type = 'predict';
-select * from leadspeek_business where leadspeek_api_id in (
-	select leadspeek_api_id from leadspeek_users where leadspeek_type = 'predict'
-);
+select * from leadspeek_business where leadspeek_api_id = 10122196;
 
 
 
