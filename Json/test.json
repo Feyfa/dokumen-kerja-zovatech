@@ -1,126 +1,123 @@
-[
-    {
-        "name": "Google Sheet",
-        "description": "",
-        "logo": "fa-brands fa-google-drive",
-        "active": "3",
-        "slug": "googlesheet",
-        "custom_icon": null,
-        "custom_description": null,
-        "custom_img": null,
-        "custom_name": null,
-        "custom_slug": null
-    },
-    {
-        "id": 1,
-        "name": "Sendgrid",
-        "slug": "sendgrid",
-        "logo": "fa-solid fa-cloud-arrow-up",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": null,
-        "created_at": "2023-10-17T22:11:58.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": null,
-        "custom_description": null
-    },
-    {
-        "id": 4,
-        "name": "Zapier/Webhook",
-        "slug": "zapier",
-        "logo": "fa-solid fa-link",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": null,
-        "created_at": "2024-11-26T17:58:26.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": null,
-        "custom_description": null
-    },
-    {
-        "id": 7,
-        "name": "Kartra",
-        "slug": "kartra",
-        "logo": "fa-solid fa-k",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": null,
-        "created_at": "2024-11-26T17:58:26.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": null,
-        "custom_description": null
-    },
-    {
-        "id": 8,
-        "name": "ClickFunnels",
-        "slug": "clickfunnels",
-        "logo": "fas fa-mouse-pointer",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": "[{\"name\":\"First Name\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Last Name\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Email\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Phone Number\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Id Campaign\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Id Contact\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Click Date\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Email 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Phone 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Country\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"State\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"City\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Postal Code\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Address 1\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Address 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Keyword\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Employee ID\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Company Name\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Company Website\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Number of Employees\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Sales Volume\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Year Founded\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Job Title\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Level\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Job function\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Headquartes Branch\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"NAICS Code\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Last Seen Date\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Linked In\",\"disabled\":false,\"type\":\"b2b\"}]",
-        "created_at": "2024-11-26T17:58:26.000000Z",
-        "custom_name": "Click Funnels",
-        "custom_slug": "",
-        "custom_icon": "",
-        "custom_img": "https://cdn.worldvectorlogo.com/logos/click-funnels.svg",
-        "custom_description": ""
-    },
-    {
-        "id": 5,
-        "name": "MailBoxPower",
-        "slug": "mailboxpower",
-        "logo": "fa-regular fa-envelope-open",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": null,
-        "created_at": "2024-11-26T17:58:26.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": null,
-        "custom_description": null
-    },
-    {
-        "id": 3,
-        "name": "GoHighLevel",
-        "slug": "gohighlevel",
-        "logo": "fas fa-angle-double-up",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": "[{\"name\":\"First Name\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Last Name\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Email\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Phone Number\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Campaign Id\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Contact Id\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Click Date\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Email 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Phone 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Country\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"State\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"City\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Postal Code\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Address 1\",\"disabled\":true,\"type\":\"general\"},{\"name\":\"Address 2\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Keyword\",\"disabled\":false,\"type\":\"general\"},{\"name\":\"Employee ID\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Company\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Company Website\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Number of Employees\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Sales Volume\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Year Founded\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Job Title\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Level\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Job function\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Headquartes Branch\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"NAICS Code\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Last Seen Date\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Linked In\",\"disabled\":false,\"type\":\"b2b\"},{\"name\":\"Identification\",\"disabled\":false,\"type\":\"advance\",\"category\":\"identification\"},{\"name\":\"Contact Information\",\"disabled\":false,\"type\":\"advance\",\"category\":\"contactInformation\"},{\"name\":\"House and Real Estate\",\"disabled\":false,\"type\":\"advance\",\"category\":\"houseAndRealEstate\"},{\"name\":\"Financial Information\",\"disabled\":false,\"type\":\"advance\",\"category\":\"financialInformation\"},{\"name\":\"Household Information\",\"disabled\":false,\"type\":\"advance\",\"category\":\"householdInformation\"},{\"name\":\"Interests and Affinities\",\"disabled\":false,\"type\":\"advance\",\"category\":\"interestsAndAffinities\"},{\"name\":\"Occupation\",\"disabled\":false,\"type\":\"advance\",\"category\":\"occupation\"},{\"name\":\"Marketing Indicators\",\"disabled\":false,\"type\":\"advance\",\"category\":\"marketingIndicators\"},{\"name\":\"Location and Census Data\",\"disabled\":false,\"type\":\"advance\",\"category\":\"locationAndCensusData\"},{\"name\":\"Miscellaneous\",\"disabled\":false,\"type\":\"advance\",\"category\":\"miscellaneous\"}]",
-        "created_at": "2024-02-25T18:29:47.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": null,
-        "custom_description": null
-    },
-    {
-        "id": 9,
-        "name": "Agency Zoom",
-        "slug": "agencyzoom",
-        "logo": "fa-solid fa-diagram-project",
-        "type": "mail",
-        "status": 1,
-        "referralcode": "",
-        "custom_fields": "",
-        "created_at": "2025-09-11T16:19:22.000000Z",
-        "custom_name": null,
-        "custom_slug": null,
-        "custom_icon": null,
-        "custom_img": "https://emmspaces.nyc3.cdn.digitaloceanspaces.com/systems/agencyzoom_logo.png",
-        "custom_description": null
+// saat create zapie in campaign
+{
+    "all": {
+        "id": 1169, // campaign id
+        "company_id": 164, // company agenc
+        "integration_slug": "zapier", // integration slug
+        "zapier_webhook": [ // list webhook zapie
+            "https://hooks.zapier.com/hooks/catch/19216083/jidan1/",
+            "https://hooks.zapier.com/hooks/catch/19216083/jidan2/",
+            "https://hooks.zapier.com/hooks/catch/19216083/jidan3/",
+            "https://hooks.zapier.com/hooks/catch/19216083/jidan4/",
+            "https://hooks.zapier.com/hooks/catch/19"
+        ],
+        "zapier_tags": [ // list zapier tags
+            "agies",
+            "jidan",
+            "rifqi",
+            "dimas",
+            "system out println"
+        ],
+        "zapier_is_active": 1,
+        "zapier_test_enable": 0,
+        "leadspeek_api_id": "81087324",
+        "campaign_type": "site_id , search_id , enhance , b2b", // campaign type
+        "company_id_zap": 165 // client company id
     }
-]
+}
+{
+    "all": {
+        "id": 1171,
+        "company_id": 164,
+        "integration_slug": "zapier",
+        "zapier_webhook": [
+            "https://hook.com/jidan1/",
+            "https://hook.com/jidan2/",
+            "https://hook.com/jidan3/"
+        ],
+        "zapier_tags": [
+            "jidan",
+            "agies"
+        ],
+        "zapier_is_active": 1,
+        "zapier_test_enable": 0,
+        "leadspeek_api_id": "52418724",
+        "campaign_type": "site_id",
+        "company_id_zap": 167
+    }
+}
+{
+    "all": {
+        "id": 394,
+        "company_id": 164,
+        "integration_slug": "gohighlevel",
+        "ghl_tags": [
+            "PTQZ2ckw1TAw7dotHmHt|account-created",
+            "AeXptJKVwWyxc4P0XkZ5|agies test",
+            "3sy5DDbaC7WrDlwYDVp0|agies test enhance",
+            "9VfxmrsdPB8W1FcYLe93|agies test b2b"
+        ],
+        "ghl_is_active": 1,
+        "company_parent_id": 165,
+        "leadspeek_api_id": "486076",
+        "status_keyword_to_tags": true
+    }
+}
+
+
+{
+    "all": {
+        "id": 394,
+        "company_id": 164,
+        "integration_slug": "mailboxpower",
+        "mbp_groups": [
+            "195234|C",
+            "195236|C#"
+        ],
+        "mbp_states": [
+            "AR"
+        ],
+        "mbp_zip": null,
+        "mbp_options": "state",
+        "mbp_is_active": 1,
+        "company_parent_id": 165,
+        "leadspeek_api_id": "486076"
+    }
+}
+
+{
+    "all": {
+        "id": 394,
+        "company_id": 164,
+        "integration_slug": "agencyzoom",
+        "agencyzoom_webhook": [
+            "https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d807",
+            "https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d808"
+        ],
+        "agencyzoom_is_active": 1,
+        "agencyzoom_test_enable": 0,
+        "leadspeek_api_id": "486076",
+        "company_id_agencyzoom": 165
+    }
+}
+
+{
+    "all": {
+        "id": 1169,
+        "company_id": "164",
+        "leadspeek_api_id": "81087324",
+        "integration_slug": "zapier",
+        "zapier_webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "zapier_tags": [
+            "jidan",
+            "bima"
+        ],
+        "zapier_is_active": true,
+        "zapier_test_enable": false,
+        "campaign_type": "site_id",
+        "company_id_zap": 165
+    }
+}

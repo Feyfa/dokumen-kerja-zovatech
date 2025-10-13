@@ -1,0 +1,158 @@
+URL
+https://aaa.com/api/v1/developer/client/integrations/{userid}
+
+Header
+Host: sitesettingsapi.com
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+
+Response
+{
+  "status": "success",
+  "message": "",
+  "data": {
+    "mailboxpower": {
+      "apikey": "EIFADDEKUBYPQGF",
+      "enable": true,
+      "enable_on_campaign": true
+    },
+    "leadconnector": {
+      "apikey": "URGREVNUQEYBJ6I",
+      "enable": true,
+      "enable_on_campaign": true
+    },
+    "zapier": {
+      "webhook": [
+        "https://feyfa.github.com",
+        "https://ecommerce-frontend-delta-seven.vercel.app"
+      ],
+      "enable": true,
+      "enable_on_campaign": true
+    }
+  },
+  "status_code": 200
+}
+
+=============================================
+
+URL
+https://aaa.com/api/v1/developer/client/integrations/{userid}
+
+Header
+Host: sitesettingsapi.com
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+Content-Type: application/json
+
+Request
+{
+    "mailboxpower": {
+        "apikey": "EIFADDEKUBYPQGF",
+        "enable": true,
+        "enable_on_campaign": true
+    },
+    "leadconnector": {
+        "apikey": "URGREVNUQEYBJ6I",
+        "enable": true,
+        "enable_on_campaign": true
+    },
+    "zapier": {
+        "webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "enable": true,
+        "enable_on_campaign": true
+    }
+}
+
+Response
+{
+    "status": "success",
+    "message": "Save Integration Successfully.",
+    "status_code": 200
+}
+
+=============================================
+
+$this->inserLog($request, 400, 'error', 'Company ID Root Empty', $func);
+return response()->json([
+    'status' => 'error',
+    'message' => "Company ID Root Empty",
+    'status_code' => 400,
+], 400);
+
+Get Integrations Campaign
+
+URL
+https://aaa.com/api/v1/developer/campaign/integrations/{campaignid}
+
+Header
+Host: sitesettingsapi.com
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+Content-Type: application/json
+
+Response
+{
+  "status": "success",
+  "message": "",
+  "data": {
+    "zapier" {
+        "webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "tags": [
+            "agies",
+            "agies",
+            "agies",
+        ]
+        "enable": true
+    },
+    "agencyzoom" {
+        "webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "enable": true
+    }
+  },
+  "status_code": 200
+}
+
+Create Integrations Campaign
+
+URL
+https://aaa.com/api/v1/developer/campaign/integrations/{campaignid}
+
+Header
+Host: sitesettingsapi.com
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+Content-Type: application/json
+
+Request
+{
+    "zapier": {
+        "webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "tags": [
+            "jidan",
+            "bima",
+        ]
+        "enable": true,
+    },
+    "agencyzoom": {
+        "webhook": [
+            "https://feyfa.github.com",
+            "https://ecommerce-frontend-delta-seven.vercel.app"
+        ],
+        "enable": true,
+    }
+}
+
+Response
+{
+    "status": "success",
+    "message": "Save Integration Successfully.",
+    "status_code": 200
+}
