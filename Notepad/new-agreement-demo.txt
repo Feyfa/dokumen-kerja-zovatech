@@ -1,0 +1,35 @@
+=======KONSEP=======
+UserSetup.vue
+- ThirdStep.vue
+- ExistingCreditCard.vue
+- UpdateCreditCard.vue
+- FirstStep
+- SecondStep
+- FinishStep.vue
+
+struktur di agency yang sudah bayar saat create agency oleh root
+1 [ExistingCreditCard.vue , UpdateCreditCard.vue]
+2 [FirstStep.vue , SecondStep.vue]
+3 [FinishStep.vue]
+- ExistingCreditCard.vue = userServiceAgreementConfirm ✅
+- UpdateCreditCard.vue = processUpdateCard
+
+struktur di agency yang belum bayar di awal
+1 [ThirdStep.vue]
+2 [FirstStep.vue , SecondStep.vue]
+3 [FinishStep.vue]
+- ThirdStep.vue = paymentcustomersetup ✅
+
+struktur di client
+1 [FirstStep.vue , SecondStep.vue]
+2 [ThirdStep.vue]
+3 [FinishStep.vue]
+
+Aggreement Credit Card Letak File Nya Di = ServiceBillingAgreement.vue -> HtmlTemplateRenderer.vue
+nanti bakal ambil raw htmlnya di FileController@getDocumentAgreement dan bakal membaca dari table agreement_files
+=======KONSEP=======
+
+=======CATATAN=======
+configuration/onboarding/get?companyID=766&companyRootID=22&settingname=agencyonboardingcustom
+=======CATATAN=======
+if (!is_null($file_path) && !is_null($file_url)) {
