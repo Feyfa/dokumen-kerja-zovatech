@@ -1,0 +1,8 @@
+[
+    'username' => 'fisikamodern00+1760427646@gmail.com', // email users
+    'password' => '1234561', // password users
+    'gtoken' => NULL, // token untuk recaptcha
+    'domainName' => 'jidanagencyemm44.emmsandbox.com', // url ketika login, ini tidak kepakai lagi ❌
+    'ownedcompanyid' => 870, // company owner pemilik domain, bisa agency atau root
+    'companyrootid' => 22, // company root id
+]

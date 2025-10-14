@@ -32,4 +32,137 @@ nanti bakal ambil raw htmlnya di FileController@getDocumentAgreement dan bakal m
 =======CATATAN=======
 configuration/onboarding/get?companyID=766&companyRootID=22&settingname=agencyonboardingcustom
 =======CATATAN=======
-if (!is_null($file_path) && !is_null($file_url)) {
+
+ctrl + alt + bawah/atas di dbeaver itu seperti ctrl + shift + bawah/atas di vsc
+ctrl + shift + bawah/atas di dbeaver itu seperti alt + bawah/atas di vsc
+
+jidanagencyemm41.emmsandbox.com
+c:/wamp64/www/emm-sandbox-app/data/public/
+
+info([
+    'function' => __FUNCTION__,
+    'services.passport.login_endpoint' => config('services.passport.login_endpoint'),
+    'services.passport.client_id' => config('services.passport.client_id'),
+    'services.passport.client_secret' => config('services.passport.client_secret'),
+    'request->username' => $request->username,
+    'companyrootid' => $companyrootid,
+    'username' => Encrypter::encrypt($request->username) . '|' . $companyrootid,
+    'password' => $request->password,
+]);
+
+data\vendor\laravel\passport\src\Bridge\UserRepository.php
+
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-627 = "feature new agreement for new agency"
+JD-TASK-EMM-627-DEV-SYNC
+
+FILE
+FRONT
+* front\src\components\HtmlTemplateRenderer.vue
+* front\src\components\Pages\ProfileSetup\ExistingCreditCard.vue
+* front\src\components\Pages\ProfileSetup\UpdateCreditCard.vue
+* front\src\components\Pages\ServicesAgreement\MarketingServicesAgreementDeveloper.vue
+* front\src\components\SidebarPlugin\SideBar.vue
+* front\src\pages\Modules\Auth\User\CardSetting.vue
+* front\src\pages\Modules\Auth\User\Includes\UserSetup\ThirdStep.vue
+* front\src\pages\Modules\NoAuth\ServiceBillingAgreement.vue
+* front\src\shared\constants.js
+* front\src\store\store.js
+
+DATA
+* data\app\Services\AgreementService.php
+* data\routes\api.php
+* data\app\Models\User.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\GeneralController.php
+* data\app\Http\Controllers\PaymentController.php
+
+
+# Komponen Sistem Operasi
+Sistem operasi terdiri dari beberapa komponen utama yang bekerja sama untuk mengatur sumber daya komputer. Komponen-komponen tersebut adalah:
+
+1. Manajemen Proses
+Mengatur semua proses (program yang sedang berjalan).
+Tugasnya meliputi:
+* Membuat dan menghapus proses.
+* Menjeda dan melanjutkan proses.
+* Menyediakan mekanisme sinkronisasi dan komunikasi antarproses.
+
+2. Manajemen Memori Utama
+Mengatur penggunaan memori utama oleh proses-proses yang berjalan.
+Tugasnya:
+* Menentukan bagian memori yang sedang digunakan dan oleh siapa.
+* Mengalokasikan dan membebaskan memori sesuai kebutuhan proses.
+
+3. Manajemen File
+Mengatur penyimpanan dan pengelolaan data dalam bentuk file.
+Tugasnya:
+* Membuat dan menghapus file serta direktori.
+* Melakukan backup file ke media penyimpanan lain.
+
+4. Manajemen Input/Output (I/O)
+Mengatur komunikasi antara sistem dan perangkat I/O.
+Tugasnya:
+* Mengatur sistem buffer dan cache.
+* Menyediakan antarmuka device driver.
+
+5. Manajemen Penyimpan Sekunder
+Mengatur penyimpanan permanen seperti hard disk.
+Tugasnya:
+* Mengelola ruang kosong.
+* Menjadwalkan penggunaan disk.
+
+6. Sistem Jaringan (Sistem Terdistribusi)
+Memungkinkan komunikasi antar komputer melalui jaringan.
+Keuntungannya:
+* Meningkatkan kecepatan komputasi.
+* Meningkatkan ketersediaan data.
+* Meningkatkan keandalan sistem.
+
+7. Sistem Proteksi
+Mengontrol akses terhadap sumber daya agar aman dari penyalahgunaan.
+Tujuannya:
+* Membedakan penggunaan sah dan tidak sah.
+* Menetapkan aturan proteksi sistem.
+
+8. Sistem Command Interpreter (Shell)
+Menjadi antarmuka bagi pengguna untuk memberikan perintah ke sistem operasi.
+Fungsinya:
+* Menerjemahkan perintah pengguna.
+* Menjalankan perintah seperti manajemen file, proses, memori, dan jaringan.
+
+
+#Struktur Sistem Operasi
+Struktur sistem operasi menjelaskan bagaimana komponen-komponen tersebut disusun dan saling berinteraksi. Beberapa struktur utama yaitu:
+
+1. Struktur Sederhana (Contoh: MS-DOS)
+* Tidak memiliki pemisahan modul yang jelas.
+* Semua fungsi sistem operasi saling terhubung langsung dengan perangkat keras.
+* Kelemahan: sulit dikembangkan dan tidak aman.
+
+2. Struktur UNIX (Dua Lapisan)
+* Terdiri dari dua bagian utama:
+    * Kernel: mengatur CPU, memori, sistem file, dan proses.
+    * Program Sistem: berisi utilitas untuk pengguna.
+* Kernel berfungsi sebagai inti dari sistem operasi.
+
+3. Pendekatan Berlapis (Layered Approach)
+* Sistem dibagi menjadi beberapa lapisan (layer).
+* Lapisan paling bawah: perangkat keras (hardware).
+* Lapisan paling atas: antarmuka pengguna (user interface).
+* Setiap lapisan hanya berinteraksi dengan lapisan di atas dan bawahnya.
+* Contoh: sistem THE, OS/2, dan UNIX modern.
+* Kelebihan: lebih mudah dikelola, dikembangkan, dan diuji.
+* Kekurangan: bisa lebih lambat karena setiap lapisan harus berinteraksi berurutan.
+
+4. Mesin Virtual (Virtual Machine)
+* Membuat “ilusi” seolah-olah setiap pengguna memiliki komputer sendiri.
+* Contohnya: IBM VM System dan Java Virtual Machine (JVM).
+* Kelebihan:
+    * Aman karena tiap mesin virtual terisolasi.
+    * Cocok untuk riset dan pengembangan sistem operasi.
+* Kekurangan:
+    * Implementasinya kompleks dan memerlukan sumber daya besar.
+
