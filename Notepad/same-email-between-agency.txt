@@ -6,3 +6,18 @@
     'ownedcompanyid' => 870, // company owner pemilik domain, bisa agency atau root
     'companyrootid' => 22, // company root id
 ]
+
+
+===============RULE===============
+CLIENT
+- email client di dalam platform agency tidak boleh sama dengan client lain dan agency/admin itu sendiri
+
+
+TEMPAT UPDATE
+1. /configuration/user/update 
+    - di agency list saat update client
+    - di client management
+2. /user/update 
+    - "one"
+    - di personal profile nya saat login client
+===============RULE===============

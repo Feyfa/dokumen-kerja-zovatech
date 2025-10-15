@@ -90,3 +90,96 @@ where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4)
 
 
 
+
+
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(url_code), '8e651522e38256f2') USING utf8mb4) as url_code,
+	lu.* 
+from leadspeek_users as lu
+where leadspeek_api_id = 83117508;
+
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email,
+	user_type,
+	company_id,
+	company_parent,
+	company_root_id,
+	active,
+	"============" as divider,
+	users.* 
+from users 
+where company_id = 22 and active = 'T';
+
+
+$chkEmailExist = User::where('email',Encrypter::encrypt($chkusrname))
+ ->where(function ($query) use ($ownedcompanyid) {
+    $query->where(function ($query) use ($ownedcompanyid) {
+        $query->whereIn('user_type',['user','userdownline'])
+              ->where('company_id',$ownedcompanyid)
+              ->where('active','T');
+    })->orWhere(function ($query) use ($ownedcompanyid) {
+        $query->where('user_type','client')
+              ->where('company_parent',$ownedcompanyid)
+              ->where('active','T');
+    });
+ })
+ ->get();
+
+
+SET @ownedcompanyid := '';
+SET @idsys := '';
+
+select 
+	user_type,
+	company_id,
+	company_parent,
+	company_root_id,
+	active,
+	"============" as divider,
+	users.* 
+from users 
+where 
+	(
+		-- check email ini sudah dipakai di platform ini atau belom		
+		
+	)
+	or
+	(
+		-- check email ini sudah dipakai di root atau sales belom
+	)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
