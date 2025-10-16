@@ -71,21 +71,18 @@ select
 	users.* 
 from users 
 where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in (
-	'fisikamodern00+dimas@gmail.com',
-	'fisikamodern00+ahmad@gmail.com'
+	'chou@yopmail.com'
 );
 
 select 
 	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email_dec,
-	email,
+	user_type,
+	company_id,
 	password,
 	tfa_active,
 	users.* 
 from users 
-where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in (
-	'fisikamodern00+dimas@gmail.com',
-	'fisikamodern00+ahmad@gmail.com'
-);
+where company_id = 164 and active = 'T';
 
 
 
@@ -108,7 +105,7 @@ select
 	"============" as divider,
 	users.* 
 from users 
-where company_id = 22 and active = 'T';
+where company_id in (164) and active = 'T';
 
 
 $chkEmailExist = User::where('email',Encrypter::encrypt($chkusrname))
@@ -126,9 +123,23 @@ $chkEmailExist = User::where('email',Encrypter::encrypt($chkusrname))
  ->get();
 
 
-SET @ownedcompanyid := '';
-SET @idsys := '';
+-- fisikamodern00@gmail.com
+-- harrison+bestsales@exactmatchmarketing.com
+-- daniel+testsales1041524@danielswick.com
+-- jedundun314+root@gmail.com
+-- fisikamodern00+juukid@gmail.com
+-- fisikamodern00+jidansales@gmail.com
+-- fisikamodern00+jidanroot2@gmail.com
+-- fisikamodern00+jidansales2@gmail.com
+-- fisikamodern00+jidansales3@gmail.com
+-- fisikamodern00+jidansales4@gmail.com
+-- fisikamodern00+adminroot1update@gmail.com
+-- fisikamodern00+jidansales5@gmail.com
+-- fisikamodern00+jidansales6update@gmail.com
+-- fisikamodern00+rootdom@gmail.com
+-- fisikamodern00+jidandomsales@gmail.com
 
+SET @ownedcompanyid := 164, @idsys = 22, @email := 'chou@yopmail.com';
 select 
 	user_type,
 	company_id,
@@ -139,39 +150,35 @@ select
 	users.* 
 from users 
 where 
+	active = 'T' and
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = @email and
 	(
-		-- check email ini sudah dipakai di platform ini atau belom		
-		
-	)
-	or
-	(
-		-- check email ini sudah dipakai di root atau sales belom
-	)
+	 	(
+	 		-- check email platform/domain itu sendiri, sudah dipakai oleh agency, admin agency, client belum
+	 		user_type in ('userdownline', 'user', 'client') and 
+			(company_id = @ownedcompanyid or company_parent = @ownedcompanyid)
+		)
+		or
+		(
+			-- check email ini sudah dipakai di root atau sales belom
+			user_type in ('userdownline', 'user', 'sales') and
+			company_id = @idsys
+		)
+	);
+
+select domain from companies where id = 22;
 
 
 
 
 
 
+SELECT * FROM transkrip_nilai WHERE nim = '2301001';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+UPDATE mahasiswa
+SET alamat = 'Bandung'
+WHERE nim = '2301001';
 
 
 

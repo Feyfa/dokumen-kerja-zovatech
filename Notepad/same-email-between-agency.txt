@@ -21,3 +21,55 @@ TEMPAT UPDATE
     - "one"
     - di personal profile nya saat login client
 ===============RULE===============
+
+===============CREATE===============
+1. AGENCY CREATE CLIENT VALIDATION
+- pakai email root ✅, admin root ✅, sales ✅ 
+- pakai email agency ✅, admin agency ✅ , client ✅ di dalam platform
+
+2. AGENCY UPDATE CLIENT VALIDATION
+- pakai email root ✅, admin root ✅, sales ✅   
+- pakai email agency ✅, admin agency ✅, client ✅ di dalam platform
+
+Error Ketika Email Sudah Dipakai Di Platform Lain
+This email address is already registered on another platform
+(1) email udah dipakai oleh root
+(2) email udah dipakai oleh admin root
+(3) email udah dipakai oleh sales
+(4) email udah dipakai oleh agency platform lain
+(5) email udah dipakai oleh admin agency platform lain
+(6) email udah dipakai oleh admin client platform lain
+
+Error Ketika Email Sudah Dipakai Di Platform Sendiri
+This email address is already registered on your platform
+- as a agency
+- as a admin agency
+- as a client
+- as a root
+- as a admin root
+- as a sales
+===============CREATE===============
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-631 = "- validation when create and update admin with active = T - validation when user register"
+JD-TASK-EMM-631-DEV-SYNC
+
+FILE
+FRONT
+* front\src\pages\Modules\NoAuth\AgencyRegister.vue
+* front\src\pages\Modules\NoAuth\Register.vue
+* front\src\pages\Modules\NoAuth\Login.vue
+
+DATA
+* data\app\Http\Controllers\AuthController.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\app\Http\Controllers\UserController.php
+* data\app\Models\User.php
+
+Berbeda dengan array biasa, ArrayList merupakan kelas bawaan Java dari package java.util yang lebih fleksibel karena ukuran elemennya bisa berubah-ubah secara dinamis.
+Kamu tidak perlu menentukan ukuran di awal, dan bisa menambah data kapan pun dengan mudah menggunakan metode .add().
+
+Selain .add(), ArrayList juga memiliki banyak metode praktis lainnya seperti .remove(), .get(), .size(), dan .contains() yang membuat manipulasi data menjadi jauh lebih mudah dibanding array biasa.
+
+Namun, karena lebih kompleks, ArrayList sedikit lebih lambat dibanding array biasa dan hanya bisa menyimpan objek (bukan tipe primitif seperti int atau char secara langsung — harus pakai Integer, Character, dll).
