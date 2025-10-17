@@ -36,3 +36,28 @@ where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4)
 );
 
 select * from integration_list;
+
+
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 899;
+
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+where CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'gohlcustomfields';
+
+
+
+

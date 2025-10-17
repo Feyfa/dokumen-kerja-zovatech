@@ -73,3 +73,22 @@ Kamu tidak perlu menentukan ukuran di awal, dan bisa menambah data kapan pun den
 Selain .add(), ArrayList juga memiliki banyak metode praktis lainnya seperti .remove(), .get(), .size(), dan .contains() yang membuat manipulasi data menjadi jauh lebih mudah dibanding array biasa.
 
 Namun, karena lebih kompleks, ArrayList sedikit lebih lambat dibanding array biasa dan hanya bisa menyimpan objek (bukan tipe primitif seperti int atau char secara langsung — harus pakai Integer, Character, dll).
+
+
+client1760672623
+client1760672623
+fisikamodern00+client1760672623@gmail.com
+
+
+
+root = daniel+emmsandbox@exactmatchmarketing.com
+admin root = fisikamodern00@gmail.com
+agency = harrison+agsbxnormal@exactmatchmarketing.com
+admin = daniel+emmsandbox2@exactmatchmarketing.com
+sales = harrison+bestsales@exactmatchmarketing.com
+
+AGENCY SANDBOX NORMAL
+841490382e243d4f6f6077595ed1c4b7af56067817f47a5b589f9be1add922d25507e3d406a37eb0ef21028b42c6fcd6c2140ac11f24b5f2dcb0022100c21788f8f6c668e14c32d21111c6a0331362ff87c7413bf5e820f8b8dbda3707b6b998
+
+MUHAMMAD JIDAN
+2592dd541b9d67cf771dead47390d2852604d18e4363b3d92846de6818e74abca17002134eac6425ef1a4df4b95d294278a089567500a0e485e287304535060fd0e3463c6edf40b30f4460a8705f5f67019deb1139489b8e3fbf4e6086b43166b9

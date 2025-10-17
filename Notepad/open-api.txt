@@ -1,158 +1,78 @@
-URL
-https://aaa.com/api/v1/developer/client/integrations/{userid}
+=============YANG HARUS DIKERJAKAN=============
+1. buat get integration campaign di controller dan service ✅
+2. buat create integration campaign di controller dan service ✅ 
 
-Header
-Host: sitesettingsapi.com
-Authorization: Bearer <YOUR_ACCESS_TOKEN>
+3. buat list tags zapier integration client di controller dan service 
 
-Response
-{
-  "status": "success",
-  "message": "",
-  "data": {
-    "mailboxpower": {
-      "apikey": "EIFADDEKUBYPQGF",
-      "enable": true,
-      "enable_on_campaign": true
-    },
-    "leadconnector": {
-      "apikey": "URGREVNUQEYBJ6I",
-      "enable": true,
-      "enable_on_campaign": true
-    },
-    "zapier": {
-      "webhook": [
-        "https://feyfa.github.com",
-        "https://ecommerce-frontend-delta-seven.vercel.app"
-      ],
-      "enable": true,
-      "enable_on_campaign": true
-    }
-  },
-  "status_code": 200
-}
+4. buat get integration client di controller dan service. jangan lupa tambahkan agencyzoom ✅
+5. buat create integration client di controller dan service. jangan lupa tambahkan agencyzoom 
+=============YANG HARUS DIKERJAKAN=============
 
-=============================================
-
-URL
-https://aaa.com/api/v1/developer/client/integrations/{userid}
-
-Header
-Host: sitesettingsapi.com
-Authorization: Bearer <YOUR_ACCESS_TOKEN>
-Content-Type: application/json
-
-Request
-{
-    "mailboxpower": {
-        "apikey": "EIFADDEKUBYPQGF",
-        "enable": true,
-        "enable_on_campaign": true
-    },
-    "leadconnector": {
-        "apikey": "URGREVNUQEYBJ6I",
-        "enable": true,
-        "enable_on_campaign": true
-    },
-    "zapier": {
-        "webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "enable": true,
-        "enable_on_campaign": true
-    }
-}
-
-Response
-{
-    "status": "success",
-    "message": "Save Integration Successfully.",
-    "status_code": 200
-}
-
-=============================================
-
-$this->inserLog($request, 400, 'error', 'Company ID Root Empty', $func);
-return response()->json([
-    'status' => 'error',
-    'message' => "Company ID Root Empty",
-    'status_code' => 400,
-], 400);
-
-Get Integrations Campaign
-
-URL
-https://aaa.com/api/v1/developer/campaign/integrations/{campaignid}
-
-Header
-Host: sitesettingsapi.com
-Authorization: Bearer <YOUR_ACCESS_TOKEN>
-Content-Type: application/json
-
-Response
-{
-  "status": "success",
-  "message": "",
-  "data": {
-    "zapier" {
-        "webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "tags": [
-            "agies",
-            "agies",
-            "agies",
-        ]
-        "enable": true
-    },
-    "agencyzoom" {
-        "webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "enable": true
-    }
-  },
-  "status_code": 200
-}
-
-Create Integrations Campaign
-
-URL
-https://aaa.com/api/v1/developer/campaign/integrations/{campaignid}
-
-Header
-Host: sitesettingsapi.com
-Authorization: Bearer <YOUR_ACCESS_TOKEN>
-Content-Type: application/json
-
-Request
+url : /developer/campaign/integrations/{campaignid}
+request : 
 {
     "zapier": {
-        "webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "tags": [
-            "jidan",
-            "bima",
-        ]
-        "enable": true,
+        "webhook": "required|array|min:1",
+        "tags": "required|array|min:1",
+        "enable": "boolean|default:false",
+        "send_test": "boolean|default:false"
     },
     "agencyzoom": {
-        "webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "enable": true,
+        "webhook": "required|array|min:1",
+        "enable": "boolean|default:false",
+        "send_test": "boolean|default:false"
     }
 }
 
-Response
+// ZAPIER REQUEST IN APP
 {
-    "status": "success",
-    "message": "Save Integration Successfully.",
-    "status_code": 200
+    "id": 1169,
+    "company_id": 164,
+    "integration_slug": "zapier",
+    "zapier_webhook": [
+        "https://jidan11.com",
+        "https://jidan21.com"
+    ],
+    "zapier_tags": [
+        "merdeka",
+        "hello"
+    ],
+    "zapier_is_active": 1,
+    "zapier_test_enable": 0,
+    "leadspeek_api_id": "81087324",
+    "campaign_type": "site_id",
+    "company_id_zap": 165
 }
+
+// AGENCYZOOM REQUEST IN APP
+{
+    "id": 1169,
+    "company_id": 164,
+    "integration_slug": "agencyzoom",
+    "agencyzoom_webhook": [
+        "https://agies1.com",
+        "https://agies2.app"
+    ],
+    "agencyzoom_is_active": 1,
+    "agencyzoom_test_enable": 0,
+    "leadspeek_api_id": "81087324",
+    "company_id_agencyzoom": 165
+}
+
+
+EMM-SANDBOX-APP 
+- JD-TASK-EMM-623
+- JD-TASK-EMM-623-DEV-SYNC
+
+COMMIT
+Open Api
+- create endpoint for create integration in campaign level (zapier, agencyzoom)
+- add integration agencyzoom when create integration in client level (agencyzoom)
+- create endpoint for get tags integration (zapier)
+
+FILE
+DATA
+* data\app\Http\Controllers\OpenApiController.php
+* data\routes\api.php
+* data\app\Services\OpenApi\OpenApiValidationService.php
+* data\app\Services\OpenApi\OpenApiIntegrationService.php
