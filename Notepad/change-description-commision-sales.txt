@@ -1,0 +1,99 @@
+=====YANG HARUS DIKERJAKAN=====
+1. ketika charge campaign (progress)
+"commision from {nama_agency} for campaign #{campaignid}"
+
+2. ketika topup data wallet atau ketika auto topup data wallet
+"commission from {nama_agency} for data wallet #{invoiceid}"
+
+3. ketika minimum spend transfer data wallet
+"commission from {nama_agency} for data wallet #{invoiceid}"
+=====YANG HARUS DIKERJAKAN=====
+
+====================
+ChargeClient()
+$sr_id = 0;
+$ae_id = 0;
+$ar_id = 0;
+$sr_fee = 0;
+$ae_fee = 0;
+$ar_fee = 0;
+$sr_transfer_id = '';
+$ae_transfer_id = '';
+$ar_transfer_id = '';
+
+$sr_id = $salesfeeresult->srID;
+$ae_id = $salesfeeresult->aeID;
+$ar_id = $salesfeeresult->arID;
+$sr_fee = $salesfeeresult->srFee;
+$ae_fee = $salesfeeresult->aeFee;
+$ar_fee = $salesfeeresult->arFee;
+$sr_transfer_id = $salesfeeresult->srTransferID;
+$ae_transfer_id = $salesfeeresult->aeTransferID;
+$ar_transfer_id = $salesfeeresult->arTransferID;
+====================
+
+====================
+transfer_commission_sales()
+$srID = 0;
+$aeID = 0;
+$arID = 0;
+$srFee = 0;
+$aeFee = 0;
+$arFee = 0;
+$srTransferID = '';
+$aeTransferID = '';
+$arTransferID = '';
+====================
+
+
+nama table 'leadspeek_invoices'
+sr_transfer_id varchar(100) DEFAULT NULL AFTER 'sr_fee'
+ae_transfer_id varchar(100) DEFAULT NULL AFTER 'ae_fee'
+ar_transfer_id varchar(100) DEFAULT NULL AFTER 'ar_fee'
+
+
+====================
+SKENARIO DI APP
+1. jika chargeClient/removeClient tanpa data wallet ✅
+2. jika topup data wallet, record sales nya di leadspeek_invoices ✅
+3. jika auto topup data wallet, record sales nya di leadspeek_invoices ✅
+4. jika chage client pakai data wallet. cuman balance lebih kecil dari cost agency dan data wallet stop continual agency manual bill F. karena sisanya bakal pakai application_fee_amount ✅
+5. jika bayar hutang minspend, lalu di transfer ke data wallet, record sales nya di leadspeek_invoices ✅
+6. jika agency manual bill T. cuman balance lebih kecil dari cost agency dan data wallet stop continual. karena sisanya bakal pakai cc agency ✅
+
+SKENARIO DI API
+1. jika auto topup prepaid campaign/process invoice tanpa data wallet ✅
+2. jika auto topup data wallet, record sales nya di leadspeek_invoices ✅
+3. jika auto topup prepaid campaign pakai data wallet. cuman balance lebih kecil dari cost agency dan data wallet stop continual agency manual bill F. karena sisanya bakal pakai application_fee_amount ✅
+4. jika kena minimum spend, maka transfer ke data wallet dan record sales nya di leadspeek_invoices ✅
+5. jika agency manual bill T. cuman balance lebih kecil dari cost agency dan data wallet stop continual. karena sisanya bakal pakai cc agency (test)
+6. saat auto topup campaign prepaid, jika berhasil charge selalu bersihkan payment_status client jika manual bill F. dan selalu bersihkan payment_status agency jika manual bill nya F ✅
+====================
+
+case nya adalah
+1. agency manual bill = 'F' 
+2. balance agency lebih kecil dari charge amount client
+3. agency stop continual = 'T'
+
+seharus nya ke
+
+
+1. jika agency manual bill nya 'F' dan berhasil charge di api. maka bersihkan payment status client nya 
+2. jika agency manual bill nya 'T' dan berhasil charge di api. maka bershikan payment status agency nya
+
+
+Commission from EzyLeads "Scout" powered by explaind-Daniew Swick/Chase Conner Leadspeek Locator 2327-#
+
+(
+    [0] => Commission from EzyLeads "Scout" powered by explaind
+    [1] => Daniew Swick/Chase Conner Leadspeek Locator 2327
+    [2] => #
+)
+
+//'description' => 'Commision from ' . $sale['company_name'] . '-' . $_client_name  . '-' . $_campaign_name . ' #' . $_leadspeek_api_id,
+
+$sale['company_name'] = 'EzyLeads "Scout" powered by explaind'
+$_client_name = Daniew Swick/Chase Conner Leadspeek Locator 2327
+$_leadspeek_api_id = ""
+
+karena di live ada campaign yang leadspeek_api_id nya kosong. makanya seolah olah ke force
