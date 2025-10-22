@@ -1,14 +1,15 @@
 use emm_sandbox;
+SET GLOBAL sql_mode = '';
 
 set @salt := '8e651522e38256f2';
 
 
-set @leadspeek_api_id := '26778152';
+set @leadspeek_api_id := '29484235';
 select * from topup_campaigns where leadspeek_api_id = @leadspeek_api_id order by created_at asc;
 select * from leadspeek_invoices where leadspeek_api_id = @leadspeek_api_id order by created_at asc;
 select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id;
 
-set @leadspeek_api_id2 := '75935502';
+set @leadspeek_api_id2 := '38625712';
 select active, disabled, active_user, leadspeek_users.* from leadspeek_users where leadspeek_api_id = @leadspeek_api_id2;
 select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id2;
 select * from leadspeek_invoices where leadspeek_api_id = @leadspeek_api_id2;
