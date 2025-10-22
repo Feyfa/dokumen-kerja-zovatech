@@ -97,3 +97,33 @@ $_client_name = Daniew Swick/Chase Conner Leadspeek Locator 2327
 $_leadspeek_api_id = ""
 
 karena di live ada campaign yang leadspeek_api_id nya kosong. makanya seolah olah ke force
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-637 = "change description when transfer comission sales"
+JD-TASK-EMM-637-DEV-SYNC
+
+FILE
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Models\LeadspeekInvoice.php
+* data\resources\views\emails\agencyprepaiddirectpayment.blade.php
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-637 = "change description when transfer comission sales"
+JD-TASK-EMM-637-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\MarketingController.php
+* app\Http\Controllers\WebhookController.php
+* app\Models\LeadspeekInvoice.php
+* resources\views\emails\agencyprepaiddirectpayment.blade.php
+
+DATABASE
+ALTER TABLE `leadspeek_invoices`
+ADD COLUMN `sr_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `sr_fee`,
+ADD COLUMN `ae_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `ae_fee`,
+ADD COLUMN `ar_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `ar_fee`;

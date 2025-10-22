@@ -60,19 +60,175 @@ request :
 }
 
 
-EMM-SANDBOX-APP 
-- JD-TASK-EMM-623
-- JD-TASK-EMM-623-DEV-SYNC
 
-COMMIT
-Open Api
-- create endpoint for create integration in campaign level (zapier, agencyzoom)
-- add integration agencyzoom when create integration in client level (agencyzoom)
-- create endpoint for get tags integration (zapier)
+
+
+
+
+ROUTE
+1. UNTUK MENDAPATKAN SEMUA LIST EVENTS
+- method: GET
+- endpoint: /developer/webhook/events
+- response:
+{
+    "status": "success",
+    "message": "",
+    "status_code": 200,
+    "data": [
+        {
+            "event": "invoice.succeeded",
+            "description": "Triggered when an invoice payment has succeeded."
+        },
+        {
+            "event": "invoice.payment_failed",
+            "description": "Triggered when an invoice payment fails."
+        }
+    ]
+}
+
+2. UNTUK MENDAPATKAN ENDPOINTS EVENT
+- method: GET
+- endpoint: /developer/webhook/endpoints
+- response:
+{
+    "status": "success",
+    "message": "",
+    "status_code": 200,
+    "data": [
+        {
+            "id": 12312,
+            "url": "https://clientdomain.com/webhook",
+            "events": [
+                "invoice.succeeded",
+                "invoice.payment_failed"
+            ]
+        }
+    ]
+}
+
+3. UNTUK MEMBUAT ENDPOINTS EVENTS
+- method: POST
+- endpoint: /developer/webhook/endpoints
+- request: 
+{
+    "url": "https://clientdomain.com/webhook",
+    "events": [
+        "invoice.succeeded",
+        "invoice.payment_failed"
+    ], // jika ingin salah satu
+    "events": ["*"]
+}
+- resonse:
+{
+    "status": "success",
+    "message": "create endpoints event successfully",
+    "status_code": 200,
+}
+
+
+4. UNTUK UPDATE ENDPOINT EVENTS
+method: PUT
+endpoint: /developer/webhook/endpoints/{id}
+- request:
+{
+    "url": "https://clientdomain.com/webhook",
+    "events": [
+        "invoice.succeeded",
+        "invoice.payment_failed"
+    ], // jika ingin salah satu
+    "events": ["*"]
+}
+- resonse:
+{
+    "status": "success",
+    "message": "update endpoints event successfully",
+    "status_code": 200,
+}
+
+5. UNTUK DELETE ENDPOINT EVENTS
+- method: DELETE
+- endpoint: /developer/webhook/endpoints/{id}
+- response:
+{
+    "status": "success",
+    "message": "delete endpoints event successfully",
+    "status_code": 200,
+}
+
+DATABASE
+1. `webhook_event_lists`
+- id UNSIGNED BIGINT AI
+- category ENUM('invoice')
+- event VARCHAR(100) DEFAULT NULL
+- description VARCHAR(100) DEFAULT NULL
+- active ENUM('T','F')
+- created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+- updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+2. 'webhook_event_endpoints'
+- id UNSIGNED BIGINT AI
+- company_id UNSIGNED BIGINT DEFAULT NULL
+- url VARCHAR(255) DEFAULT NULL
+- webhook_event_id TEXT DEFAULT NULL
+- created_at TIMESTAMP DEFAULT NULL
+- updated_at TIMESTAMP DEFAULT NULL
+
+TEMPATNYA DI APP
+1. di chargeClient (only siteid, enhance, b2b)
+2. di removeClient (only siteid, enhance, b2b)
+
+TEMPATNYA DI API
+1. di chargeClient (only siteid, enhance, b2b)
+2. di createInvoice (only siteid, enhance, b2b)
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-641 = "feat fire event webhook for invoice in open api"
+JD-TASK-EMM-641-DEV-SYNC
 
 FILE
 DATA
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\LeadspeekController.php
 * data\app\Http\Controllers\OpenApiController.php
 * data\routes\api.php
-* data\app\Services\OpenApi\OpenApiValidationService.php
-* data\app\Services\OpenApi\OpenApiIntegrationService.php
+* data\app\Jobs\WebhookSendJob.php
+* data\app\Models\WebhookEndpoint.php
+* data\app\Models\WebhookEvent.php
+* data\app\Services\OpenApi\OpenApiWebhookService.php
+
+EMM-SANDBOX-API
+JD-TASK-EMM-641 = "feat fire event webhook for invoice in open api"
+JD-TASK-EMM-641-DEV-SYNC
+
+FILE
+* app\Http\Controllers\MarketingController.php
+* app\Http\Controllers\WebhookController.php
+* app\Jobs\WebhookSendJob.php
+* app\Models\WebhookEndpoint.php
+* app\Models\WebhookEvent.php
+* app\Services\OpenApi\OpenApiWebhookService.php
+
+DATABASE
+CREATE TABLE IF NOT EXISTS `webhook_events` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category` enum('invoice') DEFAULT NULL,
+  `event` varchar(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `active` enum('T','F') DEFAULT 'T',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `webhook_events` (`id`, `category`, `event`, `description`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'invoice', 'invoice.succeeded', 'Triggered when an invoice payment has succeeded.', 'T', NOW(), NOW()),
+(2, 'invoice', 'invoice.payment_failed', 'Triggered when an invoice payment fails.', 'T', NOW(), NOW());
+
+CREATE TABLE IF NOT EXISTS `webhook_endpoints` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `company_id` bigint UNSIGNED DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `webhook_event_id` text,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

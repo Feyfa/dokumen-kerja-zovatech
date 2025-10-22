@@ -24,7 +24,7 @@ where
 	);
 
 select 
-	CONVERT(AES_DECRYPT(FROM_bASE64(oat.token), '8e651522e38256f2') USING utf8mb4) as token,
+	CONVERT(AES_DECRYPT(FROM_bASE64(oat.token), '8e651522e38256f2') USING utf8mb4) as token_dec,
 	oat.*
 from open_api_tokens as oat
 where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) in (
@@ -57,6 +57,35 @@ SELECT
 	setting_value
 FROM company_settings
 where CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'gohlcustomfields';
+
+select *
+from webhook_events;
+
+select * 
+from webhook_endpoints;
+
+select active, disabled, active_user, lu.*
+from leadspeek_users as lu
+where leadspeek_api_id = 26778152;
+
+select *
+from topup_campaigns
+where leadspeek_api_id = 29484235;
+
+SELECT * 
+FROM `leadspeek_invoices` 
+where leadspeek_api_id = 26778152;
+
+SELECT * 
+FROM `leadspeek_reports` 
+where leadspeek_api_id = 26778152;
+
+select * 
+from jobs;
+
+select *
+from users
+where company_id = 165;
 
 
 
