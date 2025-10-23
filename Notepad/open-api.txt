@@ -232,3 +232,229 @@ CREATE TABLE IF NOT EXISTS `webhook_endpoints` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+Route::get('/developer/contacts/campaign/{campaignid}', 'OpenApiController@getContactsByCampaign'); // get all contacts by campaign id ?page=1&limit=10&startdate='2023-05-09 00:00:00'&enddate='2023-05-10 00:00:00'
+Route::get('/developer/contacts/client/{clientid}', 'OpenApiController@getContactsByClient'); // get all contacts by client id ?page=1&limit=10&module='local|enhance|b2b'
+Route::get('/developer/contacts/{contactid}', 'OpenApiController@getContactById'); // find contact by id
+
+$taxBillInformation = array_filter([
+    $_tax_bill_mailing_address, // tax_bill_mailing_address
+    $_tax_bill_mailing_city, // tax_bill_mailing_city
+    !empty($_tax_bill_mailing_county) ? "{$_tax_bill_mailing_county} County" : null, // tax_bill_mailing_county
+    $_tax_bill_mailing_state, // tax_bill_mailing_state
+    trim(
+        $_tax_bill_mailing_zip . // tax_bill_mailing_zip
+        ($_tax_bill_mailing_zip && $_tax_bill_mailing_zip4 ? "-" : "") . // tax_bill_mailing_zip4
+        $_tax_bill_mailing_zip4, "-"
+    )
+]);  
+$taxBillInformationString = implode(", ", $taxBillInformation);
+
+
+$columns = $this->getColumnsQueryContacts($campaignType); info(['campaignType' => $campaignType,'columns' => $columns]);
+$contacts = LeadspeekReport::from('leadspeek_reports as lr')
+                            ->select($columns)
+                            ->join('leadspeek_users as lu', 'lu.leadspeek_api_id', '=', 'lr.leadspeek_api_id')
+                            ->leftJoin('person_advance_1 as pa1', 'pa1.person_id', '=', 'lr.person_id')
+                            ->leftJoin('person_b2b as pb', 'pb.person_id', '=', 'lr.person_id')
+                            ->where('lu.user_id', $client_id)
+                            ->where('lr.active', 'T');
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-643 = "open api get contacts details"
+JD-TASK-EMM-643-DEV-SYNC
+
+FILE
+DATA
+* data\app\Http\Controllers\OpenApiController.php
+* data\routes\api.php
+* data\app\Services\OpenApi\OpenApiContactsService.php
+
+1. untuk mendapatkan data by campaign id
+- method: GET
+- endpoint: http://datalocal.emmsandbox.com/api/v1/developer/contacts/campaign/37362347?page=1&limit=1&start_date=2020-10-22&end_date=2020-10-23
+- query parameter:
+    * page: optional, integer, minimum 1, default 1
+    * limit: optional, integer, minimum 1, default 10
+    * start_date: optional, date, format YYYY-MM-DD 
+    * end_date: optional, date, format YYYY-MM-DD
+- response: 
+{
+    "status": "success",
+    "message": "",
+    "status_code": 200,
+    "current_page": 1,
+    "last_page": 5,
+    "per_page": 1,
+    "total": 5,
+    "data": [
+        {
+            "campaign_id": "37362347",
+            "campaign_type": "enhance",
+            "contact_id": "5062871761140055",
+            "created": "2020-10-22",
+            "first_name": "Krista",
+            "last_name": "29467 Tropea Dr",
+            "email": "ptrhrt57@gmail.com",
+            "email2": "",
+            "phone": "5868567638",
+            "phone2": "5868557639",
+            "address2": "",
+            "city": "Warren",
+            "state": "MI",
+            "zipcode": "48092",
+            "keyword": "fashion",
+            "gender": "F",
+            "marital_status": "Married",
+            "phone3": "",
+            "dwelling_type": "Single Family",
+            "home_owner": "Home Owner",
+            "home_owner_ordinal": "4",
+            "length_of_residence": "7",
+            "home_price": "170000",
+            "home_value": "262200",
+            "median_home_value": "90000",
+            "living_sqft": "1688",
+            "year_built_original": "1965",
+            "year_built_range": "8",
+            "lot_number": "134",
+            "legal_description": "CARLETON ESTATES SUB. LOT 134 L.53 P.7-9",
+            "land_sqft": "9104",
+            "garage_sqft": "428",
+            "subdivision": "CARLETON ESTATES SUB",
+            "zoning_code": "R-1-C",
+            "household_income": "",
+            "median_household_income": "300000",
+            "household_net_worth": "F. $25,000 - $49,999",
+            "median_household_net_worth": "37500",
+            "discretionary_income": "H. $75,000-$99,999",
+            "credit_score_median": "625",
+            "credit_score_range": "",
+            "number_of_adults_household": "3",
+            "number_of_children_household": "4",
+            "number_of_persons_household": "2",
+            "children_aged_0_3_household": "",
+            "children_aged_4_6_household": "1",
+            "children_aged_7_9_household": "1",
+            "children_aged_10_12_household": "",
+            "children_aged_13_18_household": "",
+            "children_in_household": "1",
+            "cooking": "",
+            "gardening": "",
+            "music": "1",
+            "diy": "1",
+            "books": "1",
+            "travel_vacation": "",
+            "health_beauty_products": "",
+            "pet_owner": "",
+            "photography": "1",
+            "fitness": "1",
+            "epicurean": "",
+            "occupation_category": "Professional",
+            "occupation_type": "White Collar",
+            "occupation_detail": "Nurse (Registered)",
+            "magazine_subscriber": "",
+            "charity_interest": "1",
+            "likely_charitable_donor": "1",
+            "cbsa": "19820",
+            "census_block": "2007",
+            "census_block_group": "2",
+            "census_tract": "260900",
+            "voter": "",
+            "urbanicity": "4. Urban",
+            "tax_bill_mailing_information": "29467 Tropea Dr, Warren, Macomb County, MI, 48092-3322"
+        }
+    ]
+}
+
+
+2. untuk mendapatkan data by client id
+- method: GET
+- endpoint: http://datalocal.emmsandbox.com/api/v1/developer/contacts/client/282/b2b?page=1&limit=1&start_date=2020-01-17&end_date=2024-10-18
+- query parameter:
+    * page: optional, integer, minimum 1, default 1
+    * limit: optional, integer, minimum 1, default 10
+    * start_date: optional, date, format YYYY-MM-DD 
+    * end_date: optional, date, format YYYY-MM-DD
+- response: 
+{
+    "status": "success",
+    "message": "",
+    "status_code": 200,
+    "current_page": 1,
+    "last_page": 1,
+    "per_page": 1,
+    "total": 1,
+    "data": [
+        {
+            "campaign_id": "75935502",
+            "campaign_type": "b2b",
+            "contact_id": "9188471756889722",
+            "created": "2024-09-03",
+            "first_name": "Krista",
+            "last_name": "29467 Tropea Dr",
+            "email": "ptrhrt57@gmail.com",
+            "email2": "sadasd",
+            "phone": "5868567638",
+            "phone2": "5868557639",
+            "address2": "Address2",
+            "city": "Warren",
+            "state": "MI",
+            "zipcode": "48092",
+            "keyword": "fashion",
+            "employee_id": "594496130",
+            "company_name": "LIBERTY CHAPEL CHURCH",
+            "company_website": "libertychapelchurch.com",
+            "num_employees": "1 TO 49",
+            "sales_volume": "LESS THAN $500.000",
+            "year_founded": "0",
+            "job_title": "Office Manager",
+            "level": "MANAGER-LEVEL",
+            "job_function": "MANAGMENT",
+            "headquarters_branch": "0",
+            "naics_code": "813110",
+            "last_seen_date": "2001-01-01",
+            "linkedin ": "linkedin.com/in/michael-barbella-00166589"
+        }
+    ]
+}
+
+3. untuk mendapatkan data by client id
+- method: GET
+- endpoint: http://datalocal.emmsandbox.com/api/v1/developer/contacts/2180971750666737
+- response: 
+{
+    "status": "success",
+    "message": "",
+    "status_code": 200,
+    "data": {
+        "campaign_id": "75935502",
+        "campaign_type": "b2b",
+        "contact_id": "9188471756889722",
+        "created": "2024-09-03",
+        "first_name": "Krista",
+        "last_name": "29467 Tropea Dr",
+        "email": "ptrhrt57@gmail.com",
+        "email2": "sadasd",
+        "phone": "5868567638",
+        "phone2": "5868557639",
+        "address2": "Address2",
+        "city": "Warren",
+        "state": "MI",
+        "zipcode": "48092",
+        "keyword": "fashion",
+        "employee_id": "594496130",
+        "company_name": "LIBERTY CHAPEL CHURCH",
+        "company_website": "libertychapelchurch.com",
+        "num_employees": "1 TO 49",
+        "sales_volume": "LESS THAN $500.000",
+        "year_founded": "0",
+        "job_title": "Office Manager",
+        "level": "MANAGER-LEVEL",
+        "job_function": "MANAGMENT",
+        "headquarters_branch": "0",
+        "naics_code": "813110",
+        "last_seen_date": "2001-01-01",
+        "linkedin ": "linkedin.com/in/michael-barbella-00166589"
+    }
+}
