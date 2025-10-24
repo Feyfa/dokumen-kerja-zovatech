@@ -58,7 +58,7 @@ SET @company_id2 := 464;
 SELECT * FROM `topup_agencies` where company_id = @company_id2 order by id asc;
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id2 order by id asc;
 
-select * from users where company_id = @company_id2;
+select * from users where company_id = @company_id2 and user_type = 'userdownline';
 
 -- DATABASE YANG DITAMBAH
 ALTER TABLE `leadspeek_invoices`
@@ -75,6 +75,10 @@ select DATE_ADD('2025-10-21 11:32:40', interval 1 month) as nex_month;
 
 
 select * from module_settings;
+
+
+
+select * from bigdbm_locations where leads;
 
 
 
