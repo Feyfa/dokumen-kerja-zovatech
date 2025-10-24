@@ -58,6 +58,8 @@ SET @company_id2 := 464;
 SELECT * FROM `topup_agencies` where company_id = @company_id2 order by id asc;
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id2 order by id asc;
 
+select * from users where company_id = @company_id2;
+
 -- DATABASE YANG DITAMBAH
 ALTER TABLE `leadspeek_invoices`
 ADD COLUMN `sr_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `sr_fee`,
@@ -65,11 +67,14 @@ ADD COLUMN `ae_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `ae_fee`,
 ADD COLUMN `ar_transfer_id` VARCHAR(100) DEFAULT NULL AFTER `ar_fee`;
 -- DATABASE YANG DITAMBAH
 
+select * from leadspeek_users where company_id = @company_id2;
 
 select * from users where company_id = 164 and user_type = 'userdownline';
 select * from jobs;
-
 select DATE_ADD('2025-10-21 11:32:40', interval 1 month) as nex_month;
+
+
+select * from module_settings;
 
 
 

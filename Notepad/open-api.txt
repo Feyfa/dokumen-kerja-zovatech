@@ -458,3 +458,106 @@ DATA
         "linkedin ": "linkedin.com/in/michael-barbella-00166589"
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+1. Campaign Local
+{
+    "campaign_id": 11111111,
+    "campaign_name": "Campaign Dimas Local Update",
+    "url": "https://chatgpt.com", // string atau array
+    "enable_phone": "T",
+    "enable_home": "T",
+    "require_email": "T",
+    "reident_time_limit": "1 month",
+    "reidentified_contact": "T",
+    "installed_gtm": "T",
+    "advanced_information": [
+        "identification",
+        "contact",
+        "house_and_real_estate",
+        "financial",
+        "household",
+        "interests_and_affinities",
+        "occupation",
+        "marketing_indicator",
+        "location_and_cencus_data",
+        "miscellaneous"
+    ]
+}
+
+2. Campaign enhance
+{
+    "campaign_id": 11111112,
+    "campaign_name": "Campaign Dimas Enhance Update",
+    "search_keyword": "bugatti,mclaren,bmw,ferarri,lamborgini",
+    "enable_phone": "T",
+    "enable_home": "T",
+    "require_email": "T",
+    "reident_time_limit": "1 month",
+    "reidentified_contact": "T",
+    "userid_admin_gsheet": [
+        744,
+        750,
+        747
+    ],
+    "national_targeting": "T",
+    "state_targeting": "colorado,california",
+    "city_targeting": "Acampo, Aston, Adelanto, Arriba",
+    "zipcode_targeting": "45678",
+    "advanced_information": [
+        "identification",
+        "contact",
+        "house_and_real_estate",
+        "financial",
+        "household",
+        "interests_and_affinities",
+        "occupation",
+        "marketing_indicator",
+        "location_and_cencus_data",
+        "miscellaneous"
+    ]
+}
+
+2. Campaign b2b
+{
+    "campaign_id": 11111113,
+    "campaign_name": "Campaign Dimas B2B Update",
+    "search_keyword": "bugatti,mclaren,bmw,ferarri,lamborgini",
+    "enable_phone": "T",
+    "enable_home": "T",
+    "require_email": "T",
+    "reident_time_limit": "1 month",
+    "reidentified_contact": "T",
+    "userid_admin_gsheet": [
+        744,
+        750,
+        747
+    ],
+    "national_targeting": "T",
+    "state_targeting": "colorado,california",
+    "city_targeting": "Acampo, Aston, Adelanto, Arriba",
+    "zipcode_targeting": "45678",
+    "advanced_information": [ 
+        "company_name",
+        "company_email",
+        "company_phone",
+        "company_website",
+        "job_title",
+        "level",
+        "job_function",
+        "linkedin",
+        "num_employees",
+        "sales_volume",
+        "year_founded",
+        "last_seen_date"
+    ]
+}
