@@ -561,3 +561,22 @@ DATA
         "last_seen_date"
     ]
 }
+
+endpoint yang di perlukan
+1. get subaccount leadconnector
+METHOD: GET
+ENDPOINT: /developer/leadconnector/subaccount
+
+2. create iframe subaccount leadconnector
+METHOD: GET 
+ENDPOINT: /developer/leadconnector/subaccount/iframe
+REQUEST: 
+{
+    "user_id": "", required
+    "subaccount_id": "", required
+    "iframe_name": "", optional
+}
+
+3. remove iframe subaccount leadconnector
+METHOD: DELETE 
+ENDPOINT: /developer/leadconnector/subaccount/iframe/{clientid}

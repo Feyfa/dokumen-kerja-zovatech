@@ -445,17 +445,10 @@ private function dummySubAccounts($limit = 0, $skip = 0)
     $subAccounts = [];
     for($i = 1; $i <= 100; $i++)
     {
-        $subAccounts[] = [
-            'id' => $i,
-            'name' => "Sub Account $i"
-        ];
+        $subAccounts[] = ['id' => $i, 'name' => "Sub Account $i"];
     }
-
     $subAccounts = array_slice($subAccounts, $skip, $limit);
-
-    return [
-        'locations' => $subAccounts
-    ];
+    return ['locations' => $subAccounts];
 }
 
 DATA
