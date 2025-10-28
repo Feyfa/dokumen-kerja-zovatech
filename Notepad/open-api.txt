@@ -571,12 +571,25 @@ ENDPOINT: /developer/leadconnector/subaccount
 METHOD: GET 
 ENDPOINT: /developer/leadconnector/subaccount/iframe
 REQUEST: 
-{
+{ // nanti dari open api
     "user_id": "", required
     "subaccount_id": "", required
     "iframe_name": "", optional
+}
+{ // ini di core nya
+    "company_id": 165,
+    "company_parent": 164,
+    "custom_menu_name": null,
+    "user_ip": "180.243.8.21|Asia/Jakarta",
+    "location_id": "noFzNQNpn5cu6Pkuk08A"
 }
 
 3. remove iframe subaccount leadconnector
 METHOD: DELETE 
 ENDPOINT: /developer/leadconnector/subaccount/iframe/{clientid}
+REQUEST:
+{ // ini di core nya
+    "company_id": 165,
+    "company_parent": 164,
+    "user_ip": "180.243.8.21|Asia/Jakarta"
+}

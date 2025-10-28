@@ -1,123 +1,20 @@
-// saat create zapie in campaign
 {
-    "all": {
-        "id": 1169, // campaign id
-        "company_id": 164, // company agenc
-        "integration_slug": "zapier", // integration slug
-        "zapier_webhook": [ // list webhook zapie
-            "https://hooks.zapier.com/hooks/catch/19216083/jidan1/",
-            "https://hooks.zapier.com/hooks/catch/19216083/jidan2/",
-            "https://hooks.zapier.com/hooks/catch/19216083/jidan3/",
-            "https://hooks.zapier.com/hooks/catch/19216083/jidan4/",
-            "https://hooks.zapier.com/hooks/catch/19"
-        ],
-        "zapier_tags": [ // list zapier tags
-            "agies",
-            "jidan",
-            "rifqi",
-            "dimas",
-            "system out println"
-        ],
-        "zapier_is_active": 1,
-        "zapier_test_enable": 0,
-        "leadspeek_api_id": "81087324",
-        "campaign_type": "site_id , search_id , enhance , b2b", // campaign type
-        "company_id_zap": 165 // client company id
-    }
-}
-{
-    "all": {
-        "id": 1171,
-        "company_id": 164,
-        "integration_slug": "zapier",
-        "zapier_webhook": [
-            "https://hook.com/jidan1/",
-            "https://hook.com/jidan2/",
-            "https://hook.com/jidan3/"
-        ],
-        "zapier_tags": [
-            "jidan",
-            "agies"
-        ],
-        "zapier_is_active": 1,
-        "zapier_test_enable": 0,
-        "leadspeek_api_id": "52418724",
-        "campaign_type": "site_id",
-        "company_id_zap": 167
-    }
-}
-{
-    "all": {
-        "id": 394,
-        "company_id": 164,
-        "integration_slug": "gohighlevel",
-        "ghl_tags": [
-            "PTQZ2ckw1TAw7dotHmHt|account-created",
-            "AeXptJKVwWyxc4P0XkZ5|agies test",
-            "3sy5DDbaC7WrDlwYDVp0|agies test enhance",
-            "9VfxmrsdPB8W1FcYLe93|agies test b2b"
-        ],
-        "ghl_is_active": 1,
-        "company_parent_id": 165,
-        "leadspeek_api_id": "486076",
-        "status_keyword_to_tags": true
-    }
-}
-
-
-{
-    "all": {
-        "id": 394,
-        "company_id": 164,
-        "integration_slug": "mailboxpower",
-        "mbp_groups": [
-            "195234|C",
-            "195236|C#"
-        ],
-        "mbp_states": [
-            "AR"
-        ],
-        "mbp_zip": null,
-        "mbp_options": "state",
-        "mbp_is_active": 1,
-        "company_parent_id": 165,
-        "leadspeek_api_id": "486076"
-    }
-}
-
-{
-    "all": {
-        "id": 394,
-        "company_id": 164,
-        "integration_slug": "agencyzoom",
-        "agencyzoom_webhook": [
-            "https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d807",
-            "https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d808"
-        ],
-        "agencyzoom_is_active": 1,
-        "agencyzoom_test_enable": 0,
-        "leadspeek_api_id": "486076",
-        "company_id_agencyzoom": 165
-    }
-}
-
-{
-    "all": {
-        "id": 1169,
-        "company_id": "164",
-        "leadspeek_api_id": "81087324",
-        "integration_slug": "zapier",
-        "zapier_webhook": [
-            "https://feyfa.github.com",
-            "https://ecommerce-frontend-delta-seven.vercel.app"
-        ],
-        "zapier_tags": [
-            "jidan",
-            "bima"
-        ],
-        "zapier_is_active": true,
-        "zapier_test_enable": false,
-        "campaign_type": "site_id",
-        "company_id_zap": 165
-    }
+    "id": "1bc62eea-249d-4451-9bf0-6a27a6a070f5",
+    "icon": {
+        "name": "envelope-open-text",
+        "fontFamily": "fas"
+    },
+    "title": "Jidan ACH Businnes 164",
+    "url": "https://jidanach.ap.ngrok.io/sso?token=c8628a69f144248062dcc030b37bd28bfd977f01251620342265148fa3da2d50771707c850dc15575b825dda9c39098fd460885a0aed7e86ef23006f47f2418d7d23c0931231a3ef642556bb2c0e63b616f7cc3638dfe55a86c39acb980e65c6494e16f421abf20eca3a0ac9",
+    "order": 3,
+    "userRole": "all",
+    "showOnCompany": true,
+    "showOnLocation": false,
+    "showToAllLocations": false,
+    "locations": [],
+    "excludeLocations": [],
+    "openMode": "iframe",
+    "allowCamera": false,
+    "allowMicrophone": false,
+    "traceId": "159ac8ab-5379-4618-925e-ded20a290daa"
 }
