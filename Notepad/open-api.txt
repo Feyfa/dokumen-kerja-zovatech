@@ -593,3 +593,21 @@ REQUEST:
     "company_parent": 164,
     "user_ip": "180.243.8.21|Asia/Jakarta"
 }
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-653 = "open api create iframe client"
+JD-TASK-EMM-653-DEV-SYNC
+
+FILE
+DATA
+* data\app\Services\OpenApi\OpenApiLeadConnectorService.php
+* data\app\Http\Controllers\IntegrationController.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\routes\api.php
+
+
+
+
+Host: sitesettingsapi.com
+Authorization: Bearer <YOUR_ACCESS_TOKEN>
+Content-Type: application/json
