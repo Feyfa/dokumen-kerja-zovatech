@@ -38,7 +38,7 @@ where u.user_type in ('userdownline') and CONVERT(AES_DECRYPT(FROM_bASE64(u.emai
 	'support@exactmatchmarketing.com'
 );
 select * from users where id in (906);
-select * from companies where id in (164);
+select * from companies where id in (164);	
 select * FROM company_settings WHERE company_id in (735);
 SELECT
 	id,
@@ -83,7 +83,7 @@ select * from open_api_tokens where id = 283;
 --
 select * from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in ('fisikamodern00+timothy@gmail.com','fisikamodern00+kalimasad@gmail.com');
 select * from companies_integration_settings where company_id in (566,660);
-select * from companies where id in (566,660);
+select * from companies where id in (165);
 --
 select * from user_logs 
 where (action like '%Gohigh%' or action like '%connector%') and DATE(created_at) = '2025-07-31'
@@ -318,6 +318,8 @@ select * from companies_integration_settings where company_id = 566;
 select * from global_settings where company_id = 566;
 
 select * from module_settings;
+
+select * from user_logs order by id desc limit 10;
 
 
 
