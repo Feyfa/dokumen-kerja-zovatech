@@ -311,13 +311,12 @@ SELECT
 	setting_name,
 	setting_value
 FROM company_settings
-where company_id in (566);
+where company_id in (165);
 
-select * from companies_integration_settings where company_id = 566;
+select * from global_settings where company_id = 165;
 
-select * from global_settings where company_id = 566;
+select * from companies_integration_settings where company_id = 165;
 
-select * from module_settings;
 
 select * from user_logs order by id desc limit 10;
 
