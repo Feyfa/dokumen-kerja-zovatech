@@ -1,0 +1,39 @@
+BULAN KE-1
+- misal last_payment_update tanggal 2025-10-30. maka nanti bakal di charge tanggal (2025-11-30 + dimajuin jadi tanggal 1 -> 2025-12-01)
+- kita ngga usah terlalu mikirn di EMM-SANDBOX-API nya, intinya jika tanggal nya di 29,30,31 bakal di majuin ke bulan berikutnya lagi dan tanggal 1
+- example: last_payment_update = 2025-10-30, maka jatuh temponya (2025-11-30 + dimajuin jadi bulan depan nya lagi tanggal 1) menjadi 2025-12-01
+
+last_payment_update = 2025-10-30
+last_invoice_minspend = 2026-01-01
+
+[2025-10-30 05:49:31] local.INFO: array (
+  'last_payment_update' => '2025-10-30 05:05:06',
+  'chkThirtyDayFwd' => '2025-12-01',
+  'chkSixtyDayFwd' => '2026-01-01',
+)  
+[2025-10-30 05:52:46] local.INFO: array (
+  'last_payment_update' => '2025-10-29 05:05:06',
+  'chkThirtyDayFwd' => '2025-12-01',
+  'chkSixtyDayFwd' => '2026-01-01',
+)  
+[2025-10-30 05:52:54] local.INFO: array (
+  'last_payment_update' => '2025-10-28 05:05:06',
+  'chkThirtyDayFwd' => '2025-11-28',
+  'chkSixtyDayFwd' => '2025-12-28',
+)
+
+=====PSEDUO CODE=====
+1. ambil waktu now(Y-M-D). check apakah now(Y-M-D) (<) last_invoice_minspend(Y-M-D). jika dibawah invoice minspend maka masih bulan ke 1 atau 2.
+    - susun untuk jatuh tempo bulan ke 1 dan 2 nya
+        * misal last_payment_update = 2025-10-30
+        * jatuh tempo bulan 1 = 2025-12-01
+        * jatuh tempo bulan 2 = 2025-12-01
+        * jika sudah tahu jatuh temponya baru kita bisa memilih posisi agency ini di bulan ke 1 atau 2
+2. ambil waktu now(Y-M-D). check apakah now(Y-M-D) (>=) last_invoice_minspend(Y-M-D)
+    - jika leadspeek_invoices tanggal terakhir desc minspend(Y-M-D) (<) last_invoice_minspend(Y-M-D), maka masih dianggap bulan ke-2, 
+        * bisa jadi begini start 2025-10-30, 
+        * jatuh tempo bulan ke-2 itu di tanggal 2026-01-01 12:00:00
+        * sedangkan sekarang masih tanggal 2026-01-01 06:00:00
+        * maka dalam hal bulan ke-2 belum lewat
+    - jika invoice tanggal terakhir desc minspend(Y-M-D) (>=) last_invoice_minspend(Y-M-D), maka bulan ke-2 sudah lewat dan masuk bulan ke-3
+=====PSEDUO CODE=====
