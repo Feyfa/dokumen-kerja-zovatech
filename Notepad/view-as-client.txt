@@ -68,11 +68,14 @@ localStorage:
 
 RULES
 1. untuk switchUserData kan posisinya selalu dari userData. cara nya seperti ini
-- pertama check dulu di localStorage ada userDataOri tidak. jika ada maka simpan di userDataAgency (ini terjadi ketika root view as agency, lalu view as lagi sebagai client)
+- pertama check dulu di localStorage ada userDataOri tidak. jika ada maka simpan di userDataAgency (ini terjadi ketika root view as agency, lalu view as lagi sebagai client) ✅
+    * backup companyGroupSelected
+    * backup subdomainAgency
+    * backup rootcomp
 - kedua jika tidak ada userDataOri. maka simpan di userDataOri (ini terjadi ketika login sebagai agency nya langsung dan view as sebagai client, root view as agency, root view as client, kaya biasa sekarang ini)
 
 2. untuk revertViewMode kan posisinya selalu dari userData. cara nya seperti ini
-- pertama check dulu di localStorage ada userDataAgency tidak. jika ada pakai itu dan selesai (ini terjadi ketika root view as agency, lalu view as lagi sebagai client)
+- pertama check dulu di localStorage ada userDataAgency tidak. jika ada pakai itu dan selesai (ini terjadi ketika root view as agency, lalu view as lagi sebagai client) ✅
 - kedua jika tidak ada userDataAgency. maka pakai userDataOri (ini terjadi ketika login sebagai agency nya langsung dan view as sebagai client)
 
 ======ISI LOCAL STORAGE======
