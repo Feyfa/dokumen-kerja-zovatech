@@ -1,20 +1,11 @@
 {
-    "id": "1bc62eea-249d-4451-9bf0-6a27a6a070f5",
-    "icon": {
-        "name": "envelope-open-text",
-        "fontFamily": "fas"
-    },
-    "title": "Jidan ACH Businnes 164",
-    "url": "https://jidanach.ap.ngrok.io/sso?token=c8628a69f144248062dcc030b37bd28bfd977f01251620342265148fa3da2d50771707c850dc15575b825dda9c39098fd460885a0aed7e86ef23006f47f2418d7d23c0931231a3ef642556bb2c0e63b616f7cc3638dfe55a86c39acb980e65c6494e16f421abf20eca3a0ac9",
-    "order": 3,
-    "userRole": "all",
-    "showOnCompany": true,
-    "showOnLocation": false,
-    "showToAllLocations": false,
-    "locations": [],
-    "excludeLocations": [],
-    "openMode": "iframe",
-    "allowCamera": false,
-    "allowMicrophone": false,
-    "traceId": "159ac8ab-5379-4618-925e-ded20a290daa"
+    "enabled": "T",
+    "startobilldays": "60",
+    "startobillmonths": "2",
+    "minspend_first_month": "49",
+    "minspend_second_month": "99",
+    "minspend": "149",
+    "minspend_logic_change_date": "2025-04-16",
+    "excludecompanyid": "872,977,962,1007,1023,1025,3150,2326,2724,1715,1547,3634,2450",
+    "is_default": "F"
 }

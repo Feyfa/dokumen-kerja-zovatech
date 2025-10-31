@@ -3,7 +3,7 @@ BULAN KE-1
 - kita ngga usah terlalu mikirn di EMM-SANDBOX-API nya, intinya jika tanggal nya di 29,30,31 bakal di majuin ke bulan berikutnya lagi dan tanggal 1
 - example: last_payment_update = 2025-10-30, maka jatuh temponya (2025-11-30 + dimajuin jadi bulan depan nya lagi tanggal 1) menjadi 2025-12-01
 
-    last_payment_update = 2025-10-30
+last_payment_update = 2025-10-30
 last_invoice_minspend = 2026-01-01
 
 [2025-10-30 05:49:31] local.INFO: array (
@@ -34,3 +34,33 @@ last_invoice_minspend = 2026-01-01
 2. ambil waktu now(Y-M-D). check apakah now(Y-M-D) (>=) last_invoice_minspend(Y-M-D). jika iya maka masuk bulan 3
   - ambil last_invoice_minspend dan hitung next temponya pakai rule 29,30,31, baru hitung cost dari leadspeek_reports and topup campaign
 =====PSEDUO CODE=====
+
+
+{"enabled":"T","startobilldays":"60","startobillmonths":"2","minspend_first_month":"49","minspend_second_month":"99","minspend":"149","minspend_logic_change_date":"2025-04-16","excludecompanyid":"872,977,962,1007,1023,1025,3150,2326,2724,1715,1547,3634,2450","is_default":"F"}
+
+Your current spend as of October 30, 2025 is $XXX.
+Your minimum spend goal by December 1, 2025 is $XXX.
+You need an additional $XXX to reach your goal.
+
+Current Spend (as of October 30, 2025): $XXX
+Minimum Spend Goal (by December 1, 2025): $XXX
+Additional Spend Required to Reach Goal: $XXX
+
+
+
+SKENARIO DARI TANGGAL HARAM 2026-01-30, OPEN API F,  
+1. agency di buat tanggal 2026-01-29, maka disini last_payment_update 2026-01-30 dan last_invoice_minspend 2026-04-01
+2. di tanggal 2026-02-01 beli campaign prepaid misalnya
+3. di tanggal 2026-02-28 beli campaign prepaid misalnya
+4. di tanggal 2026-03-01 maka baru kena charge. dan di modal nya juga berarti mulai dari 2026-03-01 - 2026-04-01
+
+EMM-SAMNDBOX-APP
+JD-TASK-EMM-667 = "feat: minimum spend information in data wallet"
+JD-TASK-EMM-667-DEV-SYNC
+
+FILE
+FRONT
+* front\src\components\SidebarPlugin\SideBar.vue
+
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
