@@ -80,5 +80,7 @@ select * from module_settings;
 
 select * from bigdbm_locations where leads;
 
+select * from topup_agencies where company_id = 164 order by id desc;
+
 
 

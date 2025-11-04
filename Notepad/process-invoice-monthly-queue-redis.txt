@@ -1,0 +1,33 @@
+JD-TASK-EMM-675
+php artisan queue:work redis --queue=process_invoice_monthly --tries=1 --timeout=300
+
+
+
+ALTER TABLE `failed_lead_records` CHANGE `blocked_type` `blocked_type` ENUM('optoutlist','supressionlist','reidentification','locationlock','zerobounce','googlesheet','sendgrid','gohighlevel','mailboxpower','kartra','zapier','empty','clickfunnels','error','agencyzoom','sendjim','invoice') NULL DEFAULT NULL;
+
+
+JD-TASK-EMM-675 = "Queue Process Invoice Monthly"
+JD-TASK-EMM-675-DEV-SYNC
+
+FILE
+* app\Http\Controllers\MarketingController.php
+* app\Jobs\ProcessInvoiceMonthlyJob.php
+
+DATABASE YANG DIUBAH
+1. tambahkan enum `invoice` di field `blocked_type`
+
+WORKER YANG DITAMBAHIN
+php artisan queue:work redis --queue=process_invoice_monthly
+
+APLIKASI UNTUK MONITOR REDIS
+https://redis.io/insight/
+
+
+sa231122054.modernbusinessagent
+
+disabled = "F"
+active = "T"
+active_user = "T"
+campaign_never_started = "T"
+total_leads = 0
+audience_status = finish

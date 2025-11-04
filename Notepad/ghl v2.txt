@@ -820,10 +820,11 @@ JD-TASK-EMM-610-DV-SYNC
 
 
 
+Your data wallet balance can be used for transactions related to eligible campaign activities, including payments, refunds, and approved agency expenses. Please note that not all modules support payments through the data wallet.
 
+If your minimum spend goal is not met by the end of the period, the difference between your current spend and the minimum spend goal will automatically be added to your data wallet balance.
 
-
-
+Each top-up or credited amount remains valid for 12 months from the date it’s added. After this period, any unused balance from that top-up will expire.
 
 
 
