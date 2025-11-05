@@ -19,3 +19,55 @@ pixel_lead_records
 - campaign_status ENUM('stopped', 'paused', 'paused_on_run', 'running') DEFAULT NULL
 - created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 - updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-678 = "record rendering pixel"
+JD-TASK-EMM-678-DEV-SYNC
+
+FILE
+FRONT
+* front\public\px-sandbox.min.js
+
+DATA
+* data\app\Models\PixelLeadRecord.php
+
+------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-678 = "record rendering pixel"
+JD-TASK-EMM-678-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* app\Models\PixelLeadRecord.php
+
+------
+
+DATABASE YANG DITAMBAH
+
+CREATE TABLE IF NOT EXISTS `pixel_lead_records` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `leadspeek_api_id` varchar(20) DEFAULT NULL,
+  `campaign_status` enum('stopped','paused','paused_on_run','running') DEFAULT 'stopped',
+  `lead_fire` smallint DEFAULT '0',
+  `md5_list` text,
+  `visitor_id` varchar(100) DEFAULT NULL,
+  `visitor_data` text,
+  `function` varchar(100) DEFAULT NULL,
+  `url` text,
+  `ip_address` varchar(50) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `timezone` varchar(50) DEFAULT NULL,
+  `screen_width` smallint UNSIGNED DEFAULT NULL,
+  `screen_height` smallint UNSIGNED DEFAULT NULL,
+  `viewport_width` smallint UNSIGNED DEFAULT NULL,
+  `viewport_height` smallint UNSIGNED DEFAULT NULL,
+  `pixel_ratio` float DEFAULT NULL,
+  `device_type` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+<script id="px-grabber" src="https://asn.emmsandbox.com/px-sandbox.min.js" type="text/javascript"></script>
