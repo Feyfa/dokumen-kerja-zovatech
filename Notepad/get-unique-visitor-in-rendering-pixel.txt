@@ -71,3 +71,190 @@ CREATE TABLE IF NOT EXISTS `pixel_lead_records` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 <script id="px-grabber" src="https://asn.emmsandbox.com/px-sandbox.min.js" type="text/javascript"></script>
+
+https://api.emmsandbox.com/pixel?label=861487%7Chttps%3A%2F%2Fsitesettings-api-docs.vercel.app%2F&script=true
+
+
+1. Kotak Ke-1
+Pixel Impressions (Total Hits)
+- running       : 10 
+- stopped       : 10
+- paused        : 10
+- paused on run : 10
+
+2. Kotak Ke-2
+Pixel Impressions (Unique Visitors)
+- running       : 10 
+- stopped       : 10
+- paused        : 10
+- paused on run : 10
+
+3. Kotak Ke-3
+Pixel Visitor ID Empty 
+10
+
+4. Kotak Ke-4
+Pixel Feedback Received
+10
+
+hai saya sudah membuat record data orang yang telah menggunakan embeded code saya. lalu saya ingin membuat report seperti pada gambar ke-1. konsep dasar dari ini jadi embeded kode hit ke server saya https://api.emmsandbox.com/pixel?label=... lalu setelah hit itu bakal hit api alocdn dan membuat gif di website yang embed code itu. lalu di server saya https://api.emmsandbox.com/webhook
+
+jadi saya ingin membuat report nya itu seperti kotak pada contoh di atas, untuk data angka nya dibuat dummy saja
+
+jadi nanti dibikin gini saja, dan tempatnya di bawah ZeroBounce Details
+
+-- divider --
+
+|kotak ke-1|kotak ke-2|kotak ke-3|kotak ke-4| 
+
+running : 10    paused        : 10 
+stopped : 10    paused_on_run : 10
+
+
+
+
+1. stopped : 10 dan stopped : 10. margin kiri dari : dan margin kanan dari : itu sangat jauh sekali
+2. untuk paused : 10 dan paused on run : 10, itu sudah benar jadi jangan dirubah lagi
+3. bisa tidak dikasih seperti space-between kaya di flex box pada jadi 
+
+file vue : front\src\pages\Modules\Auth\ConfigApp\ReportAnalytic.vue
+
+
+hai saya sudah membuat record data orang yang telah menggunakan embeded code saya. lalu saya ingin membuat report seperti pada gambar ke-1. konsep dasar dari ini jadi embeded kode hit ke server saya https://api.emmsandbox.com/pixel?label=... lalu setelah hit itu bakal hit api alocdn dan membuat gif di website yang embed code itu. lalu di server saya https://api.emmsandbox.com/webhook
+
+
+Contoh Kalimat nya
+1. Kotak Ke-1
+Pixel Impressions (Total Hits)
+- running       : 10 
+- stopped       : 10
+- paused        : 10
+- paused on run : 10
+
+2. Kotak Ke-2
+Pixel Impressions (Unique Visitors)
+- running       : 10 
+- stopped       : 10
+- paused        : 10
+- paused on run : 10
+
+3. Kotak Ke-3
+Pixel Visitor ID Empty 
+10
+
+4. Kotak Ke-4
+Pixel Feedback Received
+10
+
+
+jadi saya ingin membuat report nya itu seperti kotak pada contoh di atas, untuk data angka nya dibuat dummy saja
+
+jadi nanti dibikin gini saja, dan tempatnya di bawah ZeroBounce Details
+
+-- divider --
+
+|kotak ke-1|kotak ke-2|kotak ke-3|kotak ke-4| 
+
+
+
+leadspeek_api_id | campaign status | visitor_id 
+// ini dihitung 1 
+123456 | running | abcd 
+123456 | running | abcd 
+987654 | running | abcd 
+987654 | running | abcd 
+// ini dihitung 1 
+
+// ini dihitung 1 
+123456 | stopped | abcd 
+123456 | stopped | abcd 
+759478 | stopped | abcd 
+759478 | stopped | abcd 
+// ini dihitung 1 
+
+// ini dihitung 1 
+123456 | paused_on_run | abcd 
+// ini dihitung 1 
+
+// ini dihitung 1 
+123456 | paused | abcd 
+// ini dihitung 1
+
+
+
+ohh ternyata benar deh pakai ini yang grouping pakai yang ini
+
+DI MYSQL 
+SELECT plr.visitor_id, COUNT(DISTINCT CONCAT(plr.leadspeek_api_id, '_', CASE WHEN plr.campaign_status = 'running' THEN plr.campaign_status END)) AS total_running, COUNT(DISTINCT CONCAT(plr.leadspeek_api_id, '_', CASE WHEN plr.campaign_status = 'stopped' THEN plr.campaign_status END)) AS total_stopped, COUNT(DISTINCT CONCAT(plr.leadspeek_api_id, '_', CASE WHEN plr.campaign_status = 'paused' THEN plr.campaign_status END)) AS total_paused, COUNT(DISTINCT CONCAT(plr.leadspeek_api_id, '_', CASE WHEN plr.campaign_status = 'paused_on_run' THEN plr.campaign_status END)) AS total_paused_on_run FROM pixel_lead_records AS plr LEFT JOIN leadspeek_users AS lu ON plr.leadspeek_api_id = lu.leadspeek_api_id LEFT JOIN users AS u ON lu.user_id = u.id WHERE plr.visitor_id IS NOT NULL AND plr.visitor_id <> '' AND DATE_FORMAT(plr.created_at, "%Y%m%d") >= '20251105' AND DATE_FORMAT(plr.created_at, "%Y%m%d") <= '20251105' GROUP BY plr.visitor_id;
+
+kode saya sebelumnya DI LARAVEL, nanti juga di update
+public function getPixelLeadRecords($type, $startDate, $endDate, $companyRootId)
+{
+    $pixelLeadRecords = PixelLeadRecord::from('pixel_lead_records as plr')
+                                        ->select([
+                                            DB::raw("COUNT(CASE WHEN plr.campaign_status = 'running' THEN 1 END) AS total_running"),
+                                            DB::raw("COUNT(CASE WHEN plr.campaign_status = 'stopped' THEN 1 END) AS total_stopped"),
+                                            DB::raw("COUNT(CASE WHEN plr.campaign_status = 'paused' THEN 1 END) AS total_paused"),
+                                            DB::raw("COUNT(CASE WHEN plr.campaign_status = 'paused_on_run' THEN 1 END) AS total_paused_on_run"),
+                                        ])
+                                        ->leftJoin('leadspeek_users as lu','plr.leadspeek_api_id','=','lu.leadspeek_api_id')
+                                        ->leftJoin('users as u','lu.user_id','=','u.id')
+                                        ->whereNotNull('plr.visitor_id')
+                                        ->where('plr.visitor_id', '<>', '');
+    
+    // ketika pilih bedasarkan tipe root nya 
+    if(!empty($companyrootid)){
+        $pixelLeadRecords->where('u.company_root_id','=',$companyrootid);
+    }
+
+    // ketika pilih bedasarkan tanggal nya
+    $pixelLeadRecords->where(function($query) use ($startDate,$endDate) {
+        if(!empty($startDate) && !empty($endDate)){
+            $query->where(DB::raw('DATE_FORMAT(plr.created_at,"%Y%m%d")'),'>=',$startDate)
+                  ->where(DB::raw('DATE_FORMAT(plr.created_at,"%Y%m%d")'),'<=',$endDate);
+        }else{
+            $query->where(DB::raw('DATE_FORMAT(plr.created_at,"%Y%m%d")'),'=',date('Ymd'));
+        }
+    });
+
+    $result = ['running' => 0, 'stopped' => 0, 'paused' => 0, 'paused_on_run' => 0];
+    if($type === 'grouping'){ // mode grouping
+        $grouped = $pixelLeadRecords->addSelect('plr.visitor_id')
+                                    ->groupBy('plr.visitor_id')
+                                    ->get();
+        info(__FUNCTION__, [
+            'grouped' => $grouped,
+            'total_running' => $grouped->sum('total_running'),
+            'total_stopped' => $grouped->sum('total_stopped'),
+            'total_paused' => $grouped->sum('total_paused'),
+            'total_paused_on_run' => $grouped->sum('total_paused_on_run'),
+        ]);
+        // Sum semua kolom dari hasil grouping
+        $result = [
+            'running' => (int) $grouped->sum('total_running'),
+            'stopped' => (int) $grouped->sum('total_stopped'),
+            'paused' => (int) $grouped->sum('total_paused'),
+            'paused_run' => (int) $grouped->sum('total_paused_on_run'),
+        ];
+        $result['total_all'] = $result['running'] + $result['stopped'] + $result['paused'] + $result['paused_run'];
+    }else{ // mode detail
+        $pixelLeadRecords = $pixelLeadRecords->first();
+        $result = [
+            'running' => (int) ($pixelLeadRecords->total_running ?? 0),
+            'stopped' => (int) ($pixelLeadRecords->total_stopped ?? 0),
+            'paused' => (int) ($pixelLeadRecords->total_paused ?? 0),
+            'paused_run' => (int) ($pixelLeadRecords->total_paused_on_run ?? 0),
+        ];
+        $result['total_all'] = $result['running'] + $result['stopped'] + $result['paused'] + $result['paused_run'];
+    }
+
+    return $result;
+}
+
+
+sekarang kita fokus sama ksTEM01xcnccA3N1mKEZ0iJ21762335434114, nah nanti berarti 
+running nya ada 2
+stopped nya ada 1
+paused_on_run ada 1
+
+namun saat di bagian total_all nya kita bisa anggap ini jadi 1 orang saja, dan buka jadi (2+1+1)
