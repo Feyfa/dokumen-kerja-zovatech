@@ -108,8 +108,7 @@ d18fa68148cf6bdb08db8c8228d0616d
 a72acb561a6b078895468c756c7a6efa
 a72acb561a6b078895468c756c7a6efa
 
-    "message": "Your total price is $20.00, but your wallet balance is only $15. You need a minimum balance of $20.00 to complete this transaction."
-
+"message": "Your total price is $20.00, but your wallet balance is only $15. You need a minimum balance of $20.00 to complete this transaction."
 
 -----------YANG HARUS DIKERJAKAN-----------
 - validasi di ui jangan 0 cost per lead nya ✅
@@ -969,14 +968,21 @@ DATA
 - app\Http\Controllers\UploadController.php
 
 
+=====YANG HARUS DI KERJAKAN=====
+- url ketika di inject di tempat yuang tidak diizinkan masih bisa ✅
+  * di agency bukan selain emm
+  * di agency emm namun belum enable developer
+  * di client semua root
+- buat fitur di cleanid upload file md5 di ui dan open api, dan jangan lupa kalo yang upload itu langsung buat hasil csv nya
+- buat fitur di cleanid beta dan hanya beberapa user saja yang di bolehkan
+- buat fitur autorefresh jika masih ada yang pending
 
-
-
-
-
-
+- pagination clean id
+=====YANG HARUS DI KERJAKAN=====
 
 & "C:\Program Files\nodejs\npx.cmd" mcp-remote https://d3qbgyi0xnnqpn.cloudfront.net/mcp --transport stream --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY3AiOlsidXNlOnRvb2xzIl0sInN1YiI6IjJjOWU0NzAwLWEzMmYtNDJjYi04MTEwLWMzZjNkYzYyZTI1N0BleGFtcGxlLmNvbSIsImV4cCI6MTc2NzIwMzMzMCwiaWF0IjoxNzU5NDI3MzMwfQ.6jvpytYh-aR8GfIk9ToPc5XrRbe00fj5jQyHMA_QPpI"
+
+https://data.emmsandbox.com/api/v1/developer/clean-id/data
 
 
 

@@ -44,7 +44,7 @@ select * from failed_lead_records where leadspeek_type = 'clean_id';
 select * from report_analytics where leadspeek_type = 'clean_id' order by id desc;
 --
 select * from persons where FIND_IN_SET(id, @person_ids);
-select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email from person_emails where email_encrypt in (
+select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, person_emails.* from person_emails where email_encrypt in (
 	"78e63b99eaa18437f46b56cea8e7b220",
     "8bc64c9c289d18a05dd9652422208f05",
     "8dba134974fd2681332f7194e4e17711",
@@ -119,7 +119,6 @@ select * from global_settings where setting_name = 'bigdbm_token';
 select * from topup_cleanids;
 
 select * from person_emails where email_encrypt in ('8bc64c9c289d18a05dd9652422208f05');
-
 
 
 

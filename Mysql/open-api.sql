@@ -173,11 +173,3 @@ where leadspeek_reports.user_id in (
 
 
 
-
-
-
-
-
-
-
-
