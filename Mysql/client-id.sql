@@ -1,5 +1,6 @@
 use emm_sandbox;
 -- 
+SET @company_id_jidanach := 164;
 TRUNCATE TABLE clean_id_errors;
 TRUNCATE TABLE clean_id_export;
 TRUNCATE TABLE clean_id_file;
@@ -15,6 +16,7 @@ update topup_agencies set balance_amount = 3, topup_status = 'queue' where total
 update topup_agencies set balance_amount = 4, topup_status = 'queue' where total_amount = 4 AND company_id = @company_id_jidanach;
 update topup_agencies set balance_amount = 5, topup_status = 'queue' where total_amount = 5 AND company_id = @company_id_jidanach;
 update topup_agencies set balance_amount = 10, topup_status = 'queue' where total_amount = 10 AND company_id = @company_id_jidanach;
+delete FROM topup_agencies WHERE company_id = @company_id_jidanach;
 delete FROM leadspeek_invoices WHERE invoice_type = 'clean_id' AND company_id = @company_id_jidanach;
 delete from report_analytics where leadspeek_type = 'clean_id';
 delete from failed_lead_records where leadspeek_type = 'clean_id';
@@ -64,7 +66,8 @@ select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4
     "1bd323891a53cda51c80d729f3b15455",
     "78347e6ed4cd3fed7fb7a1e8d53538aa",
     "93b76b90c2f8e1d433832d0a00c999f9",
-    "a72acb561a6b078895468c756c7a6efa"
+    "a72acb561a6b078895468c756c7a6efa",
+    "dd2124afa8ab78aae179b61ae8604bb5"
 );
 select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4)  from person_emails where person_id = 7793;
 SET @person_ids := '7793';

@@ -981,10 +981,27 @@ DATA
 - pagination clean id
 =====YANG HARUS DI KERJAKAN=====
 
+
+=====SKENARIO=====
+1. di ui app, testing pakai campuran md5 dan email (progress)
+2. di ui app, testing pakai file csv campuran md5 dan email
+=====SKENARIO=====
+
+
 & "C:\Program Files\nodejs\npx.cmd" mcp-remote https://d3qbgyi0xnnqpn.cloudfront.net/mcp --transport stream --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY3AiOlsidXNlOnRvb2xzIl0sInN1YiI6IjJjOWU0NzAwLWEzMmYtNDJjYi04MTEwLWMzZjNkYzYyZTI1N0BleGFtcGxlLmNvbSIsImV4cCI6MTc2NzIwMzMzMCwiaWF0IjoxNzU5NDI3MzMwfQ.6jvpytYh-aR8GfIk9ToPc5XrRbe00fj5jQyHMA_QPpI"
 
 https://data.emmsandbox.com/api/v1/developer/clean-id/data
 
+TopupAgency
+id | total_amount | balance_amount | topup_status
+1  | 5            | 0              | done
+2  | 10           | 0              | done
+3  | 15           | 10             | progress
 
+TopupCleanId (misal beli 10 data)
+id | file_id | topup_agencies_id | cost_cleanid | total_amount | balance_amount
+1  | 1       | 1                 | 2            | 5            | 5 
+2  | 1       | 2                 | 2            | 10           | 10 
+3  | 1       | 3                 | 2            | 5            | 5 
 
-
+20 data = 0.03315997123718262
