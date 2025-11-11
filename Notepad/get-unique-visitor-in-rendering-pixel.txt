@@ -258,3 +258,40 @@ stopped nya ada 1
 paused_on_run ada 1
 
 namun saat di bagian total_all nya kita bisa anggap ini jadi 1 orang saja, dan buka jadi (2+1+1)
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-692 = "update date pixel lead record after update feedback pixel lead record"
+JD-TASK-EMM-692-DEV-SYNC
+
+FILE
+DATA
+* app\Models\PixelLeadRecord.php
+* data\app\Services\Configuration\PixelLeadRecordService.php
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-692 = "update date pixel lead record after update feedback pixel lead record"
+JD-TASK-EMM-692-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* app\Models\PixelLeadRecord.php
+
+
+
+
+
+ALTER TABLE `pixel_lead_records` ADD `label` TEXT NULL DEFAULT NULL AFTER `md5_list`;
+ALTER TABLE `pixel_lead_records` ADD `date_fire` DATE NULL DEFAULT NULL AFTER `lead_fire`;
+ALTER TABLE `pixel_lead_records` ADD `pixel_status` ENUM('pending','valid_label','invalid_label') NULL DEFAULT 'valid_label' AFTER `id`;
+
+
+
+
+https://p.alocdn.com/c/6cd7kkmz/a/xtarget/p.gif?label=81151983|http://127.0.0.1:5500/src/index.html|48
+https://p.alocdn.com/c/6cd7kkmz/a/xtarget/p.gif?label=81151983%7Chttp%3A%2F%2F127.0.0.1%3A5500%2Fsrc%2Findex.html%7C48
+
+statsCardsBreakdown: []
+statsCardPixel: []

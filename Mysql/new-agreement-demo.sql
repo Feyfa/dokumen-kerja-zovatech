@@ -180,6 +180,14 @@ UPDATE mahasiswa
 SET alamat = 'Bandung'
 WHERE nim = '2301001';
 
+2025-11-10 - 2025-11-11
+
+
+select SUM(pixelfire) from report_analytics
+where 
+	DATE_FORMAT(date,"%Y%m%d") >= '20251110' and
+	DATE_FORMAT(date,"%Y%m%d") >= ''
+
 
 
 

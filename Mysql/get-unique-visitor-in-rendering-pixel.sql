@@ -1,10 +1,18 @@
-select * from pixel_lead_records;
+select * from pixel_lead_records order by id desc;
 
 select * from leadspeek_users where leadspeek_api_id = 81151983;
 
 select * from report_analytics;
 
-select * from pixel_lead_records;
+select * from pixel_lead_records where DATE(created_at) >= '2025-11-11';
+select * from pixel_lead_records where DATE(date_fire) >= '2025-11-11';
+select * from report_analytics where DATE(date) >= '2025-11-11';
+
+select * from pixel_lead_records as plr
+where 
+	DATE_FORMAT(plr.created_at,"%Y%m%d") >= '20251111'
+	and DATE_FORMAT(plr.created_at,"%Y%m%d") <= '20251111'
+	and pixel_status <> 'invalid_label';
 
 
 
