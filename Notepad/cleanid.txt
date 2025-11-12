@@ -973,8 +973,8 @@ DATA
   * di agency bukan selain emm
   * di agency emm namun belum enable developer
   * di client semua root
-- buat fitur di cleanid upload file md5 di ui dan open api (progress)
-- dan jangan lupa kalo yang upload itu langsung download hasil csv nya, pakai teknik queue
+- buat fitur di cleanid upload file md5 di ui dan open api ✅
+- dan jangan lupa kalo yang upload itu langsung download hasil csv nya, pakai teknik queue (progress)
 - buat fitur di cleanid beta dan hanya beberapa user saja yang di bolehkan
 - buat fitur autorefresh jika masih ada yang pending
 
@@ -1005,3 +1005,37 @@ id | file_id | topup_agencies_id | cost_cleanid | total_amount | balance_amount
 3  | 1       | 3                 | 2            | 5            | 5 
 
 20 data = 0.03315997123718262
+
+=====NAMA QUEUE YANG DITAMBAHKAN=====
+clean_id_md5_stream
+clean_id
+clean_id_export_chunk
+clean_id_export_insert
+=====NAMA QUEUE YANG DITAMBAHKAN=====
+
+=====DATABASE YANG DIRUBAH=====
+- table `clean_id_md5` tambahkan field `batch_id` varchar(100) default null
+- table `clean_id_export` hapus field `client_id` 
+- table `clean_id_export` tambahkan field `total_jobs` int default null
+- table `clean_id_export` tambahkan field `jobs_completed` int default null
+
+- table `clean_id_export` rename field `file_path` to `file_download`, ubah type nya dari VARCHAR(256) ke Text
+- table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL
+- table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL
+- table `clean_id_export` tambahkan enum `pending` di field `status`
+=====DATABASE YANG DIRUBAH=====
+
+https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_7WriSfi52b_1762924986218.csv
+
+
+
+Report
+3fb60d5ccd5e206884de8c1f6ff9e4d3
+ca6121f99f3c6ed8e20ef209af75ed1d
+
+Pixel lead report
+cef25be7b7d76ccf990dbe19e2254205
+d9c785ec9dc2500f1c15015d97bdf661
+
+php artisan queue:work redis --queue=clean_id_export_chunk
+php artisan queue:work redis --queue=clean_id_export_insert

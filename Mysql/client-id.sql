@@ -124,6 +124,23 @@ select * from topup_cleanids;
 select * from person_emails where email_encrypt in ('8bc64c9c289d18a05dd9652422208f05');
 
 
+-- id	user_id	file_id	total_jobs	jobs_completed	status	file_temporary	file_download	created_at	updated_at
+
+select * from leadspeek_report
+
+select * from module_settings;
+
+select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, person_emails.* from person_emails where email_encrypt in (
+	'cef25be7b7d76ccf990dbe19e2254205',
+	'd9c785ec9dc2500f1c15015d97bdf661'
+);
+
+select {semua kolom di $select}
+from `clean_id_file` as `f`
+inner join `clean_id_md5` as `m` on `m`.`file_id` = `f`.`id`
+left join `clean_id_result` as `r` on `r`.`file_id` = `m`.`file_id` and `r`.`md5_id` = `m`.`id`
+left join `clean_id_result_advance_1` as `a1` on `a1`.`file_id` = `m`.`file_id` and `a1`.`md5_id` = `m`.`id`
+where `f`.`id` = ?
 
 
 

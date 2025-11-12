@@ -187,6 +187,44 @@ select SUM(pixelfire) from report_analytics
 where 
 	DATE_FORMAT(date,"%Y%m%d") >= '20251110' and
 	DATE_FORMAT(date,"%Y%m%d") >= ''
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+TRUNCATE TABLE clean_id_errors;
+TRUNCATE TABLE clean_id_export;
+TRUNCATE TABLE clean_id_file;
+TRUNCATE TABLE clean_id_md5;
+TRUNCATE TABLE clean_id_result;
+TRUNCATE TABLE clean_id_result_advance_1;
+TRUNCATE TABLE clean_id_result_advance_2;
+TRUNCATE TABLE clean_id_result_advance_3;
+TRUNCATE TABLE topup_cleanids;
 
 
 
