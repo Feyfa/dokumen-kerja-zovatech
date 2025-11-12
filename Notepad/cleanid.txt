@@ -1016,12 +1016,12 @@ clean_id_export_insert
 =====DATABASE YANG DIRUBAH=====
 - table `clean_id_md5` tambahkan field `batch_id` varchar(100) default null
 - table `clean_id_export` hapus field `client_id` 
-- table `clean_id_export` tambahkan field `total_jobs` int default null
-- table `clean_id_export` tambahkan field `jobs_completed` int default null
+- table `clean_id_export` tambahkan field `total_jobs` int default null after `status`
+- table `clean_id_export` tambahkan field `jobs_completed` int default null after `total_jobs`
 
 - table `clean_id_export` rename field `file_path` to `file_download`, ubah type nya dari VARCHAR(256) ke Text
-- table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL
-- table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL
+- table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL after `jobs_completed`
+- table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL after `jobs_completed`
 - table `clean_id_export` tambahkan enum `pending` di field `status`
 =====DATABASE YANG DIRUBAH=====
 
