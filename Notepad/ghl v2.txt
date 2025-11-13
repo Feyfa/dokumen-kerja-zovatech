@@ -826,8 +826,17 @@ If your minimum spend goal is not met by the end of the period, the difference b
 
 Each top-up or credited amount remains valid for 12 months from the date it’s added. After this period, any unused balance from that top-up will expire.
 
+http://jidanach.emmsandbox.com:8080/sso?token=d9bc611acf806fd833770de617408c5a4a22072d3453a6619993174e8b4ff992a2c2ec93ffd2699773287a9dda9c68ffcd13059514aa0e89e9ecd005c7869016ce5c2c31f40a3ff4482ab18419328b2309bee85ca62b8a981880b02a0a892b03b5da2f05b8143e43876377078181
 
-
+1. connect ghl contact, integration client ✅
+2. connect ghl contact, client management  ✅
+    - jika connect ghl, dan modal integration sudah dibuka untuk client itu, dan di icon gohighlevel, maka akan buka modalnya ✅
+    - jika connect ghl, dan modal integration sudah dibuka untuk client itu, dan bukan di icon gohighlevel, maka akan buka modalnya ✅
+    - jika connect ghl, dan modal integration sudah dibuka namun bukan untuk client itu, dan di list client ada client nya, maka akan buka modalnya ✅
+    - jika connect ghl, dan modal integration sudah dibuka namun bukan untuk client itu, dan di list client tidak ada client nya, maka akan search dari email, dan buka modalnya ✅
+    - jika connect ghl, dan modal integration belum dibuka, dan di list client ada client nya, maka akan buka modalnya ✅
+    - jika connect ghl, dan modal integration belum dibuka, dan di list client tidak ada client nya, maka akan search dari email dan buka modalnya ✅
+3. connect ghl agency, general settings
 
 
 

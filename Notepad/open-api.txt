@@ -611,3 +611,17 @@ DATA
 Host: sitesettingsapi.com
 Authorization: Bearer <YOUR_ACCESS_TOKEN>
 Content-Type: application/json
+
+
+17726346 -> coba di open api
+92830739 -> coba di ui
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-696 = "fix bug charge campaign local, prepaid, limit monthly in open api"
+JD-TASK-EMM-696-DEV-SYNC
+
+FILE
+DATA
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+

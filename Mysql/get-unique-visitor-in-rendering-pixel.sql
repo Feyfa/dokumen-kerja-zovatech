@@ -82,7 +82,9 @@ where
 	and plr.visitor_id <> '' 
 	and plr.visitor_id is not null;
 
-select * from pixel_lead_records;
+select * from pixel_lead_records where pixel_status = 'invalid_label';
+
+select * from clean_id_export;
 
 
 

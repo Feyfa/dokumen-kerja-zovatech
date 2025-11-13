@@ -230,6 +230,50 @@ TRUNCATE TABLE topup_cleanids;
 
 
 
+-- 43937231 ini yang bener di buat dari ui
+-- 92830739,17726346 ini yang bug dari open api
+update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id in (43937231,92830739,17726346);
+select * from topup_campaigns where leadspeek_api_id in (43937231,92830739,17726346);
+select * from leadspeek_invoices where leadspeek_api_id in (43937231,92830739,17726346);
+
+
+
+-- https://muhammadjidan.emmsandbox.com/sso?token=9bc9fd58a3d4aca4749a73f97c9f2f0844b2546814e41eb1b5c6e90ca468edb879948c96221b408f6193acb4a14c45c752b4b4db9343b5dc28abb4acd49b6cbbc756972e199ad3e86438c975d41a597dd59b2d50aa82da185133180edd62e8272f42b561578fd5eb3774ea4a34
+-- https://jidanach.emmsandbox.com/sso?token=7b53c5732f96d1eca16289003e452fde875128a0935fc4c74a7fa6def20c93a8902053c907bb76b901dc2dbe788c9c048ac0cef1f0e8d9b886f61c9d299566ffddae61a39ed1ea5606e894e4e9d4dded7ff9da0f6b67673b2c3e829ec99a02e97f25442ecdc8719a8beab1da
+-- http://jidanach.emmsandbox.com:8080/sso?token=7b53c5732f96d1eca16289003e452fde875128a0935fc4c74a7fa6def20c93a8902053c907bb76b901dc2dbe788c9c048ac0cef1f0e8d9b886f61c9d299566ffddae61a39ed1ea5606e894e4e9d4dded7ff9da0f6b67673b2c3e829ec99a02e97f25442ecdc8719a8beab1da
+-- https://jidanach.emmsandbox.com/sso?token=d9bc611acf806fd833770de617408c5a4a22072d3453a6619993174e8b4ff992a2c2ec93ffd2699773287a9dda9c68ffcd13059514aa0e89e9ecd005c7869016ce5c2c31f40a3ff4482ab18419328b2309bee85ca62b8a981880b02a0a892b03b5da2f05b8143e43876377078181
+select * 
+from sso_access_tokens 
+where
+	CONVERT(AES_DECRYPT(FROM_bASE64(token),'8e651522e38256f2') USING utf8mb4) = 'd9bc611acf806fd833770de617408c5a4a22072d3453a6619993174e8b4ff992a2c2ec93ffd2699773287a9dda9c68ffcd13059514aa0e89e9ecd005c7869016ce5c2c31f40a3ff4482ab18419328b2309bee85ca62b8a981880b02a0a892b03b5da2f05b8143e43876377078181'
+	and user_id = 279;
+
+select *,CONVERT(AES_DECRYPT(FROM_bASE64(token),'8e651522e38256f2') USING utf8mb4) from open_api_tokens where company_id = 22;
+
+select * from companies_integration_settings where company_id = 165 and integration_slug = 'gohighlevel';
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 165 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'gohlcustomfields';
+select * from global_settings where company_id = 165 and setting_name like '%gohighlevel%';
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
