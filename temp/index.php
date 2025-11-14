@@ -1,6 +1,7 @@
 <?php
 
-for($i = 0; $i < 10; $i++) {
-    echo "INI ADALAH FOR\n";
-    usleep(0.5 * 1000000);
-}
+$array = [];
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+$value = $array['a']['b']['c'] ?? "TESTING";
+var_dump($value);

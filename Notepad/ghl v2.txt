@@ -847,4 +847,6 @@ http://jidanach.emmsandbox.com:8080/sso?token=d9bc611acf806fd833770de617408c5a4a
 
 
 
+api/v1/developer/list/campaign/{campaignType}
+
 
