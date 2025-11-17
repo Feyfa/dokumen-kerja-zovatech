@@ -1024,6 +1024,8 @@ clean_id_export_insert
 - table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL after `jobs_completed`
 - table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL after `jobs_completed`
 - table `clean_id_export` tambahkan enum `pending` di field `status`
+
+- INSERT INTO master_features (slug, name, is_beta, apply_to_all_agency, created_at, updated_at) VALUES ('clean_module', 'Clean Module', 'T', 'F', NOW(), NOW());
 =====DATABASE YANG DIRUBAH=====
 
 https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_7WriSfi52b_1762924986218.csv
@@ -1040,3 +1042,8 @@ d9c785ec9dc2500f1c15015d97bdf661
 
 php artisan queue:work redis --queue=clean_id_export_chunk
 php artisan queue:work redis --queue=clean_id_export_insert
+
+
+Service Agreement
+×
+I understand that any features marked as beta in the system are under development and not released for commercial use. Any commercial use of these features are undertaken by the client for their use and are not warranted against errors.

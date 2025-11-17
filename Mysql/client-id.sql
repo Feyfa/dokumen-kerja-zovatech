@@ -142,6 +142,28 @@ left join `clean_id_result` as `r` on `r`.`file_id` = `m`.`file_id` and `r`.`md5
 left join `clean_id_result_advance_1` as `a1` on `a1`.`file_id` = `m`.`file_id` and `a1`.`md5_id` = `m`.`id`
 where `f`.`id` = ?
 
+select * from services_agreement where feature_id = 4 and user_id = 279;
+select * from feature_users;
+select * from master_features;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
