@@ -263,6 +263,14 @@ WHERE company_id = 165 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651
 select * from global_settings where company_id = 165 and setting_name like '%gohighlevel%';
 
 
+select * from leadspeek_users where company_id = 164 and user_id = 282 and archived = 'F' and leadspeek_type = 'local' order by id desc;
+
+
+select * from module_settings where company_id = 164;
+select * from failed_lead_records where blocked_type = 'googlesheet' and leadspeek_api_id = 45636124 order by id desc;
+select * from jobs;
+select * from failed_jobs;
+
 
 
 

@@ -1,0 +1,23 @@
+jadi ada campaign 10 data ngga masuk
+
+dan di 
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-701 = "record error when running service googlesheet"
+JD-TASK-EMM-701-DEV-SYNC
+
+FILE
+DATA
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Models\FailedLeadRecord.php
+* data\app\Services\GoogleSheet.php
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-701 = "record error when running service googlesheet"
+JD-TASK-EMM-701-DEV-SYNC
+
+FILE
+* app\Jobs\SendSpreadsheetJob.php
+* app\Services\GoogleSheet.php

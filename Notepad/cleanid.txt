@@ -974,9 +974,10 @@ DATA
   * di agency emm namun belum enable developer
   * di client semua root
 - buat fitur di cleanid upload file md5 di ui dan open api ✅
-- dan jangan lupa kalo yang upload itu langsung download hasil csv nya, pakai teknik queue (progress)
-- buat fitur di cleanid beta dan hanya beberapa user saja yang di bolehkan
-- buat fitur autorefresh jika masih ada yang pending
+- dan jangan lupa kalo yang upload itu langsung download hasil csv nya, pakai teknik queue ✅
+- buat fitur pagination di clean id ✅
+- buat fitur autorefresh jika masih ada yang pending ✅
+- buat fitur di cleanid beta dan hanya beberapa user saja yang di bolehkan (progress)
 
 - pagination clean id
 =====YANG HARUS DI KERJAKAN=====
