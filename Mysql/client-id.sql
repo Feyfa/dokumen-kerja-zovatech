@@ -42,6 +42,8 @@ SELECT * FROM `topup_agencies` where company_id = @company_id_jidanach order by 
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id_jidanach order by id asc;
 select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
 --
+select * from jobs;
+select * from failed_jobs;
 select * from failed_lead_records where leadspeek_type = 'clean_id';
 select * from report_analytics where leadspeek_type = 'clean_id' order by id desc;
 --

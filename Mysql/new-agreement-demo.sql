@@ -213,8 +213,8 @@ where
 	
 	
 	
-	
-	
+use emm_sandbox;
+SET @company_id_jidanach := 164;
 	
 TRUNCATE TABLE clean_id_errors;
 TRUNCATE TABLE clean_id_export;
@@ -226,8 +226,13 @@ TRUNCATE TABLE clean_id_result_advance_2;
 TRUNCATE TABLE clean_id_result_advance_3;
 TRUNCATE TABLE topup_cleanids;
 
+delete FROM topup_agencies WHERE company_id = @company_id_jidanach;
+delete FROM leadspeek_invoices WHERE invoice_type = 'clean_id' AND company_id = @company_id_jidanach;
+delete from report_analytics where leadspeek_type = 'clean_id';
+delete from failed_lead_records where leadspeek_type = 'clean_id';
 
-
+ALTER TABLE `clean_id_file`
+ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 
 
 -- 43937231 ini yang bener di buat dari ui
@@ -270,6 +275,12 @@ select * from module_settings where company_id = 164;
 select * from failed_lead_records where blocked_type = 'googlesheet' and leadspeek_api_id = 45636124 order by id desc;
 select * from jobs;
 select * from failed_jobs;
+
+
+select * from topup_agencies where company_id = 164;
+select * from leadspeek_invoices where topup_agencies_id in ( 
+	select id from topup_agencies where company_id = 164
+) and invoice_type = 'campaign';
 
 
 
