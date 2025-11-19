@@ -1129,6 +1129,7 @@ c:/wamp64/www/emm-sandbox-app/data/public/
 - charge campaign : $1000
 - yang sekarang terjadi kan charge ($100) + ($250, $250, $250, $250) = $1100
 - nah yang ingin di perbaiki, dia bakal auto topup $250 sebanyak 4 kali nya digabung jadi ($100) + ($1000) = $1100
+
 EMM-SANDBOX-APP
 ======= ✅
 - stop continual : false
@@ -1213,6 +1214,34 @@ EMM-SANDBOX-APP
 - dan history auto topup yang $250 dolar tadi menjadi seperti ini "Auto Top Up Via Credit Card For Campaign #62919136 With Invoice #3132"
 =======
 
+======= ✅
+- stop continual : false
+- balance data wallet : $100
+- select amount : $250
+- treshold : $25
+- charge campaign client : $240
+- charge campaign agency : $120
+
+- kekurangannya = (charge campaign) - (balance data wallet) = ($120) - ($100) = $20
+- berapa kali seharusnya di charge = ceil(kekurangannya / $select amount) = ceil($20 / $250) = 1 kali
+- jumlah yang akan di-charge tunggal = (berapa kali seharusnya di charge) * (select amount) = (1) * (250) = $250
+- saat auto topup cc agency error, maka ngga charge client dan berhenti sampai sini
+=======
+
+======= 
+- stop continual : false
+- balance data wallet : $100
+- select amount : $250
+- treshold : $25
+- charge campaign client : $160
+- charge campaign agency : $80
+
+- coba charge agency sebesar : $80
+- setelah di agency di charge, sisa balance nya menjadi (balance data wallet - charge campaign agency) = ($100 - $80) = $20
+- karena sisa balance di bawah treshold($25), maka akan coba auto topup data wallet sebesar $250 dan cc agency failed
+- karena cc agency failed, maka charge campaign nya berhasil, namun cc merah saat mau auto topup 
+=======
+
 - kondisi dimana agency manual bill "F" berhasil di charge, namun client nya gagal charge, maka yang awalnya bentuknya kaya gini "{leadspeeek_api_id}|{leadspeeek_invoice_id}" itu menjadi gini saja "{leadspeeek_api_id}", karena ketika client nya gagal maka leadspeek_invoice campaign nya bakal di hapus
 
 2. buat history, jika topup maka tulisan nya "Top Up Via Credit Card", dan kalau auto topup karena treshold atau balance kurang maka tulisannya adalah "Auto Top Up Via Credit Card After Charge Campaign #12345678 Invoice ID #123" 7✅
@@ -1223,9 +1252,7 @@ appendInvoiceIdToLeadspeekApiIdForRecordDataWallet
 cleanLeadspeekInvoiceIdForRecordDataWallet
 
 
-
-user id: 279 | company id: 164 | agency name: Jidan ACH 164 Businnes | agency email: xxx | stop continual topup: F | total amount: 250.00 | balance amount: 350 | invoice id: 3140
-
+user id: 279 | company id: 164 | agency name: Jidan ACH 164 Businnes | agency email: fisikamodern00+jidanach@gmail.com | stop continual topup: F | total amount: 250.00
 
 
 $autoTopupWalletinvoiceID = (isset($charge['invoiceID'])) ? $charge['invoiceID'] : '';
