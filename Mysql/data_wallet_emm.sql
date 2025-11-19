@@ -1,19 +1,11 @@
 use emm_sandbox;
 -- 
-SET @company_id := '164';
+SET @company_id := '464';
 select @company_id;
 -- 
 update topup_agencies set balance_amount = 20, topup_status = 'progress' where total_amount = 20 AND company_id = @company_id;
 update topup_agencies set balance_amount = 30, topup_status = 'queue' where total_amount = 30 AND company_id = @company_id;
-
 update topup_agencies set balance_amount = 50, topup_status = 'progress' where total_amount = 50 AND company_id = @company_id;
---
-SELECT * FROM `topup_agencies` where company_id = @company_id order by id asc;
-SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id order by id asc;
---
-select amount, stopcontinual, last_balance_amount, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanach@gmail.com'; -- id = 279
---
-select * from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+dimas@gmail.com'; -- id = 282
 --
 select amount, last_balance_amount, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanagencyemm3@gmail.com'; -- id = 618
 select 
@@ -25,9 +17,30 @@ select
 	'============' as 'divider',
 	users.* 
 from users 
-where company_id in (@company_id, 169) and user_type = 'userdownline';
+where company_id in (@company_id) and user_type = 'userdownline';
 --
-SET @leadspeek_api_id := '83117508';
+SELECT * FROM `topup_agencies` where company_id = @company_id order by id asc;
+SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id order by id asc;
+
+select * from leadspeek_users where leadspeek_api_id = '64172624';
+select * from topup_campaigns where leadspeek_api_id = '64172624';
+select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = '64172624';
+update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = '64172624';
+
+select * from leadspeek_reports where leadspeek_api_id = '64172624';
+select * from user_logs order by id desc limit 50;
+select distinct action from user_logs order by action asc;
+
+
+select * from leadspeek_invoices where invoice_type = 'campaign' and topup_agencies_id in (
+	SELECT id FROM `topup_agencies` where company_id = @company_id
+);
+--
+select amount, stopcontinual, last_balance_amount, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanach@gmail.com'; -- id = 279
+--
+select * from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+dimas@gmail.com'; -- id = 282
+--
+SET @leadspeek_api_id := '62919136 ';
 select @leadspeek_api_id;
 select active, disabled, active_user, leadspeek_type, leadspeek_users.* from leadspeek_users where leadspeek_api_id = @leadspeek_api_id;
 update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = @leadspeek_api_id;

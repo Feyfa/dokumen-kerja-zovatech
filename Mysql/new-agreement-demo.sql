@@ -282,6 +282,11 @@ select * from leadspeek_invoices where topup_agencies_id in (
 	select id from topup_agencies where company_id = 164
 ) and invoice_type = 'campaign';
 
+select  total_amount,platform_total_amount, leadspeek_invoices.* from leadspeek_invoices where invoice_type = 'campaign' and user_id in (
+	select user_id from users where company_parent = 164 and user_type = 'client'
+) and DATE(created_at) = '2025-03-25'
+order by id desc;
+
 
 
 
