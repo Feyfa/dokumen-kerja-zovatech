@@ -22,15 +22,16 @@ where company_id in (@company_id) and user_type = 'userdownline';
 SELECT * FROM `topup_agencies` where company_id = @company_id order by id asc;
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id order by id asc;
 
-select * from leadspeek_users where leadspeek_api_id = '62919136';
-select * from topup_campaigns where leadspeek_api_id = '62919136';
-select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = '62919136';
-update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = '62919136';
+select * from leadspeek_users where leadspeek_api_id = '55458332';
+select * from topup_campaigns where leadspeek_api_id = '55458332';
+select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = '55458332';
+update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = '55458332';
 
-select * from leadspeek_reports where leadspeek_api_id = '62919136';
+select * from leadspeek_reports where leadspeek_api_id = '55458332';
 select * from user_logs order by id desc limit 50;
 select distinct action from user_logs order by action asc;
 
+select * from module_settings;
 
 select * from leadspeek_invoices where invoice_type = 'campaign' and topup_agencies_id in (
 	SELECT id FROM `topup_agencies` where company_id = @company_id

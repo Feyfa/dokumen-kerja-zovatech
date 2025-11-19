@@ -1228,7 +1228,7 @@ EMM-SANDBOX-APP
 - saat auto topup cc agency error, maka ngga charge client dan berhenti sampai sini
 =======
 
-======= 
+======= ✅
 - stop continual : false
 - balance data wallet : $100
 - select amount : $250
@@ -1240,6 +1240,44 @@ EMM-SANDBOX-APP
 - setelah di agency di charge, sisa balance nya menjadi (balance data wallet - charge campaign agency) = ($100 - $80) = $20
 - karena sisa balance di bawah treshold($25), maka akan coba auto topup data wallet sebesar $250 dan cc agency failed
 - karena cc agency failed, maka charge campaign nya berhasil, namun cc merah saat mau auto topup 
+=======
+
+======= ✅
+- manual bill : F
+- stop continual : true
+- balance data wallet : $10
+- select amount : $250
+- treshold : $25
+- charge campaign client : $100
+- charge campaign agency : $50
+
+- charge campaign agency sebesar $50
+- ambil dari data wallet sebesar $10
+- sisanya sebesar $40 bakal charge di application_fee_amount
+
+- charge campaign client sebesar $100 with application_fee_amount sebesar $40
+- dari $40 bakal di bagi bagi ke sales sebesar $40 * 0.1 = $4
+=======
+
+======= ✅
+- manual bill : F
+- stop continual : true
+- balance data wallet : $60
+- select amount : $30
+- treshold : $3
+- charge campaign client : $200
+- charge campaign agency : $100
+
+- kekurangannya = (charge campaign) - (balance data wallet) = ($100) - ($60) = $40
+- berapa kali seharusnya di charge = ceil(kekurangannya / $select amount) = ceil($40 / $30) = 2 kali
+- jumlah yang akan di-charge tunggal = (berapa kali seharusnya di charge) * (select amount) = (2) * (30) = $60
+- total balance = (balance data wallet) + (jumlah yang akan di-charge tunggal) = $60 + $60 = $120
+
+- charge agency sebesar $100
+- sisa balance setelah di charge = (total balance) - (charge campaign) = $120 - $100 = $20
+
+- charge client sebesar $200, dan kalau cc client success, maka selesai
+- dan history auto topup yang $250 dolar tadi menjadi seperti ini "Auto Top Up Via Credit Card For Campaign #62919136 With Invoice #3132"
 =======
 
 - kondisi dimana agency manual bill "F" berhasil di charge, namun client nya gagal charge, maka yang awalnya bentuknya kaya gini "{leadspeeek_api_id}|{leadspeeek_invoice_id}" itu menjadi gini saja "{leadspeeek_api_id}", karena ketika client nya gagal maka leadspeek_invoice campaign nya bakal di hapus
@@ -1345,6 +1383,23 @@ EMM-SANDBOX-API
 
 - charge client sebesar $280, dan kalau cc client success, maka selesai
 - dan history auto topup yang $250 dolar tadi menjadi seperti ini "Auto Top Up Via Credit Card For Campaign #62919136 With Invoice #3132"
+=======
+
+======= ✅
+- manual bill : F
+- stop continual : true
+- balance data wallet : $10
+- select amount : $250
+- treshold : $25
+- charge campaign client : $70
+- charge campaign agency : $35
+
+- charge campaign agency sebesar $35
+- ambil dari data wallet sebesar $10
+- sisanya sebesar $25 bakal charge di application_fee_amount
+
+- charge campaign client sebesar $70 with application_fee_amount sebesar $25
+- dari $25 bakal di bagi bagi ke sales sebesar $25 * 0.1 = $2.5
 =======
 
 
