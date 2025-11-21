@@ -171,5 +171,20 @@ where leadspeek_reports.user_id in (
 	select id from users where company_parent = 464 and user_type = 'client' and active = 'T'
 ) and leadspeek_reports.active = 'T' and leadspeek_users.archived = 'F';
 
+-- http://datalocal.emmsandbox.com/api/v1/developer/status/campaign/17726346/running
+select * from openapi_request_log order by id desc limit 10;
+
+select * from user_logs order by id desc limit 10;
+
+select * from topup_agencies where company_id = 164;
+
+
+
+
+
+
+
+
+
 
 

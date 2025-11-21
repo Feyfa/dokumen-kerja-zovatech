@@ -171,5 +171,3 @@ select * from master_features;
 
 
 
-
-

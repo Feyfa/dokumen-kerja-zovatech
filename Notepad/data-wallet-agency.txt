@@ -1350,6 +1350,31 @@ EMM-SANDBOX-API
 
 
 
+$prevCampaignFinancial = [
+    'billingFrequency' => $campaign->paymentterm ?? '',
+    'topUpOptions' => $campaign->topupoptions ?? '',
+    'setupFee' => $campaign->platformfee ?? '',
+    'campaignFee' => $campaign->lp_min_cost_month ?? '',
+    'costPerLead' => $campaign->cost_perlead ?? '',
+    'leadPerDay' => $campaign->lp_limit_leads ?? '',
+    'contiDurationSelection' => $campaign->continual_buy_options ?? '',
+    'endDate' => $campaign->lp_enddate ?? '',
+    'enableMinimumLeadPerDay' => $campaign->enable_minimum_limit_leads ?? '',
+    'minimumLeadPerDay' => $campaign->minimum_limit_leads ?? '',
+    'lpLimitFreq' => $lp_limit_freq,
+];
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-707 = "fix bug campaign prepaid when running campaign and financials not setup"
+JD-TASK-EMM-707-DEV-SYNC
+
+FILE
+DATA
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\app\Services\OpenApi\OpenApiService.php
+* data\app\Services\OpenApi\OpenApiCampaignStatusService.php
 
 
 
@@ -1357,6 +1382,23 @@ EMM-SANDBOX-API
 
 
 
+EMM-SANDBOX-APP
+JD-TASK-EMM-702 = "change title history data wallet"
+JD-TASK-EMM-702-DEV-SYNC
+
+FILE
+DATA
+* data\app\Exports\TransactionHistoryDirectPayment.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\Controller.php
+
+EMM-SANDBOX-API
+JD-TASK-EMM-702 = "fix bug looping for auto topup data wallet"
+JD-TASK-EMM-702-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
 
 
 
