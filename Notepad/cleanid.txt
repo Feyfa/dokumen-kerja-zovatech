@@ -983,8 +983,8 @@ DATA
 - masih ada bug ketika, balance wallet 0, dan harga agency juga 0 ✅
 - tambahkan loading ketika klik submit di manual ✅
 - tambahkan topup_status di topup_cleanids ✅
-- ketika sudah selesai menjalankan job cleanid, maka kirim email ke agency bahwa sudah selesai
-- ketika download check dahulu apakah sudah di clean_id_export, jika sudah ada pakai link itu, jika belum maka buat pakai matweb
+- ketika sudah selesai menjalankan job cleanid, maka kirim email ke agency bahwa sudah selesai ✅
+- ketika download check dahulu apakah sudah di clean_id_export, jika sudah ada pakai link itu, jika belum maka buat pakai matweb ✅
 =====YANG HARUS DI KERJAKAN=====
 
 78e63b99eaa18437f46b56cea8e7b220
@@ -1046,20 +1046,53 @@ clean_id_export_insert
 clean_api_id
 
 =====DATABASE YANG DIRUBAH=====
-- table `clean_id_md5` tambahkan field `batch_id` varchar(100) default null
-- table `clean_id_export` hapus field `client_id` 
-- table `clean_id_export` tambahkan field `total_jobs` int default null after `status`
-- table `clean_id_export` tambahkan field `jobs_completed` int default null after `total_jobs`
+- table `clean_id_md5` tambahkan field `batch_id` varchar(100) default null ✅
+ALTER TABLE `clean_id_md5`
+ADD COLUMN `batch_id` VARCHAR(100) DEFAULT NULL;
 
-- table `clean_id_export` rename field `file_path` to `file_download`, ubah type nya dari VARCHAR(256) ke Text
-- table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL after `jobs_completed`
-- table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL after `jobs_completed`
-- table `clean_id_export` tambahkan enum `pending` di field `status`
+- table `clean_id_export` hapus field `client_id` ✅
+ALTER TABLE `clean_id_export`
+DROP COLUMN `client_id`;
 
-- INSERT INTO master_features (slug, name, is_beta, apply_to_all_agency, created_at, updated_at) VALUES ('clean_module', 'Clean Module', 'T', 'F', NOW(), NOW());
-- table `topup_cleanids` tambahkan field `topup_status` enum('queue','progress','done') default 'progress' NULL after `balance_amount`
-- table `clean_id_file` tambahkan field `clean_api_id` varchar(20) DEFAULT NULL after `id`
-- table `clean_id_file` hapus field `file`
+- table `clean_id_export` tambahkan field `total_jobs` int default null after `status` ✅
+ALTER TABLE `clean_id_export`
+ADD COLUMN `total_jobs` INT DEFAULT NULL AFTER `status`;
+
+- table `clean_id_export` tambahkan field `jobs_completed` int default null after `total_jobs` ✅
+ALTER TABLE `clean_id_export`
+ADD COLUMN `jobs_completed` INT DEFAULT NULL AFTER `total_jobs`;
+
+- table `clean_id_export` rename field `file_path` to `file_download`, ubah type nya dari VARCHAR(256) ke Text ✅
+ALTER TABLE `clean_id_export`
+CHANGE COLUMN `file_path` `file_download` TEXT;
+
+- table `clean_id_export` tambahkan field `file_temporary` TEXT DEFAULT NULL after `jobs_completed` ✅
+ALTER TABLE `clean_id_export`
+ADD COLUMN `file_temporary` TEXT DEFAULT NULL AFTER `jobs_completed`;
+
+- table `clean_id_export` tambahkan field `file_temporary_full` TEXT DEFAULT NULL after `file_temporary` ✅
+ALTER TABLE `clean_id_export`
+ADD COLUMN `file_temporary_full` TEXT DEFAULT NULL AFTER `file_temporary`;
+
+- table `clean_id_export` tambahkan enum `pending` di field `status` ✅
+
+- INSERT INTO master_features (slug, name, is_beta, apply_to_all_agency, created_at, updated_at) VALUES ('clean_module', 'Clean Module', 'T', 'F', NOW(), NOW()); ✅
+
+- table `topup_cleanids` tambahkan field `topup_status` enum('queue','progress','done') default 'progress' NULL after `balance_amount` ✅
+ALTER TABLE `topup_cleanids`
+ADD COLUMN `topup_status` ENUM('queue','progress','done') DEFAULT 'progress' NULL AFTER `balance_amount`;
+
+- table `clean_id_file` tambahkan field `clean_api_id` varchar(20) DEFAULT NULL after `id` ✅
+ALTER TABLE `clean_id_file`
+ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
+
+- table `clean_id_file` hapus field `file` ✅
+ALTER TABLE `clean_id_file`
+DROP COLUMN `file`;
+
+- table `clean_id_file` tambahkan field `source_type` enum('ui','api') DEFAULT 'ui' after `file_type`
+ALTER TABLE `clean_id_file`
+ADD COLUMN `source_type` ENUM('ui','api') DEFAULT 'ui' AFTER `file_type`;
 =====DATABASE YANG DIRUBAH=====
 
 https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_7WriSfi52b_1762924986218.csv
@@ -1080,6 +1113,8 @@ php artisan queue:work redis --queue=clean_id_md5_stream
 php artisan queue:work redis --queue=clean_id_export_chunk
 php artisan queue:work redis --queue=clean_id_export_insert
 
+if($emailDisabled ==true || in_array('serverlogs@sitesettingsapi.com', $sentTo)) 
+$sentTo = ['fisikamodern00@gmail.com'];
 
 tenda12345678
 
@@ -1109,3 +1144,224 @@ Agency Cost      : $16
 Please do not respond to this email address as it is not monitored. If you have any questions, please reach out to testing@gmail.com.
 Thank you
 ===================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+misal saya punya project begini 
+1. tokopedia 
+- vue js 
+- laravel 
+- hal" yang diperlukan di docker :
+  * node js
+  * php
+  * mysql
+  * nginx
+2. shoopie 
+- react js 
+- nest js 
+- hal" yang diperlukan di docker :
+  * node js
+  * mongodb
+  * nginx
+3. tokopedia (mobile) 
+- react js 
+- kotlin 
+- hal" yang diperlukan di docker :
+  * node js
+  * mysql
+  * nginx
+  * java
+
+nah berarti docker compose itu hanya 1 project saja yaitu tokopedia saja, dan shoopie saja
+dan kalo misalnya kubernetes bisa mengontrol ke-3 project tersebut
+
+private function readLines($stream, $chunkSize) // ini hanya untuk testing
+{
+  $chunk = [];
+
+  while (($line = fgets($stream)) !== false) {
+    $line = trim($line);
+    if ($line === '') continue;
+
+    // filter karakter aneh (misal BOM, kutip, \r, dsb)
+    $line = trim($line, "\xEF\xBB\xBF\"'\r\n\t ");
+
+    // tambahkan ke chunk
+    $chunk[] = $line;
+
+    if (count($chunk) >= $chunkSize) {
+      yield $chunk;
+      $chunk = [];
+    }
+  }
+
+  if (!empty($chunk)) yield $chunk;
+}
+
+public function jidantest() // ini hanya untuk testing
+{
+  // $filedownload_url = "https://embbetaspaces.nyc3.cdn.digitaloceanspaces.com/suppressionlist/1762590409643_leadspeek_1065.csv";
+  // $filedownload_url = "https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/suppressionlist/1762510156995_leadspeek_1065.csv";
+  // $filedownload_url = "https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/suppressionlist/1762510257475_leadspeek_1065.csv";
+
+  // $stream = fopen($filedownload_url, 'r');
+  // if (!$stream) {
+  //     return response()->json(['result' => 'error']);
+  // }
+
+  // foreach ($this->readLines($stream, 30) as $chunk) {
+  //     info('', ['chunk' => $chunk, 'check' => $chunk[0] == "unsightlyTheresa12@live.com"]);
+  // }
+
+  // fclose($stream);
+
+  // https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_CFtIFdTt4k_1762758694247.csv
+  // $cleanid = App::make(CleanID::class);
+  // $cleanid->deleteStorageFileCleanID("tools/cleanid/cleanid_279_CFtIFdTt4k_1762758694247.csv");
+
+  // $cleanid = App::make(CleanID::class);
+  // $md5Final = "1600844aa311fd8df30c0e6b2cc3ad51";
+  // $_cacheKey = "cleanid_chkEmailExistPersonEmail_" . $md5Final;
+  // $chkEmailExist = $cleanid->cacheGetResult($_cacheKey);
+  // if(is_null($chkEmailExist))
+  // {
+  //     info('masuk sini bang 1');
+  //     $chkEmailExist = \App\Models\PersonEmail::select('person_emails.email','person_emails.id as emailID','person_emails.permission','p.lastEntry','p.uniqueID','p.firstName','p.lastName','p.id')
+  //                                 ->join('persons as p','person_emails.person_id','=','p.id')
+  //                                 ->where('person_emails.email_encrypt','=',$md5Final)
+  //                                 ->orderBy('person_emails.id','desc')
+  //                                 ->first();
+  //     if(!empty($chkEmailExist))
+  //     {
+  //         $chkEmailExist = $cleanid->cacheQueryResult($_cacheKey,86400,function () use ($chkEmailExist){
+  //             return $chkEmailExist;
+  //         });
+  //     }
+  //     else
+  //     {
+  //         if($cleanid->cacheHasResult($_cacheKey))
+  //         {
+  //             $cleanid->cacheForget($_cacheKey);
+  //         }
+  //     }
+  // }
+  // info('', ['chkEmailExist' => $chkEmailExist]);
+  // if ($chkEmailExist) 
+  // {
+  //     info('masuk nih bang 2', [
+  //         'chkEmailExist' => $chkEmailExist,
+  //         'chkEmailExist_id' => $chkEmailExist->id,
+  //     ]);
+  // }
+
+
+  /* Queue Chunk 2000 Clean Id Result For Export CSV */
+  // CleanIDExportChunkJob::dispatch(1)
+  //                      ->onQueue('clean_id_export_chunk')
+  //                      ->onConnection('redis');
+  /* Queue Chunk 2000 Clean Id Result For Export CSV */
+
+  /* TEST */
+  $file_temporary_path = storage_path("app/tmp/clean_id/jidantest.csv");
+  $file_open = @fopen($file_temporary_path, 'w');
+  fputcsv($file_open, ['nama', 'email']);
+  fclose($file_open);
+
+  sleep(1);
+
+  $file_temporary_path = storage_path("app/tmp/clean_id/jidantest.csv");
+  $file_open = @fopen($file_temporary_path, 'a');
+  for($i = 0; $i < 10; $i++){
+    fputcsv($file_open, ["nama $i", "email $i"]);
+  }
+  fclose($file_open);
+
+  sleep(1);
+
+  $file_temporary_path = storage_path("app/tmp/clean_id/jidantest.csv");
+  $file_open = @fopen($file_temporary_path, 'a');
+  for($i = 0; $i < 10; $i++){
+    fputcsv($file_open, ["nama $i", "email $i"]);
+  }
+  fclose($file_open);
+
+  sleep(1);
+
+  $file_temporary_path = storage_path("app/tmp/clean_id/jidantest.csv");
+  $file_open = @fopen($file_temporary_path, 'a');
+  for($i = 0; $i < 10; $i++){
+    fputcsv($file_open, ["nama $i", "email $i"]);
+  }
+  fclose($file_open);
+
+  return response()->json(['result' => 'success']);
+  /* TEST */
+}
+
+JD-TASK-EMM-341
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url'
+
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url'
+
+DEV-SYNC
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.destination_url',
+'leadspeek_business.business_type_id',
+
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.destination_url',
+'leadspeek_business.business_type_id',
+
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url',
+'leadspeek_business.business_type_id',
+
+
+
+
+1. beta feature ✅
+2. pagination 
+3. open api
+POST
+https://data.emmsandbox.com/api/v1/developer/clean-id/data
+* manual
+{
+    "advanced_information": [
+        "identification",
+        "contact",
+        "house_and_real_estate",
+        "financial",
+        "household",
+        "interests_and_affinities",
+        "occupation",
+        "marketing_indicator",
+        "location_and_cencus_data",
+        "miscellaneous"
+    ],
+    "md5": [
+        "8dba134974fd2681332f7194e4e17711",
+        "78e63b99eaa18437f46b56cea8e7b220"
+    ]
+}
+* upload
+4. COBA SUBMIT
+- UI
+  * Manual ✅
+  * Upload ✅
+- OPEN API
+  * Manual
+  * Upload
+
+

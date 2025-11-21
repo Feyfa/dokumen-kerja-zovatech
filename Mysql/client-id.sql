@@ -42,35 +42,35 @@ SELECT * FROM `topup_agencies` where company_id = @company_id_jidanach order by 
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id_jidanach order by id asc;
 select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
 --
-select * from jobs;
+select * from jobs order by id desc;
 select * from failed_jobs;
 select * from failed_lead_records where leadspeek_type = 'clean_id';
 select * from report_analytics where leadspeek_type = 'clean_id' order by id desc;
 --
 select * from persons where FIND_IN_SET(id, @person_ids);
 select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, person_emails.* from person_emails where email_encrypt in (
-	"78e63b99eaa18437f46b56cea8e7b220",
-    "8bc64c9c289d18a05dd9652422208f05",
-    "8dba134974fd2681332f7194e4e17711",
- 	"6d30f2e60dcdab0ce437e9c4066b1082",
-    "df19e366cfa7f01166b4929fb35fc37f",
-    "1600844aa311fd8df30c0e6b2cc3ad51",
-    "697f116c75fbeaf384e33df8f86516e4",
-    "512ab114b277e3b4aad9fb5eb9b0cdf8",
-    "3a60885ca65f5be99d14e17933220aaa",
-    "d18fa68148cf6bdb08db8c8228d0616d",
-    "77923622fd09a3f6ef187d82971ba3cd",
-    "3d06deaa536581946ba9dd665232fe09",
-    "7cf9e71b7cef1edcb3c786b8f04b4b92",
-    "cf75592604f42a98883f86918100fdf3",
-    "e1f8fc7ce39f7799b0542416aa3eceb2",
-    "d264abd0a46ce4d6a9c1a1fc9deaf2f7",
-    "1bd323891a53cda51c80d729f3b15455",
-    "78347e6ed4cd3fed7fb7a1e8d53538aa",
-    "93b76b90c2f8e1d433832d0a00c999f9",
-    "a72acb561a6b078895468c756c7a6efa",
-    "dd2124afa8ab78aae179b61ae8604bb5"
-);
+-- 	"78e63b99eaa18437f46b56cea8e7b220",
+    "8bc64c9c289d18a05dd9652422208f05"
+--     "8dba134974fd2681332f7194e4e17711",
+--  	"6d30f2e60dcdab0ce437e9c4066b1082",
+--     "df19e366cfa7f01166b4929fb35fc37f",
+--     "1600844aa311fd8df30c0e6b2cc3ad51",
+--     "697f116c75fbeaf384e33df8f86516e4",
+--     "512ab114b277e3b4aad9fb5eb9b0cdf8",
+--     "3a60885ca65f5be99d14e17933220aaa",
+--     "d18fa68148cf6bdb08db8c8228d0616d",
+--     "77923622fd09a3f6ef187d82971ba3cd",
+--     "3d06deaa536581946ba9dd665232fe09",
+--     "7cf9e71b7cef1edcb3c786b8f04b4b92",
+--     "cf75592604f42a98883f86918100fdf3",
+--     "e1f8fc7ce39f7799b0542416aa3eceb2",
+--     "d264abd0a46ce4d6a9c1a1fc9deaf2f7",
+--     "1bd323891a53cda51c80d729f3b15455",
+--     "78347e6ed4cd3fed7fb7a1e8d53538aa",
+--     "93b76b90c2f8e1d433832d0a00c999f9",
+--     "a72acb561a6b078895468c756c7a6efa",
+--     "dd2124afa8ab78aae179b61ae8604bb5"
+) order by id desc;
 select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4)  from person_emails where person_id = 7793;
 SET @person_ids := '7793';
 select @person_ids;
@@ -147,6 +147,21 @@ where `f`.`id` = ?
 select * from services_agreement where feature_id = 4 and user_id = 279;
 select * from feature_users;
 select * from master_features;
+
+
+select * from user_logs order by id desc limit 10;
+                     																															                       | jika failed maka ini ngga muncul                        |	
+source type : ui | file type : manual | title/file name : testing | company id : 164 | advanced information : 1,2,3,4 | cost per contact : $ 0.2 | total entries : 100 | clean api id : 1234 | cost agency : $ 10 | invoice id : | 
+
+Clean ID Submit Manual From UI
+Clean ID Submit Upload From UI
+Clean ID Submit Manual From UI Failed
+Clean ID Submit Upload From UI Failed
+
+Clean ID Submit Manual From API
+Clean ID Submit Upload From API
+Clean ID Submit Manual From API Failed
+Clean ID Submit Upload From API Failed
 
 
 

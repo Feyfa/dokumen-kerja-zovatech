@@ -234,12 +234,16 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 ALTER TABLE `clean_id_file`
 ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 
+select * from leadspeek_invoices where leadspeek_api_id = '85552608';
+
 
 -- 43937231 ini yang bener di buat dari ui
 -- 92830739,17726346 ini yang bug dari open api
 update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id in (43937231,92830739,17726346);
 select * from topup_campaigns where leadspeek_api_id in (43937231,92830739,17726346);
 select * from leadspeek_invoices where leadspeek_api_id in (43937231,92830739,17726346);
+
+select * from leadspeek_invoices;
 
 
 
@@ -286,6 +290,8 @@ select  total_amount,platform_total_amount, leadspeek_invoices.* from leadspeek_
 	select user_id from users where company_parent = 164 and user_type = 'client'
 ) and DATE(created_at) = '2025-03-25'
 order by id desc;
+
+select * from leadspeek_invoices where invoice_number = '20251120-76066885-3218';
 
 
 

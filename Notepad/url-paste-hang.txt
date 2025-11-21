@@ -1,18 +1,58 @@
-http://applocal.emmsandbox.com:8080/siteach/campaign-management
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "progress clean id"
+JD-TASK-EMM-341-DEV-SYNC
 
-======URL YANG BIKIN BROKEN=======
-https://www.searchallproperties.com/custom-landing-sellers/elelyon77/1+Percent+Listing-1185456
-https://www.searchallproperties.com/custom-landing-sellers/elelyon77/1+Percent+Listing-1185456/abcd/eds-+ds
-https://www.searchallproperties.com/custom-landing-sellers/elelyon77/1-Percent-Listing-1185456
+FILE
+FRONT
+* front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+* front\src\helpers\downloadFile.js
+* front\src\components\Tree\Tree.vue
+* front\src\main.js
+* front\src\components\SidebarPlugin\SideBar.vue
+* front\src\components\TabsShadcn\index.vue
+* front\src\pages\Layout\DashboardLayout.vue
+* front\src\routes\routes.js
+* front\src\store\store.js
+* front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
 
-https://www.searchallproperties.com/1+Percent+Listing-1185456 ✅
-https://www.searchallproperties.com/custom-landing-sellers/1+Percent+Listing-1185456 
-https://www.searchallproperties.com/custom-landing-sellers/elelyon77/1+Percent+Listing-1185456
+DATA 
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\app\Models\CleanIDFile.php
+* data\routes\api.php
+* data\app\Exports\TransactionHistoryDirectPayment.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Models\TopupCleanId.php
+* data\app\Http\Controllers\UserController.php
+* data\app\Models\CleanIDExport.php
+* data\app\Models\CleanIdAdvance.php
+* data\app\Models\CleanIdAdvance2.php
+* data\app\Models\CleanIdAdvance3.php
+* data\app\Models\CleanIDFile.php
+* data\app\Models\CleanIDMd5.php
+* data\app\Models\CleanIDResult.php
+* data\app\Models\CleanIDResultB2B.php
 
-https://www.jidan.com/custom-landing-sellers/1+Percent+Listing-1185456
 
 
-https://chatgpt.com
-======URL YANG BIKIN BROKEN=======
 
-jaslkdjslkj-=+-=--=$%^&*()_!@#$%^&*()_.com
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "progress clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+* app\Http\Controllers\UploadController.php
+* app\Jobs\CleanIDJob.php
+* app\Models\CleanIDFile.php
+* app\Services\CleanID.php
+* app\Jobs\CleanIDExportChunkJob.php
+* app\Jobs\CleanIDExportInsertJob.php
+* app\Jobs\CleanIDMd5StreamJob.php
+* app\Jobs\RetryMD5CleanIDJob.php
+* resources\views\emails\tryseramatchlistcharge.blade.php
+* app\Http\Controllers\Controller.php
+* app\Models\TopupCleanId.php
+* routes\api.php
+* app\Models\CleanIDExport.php
+* app\Services\BigDBM.php
+* app\Models\CleanIDMd5.php
