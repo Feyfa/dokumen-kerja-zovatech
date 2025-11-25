@@ -234,7 +234,7 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 ALTER TABLE `clean_id_file`
 ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 
-select * from leadspeek_invoices where leadspeek_api_id = '85552608';
+select * from leadspeek_invoices where invoice_type = 'agency' and company_id = 164;
 
 
 -- 43937231 ini yang bener di buat dari ui

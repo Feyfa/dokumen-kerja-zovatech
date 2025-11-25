@@ -33,14 +33,17 @@ select * from clean_id_file; -- untuk container md5 atau sekali process api
 select * from clean_id_md5; -- untuk list md5 sekali process api
 select * from clean_id_result; -- untuk result basic
 select * from clean_id_result_advance_1; -- untuk result advanced 1
-select * from clean_id_result_advance_2; -- untuk result advanced 3
-select * from clean_id_result_advance_3; -- untuk result advanced 2
+select * from clean_id_result_advance_2; -- untuk result advanced 2
+select * from clean_id_result_advance_3; -- untuk result advanced 3
 select * from topup_cleanids; -- untuk topup_cleandids
 --
 SET @company_id_jidanach := 164;
 SELECT * FROM `topup_agencies` where company_id = @company_id_jidanach order by id asc;
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id_jidanach order by id asc;
 select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
+
+select * from report_analytics order by id desc;
+select * from failed_lead_records;
 --
 select * from jobs order by id desc;
 select * from failed_jobs;
@@ -48,8 +51,9 @@ select * from failed_lead_records where leadspeek_type = 'clean_id';
 select * from report_analytics where leadspeek_type = 'clean_id' order by id desc;
 --
 select * from persons where FIND_IN_SET(id, @person_ids);
+select * from persons where id = 7919;
 select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, person_emails.* from person_emails where email_encrypt in (
--- 	"78e63b99eaa18437f46b56cea8e7b220",
+-- 	"78e63b99eaa18437f46b56cea8e7b220"
     "8bc64c9c289d18a05dd9652422208f05"
 --     "8dba134974fd2681332f7194e4e17711",
 --  	"6d30f2e60dcdab0ce437e9c4066b1082",
@@ -94,6 +98,7 @@ SET @company_id_jidanach := 164;
 select amount, last_balance_amount, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00+jidanach@gmail.com';
 select *, cost_cleanid_advanced from users where company_id in (@company_id_jidanach) and user_type = 'userdownline';
 --
+select * from failed_lead_records where leadspeek_api_id = '1234567890' order by id desc;
 select 
 	id,
 	company_id ,
@@ -132,6 +137,9 @@ select * from leadspeek_report
 
 select * from module_settings;
 
+select * from failed_lead_records where status = 'risky';
+select * from report_analytics order by id desc;
+
 select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, person_emails.* from person_emails where email_encrypt in (
 	'cef25be7b7d76ccf990dbe19e2254205',
 	'd9c785ec9dc2500f1c15015d97bdf661'
@@ -163,18 +171,23 @@ Clean ID Submit Upload From API
 Clean ID Submit Manual From API Failed
 Clean ID Submit Upload From API Failed
 
+select * from module_settings;
+
+ALTER TABLE `clean_id_export`
+ADD COLUMN `app_url` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
 
 
 
 
 
 
+select * from companies_integration_settings where integration_slug = 'gohighlevel' and company_id in (
+	select company_id from users where company_parent = 164 and user_type = 'client' and company_id is not null and company_id <> '' and active = 'T'
+);
 
+select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email from users where company_id = 904 and user_type = 'client';
 
-
-
-
-
+select * from module_settings;
 
 
 

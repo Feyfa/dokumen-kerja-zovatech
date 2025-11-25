@@ -985,6 +985,14 @@ DATA
 - tambahkan topup_status di topup_cleanids ✅
 - ketika sudah selesai menjalankan job cleanid, maka kirim email ke agency bahwa sudah selesai ✅
 - ketika download check dahulu apakah sudah di clean_id_export, jika sudah ada pakai link itu, jika belum maka buat pakai matweb ✅
+
+- tambahkan company_id di clean_id_file ✅
+- validasi ketika bukan email atau md5 maka jangan di check ke bigdbm, langsung saja bikin not_found ✅
+- tambahkan pengecekan truelist, baru nanti check zerobounce, ikuti kaya getleadwebhook (progress)
+- ubah cara charge, jadi charge nya itu di akhir 
+  * kalo berhasil yaudah success
+  * kalo gagal maka akan jadi hutang, dan tidak bisa klik download, dan email pakai yang format untuk failed (ngga kirim link download nya)
+  * kalo misalnya data wallet balance nya 0, maka menjadi charge credit card
 =====YANG HARUS DI KERJAKAN=====
 
 78e63b99eaa18437f46b56cea8e7b220
@@ -1090,9 +1098,17 @@ ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 ALTER TABLE `clean_id_file`
 DROP COLUMN `file`;
 
-- table `clean_id_file` tambahkan field `source_type` enum('ui','api') DEFAULT 'ui' after `file_type`
+- table `clean_id_file` tambahkan field `source_type` enum('ui','api') DEFAULT 'ui' after `file_type` ✅
 ALTER TABLE `clean_id_file`
 ADD COLUMN `source_type` ENUM('ui','api') DEFAULT 'ui' AFTER `file_type`;
+
+- table `clean_id_export` tambahkan field `app_url` after `status` default null ✅
+ALTER TABLE `clean_id_export`
+ADD COLUMN `app_url` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
+
+- table `clean_id_file` tambahkan field `company_id` BIGINT DEFAULT NULL after `user_id`
+ALTER TABLE `clean_id_file`
+ADD COLUMN `company_id` BIGINT NULL AFTER `user_id`;
 =====DATABASE YANG DIRUBAH=====
 
 https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_7WriSfi52b_1762924986218.csv
@@ -1107,11 +1123,13 @@ Pixel lead report
 cef25be7b7d76ccf990dbe19e2254205
 d9c785ec9dc2500f1c15015d97bdf661
 
+php artisan queue:work redis --queue=clean_id_md5_stream
 php artisan queue:work redis --queue=clean_id
 php artisan queue:work redis --queue=retry_clean_id
-php artisan queue:work redis --queue=clean_id_md5_stream
 php artisan queue:work redis --queue=clean_id_export_chunk
 php artisan queue:work redis --queue=clean_id_export_insert
+
+php artisan queue:work --queue=send_email
 
 if($emailDisabled ==true || in_array('serverlogs@sitesettingsapi.com', $sentTo)) 
 $sentTo = ['fisikamodern00@gmail.com'];
@@ -1148,15 +1166,16 @@ Thank you
 
 
 
+http://datalocal.emmsandbox.com/configuration/clean-id/download-result/123/231/12
 
 
 
 
+--queue=clean_id_md5_stream,clean_id,retry_clean_id,clean_id_export_chunk,clean_id_export_insert
 
 
 
-
-
+http://datalocal.emmsandbox.com/configuration/clean-id/download-result/3
 
 
 
@@ -1365,3 +1384,38 @@ https://data.emmsandbox.com/api/v1/developer/clean-id/data
   * Upload
 
 
+1. Your balance bentuk desimal nya seperti ini $73.27000000000001 ✅
+2. created_at di table `clean_id_file` itu ngga ada ✅
+3. ketika topup_cleanids balance_amount nya itu 0, maka status nya masih queue, karena sebenarnya ngga ada yang di refund ✅ 
+
+$base_url = env('APP_URL');
+$download_url = $base_url . '/download-agreement?agreement_id=' . urlencode($agreement_file->uuid);
+
+C:\wamp64\www\EMM-SANDBOX-APP\data\resources\views\emails\service_agreement_notification.blade.php
+
+Route::get('/configuration/clean-id/download-result/{file_id?}', 'ConfigurationController@downloadCsvCleanID');
+
+909
+<div class="mt-4">
+                    <div v-if="selectedIntegration === 'googlesheet'" class="">
+                        <div v-if="isGoogleInfoFetching" class="row" v-loading="true" id="loading"></div>
+                        <div v-if="isLoadingResetSpreadsheet" class="row" v-loading="true" id="loading"></div>
+                        <div v-if="!isGoogleInfoFetching && !isLoadingResetSpreadsheet">
+                            <base-input label="Client Emails Approved to View the Google Sheet:">
+                                <textarea class="w-100" v-model="selectedRowData.report_sent_to" @keydown="handleKeydown" @paste="handlePaste"
+                                    placeholder="Enter email, separate by new line" rows="4">
+                                </textarea>
+                                <span>Seperate the emails by space or comma</span>
+                            </base-input>
+                            <div class="has-label" :style="{display : userType === 'client' ? 'none' : 'block'}">
+                                <label>Admins Approved for Google Sheet Administration</label>
+                                <el-select multiple class="select-info select-fullwidth" size="large"
+                                    v-model="selectedRowData.admin_notify_to" placeholder="You can select multiple Admin">
+                                    <el-option v-for="option in selectsAdministrator.administratorList" class="select-info"
+                                        :value="option.id" :label="option.name" :key="option.id">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
