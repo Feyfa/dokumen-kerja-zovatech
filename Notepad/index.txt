@@ -1,0 +1,37 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Here, I will prove that sending and distributing leads does not replace existing tags.
+
+I used:
+- Client name in emm: client1761796717
+- Campaign ID in emm: 37342075
+- Email contact in ghl: johndoe1-20251126035354-37342075@example.com
+- Phone contact in ghl: 1126035354
+
+Step 1: 
+- I will try to send test contact ✅
+- in the middle of the road i added a tag to the contact via ghl ✅
+- I will try to send test contact again ✅
+
+Step 2: 
+- in the middle of the road i added a tag to the contact via ghl ✅
+- I will test as if the contact is distributed ✅
+

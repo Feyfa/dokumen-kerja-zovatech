@@ -1131,6 +1131,9 @@ php artisan queue:work redis --queue=clean_id_export_insert
 
 php artisan queue:work --queue=send_email
 
+
+cd "C:\wamp64\www\EMM-SANDBOX-API" && cls
+
 if($emailDisabled ==true || in_array('serverlogs@sitesettingsapi.com', $sentTo)) 
 $sentTo = ['fisikamodern00@gmail.com'];
 
@@ -1174,11 +1177,50 @@ http://datalocal.emmsandbox.com/configuration/clean-id/download-result/123/231/1
 --queue=clean_id_md5_stream,clean_id,retry_clean_id,clean_id_export_chunk,clean_id_export_insert
 
 
-
+client1761796717
 http://datalocal.emmsandbox.com/configuration/clean-id/download-result/3
 
+Contact tersedia
+ROW | name | phone | email | tags 
+1 | Jhon2 Doe2 | +1764149107 | johndoe1-1764149107@example.com | jidan_a
+2 | Jhon1 Doe1 | +1764149709 | johndoe1-1764149709@example.com | jidan_a                                                                                                                                                                                                          11764149709@example.com
+
+1. ✅
+- Contact Deduplication Preferences : false 
+- Find existing contacts based on : email
+- Second preference for search (Optional) : phone
+- email contact : johndoe1-1764149709@example.com
+- phone contact : 1764149107 
+- Result: 
+  * row : 2
+  * tags menjadi : jidan_a, jidan_c, jidan_d 
+
+2. 
+- Contact Deduplication Preferences : false 
+- Find existing contacts based on : phone
+- Second preference for search (Optional) : email
+- email contact : johndoe1-1764149709@example.com
+- phone contact : 1764149107 
+- Result: 
+  * row : 1
+  * tags menjadi : jidan_a, jidan_b
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-716 = "fix merge tags when create contact gohighlevel"
+JD-TASK-EMM-716-DEV-SYNC
+
+FILE
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\IntegrationController.php
 
 
+EMM-SANDBOX-API
+JD-TASK-EMM-716 = "fix merge tags when create contact gohighlevel"
+JD-TASK-EMM-716-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
 
 
 misal saya punya project begini 
