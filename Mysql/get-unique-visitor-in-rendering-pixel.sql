@@ -92,7 +92,7 @@ select * from clean_id_export;
 
 
 
-
+SET @company_id_jidanach := 164;
 TRUNCATE TABLE clean_id_errors;
 TRUNCATE TABLE clean_id_export;
 TRUNCATE TABLE clean_id_file;
@@ -102,7 +102,7 @@ TRUNCATE TABLE clean_id_result_advance_1;
 TRUNCATE TABLE clean_id_result_advance_2;
 TRUNCATE TABLE clean_id_result_advance_3;
 TRUNCATE TABLE topup_cleanids;
-SET @company_id_jidanach := 164;
+
 delete FROM topup_agencies WHERE company_id = @company_id_jidanach;
 delete FROM leadspeek_invoices WHERE invoice_type = 'clean_id' AND company_id = @company_id_jidanach;
 delete from report_analytics where leadspeek_type = 'clean_id';

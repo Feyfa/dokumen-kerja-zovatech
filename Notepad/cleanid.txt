@@ -1518,11 +1518,20 @@ SKENARIO
 - stop continual : T
 - balance amount : $10
 - type submit : upload
-- total cost clean id : ($15 * 1) = $15
-- auto topup data wallet sebesar : $250
-- balance menjadi : (auto topup + balance awal) = ($250 + $10) = $260
-- charge $10 dari data wallet
-- balance menjadi : ($260 - $15) = $245
+- total cost clean id : ($25 * 1) = $25
+- charge dari balance sebesar $10
+- sisanya $15 dari credit card
+- transfer ke sales sebesar $15 * 0.1 = $1.5 
+
+4. ✅
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- balance amount : $0
+- type submit : manual
+- total cost clean id : ($0 * 1) = $0
+- ngga ada charge, gratis
 
 
 
@@ -1625,3 +1634,6 @@ hai bisa tidak saya check jika id berupa number, saya coba check dia itu berada 
 
 
 payment/card
+
+
+SEPERTINYA ADA BUG KETIKA CHARGE DATAWALLET BERHASIL, NAMUN AUTO TOPUP NGA GAGAL, AKAN DI ANGGAP HUTANG
