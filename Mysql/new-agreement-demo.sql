@@ -234,7 +234,7 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 ALTER TABLE `clean_id_file`
 ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 
-select * from leadspeek_invoices where invoice_type = 'agency' and company_id = 164;
+select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = 164;
 
 
 -- 43937231 ini yang bener di buat dari ui
@@ -292,6 +292,68 @@ select  total_amount,platform_total_amount, leadspeek_invoices.* from leadspeek_
 order by id desc;
 
 select * from leadspeek_invoices where invoice_number = '20251120-76066885-3218';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select CONVERT(AES_DECRYPT(FROM_bASE64(api_key), '8e651522e38256f2') USING utf8mb4) as api_key, cis.* from companies_integration_settings as cis where company_id = 165;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -157,7 +157,7 @@ select * from feature_users;
 select * from master_features;
 
 
-select * from user_logs order by id desc limit 10;
+select * from user_logs order by id desc limit 100;
                      																															                       | jika failed maka ini ngga muncul                        |	
 source type : ui | file type : manual | title/file name : testing | company id : 164 | advanced information : 1,2,3,4 | cost per contact : $ 0.2 | total entries : 100 | clean api id : 1234 | cost agency : $ 10 | invoice id : | 
 
@@ -175,6 +175,17 @@ select * from module_settings;
 
 ALTER TABLE `clean_id_export`
 ADD COLUMN `app_url` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
+
+
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 22;
 
 
 

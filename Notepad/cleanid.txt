@@ -988,11 +988,14 @@ DATA
 
 - tambahkan company_id di clean_id_file ✅
 - validasi ketika bukan email atau md5 maka jangan di check ke bigdbm, langsung saja bikin not_found ✅
-- tambahkan pengecekan truelist, baru nanti check zerobounce, ikuti kaya getleadwebhook (progress)
-- ubah cara charge, jadi charge nya itu di akhir 
+- tambahkan pengecekan truelist, baru nanti check zerobounce, ikuti kaya getleadwebhook ✅
+- bug module cleanid masih muncul ketika agency punya hutang ✅
+- saat hutang di table users field `failed_campaignid` : 'minspend|123456' dan `failed_total_amount` : '16.28|12.21'. nah kalo cleanid kalo failed itu di `failed_campaignid` disimpan nya adalah id nya, nah harus buat logic id itu dari `leadspeek_api_id` atau dari `clean_api_id` ✅
+- ubah cara charge, jadi charge nya itu di akhir (progress)
   * kalo berhasil yaudah success
   * kalo gagal maka akan jadi hutang, dan tidak bisa klik download, dan email pakai yang format untuk failed (ngga kirim link download nya)
   * kalo misalnya data wallet balance nya 0, maka menjadi charge credit card
+  * pokoknya sifatnya kaya weekly/monthly
 =====YANG HARUS DI KERJAKAN=====
 
 78e63b99eaa18437f46b56cea8e7b220
@@ -1109,6 +1112,22 @@ ADD COLUMN `app_url` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
 - table `clean_id_file` tambahkan field `company_id` BIGINT DEFAULT NULL after `user_id`
 ALTER TABLE `clean_id_file`
 ADD COLUMN `company_id` BIGINT NULL AFTER `user_id`;
+
+- table `clean_id_file` tambahkan field `platform_cost_leads` double DEFAULT 0 NULL after `entries`
+ALTER TABLE clean_id_file
+ADD COLUMN platform_cost_leads DOUBLE NULL DEFAULT 0 AFTER entries;
+
+- table `clean_id_file` tambahkan field `entries_found` int DEFAULT NULL after `entries`
+ALTER TABLE clean_id_file
+ADD COLUMN entries_found INT DEFAULT NULL AFTER entries;
+
+- table `clean_id_file` tambahkan field `entries_not_found` int DEFAULT NULL after `entries_found`
+ALTER TABLE clean_id_file
+ADD COLUMN entries_not_found INT DEFAULT NULL AFTER entries_found;
+
+- table `clean_id_file` tambahkan field `entries_duplicate` int DEFAULT NULL after `entries_not_found`
+ALTER TABLE clean_id_file
+ADD COLUMN entries_duplicate INT DEFAULT NULL AFTER entries_not_found;
 =====DATABASE YANG DIRUBAH=====
 
 https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/tools/cleanid/cleanid_279_7WriSfi52b_1762924986218.csv
@@ -1461,3 +1480,148 @@ Route::get('/configuration/clean-id/download-result/{file_id?}', 'ConfigurationC
                         </div>
                     </div>
                 </div>
+
+SKENARIO
+1. ✅
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25  
+- stop continual : F
+- balance amount : $10
+- type submit : manual
+- total cost clean id : ($1 * 1) = $1
+- maka akan charge $1 dari data wallet
+- balance amount menjadi : $9
+- karena di bawah treshold, maka akan auto topup sebesar $250, cc success
+- balance amount menjadi (balance amount + auto topup) = ($9 + $250) = $259 
+
+2. ✅
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- stop continual : F
+- balance amount : $10
+- type submit : manual
+- total cost clean id : ($15 * 1) = $15
+- auto topup data wallet sebesar : $250
+- balance menjadi : (auto topup + balance awal) = ($250 + $10) = $260
+- charge $10 dari data wallet
+- balance menjadi : ($260 - $15) = $245
+
+3. ✅
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $10
+- type submit : upload
+- total cost clean id : ($15 * 1) = $15
+- auto topup data wallet sebesar : $250
+- balance menjadi : (auto topup + balance awal) = ($250 + $10) = $260
+- charge $10 dari data wallet
+- balance menjadi : ($260 - $15) = $245
+
+
+
+- misal gini balance amount $50, nah harus bayar clean id $100
+- karena data walet auto topup, maka coba charge lah sebesar $250 dulu, nah ternyata gagal nih cc error $statusPayment = 'failed' dan $chargeStatusWithPrepaid = ''
+- maka ngga transfer ke sales dari $50 nya itu
+- maka agency hutang sebesar $100 - $50 = $50 (progress)
+- apakah dengan hasil akhir kaya gini akan aman 
+
+
+
+
+f(!$topupAgencyExists || $chargeStatusWithPrepaid == 'failed')
+
+kalo bikin kaya gini maka bisa aja agency charge data wallert berhasil dan padahal masih ada sisa.
+
+mislnya gini balance ada $50, nah saat auto topup itu gagal. nah di kondisi ni maka statusPayment menjadi failed, dan chargeStatusWithPrepaid = "". nah kalo kaya gini maka hutang nya ngga di record dong, karena ada restcitid $chargeStatusWithPrepaid == 'failed'
+
+
+
+if($statusPayment == 'failed')
+    if($topupAgencyExists && $chargeStatusWithPrepaid == 'paid')
+  
+apakah mungkin ada kejadian $statusPayment 'failed' dan sedangkan $chargeStatusWithPrepaid = 'paid'. ya ini bisa terjadi.
+misal saya punya balance $50, lalu charge sebesar $40, $chargeStatusWithPrepaid = 'paid' lalu sisa balance menjadi $10 dan dibawah treshold dan akan auto topup.
+nah ketika auto topup cc agency gagal nah di sini lah  $statusPayment 'failed'
+
+v-if="
+(
+  (
+    this.$global.menuLeadsPeek &&
+    this.$global.menuUserType != 'client' &&
+    (
+      !this.$global.agencyPaymentFailed ||
+      this.$global.globalviewmode
+    ) &&
+    !this.$global.systemUser &&
+    this.$global.creditcardsetup &&
+    this.$global.stripeaccountconnected &&
+    this.activesidebar['simplifi']
+  )
+  ||
+  (
+    this.$global.menuLeadsPeek &&
+    this.$global.menuLeadsPeek_typeLocator == 'locator' &&
+    this.$global.menuUserType == 'client' &&
+    this.$global.stripeaccountconnected &&
+    !this.$global.systemUser &&
+    this.activesidebar['simplifi']
+  )
+)
+&&
+(this.$global.idsys == this.$global.masteridsys)
+&&
+(this.validateBetaFeature('simplifi_module'))
+"
+
+
+
+
+
+v-if="
+  this.$global.menuLeadsPeek &&
+  this.$global.menuUserType != 'client' &&
+  this.$global.creditcardsetup &&
+  this.$global.stripeaccountconnected &&
+  this.$global.idsys == this.$global.masteridsys &&
+  this.$global.apiMode &&
+  this.$global.is_marketing_services_agreement_developer &&
+  this.validateBetaFeature('clean_module') &&
+  (!this.$global.agencyPaymentFailed || this.$global.globalviewmode)
+"
+
+
+(
+  this.$global.menuLeadsPeek &&
+  this.$global.menuUserType != 'client' &&
+  this.$global.creditcardsetup &&
+  this.$global.stripeaccountconnected &&
+  this.$global.idsys == this.$global.masteridsys &&
+  this.$global.apiMode &&
+  this.$global.is_marketing_services_agreement_developer &&
+  this.validateBetaFeature('clean_module')
+  )
+
+global.failedCampaignNumber = response.fcampid;
+global.failedInvoiceAmount = response.finamt;
+
+$failed_campaignid = explode('|',$usrSetup[0]['failed_campaignid']); 
+
+minspend|45636124|62954383 
+
+hai bisa tidak saya check jika id berupa number, saya coba check dia itu berada di table LeadspeekUser atau CleanIdFile nah jika dia berada di table CleanIdFile, maka nanti hasil explode nya kaya gini 
+
+[
+  'minspend', 
+  '45636124',
+  'cleanid_62954383'
+]
+
+
+payment/card
