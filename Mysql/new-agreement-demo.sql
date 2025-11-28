@@ -231,6 +231,11 @@ delete FROM leadspeek_invoices WHERE invoice_type = 'clean_id' AND company_id = 
 delete from report_analytics where leadspeek_type = 'clean_id';
 delete from failed_lead_records where leadspeek_type = 'clean_id';
 
+select * from leadspeek_users where leadspeek_api_id = 62919136;
+select * from topup_campaigns where leadspeek_api_id = 62919136;
+select * from leadspeek_reports where leadspeek_api_id = 62919136;
+select * from leadspeek_invoices where leadspeek_api_id = 62919136;
+
 ALTER TABLE `clean_id_file`
 ADD COLUMN `clean_api_id` VARCHAR(20) DEFAULT NULL AFTER `id`;
 

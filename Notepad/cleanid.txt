@@ -991,12 +991,23 @@ DATA
 - tambahkan pengecekan truelist, baru nanti check zerobounce, ikuti kaya getleadwebhook ✅
 - bug module cleanid masih muncul ketika agency punya hutang ✅
 - saat hutang di table users field `failed_campaignid` : 'minspend|123456' dan `failed_total_amount` : '16.28|12.21'. nah kalo cleanid kalo failed itu di `failed_campaignid` disimpan nya adalah id nya, nah harus buat logic id itu dari `leadspeek_api_id` atau dari `clean_api_id` ✅
-- ubah cara charge, jadi charge nya itu di akhir (progress)
+
+- ubah cara charge, jadi charge nya itu di akhir (90% sudah benar, hanya di testing saja)
   * kalo berhasil yaudah success
   * kalo gagal maka akan jadi hutang, dan tidak bisa klik download, dan email pakai yang format untuk failed (ngga kirim link download nya)
   * kalo misalnya data wallet balance nya 0, maka menjadi charge credit card
   * pokoknya sifatnya kaya weekly/monthly
-=====YANG HARUS DI KERJAKAN=====
+
+- description saat charge clean id di stripe belum sesuai ✅
+  * harus nya kaya gini "Agency #20251127-1057-Dimas #40889824" bukan "pi_0xxx"
+  * "Agency {$company_agency} Clean ID #{$invoice_num} #{$clean_api_id}"
+
+- description saat transfer ke sales setelah charge clean id di stripe belum sesuai ✅
+  * "Commision from Jidan ACH 164 Businnes for campaign #93680279" Untuk cleanid harus nya diganti "campaign" menjadi "Clean ID"
+
+- ketika search di agency, maka clean_api_id juga bisa di cari ✅
+- validasi ketika agency failed dan punya hutang, maka tidak bisa menjalankan cleanid
+=====YANG HARUS DI KERJAKAN===
 
 78e63b99eaa18437f46b56cea8e7b220
 8bc64c9c289d18a05dd9652422208f05
@@ -1533,6 +1544,109 @@ SKENARIO
 - total cost clean id : ($0 * 1) = $0
 - ngga ada charge, gratis
 
+5. ✅ 
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- balance amount : $30
+- type submit : manual
+- total cost clean id : ($10 * 1) = $10
+- charge dari balance sebesar $10
+- balance menjadi ($30 - $10) = $20
+- karena di bawah treshold, maka akan auto topup lagi sebesar $250, dan cc berhasil
+- balance final menjadi ($250 + $20) = $270
+
+6. ✅
+- cc agency : gagal 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- balance amount : $30
+- type submit : manual
+- total cost clean id : ($10 * 1) = $10
+- charge dari balance sebesar $10
+- balance menjadi ($30 - $10) = $20
+- karena di bawah treshold, maka akan auto topup lagi sebesar $250, namun karena cc error, maka pembayaran cleanid berhasil, namun tidak hutang
+- tidak transfer ke sales, karena sudah pakai data wallet
+
+7. ✅
+- cc agency : gagal 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- balance amount : $20
+- type submit : manual
+- total cost clean id : ($30 * 1) = $30
+- coba auto topup dahulu sebesar $250. karena cc gagal maka tidak jadi auto topup 
+- ambil dari balance sebesar $20
+- sisa balance menjadi $0
+- sisanya hutang sebesar $10
+- tidak transfer ke sales
+
+8. ✅
+- cc agency : success 
+- agency manual bill : F 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $10
+- type submit : upload
+- total cost clean id : ($30 * 1) = $30
+- charge dari balance sebesar $10
+- sisanya $20 dari credit card
+- transfer ke sales sebesar $20 * 0.1 = $2 
+
+9. ✅
+- cc agency : failed 
+- agency manual bill : T 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $0
+- type submit : upload
+- total cost clean id : ($30 * 1) = $30
+- charge pakai cc agency $30, karena cc failed, maka hutang sebesar $30 dan tidak bisa download csv di ui maupun di email
+
+
+10. ✅
+- cc agency : success 
+- agency manual bill : T 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $0
+- type submit : manual
+- total cost clean id : ($30 * 1) = $30
+- charge pakai cc agency $30, cc success berhasil
+- cuman bedanya buat seolah olah CleanIDJob itu error, lalu dijalankan di RetryMD5CleanIDJob, nanti process charge dari RetryMD5CleanIDJob
+
+11. (progress)
+==DI TAB 1==
+- cc agency : failed 
+- agency manual bill : T 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $30
+- type submit : manual
+- total cost clean id : ($30 * 1) = $30
+- charge pakai data wallet sebesar $30, maka berhasil
+- ngga transfer ke sales
+==DI TAB 1==
+1 detik kemudian
+==DI TAB 2==
+- cc agency : failed 
+- agency manual bill : T 
+- select amount : $250
+- treshold : $25
+- stop continual : T
+- balance amount : $0
+- type submit : manual
+- total cost clean id : ($30 * 1) = $30
+- karena balance 0, maka charge pakai cc sebesar $30, karena cc failed maka hutang sebesar $30
+- ngga transfer ke sales
+==DI TAB 2==
 
 
 - misal gini balance amount $50, nah harus bayar clean id $100
@@ -1541,6 +1655,106 @@ SKENARIO
 - maka agency hutang sebesar $100 - $50 = $50 (progress)
 - apakah dengan hasil akhir kaya gini akan aman 
 
+
+mungkin ngga terjadi hal seperti ini
+statusPayment = 'failed'
+$topupAgencyExists = true 
+$chargeStatusWithPrepaid == '' -> biasanya jika chargeStatusWithPrepaid != 'paid', maka nilai dari remainingPlatformfee itu pasti lebih besar dari 0
+if($topupAgencyExists && $remainingPlatformfee > 0) // maka dengan begitu ini pasti kena
+{
+  $failedTotalAmount = $remainingPlatformfee;
+}
+1. ✅
+- stop continual = F
+- balance amount = $30
+- bayar cost = $50
+- mencoba auto topup, namun cc agency failed 
+- nah ambil dari data wallet $30, lalu $20 hutang
+- nilai dari chargeStatusWithPrepaid = ""
+- maka secara logic harus dianggap failed
+
+
+mungkin ngga terjadi hal seperti ini
+statusPayment = 'failed'
+$topupAgencyExists = true 
+$chargeStatusWithPrepaid == 'paid' -> biasanya jika chargeStatusWithPrepaid != 'paid', maka nilai dari remainingPlatformfee itu pasti lebih besar dari 0
+2. ✅
+- stop continual = F
+- balance amount = $30
+- bayar cost = $20
+- select amount = 250
+- treshold = 25
+- balance menjadi $10, karena di bawah treshold, maka mencoba auto, namun cc agency failed 
+- nilai dari chargeStatusWithPrepaid = "paid"
+- statusPayment = 'failed'
+- maka secara logic harus dianggap valid
+
+
+mungkin ngga terjadi hal seperti ini
+statusPayment = 'failed'
+$topupAgencyExists = true 
+$chargeStatusWithPrepaid == 'failed' -> biasanya jika chargeStatusWithPrepaid != 'paid', maka nilai dari remainingPlatformfee itu pasti lebih besar dari 0
+3. ✅
+- stop continual = T
+- balance amount = $30
+- bayar cost = $50
+- select amount = 250
+- treshold = 25
+- nah ambil dari data wallet $30, lalu charge $20 dari cc agency, karena cc failed maka hutang sebesar $20
+- nilai dari chargeStatusWithPrepaid = "failed"
+- maka secara logic harus dianggap failed
+
+- change logic charge clean id
+- implement true list for check md5
+- add validation if not email and md5, then dont hit bigdbm and consider it not found
+- add validation if payment status agency failed, cannot download csv clean id and cannot submit clean id
+
+EMM-SANDBOX-APP
+
+JD-TASK-EMM-341-NEW-LOGIC-CHARGE = 
+"
+- change logic charge clean id
+- implement true list for check md5
+- add validation if not email and md5, then dont hit bigdbm and consider it not found
+- add validation if payment status agency failed, cannot download csv clean id and cannot submit clean id
+"
+
+FILE
+FRONT
+* front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+
+DATA
+* data\app\Exports\TransactionHistoryDirectPayment.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+
+----
+
+EMM-SANDBOX-API
+
+JD-TASK-EMM-341-NEW-LOGIC-CHARGE = 
+"
+- change logic charge clean id
+- implement true list for check md5
+- add validation if not email and md5, then dont hit bigdbm and consider it not found
+- add validation if payment status agency failed, cannot download csv clean id and cannot submit clean id
+"
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* app\Http\Controllers\UploadController.php
+* app\Jobs\CleanIDExportChunkJob.php
+* app\Jobs\CleanIDExportInsertJob.php
+* app\Jobs\CleanIDJob.php
+* app\Jobs\CleanIDMd5StreamJob.php
+* app\Jobs\RetryMD5CleanIDJob.php
+* app\Services\CleanID.php
+* routes\api.php
+* app\Models\CleanIDFile.php
+* resources\views\emails\tryseramatchlistcharge.blade.php
 
 
 
@@ -1615,7 +1829,7 @@ v-if="
   this.$global.apiMode &&
   this.$global.is_marketing_services_agreement_developer &&
   this.validateBetaFeature('clean_module')
-  )
+)
 
 global.failedCampaignNumber = response.fcampid;
 global.failedInvoiceAmount = response.finamt;
@@ -1636,4 +1850,10 @@ hai bisa tidak saya check jika id berupa number, saya coba check dia itu berada 
 payment/card
 
 
-SEPERTINYA ADA BUG KETIKA CHARGE DATAWALLET BERHASIL, NAMUN AUTO TOPUP NGA GAGAL, AKAN DI ANGGAP HUTANG
+SEPERTINYA ADA BUG KETIKA CHARGE DATAWALLET BERHASIL, NAMUN AUTO TOPUP NGA GAGAL, AKAN DI ANGGAP HUTANG (TIDAK INI BUKAN BUG, AMAN)
+
+78e63b99eaa18437f46b56cea8e7b220
+8bc64c9c289d18a05dd9652422208f05
+8dba134974fd2681332f7194e4e17711
+6d30f2e60dcdab0ce437e9c4066b1082
+

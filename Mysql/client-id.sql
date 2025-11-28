@@ -42,10 +42,14 @@ SELECT * FROM `topup_agencies` where company_id = @company_id_jidanach order by 
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id_jidanach order by id asc;
 select * from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
 
-select * from leadspeek_invoices where id = 2785;
+select * from leadspeek_invoices order by id desc;
+
+select * from leadspeek_invoices where id = 3345;
 
 select * from report_analytics order by id desc;
 select * from failed_lead_records;
+
+select * from user_logs where target_user_id = 279 order by id desc;
 --
 select * from jobs order by id desc;
 select * from failed_jobs;
@@ -78,7 +82,7 @@ select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4
 	"dd2124afa8ab78aae179b61ae8604bb5"
 ) order by id desc;
 select *, CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4)  from person_emails where person_id = 7793;
-SET @person_ids := '7839,7838,7837,7835,7834,7833,7828,7827,7826,7825,7824,7823,7822,7821,7820,7819,7812,7811,7808,7807,7794';
+SET @person_ids := '7885,7880,7878,7875,7872,7869,7859,7858,7857,7856,7855,7854,7853,7850,7849,7848,7847,7844,7843,7842,7841,7840,7839,7838,7836,7827,7818,7803';
 select @person_ids;
 select * from person_names where FIND_IN_SET(person_id, @person_ids);
 select * from person_phones where FIND_IN_SET(person_id, @person_ids);
