@@ -29,8 +29,6 @@ public function getTransactionHistoryDirectPayment(Request $request)
     $transactionHistory = LeadspeekInvoice::select(
                                             'leadspeek_invoices.id','leadspeek_invoices.invoice_type','leadspeek_invoices.leadspeek_api_id','leadspeek_invoices.platform_total_amount',
                                             'leadspeek_invoices.payment_term','leadspeek_invoices.payment_type','leadspeek_invoices.created_at','topup_agencies.expired_at',
-                                            'leadspeek_users.campaign_name','leadspeek_users.leadspeek_type',
-                                            'clean_id_file.id as upload_id','clean_id_file.file_name as file_name',
                                             'clean_id_file.id as upload_id','clean_id_file.file_name as file_name'
                                             )
                                             ->leftJoin('topup_agencies','topup_agencies.id','=','leadspeek_invoices.topup_agencies_id')
@@ -98,7 +96,6 @@ public function getTransactionHistoryDirectPayment(Request $request)
                                                             }
                                                             if(!empty($leadspeek_api_id_data_wallet_array[1] ?? "")){ // leadspeek_invoice_id
                                                                 $title .= " With Invoice #{$leadspeek_api_id_data_wallet_array[1]}";
-                                                            }
                                                         }
                                                     }
                                                 }
@@ -124,7 +121,7 @@ public function getTransactionHistoryDirectPayment(Request $request)
                                                     'transaction_type' => $transaction_type,
                                                     'title' => $title,
                                                     'sub_title' => $sub_title,
-                                                    'amount' => (float) number_format(($item->platform_total_amount ?? 0),2,'.',''),
+                                                    'amount' => number_format($item->platform_total_amount ?? 0,2,'.',''),
                                                     'created_at' => $created_at,
                                                     'expired_at' => $expired_at, 
                                                 ];
@@ -135,3 +132,73 @@ public function getTransactionHistoryDirectPayment(Request $request)
         'transaction_history' => $transactionHistory,
     ]);
 }
+
+
+
+->map(function ($item, $index) {
+    $payment_term = $item->payment_term;
+    $transaction_type = ($item->invoice_type == 'campaign' || $item->invoice_type == 'clean_id') ? 'charge' : 'topup';
+
+    $payment_type = 'Credit Card';
+    if($item->payment_type == 'bank_account') 
+        $payment_type = 'Bank Account';
+    else if($item->payment_type == 'refund_campaign') 
+        $payment_type = "Refund Campaign #{$item->leadspeek_api_id}";
+    else if($item->payment_type == 'minimum_spend')
+        $payment_type = "Minimum Spend";
+
+    $title = "Charge {$payment_term} Payment For Campaign #{$item->leadspeek_api_id} With Invoice #{$item->id}";
+    if($item->invoice_type == 'agency')
+    {
+        if(empty($item->leadspeek_api_id)) // topup manual
+        {
+            $title = "Top Up Via {$payment_type}";
+        }
+        else // auto topup
+        {
+            $leadspeek_api_id_data_wallet_array = explode("|", $item->leadspeek_api_id);
+            $title = "Auto Top Up Via {$payment_type}";
+            if(!in_array($item->payment_type, ['refund_campaign','minimum_spend']))
+            {
+                if(!empty($leadspeek_api_id_data_wallet_array[0] ?? "")){ // leadspeek_api_id
+                    // check apakah leadspeek_api_id ini punya campaign atau clean id
+                    $isLeadspeekApiIdCampaign = LeadspeekUser::where('leadspeek_api_id',$leadspeek_api_id_data_wallet_array[0])->exists();
+                    $isLeadspeekApiIdCleanId = CleanIDFile::where('clean_api_id',$leadspeek_api_id_data_wallet_array[0])->exists();
+                    if($isLeadspeekApiIdCampaign){
+                        $title .= " For Campaign #{$leadspeek_api_id_data_wallet_array[0]}";
+                    }elseif($isLeadspeekApiIdCleanId){
+                        $title .= " For Clean ID #{$leadspeek_api_id_data_wallet_array[0]}";
+                    }
+                }
+                if(!empty($leadspeek_api_id_data_wallet_array[1] ?? "")){ // leadspeek_invoice_id
+                    $title .= " With Invoice #{$leadspeek_api_id_data_wallet_array[1]}";
+            }
+        }
+    }
+    elseif($item->invoice_type == 'clean_id')
+    {
+        $title = "Charge For Clean ID #{$item->leadspeek_api_id} Title {$item->file_name}";
+    }
+
+    $sub_title = '';
+    $campaign_name = Encrypter::decrypt($item->campaign_name ?? '');
+    $leadspeek_type = $item->leadspeek_type ?? '';
+    $leadspeek_type = ($leadspeek_type == 'b2b') ? 'B2B' : ucfirst($leadspeek_type);
+    if($item->invoice_type == 'campaign')
+    {
+        $sub_title = "Campaign {$campaign_name} ({$leadspeek_type})";
+    }
+    
+    $created_at = Carbon::parse($item->created_at)->format('Y F d H:i:s');
+    $expired_at = !empty($item->expired_at) ? Carbon::parse($item->expired_at)->format('Y F d H:i:s') : null;
+
+    return [
+        'id' => $item->id,
+        'transaction_type' => $transaction_type,
+        'title' => $title,
+        'sub_title' => $sub_title,
+        'amount' => number_format($item->platform_total_amount ?? 0,2,'.',''),
+        'created_at' => $created_at,
+        'expired_at' => $expired_at, 
+    ];
+});

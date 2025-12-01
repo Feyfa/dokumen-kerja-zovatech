@@ -1120,23 +1120,23 @@ ADD COLUMN `source_type` ENUM('ui','api') DEFAULT 'ui' AFTER `file_type`;
 ALTER TABLE `clean_id_export`
 ADD COLUMN `app_url` VARCHAR(255) NULL DEFAULT NULL AFTER `status`;
 
-- table `clean_id_file` tambahkan field `company_id` BIGINT DEFAULT NULL after `user_id`
+- table `clean_id_file` tambahkan field `company_id` BIGINT DEFAULT NULL after `user_id` ✅
 ALTER TABLE `clean_id_file`
 ADD COLUMN `company_id` BIGINT NULL AFTER `user_id`;
 
-- table `clean_id_file` tambahkan field `platform_cost_leads` double DEFAULT 0 NULL after `entries`
+- table `clean_id_file` tambahkan field `platform_cost_leads` double DEFAULT 0 NULL after `entries` ✅
 ALTER TABLE clean_id_file
 ADD COLUMN platform_cost_leads DOUBLE NULL DEFAULT 0 AFTER entries;
 
-- table `clean_id_file` tambahkan field `entries_found` int DEFAULT NULL after `entries`
+- table `clean_id_file` tambahkan field `entries_found` int DEFAULT NULL after `entries` ✅
 ALTER TABLE clean_id_file
 ADD COLUMN entries_found INT DEFAULT NULL AFTER entries;
 
-- table `clean_id_file` tambahkan field `entries_not_found` int DEFAULT NULL after `entries_found`
+- table `clean_id_file` tambahkan field `entries_not_found` int DEFAULT NULL after `entries_found` ✅
 ALTER TABLE clean_id_file
 ADD COLUMN entries_not_found INT DEFAULT NULL AFTER entries_found;
 
-- table `clean_id_file` tambahkan field `entries_duplicate` int DEFAULT NULL after `entries_not_found`
+- table `clean_id_file` tambahkan field `entries_duplicate` int DEFAULT NULL after `entries_not_found` ✅
 ALTER TABLE clean_id_file
 ADD COLUMN entries_duplicate INT DEFAULT NULL AFTER entries_not_found;
 =====DATABASE YANG DIRUBAH=====
@@ -1196,12 +1196,10 @@ Please do not respond to this email address as it is not monitored. If you have 
 Thank you
 ===================================
 
-
+#include<password/>postman.h>
 
 
 http://datalocal.emmsandbox.com/configuration/clean-id/download-result/123/231/12
-
-
 
 
 --queue=clean_id_md5_stream,clean_id,retry_clean_id,clean_id_export_chunk,clean_id_export_insert
