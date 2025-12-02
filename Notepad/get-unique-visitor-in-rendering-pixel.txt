@@ -343,3 +343,9 @@ $CustomParams_Base64Encode = "eyJuYW1hIjoiamlkYW4iLCJlbWFpbCI6ImppZGFuQGdtYWlsLm
 
 3. buat url alocdn 
 $url = https://p.alocdn.com/c/{$webhookcode}/a/xtarget/p.gif?label=12345678-1234-eyJuYW1hIjoiamlkYW4iLCJlbWFpbCI6ImppZGFuQGdtYWlsLmNvbSJ9|https://test.com
+
+
+SKENARIO
+1. 
+- campaign type = local
+- input label = 

@@ -1,5 +1,6 @@
+use emm_sandbox;
 select * from pixel_lead_records where DATE(created_at) = '2025-12-02' order by id desc;
-select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '81151983' order by id desc;
+select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where leadspeek_api_id = '55458332' order by id desc;
 select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '37342075' order by id desc;
 select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '27215395' order by id desc;
 
