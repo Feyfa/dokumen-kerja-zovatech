@@ -1,4 +1,7 @@
-select * from pixel_lead_records order by id desc;
+select * from pixel_lead_records where DATE(created_at) = '2025-12-02' order by id desc;
+select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '81151983' order by id desc;
+select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '37342075' order by id desc;
+select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '27215395' order by id desc;
 
 select * from leadspeek_users where leadspeek_api_id = 81151983;
 
@@ -14,7 +17,7 @@ where
 	and DATE_FORMAT(plr.created_at,"%Y%m%d") <= '20251111'
 	and pixel_status <> 'invalid_label';
 
-
+select * from pixel_lead_records where lead_fire > 0 order by id desc limit 10;
 
 -- mode all
 -- untuk total visitor adalah count dari hasil ini

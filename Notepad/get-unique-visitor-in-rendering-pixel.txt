@@ -295,3 +295,51 @@ https://p.alocdn.com/c/6cd7kkmz/a/xtarget/p.gif?label=81151983%7Chttp%3A%2F%2F12
 
 statsCardsBreakdown: []
 statsCardPixel: []
+
+
+
+SKENARIO 
+1. (yang paling penting) ✅
+- campaign type = local 
+- scenario = case untuk format label local yang baru 
+- input = "{campaignid}|{idpixelrecord}|{keyword}" -> "81151983|84|http://127.0.0.1:5500/index1.html"
+- output = "{campaignid}|{keyword}|{idpixelrecord}" -> "81151983|http://127.0.0.1:5500/index1.html|86"
+
+2. (yang paling penting) ✅
+- campaign type = local
+- scenario = case untuk format label local yang lama
+- input = "{campaignid}|{keyword}|{idpixelrecord}" -> "81151983|http://127.0.0.1:5500/index1.html|83"
+- output = "{campaignid}|{keyword}|{idpixelrecord}" -> "81151983|http://127.0.0.1:5500/index1.html|83"
+
+3. (probabilitas terjadi nya ini sangat kecil, mungkin hanya 1%) ✅
+- campaign type = local
+- scenario = case dimana format label local yang lama, namun parameter di index ke 2 nya kosong
+- input = "{campaignid}|{keyword}" -> "81151983|http://127.0.0.1:5500/index1.html"
+- output = "{campaignid}|{keyword}" -> "81151983|http://127.0.0.1:5500/index1.html"
+
+4. (probabilitas terjadi nya ini sangat kecil, mungkin hanya 1%), karena kalau ini terjadi maka yang sebelumnya bisa aja cuman {campaignid} tanpa keyword ✅
+- campaign type = local
+- scenario = case dimana format label local yang baru, namun parameter di index ke 2 nya kosong
+- input = "{campaignid}|{idpixelrecord}" -> "81151983|84"
+- output = "{campaignid}|{idpixelrecord}" -> "81151983|84"
+
+5. (yang paling penting) ✅ 
+- campaign type = non local
+- scenario = case untuk enhance atau b2b misalnya
+- input = "{campaignid}|{keyword}" -> "37342075|fashion"
+- output = "{campaignid}|{keyword}" -> "37342075|fashion"
+
+misal bentuk nya 12345678-12345678-|muhammadjidan|https://chatgpt.com
+
+1. buat custom param seperti ini 
+PxGrabber.setOptions({
+    Label: "12345678|" + window.location.href,
+    CustomParams: "test123"
+});
+
+2. pada saat generate alocdn, json_encode + base64_encode
+$CustomParams_JsonEncode = "{"nama":"jidan","email":"jidan@gmail.com"}"
+$CustomParams_Base64Encode = "eyJuYW1hIjoiamlkYW4iLCJlbWFpbCI6ImppZGFuQGdtYWlsLmNvbSJ9"
+
+3. buat url alocdn 
+$url = https://p.alocdn.com/c/{$webhookcode}/a/xtarget/p.gif?label=12345678-1234-eyJuYW1hIjoiamlkYW4iLCJlbWFpbCI6ImppZGFuQGdtYWlsLmNvbSJ9|https://test.com

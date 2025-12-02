@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Rendering Pixel</title>
+    <script>
+    (function (doc, tag, id) {
+        var js = doc.getElementsByTagName(tag)[0];
+
+        if (doc.getElementById(id)) {
+            return;
+        }
+
+        js = doc.createElement(tag);
+        js.id = id;
+        // js.src = "https://jidanach.ap.ngrok.io/px-sandbox.min.js";
+        js.src = "http://jidanach.emmsandbox.com:8080/px-sandbox.min.js";
+        js.type = "text/javascript";
+
+        doc.head.appendChild(js);
+
+        js.onload = function () {
+            pxfired();
+        };
+    }(document, 'script', 'px-grabber'));
+
+    function pxfired() {
+        PxGrabber.setOptions({
+            Label: "81151983|" + window.location.href,
+            // CustomParams: "nama saya jidan",
+        });
+
+        PxGrabber.render();
+    }
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">Testing Rendering Pixel</h1>
+</body>
+</html>
