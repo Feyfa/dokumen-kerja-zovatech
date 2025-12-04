@@ -850,3 +850,81 @@ http://jidanach.emmsandbox.com:8080/sso?token=d9bc611acf806fd833770de617408c5a4a
 api/v1/developer/list/campaign/{campaignType}
 
 
+
+
+
+STEP 1
+- ubah url integrasi /gohighlevel menjadi /leadconnector ✅
+- sembunyikan button sso link ketika client login, namun ketika sudah di attch oleh agency, maka muncul button remove sso link (progress)
+    1 di sisi client (view as)
+        * disini seperti biasa ngga ada perubahan sama sekali
+    2 di sisi client (login)
+        * ketika client ini belum create sso link, maka hilangkan bagian "You Have Not Yet Created a Single Sign On Link"
+        * ketika client sudah create sso link, maka masih muncul bagian "Remove SSO Link"
+
+ghlV2AgencyConnected && this.$global.idsys == this.$global.masteridsys && (this.$global.globalviewmode || this.$global.globalviewmodeclient || ghlV2CreatedIframe)
+
+EMM-SANDBOX-APP
+
+JD-TASK-EMM-728 = "step1 hide button create sso link only as client login"
+JD-TASK-EMM-728-DEV-SYNC
+
+FILE
+FRONT
+* front\src\main.js
+* front\src\pages\Integration\IntegrationDetail.vue
+* front\src\plugins\global.js
+* front\src\routes\routes.js
+
+DATA
+* data\app\Http\Controllers\IntegrationController.php
+
+
+isLoadingCreateDeleteIframeGhlV2YourAccount
+btnCreateDeleteIframeGhlv2TextYourAccount
+ghlV2CreatedIframeYourAccount
+
+createDeleteIframeGhlv2() {
+    if(!this.ghlV2CreatedIframe) { // create iframe
+        this.createIframeGhlv2Client();
+    } else { // delete iframe
+        this.deleteIframeGhlv2Client();
+    }
+},
+
+createDeleteIframeGhlv2YourAccount() {
+    if(!this.ghlV2CreatedIframeYourAccount) { // create iframe
+        this.createIframeGhlv2ClientYourAccount();
+    } else { // delete iframe
+        this.deleteIframeGhlv2ClientYourAccount();
+    }
+}
+
+
+ACCOUNT DI MARKETPLACE (muhammadjidan703@gmail.com)
+1. 
+- app name = Test App ❌
+- client id = 67f890e1acd0d3495982f9ec-m9c9thu3
+2. 
+- app name = Emm Local Private ❌
+- client id = 67fc95b55eb4de2db9bed2b6-mdftpeau atau 67fc95b55eb4de2db9bed2b6-mdg1q57y
+3. 
+- app name = LeadConnector Sandbox
+- client id = 6800b9d21ce741717dab166b-m9l3ec95
+- kegunaan = digunakan untuk client, connect ghl contact v2 (SANDBOX)
+4. 
+- app name = Exact Match Marketing Local Private
+- client id = 6888d84d6b9c0a27d216ecec-mdph7li2
+- kegunaan = digunakan untuk agency, connect ghl iframe secara private (LOCAL)
+5. 
+- app name = Exact Match Marketing Local Public
+- client id = 6888decb3b9bf85afd4cdff7-mdphajo4
+- kegunaan = digunakan untuk agency, connect ghl iframe secara public (LOCAL)
+6. 
+- app name = Lead Connector Local Private
+- client id = 6888e0eb3b9bf854994f3d06-mdpgk9x4
+- kegunaan = digunakan untuk client, connect ghl contact v2 (LOCAL)
+7. 
+- app name = Exact Match Marketing Sandbox Private
+- client id = 688cb175e320d49adb331172-mdsstl3o
+- kegunaan = digunakan untuk agency, connect ghl iframe secara private (SANDBOX)

@@ -1,37 +1,8 @@
+ALTER TABLE pixel_lead_records ADD fingerprint_id TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER vpn_details, ADD fingerprint_confidence INT NOT NULL DEFAULT '0' AFTER fingerprint_id, ADD fingerprint_layers TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER fingerprint_confidence;
+
+ALTER TABLE pixel_lead_records ADD device_id VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER fingerprint_layers;
 
 
+ALTER TABLE pixel_lead_records ADD bot_detected ENUM('T','F') NOT NULL DEFAULT 'F' AFTER timezone, ADD bot_indicators VARCHAR(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER bot_detected, ADD geo_latitude VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER bot_indicators, ADD geo_longitude VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER geo_latitude, ADD geo_location_accuracy INT NULL AFTER geo_longitude, ADD geo_location_timestamp VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER geo_location_accuracy;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Here, I will prove that sending and distributing leads does not replace existing tags.
-
-I used:
-- Client name in emm: client1761796717
-- Campaign ID in emm: 37342075
-- Email contact in ghl: johndoe1-20251126035354-37342075@example.com
-- Phone contact in ghl: 1126035354
-
-Step 1: 
-- I will try to send test contact ✅
-- in the middle of the road i added a tag to the contact via ghl ✅
-- I will try to send test contact again ✅
-
-Step 2: 
-- in the middle of the road i added a tag to the contact via ghl ✅
-- I will test as if the contact is distributed ✅
-
+ALTER TABLE pixel_lead_recordsADDincognito_detectedENUM('T','F') NOT NULL DEFAULT 'F' AFTERgeo_location_timestamp, ADD incognito_indicatorsVARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERincognito_detected, ADD incognito_detailsTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERincognito_indicators, ADD vpn_detectedENUM('T','F') NOT NULL DEFAULT 'F' AFTERincognito_details, ADD vpn_indicatorsVARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERvpn_detected, ADD vpn_detailsTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERvpn_indicators;

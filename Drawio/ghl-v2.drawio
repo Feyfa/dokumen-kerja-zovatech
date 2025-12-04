@@ -1,0 +1,127 @@
+<mxfile host="65bd71144e">
+    <diagram id="yFt4NO7j5gke3MWqd-bo" name="Page-1">
+        <mxGraphModel dx="989" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1210" y="180" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="CLIENT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1235" y="195" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="975" y="360" width="230" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Lead Connector Local Private" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="975" y="360" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="client id = 6888e0eb3b9bf854994f3d06-mdpgk9x4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="970" y="390" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="kegunaan = digunakan untuk client, connect ghl contact v2 (LOCAL)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="970" y="410" width="240" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1355" y="360" width="245" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="LeadConnector Sandbox" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="360" width="160" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="client id = 6800b9d21ce741717dab166b-m9l3ec95" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="390" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="kegunaan = digunakan untuk client, connect ghl contact v2 (SANDBOX)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="410" width="250" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.585;entryY=0.031;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="2" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1240" y="660" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="AGENCY" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1265" y="675" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="840" width="260" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Exact Match Marketing Local Private" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="975" y="840" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="client id = 6888d84d6b9c0a27d216ecec-mdph7li2" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="975" y="870" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="kegunaan = digunakan untuk agency, connect ghl iframe secara private (LOCAL)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="975" y="890" width="270" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1385" y="840" width="295" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Exact Match Marketing Sandbox Private" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="1380" y="840" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="client id = 688cb175e320d49adb331172-mdsstl3o" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="1380" y="870" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="kegunaan = digunakan untuk agency, connect ghl iframe secara private (SANDBOX)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="1380" y="890" width="290" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.661;entryY=-0.005;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="18" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.585;entryY=0.031;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="18" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="705" y="840" width="260" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Exact Match Marketing Local Public" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="705" y="840" width="210" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="- client id = 6888decb3b9bf85afd4cdff7-mdphajo4" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="870" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="- kegunaan = digunakan untuk agency, connect ghl iframe secara public (LOCAL)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" parent="1" vertex="1">
+                    <mxGeometry x="695" y="890" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.604;entryY=-0.027;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="18" target="31" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="Pertanyaan Yang Sering Ditanyakan" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="705" y="960" width="205" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="1. Kenapa&amp;nbsp;&lt;span style=&quot;color: rgb(0, 0, 0); text-align: center; text-wrap-mode: nowrap;&quot;&gt;Exact Match Marketing Local Public Ngga Ada Di Sandbox?&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0); text-align: center; text-wrap-mode: nowrap;&quot;&gt;jadi karena jarang banget ada yang daftar atau install langsung di marketplace untuk sandbox, makanya hanya buat di live saja&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="707.5" y="990" width="682.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="2. Untuk Marketplace&amp;nbsp;&lt;span style=&quot;color: rgb(0, 0, 0); text-align: center; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Lead Connector LIVE Itu Dimana&lt;/span&gt;?&amp;nbsp;&lt;/span&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;itu ada di account bapak harison&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="707.5" y="1040" width="392.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="3. Untuk Marketplace&amp;nbsp;&lt;span style=&quot;color: rgb(0, 0, 0); text-align: center; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Exact Match Marketing Local Public&lt;/span&gt;&amp;nbsp;(LIVE) Itu Dimana&lt;/span&gt;?&amp;nbsp;&lt;/span&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;itu ada di account bapak harison&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="707.5" y="1090" width="432.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="4. Untuk Marketplace&amp;nbsp;&lt;span style=&quot;color: rgb(0, 0, 0); text-align: center; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Exact Match Marketing Local Private&lt;/span&gt;&amp;nbsp;(LIVE) Itu Dimana&lt;/span&gt;?&amp;nbsp;&lt;/span&gt;&lt;div style=&quot;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;itu ada di account bapak harison&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;rounded=0;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="707.5" y="1140" width="432.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="user type = client" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" vertex="1" parent="1">
+                    <mxGeometry x="970" y="430" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="user type = client" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" vertex="1" parent="1">
+                    <mxGeometry x="1350" y="430" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="user type = agency" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" vertex="1" parent="1">
+                    <mxGeometry x="700" y="910" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="user type = agency dan client" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" vertex="1" parent="1">
+                    <mxGeometry x="975" y="910" width="110" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="user type = agency dan client" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=7;" vertex="1" parent="1">
+                    <mxGeometry x="1385" y="910" width="110" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

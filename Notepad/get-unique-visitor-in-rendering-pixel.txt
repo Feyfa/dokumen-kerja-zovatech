@@ -349,3 +349,64 @@ SKENARIO
 1. 
 - campaign type = local
 - input label = 
+
+Format Label Lama
+1. {leadspeek_api_id}|{keyword}|{pixel_lead_record_id}
+2. {leadspeek_api_id}|{keyword}
+
+Format Label Baru
+1. {leadspeek_api_id}-{pixel_lead_record_id}-{custom_params}|{keyword}
+2. {leadspeek_api_id}-{pixel_lead_record_id}|{keyword}
+
+=====YANG HARUS DIKERJAKAN=====
+1. munculin field custom params di dashboard dan pada saat download di dashboard juga ✅
+2. buat logic untuk mengamankan bentuk label yang udah existing (progress)
+- label lama "12345678|https://a.com/landing-page|999" atau "12345678|https://a.com/landing-page?google_gtm=true"
+- label baru "12345678-999-belum lunas|https://a.com/landing-page" atau "12345678-999|https://a.com/landing-page"
+
+logic lama = 
+- ambil pipa "|" paling pertama
+- lalu ambil string dari pertama sampai posisi pipa paling pertama "|"
+- lalu string tersebut di check apakah ada karakter "-"
+- jika tidak maka itu adalah label lama
+- pembuktian : 
+    * format lama = "{campaignid}|{url}|{pixelLeadRecordID}" atau "{campaignid}|{url}"
+    * bisa anda lihat tidak mungkin "{campaignid}" mengandung karakter "-"
+    * oleh karena itu jika tidak mengandung karakter "-" bisa dipastikan itu label lama
+
+if(logic lama){
+
+}else{
+
+}
+=====YANG HARUS DIKERJAKAN=====
+81151983 
+33445017 
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-725 = "add custom params and change format label pixel in site id"
+JD-TASK-EMM-725-DEV-SYNC
+
+FILE
+FRONT
+* front\public\px.min.js
+* front\src\pages\Dashboard\LeadsTable.vue
+* front\public\px-sandbox.min.js
+
+DATA
+* data\app\Exports\LeadsExport.php
+
+--
+
+EMM-SANDBOX-API
+
+JD-TASK-EMM-725 = "add custom params and change format label pixel in site id"
+JD-TASK-EMM-725-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* public\px.min.js
+* app\Models\LeadspeekReport.php
+

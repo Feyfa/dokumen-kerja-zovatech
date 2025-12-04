@@ -1,11 +1,15 @@
 use emm_sandbox;
-select * from pixel_lead_records where DATE(created_at) = '2025-12-02' order by id desc;
-select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where leadspeek_api_id = '55458332' order by id desc;
-select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '37342075' order by id desc;
-select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where DATE(created_at) = '2025-12-02' and leadspeek_api_id = '27215395' order by id desc;
+set @leadspeek_api_id := '72770339';
+SET @date_now := '2025-12-02 23:00:00';
+select * from pixel_lead_records where created_at >= @date_now and leadspeek_api_id = @leadspeek_api_id order by id desc;
+select  leadspeek_api_id, keyword, custom_params, lr.* from leadspeek_reports as lr where created_at >= @date_now and leadspeek_api_id = @leadspeek_api_id order by created_at desc;
+select  leadspeek_api_id, keyword, custom_params, lr.* from leadspeek_reports as lr where leadspeek_api_id = @leadspeek_api_id order by created_at desc;
+select  leadspeek_api_id, keyword, custom_params, lr.* from leadspeek_reports as lr where created_at >= @date_now and leadspeek_api_id = @leadspeek_api_id order by created_at desc;
 
-select * from leadspeek_users where leadspeek_api_id = 81151983;
+select  leadspeek_api_id, keyword, lr.* from leadspeek_reports as lr where leadspeek_api_id = '81151983' order by id desc;
 
+select * from leadspeek_reports where leadspeek_api_id = 81151983 order by created_at desc;
+select * from module_settings;
 select * from report_analytics;
 
 select * from pixel_lead_records where DATE(created_at) >= '2025-11-11';
@@ -19,6 +23,9 @@ where
 	and pixel_status <> 'invalid_label';
 
 select * from pixel_lead_records where lead_fire > 0 order by id desc limit 10;
+
+select * from person_emails where email_encrypt = '8bc64c9c289d18a05dd9652422208f05';
+select * from jobs;
 
 -- mode all
 -- untuk total visitor adalah count dari hasil ini
