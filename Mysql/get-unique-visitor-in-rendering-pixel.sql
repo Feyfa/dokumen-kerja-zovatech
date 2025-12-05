@@ -131,6 +131,10 @@ select * from leadspeek_reports where leadspeek_api_id = 34341127 order by id as
 select * from topup_agencies where company_id = 164  order by id asc;
 select * from leadspeek_invoices where company_id = 164 and invoice_type = 'agency' order by id asc;
 
+-- 1. ubah total_leads, balance_leads, treshold, topup_status di query select * from topup_campaigns where leadspeek_api_id = 34341127 order by id asc;
+-- 2. ubah total_leads, platform_total_amount di query select * from leadspeek_invoices where leadspeek_api_id = 34341127 order by id asc;
+-- 3. ubah balance_amount di query select * from topup_agencies where company_id = 164  order by id asc;
+
 
 
 
