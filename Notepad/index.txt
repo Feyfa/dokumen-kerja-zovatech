@@ -1,8 +1,241 @@
-ALTER TABLE pixel_lead_records ADD fingerprint_id TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER vpn_details, ADD fingerprint_confidence INT NOT NULL DEFAULT '0' AFTER fingerprint_id, ADD fingerprint_layers TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER fingerprint_confidence;
+-- ===============UJI COBA SANDBOX===============
+-- leadspeek_api_id = 11655464
+-- nama agency = muhammad jidan
+select * from topup_agencies where company_id = 581 order by id desc;
+select * from topup_agencies where company_id = 85 order by id desc;
+-- ===============UJI COBA SANDBOX===============
 
-ALTER TABLE pixel_lead_records ADD device_id VARCHAR(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER fingerprint_layers;
+-- ===============UPDATE STATUS CAMPAIGN===============
+-- update leadspeek_users set active = 'T', disabled = 'F', active_user = 'T' where leadspeek_api_id = @leadspeek_api_id;
+-- ===============UPDATE STATUS CAMPAIGN===============
+
+-- ===============SELECT===============
+SELECT start_billing_date,lp_invoice_date,active,disabled,active_user,leadspeek_users.* FROM leadspeek_users WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY);
+SELECT * FROM topup_campaigns WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY) ORDER BY id ASC;
+SELECT * FROM leadspeek_invoices WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY) ORDER BY id ASC;
+SELECT * FROM leadspeek_reports WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY) ORDER BY id ASC;
+SELECT * FROM topup_agencies WHERE CAST(company_id AS BINARY)=(SELECT CAST(company_id AS BINARY) FROM leadspeek_users WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY)) ORDER BY id ASC;
+SELECT * FROM leadspeek_invoices WHERE CAST(company_id AS BINARY)=(SELECT CAST(company_id AS BINARY) FROM leadspeek_users WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY)) AND invoice_type='agency' ORDER BY id ASC;
+-- ===============SELECT===============
 
 
-ALTER TABLE pixel_lead_records ADD bot_detected ENUM('T','F') NOT NULL DEFAULT 'F' AFTER timezone, ADD bot_indicators VARCHAR(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER bot_detected, ADD geo_latitude VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER bot_indicators, ADD geo_longitude VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER geo_latitude, ADD geo_location_accuracy INT NULL AFTER geo_longitude, ADD geo_location_timestamp VARCHAR(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER geo_location_accuracy;
 
-ALTER TABLE pixel_lead_recordsADDincognito_detectedENUM('T','F') NOT NULL DEFAULT 'F' AFTERgeo_location_timestamp, ADD incognito_indicatorsVARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERincognito_detected, ADD incognito_detailsTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERincognito_indicators, ADD vpn_detectedENUM('T','F') NOT NULL DEFAULT 'F' AFTERincognito_details, ADD vpn_indicatorsVARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERvpn_detected, ADD vpn_detailsTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTERvpn_indicators;
+
+
+
+
+-- ===============VARIABLE===============
+SET @total_leads := 500;
+SET @leadspeek_api_id := '87230242';
+
+set @cost_per_contact := 0.1;
+set @total_cost_agency := @cost_per_contact * @total_leads;
+
+SET @last_id_topup_agencies := (
+    SELECT id
+    FROM topup_agencies
+    WHERE company_id = (
+        SELECT company_id
+        FROM leadspeek_users
+        WHERE CAST(leadspeek_api_id AS CHAR) = CAST(@leadspeek_api_id AS CHAR)
+        LIMIT 1
+    )
+    ORDER BY id DESC
+    LIMIT 1
+);
+
+select @total_leads, @leadspeek_api_id, @cost_per_contact, @total_cost_agency, @last_id_topup_agencies;
+-- ===============VARIABLE===============
+
+
+-- ===============TOPUP_CAMPAIGNS===============
+INSERT INTO topup_campaigns
+(
+    user_id,
+    lp_user_id,
+    company_id,
+    leadspeek_api_id,
+    leadspeek_type,
+    topupoptions,
+    advance_information,
+    campaign_information_type_local,
+    platformfee,
+    cost_perlead,
+    lp_limit_leads,
+    lp_min_cost_month,
+    total_leads,
+    balance_leads,
+    platform_price,
+    root_price,
+    treshold,
+    payment_amount,
+    active,
+    stop_continue,
+    last_cost_perlead,
+    last_limit_leads_day,
+    topup_status,
+    ip_user,
+    timezone,
+    updated_at,
+    created_at
+)
+SELECT
+    user_id,
+    lp_user_id,
+    company_id,
+    leadspeek_api_id,
+    leadspeek_type,
+    topupoptions,
+    advance_information,
+    campaign_information_type_local,
+    platformfee,
+    cost_perlead,
+    @total_leads as lp_limit_leads,
+    lp_min_cost_month,
+    @total_leads AS total_leads,
+    @total_leads AS balance_leads,
+    platform_price,
+    root_price,
+    @total_leads AS treshold,
+    payment_amount,
+    active,
+    stop_continue,
+    last_cost_perlead,
+    last_limit_leads_day,
+	CASE WHEN (SELECT COUNT(*) FROM topup_campaigns WHERE CAST(leadspeek_api_id AS BINARY)=CAST(@leadspeek_api_id AS BINARY) AND CAST(topup_status AS BINARY)=BINARY'done')=0 THEN 'queue' ELSE 'progress' END AS topup_status,
+    ip_user,
+    timezone,
+    NOW(),
+    NOW()
+FROM topup_campaigns
+WHERE CAST(leadspeek_api_id AS BINARY) = CAST(@leadspeek_api_id AS BINARY)
+ORDER BY id DESC
+LIMIT 1;
+-- ===============TOPUP_CAMPAIGNS===============
+
+
+-- ===============LEADSPEEK_INVOICES===============
+INSERT INTO leadspeek_invoices (
+    id,
+    invoice_type,
+    topup_agencies_id,
+    budget_plan_id,
+    payment_type,
+    company_id,
+    user_id,
+    leadspeek_api_id,
+    invoice_number,
+    payment_term,
+    onetimefee,
+    platform_onetimefee,
+    min_leads,
+    exceed_leads,
+    total_leads,
+    min_cost,
+    platform_min_cost,
+    cost_leads,
+    platform_cost_leads,
+    frequency_capping_impressions,
+    frequency_capping_hours,
+    max_bid,
+    monthly_budget,
+    daily_budget,
+    goal_type,
+    goal_value,
+    agency_markup,
+    total_amount,
+    platform_total_amount,
+    root_total_amount,
+    status,
+    customer_payment_id,
+    customer_stripe_id,
+    customer_card_id,
+    platform_customer_payment_id,
+    error_payment,
+    platform_error_payment,
+    invoice_date,
+    invoice_start,
+    invoice_end,
+    sent_to,
+    sr_id,
+    sr_fee,
+    sr_transfer_id,
+    ae_id,
+    ae_fee,
+    ae_transfer_id,
+    ar_id,
+    ar_fee,
+    ar_transfer_id,
+    campaigns_paused,
+    active,
+    updated_at,
+    created_at
+)
+SELECT
+    NULL,
+    invoice_type,
+    topup_agencies_id,
+    budget_plan_id,
+    payment_type,
+    company_id,
+    user_id,
+    leadspeek_api_id,
+    invoice_number, -- ganti yang ini
+    payment_term,
+    onetimefee,
+    platform_onetimefee,
+    min_leads,
+    exceed_leads,
+    @total_leads as total_leads, -- ganti total_leads
+    min_cost,
+    platform_min_cost,
+    cost_leads,
+    @cost_per_contact as platform_cost_leads,
+    frequency_capping_impressions,
+    frequency_capping_hours,
+    max_bid,
+    monthly_budget,
+    daily_budget,
+    goal_type,
+    goal_value,
+    agency_markup,
+    total_amount,
+    @total_cost_agency as platform_total_amount,
+    root_total_amount,
+    status,
+    customer_payment_id,
+    customer_stripe_id,
+    customer_card_id,
+    platform_customer_payment_id,
+    error_payment,
+    platform_error_payment,
+    DATE(NOW()) as invoice_date,
+    DATE(NOW()) as invoice_start,
+    DATE(NOW()) as invoice_end,
+    sent_to,
+    sr_id,
+    sr_fee,
+    sr_transfer_id,
+    ae_id,
+    ae_fee,
+    ae_transfer_id,
+    ar_id,
+    ar_fee,
+    ar_transfer_id,
+    campaigns_paused,
+    active,
+    NOW(),
+    NOW()
+FROM leadspeek_invoices
+WHERE CAST(leadspeek_api_id AS BINARY) = CAST(@leadspeek_api_id AS BINARY)
+ORDER BY id DESC
+LIMIT 1;
+-- ===============LEADSPEEK_INVOICES===============
+
+
+-- ===============topup_agencies===============
+UPDATE topup_agencies
+SET balance_amount = balance_amount - @total_cost_agency
+WHERE CAST(id AS BINARY) = CAST(@last_id_topup_agencies AS BINARY)
+LIMIT 1;
+-- ===============topup_agencies===============

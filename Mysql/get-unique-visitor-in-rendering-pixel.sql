@@ -121,68 +121,233 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 
 select * from topup_agencies where company_id = @company_id_jidanach;
 
+-- ===============UPDATE STATUS CAMPAIGN===============
+update leadspeek_users set active = 'T', disabled = 'F', active_user = 'T' where leadspeek_api_id = @leadspeek_api_id;
+-- ===============UPDATE STATUS CAMPAIGN===============
+
+-- ===============SELECT===============
+select start_billing_date, lp_invoice_date,active,disabled,active_user,leadspeek_users.* from leadspeek_users where leadspeek_api_id = @leadspeek_api_id;
+select * from topup_campaigns where leadspeek_api_id = @leadspeek_api_id order by id asc;
+select * from leadspeek_invoices where leadspeek_api_id = @leadspeek_api_id order by id asc;
+select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id order by id asc;
+
+select * from topup_agencies where company_id = (select company_id from leadspeek_users where leadspeek_api_id = @leadspeek_api_id) order by id asc;
+select * from leadspeek_invoices where company_id = (select company_id from leadspeek_users where leadspeek_api_id = @leadspeek_api_id) and invoice_type = 'agency' order by id asc;
+-- ===============SELECT===============
+
+-- ===============VARIABLE===============
+SET @total_leads := 200;
+SET @leadspeek_api_id := '65129841';
+
+set @cost_per_contact := 0.1;
+set @total_cost_agency := @cost_per_contact * @total_leads;
+
+SET @last_id_topup_agencies := (
+    SELECT id 
+    FROM topup_agencies 
+    WHERE company_id = (
+        SELECT company_id COLLATE utf8mb4_general_ci
+        FROM leadspeek_users 
+        WHERE leadspeek_api_id COLLATE utf8mb4_general_ci = @leadspeek_api_id
+        LIMIT 1
+    )
+    ORDER BY id DESC
+    LIMIT 1
+);
+
+select @total_leads, @leadspeek_api_id, @cost_per_contact, @total_cost_agency, @last_id_topup_agencies;
+-- ===============VARIABLE===============
 
 
-select start_billing_date,lp_invoice_date,active,disabled,active_user,leadspeek_users.* from leadspeek_users where leadspeek_api_id = 34341127;
-select * from topup_campaigns where leadspeek_api_id = 34341127 order by id asc;
-select * from leadspeek_invoices where leadspeek_api_id = 34341127 order by id asc;
-select * from leadspeek_reports where leadspeek_api_id = 34341127 order by id asc;
+-- ===============TOPUP_CAMPAIGNS===============
+INSERT INTO topup_campaigns
+(
+	user_id,
+	lp_user_id,
+	company_id,
+	leadspeek_api_id,
+	leadspeek_type,
+	topupoptions,
+	advance_information,
+	campaign_information_type_local,
+	platformfee,
+	cost_perlead,
+	lp_limit_leads,
+	lp_min_cost_month,
+	total_leads,
+	balance_leads,
+	platform_price,
+	root_price,
+	treshold,
+	payment_amount,
+	active,
+	stop_continue,
+	last_cost_perlead,
+	last_limit_leads_day,
+	topup_status,
+	ip_user,
+	timezone,
+	updated_at,
+	created_at
+)
+SELECT
+	user_id,
+	lp_user_id,
+	company_id,
+	leadspeek_api_id,
+	leadspeek_type,
+	topupoptions,
+	advance_information,
+	campaign_information_type_local,
+	platformfee,
+	cost_perlead,
+	@total_leads as lp_limit_leads,
+	lp_min_cost_month,
+	@total_leads AS total_leads, -- diubah manual
+	@total_leads AS balance_leads, -- diubah manual
+	platform_price,
+	root_price,
+	@total_leads AS treshold, -- diubah manual
+	payment_amount,
+	active,
+	stop_continue,
+	last_cost_perlead,
+	last_limit_leads_day,
+	CASE WHEN (SELECT COUNT(*) FROM topup_campaigns WHERE leadspeek_api_id = @leadspeek_api_id AND topup_status = 'done') = 0 THEN 'queue' ELSE 'progress' END AS topup_status,
+	ip_user,
+	timezone,
+	NOW(),
+	NOW()
+FROM topup_campaigns
+WHERE leadspeek_api_id = @leadspeek_api_id
+ORDER BY id DESC
+LIMIT 1;
+-- ===============TOPUP_CAMPAIGNS===============
 
-select * from topup_agencies where company_id = 164  order by id asc;
-select * from leadspeek_invoices where company_id = 164 and invoice_type = 'agency' order by id asc;
 
--- 1. ubah total_leads, balance_leads, treshold, topup_status di query select * from topup_campaigns where leadspeek_api_id = 34341127 order by id asc;
--- 2. ubah total_leads, platform_total_amount di query select * from leadspeek_invoices where leadspeek_api_id = 34341127 order by id asc;
--- 3. ubah balance_amount di query select * from topup_agencies where company_id = 164  order by id asc;
+-- ===============LEADSPEEK_INVOICES===============
+INSERT INTO leadspeek_invoices (
+    id,
+    invoice_type,
+    topup_agencies_id,
+    budget_plan_id,
+    payment_type,
+    company_id,
+    user_id,
+    leadspeek_api_id,
+    invoice_number,
+    payment_term,
+    onetimefee,
+    platform_onetimefee,
+    min_leads,
+    exceed_leads,
+    total_leads,
+    min_cost,
+    platform_min_cost,
+    cost_leads,
+    platform_cost_leads,
+    frequency_capping_impressions,
+    frequency_capping_hours,
+    max_bid,
+    monthly_budget,
+    daily_budget,
+    goal_type,
+    goal_value,
+    agency_markup,
+    total_amount,
+    platform_total_amount,
+    root_total_amount,
+    status,
+    customer_payment_id,
+    customer_stripe_id,
+    customer_card_id,
+    platform_customer_payment_id,
+    error_payment,
+    platform_error_payment,
+    invoice_date,
+    invoice_start,
+    invoice_end,
+    sent_to,
+    sr_id,
+    sr_fee,
+    sr_transfer_id,
+    ae_id,
+    ae_fee,
+    ae_transfer_id,
+    ar_id,
+    ar_fee,
+    ar_transfer_id,
+    campaigns_paused,
+    active,
+    updated_at,
+    created_at
+)
+SELECT
+    NULL,
+    invoice_type,
+    topup_agencies_id,
+    budget_plan_id,
+    payment_type,
+    company_id,
+    user_id,
+    leadspeek_api_id,
+    invoice_number, -- ganti yang ini
+    payment_term,
+    onetimefee,
+    platform_onetimefee,
+    min_leads,
+    exceed_leads,
+    @total_leads as total_leads, -- ganti total_leads
+    min_cost,
+    platform_min_cost,
+    cost_leads,
+    @cost_per_contact as platform_cost_leads,
+    frequency_capping_impressions,
+    frequency_capping_hours,
+    max_bid,
+    monthly_budget,
+    daily_budget,
+    goal_type,
+    goal_value,
+    agency_markup,
+    total_amount,
+    @total_cost_agency as platform_total_amount,
+    root_total_amount,
+    status,
+    customer_payment_id,
+    customer_stripe_id,
+    customer_card_id,
+    platform_customer_payment_id,
+    error_payment,
+    platform_error_payment,
+    DATE(NOW()) as invoice_date,
+    DATE(NOW()) as invoice_start,
+    DATE(NOW()) as invoice_end,
+    sent_to,
+    sr_id,
+    sr_fee,
+    sr_transfer_id,
+    ae_id,
+    ae_fee,
+    ae_transfer_id,
+    ar_id,
+    ar_fee,
+    ar_transfer_id,
+    campaigns_paused,
+    active,
+    NOW(),
+    NOW()
+FROM leadspeek_invoices
+WHERE leadspeek_api_id = @leadspeek_api_id
+ORDER BY id DESC
+LIMIT 1;
+-- ===============LEADSPEEK_INVOICES===============
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- ===============TOPUP_CAMPAIGNS===============
+UPDATE topup_agencies
+SET balance_amount = balance_amount - @total_cost_agency
+WHERE id = @last_id_topup_agencies;
+-- ===============TOPUP_CAMPAIGNS===============
 
 
