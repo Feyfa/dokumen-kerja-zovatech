@@ -336,14 +336,3 @@ where company_id in (165) and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e
 select ghl_company_id,ghl_tokens,ghl_custom_menus,ghl_credentials_id,ghl_first_time_connect,companies.* from companies where id in (164,165);
 
 
-
-
-select * from global_settings where setting_name like '%credentials_ghl_emm%';
-
-
-
--- {"base_url":"https://marketplace.gohighlevel.com","client_id":"6888d84d6b9c0a27d216ecec-mdph7li2","client_secret":"ebcbd277-1484-42e5-86ec-444e1b6f9c91","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","app_id":"6888d84d6b9c0a27d216ecec"}
-
-{"base_url":"https://marketplace.gohighlevel.com","client_id":"6888decb3b9bf85afd4cdff7-mdphajo4","client_secret":"591c01df-1069-421f-aaa4-6f5ffb0c4a2a","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","app_id":"6888decb3b9bf85afd4cdff7"}
-
-

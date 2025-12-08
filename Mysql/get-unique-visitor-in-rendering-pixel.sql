@@ -143,12 +143,12 @@ set @cost_per_contact := 0.1;
 set @total_cost_agency := @cost_per_contact * @total_leads;
 
 SET @last_id_topup_agencies := (
-    SELECT id 
-    FROM topup_agencies 
+    SELECT id
+    FROM topup_agencies
     WHERE company_id = (
-        SELECT company_id COLLATE utf8mb4_general_ci
-        FROM leadspeek_users 
-        WHERE leadspeek_api_id COLLATE utf8mb4_general_ci = @leadspeek_api_id
+        SELECT company_id
+        FROM leadspeek_users
+        WHERE CAST(leadspeek_api_id AS CHAR) = CAST(@leadspeek_api_id AS CHAR)
         LIMIT 1
     )
     ORDER BY id DESC
