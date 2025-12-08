@@ -298,10 +298,17 @@ select * from jobs;
 select *, CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) as token from sso_access_tokens
 where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) in ('ec59cb813e161b44773319adf68ca322dabe0114669c12c918c11ae9ea6ab36b10097296bc36b85946238bff0f418184447767417f15d58aa3070dc1a933d6f1bc07e146b184a5dda4c5e3fd289821e4a4562e3b5fba5c12acccdf192fe23f2b35ca7f24bb');
 
+set @email1 := 'muhammadjidan703@gmail.com';
 
+select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, users.* from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = @email1 and user_type = 'userdownline';
+select * from company_settings where company_id in (
+	select company_id from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = @email1 and user_type = 'userdownline'
+);
+select * from companies where id in (
+	select company_id from users where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = @email1 and user_type = 'userdownline'
+);
 
-
-
+select * from user_logs where target_user_id = 282 order by id desc limit 10;
 
 SELECT
 	id,
@@ -320,10 +327,12 @@ select * from companies_integration_settings where company_id = 165;
 
 select * from user_logs order by id desc limit 10;
 
+select * from failed_lead_records where `function` = 'gohighlevelv2CreateContact' order by id desc;
 
 
 select * from integration_list;
-select * from companies_integration_settings;
+select * from companies_integration_settings where company_id = 165 and integration_slug = 'gohighlevel';
+
 SELECT
 	id,
 	company_id,
@@ -333,6 +342,33 @@ SELECT
 	setting_value
 FROM company_settings
 where company_id in (165) and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'ghl_custom_menus_client_your_account';
-select ghl_company_id,ghl_tokens,ghl_custom_menus,ghl_credentials_id,ghl_first_time_connect,companies.* from companies where id in (164,165);
+
+select CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) as token_dec, sat.* from sso_access_tokens as sat where user_id = 282 order by id desc limit 10;
+
+select id,ghl_company_id,ghl_tokens,ghl_custom_menus,ghl_credentials_id,ghl_first_time_connect,companies.* from companies where id in (164);
+
+select id,ghl_company_id,ghl_tokens,ghl_custom_menus,ghl_credentials_id,ghl_first_time_connect,companies.* from companies where id in (
+	select company_id from users where company_parent = 164 and user_type = 'client' and active = 'T'
+) and ghl_custom_menus is not null and ghl_custom_menus <> '';
+
+select id,ghl_company_id,ghl_tokens,ghl_custom_menus,ghl_credentials_id,ghl_first_time_connect,companies.* from companies where id in (914);
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"ghl_company_id":"Y8EvqkBcidwRvV4j9rQs","ghl_tokens":{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2ODg4ZDg0ZDZiOWMwYTI3ZDIxNmVjZWMtbWRwaDdsaTIiLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29tcGFuaWVzLnJlYWRvbmx5IiwidXNlcnMucmVhZG9ubHkiLCJjdXN0b20tbWVudS1saW5rLnJlYWRvbmx5IiwiY3VzdG9tLW1lbnUtbGluay53cml0ZSIsImxvY2F0aW9ucy5yZWFkb25seSIsInNhYXMvbG9jYXRpb24ud3JpdGUiLCJzYWFzL2NvbXBhbnkud3JpdGUiLCJzbmFwc2hvdHMucmVhZG9ubHkiLCJvYXV0aC53cml0ZSIsIm9hdXRoLnJlYWRvbmx5Il0sImNsaWVudCI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYyIsInZlcnNpb25JZCI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYyIsImNsaWVudEtleSI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYy1tZHBoN2xpMiIsImFnZW5jeVBsYW4iOiJhZ2VuY3lfbW9udGhseV85NyJ9LCJpYXQiOjE3NjUxNjk5NDguOTIzLCJleHAiOjE3NjUyNTYzNDguOTIzfQ.FfF7d8JivPdZ_JdAZrv1wqLVLQ5Sua4vqXYVcKRXpJcTmYsJJKH7JeUi_O1jhjU0s6knv74xf29CK3fkB9mvlcaSnRt5aisy1fq_8QfjHI-wPJFYKBzLXTQoPY2rM5FAveF75KChCnzLQjQ5WalncZM_th8rXjPLPviCEJRCqUS5hi1NBtYin2lc4aJJmMPJaLhafW8BOlM2q2BkLa9wZJIr5emPli1YSCnSgU9vbDZxfRDqxhEMFSB0_NvXwFRLdxoP_fh0TrbrauUJeKXIT_l-aeeyL4TU9nDtRUDe-mRA7G5AcXpaFvtlIVt4S-uf8BGO__YU-lnh7XOTO6-_AzPO5xiyR8TqxN5ig6UkSbSs-WOEpVjGzXvhYZ59aZJsdTwgyDk-B3pUSFminDwBR77gjkIGdaI2vlf_DxFF5p744DTnrFTqeWe0qP0gXYHaCBVTupVLsNrN60Yy2Xip0-jWtXzBfwJgCKejWQDaJNXsZaN38K7oemciBcCoVyxfs_-zQSniOJd8eQs43kLFRnStRFAfsCme7rx9dTfvylMYK-75JUjCKMWbfnNa3vxCmmDqVEAKnvvHT24bTs89nHHK-p3XQ_x3JK2dJiorg8nMWIbPWTophM3NT485tSwUiKZlI3qfNbS3ltQd5cwth4ww0hm6zkhrqTfcPlO5tVU","token_type":"Bearer","expires_in":86399,"refresh_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2ODg4ZDg0ZDZiOWMwYTI3ZDIxNmVjZWMtbWRwaDdsaTIiLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29tcGFuaWVzLnJlYWRvbmx5IiwidXNlcnMucmVhZG9ubHkiLCJjdXN0b20tbWVudS1saW5rLnJlYWRvbmx5IiwiY3VzdG9tLW1lbnUtbGluay53cml0ZSIsImxvY2F0aW9ucy5yZWFkb25seSIsInNhYXMvbG9jYXRpb24ud3JpdGUiLCJzYWFzL2NvbXBhbnkud3JpdGUiLCJzbmFwc2hvdHMucmVhZG9ubHkiLCJvYXV0aC53cml0ZSIsIm9hdXRoLnJlYWRvbmx5Il0sImNsaWVudCI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYyIsInZlcnNpb25JZCI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYyIsImNsaWVudEtleSI6IjY4ODhkODRkNmI5YzBhMjdkMjE2ZWNlYy1tZHBoN2xpMiJ9LCJpYXQiOjE3NjUxNjk5NDguOTI5LCJleHAiOjE3OTY3MDU5NDguOTI5LCJ1bmlxdWVJZCI6ImEwNTY1MDlhLTBhMjMtNDU2Yi1iMmUyLTUzM2E5ZTM2ODk2YiIsInYiOiIyIn0.G_pEG32BTpRQbFzHZHibK09nFzxM4QM9FSteR7QH_KOJF01eTiWFbDDeSA9RR_kOAAE6nYgen2R2vPIweSoNimwI_3H3_RwZbp__QlU8-ODjbLWK1OCt7UN5s1fJf9XqEAgIPdejv68tismeSABZWiB5b8hi4oaH3pDOBpSEWTtLNASKDuh5tCoayJmfZ3OcrB8lrU84ZoTWWmKTbf139GctoZ7BOi06yCO07Lr9gBkrK4nNpU1IjsMtYsJGZJ5siSWLANwHWpMa1GVfl4_z65XJ51-jU5ENUptv8KA-tYfK-ESS7RHyc8QyYbsgCCALahpBeFdaWFD2U4uOCiWEB0Y8pVV3cI4KV8UelMe7IkccHh0fRoQ38e0EzaCIcWwfRQO88bUnj2FcDTu9Jkx6j1GOUD72EZ7_7Pj63s5GFVYS866lgJaW1JeAwP1pTgYyyHnQu7YcawQ141z3dIVZ2hseqrsG7lT4Dtwav-UPeu_GPKtxwVfHZCLcQO4knX99djzoZPFvB114-qjOi19Xpt-2UJ9GxBHKJcAKoJQL8QWSJ4B4AwLRJW1uDQ6TSh1Xq6teW2n4Wndoq4VUtxQ-X-I-9Tt8gbrPvSMa-quB2_SefBJ5S3xCU8gPf7Ws96ftYJJ2Ozue4sAF3LH8DoJjzLvubBnh222r79mGots4FLU","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","refreshTokenId":"69365b1c73cfaa6e08f1d49e","userType":"Company","companyId":"Y8EvqkBcidwRvV4j9rQs","isBulkInstallation":false,"userId":"hC0oMDhaxI3kVF4RCuxU"},"ghl_custom_menus":{"id":"6c64bf46-51c5-4dd8-a137-491d6bc7a2f1","icon":{"name":"envelope-open-text","fontFamily":"fas"},"title":"Dimas Your Account","url":"https://jidanach.emmsandbox.com/sso?token=48b1f6fa15ddaeccb8ace5445385667590bc0d605b91f1be21bfd1502494e85aeeaa837487c2dc257e7d75bcc95858bb8ada66309419441a5a7db2afc595d6be7ac5d2e617d50650bd7be88afe814ce0ff9081ad6555da8dfeff6ae21d8a8d13f10930d33c1be6","order":7,"userRole":"all","showOnCompany":true,"showOnLocation":false,"showToAllLocations":false,"locations":[],"excludeLocations":[],"openMode":"iframe","allowCamera":false,"allowMicrophone":false,"traceId":"16da8625-f0f7-40eb-b904-2b383f349c58"},"ghl_credentials_id":101}', '8e651522e38256f2'))
+WHERE
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'ghl_custom_menus_client_your_account' and
+	company_id = 165;
+
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) as token_dec, 
+	sat.* 
+from sso_access_tokens as sat 
+where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) in (
+-- 	'35ee9844fc8cde979017497bf6fdb786eafd17fa9b3682b27fb89a2e9ce185a9ae3081b9d3f71f9b966d7b339440ac0b1499c6d6d8a8c2983e8096b28a1f23c96572af2a4849d4ad200fda0cf71b717c2ed11f137b33baca3135ad5ad73aa01f9c154c6d0917649d',
+-- 	'ab55ea0987fd116700aec2ba22414bff599b260e851a9e32b8dab0748790ee18608be7367c3a4062c377b0764eabcd2bb9f27f582a97e3ed55c095f1f377296da5b43d9ff286439b593d3e755ca6bd189b9d4adab059d1577a98a37d3131aec6f745929c1b7e79cc08',
+	'363b0eb56020dd42f331f7d20868a42546e9f11392b5428ba2364fb8caaae61e8101cfb623f7082d30ea1015a21c55172b6337961715d7c5fe62dbf45a08288eb3e13c247e122697a585604b0abd2ff08fa89eaec5b779acb449aa5d267c2a8dd1241aba84cc3b6f1f1bb754'
+);
+
 
 

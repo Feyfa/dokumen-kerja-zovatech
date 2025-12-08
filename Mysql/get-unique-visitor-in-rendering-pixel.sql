@@ -351,3 +351,11 @@ WHERE id = @last_id_topup_agencies;
 -- ===============TOPUP_CAMPAIGNS===============
 
 
+select total_leads, lu.* from leadspeek_users as lu where leadspeek_api_id = '33445017';
+
+select created_at, clickdate, ls.* from leadspeek_reports as ls where leadspeek_api_id = '33445017' order by created_at desc;
+
+
+
+
+

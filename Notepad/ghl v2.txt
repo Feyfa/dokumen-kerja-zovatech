@@ -928,3 +928,57 @@ ACCOUNT DI MARKETPLACE (muhammadjidan703@gmail.com)
 - app name = Exact Match Marketing Sandbox Private
 - client id = 688cb175e320d49adb331172-mdsstl3o
 - kegunaan = digunakan untuk agency, connect ghl iframe secara private (SANDBOX)
+
+SKENARIO REFRESH TOKEN
+1. untuk client custom menu your account ✅
+2. untuk agency custom menu settings ✅
+3. untuk client contact ✅
+4. coba test client custom menu your account pada saat di iframe settings✅
+5. coba test di general setting 'Create Client From Sub Account Lead Connector' ini masih berjalan atau tidak ✅
+6. coba test dari agency marketplace agency install aplikasi yang public, maka akan membuat agency baru, jika agency tersebut belum ada di emm ✅
+7. coba test dari agency marketplace agency install aplikasi yang public, maka akan connect agency, jika agency tersebut sudah ada di emm ✅
+8. perbaiki user logs untuk client custom menu your account ✅
+9. terakhir coba kirim lead di emm-sandbox-api apakah sudah oke atau tidak, probabilitas berhasil (99%)
+
+
+
+// di function gohighlevelv2OauthCallbackProcessClient
+$description = "The client has successfully connected their lead connector account. Name: $client_name | Email: $client_email | Company Name: $company_name | Company ID : $company_id";
+$this->logUserAction($user_id_login,'Client Connect Lead Connector',$description,$user_ip,$client_user_id);
+
+// di function gohighlevelv2OauthCallbackProcessClientYourAccount
+$description = "The client has successfully connected their lead connector account. Name: $client_name | Email: $client_email | Company Name: $company_name | Company ID : $company_id | Menu Name: $custom_menu_name";
+$this->logUserAction($user_id_login,'Client Connect Lead Connector Your Account',$description,$user_ip,$user_id);
+
+// ----
+
+// di function gohighlevelv2DeleteIframeClientYourAccount
+$description = "The client has successfully disconnect their lead connector account. Name: $client_name | Email: $client_email | Company Name: $company_name | Company ID : $company_id";
+$this->logUserAction($user_id_login,'Client Disconnect Lead Connector Your Account',$description,$user_ip,$client_id);
+
+// gohighlevelv2DeleteIframeClient
+$description = "The client has successfully disconnected iframe their GoHighLevel account. Name: $client_name | Email: $client_email | Company Name: $company_name | Company ID : $company_id";
+$this->logUserAction($user_id_login,'Client Disconnected Iframe Lead Connector',$description,$user_ip,$client_id);
+
+EMM-SANDBOX-APP
+TASK-EMM-728 = "create sso link in client use your account"
+TASK-EMM-728-DEV-SYNC
+
+FILE
+FRONT
+* front\src\pages\Integration\IntegrationDetail.vue
+* front\src\store\store.js
+DATA
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\IntegrationController.php
+* data\resources\views\gohighlevelv2-oauth-callback.blade.php
+* data\app\Http\Controllers\Controller.php
+* data\routes\api.php
+
+
+// SECTION 1
+(ghlV2AgencyConnected) && // agency harus sudah connect
+((isViewModeClientFromRootOrAgency) || (!isViewModeClientFromRootOrAgency && ghlV2CreatedIframe)) // jika view mode client || client login dan sudah buat iframe
+
+// SECTION 2
+!isViewModeClientFromRootOrAgency // jika tidak view mode client atau client login

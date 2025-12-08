@@ -239,3 +239,50 @@ SET balance_amount = balance_amount - @total_cost_agency
 WHERE CAST(id AS BINARY) = CAST(@last_id_topup_agencies AS BINARY)
 LIMIT 1;
 -- ===============topup_agencies===============
+
+{
+    "status": "success",
+    "message": "success get campaign",
+    "status_code": 200,
+    "data": {
+        "campaign_id": "12345678",
+        "campaign_type": "local",
+        "status_campaign": "Stopped",
+        "company_name": "Jhon Doe",
+        "client_name": "Jhon Doe",
+        "campaign_name": "Campaign Name",
+        "email": "emmqatester@gmail.com",
+        "phonenum": "(201) 222-2222",
+        "phoneenabled": true,
+        "homeaddressenabled": true,
+        "require_email": true,
+        "applyreidentificationall": false,
+        "reidentification_type": "1 year",
+        "gtminstalled": true,
+        "urlcode_1": "https://jhondoe1.com",
+        "urlcode_2": "https://jhondoe2.com",
+        "contacts": {
+            "total": 5,
+            "yesterday": 2
+        },
+        "financials": {
+            "payment_term": "prepaid",
+            "prepaid_options": "continual",
+            "stop_continual_topup": false,
+            "continual_buy_options": "weekly",
+            "limit_frequency": "day",
+            "remaining_balance": 0,
+            "lead_per_day": 3,
+            "client": {
+                "setup_fee": 0,
+                "campaign_fee": 0,
+                "cost_per_lead": 2.49
+            },
+            "agency": {
+                "setup_fee": 0.1,
+                "campaign_fee": 0.2,
+                "cost_per_lead": 2
+            }
+        }
+    }
+}

@@ -3,39 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Rendering Pixel</title>
-    <script>
-    (function (doc, tag, id) {
-        var js = doc.getElementsByTagName(tag)[0];
-
-        if (doc.getElementById(id)) {
-            return;
+    <title>Testing Iframe Emm Local</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
         }
-
-        js = doc.createElement(tag);
-        js.id = id;
-        // js.src = "https://jidanach.ap.ngrok.io/px-sandbox.min.js";
-        js.src = "http://jidanach.emmsandbox.com:8080/px-sandbox.min.js";
-        js.type = "text/javascript";
-
-        doc.head.appendChild(js);
-
-        js.onload = function () {
-            pxfired();
-        };
-    }(document, 'script', 'px-grabber'));
-
-    function pxfired() {
-        PxGrabber.setOptions({
-            Label: "72770339|" + window.location.href,
-            CustomParams: 'custom params testing',
-        });
-
-        PxGrabber.render();
-    }
-    </script>
+    </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Testing Rendering Pixel</h1>
+    <h3 style="text-align: center;">Testing Iframe Emm Local</h3>
+
+    <!-- CLIENT -->
+    <!-- <iframe src="http://jidanach.emmsandbox.com:8080/sso?token=8fb8587c06fd156989f4f076c536c2e2404bd4bf27ddbbe8f99451d70230290511b85bf155785ed58a6dafb3b19d1b5c5856c6f2b4ccfa7d5ba19a69d917de9127aede4cf33fe2466b57055c34607f34b603a5971aa0bcc9fc439a21a738a3040c5595bf2e" width="100%" height="900px" frameborder="0" style="border: 1px solid #ccc;"></iframe> -->
+    
+    <!-- AGENCY -->
+    <iframe src="http://jidanach.emmsandbox.com:8080/sso?token=ab55ea0987fd116700aec2ba22414bff599b260e851a9e32b8dab0748790ee18608be7367c3a4062c377b0764eabcd2bb9f27f582a97e3ed55c095f1f377296da5b43d9ff286439b593d3e755ca6bd189b9d4adab059d1577a98a37d3131aec6f745929c1b7e79cc08" width="100%" height="1000px" frameborder="0" style="border: 1px solid #ccc;"></iframe>
 </body>
 </html>
