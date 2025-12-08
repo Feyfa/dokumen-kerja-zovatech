@@ -1,0 +1,246 @@
+Proxmox
+Email : fisikamodern00@gmail.com
+Password : feyfasayangaku
+Hostname (FQDN) : jidanhomeserver.com
+
+https://192.168.100.2:8006/
+
+
+sudo nano /etc/ssh/sshd_config
+PasswordAuthentication yes
+sudo systemctl restart ssh
+
+ssh webserver4@192.168.1.12
+
+sudo hanya dilakukan jika anda sedang tidak menjadi root, kalo lagi di root sudo tidak di perlukan 
+
+ip a
+
+sudo su
+htop
+apt update 
+apt upgrade
+
+
+apt install nginx
+
+ufw allow 'Nginx Full' -> dipakai untuk mengizinkan trafik HTTP (port 80) dan HTTPS (port 443) lewat firewall UFW.
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+apt-cache policy docker-ce
+
+sudo apt install docker-ce
+
+systemctl status docker
+
+sudo usermod -aG docker ${USER}
+
+groups
+
+mkdir ~/owncloud
+
+OWNCLOUD_VERSION=10.11
+OWNCLOUD_DOMAIN=SERVER:8080
+OWNCLOUD_TRUSTED_DOMAINS="192.168.1.11"
+ADMIN_USERNAME=jidan
+ADMIN_PASSWORD=feyfa
+HTTP_PORT=8080
+
+wget https://raw.githubusercontent.com/owncloud/docs-server/master/modules/admin_manual/examples/installation/docker/docker-compose.yml
+
+docker compose up -d --build
+
+http://192.168.1.11:8080/apps/files/?dir=/&fileid=6
+
+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
+
+
+- untuk copy folder dist ke dalam server proxmox
+scp -r dist root@192.168.1.7:/var/www/vue-js-proxmox
+
+- mengubah pemilik folder dari root → menjadi user webserver100
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo chown -R webserver100:webserver100 /var/www/vue-js-proxmox
+[sudo] password for webserver100: 
+
+- Buat config Nginx baru
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo nano /etc/nginx/sites-available/vue-js-proxmox
+server {
+  listen 80;
+  server_name _;
+
+  root /var/www/vue-js-proxmox/dist;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+
+- Aktifkan config tersebut, Buat symlink:
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo ln -s /etc/nginx/sites-available/vue-js-proxmox /etc/nginx/sites-enabled/
+
+- Hapus config default (opsional tapi direkomendasikan)
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo rm /etc/nginx/sites-enabled/default
+
+- Test config apakah valid
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+- Restart Nginx
+webserver100@webserver100:/var/www/vue-js-proxmox$ sudo systemctl restart nginx
+
+
+
+
+
+=======================untuk ci cd=======================
+ssh di pc_m saya
+ssh-keygen -t ed25519 -C "github-ci" -f ~/.ssh/github_ci_key
+passphrase:feyfa
+
+private key
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACCK564H4u9CXig+7dFNrJQWE3py2A5KVhpBRmyDDi2RJgAAAJBYGUchWBlH
+IQAAAAtzc2gtZWQyNTUxOQAAACCK564H4u9CXig+7dFNrJQWE3py2A5KVhpBRmyDDi2RJg
+AAAEA5Qwxh3Nb2NDkmt3hWqBb2tqcp0OaWkwzp/rjSSO3AR4rnrgfi70JeKD7t0U2slBYT
+enLYDkpWGkFGbIMOLZEmAAAACWdpdGh1Yi1jaQECAwQ=
+-----END OPENSSH PRIVATE KEY-----
+
+public key
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrnrgfi70JeKD7t0U2slBYTenLYDkpWGkFGbIMOLZEm github-ci
+
+mkdir -p ~/.ssh
+nano ~/.ssh/authorized_keys
+
+chmod 600 ~/.ssh/authorized_keys
+=======================untuk ci cd=======================
+
+
+=======================ssh nyangkut ke vm yang lama=======================
+muhammadjidan@Mac-mini-Muhammad ~ % ssh template1@192.168.1.4
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:LozbC5bt+uc5lW6K+gwT5D7vFK70LkmuZkEsj2TugGs.
+Please contact your system administrator.
+Add correct host key in /Users/muhammadjidan/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /Users/muhammadjidan/.ssh/known_hosts:13
+Host key for 192.168.1.4 has changed and you have requested strict checking.
+Host key verification failed.
+
+ssh-keygen -R 192.168.1.7
+=======================ssh nyangkut ke vm yang lama=======================
+
+
+=======================CARA MEMBUAT TEMPLATE VM=======================
+Penjelasan: karena membuat vm itu lama sekitar 40 menit, maka kita harus mengakali nya dengan menggunakan cara clone, jadi awal kita buat vm sekali saja lalu setelah itu kita clone, dengan begitu process nya hanya 10 - 30 detik saja
+
+Langkah-Langkah:
+1. Membuat VM Pertama Kali
+  * create vm dengan spesifikasi name = 'template1', CPU 4 core, RAM 4gb, DISK 32gb
+  * setelah berhasil, maka klik vm nya, klik more, klik convert to template
+
+2. Setelah Berhasil Clone VM
+  * klik vm template, klik more, klik clone, nanti ada form isi nama misalnya = 'vuejs1', mode full clone
+  * tunggu dulu beberapa menit, nanti nama vm yang awalnya namanya example 'VM 100', akan berubah menjadi 'vuejs1', ini akan memakan waktu sekitar 1 menit
+  * setelah berubah namanya, kita start vm nya
+  * masuk ke console di proxmox, biasanya username dan password nya itu mengikuti dari langkah (1. Membuat VM Pertama Kali)
+  * setelah masuk ketik perintah 'ip a', nanti ambil ip nya example '192.168.1.4/24', namun nanti '/24' diabaikan saja
+  * buka terminal di pc, ketik ini 'ssh template1@192.168.1.4', nanti masukan password nya biasanya mengikuti dari langkah (1. Membuat VM Pertama Kali)
+  * setelah masuk ketik 'sudo nano /etc/ssh/sshd_config', 
+    - lalu cari baris dan ubah 'PasswordAuthentication no' menjadi 'PasswordAuthentication yes'
+    - lalu cari baris dan ubah 'PermitRootLogin prohibit-password' menjadi 'PermitRootLogin yes'
+    - klik ctrl + x, y
+  * jalankan perintah 'sudo systemctl restart ssh'
+  * jalankan perintah 'sudo passwd root', nanti masukan password nya
+  * exit dari season
+  * masuk lagi dengan perintah 'ssh root@192.168.1.4', masukan passwod yang di set saat menjalankan 'sudo passwd root'
+  * jalankan perintah 'sudo nano /etc/hostname', ubah dari 'template1' menjadi 'vuejs1', vuejs1 = yang ingin diganti, template1 adalah nama awal
+  * jalankan perintah 'sudo nano /etc/hosts', ubah dari '127.0.1.1 template1' menjadi '127.0.1.1 vuejs1', vuejs1 = yang ingin diganti, template1 adalah nama awal
+  * ketik perintah ini 'sudo usermod -l vuejs1 template1', vuejs1 = yang ingin diganti, template1 adalah nama awal
+  * ketik perintah 'sudo usermod -d /home/vuejs1 -m vuejs1'
+  * ketik perintah 'sudo reboot'
+  * exit dari season
+  * sekarang ketika buka di console proxmox akan berubah menjadi vuejs1@vuejs1
+=======================CARA MEMBUAT TEMPLATE VM=======================
+
+=======================PROJECT VUE JS + GIT + PROXMOX + NGINX=======================
+disclaimer: menurut chatgpt, vue js itu lebih baik tanpa docker di server, kenapa? karena ujung ujung nya kan vue itu jadi folder dist, nah nanti di server yang disimpan itu adalah dist nya, jadi dengan begitu kita ngga butuh docker di server untuk vuejs
+
+Langkah-Langkah:
+1. Upload Project Vue Ke Server Proxmox
+  * sebellum melakukan ini pastikan vue js sudah di buat project nya + vm nya sudah dibuat, karena tidak dijelankan lagi disini
+  * di server, jalankan perintah 'sudo apt update', untuk update apt
+  * di server, jalankan perintah 'sudo apt install nginx -y', untuk install nginx
+  * di server, jalankan perintah 'systemctl status nginx', untuk check status nginx oke atau tidak, jika oke coba buka http://@ip_vm, seharus nya jalan dengan normal
+  * di pc local, jalankan perintah 'npm run build', maka akan muncul folder 'dist/'
+  * di pc local, jalankan perintah 'scp -r dist vuejs1@192.168.1.7:/home/vuejs1/'
+  * di server, jalankan perintah 'sudo mkdir -p /var/www/vuejs1'
+  * di server, jalankan perintah 'sudo mv ~/dist/* /var/www/vuejs1/'
+  * di server, jalankan perintah 'sudo chown -R www-data:www-data /var/www/vuejs1'
+  * di server, jalankan perintah 'sudo chmod -R 755 /var/www/vuejs1'
+  * di server, jalankan perintah 'sudo nano /etc/nginx/sites-available/vuejs1', lalu isi dengan ini 
+    server {
+      listen 80;
+      server_name _;
+
+      root /var/www/vueapp;
+      index index.html;
+
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
+    }
+  * di server, jalankan perintah 'sudo ln -s /etc/nginx/sites-available/vuejs1 /etc/nginx/sites-enabled/'
+  * di server, jalankan perintah 'sudo systemctl restart nginx'
+  * terakhir test di browser 'http://192.168.1.7'
+
+2. BONUS CARA MENGUBAH DARI HTTP KE HTTPS DAN BISA DI AKSES PUBLIC UNTUK VUEJS (OPSIONAL TIDAK WAJIB)
+  * di server, jalankan perintah ini 
+  `
+    sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/vue.key \
+    -out /etc/ssl/certs/vue.crt
+  `, Saat ditanya, isi bebas. Yang penting bagian Common Name isi: '192.168.1.7'
+  * di server, jalankan perintah 'sudo nano /etc/nginx/sites-available/vuejs1'
+    server {
+      listen 443 ssl;
+      server_name 192.168.1.7;
+
+      ssl_certificate /etc/ssl/certs/vue.crt;
+      ssl_certificate_key /etc/ssl/private/vue.key;
+
+      root /var/www/vuejs1;
+      index index.html;
+
+      location / {
+        try_files $uri $uri/ /index.html;
+      }
+    }
+    # HTTP → redirect ke HTTPS
+    server {
+      listen 80;
+      server_name 192.168.1.7;
+      return 302 https://$host$request_uri;
+    }
+  * di server, jalankan perintah 'sudo nginx -t', untuk check status nginx 
+  * di server, jalankan perintah 'sudo systemctl restart nginx', untuk restart nginx
+  * buka di browser 'https://192.168.1.7'
+=======================PROJECT VUE JS + GIT + PROXMOX + NGINX=======================
