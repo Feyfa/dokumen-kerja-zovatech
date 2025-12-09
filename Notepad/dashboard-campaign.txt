@@ -1,0 +1,79 @@
+----------------GET CAMPAIGNL LIST----------------
+// route
+Route::get('/leadspeek/client/{groupCompanyID?}/{leadspeekType?}/{CompanyID?}/{clientID?}/{SortBy?}/{OrderBy?}/{searchKey?}','LeadspeekController@getclient');
+
+// ini adalah saat pertama kali masuk
+http://datalocal.emmsandbox.com/api/leadspeek/client/282/local/164?PerPage=10&view=dashboard&Page=1
+
+// ini adalah saat select campaign name
+http://datalocal.emmsandbox.com/api/leadspeek/client/282/local/164/1023?PerPage=10&view=dashboard&Page=1
+
+catatan
+1.  - {clientID?} ini kosong hanya ketika pertama kali masuk ke dashboard
+    - {clientID?} ini tidak kosong ketika sudah pilih select campaign
+----------------GET CAMPAIGNL LIST----------------
+
+
+----------------GET CONTACT LIST----------------
+// route
+Route::get('/leadspeek/report/lead/{CompanyID?}/{clientID?}/{startDate?}/{endDate?}','LeadspeekController@getreportlead');
+
+// ini ketika selain view all
+encode = http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/1019/2020-11-30%2011:00:00/2025-12-31%2010:59:59?Page=1&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+decode = http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/1019/2020-11-30 11:00:00/2025-12-31 10:59:59?Page=1&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+
+encode = http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/1020/2020-10-25%2012:00:00/2025-12-31%2010:59:59?Page=2&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+decode = http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/1020/2020-10-25 12:00:00/2025-12-31 10:59:59?Page=2&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+
+// ini ketika view all
+http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/view_all/2020-11-30%2011:00:00/2025-12-31%2010:59:59?Page=1&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+http://datalocal.emmsandbox.com/api/leadspeek/report/lead/164/view_all/2020-11-30 11:00:00/2025-12-31 10:59:59?Page=1&sortby=clickdate&order=descending&moduleType=local&searchQuery=
+----------------GET CONTACT LIST----------------
+
+
+
+----------------GET LINE CHART----------------
+// route
+Route::get('/leadspeek/report/chart/{CompanyID?}/{clientID?}/{startDate?}/{endDate?}','LeadspeekController@getreportchart');
+
+// ketika bukan view all
+encode = http://datalocal.emmsandbox.com/api/leadspeek/report/chart/164/1217/2021-11-28%2011:00:00/2025-12-31%2010:59:59
+decode = http://datalocal.emmsandbox.com/api/leadspeek/report/chart/164/1217/2021-11-28 11:00:00/2025-12-31 10:59:59
+
+// ketika view all
+encode = http://datalocal.emmsandbox.com/api/leadspeek/report/chart/164/view_all/2021-11-28%2011:00:00/2025-12-31%2010:59:59
+decode = http://datalocal.emmsandbox.com/api/leadspeek/report/chart/164/view_all/2021-11-28 11:00:00/2025-12-31 10:59:59
+----------------GET LINE CHART----------------
+
+var _groupCompanyID = '';
+if ((localStorage.getItem('companyGroupSelected') != null && localStorage.getItem('companyGroupSelected') != '')){
+    _groupCompanyID = localStorage.getItem('companyGroupSelected');
+}
+groupCompanyID: _groupCompanyID,
+
+vue
+getInitDate() {
+    this.$store.dispatch('GetLeadsPeekInitDate')
+}
+getTotalLeadsChart() {
+    this.$store.dispatch('GetLeadsPeekChartReport')
+}
+
+php
+getinitdatechart
+getreportchart
+
+http://datalocal.emmsandbox.com/leadspeek/report/lead/export?companyID=164&clientID=view_all&startDate=2019-10-28+12%3A00%3A00&e
+
+
+select * from 
+
+2025-11-30
+11-30-2025
+
+
+46389124
+75935502
+
+27215395
+27215395
