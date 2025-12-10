@@ -145,7 +145,7 @@ Offending ECDSA key in /Users/muhammadjidan/.ssh/known_hosts:13
 Host key for 192.168.1.4 has changed and you have requested strict checking.
 Host key verification failed.
 
-ssh-keygen -R 192.168.1.7
+ssh-keygen -R 192.168.1.11
 =======================ssh nyangkut ke vm yang lama=======================
 
 
@@ -180,7 +180,8 @@ Langkah-Langkah:
   * exit dari season
   * sekarang ketika buka di console proxmox akan berubah menjadi vuejs1@vuejs1
 =======================CARA MEMBUAT TEMPLATE VM=======================
-
+sudo usermod -l worker2 template1
+sudo usermod -d /home/vuejs1 -m worker2
 =======================PROJECT VUE JS + GIT + PROXMOX + NGINX=======================
 disclaimer: menurut chatgpt, vue js itu lebih baik tanpa docker di server, kenapa? karena ujung ujung nya kan vue itu jadi folder dist, nah nanti di server yang disimpan itu adalah dist nya, jadi dengan begitu kita ngga butuh docker di server untuk vuejs
 
@@ -244,3 +245,14 @@ Langkah-Langkah:
   * di server, jalankan perintah 'sudo systemctl restart nginx', untuk restart nginx
   * buka di browser 'https://192.168.1.7'
 =======================PROJECT VUE JS + GIT + PROXMOX + NGINX=======================
+
+
+=======================VM MASTER=======================
+MASTER_IP=192.168.1.3
+
+sudo cat /var/lib/rancher/k3s/server/node-token
+K104bda5dfb9c9518d8888ef99cd120548ab45a615edcfcd1ab8d7e51d85fbea5b1::server:f45d64e188918c2645908d5506b3ffb2
+
+curl -sfL https://get.k3s.io | K3S_URL="https://192.168.1.3:6443" K3S_TOKEN="K104bda5dfb9c9518d8888ef99cd120548ab45a615edcfcd1ab8d7e51d85fbea5b1::server:f45d64e188918c2645908d5506b3ffb2" sh -
+
+=======================VM MASTER=======================
