@@ -1,71 +1,73 @@
 {
-    "name": "exact-match-marketing-system",
-    "version": "1.2.3",
-    "private": true,
-    "description": "Exact Match Marketing System",
-    "author": "Harrison Budiman <harrison.budiman@gmail.com>",
-    "scripts": {
-      "serve": "vue-cli-service serve --open",
-      "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint",
-      "dev": "npm run serve"
-    },
-    "dependencies": {
-      "@fullcalendar/core": "^4.4.0",
-      "@fullcalendar/daygrid": "^4.4.0",
-      "@fullcalendar/interaction": "^4.4.0",
-      "@fullcalendar/timegrid": "^4.4.0",
-      "@fullcalendar/vue": "^4.4.0",
-      "axios": "^0.21.1",
-      "bootstrap": "^4.5.0",
-      "chart.js": "^2.9.3",
-      "d3": "^5.16.0",
-      "datamaps": "^0.5.9",
-      "element-ui": "^2.13.2",
-      "es6-promise": "^4.2.8",
-      "fuse.js": "^6.0.0",
-      "gmap-vue": "^1.5.0",
-      "google-maps": "^4.2.3",
-      "libphonenumber-js": "^1.10.52",
-      "moment-timezone": "^0.5.43",
-      "nouislider": "^14.5.0",
-      "perfect-scrollbar": "^1.5.0",
-      "register-service-worker": "^1.7.1",
-      "resumablejs": "^1.1.0",
-      "sweetalert2": "^9.13.1",
-      "tween.js": "^16.6.0",
-      "vee-validate": "^3.3.0",
-      "vue": "^2.6.11",
-      "vue-chartjs": "^3.5.0",
-      "vue-country-region-select": "^2.0.16",
-      "vue-i18n": "^8.18.0",
-      "vue-router": "^3.3.0",
-      "vue-router-prefetch": "^1.6.0",
-      "vue2-google-maps": "^0.10.7",
-      "vue2-transitions": "^0.3.0",
-      "vuex": "^3.6.2"
-    },
-    "devDependencies": {
-      "@vue/cli-plugin-babel": "^3.11.0",
-      "@vue/cli-plugin-eslint": "^3.11.0",
-      "@vue/cli-plugin-pwa": "^3.11.0",
-      "@vue/cli-service": "^4.4.1",
-      "babel-plugin-component": "^1.1.1",
-      "eslint": "^7.21.0",
-      "eslint-plugin-vue": "^7.6.0",
-      "node-sass": "^4.14.1",
-      "sass-loader": "^8.0.2",
-      "vue-cli-plugin-i18n": "^1.0.1",
-      "vue-template-compiler": "^2.6.11"
-    },
-    "postcss": {
-      "plugins": {
-        "autoprefixer": {}
-      }
-    },
-    "browserslist": [
-      "> 1%",
-      "last 2 versions",
-      "not ie <= 10"
-    ]
+  "refund": {
+      "id": "re_3SclDtRrOfJImWE21GF9Z4TU",
+      "object": "refund",
+      "amount": 3000,
+      "balance_transaction": "txn_3SclDtRrOfJImWE212wCTWMS",
+      "charge": "ch_3SclDtRrOfJImWE21N4xl4zj",
+      "created": 1765365442,
+      "currency": "usd",
+      "destination_details": {
+          "card": {
+              "reference_status": "pending",
+              "reference_type": "acquirer_reference_number",
+              "type": "refund"
+          },
+          "type": "card"
+      },
+      "metadata": [],
+      "payment_intent": "pi_3SclDtRrOfJImWE21xf2WMZv",
+      "reason": null,
+      "receipt_number": null,
+      "source_transfer_reversal": null,
+      "status": "succeeded",
+      "transfer_reversal": null
   }
+}
+
+{
+  "balance": {
+      "object": "balance",
+      "available": [
+          {
+              "amount": 154716004,
+              "currency": "usd",
+              "source_types": {
+                  "bank_account": -1,
+                  "card": 154716005
+              }
+          }
+      ],
+      "connect_reserved": [
+          {
+              "amount": 0,
+              "currency": "usd"
+          }
+      ],
+      "livemode": false,
+      "pending": [
+          {
+              "amount": 178560,
+              "currency": "usd",
+              "source_types": {
+                  "bank_account": 0,
+                  "card": 178560
+              }
+          }
+      ],
+      "refund_and_dispute_prefunding": {
+          "available": [
+              {
+                  "amount": 0,
+                  "currency": "usd"
+              }
+          ],
+          "pending": [
+              {
+                  "amount": 0,
+                  "currency": "usd"
+              }
+          ]
+      }
+  }
+}

@@ -1457,9 +1457,30 @@ FILE
 
 
 
+=======YANG HARUS DIKERJAKAN=======
+1. membuat button refund muncul di agency ✅
+2. research refund campaign
+3. ketika manual bill T, membuat logic refund hanye ke agency
+4. ketika manual bill F, di wording refund tambahkan sisa uang client nya berapa 
+5. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id
+6. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id
+=======YANG HARUS DIKERJAKAN=======
+
+
+"pendingRoot": 1785.6,
+"availableRoot": 1547145.04,
+"pendingAgency": 94.75,
+"availableAgency": 2.15
+
+=======BALANCE STRIPE=======
+"pendingRoot": 1785.6,
+"availableRoot": 1547147.54,
+"pendingAgency": 94.75,
+"availableAgency": 23.25
 
 
 
+=======BALANCE STRIPE=======
 
 
 

@@ -77,3 +77,118 @@ select * from
 
 27215395
 27215395
+
+
+/* GET agency_lifetime_total_leads, GET agency_lifetime_total_leads_cost, GET agency_lifetime_total_leads_profit */
+// $totalLeadsCostProfit = LeadspeekReport::selectRaw('
+//         COUNT(*) as lifetime_total_leads,
+//         SUM(leadspeek_reports.platform_price_lead) as agency_lifetime_total_leads_cost,
+//         SUM(leadspeek_reports.price_lead) as client_lifetime_total_leads_cost
+//     ')
+//     ->leftJoin('leadspeek_users','leadspeek_reports.leadspeek_api_id','=','leadspeek_users.leadspeek_api_id')
+//     ->leftJoin('users','leadspeek_users.user_id','=','users.id')
+//     ->where('leadspeek_users.archived','=','F')
+//     ->where('users.active','=','T');
+// if($isDashboardViewAllCampaign){ // jika dashboard view all
+//     info('getclient foreach 3.2');
+//     $totalLeadsCostProfit->where('leadspeek_users.company_id','=',$CompanyID)
+//         ->where('leadspeek_users.leadspeek_type','=',$leadspeekType);
+//     if($groupCompanyID != '' && $groupCompanyID != 'all'){
+//         info('getclient foreach 3.2.1');
+//         $totalLeadsCostProfit->where('leadspeek_users.user_id','=',$groupCompanyID);
+//     }
+// }else{ // jika selain dashboard view all
+//     info('getclient foreach 3.3');
+//     $totalLeadsCostProfit->where('leadspeek_reports.leadspeek_api_id', $cl['leadspeek_api_id']);
+// }
+// $totalLeadsCostProfit = $totalLeadsCostProfit->where('leadspeek_reports.active','=','T')->first();
+/* GET agency_lifetime_total_leads, GET agency_lifetime_total_leads_cost, GET agency_lifetime_total_leads_profit */
+
+
+
+
+/* GET agency_total_leads_last_billing, GET agency_total_cost_since_last_billing, GET agency_total_cost_since_last_billing_profit */
+// $lastInvoiceDate = LeadspeekInvoice::leftJoin('leadspeek_users','leadspeek_invoices.leadspeek_api_id','=','leadspeek_users.leadspeek_api_id')
+//     ->leftJoin('users','leadspeek_invoices.user_id','=','users.id')
+//     ->where('leadspeek_users.archived','=','F')
+//     ->where('users.active','=','T');
+// if($isDashboardViewAllCampaign){ // jika dashboard view all
+//     info('getclient foreach 3.4');
+//     $lastInvoiceDate->where('leadspeek_users.company_id','=',$CompanyID)
+//         ->where('leadspeek_users.leadspeek_type','=',$leadspeekType);
+//     if($groupCompanyID != '' && $groupCompanyID != 'all'){
+//         info('getclient foreach 3.4.1');
+//         $totalLeadsCostProfit->where('leadspeek_users.user_id','=',$groupCompanyID);
+//     }
+// }else{ // jika selain dashboard view all
+//     info('getclient foreach 3.5');
+//     $lastInvoiceDate->where('leadspeek_invoices.leadspeek_api_id', $cl['leadspeek_api_id']);
+// }
+// $lastInvoiceDate = $lastInvoiceDate->where('leadspeek_invoices.status', 'paid')->orderBy('leadspeek_invoices.created_at', 'desc')->value('leadspeek_invoices.created_at');
+
+// if(!empty($lastInvoiceDate)){
+//     info('getclient foreach 3.6');
+//     $leadsCostProfit = LeadspeekReport::selectRaw('
+//             COUNT(*) as total_leads_last_billing,
+//             SUM(leadspeek_reports.platform_price_lead) as agency_total_cost_since_last_billing,
+//             SUM(leadspeek_reports.price_lead) as client_total_cost_since_last_billing
+//         ')
+//         ->leftJoin('leadspeek_users','leadspeek_reports.leadspeek_api_id','=','leadspeek_users.leadspeek_api_id')
+//         ->leftJoin('users','leadspeek_users.user_id','=','users.id')
+//         ->where('leadspeek_users.archived','=','F')
+//         ->where('users.active','=','T');
+//     if($isDashboardViewAllCampaign){ // jika dashboard view all
+//         info('getclient foreach 3.7');
+//         $leadsCostProfit->where('leadspeek_users.company_id','=',$CompanyID)
+//             ->where('leadspeek_users.leadspeek_type','=',$leadspeekType);
+//         if($groupCompanyID != '' && $groupCompanyID != 'all'){
+//             info('getclient foreach 3.7.1');
+//             $totalLeadsCostProfit->where('leadspeek_users.user_id','=',$groupCompanyID);
+//         }
+//     }else{ // jika selain dashboard view all
+//         info('getclient foreach 3.8');
+//         $leadsCostProfit->where('leadspeek_reports.leadspeek_api_id', $cl['leadspeek_api_id'])
+//             ->where('leadspeek_users.leadspeek_type','=',$leadspeekType);
+//     }
+//     $leadsCostProfit = $leadsCostProfit->where('leadspeek_reports.created_at', '>=', $lastInvoiceDate)->where('leadspeek_reports.active','=','T')->first();
+
+//     $client[$a]['total_leads_last_billing'] = !empty($leadsCostProfit->total_leads_last_billing) ? $leadsCostProfit->total_leads_last_billing : 0;
+//     $client[$a]['agency_total_cost_since_last_billing'] = !empty($leadsCostProfit->agency_total_cost_since_last_billing) ? $leadsCostProfit->agency_total_cost_since_last_billing : 0;
+//     $client[$a]['client_total_cost_since_last_billing'] = !empty($leadsCostProfit->client_total_cost_since_last_billing) ? $leadsCostProfit->client_total_cost_since_last_billing : 0;
+// }else{
+//     info('getclient foreach 3.9');
+//     $client[$a]['total_leads_last_billing'] = 0;
+//     $client[$a]['agency_total_cost_since_last_billing'] = 0;
+//     $client[$a]['client_total_cost_since_last_billing'] = 0;
+// }
+/* GET agency_total_leads_last_billing, GET agency_total_cost_since_last_billing, GET agency_total_cost_since_last_billing_profit */
+
+
+/ /* CARA 1 */
+// $dummySelectArray = collect($columns)->map(function($col) use($defaults){
+//     $alias = Str::contains($col, ' as ') ? 
+//              trim(Str::after($col, ' as ')) :
+//              trim(Str::after($col, '.'));
+//     $value = $defaults[$alias] ?? '';
+//     return DB::raw("'{$value}' as {$alias}");
+// })->toArray();
+// $client = LeadspeekUser::select($dummySelectArray);
+// $client = $client->paginate(1, ['*'], 'page', 1);
+// /* CARA 1 */
+
+
+
+$clientTotal = LeadspeekUser::join('users','leadspeek_users.user_id','=','users.id')
+    ->join('companies','users.company_id','=','companies.id')
+    ->where('leadspeek_users.company_id','=',$CompanyID)
+    ->where('leadspeek_users.archived','=','F')
+    ->where('users.active','=','T');
+if($groupCompanyID != '' && $groupCompanyID != 'all'){
+    info('getclient 5.2');
+    $clientTotal->where('leadspeek_users.user_id','=',$groupCompanyID);
+}
+if(trim($leadspeekType) != '' && trim($leadspeekType) != 'all'){
+    $clientTotal->where('leadspeek_users.leadspeek_type','=',trim($leadspeekType));
+}
+$clientTotal = $clientTotal->count();
+info('getclient 5.3', ['clientTotal' => $clientTotal]);
