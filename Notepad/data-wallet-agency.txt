@@ -1460,11 +1460,12 @@ FILE
 =======YANG HARUS DIKERJAKAN=======
 1. membuat button refund muncul di agency ✅
 2. research refund campaign ✅
-3. ubah wording estimate refund 
-4. ketika manual bill T, membuat logic refund hanye ke agency
-5. ketika manual bill F, di wording refund tambahkan sisa uang client nya berapa 
-6. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id
-7. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id
+3. ubah wording estimate refund ✅
+4. ketika manual bill T, membuat logic refund hanye ke agency ✅
+5. ketika manual bill F, di wording refund tambahkan sisa uang client nya berapa ✅
+6. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id ✅
+7. ketika manual bill F, membuat refund campaign ke agency + client dengan case dimana belum ada topup_campaign_id ✅
+8. ubah email
 =======YANG HARUS DIKERJAKAN=======
 
 
@@ -1494,6 +1495,7 @@ Are you sure you want to refund the campaign? Once the refund is processed, an a
 hai jadi saya sekarang punya 2 table, untuk topup campaign dan berapa lead yang dibeli itu kan bakal masuk ke topup_campaign, dan invoice nya itu bakal masuk ke dalam leadspeek_invoices 1. jadi pertama saya bakal query begini $topups = Topup::where('leadspeek_api_id','=', $leadspeek_api_id) ->where('topup_status','<>','done') ->get(); 2. nah yang jadi masalah adalah saya baru menambahkan field di leadspeek_invoices yang namanya 'topup_campaign_id', nah jadi ada case dimana topup_campaign_id sudah diisi dan belum keiisi jadi bentuknya kaya gini =========================== - topup_campaign id | cost_perlead | total_leads | topup_status 1 | 0.5 | 10 | progress 2 | 0.5 | 10 | queue - leadspeek_invoices id | topup_campaign_id | cost_perlead | total_leads | customer_payment_id 1 | NULL | 0.5 | 10 | pi_xxxxx 2 | NULL | 0.5 | 10 | pi_xxxxx =========================== =========================== - topup_campaign id | cost_perlead | total_leads | topup_status 1 | 0.5 | 10 | progress 2 | 0.5 | 10 | queue - leadspeek_invoices id | topup_campaign_id | cost_perlead | total_leads | customer_payment_id 1 | NULL | 0.5 | 10 | pi_xxxxx 2 | 2 | 0.5 | 10 | pi_xxxxx =========================== =========================== - topup_campaign id | cost_perlead | total_leads | topup_status 1 | 0.5 | 10 | progress 2 | 0.5 | 10 | queue - leadspeek_invoices id | topup_campaign_id | cost_perlead | total_leads | customer_payment_id 1 | 1| 0.5 | 10 | pi_xxxxx 2 | 2 | 0.5 | 10 | pi_xxxxx ===========================
 
 
+ALTER TABLE leadspeek_invoices ADD topup_campaigns_id BIGINT NULL DEFAULT NULL AFTER topup_agencies_id;
 
 
 
@@ -1506,6 +1508,7 @@ hai jadi saya sekarang punya 2 table, untuk topup campaign dan berapa lead yang 
 
 
 
+Are you sure you want to activate this campaign?
 
 
 

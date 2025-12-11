@@ -1,6 +1,6 @@
 use emm_sandbox;
 -- 
-SET @company_id := '164', @leadspeek_api_id := '23024637';
+SET @company_id := '164', @leadspeek_api_id := '37362347';
 select @company_id, @leadspeek_api_id;
 -- 
 update topup_agencies set balance_amount = 20, topup_status = 'progress' where total_amount = 20 AND company_id = @company_id;
@@ -32,6 +32,8 @@ select * from user_logs order by id desc limit 50;
 select distinct action from user_logs order by action asc;
 
 select * from module_settings;
+
+select * from jobs;
 
 
 SELECT 
