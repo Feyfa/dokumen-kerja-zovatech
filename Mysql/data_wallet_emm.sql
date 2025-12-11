@@ -1,7 +1,7 @@
 use emm_sandbox;
 -- 
-SET @company_id := '164';
-select @company_id;
+SET @company_id := '164', @leadspeek_api_id := '23024637';
+select @company_id, @leadspeek_api_id;
 -- 
 update topup_agencies set balance_amount = 20, topup_status = 'progress' where total_amount = 20 AND company_id = @company_id;
 update topup_agencies set balance_amount = 30, topup_status = 'queue' where total_amount = 30 AND company_id = @company_id;
@@ -22,16 +22,36 @@ where company_id in (@company_id) and user_type = 'userdownline';
 SELECT * FROM `topup_agencies` where company_id = @company_id order by id asc;
 SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id = @company_id order by id asc;
 
-select * from leadspeek_users where leadspeek_api_id = '55458332';
-select * from topup_campaigns where leadspeek_api_id = '55458332';
-select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = '55458332';
-update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = '55458332';
+select * from leadspeek_users where leadspeek_api_id = @leadspeek_api_id;
+select * from topup_campaigns where leadspeek_api_id = @leadspeek_api_id;
+select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = @leadspeek_api_id;
+update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = @leadspeek_api_id;
 
-select * from leadspeek_reports where leadspeek_api_id = '55458332';
+select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id;
 select * from user_logs order by id desc limit 50;
 select distinct action from user_logs order by action asc;
 
 select * from module_settings;
+
+
+SELECT 
+    tc.id,
+    tc.cost_perlead,
+    tc.total_leads,
+    tc.topup_status,
+    li.customer_payment_id,
+    li.id as invoice_id,
+    li.leadspeek_api_id,
+    li.invoice_type
+FROM topup_campaigns AS tc
+LEFT JOIN leadspeek_invoices AS li 
+	ON (li.leadspeek_api_id = tc.leadspeek_api_id AND li.topup_campaign_id = tc.id)
+    OR (li.leadspeek_api_id = tc.leadspeek_api_id and li.topup_campaign_id IS null AND li.cost_leads = tc.cost_perlead AND li.total_leads = tc.total_leads)
+WHERE tc.leadspeek_api_id = '23024637'
+ AND tc.topup_status <> 'done'
+ORDER BY tc.id DESC;
+
+
 
 select * from leadspeek_invoices where invoice_type = 'campaign' and topup_agencies_id in (
 	SELECT id FROM `topup_agencies` where company_id = @company_id

@@ -28,22 +28,22 @@ WHERE leadspeek_users.archived = 'F'
   AND users.active = 'T'
   AND leadspeek_reports.active = 'T'
   AND leadspeek_users.company_id = 164
-  AND leadspeek_users.leadspeek_type = 'local'
-  and leadspeek_users.user_id = 1072;
+  AND leadspeek_users.leadspeek_type = 'b2b'
+--   and leadspeek_users.user_id = 1072;
 --   AND leadspeek_reports.created_at >= '2025-11-30 22:53:41
 
 
 -- getLastBillingTotalLeads 1.1
-select leadspeek_invoices.leadspeek_api_id, leadspeek_invoices.created_at from leadspeek_invoices
+select leadspeek_invoices.leadspeek_api_id, leadspeek_invoices.created_at, leadspeek_invoices.* from leadspeek_invoices
 left join leadspeek_users on leadspeek_invoices.leadspeek_api_id = leadspeek_users.leadspeek_api_id
 left join users on leadspeek_invoices.user_id = users.id
 where
 	leadspeek_users.archived = 'F' and 
 	users.active = 'T' and
 	leadspeek_users.company_id = 164 and 
-	leadspeek_users.leadspeek_type = 'local' and
-	leadspeek_users.user_id = '282' and
--- 	leadspeek_users.leadspeek_api_id = '47730235'  
+	leadspeek_users.leadspeek_type = 'b2b' and
+-- 	leadspeek_users.user_id = '282' and
+-- 	leadspeek_users.leadspeek_api_id = '27215395' and
 	leadspeek_invoices.status = 'paid'
 order by created_at desc;
 
@@ -51,8 +51,10 @@ order by created_at desc;
 
 -- getLastBillingTotalLeads 1.2
 SELECT 
--- 	leadspeek_reports.platform_price_lead,
--- 	leadspeek_reports.price_lead
+	leadspeek_reports.created_at,
+	leadspeek_reports.leadspeek_api_id,
+	leadspeek_reports.platform_price_lead,
+	leadspeek_reports.price_lead
 --     COUNT(*) AS total_leads_last_billing,
 --     SUM(leadspeek_reports.platform_price_lead) AS agency_total_cost_since_last_billing,
 --     SUM(leadspeek_reports.price_lead) AS client_total_cost_since_last_billing
@@ -65,9 +67,12 @@ WHERE leadspeek_users.archived = 'F'
   AND users.active = 'T'
   AND leadspeek_reports.active = 'T'
   AND leadspeek_users.company_id = 164
-  AND leadspeek_users.leadspeek_type = 'local'
-  and leadspeek_users.user_id = 1072;
---   AND leadspeek_reports.created_at >= '2025-11-30 22:53:41
+  AND leadspeek_users.leadspeek_type = 'b2b'
+--   and leadspeek_users.user_id = 282
+  AND leadspeek_reports.created_at >= '2025-11-30 22:00:58'
+--   and leadspeek_reports.leadspeek_api_id = '27215395'
+--   AND leadspeek_reports.created_at >= '2025-11-03 02:15:45'
+order by leadspeek_reports.created_at desc;
 
 
 

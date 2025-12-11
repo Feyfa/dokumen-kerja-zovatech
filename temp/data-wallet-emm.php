@@ -63,3 +63,121 @@ class DataWalletEmm
     }
     // ===========TESTING===========
 }
+
+hai saya punya data misalnya begini
+
+$datas = [
+    [
+        'id' => 1,
+        'cost_perlead' => 0.1,
+        'total_leads' => 10,
+    ],
+    [
+        'id' => 2,
+        'cost_perlead' => 0.1,
+        'total_leads' => 10,
+    ],
+    [
+        'id' => 3,
+        'cost_perlead' => 0.1,
+        'total_leads' => 10,
+    ],
+    [
+        'id' => 4,
+        'cost_perlead' => 0.1,
+        'total_leads' => 10,
+    ],
+];
+$idsExclude = [1,2];
+
+
+
+public function processRefundToClient($leadspeek_api_id)
+{
+    try
+    {
+        /* GET TOPUPS CAMPAIGNS */
+        // ambil topup campaign yang belum done
+        $topupCampaigns = Topup::where('leadspeek_api_id', $leadspeek_api_id)
+            ->where('topup_status', '<>', 'done')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->toArray();
+        $topupCampaigns_ids = array_column($topupCampaigns, 'id');
+        $topupCampaigns_count = count($topupCampaigns);
+        /* GET TOPUPS CAMPAIGNS */
+
+        /* GET INVOICES TOPUP CAMPAIGNS */
+        // buat variable untuk invoice final
+        $invoicesFinal = [];
+
+        // ambil invoice yang sudah ada topup_campaign_id
+        $invoicesWithTopupCampaign = LeadspeekInvoice::whereIn('topup_campaign_id', $topupCampaigns_ids)
+            ->where('leadspeek_api_id', $leadspeek_api_id)
+            ->where('invoice_type', 'campaign')
+            ->orderBy('id', 'desc')
+            ->get()
+            ->toArray();
+        $invoicesWithTopupCampaign_ids = array_column($invoicesWithTopupCampaign, 'id');
+        $invoicesWithTopupCampaign_topupCampaignsIds = array_column($invoicesWithTopupCampaign, 'topup_campaign_id');
+        $invoicesWithTopupCampaign_count = count($invoicesWithTopupCampaign);
+
+        if($invoicesWithTopupCampaign_count == 0) // jika leadspeek_invoices sama sekali ngga ada topup_campaign_id
+        {
+            $invoicesBufferId = [];
+            foreach($topupCampaigns as $topup)
+            {
+                $cost_perlead = $topup['cost_perlead'];
+                $total_leads = $topup['total_leads'];
+                $invoices = LeadspeekInvoice::whereNotIn('id', $invoicesBufferId)
+                    ->where('leadspeek_api_id', $leadspeek_api_id)
+                    ->where('invoice_type', 'campaign')
+                    ->where('cost_leads', $cost_perlead)
+                    ->where('total_leads', $total_leads)
+                    ->orderBy('id', 'desc')
+                    ->first()
+                    ->toArray();
+                if(!empty($invoices))
+                {
+                    $invoicesFinal[] = $invoices;
+                    $invoicesBufferId[] = $invoices['id'];
+                }
+            }
+        }
+        elseif($invoicesWithTopupCampaign_count < $topupCampaigns_count) // jika leadspeek_invoices sebagian ada topup_campaign_id, dan masih ada sebagian leadspeek_invoices yang belum ada topup_campaign_id, maka ambil yang sebagian yang belum ada itu
+        {
+            // ambil topup campaign yang belum ada invoice nya
+            $topupCampaignsFilter = array_filter($topupCampaigns, function ($item) use ($invoicesWithTopupCampaign_topupCampaignsIds) {
+                return !in_array($item['id'], $invoicesWithTopupCampaign_topupCampaignsIds);
+            });
+
+            $invoicesBufferId = $invoicesWithTopupCampaign_ids;
+            foreach($topupCampaignsFilter as $topup)
+            {
+                $cost_perlead = $topup['cost_perlead'];
+                $total_leads = $topup['total_leads'];
+                $invoices = LeadspeekInvoice::whereNotIn('id', $invoicesBufferId)
+                    ->whereNull('topup_campaign_id')
+                    ->whereNotIn('topup_campaign_id', $invoicesWithTopupCampaign_topupCampaignsIds)
+                    ->where('leadspeek_api_id', $leadspeek_api_id)
+                    ->where('invoice_type', 'campaign')
+                    ->where('cost_leads', $cost_perlead)
+                    ->where('total_leads', $total_leads)
+                    ->orderBy('id', 'desc')
+                    ->first()
+                    ->toArray();
+                if(!empty($invoices))
+                {
+                    $invoicesFinal[] = $invoices;
+                    $invoicesBufferId[] = $invoices['id'];
+                }
+            }
+        }
+        /* GET INVOICES TOPUP CAMPAIGNS */
+    }
+    catch(\Throwable $e)
+    {
+        Log::error("Error In Function processRefundToClient = {$e->getMessage()}");
+        return ['result' => 'error', 'message' => $e->getMessage()];
+    }
+}
