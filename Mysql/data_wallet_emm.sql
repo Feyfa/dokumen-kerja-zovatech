@@ -1,6 +1,6 @@
 use emm_sandbox;
 -- 
-SET @company_id := '164', @leadspeek_api_id := '37362347';
+SET @company_id := '164', @leadspeek_api_id := '23024637';
 select @company_id, @leadspeek_api_id;
 -- 
 update topup_agencies set balance_amount = 20, topup_status = 'progress' where total_amount = 20 AND company_id = @company_id;
@@ -25,16 +25,15 @@ SELECT * FROM `leadspeek_invoices` where invoice_type = 'agency' and company_id 
 select * from leadspeek_users where leadspeek_api_id = @leadspeek_api_id;
 select * from topup_campaigns where leadspeek_api_id = @leadspeek_api_id;
 select * from leadspeek_invoices where invoice_type = 'campaign' and leadspeek_api_id = @leadspeek_api_id;
-update leadspeek_users set active = 'F', disabled = 'T', active_user = 'F' where leadspeek_api_id = @leadspeek_api_id;
+update leadspeek_users set active = 'T', disabled = 'F', active_user = 'T' where leadspeek_api_id = @leadspeek_api_id;
 
-select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id;
-select * from user_logs order by id desc limit 50;
+select * from leadspeek_reports where leadspeek_api_id = @leadspeek_api_id;ysq
+select * from user_logs order by id desc limit 5;
 select distinct action from user_logs order by action asc;
 
 select * from module_settings;
 
-select * from jobs;
-
+select * from jobs order by id desc;
 
 SELECT 
     tc.id,
