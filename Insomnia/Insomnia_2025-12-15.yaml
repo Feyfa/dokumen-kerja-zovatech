@@ -1,0 +1,398 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: EMM
+meta:
+  id: wrk_057db06b1f8d41cf95ed5b6129b58d5e
+  created: 1721879985770
+  modified: 1727063633550
+  description: ""
+collection:
+  - name: Charge
+    meta:
+      id: fld_da451a657f17472e9297fbbd35176a87
+      created: 1725507033072
+      modified: 1730187861994
+      sortKey: -1729466321159.75
+      description: ""
+  - name: Twilio
+    meta:
+      id: fld_f36b99a71af64f8394aff54f4ccf15bd
+      created: 1728015943513
+      modified: 1730187859446
+      sortKey: -1729706590052.5
+      description: ""
+  - name: Open Api
+    meta:
+      id: fld_d59f99a58651419b82f9966a8f3a2e36
+      created: 1730187127838
+      modified: 1746520583054
+      sortKey: -1730187127838
+      description: ""
+  - name: EMM-SANDBOX-API
+    meta:
+      id: fld_4afd5920ac444990a81fa77a076a4c5f
+      created: 1731313931315
+      modified: 1746520580757
+      sortKey: -1731313931315
+      description: ""
+  - name: EMM-SANDBOX-APP
+    meta:
+      id: fld_4719d084733b495dabd5b09c8c684609
+      created: 1732178894448
+      modified: 1746520849662
+      sortKey: -1730750529576.5
+      description: ""
+  - name: MailBoxPower
+    meta:
+      id: fld_6cc876fda00841bd8b38b5d8dba0248c
+      created: 1732695964449
+      modified: 1732695966421
+      sortKey: -1731448201221
+      description: ""
+  - name: BIGDBM REQUEST
+    meta:
+      id: fld_048aaba9cd3d46cbbcd827d8e498eb46
+      created: 1735028873090
+      modified: 1735028873090
+      sortKey: -1735028873090
+      description: ""
+  - name: Go High Level
+    meta:
+      id: fld_8a117fc36099440c9427dab7a3faf022
+      created: 1735545382937
+      modified: 1735545382937
+      sortKey: -1735545382937
+      description: ""
+  - name: Open Api Sandbox
+    meta:
+      id: fld_35392c4fcdd64676a70599077270dcde
+      created: 1739777679613
+      modified: 1741332120118
+      sortKey: -1729946858945.25
+      description: ""
+    children:
+      - name: Execlution List
+        meta:
+          id: fld_55b34601b6644623a9c7ba85f080baf7
+          created: 1739777988734
+          modified: 1739777988734
+          sortKey: -1739777988734
+          description: ""
+        children:
+          - name: Root
+            meta:
+              id: fld_8c051d91a02c4880b0eedcfa795778fd
+              created: 1739777995229
+              modified: 1739778016678
+              sortKey: -1739777995229
+              description: ""
+          - name: Client
+            meta:
+              id: fld_7cb6bbd05b7541c29ffec002e42adf70
+              created: 1739778068578
+              modified: 1739778068578
+              sortKey: -1739777991981.5
+              description: ""
+          - name: Campaign
+            meta:
+              id: fld_ca660886df84450a81d9406b3393c538
+              created: 1739778125932
+              modified: 1739778125932
+              sortKey: -1739777990357.75
+              description: ""
+      - name: AGENCY
+        meta:
+          id: fld_4bf57a65c6dd40ba82b9ce252bff79bc
+          created: 1740560026839
+          modified: 1740560036059
+          sortKey: -1739778193612
+          description: ""
+      - name: CLIENT
+        meta:
+          id: fld_a42409a562f54ddf96a7c87879362cce
+          created: 1741344077994
+          modified: 1741344077994
+          sortKey: -1741344077994
+          description: ""
+      - name: Integrations
+        meta:
+          id: fld_cba4ccae368149838e48c609811eb592
+          created: 1741685061531
+          modified: 1741685061531
+          sortKey: -1741685061531
+          description: ""
+  - name: Gohighlevel 2
+    meta:
+      id: fld_add4eeccff844ab885957eba9307f4e6
+      created: 1744618759425
+      modified: 1744618768025
+      sortKey: -1744618759425
+      description: ""
+    children:
+      - name: Contacts
+        meta:
+          id: fld_59843edaf51b446e87fbf9cef91a4b99
+          created: 1744710739323
+          modified: 1744710739323
+          sortKey: -1744710739323
+          description: ""
+      - name: Tags
+        meta:
+          id: fld_0f102542dd18422f9959a632e5fb9f40
+          created: 1744710744911
+          modified: 1744710744911
+          sortKey: -1744710744911
+          description: ""
+      - name: Custom Fields
+        meta:
+          id: fld_110f1b64983d40afb4be5bf61fa8b0e9
+          created: 1744710751793
+          modified: 1744710751793
+          sortKey: -1744710751793
+          description: ""
+      - name: Get Access Tokens
+        meta:
+          id: fld_21e5b7b2e9ed429fa4d163da438f24a1
+          created: 1744787009304
+          modified: 1744787089520
+          sortKey: -1744787009304
+          description: ""
+      - name: Opportunities
+        meta:
+          id: fld_49899fe8aeed4d4db67ed5a8b7af5162
+          created: 1745213291614
+          modified: 1745213354992
+          sortKey: -1745213291614
+          description: ""
+  - name: Gohighlevel 1
+    meta:
+      id: fld_4aab79c6bb1642aab04a046b476d3ed4
+      created: 1744862036123
+      modified: 1744862037833
+      sortKey: -1744618759525
+      description: ""
+    children:
+      - name: Tags
+        meta:
+          id: fld_4a158b7693444cd0bc9d5d2364a21047
+          created: 1744862046399
+          modified: 1744862046399
+          sortKey: -1744862046399
+          description: ""
+      - name: Contacts
+        meta:
+          id: fld_3d1168bbdb724de7b1f2d84cbc25a71f
+          created: 1744869590102
+          modified: 1744869590102
+          sortKey: -1744869590102
+          description: ""
+  - name: IP INFO
+    meta:
+      id: fld_e1916e4246484c3198b52ad1bf3853f3
+      created: 1745998321402
+      modified: 1745998321402
+      sortKey: -1745998321402
+      description: ""
+  - name: Zoom Agency
+    meta:
+      id: fld_a5f453bd07cc49179a3e0a1a36fb13e3
+      created: 1757508841518
+      modified: 1757508847810
+      sortKey: -1757508841518
+      description: ""
+  - name: Watt Data
+    meta:
+      id: fld_1020e5475359430f9c301bc87983675e
+      created: 1765792714778
+      modified: 1765792714778
+      sortKey: -1765792714778
+      description: ""
+    children:
+      - url: https://api.wattdata.ai/mcp
+        name: resolve_identities
+        meta:
+          id: req_2a74f6be0da345c5bea26da248e0feb1
+          created: 1765778482532
+          modified: 1765792736501
+          isPrivate: false
+          description: ""
+          sortKey: -1765792736476
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "jsonrpc": "2.0",
+              "method": "tools/call",
+              "params": {
+                "name": "resolve_identities",
+                "arguments": {
+                  "id_type": "email",
+                  "id_hash": "plaintext",
+                  "identifiers": [
+                    "ptrhrt57@gmail.com"
+                  ]
+                }
+              },
+              "id": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.1.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Basic
+              bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=
+            description: ""
+            disabled: false
+          - name: Accept
+            value: application/json,text/event-stream
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://api.wattdata.ai/mcp
+        name: get_persons
+        meta:
+          id: req_9bac57b90a75423793041eed39029a0e
+          created: 1765792740206
+          modified: 1765792824403
+          isPrivate: false
+          description: ""
+          sortKey: -1765792740206
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "jsonrpc": "2.0",
+              "method": "tools/call",
+              "params": {
+                "name": "get_person",
+                "arguments": {
+                  "person_ids": ["12921488"],
+                  "domains": [
+                    "id",
+                    "email",
+                    "name",
+                    "phone",
+                    "address"
+                  ],
+                  "format": "none"
+                }
+              },
+              "id": 2
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.1.0
+          - name: Authorization
+            value: Basic
+              bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=
+          - name: Accept
+            value: application/json,text/event-stream
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_c89e01254a9ea8b40a853ca6dc1bee84a6dd42d9
+    created: 1721879985776
+    modified: 1757400625931
+  cookies:
+    - id: eba13241-142d-4f7d-9bcd-65fad443432d
+      key: XSRF-TOKEN
+      value: eyJpdiI6IlY2ZjFWOFA0V01aYm1hM2kvNUY3Z0E9PSIsInZhbHVlIjoiRmdBWjhCM2dwUTRoRStJd1VnOXpTV2ZtVVV2bFlkd051bWFFclhUNHEvTi9haTVQOEdzN0w5aXdPalFjL3VEVE5NOHZwZG1td1h4d0tqTGZqd2hOQjFOcHdPZWc4b2ZqV0xkeVZqOU1QM2dDcDY2cnR1N1BYZkZlejRENzRHb0UiLCJtYWMiOiIzYjI1Zjk2YWNjYWJmZThkMDA1ZWQ2M2JiMzM5NGMyYTRjYjYzNTJkNGRiZGNkODQyZWNiY2JkMzVjNDU0NWIxIn0%3D
+      domain: datalocal.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: b4a019c0-0cee-49a5-91ce-31e64621bc70
+      key: laravel_session
+      value: eyJpdiI6IlZOWUp2Nmd3U3VXWkxqdFFWakR3c3c9PSIsInZhbHVlIjoibXdOVFpwTU9QRzdYMjlVcGVVMkEycnJxN3cyQStFTjBrQkNEU2JVSWRBZHNta0U5YjJTKzEyYkhWT3pQc2ZONFZlNGFadnJKem5rY1p0aG9NYXh1bko0MG9Damc1U3NpalZHcjAyQzNnSGpaekovS0piTVRTWTJ3dTYraUhNSVciLCJtYWMiOiIyMDc2YjAzMTU4NDA3OGZiMGI4MjQ4MGUyNDE1ZDg5NDhlMmViZDc4Nzc1MGFmZmRjNDlkNDA4NjJkZjk4NTYxIn0%3D
+      domain: datalocal.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+    - id: e5ea2316-3f9d-4f25-90af-3603678014ef
+      key: XSRF-TOKEN
+      value: a241871d-2c9c-4b8a-b2af-d4f897b37c56
+      domain: aws-prod-auth-service.bigdbm.com
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+    - id: 9cb4d347-fb9c-42e5-aaf0-cc8f041e0215
+      key: XSRF-TOKEN
+      value: eyJpdiI6IllPQkNVM2xxTElEZGdETDdUcTZwK1E9PSIsInZhbHVlIjoiSk5TSEd6czdiNFpiSGRrem1GZG1FYldGdDl3R2w3b3dGZUExNXFqbmNNQ3R5U0ZWMWliaVdqciszeXBsZTJJRCticmRqME10NmFxTHAzWER5OTdLaWZLbGt1NTE5OHhXMklTbGZhOHRXaTFQV0hPZW5WZFdQUzdsNlgraU9HMUEiLCJtYWMiOiI0OWM4ODAzNDc1NWYzMjE5MWI0ZGQxZmZhMzRiNWVhNWU3YzdjYWE5YjNkNjhlZDVjNmZlNDRkZjRmYTM4NWZmIn0%3D
+      domain: api.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: 003d08d0-a73e-4db8-ae35-2395b2990572
+      key: apiemm_session
+      value: eyJpdiI6IlErczV5cHUyamRjR1Ayb3ZNVHVvV1E9PSIsInZhbHVlIjoiclIxeUQvcWs3dWV1ZmRGeVZwVXZ4OHhKL1BpK2ZQOHB0TCtKTDBuRDdEa1UxQ0t0VWo4a3FiQkNHTmR1OVpsbHFkd1lZQ2pxRUFaa0RTZ0pnRVVBMTRmRmZBY3JSanEzN21Qcml0ZUFvaVRrUUcyNndYNmFac1hKdTl2TzRaalIiLCJtYWMiOiIzZjk5ZjNkNThhOWYyYmQzZjM4OGFlZDk0YzIzMDI0OWZlNTlkMjEwMmU1MWQzNmJlNjhhZGRiNjZjM2I1NTg1In0%3D
+      domain: api.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+    - id: 347de0db-fb27-47ad-b687-f1546abe9029
+      key: XSRF-TOKEN
+      value: eyJpdiI6IkluV3pHRzQ2b3FtcVdiNlV1MlhlMUE9PSIsInZhbHVlIjoicVpwU1Znei94VHlkNWdpRkRlUTR5dUNFaG5EbVVrSnc3dXUyOGJTdXF4cHlDcjFxQUJrV1hvUFYxaENSL05aQ3ZYcEp2UllDSEFXaC8wSnlYR3YzSDduZ3p0dUJ4TnliUVEvWVdYMnJPRS9Ld3ZQdnZLV2JERUIwK1ZNUnVGYmQiLCJtYWMiOiI2ZDEzZjFlY2E3YWMzNWI1ODljZGNiYzNjMWZkMGM3NTYzN2FmZjBmMWFjNmE5YjRhOGY5NTM3YWUzNjc1NGYxIn0%3D
+      domain: data.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: 86996293-c8c3-4850-a2e2-49059f4f5369
+      key: laravel_session
+      value: eyJpdiI6IjlKNUVRYUgyak91WENvelhWNkJ3QlE9PSIsInZhbHVlIjoiWlppTnczMEtPTHVPZFI0TjV4QmVoMzlUdHdhR2M2VmJjakNZZzFPWFBXcitJcXhYT3ZMWWdwa1RlRmNsck9TSndjQ1Vocno5TUhZVW50MzdkYXprdi9OMm9jdVlILzUvMCtVMWR0ZjFWZkFwaXZZYm9mS3hRakNsaCtVNHhsZXAiLCJtYWMiOiI3ODc2YjM2NThhNWJlOTczYWFkYjcyMDc4OTBkMmRjZjQ4MmNiOGMzYjZhOTQ2YTY0ZGY3NzYyOTMzNWZlMzMyIn0%3D
+      domain: data.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+    - id: 0d362f00-421d-4e13-98b0-4e244956f321
+      key: XSRF-TOKEN
+      value: eyJpdiI6IlZLSjdzTFl4T1ZhekJnQzJxejV4Vmc9PSIsInZhbHVlIjoiRHlJNTBkZURHZkFTSFI1M1F4MzFwN3N2UVUwM0pJY1YxU1hBc2l2Rmd3YnJsOFVFeWFtL0xzRGRrVXlld0tndkRtZTByYURJMWRtcjNPOVZvN3hEeWRpR2xkaWxHem9iQVk1T0hqRSt5aDRoSlp1RW9tOS9Ta2t2bVFzNjhabjUiLCJtYWMiOiIzYTNiM2Q4OWE2ODEyN2RhNDE2YmU4ZTUzMWE4MGU4MWZhZWEwOGFhNmQ1MDZkZTliZDAxOTkwNmJlNWNkYTllIn0%3D
+      domain: apilocal.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: false
+      hostOnly: true
+    - id: eda9f1b3-2657-40d9-b5d2-e8ff0a9680db
+      key: apiemm_session
+      value: eyJpdiI6ImVsb3hqQWtaRU12SW1uV3B2S053VWc9PSIsInZhbHVlIjoiRmF0QmlzdVVpZGVuV3B1amY4d1ZlUHkrL0ljL3pDSTZSMlZGR1NPbWVXS1Jybkh1Sm9UTlcrQnl6cDV1dmVWT3hQSmFHVFZXNDRlVTZQem1hNU5QQ21sazJwZHZpOWFMbWFleDdmL2FVYVR3VGFZamF6SVYycU9vOEZBTW0zbGkiLCJtYWMiOiI5MDJmZDU0NzA4OGEzZDYzMDI4ZDdhZWY2MjkxZTcxNGZiZTA0MzNjNmJkOTEwZGMzNDliYmE5MjRhOTMwNGI4In0%3D
+      domain: apilocal.emmsandbox.com
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_c89e01254a9ea8b40a853ca6dc1bee84a6dd42d9
+    created: 1721879985771
+    modified: 1721879985771
+    isPrivate: false
