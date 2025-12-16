@@ -1920,11 +1920,15 @@ $address = "1414 E Grove";
 INSERT INTO global_settings (id, company_id, setting_name, setting_value, created_at, updated_at) VALUES (NULL, NULL, 'wattdata_credentials', '{\"token\":\"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=\",\"base_url\":\"https://api.wattdata.ai/mcp\"}', NOW(), NOW());
 
 Person
+PersonEmail
+PersonName
+PersonPhone
 PersonAddress
 PersonAdvance
 PersonAdvance2
 PersonAdvance3
 PersonB2B
-PersonEmail
-PersonName
-PersonPhone
+
+ALTER TABLE `clean_id_md5` ADD `phone` VARCHAR(256) NULL DEFAULT NULL AFTER `md5`;
+ALTER TABLE `clean_id_md5` ADD `address` TEXT NULL DEFAULT NULL AFTER `phone`;
+ALTER TABLE `clean_id_md5` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;

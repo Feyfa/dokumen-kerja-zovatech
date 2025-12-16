@@ -357,5 +357,127 @@ select created_at, clickdate, ls.* from leadspeek_reports as ls where leadspeek_
 
 
 
+select
+	id,
+	last_payment_update,
+	last_invoice_minspend,
+	exclude_minimum_spend,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_BASE64(email), '8e651522e38256f2') USING utf8mb4) as email
+from users
+where user_type = 'userdownline' and company_id = 919;
+
+select * from jobs;
+
+select * from user_logs
+where target_user_id = 1081
+order by created_at desc;
+
+-- MinimumSpendNotificationEmail
+
+
+select 
+	users.id as id,
+	users.email as email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(users.email), '8e651522e38256f2') USING utf8mb4) as user_email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(companies.email), '8e651522e38256f2') USING utf8mb4) as company_email,
+	exclude_minimum_spend,
+	company_id
+from users 
+join companies on companies.id = users.company_id
+where 
+	users.user_type = 'userdownline'
+	and users.company_parent = 60
+	and (exclude_minimum_spend is null or exclude_minimum_spend = 0)
+	and active = 'T';
+
+select 
+	users.id as id,
+	users.email as email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(users.email), '8e651522e38256f2') USING utf8mb4) as user_email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(companies.email), '8e651522e38256f2') USING utf8mb4) as company_email,
+	exclude_minimum_spend,
+	company_id
+from users 
+join companies on companies.id = users.company_id
+where 
+	users.user_type = 'userdownline'
+	and users.company_parent = 60
+	and exclude_minimum_spend = 1
+	and active = 'T';
+
+select 
+	users.id as id,
+	users.email as email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(users.email), '8e651522e38256f2') USING utf8mb4) as user_email,
+	CONVERT(AES_DECRYPT(FROM_BASE64(companies.email), '8e651522e38256f2') USING utf8mb4) as company_email,
+	exclude_minimum_spend,
+	company_id
+from users 
+join companies on companies.id = users.company_id
+where 
+	users.user_type = 'userdownline'
+	and users.company_parent = 60
+	and (exclude_minimum_spend = 1)
+	and active = 'T';
+
+select 
+    users.id as id,
+    users.email as email,
+    CONVERT(AES_DECRYPT(FROM_BASE64(users.email), '8e651522e38256f2') USING utf8mb4) as user_email,
+    CONVERT(AES_DECRYPT(FROM_BASE64(companies.email), '8e651522e38256f2') USING utf8mb4) as company_email,
+    users.exclude_minimum_spend,
+    users.company_id,
+    users.last_payment_update,
+    users.last_invoice_minspend,
+    users.created_at
+from users 
+join companies on companies.id = users.company_id
+where 
+    users.user_type = 'userdownline'
+    and users.company_parent = 60
+    and exclude_minimum_spend = 1
+    and active = 'T'
+order by users.id desc;
+
+exclude_minimum_spend is null
+
+select * from leadspeek_reports where leadspeek_api_id = 72770339;
+
+set @company_id := 164;
+
+SELECT 
+    COALESCE(SUM(lr.platform_price_lead), 0) AS totalSpend
+FROM leadspeek_reports AS lr
+JOIN users AS u 
+    ON lr.company_id = u.company_id
+WHERE 
+    (
+        lr.topup_id IS NULL
+        OR lr.topup_id = 0
+        OR lr.topup_id = ''
+    )
+    AND lr.clickdate >= '2025-11-15'
+    AND lr.clickdate < '2025-12-15'
+    AND u.company_parent = @company_id
+    AND u.company_root_id = 60
+    AND u.active = 'T'
+    AND u.user_type = 'client';
+
+
+SELECT 
+    COALESCE(SUM(tc.platform_price * tc.total_leads), 0) AS total_spend
+FROM topup_campaigns AS tc
+JOIN users AS u 
+    ON tc.user_id = u.id
+WHERE 
+    tc.created_at >= '2025-11-15'
+    AND tc.created_at < '2025-12-15'
+    AND u.company_parent = @company_id
+    AND u.company_root_id = 60
+    AND u.active = 'T'
+    AND u.user_type = 'client';
+
+
 
 
