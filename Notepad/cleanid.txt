@@ -1929,6 +1929,22 @@ PersonAdvance2
 PersonAdvance3
 PersonB2B
 
+INSERT INTO global_settings (id, company_id, setting_name, setting_value, created_at, updated_at) VALUES (NULL, NULL, 'wattdata_credentials', '{\"token\":\"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=\",\"base_url\":\"https://api.wattdata.ai/mcp\"}', NOW(), NOW());
+
+ALTER TABLE `persons` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `id`;
+ALTER TABLE `person_emails` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_addresses` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_names` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_phones` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_1` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_2` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_3` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_b2b` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+
+ALTER TABLE `clean_id_file` ADD `source_provider` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `clean_api_id`;
 ALTER TABLE `clean_id_md5` ADD `phone` VARCHAR(256) NULL DEFAULT NULL AFTER `md5`;
 ALTER TABLE `clean_id_md5` ADD `address` TEXT NULL DEFAULT NULL AFTER `phone`;
 ALTER TABLE `clean_id_md5` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;
+ALTER TABLE `clean_id_result` ADD `wattdata_id` VARCHAR(256) NULL DEFAULT NULL AFTER `bigdbm_id`;
+
+ALTER TABLE `persons` ADD `person_id_wattdata` VARCHAR(256) NULL DEFAULT NULL AFTER `source`;
