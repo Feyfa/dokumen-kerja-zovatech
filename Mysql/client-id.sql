@@ -49,7 +49,7 @@ select * from leadspeek_invoices where id = 3345;
 select * from report_analytics order by id desc;
 select * from failed_lead_records;
 
-select * from user_logs where target_user_id = 279 order by id desc;
+select * from user_logs where target_user_id = 279 order by id desc limit 10;
 --
 select * from jobs order by id desc;
 select * from failed_jobs;

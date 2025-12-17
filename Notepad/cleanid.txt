@@ -1929,6 +1929,7 @@ PersonAdvance2
 PersonAdvance3
 PersonB2B
 
+================== DATABASE YANG DIUBAH ==================
 INSERT INTO global_settings (id, company_id, setting_name, setting_value, created_at, updated_at) VALUES (NULL, NULL, 'wattdata_credentials', '{\"token\":\"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=\",\"base_url\":\"https://api.wattdata.ai/mcp\"}', NOW(), NOW());
 
 ALTER TABLE `persons` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `id`;
@@ -1948,3 +1949,45 @@ ALTER TABLE `clean_id_md5` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;
 ALTER TABLE `clean_id_result` ADD `wattdata_id` VARCHAR(256) NULL DEFAULT NULL AFTER `bigdbm_id`;
 
 ALTER TABLE `persons` ADD `person_id_wattdata` VARCHAR(256) NULL DEFAULT NULL AFTER `source`;
+
+ALTER TABLE `failed_lead_records` ADD `phone` VARCHAR(256) NULL DEFAULT NULL AFTER `email_encrypt`;
+ALTER TABLE `failed_lead_records` ADD `address` TEXT NULL DEFAULT NULL AFTER `phone`;
+ALTER TABLE `failed_lead_records` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;
+ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEFAULT NULL AFTER `clean_file_id`;
+================== DATABASE YANG DIUBAH ==================
+
+==================== TESTING CLEAN ID WATTDATA ====================
+(2025-12-17 02:07) (RABU)
+1. jadi untuk upload file clean id sekarang wajib menyertakan header ✅
+- untuk bigbdm header nya = 'email'
+- untuk wattdata header nya = 'email|phone|address|maid'
+- validasi jika tidak sesuai maka ada pesan error nya
+
+2. coba test untuk upload manual , nhaggerty76@gmail.com
+- bigdbm : 
+  * process_BIGDBM_towerdata ✅
+  * dataExistOnDB ✅
+  * dataNotExistOnDBBIG ✅
+- wattdata : 
+  * process_WattData_basic ✅
+  * dataExistOnDB_wattData ✅
+  * dataNotExistOnDB_wattData ✅
+
+3. coba test untuk upload file , nhaggerty76@gmail.com
+- bigdbm :
+  * email (progress)
+- wattdata : 
+  * email
+  * email, phone
+  * email, phone, address
+  * email, phone, address, maid
+==================== TESTING CLEAN ID WATTDATA ====================
+
+
+lquintal12304@gmail.com
+nhaggerty76@gmail.com
+
+phone
+address
+maid
+
