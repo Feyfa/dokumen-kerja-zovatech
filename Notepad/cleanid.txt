@@ -1163,6 +1163,7 @@ php artisan queue:work --queue=send_email
 
 
 cd "C:\wamp64\www\EMM-SANDBOX-API" && cls
+cd '/Users/jidan/Documents/CODE EMM/EMM-SANDBOX-API' && clear
 
 if($emailDisabled ==true || in_array('serverlogs@sitesettingsapi.com', $sentTo)) 
 $sentTo = ['fisikamodern00@gmail.com'];
@@ -1975,7 +1976,7 @@ ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEF
 
 3. coba test untuk upload file , nhaggerty76@gmail.com
 - bigdbm :
-  * email (progress)
+  * email ✅
 - wattdata : 
   * email
   * email, phone

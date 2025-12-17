@@ -1,4 +1,5 @@
-set @source := 'bigdbm', @now_timestamp = '2025-12-16 00:00:00';
+use emm_sandbox;
+set @source := 'wattdata', @now_timestamp = '2025-12-16 00:00:00';
 
 SELECT 
 	id,source,person_id_wattdata,uniqueID,
@@ -32,10 +33,11 @@ SELECT * FROM person_advance_2 where source = @source and created_at >= @now_tim
 SELECT * FROM person_advance_3 where source = @source and created_at >= @now_timestamp order by id desc;
 SELECT * FROM person_b2b where source = @source and created_at >= @now_timestamp order by id desc;
 
-select * from failed_lead_records where leadspeek_type = 'clean_id';
+select * from failed_lead_records where leadspeek_type = 'clean_id' limit 20;
 select * from failed_lead_records order by id desc limit 100;
 select * from jobs;
 select * from failed_jobs;
+select * from user_logs where created_at >= @now_timestamp order by id desc limit 20;
 
 
 
