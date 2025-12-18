@@ -1,5 +1,5 @@
 use emm_sandbox;
-set @source := 'wattdata', @now_timestamp = '2025-12-16 00:00:00';
+set @source := 'wattdata', @now_timestamp = '2025-12-17 00:00:00';
 
 SELECT 
 	id,source,person_id_wattdata,uniqueID,
@@ -24,7 +24,7 @@ SELECT
 	CONVERT(AES_DECRYPT(FROM_bASE64(fullAddress), '8e651522e38256f2') USING utf8mb4) as fullAddress,
 	firstReportedDate,lastReportedDate,updated_at,created_at
 FROM person_addresses 
-where source = @source and created_at >= @now_timestamp 
+where source = @source and created_at >= @now_timestamp
 order by id desc;
 
 SELECT * FROM person_names where source = @source and created_at >= @now_timestamp order by id desc;
@@ -40,8 +40,48 @@ select * from failed_jobs;
 select * from user_logs where created_at >= @now_timestamp order by id desc limit 20;
 
 
+SELECT 
+	id,person_id,source,
+	CONVERT(AES_DECRYPT(FROM_bASE64(street), '8e651522e38256f2') USING utf8mb4) as street,
+	CONVERT(AES_DECRYPT(FROM_bASE64(unit), '8e651522e38256f2') USING utf8mb4) as unit,
+	CONVERT(AES_DECRYPT(FROM_bASE64(city), '8e651522e38256f2') USING utf8mb4) as city,
+	CONVERT(AES_DECRYPT(FROM_bASE64(state), '8e651522e38256f2') USING utf8mb4) as state,
+	CONVERT(AES_DECRYPT(FROM_bASE64(zip), '8e651522e38256f2') USING utf8mb4) as zip,
+	CONVERT(AES_DECRYPT(FROM_bASE64(fullAddress), '8e651522e38256f2') USING utf8mb4) as fullAddress,
+	firstReportedDate,lastReportedDate,updated_at,created_at
+FROM person_addresses 
+where id = 14752
+order by id desc;
 
-
+select * from person_addresses where person_id = 7981;
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, 
+	person_emails.* 
+from person_emails 
+where 
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in (
+		"leonardwest@hotmail.com"
+-- 		"wizardofozfan@gmail.com",
+-- 		"litlelori1968@gmail.com",
+-- 		"walterzaldivar0610@yahoo.com",
+-- 		"stanrmatthews@yahoo.com",
+-- 		"garymacelwee@gmail.com",
+-- 		"a172c778@gmail.com",
+-- 		"miyatayy@gmail.com",
+-- 		"judyhuber525@yahoo.com",
+-- 		"corishearer.410@hotmail.com",
+-- 		"lakechelanvet@yahoo.com",
+-- 		"jsmith1038@aol.com",
+-- 		"huangj@tampabay.rr.com",
+-- 		"saradakodavati@gmail.com",
+-- 		"ariepugh518@gmail.com",
+-- 		"mpauley@montini.org",
+-- 		"monicmack@yahoo.com",
+-- 		"dan@dumperdan.com",
+-- 		"jacqualine236@gmail.com",
+-- 		"nitkhanna1@gmail.com"
+	) and source = 'bigdbm'
+order by id desc;
 
 
 

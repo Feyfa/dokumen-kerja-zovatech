@@ -286,3 +286,49 @@ LIMIT 1;
         }
     }
 }
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "implement watt in clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+FRONT
+* front\public\samplefile\cleanid-watt-sample.csv
+* front\public\samplefile\cleanid-bigdbm-sample.csv
+* front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+* front\src\store\store.js
+
+DATA
+* data\app\Exports\CleanIDResultExport.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Models\FailedLeadRecord.php
+* data\app\Models\CleanIDFile.php
+
+px.min.js
+DashboardLayout
+global.js
+
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "implement watt in clean id"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+* app\Http\Controllers\UploadController.php
+* app\Jobs\CleanIDExportChunkJob.php
+* app\Jobs\CleanIDExportInsertJob.php
+* app\Jobs\CleanIDJob.php
+* app\Jobs\CleanIDMd5StreamJob.php
+* app\Jobs\RetryMD5CleanIDJob.php
+* app\Services\CleanID.php
+* app\Services\WattData.php
+* app\Models\CleanIDFile.php
+* app\Models\FailedLeadRecord.php
+* app\Models\CleanIDResult.php
+* app\Models\CleanIDMd5.php
+* app\Models\Person.php
+* app\Models\PersonAddress.php
+* app\Models\PersonB2B.php
+* app\Models\PersonEmail.php
+* app\Models\PersonName.php
+* app\Models\PersonPhone.php
