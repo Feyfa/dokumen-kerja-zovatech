@@ -1153,14 +1153,12 @@ Pixel lead report
 cef25be7b7d76ccf990dbe19e2254205
 d9c785ec9dc2500f1c15015d97bdf661
 
-php artisan queue:work redis --queue=clean_id_md5_stream
-php artisan queue:work redis --queue=clean_id
-php artisan queue:work redis --queue=retry_clean_id
-php artisan queue:work redis --queue=clean_id_export_chunk
-php artisan queue:work redis --queue=clean_id_export_insert
-
-php artisan queue:work --queue=send_email
-
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=clean_id_md5_stream
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=clean_id
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=retry_clean_id
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=clean_id_export_chunk
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=clean_id_export_insert
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work --queue=send_email
 
 cd "C:\wamp64\www\EMM-SANDBOX-API" && cls
 cd '/Users/jidan/Documents/CODE EMM/EMM-SANDBOX-API' && clear
@@ -1172,7 +1170,11 @@ tenda12345678
 
 cleanid_done_notification.blade.php
 
-
+"98473881",
+"13531167",
+"213773391",
+"61947156",
+"12921488"
 ===================================
 title -> Invoice Clean ID for Agency Name - Testing 1 (18-11-2025)
 

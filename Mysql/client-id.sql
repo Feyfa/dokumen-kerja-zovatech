@@ -26,7 +26,6 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 --
 
 
-
 select * from clean_id_errors; -- untuk menampung error
 select * from clean_id_export; -- untuk download
 select * from clean_id_file; -- untuk container md5 atau sekali process api
@@ -211,6 +210,10 @@ select * from jobs;
 leonardwest@hotmail.com
 
 
+52
+251
+
+austin.samber@gmail.com
 
 
 

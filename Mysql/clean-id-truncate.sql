@@ -13,11 +13,11 @@ TRUNCATE TABLE topup_cleanids;
 
 delete from leadspeek_invoices where invoice_type = 'clean_id' and company_id = @company_id_jidanach order by id asc;
 select * from failed_jobs;
+select * from jobs;
 
 
 
-
-set @person_id_delete := '4693,4691,4687,4686,4683,4682,4679,4678,4674,4673,4671,4670,4669,4667,4664,4666,4663,4662,4661,4660';
+set @person_id_delete := '8004';
 delete from persons where FIND_IN_SET(id, @person_id_delete);
 delete from person_emails where FIND_IN_SET(person_id, @person_id_delete);
 delete from person_phones where FIND_IN_SET(person_id, @person_id_delete);
@@ -56,6 +56,6 @@ where
 		"dan@dumperdan.com",
 		"jacqualine236@gmail.com",
 		"nitkhanna1@gmail.com"
-	) and source = 'bigdbm'
+	) and source = 'wattdata'
 order by id desc;
 
