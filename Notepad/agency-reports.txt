@@ -1,0 +1,109 @@
+http://datalocal.emmsandbox.com/configuration/agencies-report/download/all?AgencyStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22failed%22%3Afalse%2C%22inactive%22%3Afalse%7D&CampaignStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22inactive%22%3Afalse%7D&SelectedDate=2025-12-22&OpenApiStatus=%7B%22show%22%3Afalse%2C%22apiMode%22%3Afalse%2C%22isGenerateApi%22%3Afalse%7D&idsys=22
+
+tanpa indexing : 1.7 menit = 102 detik
+
+dengan indexing
+1. users — QUERY UTAMA AGENCIES
+- query laravel :
+$agencies = User::where('users.user_type', 'userdownline')
+    ->where('users.active', 'T')
+    ->whereIn('users.company_parent', $root_company_ids);
+- SQL yang dijalankan MySQL :
+    SELECT *
+    FROM users
+    WHERE user_type = 'userdownline'
+    AND active = 'T'
+      AND company_parent IN (1,2,3,4);
+- INDEX YANG DIPAKAI :
+    CREATE INDEX idx_users_parent_type_active
+    ON users (company_parent, user_type, active);
+
+2. companies — FILTER TANGGAL
+- query laravel : 
+    $agencies->whereDate('companies.created_at', '<=', $selected_date);
+- query mysql :
+    SELECT *
+    FROM companies
+    WHERE created_at <= '2025-12-22';
+- INDEX :
+    CREATE INDEX idx_companies_created_at
+    ON companies (created_at);
+
+3. leadspeek_users — ACTIVE / STOPPED CAMPAIGN (PALING PENTING)
+- Laravel :
+    LeadspeekUser::where('company_id', $companyId)
+    ->where('archived', 'F')
+    ->where('active', 'T')
+    ->where('disabled', 'F')
+    ->where('active_user', 'T')
+    ->count();
+- mysql :
+    SELECT COUNT(*)
+    FROM leadspeek_users
+    WHERE company_id = 123
+    AND archived = 'F'
+    AND active = 'T'
+    AND disabled = 'F'
+    AND active_user = 'T';
+- INDEX : 
+    CREATE INDEX idx_lp_company_status
+    ON leadspeek_users (
+        company_id,
+        archived,
+        active,
+        disabled,
+        active_user
+    );
+
+4. leadspeek_reports — CLICKDATE + API ID (SUPER MAHAL)
+- laravel :
+    DB::table('leadspeek_reports')
+    ->where('leadspeek_api_id', $apiId)
+    ->whereDate('clickdate', '>=', $weeks_ago)
+    ->whereDate('clickdate', '<=', $selected_date)
+    ->count();
+- sql :
+    SELECT COUNT(*)
+    FROM leadspeek_reports
+    WHERE leadspeek_api_id = 'abc123'
+    AND clickdate BETWEEN '2025-12-15' AND '2025-12-22';
+- INDEX : 
+    CREATE INDEX idx_reports_api_clickdate
+    ON leadspeek_reports (leadspeek_api_id, clickdate);
+
+5. topup_campaigns — WEEKLY REVENUE
+- laravel :
+    DB::table('topup_campaigns')
+    ->where('company_id', $companyId)
+    ->whereBetween('created_at', [$weeks_ago, $selected_date])
+    ->sum(DB::raw('platform_price * total_leads'));
+- sql : 
+    SELECT SUM(platform_price * total_leads)
+    FROM topup_campaigns
+    WHERE company_id = 123
+    AND created_at BETWEEN '2025-12-15' AND '2025-12-22';
+- INDEX : 
+    CREATE INDEX idx_topup_company_created
+    ON topup_campaigns (company_id, created_at);
+
+6. company_sales — ACCOUNT EXECUTIVE / SALES
+- Laravel : 
+    DB::table('company_sales')
+    ->where('company_id', $companyId)
+    ->where('sales_title', 'Account Executive')
+    ->first();
+- sql : 
+    SELECT *
+    FROM company_sales
+    WHERE company_id = 123
+    AND sales_title = 'Account Executive'
+    LIMIT 1;
+- INDEX : 
+    CREATE INDEX idx_company_sales_company_title
+    ON company_sales (company_id, sales_title);
+
+setelah indexing : 33 detik
+
+
+400 row = 10 menit = 10 * 60 = 600
+236 row = x

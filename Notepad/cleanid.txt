@@ -2051,3 +2051,19 @@ ALTER TABLE `failed_lead_records` ADD `address` TEXT NULL DEFAULT NULL AFTER `ph
 ALTER TABLE `failed_lead_records` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;✅
 ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEFAULT NULL AFTER `clean_file_id`;✅
 
+
+
+
+======================== YANG HARUS DIKERJAKAN ========================
+1. untuk input email, harus lowercase ✅
+2. untuk input email, hapus tanda + sampai @ ✅
+3. untuk input md5, yang sekarang ini kan hanya md5 biasa 32 karakter, tambahkan logic supaya bisa md5 sha256 (progress)
+======================== YANG HARUS DIKERJAKAN ========================
+
+
+[
+  ['id_type' => 'email', 'hash_type' => 'md5', 'value' => '1231xxxxx'],
+  ['id_type' => 'phone', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
+  ['id_type' => 'address', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
+  ['id_type' => 'maid', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
+]

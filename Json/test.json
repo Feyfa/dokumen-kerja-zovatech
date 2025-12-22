@@ -2,3 +2,8 @@
     "token": "bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=",
     "base_url": "https://api.wattdata.ai/mcp"
 }
+
+
+https://data.emmsandbox.com/configuration/agencies-report/download/all?AgencyStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22failed%22%3Afalse%2C%22inactive%22%3Afalse%7D&CampaignStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22inactive%22%3Afalse%7D&SelectedDate=2025-12-22&OpenApiStatus=%7B%22show%22%3Afalse%2C%22apiMode%22%3Afalse%2C%22isGenerateApi%22%3Afalse%7D&idsys=22
+
+https://data.emmsandbox.com/api/configuration/agencies-report/all/created_at/descending?Page=1&CardStatus=%7B%22show%22:false,%22active%22:false,%22failed%22:false,%22inactive%22:false%7D&CampaignStatus=%7B%22show%22:false,%22active%22:false,%22inactive%22:false%7D&SelectedDate=2025-12-21&OpenApiStatus=%7B%22show%22:false,%22apiMode%22:false,%22isGenerateApi%22:false%7D
