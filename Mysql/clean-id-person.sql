@@ -84,6 +84,11 @@ where
 order by id desc;
 
 
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) as token_dec,
+	sso_access_tokens.*
+from sso_access_tokens
+order by created_at desc;
 
 
 

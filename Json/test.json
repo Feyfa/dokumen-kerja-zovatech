@@ -1,9 +1,257 @@
+// resolve_identities
 {
-    "token": "bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=",
-    "base_url": "https://api.wattdata.ai/mcp"
+    "identities": [
+        {
+            "person_id": 213773391,
+            "matches": [
+                {
+                    "criterion_type": "phone_plaintext",
+                    "criterion_value": "+15867732982",
+                    "quality_score": 90
+                }
+            ],
+            "overall_quality_score": 90,
+            "identifiers": {}
+        },
+        {
+            "person_id": 98473881,
+            "matches": [
+                {
+                    "criterion_type": "phone_plaintext",
+                    "criterion_value": "+15867732982",
+                    "quality_score": 90
+                }
+            ],
+            "overall_quality_score": 90,
+            "identifiers": {
+                "email": [
+                    "emilyh4575@hotmail.com",
+                    "jharte@chartermi.net"
+                ]
+            }
+        },
+        {
+            "person_id": 61947156,
+            "matches": [
+                {
+                    "criterion_type": "phone_plaintext",
+                    "criterion_value": "+15867732982",
+                    "quality_score": 90
+                }
+            ],
+            "overall_quality_score": 90,
+            "identifiers": {}
+        },
+        {
+            "person_id": 12921488,
+            "matches": [
+                {
+                    "criterion_type": "phone_plaintext",
+                    "criterion_value": "+15867732982",
+                    "quality_score": 100
+                }
+            ],
+            "overall_quality_score": 100,
+            "identifiers": {
+                "email": [
+                    "ptrhrt57@gmail.com"
+                ]
+            }
+        },
+        {
+            "person_id": 13531167,
+            "matches": [
+                {
+                    "criterion_type": "phone_plaintext",
+                    "criterion_value": "+15867732982",
+                    "quality_score": 90
+                }
+            ],
+            "overall_quality_score": 90,
+            "identifiers": {}
+        }
+    ],
+    "stats": {
+        "requested": 1,
+        "resolved": 5,
+        "rate": 5
+    },
+    "workflow_id": "706fc5c5-054c-4b46-acd8-a864b295025d",
+    "tool_trace_id": "bef5b15612e3e0f30c06a540baf6cf48"
+}
+// get person
+{
+    "profiles": [
+        {
+            "person_id": "12921488",
+            "domains": {
+                "address": [
+                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
+                ],
+                "phone": [
+                    "+15867732982",
+                    "+19892246655"
+                ],
+                "name": [
+                    "Diane Harte"
+                ],
+                "email": [
+                    "ptrhrt57@gmail.com"
+                ]
+            }
+        },
+        {
+            "person_id": "13531167",
+            "domains": {
+                "address": [
+                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
+                ],
+                "phone": [
+                    "+19892920155",
+                    "+19892246655",
+                    "+15867732982"
+                ],
+                "name": [
+                    "Emily Harte"
+                ]
+            }
+        },
+        {
+            "person_id": "213773391",
+            "domains": {
+                "name": [
+                    "Daine Harte"
+                ],
+                "phone": [
+                    "+15867732982",
+                    "+19892246655"
+                ],
+                "address": [
+                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
+                ]
+            }
+        },
+        {
+            "person_id": "98473881",
+            "domains": {
+                "email": [
+                    "emilyh4575@hotmail.com",
+                    "jharte@chartermi.net"
+                ],
+                "address": [
+                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
+                ],
+                "phone": [
+                    "+15867732982",
+                    "+19892246655",
+                    "+19896664407"
+                ],
+                "name": [
+                    "Jeryl Harte"
+                ]
+            }
+        },
+        {
+            "person_id": "61947156",
+            "domains": {
+                "phone": [
+                    "+15867732982",
+                    "+19892921489",
+                    "+19892246655"
+                ],
+                "address": [
+                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
+                ],
+                "name": [
+                    "Allison Harte"
+                ]
+            }
+        }
+    ],
+    "workflow_id": "2768d057-ce66-4f7d-a887-040a9f4c94e8",
+    "tool_trace_id": "742301db7f37a8e1ec846bcf7fb01dd8"
 }
 
+// list bobot = ['email' => 5, 'phone' => 2, 'address' => 2, 'name' => 1];
 
-https://data.emmsandbox.com/configuration/agencies-report/download/all?AgencyStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22failed%22%3Afalse%2C%22inactive%22%3Afalse%7D&CampaignStatus=%7B%22show%22%3Afalse%2C%22active%22%3Afalse%2C%22inactive%22%3Afalse%7D&SelectedDate=2025-12-22&OpenApiStatus=%7B%22show%22%3Afalse%2C%22apiMode%22%3Afalse%2C%22isGenerateApi%22%3Afalse%7D&idsys=22
+// 5 
+/*
+    email = (5) * 1 = 5
+    phone = (2) * 2 = 4
+    address = (2) * 1 = 2
+    name = (1) * 1 = 1
+    total = 5 + 4 + 2 + 1 = 12
+*/
+{
+    "email": [
+        "ptrhrt57@gmail.com"
+    ],
+    "phone": [
+        "+15867732982",
+        "+19892246655"
+    ],
+    "address": [
+        "1033 Bills Ln, Saint Johns, MI 48879-1183"
+    ],
+    "name": [
+        "Diane Harte"
+    ],
+}
 
-https://data.emmsandbox.com/api/configuration/agencies-report/all/created_at/descending?Page=1&CardStatus=%7B%22show%22:false,%22active%22:false,%22failed%22:false,%22inactive%22:false%7D&CampaignStatus=%7B%22show%22:false,%22active%22:false,%22inactive%22:false%7D&SelectedDate=2025-12-21&OpenApiStatus=%7B%22show%22:false,%22apiMode%22:false,%22isGenerateApi%22:false%7D
+// 7
+/*
+    email = (5) * 2 = 10
+    phone = (2) * 3 = 6
+    address = (2) * 1 = 2
+    name = (1) * 1 = 1
+    total = 10 + 6 + 2 + 1 = 19
+*/
+{
+    "email": [
+        "emilyh4575@hotmail.com",
+        "jharte@chartermi.net"
+    ],
+    "phone": [
+        "+15867732982",
+        "+19892246655",
+        "+19896664407"
+    ],
+    "address": [
+        "1033 Bills Ln, Saint Johns, MI 48879-1183"
+    ],
+    "name": [
+        "Jeryl Harte"
+    ],
+}
+
+/*
+CARA SAYA PEMBAGIAN KUE
+12 + 19 = 31
+(12/31) * 100 = 38.71%
+(19/31) * 100 = 61.29%
+*/
+
+/*
+CARA CHATGPT GAP
+A = 12
+B = 19
+(19 - 12) / 19 = 36.84%
+*/
+
+
+
+
+
+/*
+CARA SAYA PEMBAGIAN KUE
+19 + 18 = 37
+(19/37) * 100 = 51.35%
+(18/37) * 100 = 48.65%
+*/
+
+/*
+CARA CHATGPT GAP
+A = 19
+B = 18
+(18 - 19) / 19 = 5.26%
+*/

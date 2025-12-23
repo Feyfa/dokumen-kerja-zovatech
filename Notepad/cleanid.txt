@@ -2057,8 +2057,31 @@ ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEF
 ======================== YANG HARUS DIKERJAKAN ========================
 1. untuk input email, harus lowercase ✅
 2. untuk input email, hapus tanda + sampai @ ✅
-3. untuk input md5, yang sekarang ini kan hanya md5 biasa 32 karakter, tambahkan logic supaya bisa md5 sha256 (progress)
+3. untuk input email, sebelum tanda @, hapus tanda titik nya ✅
+4. untuk input md5, yang sekarang ini kan hanya md5 biasa 32 karakter, tambahkan logic supaya bisa md5 sha256 ✅
+5. tambahkan Full Name Identifier, di sample user upload (progress)
+
+6. di result csv tambahkan kolom 'Multiple Profile Found'
+CARA PENGAMBILAN DATA YANG BANYAK
+1. STEP 1
+lakukan pengecekan Full Name Identifier sama dengan Name yang di kasih watt, jika sama maka serve itu
+2. STEP 2
+lakukan pengecekan terhadap quality score, ambil quality score yang paling bagus
+3. STEP 3
+jika terdapat lebih dari 1 quality_score yang sama, misal 2 (100%) dari 3, maka ambil 2 data tersebut
+lakukan pengecekan ini
+  - jika hanya 2 data, lakukan pengecekan bobot 
+    - ambil bobotnya yang paling tinggi, jika bobot yang paling tinggi itu mencapat minimum 60%, maka kolom 'Multiple Profile Found' kosong, jika bobot yang paling tinggi itu kuran dari 60%, mmaka kolom 'Multiple Profile Found' itu jadi 'yes'
+  - jika lebih dari 2 data, lakukan pengecekan bobot
+    - nah yang lebih dari 2 itu gampang, ambil bobot yang paling tinggi, nanti kolom 'Multiple Profile Found' diisi dengan 'yes'
 ======================== YANG HARUS DIKERJAKAN ========================
+
+======================== DATABASE YANG DIRUBAH ========================
+ALTER TABLE `clean_id_md5` ADD `multiple_profile_found` TINYINT UNSIGNED NULL DEFAULT NULL AFTER `batch_id`;
+
+ALTER TABLE `clean_id_md5` ADD `full_name` VARCHAR(256) NULL DEFAULT NULL AFTER `maid`;
+======================== DATABASE YANG DIRUBAH ========================
+
 
 
 [
@@ -2067,3 +2090,183 @@ ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEF
   ['id_type' => 'address', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
   ['id_type' => 'maid', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
 ]
+
+
+
+
+{"default":false,"host":"smtp.gmail.com","port":"465","username":"sandboxqaemail@gmail.com","password":"avzu kwbs yfbb cjtk","security":"ssl"}
+
+
+skenario 
+1. agency belum punya settingan, send email ke client, reply to nya admin agency ✅
+2. agency sudah punya settingan, send email ke client, reply to nya admin agency ✅
+3. agency error saat pertama kali ngirim,  kan pakai default, nah saat send email ke client, replyto nya punya admin agency ✅
+4. root mau send email ke agency, atau ke serverlogs. kalo kejadian kaya gini, ngga usah di apa apakan pakai cara kaya sebelumnya (progress)
+
+
+CARA MELAKUKAN PERBANDINGAN 2 DATA WATT
+
+1. STEP 1
+tentukan score pada setiap parameter:
+- email   = 5
+- phone   = 2
+- address = 2
+- name    = 1
+
+2. STEP 2
+kalkulasi 2 data bedasarkan GAP
+
+===== CONTOH 1 — GAP < 40% (multiple_profile_found = 1) =====
+- CONTOH DATA : 
+[
+  {
+    "person_id": "0000000001",
+    "domains": {
+      "email": ["a@email.com"],
+      "phone": ["111", "222"],
+      "address": ["Addr A"],
+      "name": ["Alice"]
+    }
+  },
+  {
+    "person_id": "0000000002",
+    "domains": {
+      "email": ["b1@email.com", "b2@email.com"],
+      "phone": ["111", "222"],
+      "address": ["Addr B"],
+      "name": ["Bob"]
+    }
+  }
+]
+
+
+
+- HITUNG SCORE :
+person_id = 0000000001
+email     = 1 × 5 = 5
+phone     = 2 × 2 = 4
+address   = 1 × 2 = 2
+name      = 1 × 1 = 1
+TOTAL     = 12
+
+person_id = 0000000002
+email     = 2 × 5 = 10
+phone     = 2 × 2 = 4
+address   = 1 × 2 = 2
+name      = 1 × 1 = 1
+TOTAL     = 17
+
+
+
+- HITUNG GAP :
+gap = (17 - 12) / 17 ≈ 29.4%
+
+
+
+- KEPUTUSAN :
+29.4% < 40%
+→ multiple_profile_found = 1
+
+
+- MAKNA
+person 0000000002 memang lebih kuat, tapi belum cukup jauh → masih ambigu.
+===== CONTOH 1 — GAP < 40% (multiple_profile_found = 1) =====
+
+
+
+
+
+===== CONTOH 2 — GAP ≥ 40% (multiple_profile_found = 0) =====
+- CONTOH DATA : 
+[
+  {
+    "person_id": "0000000003",
+    "domains": {
+      "email": ["c@email.com"],
+      "phone": ["111", "222"],
+      "address": ["Addr C"],
+      "name": ["Charlie"]
+    }
+  },
+  {
+    "person_id": "0000000004",
+    "domains": {
+      "email": ["d1@email.com", "d2@email.com", "d3@email.com"],
+      "phone": ["111", "222", "333"],
+      "address": ["Addr D"],
+      "name": ["David"]
+    }
+  }
+]
+
+
+
+- HITUNG SCORE :
+person_id = 0000000003
+email     = 1 × 5 = 5
+phone     = 2 × 2 = 4
+address   = 1 × 2 = 2
+name      = 1 × 1 = 1
+TOTAL     = 12
+
+person_id = 0000000004
+email     = 3 × 5 = 15
+phone     = 3 × 2 = 6
+address   = 1 × 2 = 2
+name      = 1 × 1 = 1
+TOTAL     = 24
+
+
+
+- HITUNG GAP :
+gap = (24 - 12) / 24 = 50%
+
+
+
+- KEPUTUSAN :
+50% ≥ 40%
+→ multiple_profile_found = 0
+
+
+
+- MAKNA
+person_id 0000000004 jelas dominan → aman ambil satu profile.
+===== CONTOH 2 — GAP ≥ 40% (multiple_profile_found = 0) =====
+
+
+
+
+Alur Process:
+multiple_profile_found = (0 = kosong) dan (1 = yes)
+
+1. STEP 1: ✅
+Lakukan pengecekan Full Name Identifier sama dengan Name yang di kasih watt, 
+jika sama maka serve itu (multiple_profile_found = 0)
+
+2. STEP 2: ✅
+Lakukan pengecekan terhadap quality score.
+ambil quality score yang paling bagus. 
+Quality score = overall_quality_score dari resolve_identities.
+Jika hanya 1 profile dengan score tertinggi.
+serve itu (multiple_profile_found = 0).
+
+STEP 3: 
+Jika terdapat lebih dari 1 quality_score yang sama:
+  - Jika hanya 2 data: ✅
+    hitung bobot dari ke 2 data tersebut.
+    lalu cari bobot yang paling besar, example data1 > data2.
+    serve data yang bobotnya paling besar.
+    hitung gap pakai rumus ini = ((data1 - data2) / data1) * 100 = value %.
+    di column multiple_profile_found, jika gap < 60% maka 0, jika gap >= 60% maka 1.
+    maknanya jika gap < 60%, artinya 2 data ini ngga beda" banget, makanya bisa dibilang data ini multiple 
+    maknanya jika gap >= 60%, artinya 2 data ini lumayan beda jauh, makanya bisa dibilang data ini tidak multiple
+  - Jika lebih dari 2 data: ✅
+    hitung bobot dari ke 2 data tersebut.
+    lalu cari bobot yang paling besar, example data1 > data2.
+    server data yang bobotnya paling besar
+    tidak usah buat gap, multiple_profile_found menjadi 1, karena bisa dibilang data ini multiple
+
+1. input email ✅
+2. input md5 ✅
+3. input sha1 (progress)
+3. input sha256
