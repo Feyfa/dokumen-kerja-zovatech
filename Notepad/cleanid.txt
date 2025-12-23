@@ -2059,9 +2059,9 @@ ALTER TABLE `failed_lead_records` ADD `person_id_wattdata` VARCHAR(256) NULL DEF
 2. untuk input email, hapus tanda + sampai @ ✅
 3. untuk input email, sebelum tanda @, hapus tanda titik nya ✅
 4. untuk input md5, yang sekarang ini kan hanya md5 biasa 32 karakter, tambahkan logic supaya bisa md5 sha256 ✅
-5. tambahkan Full Name Identifier, di sample user upload (progress)
+5. tambahkan Full Name Identifier, di sample user upload ✅
 
-6. di result csv tambahkan kolom 'Multiple Profile Found'
+6. di result csv tambahkan kolom 'Multiple Profile Found' ✅
 CARA PENGAMBILAN DATA YANG BANYAK
 1. STEP 1
 lakukan pengecekan Full Name Identifier sama dengan Name yang di kasih watt, jika sama maka serve itu
@@ -2074,12 +2074,20 @@ lakukan pengecekan ini
     - ambil bobotnya yang paling tinggi, jika bobot yang paling tinggi itu mencapat minimum 60%, maka kolom 'Multiple Profile Found' kosong, jika bobot yang paling tinggi itu kuran dari 60%, mmaka kolom 'Multiple Profile Found' itu jadi 'yes'
   - jika lebih dari 2 data, lakukan pengecekan bobot
     - nah yang lebih dari 2 itu gampang, ambil bobot yang paling tinggi, nanti kolom 'Multiple Profile Found' diisi dengan 'yes'
+
+7. di clean_id_errors tambahkan field phone, addres, maid
 ======================== YANG HARUS DIKERJAKAN ========================
 
 ======================== DATABASE YANG DIRUBAH ========================
 ALTER TABLE `clean_id_md5` ADD `multiple_profile_found` TINYINT UNSIGNED NULL DEFAULT NULL AFTER `batch_id`;
 
 ALTER TABLE `clean_id_md5` ADD `full_name` VARCHAR(256) NULL DEFAULT NULL AFTER `maid`;
+
+ALTER TABLE `clean_id_errors` ADD `phone` VARCHAR(256) NULL DEFAULT NULL AFTER `md5`;
+
+ALTER TABLE `clean_id_errors` ADD `address` TEXT NULL DEFAULT NULL AFTER `phone`;
+
+ALTER TABLE `clean_id_errors` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;
 ======================== DATABASE YANG DIRUBAH ========================
 
 
@@ -2268,5 +2276,5 @@ Jika terdapat lebih dari 1 quality_score yang sama:
 
 1. input email ✅
 2. input md5 ✅
-3. input sha1 (progress)
-3. input sha256
+3. input sha1 ✅
+3. input sha256 ✅

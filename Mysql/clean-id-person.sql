@@ -117,3 +117,9 @@ select CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4
 	"dd2124afa8ab78aae179b61ae8604bb5"
 ) order by id desc;
 select * from person_emails where id = 10172 and person_id = 7927;
+
+
+select 
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, 
+	person_emails.* 
+from person_emails order by id asc;
