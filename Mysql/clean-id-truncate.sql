@@ -17,7 +17,7 @@ select * from jobs;
 
 
 
-set @person_id_delete := '8004';
+set @person_id_delete := '8010,8009';
 delete from persons where FIND_IN_SET(id, @person_id_delete);
 delete from person_emails where FIND_IN_SET(person_id, @person_id_delete);
 delete from person_phones where FIND_IN_SET(person_id, @person_id_delete);
@@ -36,26 +36,26 @@ select
 from person_emails 
 where 
 	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in (
-		"leonardwest@hotmail.com",
-		"wizardofozfan@gmail.com",
-		"litlelori1968@gmail.com",
-		"walterzaldivar0610@yahoo.com",
-		"stanrmatthews@yahoo.com",
-		"garymacelwee@gmail.com",
-		"a172c778@gmail.com",
-		"miyatayy@gmail.com",
-		"judyhuber525@yahoo.com",
-		"corishearer.410@hotmail.com",
-		"lakechelanvet@yahoo.com",
-		"jsmith1038@aol.com",
-		"huangj@tampabay.rr.com",
-		"saradakodavati@gmail.com",
-		"ariepugh518@gmail.com",
-		"mpauley@montini.org",
-		"monicmack@yahoo.com",
-		"dan@dumperdan.com",
-		"jacqualine236@gmail.com",
-		"nitkhanna1@gmail.com"
+		"wbrauner1961@gmail.com"
+-- 		,"wizardofozfan@gmail.com"
+-- 		,"litlelori1968@gmail.com"
+-- 		,"walterzaldivar0610@yahoo.com"
+-- 		,"stanrmatthews@yahoo.com"
+-- 		,"garymacelwee@gmail.com"
+-- 		,"a172c778@gmail.com"
+-- 		,"miyatayy@gmail.com"
+-- 		,"judyhuber525@yahoo.com"
+-- 		,"corishearer.410@hotmail.com"
+-- 		,"lakechelanvet@yahoo.com"
+-- 		,"jsmith1038@aol.com"
+-- 		,"huangj@tampabay.rr.com"
+-- 		,"saradakodavati@gmail.com"
+-- 		,"ariepugh518@gmail.com"
+-- 		,"mpauley@montini.org"
+-- 		,"monicmack@yahoo.com"
+-- 		,"dan@dumperdan.com"
+-- 		,"jacqualine236@gmail.com"
+-- 		,"nitkhanna1@gmail.com"
 	) and source = 'wattdata'
 order by id desc;
 

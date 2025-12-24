@@ -2091,7 +2091,6 @@ ALTER TABLE `clean_id_errors` ADD `maid` TEXT NULL DEFAULT NULL AFTER `address`;
 ======================== DATABASE YANG DIRUBAH ========================
 
 
-
 [
   ['id_type' => 'email', 'hash_type' => 'md5', 'value' => '1231xxxxx'],
   ['id_type' => 'phone', 'hash_type' => 'plaintext', 'value' => '1231xxxxx'],
@@ -2111,7 +2110,7 @@ skenario
 3. agency error saat pertama kali ngirim,  kan pakai default, nah saat send email ke client, replyto nya punya admin agency ✅
 4. root mau send email ke agency, atau ke serverlogs. kalo kejadian kaya gini, ngga usah di apa apakan pakai cara kaya sebelumnya (progress)
 
-
+Lakukan pengecekan berdasarkan overall_quality_score
 CARA MELAKUKAN PERBANDINGAN 2 DATA WATT
 
 1. STEP 1
@@ -2278,3 +2277,151 @@ Jika terdapat lebih dari 1 quality_score yang sama:
 2. input md5 ✅
 3. input sha1 ✅
 3. input sha256 ✅
+
+=== SKENARIO DI UI ===
+1. MANUAL
+- bigdbm = ✅
+- wattdata = ✅
+2. UPLOAD
+- bigdbm = ✅
+- wattdata = ✅
+=== SKENARIO DI UI ===
+
+=== SKENARIO DI OPEN API ===
+1. MANUAL
+- bigdbm = ✅
+- wattdata = ✅
+2. UPLOAD
+- bigdbm = (progress)
+- wattdata = 
+=== SKENARIO DI OPEN API ===
+
+
+|-------------------------------------
+| Alur Process Penentuan Top Profile
+|-------------------------------------
+|
+| Keterangan:
+| multiple_profile_found:
+|   0 = tidak multiple (cukup yakin satu profile)
+|   1 = multiple (masih ambigu)
+|
+|-------------------------------------
+| STEP 1: Full Name Exact Match
+|-------------------------------------
+| Lakukan pengecekan apakah Full Name Identifier
+| sama persis dengan field 'name' yang diberikan oleh Watt.
+|
+| Jika ditemukan kecocokan:
+| - langsung gunakan profile tersebut
+| - set multiple_profile_found = 0
+|
+|-------------------------------------
+| STEP 2: Quality Score (overall_quality_score)
+|-------------------------------------
+| Lakukan pengecekan berdasarkan overall_quality_score
+| yang berasal dari resolve_identities.
+|
+| Ambil profile dengan quality score tertinggi.
+|
+| Jika hanya terdapat SATU profile dengan score tertinggi:
+| - gunakan profile tersebut
+| - set multiple_profile_found = 0
+|
+|-------------------------------------
+| STEP 3: Tie Quality Score (Score Sama)
+|-------------------------------------
+| Jika terdapat lebih dari satu profile dengan quality score yang sama:
+|
+| - Jika hanya terdapat 2 profile:
+|   1. Hitung bobot (weighted score) masing-masing profile
+|   2. Ambil profile dengan bobot terbesar sebagai topProfile
+|   3. Hitung GAP dalam persentase menggunakan rumus:
+|        gap = ((score_tertinggi - score_kedua) / score_tertinggi) * 100
+|
+|   4. Penentuan multiple_profile_found:
+|        - Jika gap < 60%  → multiple_profile_found = 1
+|          (kedua profile masih cukup dekat / ambigu)
+|
+|        - Jika gap ≥ 60% → multiple_profile_found = 0
+|          (profile teratas cukup dominan)
+|
+| - Jika terdapat lebih dari 2 profile:
+|   1. Hitung bobot seluruh profile
+|   2. Ambil profile dengan bobot terbesar sebagai topProfile
+|   3. Set multiple_profile_found = 1
+|      (karena lebih dari dua kandidat dianggap ambigu)
+|
+|-------------------------------------
+| Catatan:
+| - Sistem ini bertujuan menentukan DOMINANSI data,
+|   bukan probabilitas atau pembagian persentase total.
+| - Pendekatan GAP digunakan untuk mengukur selisih kekuatan
+|   antar profile, bukan kepastian absolut.
+|
+
+
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway, 'is_whitelabeling' => $is_whitelabeling,'paymenttermlist' => $paymentTerms,'rootPaymentTermsNewAgencies' => $rootPaymentTermsNewAgencies, 'colors_parent' => $getColorsParentCompany,'rootsidemenu' => $rootsidebarleadmenu,'sidemenu' => $customsidebarleadmenu,'agencyDefaultModules' => $agencyDefaultModules, 'agencyFilteredModules' => $agencyFilteredModules, 'agency_side_menu' => $agency_side_menu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'agency_onboarding_price' => $agency_onboarding_price,'agency_enable_coupon' => $agency_enable_coupon, 'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_master_company' => $is_master_company, 'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway, 'is_whitelabeling' => $is_whitelabeling,'paymenttermlist' => $paymentTerms,'rootPaymentTermsNewAgencies' => $rootPaymentTermsNewAgencies, 'colors_parent' => $getColorsParentCompany,'rootsidemenu' => $rootsidebarleadmenu,'sidemenu' => $customsidebarleadmenu,'agencyDefaultModules' => $agencyDefaultModules, 'agencyFilteredModules' => $agencyFilteredModules, 'agency_side_menu' => $agency_side_menu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'agency_onboarding_price' => $agency_onboarding_price,'agency_enable_coupon' => $agency_enable_coupon, 'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'is_master_company' => $is_master_company, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway, 'is_whitelabeling' => $is_whitelabeling,'paymenttermlist' => $paymentTerms,'rootPaymentTermsNewAgencies' => $rootPaymentTermsNewAgencies, 'colors_parent' => $getColorsParentCompany,'rootsidemenu' => $rootsidebarleadmenu,'sidemenu' => $customsidebarleadmenu,'agencyDefaultModules' => $agencyDefaultModules, 'agencyFilteredModules' => $agencyFilteredModules, 'agency_side_menu' => $agency_side_menu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'agency_onboarding_price' => $agency_onboarding_price,'agency_enable_coupon' => $agency_enable_coupon, 'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'is_master_company' => $is_master_company, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway,'rootsidemenu'=>$rootsidebarleadmenu,'sidemenu'=>$customsidebarleadmenu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_master_company' => $is_master_company,'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway,'rootsidemenu'=>$rootsidebarleadmenu,'sidemenu'=>$customsidebarleadmenu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'is_master_company' => $is_master_company, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+
+return response()->json(array('result'=>'success','setupcomplete'=>$usrCompleteProfileSetup,'accountconnected'=>$accountConnected,'modules'=>$modules,'package_id'=>$package_id,'paymentgateway'=>$paymentgateway,'rootsidemenu'=>$rootsidebarleadmenu,'sidemenu'=>$customsidebarleadmenu, 'accessmodule_agency' => $accessmodule, 'fcampid'=>$failed_campaignid, 'finamt'=>$failed_total_amount, 'agency_onboarding_status' => $agency_onboarding_status,'paymentStatusFailed'=>$paymentStatusFailed,'isBeta'=>$isBeta,'betaFeature'=>$betaFeature, 'minspend_setting' => $minspend_setting, 'api_mode'=>$apiMode, 'isDataWalletAgree' => $isDataWalletAgree, 'is_marketing_services_agreement_developer' => $is_marketing_services_agreement_developer, 'is_master_company' => $is_master_company, 'enabled_client_deleted_account' => $enabledClientDeletedAccount));
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-341 = "add field in table clean id error"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+FRONT
+* front\public\samplefile\cleanid-watt-sample.csv
+
+DATA
+* data\app\Models\CleanIDMd5.php
+* data\app\Exports\CleanIDResultExport.php
+* data\app\Models\CleanIDError.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+
+-----------------------------------------------------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-341 = "clean id new logic for get top profile in provider wattdata"
+JD-TASK-EMM-341-DEV-SYNC
+
+FILE
+* app\Jobs\CleanIDJob.php
+* app\Jobs\RetryMD5CleanIDJob.php
+* app\Services\WattData.php
+* app\Jobs\CleanIDExportChunkJob.php
+* app\Jobs\CleanIDExportInsertJob.php
+* app\Jobs\CleanIDMd5StreamJob.php
+* app\Models\CleanIDError.php
+* app\Services\CleanID.php
+* app\Http\Controllers\UploadController.php
+* app\Models\CleanIDMd5.php
+
+overall clean id udah oke pak
+* lowecase email ✅
+* hapus tanda + sampai @ ✅
+* hapus tanda titik . sampai @ ✅
+* auto detect sha1 dan sha256 ✅
+* new logic jika data watt menghasilkan 2 result
+
+{
+    "result": "failed",
+    "message": "Client error: `GET https:\/\/services.leadconnectorhq.com\/locations\/search?limit=20&skip=0` resulted in a `403 Forbidden` response:\n{\"message\":\"Forbidden resource\",\"error\":\"Forbidden\",\"statusCode\":403}\n"
+}
+
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2ODhjYjE3NWUzMjBkNDlhZGIzMzExNzItbWRzc3RsM28iLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29tcGFuaWVzLnJlYWRvbmx5IiwidXNlcnMucmVhZG9ubHkiLCJjdXN0b20tbWVudS1saW5rLnJlYWRvbmx5IiwiY3VzdG9tLW1lbnUtbGluay53cml0ZSIsImxvY2F0aW9ucy5yZWFkb25seSIsInNhYXMvbG9jYXRpb24ud3JpdGUiLCJzYWFzL2NvbXBhbnkud3JpdGUiLCJzbmFwc2hvdHMucmVhZG9ubHkiLCJvYXV0aC53cml0ZSIsIm9hdXRoLnJlYWRvbmx5Il0sImNsaWVudCI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3MiIsInZlcnNpb25JZCI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3MiIsImNsaWVudEtleSI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3Mi1tZHNzdGwzbyIsImFnZW5jeVBsYW4iOiJhZ2VuY3lfbW9udGhseV85NyJ9LCJpYXQiOjE3NjY1NjIyODkuMDczLCJleHAiOjE3NjY2NDg2ODkuMDczfQ.yWi-3sB1NByouhYj-qXVykCuIXq_ogISuy7M3VDYD0y0BLR-fM22FIu8KcLx7_ewtQtLQzalYWjgZ-w2NZpVrQKUzIaeT7zi2oVrI_VJdp-W1nRfrxPT6FZ0HlDoozKlyeQtht-PRcjq8dQeQN2O9F5MyMl_Jt6E5k6nst9qtWOk678vdhH1Jm8ZvzsXSCvpjRBl1jCswgIvWqGkaz6R_EyYdrDr9rxqeIdrvfPcolVAF-BamEFE43HosRmTRD7II8lGC3k4oTIRSQxwWkSu9vj1_LyKiJ56W9OpZstCyua_VxFKq-VzKdon7urRAsL6bNFVROS0Px1c6zNydXFyq9zPK2Ar1xbc1E91LH2-HcHOLjv-o1Q7hw6tQfaYuNc4YhPSzAC4ljQHMzocrf_9kOvQA304IbkQt3n-d9bhB06C_j86s_xcA94eD6Ne6pq8hcb_Cuj20Zb8pIbTMsmZh4ncpWcJShSArqjuz9ZJHnSZ35xaaTtO7e-Nk3rVeaHwZsox-RWVFeQqzJpJhadT6dU6Gbtp6OKrukbS01A-jDVjCrCYw7OQsprthHVXwRNuZOZvdZU9xX1nxbZp9IkCeo5i0Jo8VjPNUlLEFuqEwMlkNPzmKm4wdEBA4PxudKcKurVqnlBeYJOe-3do-B9lk8d1MrXq7kAg27OJ0TeY3oo","token_type":"Bearer","expires_in":86399,"refresh_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoQ2xhc3MiOiJDb21wYW55IiwiYXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsInNvdXJjZSI6IklOVEVHUkFUSU9OIiwic291cmNlSWQiOiI2ODhjYjE3NWUzMjBkNDlhZGIzMzExNzItbWRzc3RsM28iLCJjaGFubmVsIjoiT0FVVEgiLCJwcmltYXJ5QXV0aENsYXNzSWQiOiJZOEV2cWtCY2lkd1J2VjRqOXJRcyIsIm9hdXRoTWV0YSI6eyJzY29wZXMiOlsiY29tcGFuaWVzLnJlYWRvbmx5IiwidXNlcnMucmVhZG9ubHkiLCJjdXN0b20tbWVudS1saW5rLnJlYWRvbmx5IiwiY3VzdG9tLW1lbnUtbGluay53cml0ZSIsImxvY2F0aW9ucy5yZWFkb25seSIsInNhYXMvbG9jYXRpb24ud3JpdGUiLCJzYWFzL2NvbXBhbnkud3JpdGUiLCJzbmFwc2hvdHMucmVhZG9ubHkiLCJvYXV0aC53cml0ZSIsIm9hdXRoLnJlYWRvbmx5Il0sImNsaWVudCI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3MiIsInZlcnNpb25JZCI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3MiIsImNsaWVudEtleSI6IjY4OGNiMTc1ZTMyMGQ0OWFkYjMzMTE3Mi1tZHNzdGwzbyJ9LCJpYXQiOjE3NjY1NjIyODkuMDc5LCJleHAiOjE3OTgwOTgyODkuMDc5LCJ1bmlxdWVJZCI6IjkyOTVkYmQwLTE2YjMtNGI0YS05NTUzLWJkY2ZlNTBjYjM0MyIsInYiOiIyIn0.N90EvbYANCcZRRllfMxRZXirVAmQRel0yCTgQ50Hks-det4QfBX0uROodeJ7wvRmD_WoE5PMuqTwL1AyiEXktGSP3zH6-VibW_Sem4_TSMjqKiAhU_ENkw9RaxbopHrjrUoj1KyHYSZK1Hnf0IR-ama4W4ilo6hP4WKpZvLe1vwll056AkbHVobzJK0OmSy1JxsB9FEm9Vd6SapTSaqITaY5sQfJeibqbqVdTWikN9SnLiXPJ0wrqB8tGwyNmSLf1ANW7LiVxef45mWGBuoPsOfF8y77Dcd3S8tWlIwynp_XbQVmDrFEeaswNgsA0Y9h6HN2zWLvpPM3qy6OpwPpWr90WtGwecWwzpXC0JHyr-IB2CMMsqoDshHlIFDFLWs-ygRsicvf7ute4VYEwNB3dM7MlCFNzyLdo4a25L4ciFA3Vu1DInw6RYPyM2ThWvuFkNCznKpCw9EYju4NS8t5JGtOyUc39oMOE_pnU_zMemeSGNS_0GlFPwxIYh4dVgrCCWvDUKCxoVPe4eaLnsTE89Zx4ezhft739BnrNU4kUGaiR1dWgwWSiJjPj3A2iYMb9hkV0Uy_nn50ETHPnbXini8_GdIu3sLYvPI4CYf9QogV9hsiOlpt36rQN9oFFIrva4IjjVYuWZMV8GqDlxawj-rl9AZAToylKqvj7X2e8cU","scope":"companies.readonly users.readonly custom-menu-link.readonly custom-menu-link.write locations.readonly saas/location.write saas/company.write snapshots.readonly","refreshTokenId":"694b99f19f2da738e3654589","userType":"Company","companyId":"Y8EvqkBcidwRvV4j9rQs","isBulkInstallation":false,"userId":"hC0oMDhaxI3kVF4RCuxU"}
+
+
+
+
+
+
+
+

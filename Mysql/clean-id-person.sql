@@ -1,7 +1,7 @@
 use emm_sandbox;
 set @source := 'wattdata', @now_timestamp = '2025-12-17 00:00:00';
 
-SELECT 
+SELECT
 	id,source,person_id_wattdata,uniqueID,
 	CONVERT(AES_DECRYPT(FROM_bASE64(firstName), '8e651522e38256f2') USING utf8mb4) as firstName,
 	CONVERT(AES_DECRYPT(FROM_bASE64(middleName), '8e651522e38256f2') USING utf8mb4) as middleName,
@@ -33,7 +33,7 @@ SELECT * FROM person_advance_2 where source = @source and created_at >= @now_tim
 SELECT * FROM person_advance_3 where source = @source and created_at >= @now_timestamp order by id desc;
 SELECT * FROM person_b2b where source = @source and created_at >= @now_timestamp order by id desc;
 
-select * from failed_lead_records where leadspeek_type = 'clean_id' limit 20;
+select created_at, flr.* from failed_lead_records as flr where leadspeek_type = 'clean_id' order by created_at desc limit 20;
 select * from failed_lead_records order by id desc limit 100;
 select * from jobs;
 select * from failed_jobs;
