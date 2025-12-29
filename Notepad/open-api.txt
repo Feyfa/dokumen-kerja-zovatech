@@ -625,3 +625,252 @@ DATA
 * data\app\Http\Controllers\LeadspeekController.php
 * data\app\Http\Controllers\OpenApiController.php
 
+
+
+- prepaid campaign type local limit monthly 
+- prepaid campaign type local limit day continual 
+- prepaid campaign type local limit day onetime 
+
+- prepaid selain campaign type local continual 
+- prepaid selain campaign type local onetime 
+
+- weekly
+- monthly
+
+===== yang harus dikerjakan =====
+1. tambahkan treshold jika prepaid local limit day dan prepaid default selain local
+2. tambahkan next_billling_time di prepaid local limit monthly, weekly, monthly
+===== yang harus dikerjakan =====
+
+
+- paymentterm prepaid campaign type local limit monthly continual
+"financials": {
+    "payment_term": "prepaid",
+    "prepaid_options": "continual",
+    "stop_continual_topup": false,
+    "next_billing_date": "2026-01-29",
+    "limit_frequency": "month",
+    "remaining_balance": 55,
+    "lead_per_day": 50,
+    "client": {
+        "setup_fee": 1,
+        "campaign_fee": 2,
+        "cost_per_lead": 1
+    },
+    "agency": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 0.1
+    }
+}
+- paymentterm prepaid campaign type local limit day continual 
+"financials": {
+    "payment_term": "prepaid",
+    "prepaid_options": "continual",
+    "stop_continual_topup": false,
+    "continual_buy_options": "weekly",
+    "treshold": 50,
+    "limit_frequency": "day",
+    "remaining_balance": 55,
+    "lead_per_day": 50,
+    "client": {
+        "setup_fee": 1,
+        "campaign_fee": 2,
+        "cost_per_lead": 1
+    },
+    "agency": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 0.1
+    }
+}
+
+- paymentterm prepaid selain campaign type local continual 
+"financials": {
+    "payment_term": "prepaid",
+    "prepaid_options": "continual",
+    "stop_continual_topup": false,
+    "continual_buy_options": "monthly",
+    "treshold": 10,
+    "remaining_balance": 0,
+    "lead_per_day": 10,
+    "client": {
+        "setup_fee": 1,
+        "campaign_fee": 1,
+        "cost_per_lead": 3.3
+    },
+    "agency": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 1.65
+    }
+}
+- paymentterm prepaid selain campaign type local onetime 
+"financials": {
+    "payment_term": "prepaid",
+    "prepaid_options": "onetime",
+    "lead_buy": 50,
+    "remaining_balance": 0,
+    "lead_per_day": 10,
+    "client": {
+        "setup_fee": 1,
+        "campaign_fee": 1,
+        "cost_per_lead": 3.3
+    },
+    "agency": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 1.65
+    }
+}
+
+- paymentterm weekly
+"financials": {
+    "payment_term": "weekly",
+    "next_billing_date": "2025-12-11",
+    "lead_per_day": 10,
+    "client": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 3.1
+    },
+    "agency": {
+        "setup_fee": 0.5,
+        "campaign_fee": 0.8,
+        "cost_per_lead": 1.55
+    }
+}
+- paymentterm monthly
+"financials": {
+    "payment_term": "monthly",
+    "next_billing_date": "2026-01-04",
+    "lead_per_day": 10,
+    "client": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 3.2
+    },
+    "agency": {
+        "setup_fee": 0.4,
+        "campaign_fee": 0.8,
+        "cost_per_lead": 1.6
+    }
+}
+
+{
+    "payment_term": "prepaid",
+    "prepaid_options": "continual",
+    "stop_continual_topup": false,
+    "next_billing_date": "2026-01-29",
+    "limit_frequency": "month",
+    "remaining_balance": 55,
+    "lead_per_day": 50,
+    "client": {
+        "setup_fee": 1,
+        "campaign_fee": 2,
+        "cost_per_lead": 1
+    },
+    "agency": {
+        "setup_fee": 0,
+        "campaign_fee": 0,
+        "cost_per_lead": 0.1
+    }
+}
+
+
+prepaid - continual - limit day - local 
+prepaid - continual - limit month - local 
+prepaid - continual 
+prepaid - onetime 
+weekly 
+monthly
+
+Response Parameter
+---------------------
+financials
+    * prepaid - continual - limit month - local 
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+    * prepaid - continual - limit day - local
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+    * prepaid - continual  
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+    * prepaid - onetime  
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+    * weekly  
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+    * monthly  
+      ------------------------------------
+      |  response  |          icon paste |
+      ------------------------------------
+      |                                  |
+      |           isi json               |
+      |                                  |
+      ------------------------------------
+
+
+// jawaban ai 
+start_billing_date | billing_charge
+2025-12-28 22:39:21 | 2026-01-04 23:59:59
+
+// percobaan
+TIMESTAMPDIFF(WEEK, start_billing_date, billing_charge)
+start_billing_date | billing_charge
+2025-12-28 22:39:21 | 2026-01-02 00:00:00 ❌
+2025-12-28 22:39:21 | 2026-01-03 00:00:00 ❌
+2025-12-28 22:39:21 | 2026-01-04 00:00:00 ❌
+2025-12-28 22:39:21 | 2026-01-05 00:00:00 ✅
+
+
+2025-12-28 22:39:21 - 2026-01-05 00:00:00
+
+
+2026-02-25 22:39:21 | 2026-02-26 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-02-27 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-02-28 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-03-01 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-03-02 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-03-03 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-03-04 17:00:00 ❌
+2026-02-25 22:39:21 | 2026-03-05 17:00:00 ✅
+
+
+
+2025-12-29 00:27:15 | 2026-01-28 17:00:00 ❌
+2025-12-29 00:27:15 | 2026-01-29 17:00:00 
+
+
+
+disable_add_campaign
+disable_receive_email
+enable_phone_number_on_campaign
+enable_google_sheet_editor

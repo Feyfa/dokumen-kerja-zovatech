@@ -22,6 +22,8 @@ delete from report_analytics where leadspeek_type = 'clean_id';
 delete from failed_lead_records where leadspeek_type = 'clean_id';
 
 
+select 
+	TIMESTAMPDIFF(MONTH, '2025-12-29 00:27:15', '2026-01-29 17:00:00');
 
 --
 

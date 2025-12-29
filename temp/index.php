@@ -1,193 +1,81 @@
 <?php
 
-public function getTopProfile($profiles, $identities = [], $fullName = null)
+private function getNextTimeBillingCampaign(string $campaignId)
 {
-    info('public function getTopProfile', ['identities' => $identities, 'profiles' => $profiles, 'fullName' => $fullName]);
-
-    if(empty($profiles) || !is_array($profiles)){
-        return ['topProfile' => null, 'multiple_profile_found' => 0];
-    }
-
-    /* ------------- STEP 1 ------------- */
-    info('getTopProfile step 1 (1.1) START', ['fullName' => $fullName]);
-    // Cek Full Name Identifier sama dengan Name yang di kasih watt
-    if(!empty($fullName)){
-        $fullName = trim(strtolower($fullName));
-        info('getTopProfile step 1 (1.2)', ['fullName' => $fullName]);
-        foreach($profiles as $profile){
-            $domains = $profile['domains'] ?? [];
-            $names = $domains['name'] ?? [];
-            info('getTopProfile step 1 (1.3)', ['domains' => $domains, 'names' => $names]);
-            
-            foreach($names as $name){
-                info('getTopProfile step 1 (1.4)', ['trim_strtolower_name' => trim(strtolower($name)), 'fullName' => $fullName]);
-                if(trim(strtolower($name)) === $fullName){
-                    info('getTopProfile step 1 MATCH (1.5)');
-                    return ['topProfile' => $profile, 'multiple_profile_found' => 0];
-                }
-            }
-        }
-    }
-    info('getTopProfile step 1 (1.6) END');
-    /* ------------- STEP 1 ------------- */
-
-
-
-    /* ------------- STEP 2 ------------- */
-    // Buat mapping overall_quality_score dari identities berdasarkan person_id
-    info('getTopProfile step 2 (2.1.1) START', ['identities' => $identities]);
-    $qualityScoreMap = [];
-    if(!empty($identities) && is_array($identities)){
-        info('getTopProfile step 2 (2.1.2)');
-        foreach($identities as $identity){
-            $personId = $identity['person_id'] ?? null;
-            $overallQualityScore = $identity['overall_quality_score'] ?? 0;
-            info('getTopProfile step 2 (2.1.3)', ['personId' => $personId, 'overallQualityScore' => $overallQualityScore]);
-            if($personId !== null){
-                // Convert person_id ke string untuk memastikan matching (karena profiles menggunakan string)
-                $qualityScoreMap[(string)$personId] = (int) $overallQualityScore;
-                info('getTopProfile step 2 (2.1.4)', ['qualityScoreMap' => $qualityScoreMap]);
-            }
-        }
-    }
-    info('getTopProfile step 2 (2.1.5) END', ['qualityScoreMap' => $qualityScoreMap]);
+    // date_default_timezone_set('America/Chicago');
     
-    // Hitung quality score untuk setiap profile menggunakan overall_quality_score
-    info('getTopProfile step 2 (2.2.1) START', ['profiles' => $profiles]);
-    $profilesWithScore = [];
-    foreach($profiles as $profile){
-        $personId = $profile['person_id'] ?? null;
-        $score = 0;
-        info('getTopProfile step 2 (2.2.2)', ['personId' => $personId, 'qualityScoreMap' => $qualityScoreMap]);
-        // Gunakan overall_quality_score dari identities jika ada
-        if($personId !== null && isset($qualityScoreMap[(string)$personId])){
-            $score = (int) $qualityScoreMap[(string)$personId];
-            info('getTopProfile step 2 (2.2.3)', ['score' => $score]);
-        }
-        
-        $profilesWithScore[] = [
-            'profile' => $profile,
-            'score' => $score
-        ];
-        info('getTopProfile step 2 (2.2.4)', ['score' => $score, 'profilesWithScore' => $profilesWithScore]);
+    /* GET CAMPAIGN */
+    $lp_invoice_date_next_month = null;
+    $campaign = LeadspeekUser::where('leadspeek_api_id', $campaignId)->where('archived', 'F')->first();
+    if(!$campaign){
+        return ['status' => 'error', 'status_code' => 404, 'message' => 'Campaign Not Found', 'lp_invoice_date_next_month' => $lp_invoice_date_next_month];
     }
-    info('getTopProfile step 2 (2.2.5) END', ['profilesWithScore' => $profilesWithScore]);
+    // info('getNextTimeBillingCampaign', ['campaign' => $campaign]);
+    /* GET CAMPAIGN */
 
-    info('getTopProfile step 2 (2.3.1)', ['profilesWithScore' => $profilesWithScore]);
-    if(empty($profilesWithScore)){
-        info('getTopProfile step 2 (2.3.2)');
-        return ['topProfile' => null, 'multiple_profile_found' => 0];
+    /* PROCESS GET NEXT TIME BILLING CAMPAIGN */
+    if($campaign->paymentterm == 'Weekly')
+    {
+        $lp_invoice_date_next_month = Carbon::parse($campaign->start_billing_date)
+            ->startOfDay()   // ⬅️ KUNCI
+            ->addWeek()
+            ->addDay()
+            ->format('Y-m-d');
+        info('', ['lp_invoice_date_next_month' => $lp_invoice_date_next_month]);
     }
+    elseif($campaign->paymentterm == 'Monthly')
+    {
 
-    // Urutkan berdasarkan score tertinggi
-    usort($profilesWithScore, function($a, $b){
-        return $b['score'] - $a['score'];
-    });
-    $maxScore = $profilesWithScore[0]['score'];
-    info('getTopProfile step 2 (2.4.1)', ['maxScore' => $maxScore, 'profilesWithScore' => $profilesWithScore]);
-
-    // Cek apakah ada lebih dari 1 profile dengan score yang sama
-    $topScoredProfiles = array_filter($profilesWithScore, function($item) use ($maxScore){
-        return $item['score'] == $maxScore;
-    });
-    info('getTopProfile step 2 (2.5.1)', ['topScoredProfiles' => $topScoredProfiles]);
-
-    // Jika hanya 1 profile dengan score tertinggi
-    if(count($topScoredProfiles) == 1){
-        info('getTopProfile step 2 (2.6.1)');
-        return ['topProfile' => $topScoredProfiles[0]['profile'], 'multiple_profile_found' => 0];
     }
-    /* ------------- STEP 2 ------------- */
-    
+    /* PROCESS GET NEXT TIME BILLING CAMPAIGN */
 
+    return ['status' => 'success','status_code' => 200,'message' => 'Success Get Next Time Billing Campaign', 'lp_invoice_date_next_month' => $lp_invoice_date_next_month];
+}
 
-    /* ------------- STEP 3 ------------- */
-    // Jika lebih dari 1 profile dengan score yang sama
-    $topScoredProfiles = array_values($topScoredProfiles);
-    info('getTopProfile step 3 (3.1)', ['topScoredProfiles' => $topScoredProfiles, 'count_topScoredProfiles' => count($topScoredProfiles)]);
-    
-    // Weighting untuk setiap domain
-    $domainWeights = ['email' => 5, 'phone' => 2, 'address' => 2, 'name' => 1];
-    info('getTopProfile step 3 (3.2)', ['domainWeights' => $domainWeights]);
+public function processinvoicemonthly(Request $request) 
+{
+    /* CARA QUEUE REDIS */
+    // dapatkan tanggal beserta jam nya hari ini, format "Y-m-d H:i:s"
+    $nowDate = Carbon::now();
+    // 1 hari sebelum $nowDate 
+    $previousDate = $nowDate->copy()->subDay();
+    // atur waktunya menjadi akhir jam 29:59:59
+    $endBillingDate = $previousDate->copy()->endOfDay();
 
-    // Hitung weighted score untuk setiap profile
-    info('getTopProfile step 3 (3.3.1) START - only 2 profiles');
-    $maxWeightedScore = 0;
-    foreach($topScoredProfiles as $item){
-        $profile = $item['profile'];
-        $domains = $profile['domains'] ?? [];
-        $weightedScore = (count($domains['email'] ?? []) * $domainWeights['email']) +
-                            (count($domains['phone'] ?? []) * $domainWeights['phone']) +
-                            (count($domains['address'] ?? []) * $domainWeights['address']) +
-                            (count($domains['name'] ?? []) * $domainWeights['name']);
-        info('getTopProfile step 3 (3.3.2)', [
-            'email' => count($domains['email'] ?? []) . " x " . $domainWeights['email'] . " = " . (count($domains['email'] ?? []) * $domainWeights['email']),
-            'phone' => count($domains['phone'] ?? []) . " x " . $domainWeights['phone'] . " = " . (count($domains['phone'] ?? []) * $domainWeights['phone']),
-            'address' => count($domains['address'] ?? []) . " x " . $domainWeights['address'] . " = " . (count($domains['address'] ?? []) * $domainWeights['address']),
-            'name' => count($domains['name'] ?? []) . " x " . $domainWeights['name'] . " = " . (count($domains['name'] ?? []) * $domainWeights['name']),
-            'weightedScore' => $weightedScore,
-            'maxWeightedScore' => $maxWeightedScore,
-        ]);
-        if($weightedScore > $maxWeightedScore){
-            $maxWeightedScore = $weightedScore;
-            info('getTopProfile step 3 (3.3.3)', ['maxWeightedScore' => $maxWeightedScore, 'weightedScore' => $weightedScore]);
-        }
-    }
-    info('getTopProfile step 3 (3.3.4)', ['maxWeightedScore' => $maxWeightedScore]);
-
-    info('getTopProfile step 3 (3.3.5)');
-    $profilesWithWeight = [];
-    foreach($topScoredProfiles as $item){
-        $profile = $item['profile'];
-        $domains = $profile['domains'] ?? [];
-        $weightedScore = (count($domains['email'] ?? []) * $domainWeights['email']) +
-                            (count($domains['phone'] ?? []) * $domainWeights['phone']) +
-                            (count($domains['address'] ?? []) * $domainWeights['address']) +
-                            (count($domains['name'] ?? []) * $domainWeights['name']);
-        info('getTopProfile step 3 (3.3.6)', [
-            'email' => count($domains['email'] ?? []) . " x " . $domainWeights['email'] . " = " . (count($domains['email'] ?? []) * $domainWeights['email']),
-            'phone' => count($domains['phone'] ?? []) . " x " . $domainWeights['phone'] . " = " . (count($domains['phone'] ?? []) * $domainWeights['phone']),
-            'address' => count($domains['address'] ?? []) . " x " . $domainWeights['address'] . " = " . (count($domains['address'] ?? []) * $domainWeights['address']),
-            'name' => count($domains['name'] ?? []) . " x " . $domainWeights['name'] . " = " . (count($domains['name'] ?? []) * $domainWeights['name']),
-            'weightedScore' => $weightedScore,
-            'profile' => $profile,
-            'domains' => $domains,
-        ]);
-        $profilesWithWeight[] = [
-            'profile' => $profile,
-            'weightedScore' => $weightedScore
-        ];
-        info('getTopProfile step 3 (3.3.7)', ['profilesWithWeight' => $profilesWithWeight]);
-    }
-
-    // Urutkan berdasarkan weightedScore tertinggi (GAP-based)
-    usort($profilesWithWeight, function($a, $b){
-        return $b['weightedScore'] - $a['weightedScore'];
-    });
-    info('getTopProfile step 3 (3.3.8)', ['profilesWithWeight' => $profilesWithWeight]);
-
-    // hitung multiple_profile_found jika terdapat 2 data profile
-    $multipleProfileFound = 1;
-    if(count($topScoredProfiles) == 2){
-        // Ambil dua skor teratas
-        $score1 = $profilesWithWeight[0]['weightedScore']; // tertinggi
-        $score2 = $profilesWithWeight[1]['weightedScore']; // kedua
-        info('getTopProfile step 3 (3.3.9)', ['score1' => $score1, 'score2' => $score2]);
-
-        // Hitung GAP eksplisit
-        $thresholdGap = 60;
-        $gap = 0;
-        if($score1 > 0){
-            $gap = (($score1 - $score2) / $score1) * 100;
-        }
-        info('getTopProfile step 3 (3.3.10)', ['gap' => "{$gap} %"]);
-
-        // Penentuan multiple_profile_found
-        $multipleProfileFound = ($gap >= $thresholdGap) ? 0 : 1;
-        info('getTopProfile step 3 (3.3.11)', ['multipleProfileFound' => $multipleProfileFound]);
-    }
-    /* ------------- STEP 3 ------------- */
-
-    // return result
-    return ['topProfile' => $profilesWithWeight[0]['profile'], 'multiple_profile_found' => 1];
+    $clientList = LeadspeekUser::select('leadspeek_users.id','leadspeek_users.start_billing_date','companies.id as company_id','leadspeek_users.user_id','leadspeek_users.leadspeek_type',
+                                        'leadspeek_users.leadspeek_api_id','companies.company_name','leadspeek_users.report_sent_to','leadspeek_users.admin_notify_to',
+                                        'leadspeek_users.paymentterm','leadspeek_users.lp_enddate','leadspeek_users.lp_limit_startdate','leadspeek_users.campaign_name','leadspeek_users.campaign_information_type_local','leadspeek_users.advance_information',
+                                        'leadspeek_users.cost_perlead','leadspeek_users.lp_max_lead_month','leadspeek_users.lp_min_cost_month','users.customer_payment_id','users.customer_card_id','users.email','leadspeek_users.company_id as company_parent','users.active','users.company_root_id')
+                    ->join('users','leadspeek_users.user_id','=','users.id')
+                    ->join('companies','users.company_id','=','companies.id')
+                    ->where(function($query){
+                        $query->where(function($query){
+                            $query->where('leadspeek_users.active','=','T')
+                                ->where('leadspeek_users.disabled','=','F')
+                                ->where('leadspeek_users.active_user','=','T');
+                        })
+                        ->orWhere(function($query){
+                            $query->where('leadspeek_users.active','=','F')
+                                ->where('leadspeek_users.disabled','=','T')
+                                ->where('leadspeek_users.active_user','=','T');
+                        })
+                        ->orWhere(function($query){
+                            $query->where('leadspeek_users.active','=','F')
+                                ->where('leadspeek_users.disabled','=','F')
+                                ->where('leadspeek_users.active_user','=','T');
+                        });
+                    })
+                    ->where('leadspeek_users.paymentterm','=','Monthly')
+                    ->where('leadspeek_users.archived','=','F')
+                    ->where('users.user_type','=','client')
+                    // ->where(DB::raw('DATE_FORMAT(DATE_ADD(leadspeek_users.start_billing_date,INTERVAL 1 MONTH),"%Y%m%d%H%i%s")'),'<=',date("YmdHis"))
+                    ->whereRaw("TIMESTAMPDIFF(MONTH, leadspeek_users.start_billing_date, ?) >= 1", [$endBillingDate])
+                    /*->where(function($query) {
+                        $query->where('leadspeek_users.cost_perlead','>',0)
+                                ->orWhere('leadspeek_users.lp_max_lead_month','>',0)
+                                ->orWhere('leadspeek_users.lp_min_cost_month','>',0);
+                    })*/
+                    ->orderBy(DB::raw("DATE_FORMAT(leadspeek_users.start_billing_date,'%Y%m%d')"),'ASC')
+                    ->get()
+                    ->toArray(); // jangan lupa toArray() karena di dispatch job, jangan pake collection
 }

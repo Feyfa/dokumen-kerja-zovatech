@@ -122,4 +122,6 @@ select * from person_emails where id = 10172 and person_id = 7927;
 select 
 	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email, 
 	person_emails.* 
-from person_emails order by id asc;
+from person_emails 
+where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) like '%gmail.com%'
+order by id asc;
