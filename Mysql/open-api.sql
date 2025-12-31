@@ -178,6 +178,11 @@ select * from user_logs order by id desc limit 10;
 
 select * from topup_agencies where company_id = 164;
 
+select * from jobs;
+
+select * from openapi_request_log order by id desc;
+
+
 
 
 

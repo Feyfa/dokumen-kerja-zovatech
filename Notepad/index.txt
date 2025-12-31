@@ -332,3 +332,102 @@ FILE
 * app\Models\PersonEmail.php
 * app\Models\PersonName.php
 * app\Models\PersonPhone.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+here i will prove that enable_on_campaign parameter works well
+1. Create a client at the api level with the enable_on_campaign parameter set to true. ✅
+2. Create a campaign B2B at API level ✅
+3. Create a campaign B2B at UI level ✅
+
+
+
+
+https://drive.google.com/file/d/1bCr1pBxvgMCOd7mwYeQM24p_dFPZJrGs/view?usp=sharing
+
+https://trello.com/c/wFDXH64U#comment-69535aa3ce6c007c817d1a2a
+
+
+
+
+
+
+
+
+enable_google_sheet_editor
+enable_phone_number_on_campaign
+
+
+        return collect($users)->map(function ($user) {
+            $user->disable_client_add_campaign = $this->trueOrFalse($user->disable_client_add_campaign ?? '');
+            $user->disabled_receive_email = $this->trueOrFalse($user->disabled_receive_email ?? '');
+            $user->editor_spreadsheet = $this->trueOrFalse($user->editor_spreadsheet ?? '');
+            $user->enabled_phone_number = $this->trueOrFalse($user->enabled_phone_number ?? '');
+            $user->enable_google_sheet_editor = $this->trueOrFalse($user->editor_spreadsheet ?? '');
+            $user->enable_phone_number_on_campaign = $this->trueOrFalse($user->enabled_phone_number ?? '');
+            return $user;
+        });
+
+        DB::raw("users.editor_spreadsheet = 'T' AS enable_google_sheet_editor"),
+        DB::raw("users.enabled_phone_number = 'T' AS enable_phone_number_on_campaign"),
+
+
+RUN =>              active = T disabled = F active_user = T
+PAUSED =>           active = F disabled = T active_user = T ✅
+PAUSED on RUN =>    active = F disabled = F active_user = T
+STOP                active = F disabled = T active_user = F ✅
+
+(($request->status == 'F' && $request->activeuser == 'T') || ($request->status == 'F' && $request->activeuser == 'F'))
+
+if ($usrInfo[0]->leadspeek_type != 'simplifi' && $platform_LeadspeekCostperlead == 0)
+{
+    LeadspeekUser::find($_lp_user_id)->update(['active' => 'F', 'disabled' => 'T', 'active_user' => 'F']);
+    $msg = "Sorry, this campaign cannot be started because your agency cost per contact is set to $0. Please update the agency pricing and try again.";
+    return response()->json(array('result'=>'failedPayment','msg'=>$msg));
+}
+
+if (($leads->leadspeek_type == 'enhance' || $leads->leadspeek_type == 'b2b') && (($request->status == 'F' && $request->activeuser == 'T') || ($request->status == 'F' && $request->activeuser == 'F'))) {
+
+if(count($usrInfo) > 0 && (($usrInfo[0]['customer_payment_id'] != '' && $usrInfo[0]['customer_card_id'] != '') || $_AgencyManualBill === true) && ($updateclient[0]->platformfee > 0 || $updateclient[0]->lp_min_cost_month > 0 || $updateclient[0]->paymentterm == 'One Time' || $updateclient[0]->paymentterm == 'Prepaid' || $updateclient[0]->leadspeek_type == 'simplifi'))
+if(count($usrInfo) > 0 && (($usrInfo[0]['customer_payment_id'] != '' && $usrInfo[0]['customer_card_id'] != '') || $_AgencyManualBill === true))
+
+1767161680

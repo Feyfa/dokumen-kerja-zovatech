@@ -23,10 +23,11 @@ delete from failed_lead_records where leadspeek_type = 'clean_id';
 
 
 select 
-	TIMESTAMPDIFF(MONTH, '2025-12-29 00:27:15', '2026-01-29 17:00:00');
+	TIMESTAMPDIFF(MONTH, '2025-12-29 00:27:15', '2026-01-29 23:59:59');
 
 --
 
+select * from jobs;
 
 select * from clean_id_errors; -- untuk menampung error
 select * from clean_id_export; -- untuk download

@@ -874,3 +874,6 @@ disable_add_campaign
 disable_receive_email
 enable_phone_number_on_campaign
 enable_google_sheet_editor
+
+
+c1767065699 = 1832here i will prove that enable_on_campaign parameter works well

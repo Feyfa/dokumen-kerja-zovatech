@@ -1,0 +1,57 @@
+=====VARIABLE=====
+<i class="el-icon-refresh" :class="{ spinRefund: isProcessRefundPrepaid }"></i>
+isProcessRefundPrepaid: false
+refundTopupPrepaid()
+getWordingRefundTopupPrepaid()
+=====VARIABLE=====
+
+
+=====MESSAGE UNTUK REFUND=====
+1. jika manual bill T ✅
+
+2. jika manual bill F, client punya customer_payment_id ✅
+3. jika manual bill F, client tidak punya customer_payment_id ✅
+4. jika manual bill F, client punya customer_payment_id dan tidak punya customer_payment_id ✅
+
+5. jika manual bill F, client punya customer_payment_id dan cost_perlead 0 ✅
+6. jika manual bill F, client tidak punya customer_payment_id dan cost_perlead 0 (progress)
+=====MESSAGE UNTUK REFUND=====
+
+=== manual_bill T ===
+Are you sure you want to refund this campaign?
+
+Once the refund is processed, an amount of $5 will be returned to your data wallet agency.
+
+This action cannot be undone and any remaining balance contact will be forfeited
+=== manual_bill T ===
+
+
+=== customer_payment_id available ===
+Are you sure you want to refund this campaign?
+
+Once the refund is processed, an amount of $50 will be returned to your data wallet agency, and an amount of $100 will be refunded from your connected account to the client.
+
+This action cannot be undone and any remaining balance contact will be forfeited
+=== customer_payment_id available ===
+
+
+=== customer_payment_id not available ===
+Are you sure you want to refund this campaign?
+
+Once the refund is processed, an amount of $25 will be returned to your data wallet agency.
+
+Since this campaign was created before the refund system was implemented, the client refund cannot be processed automatically and must be completed manually for an amount of $50.
+
+This action cannot be undone and any remaining balance contact will be forfeited
+=== customer_payment_id not available ===
+
+
+=== customer_payment_id half ===
+Are you sure you want to refund this campaign?
+
+Once the refund is processed, an amount of $25 will be returned to your data wallet agency, and $30 will be refunded automatically to the client.
+
+An additional amount of $20 must be refunded to the client manually, as this portion of the payment was created before the refund system was implemented.
+
+This action cannot be undone and any remaining balance contact will be forfeited
+=== customer_payment_id half ===
