@@ -1,3 +1,5 @@
+use emm_sandbox;
+
 set @leadspeek_api_id_1 := '76448240';
 select * from leadspeek_users where leadspeek_api_id = @leadspeek_api_id_1;
 select * from topup_campaigns where leadspeek_api_id = @leadspeek_api_id_1;
