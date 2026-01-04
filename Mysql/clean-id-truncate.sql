@@ -36,7 +36,8 @@ select
 from person_emails 
 where 
 	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) in (
-		"wbrauner1961@gmail.com"
+		"paulrogersrealestate@gmail.com"
+--		"wbrauner1961@gmail.com"
 -- 		,"wizardofozfan@gmail.com"
 -- 		,"litlelori1968@gmail.com"
 -- 		,"walterzaldivar0610@yahoo.com"
@@ -58,4 +59,33 @@ where
 -- 		,"nitkhanna1@gmail.com"
 	) and source = 'wattdata'
 order by id desc;
+
+
+
+
+
+
+select * from clean_id_file;
+
+select * from clean_id_md5 as cim
+join clean_id_file as cif
+on cif.id = cim.file_id
+where cif.clean_api_id = '47899541';
+
+SELECT *
+FROM `clean_id_md5` AS cim
+JOIN `clean_id_file` AS cif
+  ON cif.`id` = cim.`file_id`
+WHERE 
+	cif.`clean_api_id` = '47899541';
+	
+	
+	
+SELECT
+    COUNT(CASE WHEN cim.description LIKE 'Basic Information Not Found From WattData%' THEN 1 END) AS count_notfound_wattdata,
+    COUNT(CASE WHEN cim.description LIKE 'Basic information Not Found Because Truelist Not Valid From WattData%' THEN 1 END) AS count_notfound_truelist
+FROM `clean_id_md5` AS cim
+JOIN `clean_id_file` AS cif
+  ON cif.`id` = cim.`file_id`
+WHERE cif.`clean_api_id` = '47899541' and cim.status = 'not_found';
 

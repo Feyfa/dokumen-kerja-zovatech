@@ -16,4 +16,7 @@ set @company_id_2 := '464';
 select * from topup_agencies where company_id = @company_id_2;
 select * from leadspeek_invoices where company_id = @company_id_2 and invoice_type = 'agency';
 
-select * from jobs;
+
+
+
+
