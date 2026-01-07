@@ -1,0 +1,246 @@
+mungkin casee nya seperti ini
+- campaign prepaid
+- remaining balance 7
+- treshold 7
+
+- nah ada 2 data masuk nih dengan email yang sama case nya kaya gini, misal a@gmail.com
+
+data 1 masuk
+- a@gmail.com masuk ke getdatamatch(), lolos pengecekan double email
+- a@gmail.com masuk ke filterEmailInLeadspeekReport(), lolos pengecek double email
+- a@gmail.com masuk ke processDataMatch()
+
+1..2 | ForEach-Object {
+    Start-Job {
+        Invoke-RestMethod -Method Get -Uri "http://apilocal.emmsandbox.com/webhook?label=42817863|google&md5_email=8dba134974fd2681332f7194e4e17711"
+    }
+}
+
+1..2 | ForEach-Object {
+    Start-Job {
+        Invoke-RestMethod -Method Get -Uri "http://apilocal.emmsandbox.com/jidantest"
+    }
+}
+
+@("42817863", "58191283", "73212713") | ForEach-Object {
+    Start-Job { 
+        param($id)
+        Invoke-RestMethod -Method Get -Uri "http://apilocal.emmsandbox.com/webhook?label=${id}|google&md5_email=8dba134974fd2681332f7194e4e17711"
+    } -ArgumentList $_
+}
+
+persons ✅
+person_emails ✅ 
+person_phones ✅
+person_addresses  
+person_advance_1
+person_advance_2
+person_advance_3
+
+=====
+menjalankan ini hanya membutuhkan waktu 0.001s, walapun datanya 1 juta row
+
+SELECT 
+    leadspeek_reports.id,
+    leadspeek_reports.clickdate,
+    leadspeek_reports.created_at
+FROM 
+    leadspeek_reports
+LEFT JOIN 
+    leadspeek_users ON leadspeek_reports.lp_user_id = leadspeek_users.id
+WHERE 
+    leadspeek_users.applyreidentificationall = 'T'
+    AND leadspeek_users.archived = 'F'
+    AND leadspeek_reports.company_id = 165
+    AND leadspeek_reports.original_md5 = 'jidanganteng'
+ORDER BY 
+    leadspeek_reports.clickdate desc;
+=====
+
+
+=====
+INSERT INTO `persons` (`uniqueID`, `firstName`, `middleName`, `lastName`, `age`, `identity Score`, `lastEntry`, `created_at`, `updated_at`) VALUES
+('6411e5c3a6238', 'pWKqVtqTz0dHt4hGjRWHfw==', '3N7eMgECaqitm53c86+M+g==', 'N3LPZG4D3mH/8psI0I4AZw==', 72, 85, '2023-03-15 15:35:31', '2023-03-15 08:35:31', '2023-03-15 08:35:31');
+=====
+
+
+
+ohh bentar saya jadi kepikiran, benar tidak pemikiran saya begini
+
+case 1
+#campaign123    | #campaign345
+jidan@gmail.com | jidan@gmail.com
+                | agies@gmail.com
+-> kalo kase nya kaya gini maka, akan ngeblock
+
+case 2
+#campaign123    | #campaign345
+jidan@gmail.com | agies@gmail.com
+                | jidan@gmail.com
+-> kalo kase nya kaya gini maka, akan buat key redis, namun hanya buat saja ngga ngeblok, nah karena bukan redis yang block tetem pada saat #campaign345 jalanin email jidan@gmail.com, itu bakal ke validasi sama pengecekan query ini
+$chkExistOnCampaign = LeadspeekReport::select('leadspeek_reports.id','leadspeek_reports.clickdate','leadspeek_reports.created_at')
+    ->join('leadspeek_users','leadspeek_reports.lp_user_id','=','leadspeek_users.id')
+    ->where('leadspeek_users.applyreidentificationall','=','T')
+    ->where('leadspeek_users.archived','=','F')
+    ->where('leadspeek_reports.company_id','=',$clientCompanyID)
+    ->where('leadspeek_reports.original_md5','=',$md5param)
+    // ->where(function($query) use ($md5param){
+    //     // $query->where('leadspeek_reports.email_mdfive','=',$md5param)
+    //     //         ->orWhere('leadspeek_reports.email2_mdfive','=',$md5param)
+    //     //         ->orWhere('leadspeek_reports.original_md5','=',$md5param);
+    //     $query->where('leadspeek_reports.original_md5','=',$md5param);
+    // })
+    ->orderBy('leadspeek_reports.clickdate','DESC')	
+    ->first();
+
+
+// $idReport = $this->generateReportUniqueNumber();
+// $dataMatch = [
+//     [
+//         "ID" => $idReport,
+//         "Email" => "ptrhrt57@gmail.com",
+//         "Email2" => "",
+//         "OriginalMD5" => "8bc64c9c289d18a05dd9652422208f05",
+//         "IP" => "",
+//         "Source" => "",
+//         "OptInDate" => "2026-01-06 22:00:00",
+//         "ClickDate" => "2026-01-06 22:00:00",
+//         "Referer" => "",
+//         "Phone" => "5868567638",
+//         "Phone2" => "5868557639",
+//         "FirstName" => "Krista",
+//         "LastName" => "Hart",
+//         "Address1" => "29467 Tropea Dr",
+//         "Address2" => "",
+//         "City" => "Warren",
+//         "State" => "MI",
+//         "Zipcode" => "48092",
+//         "PersonID" => 7795,
+//         "Keyword" => "fashion",
+//         "Description" => "EmailExistonDB|LastEntryLessSixMonthPermissionYes|dataExistOnDB|12149",
+//         "LeadFrom" => "person",
+//         "GenderAux" => "Female",
+//         "Generation" => "2. Generation X (1961-1981)",
+//         "MaritalStatus" => "Married",
+//         "IncomeHousehold" => "IncomeHousehold",
+//         "IncomeMidptsHousehold" => "300000",
+//         "NetWorthHousehold" => "F. $25,000 - $49,999",
+//         "NetWorthMidptHousehold" => "37500",
+//         "DiscretionaryIncome" => "H. $75,000-$99,999",
+//         "CreditMidpts" => "625",
+//         "CreditRange" => "CreditRange",
+//         "OccupationCategory" => "Professional",
+//         "OccupationDetail" => "Nurse (Registered)",
+//         "OccupationType" => "White Collar",
+//         "Voter" => "Voter",
+//         "Urbanicity" => "4. Urban",
+//         "Phone3" => "Phone3",
+//         "TaxBillInformation" => "29467 Tropea Dr, Warren, Macomb County, MI, 48092-3322",
+//         "NumAdultsHousehold" => "3",
+//         "NumChildrenHousehold" => "4",
+//         "NumPersonsHousehold" => "2",
+//         "ChildAged03Household" => "",
+//         "ChildAged46Household" => "1",
+//         "ChildAged79Household" => "1",
+//         "ChildAged1012Household" => "",
+//         "ChildAged1318Household" => "",
+//         "ChildrenHousehold" => "1",
+//         "MagazineSubscriber" => "MagazineSubscriber",
+//         "CharityInterest" => "1",
+//         "LikelyCharitableDonor" => "1",
+//         "DwellingType" => "Single Family",
+//         "HomeOwner" => "Home Owner",
+//         "HomeOwnerOrdinal" => "4",
+//         "LengthOfResidence" => "7",
+//         "HomePrice" => "170000",
+//         "HomeValue" => "262200",
+//         "MedianHomeValue" => "90000",
+//         "LivingSqft" => "1688",
+//         "YrBuiltOrig" => "1965",
+//         "YrBuiltRange" => "8",
+//         "LotNumber" => "134",
+//         "LegalDescription" => "CARLETON ESTATES SUB. LOT 134 L.53 P.7-9",
+//         "LandSqft" => "9104",
+//         "GarageSqft" => "428",
+//         "Subdivision" => "CARLETON ESTATES SUB",
+//         "ZoningCode" => "R-1-C",
+//         "Cooking" => "111",
+//         "Gardening" => "111",
+//         "Music" => "1",
+//         "Diy" => "1",
+//         "Books" => "1",
+//         "TravelVacation" => "TravelVacation",
+//         "HealthBeautyProducts" => "HealthBeautyProducts",
+//         "PetOwner" => "",
+//         "Photography" => "1",
+//         "Fitness" => "1",
+//         "Epicurean" => "Epicurean",
+//         "Cbsa" => "19820",
+//         "CensusBlock" => "2007",
+//         "CensusBlockGroup" => "CensusBlockGroup",
+//         "CensusTract" => "260900"
+//     ]
+// ];
+// $executionTimeListGetDataMatch = [];
+
+
+$applyreidentificationall = $chkreidentification->applyreidentificationall == 'T';
+
+
+public function getleadwebhook(Request $request)
+{
+    $emailMd5   = $request->md5_email;
+    $companyId  = $clientCompanyID;
+    $campaignId = $leadspeek_api_id;
+
+    // 1. Tentukan scope lock
+    if ($doNotIdentifyAcrossCampaigns) {
+        $lockKey = "lock:lead_company:{$companyId}:{$emailMd5}";
+    } else {
+        $lockKey = "lock:lead_campaign:{$campaignId}:{$emailMd5}";
+    }
+
+    // 2. Ambil lock
+    $lock = Cache::store('redis')->lock($lockKey, 10);
+
+    $attempt = 0;
+    $maxAttempts = 10;
+    $acquired = false;
+
+    while ($attempt < $maxAttempts) {
+        if ($lock->get()) {
+            $acquired = true;
+            break;
+        }
+
+        $attempt++;
+        usleep(200000); // 200ms
+    }
+
+    if (!$acquired) {
+        // gagal dapat lock, skip / log
+        Log::warning('Failed to acquire email lock', [
+            'email' => $emailMd5,
+            'company' => $companyId,
+            'campaign' => $campaignId
+        ]);
+        return;
+    }
+
+    try {
+        // 3. LOGIC LAMA (JANGAN DIUBAH)
+        $chkExistOnCampaign = $this->getDataMatch(...);
+
+        if ($chkExistOnCampaign) {
+            // tidak boleh masuk (never, 1 week, dll)
+            return;
+        }
+
+        // 4. INSERT (LOGIC LAMA)
+        $this->processDataMatch(...);
+
+    } finally {
+        // 5. Release lock
+        optional($lock)->release();
+    }
+}

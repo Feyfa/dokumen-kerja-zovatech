@@ -431,3 +431,13 @@ if(count($usrInfo) > 0 && (($usrInfo[0]['customer_payment_id'] != '' && $usrInfo
 if(count($usrInfo) > 0 && (($usrInfo[0]['customer_payment_id'] != '' && $usrInfo[0]['customer_card_id'] != '') || $_AgencyManualBill === true))
 
 1767161680
+
+
+validasi
+1. weekly/monthly cost per contact agency diatas 0, namun lead per day boleh 0 ✅ 
+2. weekly/monthly cost per contact agency tidak boleh 0. ✅
+3. prepaid cost per contact agency ✅, lead per day , lead buy tidak boleh 0 
+4. test apakah benar weekly/monthly, lead per day nya 0, itu unlimitid 
+5. coba test" kaya biasa 
+
+
