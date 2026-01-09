@@ -17,11 +17,13 @@ SELECT
 	CONVERT(AES_DECRYPT(FROM_bASE64(city), '8e651522e38256f2') USING utf8mb4) as city,
 	CONVERT(AES_DECRYPT(FROM_bASE64(state), '8e651522e38256f2') USING utf8mb4) as state,
 	CONVERT(AES_DECRYPT(FROM_bASE64(zipcode), '8e651522e38256f2') USING utf8mb4) as zipcode,
-	price_lead,platform_price_lead,root_price_lead,keyword,description,active,lead_from,updated_at,created_at,encrypted
-FROM `leadspeek_reports` where leadspeek_api_id = 42817863;
+	price_lead,platform_price_lead,root_price_lead,keyword,description,active,lead_from,updated_at,created_at,encrypted,total_execution_time
+FROM `leadspeek_reports` where leadspeek_api_id in ("42817863", "58191283", "73212713");
 
-select * from person_emails where email_encrypt = '8bc64c9c289d18a05dd9652422208f05';
+select * from person_emails where email_encrypt = '8dba134974fd2681332f7194e4e17711';
 
+select * from leadspeek_reports where user_id = 282 and original_md5 = '8dba134974fd2681332f7194e4e17711';
+select * from jobs;
 select count(*) from persons;
 select count(*) from persons_backup;
 
@@ -35,6 +37,8 @@ select
     (SELECT COUNT(*) FROM person_addresses) AS person_addresses,
     (SELECT COUNT(*) FROM person_addresses_backup_1) AS person_addresses_backup_1;  
 --   
+
+
 
 UPDATE leadspeek_reports 
 SET leadspeek_api_id = 42817863, lp_user_id = 1240
@@ -56,7 +60,9 @@ WHERE
 ORDER BY 
     leadspeek_reports.clickdate desc;
     
+select * from leadspeek_reports where leadspeek_api_id = '42817863';
 
+select * from person_emails where email_encrypt = '8dba134974fd2681332f7194e4e17711';
 
-select * from person_emails where email_encrypt = '78e63b99eaa18437f46b56cea8e7b220';
+select * from jobs order by created_at desc;
 

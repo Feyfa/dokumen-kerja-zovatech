@@ -22,12 +22,22 @@ data 1 masuk
     }
 }
 
+@("46171330", "92411969") | ForEach-Object {
+    Start-Job { 
+        param($id)
+        Invoke-RestMethod -Method Get -Uri "https://api.emmsandbox.com/webhook?label=${id}|google&md5_email=8dba134974fd2681332f7194e4e17711"
+    } -ArgumentList $_
+}
+
 @("42817863", "58191283", "73212713") | ForEach-Object {
     Start-Job { 
         param($id)
         Invoke-RestMethod -Method Get -Uri "http://apilocal.emmsandbox.com/webhook?label=${id}|google&md5_email=8dba134974fd2681332f7194e4e17711"
     } -ArgumentList $_
 }
+
+
+https://api.emmsandbox.com/api/media/upload?resumableChunkNumb
 
 persons ✅
 person_emails ✅ 
@@ -243,4 +253,72 @@ public function getleadwebhook(Request $request)
         // 5. Release lock
         optional($lock)->release();
     }
+}
+
+
+ssh://zovatech4@24.144.112.198/var/repo/mcpwatt.git
+
+https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1767855019229-8e681240-64c6-4845-b7e1-dfae5285b255.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SRQLMT45S%2F20260108%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T065025Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCzXaB47dPQda7dIF0LNWbt%2Bal0jOnPQo3BW76cn3oA1gIgDqDwxguL4CCdUjeUi7yXKH4nyZWDXVc8QIn9XS8A84YqtAQIhP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDOeqbUXmXXNWSotMFCqIBLmXXMVV69hMAbO8fzotQKiZpxcSd4M867A%2BXH65EGxBjA77jXwBvsWONw9BXTj1TRy3RvE%2FSID3Xn27PYZlU62pzD97ToayPuJPx5d%2FV3H1iuOa8L9oaiTeT%2F8ptCGTzDd%2BJI%2Foo45XImccHdAiDgL8MkudcMOyDJO5Gij7A3X6fs9nq0aeMOkYRUECZqt%2Foz9o91GPaG7Tq7UgWD8G4JmJNlW%2BGudgDTsXXVESxacRtapJQrpyS25F81wVfnBOm70BcshfYCXGwDLhdzUARE9KvzokmZ2utDNMbHZjMDL39utWl2U0DLaHjlCcBLSoIBWkTfI7DMQFSCNTyL0MoIdeRwqNX%2BOCkymzZzU8ROQrydR29iufc7zt6cj%2FlCeHodAj44mcpcw4pB%2F3wVH9OWzr9wFhBt8lFBKrd2bUryd70FMV93jGo7jWON5ateXV4X1MdOtYVf7a8XdyjbqNQ6Xiv21zUAHQ87X88HMFCR9S%2BHSAQnYs2M7AAcPS98fNjlDrJgPX6O5yjU%2B0GvtqXKmbizY8uAstyou8eWZvYQX7w0Tz5uVyFCWLNULXuNgJwrlgH4VJwX2F0d3x7LXnLfFMm%2FDwtl6N2LKMX58WlLRjg%2FyOrEhYQF8i5raolp3D3iwjS866ZCR%2FhWZ%2Bg5rU9zNNt3CxPRF1Kf%2F0L%2BNByVMcnUXynUdC5Zwwh7H8ygY6pgFO3DyapTbW%2BnsL2Hxr0CiXszzJy0AqcWujKhG1TKR5ZHtxm5jCOHw0tUeX8Nt32iAYfJ0fzOO5d1G7Y2EW0dQntBWaWKkHcnS2F7QI6gvudnWhVxdggmxUeH4Ueu4MiC%2FpymUaQ63CGb7lfzVVQrI7i0beTOf%2BqW32tfhhgaX6NX%2F7yQZvaH5MVPN0nud3HEvh%2Fz2d84qchjJeOLMX8B%2BsTaBt2xSf&X-Amz-Signature=c14d907906959189ef7fa7a226671ff17e7f43a667aea328d96ec230e0bcc739&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject
+
+
+/leadspeek/predict/customers
+
+
+use App\Models\LeadspeekMedcustomerPredictUploadia;customerPredictUpload
+
+https://api.emmsandbox.com/api/customer-predict/upload
+
+/* JIDAN TEST API UPLOAD SUPRESSION */
+Route::middleware(['cors'])->group(function () {
+    Route::post('/leadspeek/suppressionlist/upload','UploadController@suppressionupload');
+    Route::post('/tools/optout-client/upload','UploadController@ClientOptout');
+    Route::post('/tools/optout/upload','UploadController@optout');
+    Route::post('/audiance/upload', 'UploadController@audianceupload');
+    Route::post('/customer-predict/upload', 'UploadController@customerPredictUpload');
+    Route::post('/media/upload', 'UploadController@mediaupload');
+    Route::post('/media/delete', 'UploadController@mediadelete');
+});
+/* JIDAN TEST API UPLOAD SUPRESSION */
+
+/* UPLOAD FILE */
+Route::middleware(['cors'])->group(function () {
+    /* SUPPRESSION AND OPTOUT */
+    Route::post('/leadspeek/suppressionlist/upload','UploadController@suppressionupload');
+    Route::post('/tools/optout-client/upload','UploadController@ClientOptout');
+    Route::post('/tools/optout/upload','UploadController@optout');
+    /* SUPPRESSION AND OPTOUT */
+
+    Route::post('/audiance/upload', 'UploadController@audianceupload');
+    Route::post('/customer-predict/upload', 'UploadController@customerPredictUpload');
+    Route::post('/media/upload', 'UploadController@mediaupload');
+    Route::post('/media/delete', 'UploadController@mediadelete');
+    
+    /* CLEAN ID */
+    Route::post('/tools/clean-id/upload','UploadController@upload_cleanid');
+    /* CLEAN ID */
+});
+/* UPLOAD FILE */
+
+initiate the call {
+  csv_key: 'uploads/5bfad4f0-ae70-42d1-9a11-36bddd000b88/customer_282_test1_1760058487841.csv',
+  market_context: {
+    base_context: 'Business Name: Tesla | Industry: Automotive | Description: i sell car | Competitors: BYD | Location: National | Additional Context: Ideal customer analysis from uploaded CSV',
+    refinements: []
+  },
+  email_column: null,
+  phone_column: null,
+  address_column: null,
+  workflow_id: '29f2fa13-4981-4d7a-a97a-125b81522c00'
+}
+
+initiate the call {
+  csv_key: 'uploads/25293bcb-da48-46c8-b4d6-a94fdedd585e/customer_282_customer_1_1767857170141.csv',
+  market_context: {
+    base_context: 'Business Name: Tesla | Industry: Automotive | Description: i sell car | Competitors: BYD | Additional Context: Ideal customer analysis from uploaded CSV',
+    refinements: []
+  },
+  email_column: null,
+  phone_column: null,
+  address_column: null,
+  workflow_id: '63e960a1-09d5-4ca2-9d92-012c5fc0f544'
 }
