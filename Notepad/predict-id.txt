@@ -359,3 +359,95 @@ FRONT
 
 DATA
 * data/app/Services/PredictService.php
+
+http://datalocal.emmsandbox.com/api/leadspeek/predict
+ProcessAddEditClient
+
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "userID": [
+            "The user id field is required."
+        ],
+        "companyName": [
+            "The company name field is required."
+        ],
+        "campaignName": [
+            "The campaign name field is required."
+        ],
+        "businessName": [
+            "The business name field is required."
+        ],
+        "businessWebsite": [
+            "The business website field is required."
+        ],
+        "businessIdustry": [
+            "The business idustry field is required."
+        ],
+        "businessDescription": [
+            "The business description field is required."
+        ],
+        "businessCompetitors": [
+            "The business competitors field is required."
+        ]
+    }
+}
+
+{
+    "companyID": 164,
+    "userID": "",
+    "companyName": "",
+    "campaignName": "",
+    "answers": {
+        "asec5_4_0_0": true,
+        "asec5_4_0_1": false,
+        "asec5_4_0_2": false,
+        "asec5_4_0_3": false,
+        "asec5_4": [],
+        "asec5_4_1": [],
+        "asec5_4_2": [],
+        "asec5_3": [],
+        "asec5_5": "",
+        "asec5_6": "10",
+        "asec5_9_1": true,
+        "asec5_10": [],
+        "asec5_10_1": [],
+        "asec6_5": "FirstName,LastName,MailingAddress,Phone",
+        "startdatecampaign": "",
+        "enddatecampaign": "",
+        "geo": false,
+        "target_lat": 37.0902,
+        "target_lng": -95.7129,
+        "target_radius_miles": 25,
+        "nationaltargeting": false
+    },
+    "campaignType": 49,
+    "businessName": "",
+    "businessWebsite": "",
+    "businessIdustry": "",
+    "businessCustomIndustry": "",
+    "businessDescription": "",
+    "businessCompetitors": "",
+    "customerUploadSources": [
+        52
+    ],
+    "crmProvider": 45,
+    "crmApiKey": "7hzynwo3ae1rdgkc7kxob30ct0jomzu9ckek12lkzdrtcacia53rvvc69n",
+    "platformFee": "0",
+    "minCostMonth": "0",
+    "timezone": "Asia/Jakarta",
+    "idSys": 22,
+    "target_lat": 37.0902,
+    "target_lng": -95.7129,
+    "target_radius_miles": 25
+}
+http://datalocal.emmsandbox.com/api/leadspeek/simplifi/audience/8
+
+
+di ui ini bisakah membuat fungsi delete nya berjalan
+
+alurnya seperti ini
+1. jika di klik maka ada swal pemberitahuan apakah benar" dihapus, jika cancel maka berhenti sampai sini, jika ya lanjut langkah berikutnya
+2. jika setuju, maka icon delete itu berubah menjadi loading, dan hit ke this.$store.dispatch('PredictRemoveCustomer'), di store nanti ini pakai axios.delete
+3. di api.php, buat Route::delete('/leadspeek/predict/customers/{customer_id}','PredictController@removeCustomer');
+4. di PredictController, nanti logicnya di dalam predictService, jadi kaya this->predictService->removeCustomer. nanti di situ ada pengecekan, apakah id ini masih nyangkut di leadspeek_customer_campaigns, kalo masih nyangkut maka kasih pesan error bahwa tidak boleh di hapus, kalo tidak nyangkut maka hapus saja, dan ini hapusnya db + spaces di digitalocean
