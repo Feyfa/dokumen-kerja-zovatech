@@ -1,0 +1,1000 @@
+1. http://datalocal.emmsandbox.com/api/audience/from-csv-url
+{
+    "upload": {
+        "csvUrl": "https:\/\/emmbetaspaces.nyc3.cdn.digitaloceanspaces.com\/users\/predictid\/customer_282_dimas_customer_1767933342587.csv",
+        "marketContext": {
+            "base_context": "Business Name: Tesla | Industry: Automotive | Description: i sell car | Competitors: BYD | Location: National | Additional Context: Ideal customer analysis from uploaded CSV",
+            "refinements": []
+        },
+        "csvFileName": "customer_282_dimas_customer_1767933342587.csv",
+        "workflowId": "e65fe8f2-823b-4039-8c81-ccfc2b0cc490",
+        "emailColumn": null,
+        "phoneColumn": null,
+        "addressColumn": null,
+        "csvKey": "uploads\/943e2770-2485-4d72-86a4-ca7ec32e37ec\/customer_282_dimas_customer_1767933342587.csv",
+        "uploadUrl": "https:\/\/watt-agentic-uploads-dev.s3.us-east-1.amazonaws.com\/uploads\/943e2770-2485-4d72-86a4-ca7ec32e37ec\/customer_282_dimas_customer_1767933342587.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SS4VV3TGF%2F20260109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260109T043552Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD%2B9RXMPsTB%2BrdFMJ3sI9nyiLZBGxBzMDe1LQicTsU%2BiAIhAPemlTtYX0GTJNDn%2BwfjgVArUOfqb5sXqiqZ2v2jCDkuKrQECJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNDgxNjY1MDg3MTQxIgwfetdNu2699kZUIGIqiAT0%2BftlJyBuaRHj9qQgabBIZJpEliudr6%2B0y96C%2Fh6POAE0q0ZHP1GeyyGS4VIm1UclNGeRyQ2sz077prOFLJheCE7w0D%2BUQBLn6CKJj8mdsFLBalUsLJYAKKFYDPLoqU4a0Ea41CqR0qDLmpEZorwp%2F3SBmPrzWX7NPGT6czNbrjB0ZaCq5u21T%2Fy9yKQM60XgvfJuXokXdu42v6VaAK9DfnLoS%2FKxpXsFrNvY9jpy3tMCACyhSRqFUNB3TNS0ZdGm3VXXkCzUy%2FLg6DZS4iDMo1MtkF7729d4gqb%2FmG%2FzL9rs5RUsQEh4qcy3mYhwb8NVYT7nQbhe4e3ZchnU9ELqZJrXUlTpbSXk%2FsFqAgwLwwyQ7EQp5u8uDrwzWtKiSAHrLK1ETAFQ6qp4Jq3k7lTwhJJk8hEyOocy18w%2FpVWYQahLAC%2F7CuyuC2SXPoj1JfmhFNrjeT8rXbWCNDi7Y%2BHMaubGLkFUeWzB5OSTJ9vecusrz9q3QDi4omRpvXKPHgfHVg7PgjzN6a8DxgQDrCKVw4GclJbkZjD%2FPegrW6Ti7dCBPf3aG3IMmaTrSMWg%2BEx9%2FltBXf3eLYzios%2FaEHXrDIuXFPskNKXR77fEjIZLPRlVSWmPDpYIZbU4FpPg1OJvKRCty80QXPuAskBS58OnE6E16htZ5hzjcCLyuj2Qwkql6yGQ%2BinLMLDvgMsGOqUBJub5%2B6yOmIjgrsuIk%2BiJ8nViIZqyJ1zSUVinHnKG3J17bnyq8I56PFTO4CflUjrJBnb%2Be7w%2BHF29zUolTlBT%2FIeBrp1rPpfFjLGOtc0sY1Jr9IsEZvz6RJRrHSpgD8G6wkhU0YnGCHbLuQzUP2nOiJkQQJlPIXpqHKhEzNXe8ielGJd4aToSwPpBoPtP6oJ%2B60Y2A%2FAyCNMem8h7fI2EGYlIwhbY&X-Amz-Signature=270ee2ff871b53839d948c44de08d74201709c2ba922d5dd4cc78f5959512ffa&X-Amz-SignedHeaders=host&x-amz-checksum-crc32=AAAAAA%3D%3D&x-amz-sdk-checksum-algorithm=CRC32&x-id=PutObject",
+        "uploadExpiresAt": "2026-01-09T05:35:52.014Z"
+    },
+    "analysis": {
+        "analysis": {
+            "detected_schema": {
+                "email_column": "Email1",
+                "phone_column": "Phone1",
+                "address_column": "Address1",
+                "confidence": {
+                    "email": 1,
+                    "phone": 1,
+                    "address": 1
+                },
+                "all_columns": [
+                    "Click Date",
+                    "Firstname",
+                    "Lastname",
+                    "Email1",
+                    "Email2",
+                    "Phone1",
+                    "Phone2",
+                    "Address1",
+                    "Address2",
+                    "City",
+                    "State",
+                    "Zip"
+                ],
+                "sample_data": [
+                    {
+                        "Click Date": "6\/9\/2023 12:56",
+                        "Firstname": "Jonathan",
+                        "Lastname": "Degennaro",
+                        "Email1": "jon.degennaro@hotmail.com",
+                        "Email2": "jondege@hotmail.com",
+                        "Phone1": "(917) 543-8397",
+                        "Phone2": "(973) 707-2611",
+                        "Address1": "101 Clark St",
+                        "Address2": "",
+                        "City": "Glen Ridge",
+                        "State": "NJ",
+                        "Zip": ""
+                    },
+                    {
+                        "Click Date": "6\/9\/2023 11:11",
+                        "Firstname": "Jim",
+                        "Lastname": "Stien",
+                        "Email1": "jimstien@yahoo.com",
+                        "Email2": "jstien@comcast.net",
+                        "Phone1": "(218) 591-8976",
+                        "Phone2": "(715) 399-2345",
+                        "Address1": "5325 E Otto Rd",
+                        "Address2": "",
+                        "City": "South Range",
+                        "State": "WI",
+                        "Zip": ""
+                    },
+                    {
+                        "Click Date": "6\/7\/2023 10:47",
+                        "Firstname": "Berardino",
+                        "Lastname": "Cavaliere",
+                        "Email1": "d.c.homes4you@gmail.com",
+                        "Email2": "bigcav13@yahoo.com",
+                        "Phone1": "(215) 609-7432",
+                        "Phone2": "(215) 463-3085",
+                        "Address1": "2444 S American St",
+                        "Address2": "",
+                        "City": "Philadelphia",
+                        "State": "PA",
+                        "Zip": ""
+                    }
+                ]
+            },
+            "resolution": {
+                "total_identifiers": 9,
+                "resolved": 580,
+                "resolution_rate": 193.33333333333334
+            },
+            "clusters": [
+                {
+                    "cluster_id": "900000021",
+                    "cluster_name": "is_rv_owner",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.9491525423728814,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 21.40880503144654,
+                    "is_inverted": false,
+                    "weighted_score": 12.896225984938235
+                },
+                {
+                    "cluster_id": "900000023",
+                    "cluster_name": "is_truck_owner",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.9491525423728814,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 21.40880503144654,
+                    "is_inverted": false,
+                    "weighted_score": 12.896225984938235
+                },
+                {
+                    "cluster_id": "1800000035",
+                    "cluster_name": "donated_veterans_cause",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.9322033898305084,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 21.037735849056602,
+                    "is_inverted": false,
+                    "weighted_score": 12.562396331423958
+                },
+                {
+                    "cluster_id": "1800000029",
+                    "cluster_name": "donated_environmental_cause",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.9152542372881356,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 20.666666666666668,
+                    "is_inverted": false,
+                    "weighted_score": 12.231497935458886
+                },
+                {
+                    "cluster_id": "900000002",
+                    "cluster_name": "is_renter",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.8813559322033898,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 19.92452830188679,
+                    "is_inverted": false,
+                    "weighted_score": 11.578600432835351
+                },
+                {
+                    "cluster_id": "1800000033",
+                    "cluster_name": "donated_religious_cause",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.864406779661017,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 19.553459119496853,
+                    "is_inverted": false,
+                    "weighted_score": 11.256655906148996
+                },
+                {
+                    "cluster_id": "1800000051",
+                    "cluster_name": "owns_premium_credit_card",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.847457627118644,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 19.18238993710692,
+                    "is_inverted": false,
+                    "weighted_score": 10.937751865472903
+                },
+                {
+                    "cluster_id": "1800000027",
+                    "cluster_name": "donated_childrens_cause",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.7966101694915254,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 18.069182389937108,
+                    "is_inverted": false,
+                    "weighted_score": 9.999579710749217
+                },
+                {
+                    "cluster_id": "900000027",
+                    "cluster_name": "owns_swimming_pool",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.9322033898305084,
+                    "world_prevalence": 0.025527,
+                    "lift": 14.179757381073633,
+                    "is_inverted": false,
+                    "weighted_score": 8.531061823348432
+                },
+                {
+                    "cluster_id": "900000019",
+                    "cluster_name": "is_pet_owner",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.711864406779661,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 16.21383647798742,
+                    "is_inverted": false,
+                    "weighted_score": 8.499681990937338
+                },
+                {
+                    "cluster_id": "900000029",
+                    "cluster_name": "practices_diy",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.9322033898305084,
+                    "world_prevalence": 0.02948972,
+                    "lift": 12.358847198149945,
+                    "is_inverted": false,
+                    "weighted_score": 7.4610898266614925
+                },
+                {
+                    "cluster_id": "1800000041",
+                    "cluster_name": "owns_amex_card",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.9661016949152542,
+                    "world_prevalence": 0.03413252,
+                    "lift": 11.131834383995898,
+                    "is_inverted": false,
+                    "weighted_score": 6.861740367145132
+                },
+                {
+                    "cluster_id": "900000025",
+                    "cluster_name": "is_vacation_traveler",
+                    "cluster_value": "false",
+                    "domain": "lifestyle",
+                    "audience_prevalence": 0.6101694915254238,
+                    "world_prevalence": 0.01731372,
+                    "lift": 13.706137468729674,
+                    "is_inverted": false,
+                    "weighted_score": 6.676791583531747
+                },
+                {
+                    "cluster_id": "1800000039",
+                    "cluster_name": "is_charitable_donor",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.576271186440678,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 13.245283018867925,
+                    "is_inverted": false,
+                    "weighted_score": 6.275753225545864
+                },
+                {
+                    "cluster_id": "1800000045",
+                    "cluster_name": "owns_credit_card",
+                    "cluster_value": "false",
+                    "domain": "financial",
+                    "audience_prevalence": 0.5254237288135594,
+                    "world_prevalence": 0.01694915254237288,
+                    "lift": 12.132075471698116,
+                    "is_inverted": false,
+                    "weighted_score": 5.501443399470344
+                }
+            ],
+            "icp_synthesis": {
+                "personas": [
+                    {
+                        "name": "Modern Homeowner",
+                        "description": "Established homeowners who represent a departure from traditional automotive buyer profiles. They avoid conventional vehicle types like RVs and trucks, suggesting preference for innovative transportation. Not renters (19.92x lift) indicates financial stability and property ownership. They don't engage in traditional charitable giving patterns or own premium credit cards, suggesting different financial priorities focused on technology and sustainability investments rather than conventional luxury signals.",
+                        "key_traits": [
+                            {
+                                "cluster_id": "900000002",
+                                "domain": "lifestyle",
+                                "name": "is_renter",
+                                "value": "false",
+                                "lift": 19.92452830188679,
+                                "insight": "Strong homeownership signal indicating financial stability and established lifestyle"
+                            },
+                            {
+                                "cluster_id": "900000023",
+                                "domain": "lifestyle",
+                                "name": "is_truck_owner",
+                                "value": "false",
+                                "lift": 21.40880503144654,
+                                "insight": "Avoids traditional truck ownership, preferring innovative electric vehicles"
+                            },
+                            {
+                                "cluster_id": "900000027",
+                                "domain": "lifestyle",
+                                "name": "owns_swimming_pool",
+                                "value": "false",
+                                "lift": 14.179757381073633,
+                                "insight": "Doesn't invest in traditional luxury home amenities like pools"
+                            },
+                            {
+                                "cluster_id": "1800000051",
+                                "domain": "financial",
+                                "name": "owns_premium_credit_card",
+                                "value": "false",
+                                "lift": 19.18238993710692,
+                                "insight": "Financial priorities differ from traditional luxury consumers"
+                            }
+                        ],
+                        "expressions": {
+                            "precision": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+                            "balanced": "(900000002) AND (900000023) AND (900000027)",
+                            "reach": "(900000002) AND (900000023)"
+                        }
+                    },
+                    {
+                        "name": "Non-Traditional Philanthropist",
+                        "description": "Customers who don't engage in conventional charitable giving patterns across multiple causes including veterans, environmental, religious, and children's causes (all showing 18-21x lift). This is particularly notable given Tesla's environmental positioning - these buyers are action-oriented (purchasing electric vehicles) rather than donation-oriented. They avoid traditional credit products like premium cards and Amex, suggesting tech-forward payment preferences and different value systems.",
+                        "key_traits": [
+                            {
+                                "cluster_id": "1800000035",
+                                "domain": "financial",
+                                "name": "donated_veterans_cause",
+                                "value": "false",
+                                "lift": 21.037735849056602,
+                                "insight": "Doesn't engage in traditional charitable giving patterns"
+                            },
+                            {
+                                "cluster_id": "1800000029",
+                                "domain": "financial",
+                                "name": "donated_environmental_cause",
+                                "value": "false",
+                                "lift": 20.666666666666668,
+                                "insight": "Action-oriented environmentalism through vehicle choice rather than donations"
+                            },
+                            {
+                                "cluster_id": "1800000033",
+                                "domain": "financial",
+                                "name": "donated_religious_cause",
+                                "value": "false",
+                                "lift": 19.553459119496853,
+                                "insight": "Non-traditional giving patterns across multiple causes"
+                            },
+                            {
+                                "cluster_id": "1800000041",
+                                "domain": "financial",
+                                "name": "owns_amex_card",
+                                "value": "false",
+                                "lift": 11.131834383995898,
+                                "insight": "Avoids traditional premium credit products"
+                            }
+                        ],
+                        "expressions": {
+                            "precision": "(1800000035) AND (1800000029) AND (1800000033) AND (1800000027)",
+                            "balanced": "(1800000035) AND (1800000029) AND (1800000041)",
+                            "reach": "(1800000029) AND (1800000035)"
+                        }
+                    },
+                    {
+                        "name": "Pragmatic Tech Adopter",
+                        "description": "Customers who reject traditional lifestyle markers like RV ownership (21.41x), vacation travel (13.71x), DIY practices (12.36x), and pet ownership (16.21x). This profile suggests urban or suburban professionals focused on efficiency and technology rather than leisure activities or traditional hobbies. They're not credit-dependent (12.13x lift for not owning credit cards) and avoid maintenance-intensive lifestyle choices, aligning with Tesla's low-maintenance electric vehicle value proposition.",
+                        "key_traits": [
+                            {
+                                "cluster_id": "900000021",
+                                "domain": "lifestyle",
+                                "name": "is_rv_owner",
+                                "value": "false",
+                                "lift": 21.40880503144654,
+                                "insight": "Avoids traditional leisure vehicle ownership"
+                            },
+                            {
+                                "cluster_id": "900000025",
+                                "domain": "lifestyle",
+                                "name": "is_vacation_traveler",
+                                "value": "false",
+                                "lift": 13.706137468729674,
+                                "insight": "Not focused on traditional vacation activities"
+                            },
+                            {
+                                "cluster_id": "900000029",
+                                "domain": "lifestyle",
+                                "name": "practices_diy",
+                                "value": "false",
+                                "lift": 12.358847198149945,
+                                "insight": "Prefers professional solutions over DIY, values convenience"
+                            },
+                            {
+                                "cluster_id": "900000019",
+                                "domain": "lifestyle",
+                                "name": "is_pet_owner",
+                                "value": "false",
+                                "lift": 16.21383647798742,
+                                "insight": "Lifestyle not centered around traditional pet ownership"
+                            }
+                        ],
+                        "expressions": {
+                            "precision": "(900000021) AND (900000029) AND (900000019) AND (900000025)",
+                            "balanced": "(900000021) AND (900000029) AND (900000019)",
+                            "reach": "(900000021) AND (900000023)"
+                        }
+                    }
+                ],
+                "icp_analysis": {
+                    "summary": "Tesla's ideal customers show a distinctive profile characterized by lifestyle and financial behaviors that set them apart from the general population. The strongest signals come from what these customers are NOT: they overwhelmingly avoid traditional vehicle ownership patterns (not RV owners with 21.41x lift, not truck owners with 21.41x lift), charitable giving behaviors (not veterans cause donors with 21.04x lift, not environmental cause donors with 20.67x lift), and traditional homeownership patterns (not renters with 19.92x lift). Additional signals show they avoid premium credit cards (19.18x lift), swimming pools (14.18x lift), DIY practices (12.36x lift), and vacation travel (13.71x lift). This suggests Tesla attracts customers who are established homeowners with distinct financial priorities and lifestyle choices that differ significantly from traditional automotive buyers.",
+                    "top_distinctive_traits": [
+                        {
+                            "cluster_id": "900000021",
+                            "domain": "lifestyle",
+                            "name": "is_rv_owner",
+                            "value": "false",
+                            "audience_percent": 0.9491525423728814,
+                            "world_percent": 0.01694915254237288,
+                            "lift": 21.40880503144654
+                        },
+                        {
+                            "cluster_id": "900000023",
+                            "domain": "lifestyle",
+                            "name": "is_truck_owner",
+                            "value": "false",
+                            "audience_percent": 0.9491525423728814,
+                            "world_percent": 0.01694915254237288,
+                            "lift": 21.40880503144654
+                        },
+                        {
+                            "cluster_id": "1800000035",
+                            "domain": "financial",
+                            "name": "donated_veterans_cause",
+                            "value": "false",
+                            "audience_percent": 0.9322033898305084,
+                            "world_percent": 0.01694915254237288,
+                            "lift": 21.037735849056602
+                        },
+                        {
+                            "cluster_id": "1800000029",
+                            "domain": "financial",
+                            "name": "donated_environmental_cause",
+                            "value": "false",
+                            "audience_percent": 0.9152542372881356,
+                            "world_percent": 0.01694915254237288,
+                            "lift": 20.666666666666668
+                        },
+                        {
+                            "cluster_id": "900000002",
+                            "domain": "lifestyle",
+                            "name": "is_renter",
+                            "value": "false",
+                            "audience_percent": 0.8813559322033898,
+                            "world_percent": 0.01694915254237288,
+                            "lift": 19.92452830188679
+                        }
+                    ],
+                    "exclusion_signals": []
+                }
+            },
+            "cluster_lookup_warning": {
+                "code": "CLUSTER_LOOKUP_FAILURES",
+                "message": "152 of 317 cluster lookups failed. Analysis results may be incomplete.",
+                "failed_count": 152,
+                "total_count": 317
+            },
+            "domain_selection": {
+                "domains": [
+                    "demographic",
+                    "affinity",
+                    "financial",
+                    "intent",
+                    "lifestyle",
+                    "purchase"
+                ],
+                "reasoning": "For Tesla's automotive market analysis: 1) Affinity reveals brand preferences and competitor consideration (especially important given BYD competition), 2) Financial indicates income ranges crucial for luxury EV purchase capability, 3) Intent captures purchase signals for high-consideration automotive decisions, 4) Lifestyle identifies early adopters, tech enthusiasts, and environmentally-conscious segments aligned with Tesla's brand, 5) Purchase shows online buying behavior and spending patterns relevant to Tesla's direct-to-consumer model and premium pricing."
+            },
+            "workflow_id": "4d0b279c-3675-4b9a-93c7-020310cb7786",
+            "tool_trace_id": "797e7ea3d4691baa67206b94c852a0f6"
+        },
+        "personas": [
+            {
+                "name": "Modern Homeowner",
+                "description": "Established homeowners who represent a departure from traditional automotive buyer profiles. They avoid conventional vehicle types like RVs and trucks, suggesting preference for innovative transportation. Not renters (19.92x lift) indicates financial stability and property ownership. They don't engage in traditional charitable giving patterns or own premium credit cards, suggesting different financial priorities focused on technology and sustainability investments rather than conventional luxury signals.",
+                "key_traits": [
+                    {
+                        "cluster_id": "900000002",
+                        "domain": "lifestyle",
+                        "name": "is_renter",
+                        "value": "false",
+                        "lift": 19.92452830188679,
+                        "insight": "Strong homeownership signal indicating financial stability and established lifestyle"
+                    },
+                    {
+                        "cluster_id": "900000023",
+                        "domain": "lifestyle",
+                        "name": "is_truck_owner",
+                        "value": "false",
+                        "lift": 21.40880503144654,
+                        "insight": "Avoids traditional truck ownership, preferring innovative electric vehicles"
+                    },
+                    {
+                        "cluster_id": "900000027",
+                        "domain": "lifestyle",
+                        "name": "owns_swimming_pool",
+                        "value": "false",
+                        "lift": 14.179757381073633,
+                        "insight": "Doesn't invest in traditional luxury home amenities like pools"
+                    },
+                    {
+                        "cluster_id": "1800000051",
+                        "domain": "financial",
+                        "name": "owns_premium_credit_card",
+                        "value": "false",
+                        "lift": 19.18238993710692,
+                        "insight": "Financial priorities differ from traditional luxury consumers"
+                    }
+                ],
+                "expressions": {
+                    "precision": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+                    "balanced": "(900000002) AND (900000023) AND (900000027)",
+                    "reach": "(900000002) AND (900000023)"
+                }
+            },
+            {
+                "name": "Non-Traditional Philanthropist",
+                "description": "Customers who don't engage in conventional charitable giving patterns across multiple causes including veterans, environmental, religious, and children's causes (all showing 18-21x lift). This is particularly notable given Tesla's environmental positioning - these buyers are action-oriented (purchasing electric vehicles) rather than donation-oriented. They avoid traditional credit products like premium cards and Amex, suggesting tech-forward payment preferences and different value systems.",
+                "key_traits": [
+                    {
+                        "cluster_id": "1800000035",
+                        "domain": "financial",
+                        "name": "donated_veterans_cause",
+                        "value": "false",
+                        "lift": 21.037735849056602,
+                        "insight": "Doesn't engage in traditional charitable giving patterns"
+                    },
+                    {
+                        "cluster_id": "1800000029",
+                        "domain": "financial",
+                        "name": "donated_environmental_cause",
+                        "value": "false",
+                        "lift": 20.666666666666668,
+                        "insight": "Action-oriented environmentalism through vehicle choice rather than donations"
+                    },
+                    {
+                        "cluster_id": "1800000033",
+                        "domain": "financial",
+                        "name": "donated_religious_cause",
+                        "value": "false",
+                        "lift": 19.553459119496853,
+                        "insight": "Non-traditional giving patterns across multiple causes"
+                    },
+                    {
+                        "cluster_id": "1800000041",
+                        "domain": "financial",
+                        "name": "owns_amex_card",
+                        "value": "false",
+                        "lift": 11.131834383995898,
+                        "insight": "Avoids traditional premium credit products"
+                    }
+                ],
+                "expressions": {
+                    "precision": "(1800000035) AND (1800000029) AND (1800000033) AND (1800000027)",
+                    "balanced": "(1800000035) AND (1800000029) AND (1800000041)",
+                    "reach": "(1800000029) AND (1800000035)"
+                }
+            },
+            {
+                "name": "Pragmatic Tech Adopter",
+                "description": "Customers who reject traditional lifestyle markers like RV ownership (21.41x), vacation travel (13.71x), DIY practices (12.36x), and pet ownership (16.21x). This profile suggests urban or suburban professionals focused on efficiency and technology rather than leisure activities or traditional hobbies. They're not credit-dependent (12.13x lift for not owning credit cards) and avoid maintenance-intensive lifestyle choices, aligning with Tesla's low-maintenance electric vehicle value proposition.",
+                "key_traits": [
+                    {
+                        "cluster_id": "900000021",
+                        "domain": "lifestyle",
+                        "name": "is_rv_owner",
+                        "value": "false",
+                        "lift": 21.40880503144654,
+                        "insight": "Avoids traditional leisure vehicle ownership"
+                    },
+                    {
+                        "cluster_id": "900000025",
+                        "domain": "lifestyle",
+                        "name": "is_vacation_traveler",
+                        "value": "false",
+                        "lift": 13.706137468729674,
+                        "insight": "Not focused on traditional vacation activities"
+                    },
+                    {
+                        "cluster_id": "900000029",
+                        "domain": "lifestyle",
+                        "name": "practices_diy",
+                        "value": "false",
+                        "lift": 12.358847198149945,
+                        "insight": "Prefers professional solutions over DIY, values convenience"
+                    },
+                    {
+                        "cluster_id": "900000019",
+                        "domain": "lifestyle",
+                        "name": "is_pet_owner",
+                        "value": "false",
+                        "lift": 16.21383647798742,
+                        "insight": "Lifestyle not centered around traditional pet ownership"
+                    }
+                ],
+                "expressions": {
+                    "precision": "(900000021) AND (900000029) AND (900000019) AND (900000025)",
+                    "balanced": "(900000021) AND (900000029) AND (900000019)",
+                    "reach": "(900000021) AND (900000023)"
+                }
+            }
+        ],
+        "csvKey": "uploads\/943e2770-2485-4d72-86a4-ca7ec32e37ec\/customer_282_dimas_customer_1767933342587.csv",
+        "workflowId": "4d0b279c-3675-4b9a-93c7-020310cb7786",
+        "marketContext": {
+            "base_context": "Business Name: Tesla | Industry: Automotive | Description: i sell car | Competitors: BYD | Location: National | Additional Context: Ideal customer analysis from uploaded CSV",
+            "refinements": []
+        }
+    },
+    "icp_description": null,
+    "query_params": [],
+    "metadata": [],
+    "personas": [
+        {
+            "name": "Modern Homeowner",
+            "description": "Established homeowners who represent a departure from traditional automotive buyer profiles. They avoid conventional vehicle types like RVs and trucks, suggesting preference for innovative transportation. Not renters (19.92x lift) indicates financial stability and property ownership. They don't engage in traditional charitable giving patterns or own premium credit cards, suggesting different financial priorities focused on technology and sustainability investments rather than conventional luxury signals.",
+            "key_traits": [
+                {
+                    "cluster_id": "900000002",
+                    "domain": "lifestyle",
+                    "name": "is_renter",
+                    "value": "false",
+                    "lift": 19.92452830188679,
+                    "insight": "Strong homeownership signal indicating financial stability and established lifestyle"
+                },
+                {
+                    "cluster_id": "900000023",
+                    "domain": "lifestyle",
+                    "name": "is_truck_owner",
+                    "value": "false",
+                    "lift": 21.40880503144654,
+                    "insight": "Avoids traditional truck ownership, preferring innovative electric vehicles"
+                },
+                {
+                    "cluster_id": "900000027",
+                    "domain": "lifestyle",
+                    "name": "owns_swimming_pool",
+                    "value": "false",
+                    "lift": 14.179757381073633,
+                    "insight": "Doesn't invest in traditional luxury home amenities like pools"
+                },
+                {
+                    "cluster_id": "1800000051",
+                    "domain": "financial",
+                    "name": "owns_premium_credit_card",
+                    "value": "false",
+                    "lift": 19.18238993710692,
+                    "insight": "Financial priorities differ from traditional luxury consumers"
+                }
+            ],
+            "expressions": {
+                "precision": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+                "balanced": "(900000002) AND (900000023) AND (900000027)",
+                "reach": "(900000002) AND (900000023)"
+            }
+        },
+        {
+            "name": "Non-Traditional Philanthropist",
+            "description": "Customers who don't engage in conventional charitable giving patterns across multiple causes including veterans, environmental, religious, and children's causes (all showing 18-21x lift). This is particularly notable given Tesla's environmental positioning - these buyers are action-oriented (purchasing electric vehicles) rather than donation-oriented. They avoid traditional credit products like premium cards and Amex, suggesting tech-forward payment preferences and different value systems.",
+            "key_traits": [
+                {
+                    "cluster_id": "1800000035",
+                    "domain": "financial",
+                    "name": "donated_veterans_cause",
+                    "value": "false",
+                    "lift": 21.037735849056602,
+                    "insight": "Doesn't engage in traditional charitable giving patterns"
+                },
+                {
+                    "cluster_id": "1800000029",
+                    "domain": "financial",
+                    "name": "donated_environmental_cause",
+                    "value": "false",
+                    "lift": 20.666666666666668,
+                    "insight": "Action-oriented environmentalism through vehicle choice rather than donations"
+                },
+                {
+                    "cluster_id": "1800000033",
+                    "domain": "financial",
+                    "name": "donated_religious_cause",
+                    "value": "false",
+                    "lift": 19.553459119496853,
+                    "insight": "Non-traditional giving patterns across multiple causes"
+                },
+                {
+                    "cluster_id": "1800000041",
+                    "domain": "financial",
+                    "name": "owns_amex_card",
+                    "value": "false",
+                    "lift": 11.131834383995898,
+                    "insight": "Avoids traditional premium credit products"
+                }
+            ],
+            "expressions": {
+                "precision": "(1800000035) AND (1800000029) AND (1800000033) AND (1800000027)",
+                "balanced": "(1800000035) AND (1800000029) AND (1800000041)",
+                "reach": "(1800000029) AND (1800000035)"
+            }
+        },
+        {
+            "name": "Pragmatic Tech Adopter",
+            "description": "Customers who reject traditional lifestyle markers like RV ownership (21.41x), vacation travel (13.71x), DIY practices (12.36x), and pet ownership (16.21x). This profile suggests urban or suburban professionals focused on efficiency and technology rather than leisure activities or traditional hobbies. They're not credit-dependent (12.13x lift for not owning credit cards) and avoid maintenance-intensive lifestyle choices, aligning with Tesla's low-maintenance electric vehicle value proposition.",
+            "key_traits": [
+                {
+                    "cluster_id": "900000021",
+                    "domain": "lifestyle",
+                    "name": "is_rv_owner",
+                    "value": "false",
+                    "lift": 21.40880503144654,
+                    "insight": "Avoids traditional leisure vehicle ownership"
+                },
+                {
+                    "cluster_id": "900000025",
+                    "domain": "lifestyle",
+                    "name": "is_vacation_traveler",
+                    "value": "false",
+                    "lift": 13.706137468729674,
+                    "insight": "Not focused on traditional vacation activities"
+                },
+                {
+                    "cluster_id": "900000029",
+                    "domain": "lifestyle",
+                    "name": "practices_diy",
+                    "value": "false",
+                    "lift": 12.358847198149945,
+                    "insight": "Prefers professional solutions over DIY, values convenience"
+                },
+                {
+                    "cluster_id": "900000019",
+                    "domain": "lifestyle",
+                    "name": "is_pet_owner",
+                    "value": "false",
+                    "lift": 16.21383647798742,
+                    "insight": "Lifestyle not centered around traditional pet ownership"
+                }
+            ],
+            "expressions": {
+                "precision": "(900000021) AND (900000029) AND (900000019) AND (900000025)",
+                "balanced": "(900000021) AND (900000029) AND (900000019)",
+                "reach": "(900000021) AND (900000023)"
+            }
+        }
+    ]
+}
+
+2. http://datalocal.emmsandbox.com/api/audience/from-csv-key
+{
+    "audience": {
+        "sample": [
+            {
+                "person_id": 1,
+                "identifiers": {
+                    "email": [
+                        "nkonstantin@tds.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 6,
+                "identifiers": {
+                    "email": [
+                        "sjb2188@gmail.com",
+                        "sjb218@gmail.com",
+                        "susanbongiovanni@att.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 9,
+                "identifiers": {
+                    "email": [
+                        "lindynoftall@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 12,
+                "identifiers": {
+                    "email": [
+                        "robertguidetti@hotmail.com",
+                        "robert.guidetti@netzero.net",
+                        "djx2@webtv.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 14,
+                "identifiers": {
+                    "email": [
+                        "dlazazzera@hotmail.com",
+                        "lara721@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 16,
+                "identifiers": {
+                    "email": [
+                        "qthomaj95s.dacey@juno.com",
+                        "thomas.dacey@juno.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 17,
+                "identifiers": {
+                    "email": [
+                        "tjudd95@comcast.net",
+                        "laurie6022@aol.com",
+                        "tjudd447@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 19,
+                "identifiers": {
+                    "email": [
+                        "dorothylafleur@nc.rr.com",
+                        "dollylafleur@gmail.com",
+                        "dlafleur29@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 20,
+                "identifiers": {
+                    "email": [
+                        "ljchab413@aol.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 23,
+                "identifiers": {
+                    "email": [
+                        "jpidge68@yahoo.com"
+                    ]
+                }
+            }
+        ],
+        "total": "191137967"
+    },
+    "csvKey": "uploads\/943e2770-2485-4d72-86a4-ca7ec32e37ec\/customer_282_dimas_customer_1767933342587.csv",
+    "workflowId": "bc36f44b-1b46-45db-8f1d-f6ce24aba8a9",
+    "expressionUsed": "(900000002) AND (900000023) AND (900000027)",
+    "finalExpression": "(900000002) AND (900000023) AND (900000027)",
+    "originalExpression": "(900000002) AND (900000023) AND (900000027)",
+    "addedCluster": "none",
+    "warnings": [
+        {
+            "code": "AUDIENCE_TOO_LARGE",
+            "info": "Size > 10,000,000",
+            "message": "Audience size exceeds optimal threshold (10,000,000)"
+        }
+    ],
+    "overview": [
+        {
+            "name": "Modern Homeowner",
+            "strategy": "precision",
+            "total": 184771563
+        },
+        {
+            "name": "Modern Homeowner",
+            "strategy": "balanced",
+            "total": 191137967
+        },
+        {
+            "name": "Modern Homeowner",
+            "strategy": "reach",
+            "total": 216494544
+        }
+    ]
+}
+
+3. http://datalocal.emmsandbox.com/api/audience/from-csv-key
+{
+    "audience": {
+        "sample": [
+            {
+                "person_id": 1,
+                "identifiers": {
+                    "email": [
+                        "nkonstantin@tds.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 2,
+                "identifiers": {
+                    "email": [
+                        "dnasiatka1@gmail.com",
+                        "dianenasiatka@sbcglobal.net",
+                        "dnasiatka@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 18,
+                "identifiers": {
+                    "email": [
+                        "rtkpatriot@verizon.net",
+                        "2findthemusic@gmail.com",
+                        "rkostanski@comcast.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 20,
+                "identifiers": {
+                    "email": [
+                        "ljchab413@aol.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 24,
+                "identifiers": {
+                    "email": [
+                        "scorbett26@hotmail.com",
+                        "fromn2s@msn.com",
+                        "shannon83182@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 27,
+                "identifiers": {
+                    "email": [
+                        "4138219996@co3media.com",
+                        "tigger5468@bellsouth.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 28,
+                "identifiers": {
+                    "email": [
+                        "davidjr1500@gmail.com",
+                        "sapelli13@aol.com",
+                        "wsapelli@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 40,
+                "identifiers": {
+                    "email": [
+                        "brandi72655@yahoo.com",
+                        "crayzmomof4@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 43,
+                "identifiers": {
+                    "email": [
+                        "mkononitz@gmail.com",
+                        "dankononitz@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 49,
+                "identifiers": {
+                    "email": [
+                        "sweetangel00515@gateway.net"
+                    ]
+                }
+            }
+        ],
+        "total": "184771563"
+    },
+    "csvKey": "uploads\/943e2770-2485-4d72-86a4-ca7ec32e37ec\/customer_282_dimas_customer_1767933342587.csv",
+    "workflowId": "230754b0-f681-4165-a7cd-6c821783af77",
+    "expressionUsed": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+    "finalExpression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+    "originalExpression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+    "addedCluster": "none",
+    "warnings": [
+        {
+            "code": "AUDIENCE_TOO_LARGE",
+            "info": "Size > 10,000,000",
+            "message": "Audience size exceeds optimal threshold (10,000,000)"
+        }
+    ],
+    "summary": "**Audience Build Summary**  \n- **Persona:** Modern Homeowner  \n- **Strategy:** Precision  \n- **Total Audience Size:** 184,771,563  \n\n**Warning:**  \n- Audience size exceeds optimal threshold (10,000,000): Size > 10,000,000  \n\n**Strategy Guidance:**  \n- Audience is very large even with precision; consider adding a location to narrow results.  \n- Location not provided.\n\nYou can add in other characteristics via chatting to the agent."
+}
+
+saya sudah undo kode anda. bisakah buat ulang
+
+1. pakai cara ajax tadi, namun saya sudah buatkan route disini Route::get('/leadspeek/predict/customers-export/{customer_id}', 'PredictController@exportCustomer');
+2. nanti di PredictController, jangan lupa logic nya itu dibuat di PredictService, kaya this->predictService->exportCustomer gitu lah
+
+
+===== yang harus dikerjakan ===== 
+1. membuat download di customer list ✅
+2. buat logic jika klik next, maka akan buat job untuk upload link download dari mcp ke digital ocean
+3. buat icon download yang jika di klik maka akan muncul modal, nanti isinya dalah list atau result data mingguan
+===== yang harus dikerjakan ===== 
+
+
+table `leadspeek_predict_reports`
+- id BIGINT UNSIGNED autoincrement
+- user_id BIGINT UNSIGNED DEFAULT NULL // user_id client
+- leadspeek_api_id VARCHAR(20) DEFAULT NULL
+- file_download TEXT DEFAULT NULL
+- created_at TIMESTAMP DEFAULT NULL
+- updated_at TIMESTAMP DEFAULT NULL

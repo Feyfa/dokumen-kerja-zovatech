@@ -451,3 +451,35 @@ alurnya seperti ini
 2. jika setuju, maka icon delete itu berubah menjadi loading, dan hit ke this.$store.dispatch('PredictRemoveCustomer'), di store nanti ini pakai axios.delete
 3. di api.php, buat Route::delete('/leadspeek/predict/customers/{customer_id}','PredictController@removeCustomer');
 4. di PredictController, nanti logicnya di dalam predictService, jadi kaya this->predictService->removeCustomer. nanti di situ ada pengecekan, apakah id ini masih nyangkut di leadspeek_customer_campaigns, kalo masih nyangkut maka kasih pesan error bahwa tidak boleh di hapus, kalo tidak nyangkut maka hapus saja, dan ini hapusnya db + spaces di digitalocean
+
+
+EMM-SANDBOX-APP
+
+JD-TASK-EMM-790-DEV-SYNC = "feature delete customer in predict id"
+
+FILE
+FRONT
+* front\src\components\GeoRadiusSelector.vue
+* front\src\components\Tables\UserClient.vue
+* front\src\pages\Modules\Auth\LeedspeekPredict\Client.vue
+* front\src\store\store.js
+
+DATA
+* data\app\Http\Controllers\PredictController.php
+* data\app\Services\PredictService.php
+* data\routes\api.php
+
+LeadspeekPredictReport
+CREATE TABLE `leadspeek_predict_reports` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT UNSIGNED DEFAULT NULL,
+  `leadspeek_api_id` VARCHAR(20) DEFAULT NULL,
+  `file_download` TEXT DEFAULT NULL,
+  `report_date` DATETIME DEFAULT NULL,
+  `created_at` TIMESTAMP NULL,
+  `updated_at` TIMESTAMP NULL,
+  CONSTRAINT `leadspeek_predict_reports_pk` PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+php artisan command:predictcheckreport
+php artisan queue:work redis --queue=predictfetchreport

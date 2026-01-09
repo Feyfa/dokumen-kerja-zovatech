@@ -523,3 +523,219 @@
         ]
     }
 }
+
+
+
+{
+    "total_matches": "2181334",
+    "returned_count": 1,
+    "has_more": true,
+    "workflow_id": "f8a194e1-1c4a-4ca0-87f6-1fe0a126f75e",
+    "next_offset": 1,
+    "profiles": [
+        {
+            "person_id": "546",
+            "domains": {
+                "address": [
+                    "194 Mannaseh Dr W, Granville, OH 43023-7506"
+                ],
+                "email": [
+                    "jstasiowski@yahoo.com",
+                    "jstasiowski@gmail.com",
+                    "stasiowski@msn.com"
+                ],
+                "name": [
+                    "James Stasiowski"
+                ],
+                "demographic": {
+                    "education": {
+                        "value": "Completed Graduate School",
+                        "cluster_id": 2
+                    },
+                    "ethnic_group": {
+                        "value": "White",
+                        "cluster_id": 12
+                    },
+                    "gender": {
+                        "value": "Male",
+                        "cluster_id": 14
+                    },
+                    "generation": {
+                        "value": "3. Baby Boomers (1943-1960)",
+                        "cluster_id": 17
+                    },
+                    "is_multilingual": {
+                        "value": false,
+                        "cluster_id": 29
+                    },
+                    "is_speaks_english": {
+                        "value": true,
+                        "cluster_id": 32
+                    },
+                    "marital_status": {
+                        "value": "Married",
+                        "cluster_id": 19
+                    },
+                    "religion": {
+                        "value": "Catholic",
+                        "cluster_id": 22
+                    },
+                    "language_spoken": "English",
+                    "ethnic_detail": "Polish"
+                }
+            }
+        }
+    ],
+    "export": {
+        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1767954038919-2aac3a5a-6587-454f-b3e9-d6350daad64a.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SU6SWBKKX%2F20260109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260109T102038Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAfg2C8jJsPcsdOb1WXBY614%2BRkHjGIrhL7ZPmimj%2BKuAiEAsEiemJ3dJmrjPjlxIC0HdrioC3lH1q1AKDybdNrkj7IqtAQIn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDFliskzv1yHqbh3tcCqIBFOTE8WvxtkQtoqAQkr6BZX8ObLaEAFx%2BGokSirEoXsRNLOiBxXMvvhvqerhuTC2Fxhvm6ny%2FrorU7PtxrK0U37IYdX4VCzhr3r5DK9OP%2FODz4RDB9DP6YMDCwdrpFnFiMt8gam3cajeiLixC1jOhb3yCJcMIF4jFIsSoDDxk4hAjDFYuIM%2B6f4j65U8vpGEN%2F2T0KQMngmawZZ23UPSgCEhENfV65zHg6ZMsWR%2BLvYVcQ1TcT69E7BvlHIQKzx1yqjFewZXLOsbw%2FijISFWnWeFYHb6mOY6O1vrdNg0jYEfic%2FzCC5g7Jf43HSJLoBcUFv6zpLaKXbk3on6T8GsPcHn%2FXWd5QTZvDuhSVThJGa%2BdY4Eu8eED5fiRnLGYde8pWA0GwsESmBLAgPZpQgFShEYtuaqc42gUegP0sxylAMxGC5rQlSHBl6q8a4JvpypRTH2W%2FSgqxhPIgklhsq%2FeJEm9r7xUKglR8%2FAZJzlcANc4Sek79eIQi%2FrtJVg0Qq4N2c9Xv0cZQgpWcqb%2FL34wMy1l3o0K5cBx8M0ZeeRrvZTeOztwXsaGJkChToFYYBcDMwfbS2xsZHFCeMGGATPrWO2gwg32Y71YzNwq8NsIv1KB8c89kMnxXHfLfmrWQWeickqjSuq48fX1tZSfKNW1IBdI7ioAdCdRIJhtZHLU7%2BqHempt1IwG6EwqKSCywY6pgHYko0j47Qx55Luz3GZIFfMJzw4%2FpYVO2%2FcA%2ByVinUuN30ICYwbYEhoKUOgQdhpb0XVQ9dtcYJ8xIPGGlmhnosAaRWH9j7tNGrz%2B7gf2cPYmMuvFuQETDKlL%2Bbg6WuH85OJQ3F%2F0%2BCthh%2FXoOaKP2o27t8TisdG5rX3mNEEc%2BHhjjBAC0Sv8lrBzN3rOmhbHaP1iENFJgjIbT0nlxadRQVYu5ymOag9&X-Amz-Signature=539a71c9915b6b37f40813e7d5834992f7f1883453df6da7657ca6a6834f8abe&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+        "format": "csv",
+        "rows": 1,
+        "size_bytes": 0,
+        "expires_at": "2026-01-09T11:20:38.953Z"
+    },
+    "domains_retrieved": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "search_criteria": {
+        "expression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+        "location": {
+            "latitude": 40,
+            "longitude": -83,
+            "radius": 100,
+            "unit": "km"
+        },
+        "audience_limit": 1
+    }
+}
+
+
+{
+    "total_matches": "2181334",
+    "returned_count": 2,
+    "has_more": true,
+    "workflow_id": "ef6a0f10-2658-44f0-9a22-633a3213703b",
+    "next_offset": 2,
+    "profiles": [
+        {
+            "person_id": "546",
+            "domains": {
+                "address": [
+                    "194 Mannaseh Dr W, Granville, OH 43023-7506"
+                ],
+                "email": [
+                    "jstasiowski@yahoo.com",
+                    "jstasiowski@gmail.com",
+                    "stasiowski@msn.com"
+                ],
+                "name": [
+                    "James Stasiowski"
+                ],
+                "demographic": {
+                    "education": {
+                        "value": "Completed Graduate School",
+                        "cluster_id": 2
+                    },
+                    "ethnic_group": {
+                        "value": "White",
+                        "cluster_id": 12
+                    },
+                    "gender": {
+                        "value": "Male",
+                        "cluster_id": 14
+                    },
+                    "generation": {
+                        "value": "3. Baby Boomers (1943-1960)",
+                        "cluster_id": 17
+                    },
+                    "is_multilingual": {
+                        "value": false,
+                        "cluster_id": 29
+                    },
+                    "is_speaks_english": {
+                        "value": true,
+                        "cluster_id": 32
+                    },
+                    "marital_status": {
+                        "value": "Married",
+                        "cluster_id": 19
+                    },
+                    "religion": {
+                        "value": "Catholic",
+                        "cluster_id": 22
+                    },
+                    "language_spoken": "English",
+                    "ethnic_detail": "Polish"
+                }
+            }
+        },
+        {
+            "person_id": "798",
+            "domains": {
+                "address": [
+                    "7573 Mount Hood, Dayton, OH 45424-6911"
+                ],
+                "email": [
+                    "h.kimberly53@yahoo.com",
+                    "kymart1205@gmail.com",
+                    "kimberlyco@aol.com"
+                ],
+                "name": [
+                    "Kimberly Cofield"
+                ],
+                "demographic": {
+                    "education": {
+                        "value": "Completed High School",
+                        "cluster_id": 3
+                    },
+                    "gender": {
+                        "value": "Female",
+                        "cluster_id": 13
+                    },
+                    "generation": {
+                        "value": "2. Generation X (1961-1981)",
+                        "cluster_id": 16
+                    },
+                    "is_multilingual": {
+                        "value": false,
+                        "cluster_id": 29
+                    },
+                    "is_speaks_english": {
+                        "value": true,
+                        "cluster_id": 32
+                    },
+                    "marital_status": {
+                        "value": "Married",
+                        "cluster_id": 19
+                    },
+                    "language_spoken": "English"
+                }
+            }
+        }
+    ],
+    "export": {
+        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1767953963137-3dc239ce-72e6-43d0-b73b-73cb20493010.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SU6SWBKKX%2F20260109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260109T101923Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAfg2C8jJsPcsdOb1WXBY614%2BRkHjGIrhL7ZPmimj%2BKuAiEAsEiemJ3dJmrjPjlxIC0HdrioC3lH1q1AKDybdNrkj7IqtAQIn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDFliskzv1yHqbh3tcCqIBFOTE8WvxtkQtoqAQkr6BZX8ObLaEAFx%2BGokSirEoXsRNLOiBxXMvvhvqerhuTC2Fxhvm6ny%2FrorU7PtxrK0U37IYdX4VCzhr3r5DK9OP%2FODz4RDB9DP6YMDCwdrpFnFiMt8gam3cajeiLixC1jOhb3yCJcMIF4jFIsSoDDxk4hAjDFYuIM%2B6f4j65U8vpGEN%2F2T0KQMngmawZZ23UPSgCEhENfV65zHg6ZMsWR%2BLvYVcQ1TcT69E7BvlHIQKzx1yqjFewZXLOsbw%2FijISFWnWeFYHb6mOY6O1vrdNg0jYEfic%2FzCC5g7Jf43HSJLoBcUFv6zpLaKXbk3on6T8GsPcHn%2FXWd5QTZvDuhSVThJGa%2BdY4Eu8eED5fiRnLGYde8pWA0GwsESmBLAgPZpQgFShEYtuaqc42gUegP0sxylAMxGC5rQlSHBl6q8a4JvpypRTH2W%2FSgqxhPIgklhsq%2FeJEm9r7xUKglR8%2FAZJzlcANc4Sek79eIQi%2FrtJVg0Qq4N2c9Xv0cZQgpWcqb%2FL34wMy1l3o0K5cBx8M0ZeeRrvZTeOztwXsaGJkChToFYYBcDMwfbS2xsZHFCeMGGATPrWO2gwg32Y71YzNwq8NsIv1KB8c89kMnxXHfLfmrWQWeickqjSuq48fX1tZSfKNW1IBdI7ioAdCdRIJhtZHLU7%2BqHempt1IwG6EwqKSCywY6pgHYko0j47Qx55Luz3GZIFfMJzw4%2FpYVO2%2FcA%2ByVinUuN30ICYwbYEhoKUOgQdhpb0XVQ9dtcYJ8xIPGGlmhnosAaRWH9j7tNGrz%2B7gf2cPYmMuvFuQETDKlL%2Bbg6WuH85OJQ3F%2F0%2BCthh%2FXoOaKP2o27t8TisdG5rX3mNEEc%2BHhjjBAC0Sv8lrBzN3rOmhbHaP1iENFJgjIbT0nlxadRQVYu5ymOag9&X-Amz-Signature=cdcaf42e3a7738b03dabc23933edbbc856b99eea6ad71f7e6240704328b55c90&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+        "format": "csv",
+        "rows": 2,
+        "size_bytes": 0,
+        "expires_at": "2026-01-09T11:19:23.166Z"
+    },
+    "domains_retrieved": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "search_criteria": {
+        "expression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
+        "location": {
+            "latitude": 40,
+            "longitude": -83,
+            "radius": 100,
+            "unit": "km"
+        },
+        "audience_limit": 2
+    }
+}
