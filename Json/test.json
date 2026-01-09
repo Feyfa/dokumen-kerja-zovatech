@@ -1,257 +1,525 @@
-// resolve_identities
 {
-    "identities": [
-        {
-            "person_id": 213773391,
-            "matches": [
-                {
-                    "criterion_type": "phone_plaintext",
-                    "criterion_value": "+15867732982",
-                    "quality_score": 90
-                }
-            ],
-            "overall_quality_score": 90,
-            "identifiers": {}
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": ".10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": ".10"
         },
-        {
-            "person_id": 98473881,
-            "matches": [
-                {
-                    "criterion_type": "phone_plaintext",
-                    "criterion_value": "+15867732982",
-                    "quality_score": 90
-                }
-            ],
-            "overall_quality_score": 90,
-            "identifiers": {
-                "email": [
-                    "emilyh4575@hotmail.com",
-                    "jharte@chartermi.net"
-                ]
-            }
+        "OneTime": {
+            "LeadspeekCostperlead": "0.10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.10"
         },
-        {
-            "person_id": 61947156,
-            "matches": [
-                {
-                    "criterion_type": "phone_plaintext",
-                    "criterion_value": "+15867732982",
-                    "quality_score": 90
-                }
-            ],
-            "overall_quality_score": 90,
-            "identifiers": {}
+        "Weekly": {
+            "LeadspeekCostperlead": ".10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": ".10"
         },
-        {
-            "person_id": 12921488,
-            "matches": [
-                {
-                    "criterion_type": "phone_plaintext",
-                    "criterion_value": "+15867732982",
-                    "quality_score": 100
-                }
-            ],
-            "overall_quality_score": 100,
-            "identifiers": {
-                "email": [
-                    "ptrhrt57@gmail.com"
-                ]
-            }
-        },
-        {
-            "person_id": 13531167,
-            "matches": [
-                {
-                    "criterion_type": "phone_plaintext",
-                    "criterion_value": "+15867732982",
-                    "quality_score": 90
-                }
-            ],
-            "overall_quality_score": 90,
-            "identifiers": {}
+        "Prepaid": {
+            "LeadspeekCostperlead": ".10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": ".10"
         }
-    ],
-    "stats": {
-        "requested": 1,
-        "resolved": 5,
-        "rate": 5
     },
-    "workflow_id": "706fc5c5-054c-4b46-acd8-a864b295025d",
-    "tool_trace_id": "bef5b15612e3e0f30c06a540baf6cf48"
-}
-// get person
-{
-    "profiles": [
-        {
-            "person_id": "12921488",
-            "domains": {
-                "address": [
-                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
-                ],
-                "phone": [
-                    "+15867732982",
-                    "+19892246655"
-                ],
-                "name": [
-                    "Diane Harte"
-                ],
-                "email": [
-                    "ptrhrt57@gmail.com"
-                ]
-            }
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
         },
-        {
-            "person_id": "13531167",
-            "domains": {
-                "address": [
-                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
-                ],
-                "phone": [
-                    "+19892920155",
-                    "+19892246655",
-                    "+15867732982"
-                ],
-                "name": [
-                    "Emily Harte"
-                ]
-            }
+        "OneTime": {
+            "LocatorCostperlead": "1.3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
         },
-        {
-            "person_id": "213773391",
-            "domains": {
-                "name": [
-                    "Daine Harte"
-                ],
-                "phone": [
-                    "+15867732982",
-                    "+19892246655"
-                ],
-                "address": [
-                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
-                ]
-            }
+        "Weekly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
         },
-        {
-            "person_id": "98473881",
-            "domains": {
-                "email": [
-                    "emilyh4575@hotmail.com",
-                    "jharte@chartermi.net"
-                ],
-                "address": [
-                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
-                ],
-                "phone": [
-                    "+15867732982",
-                    "+19892246655",
-                    "+19896664407"
-                ],
-                "name": [
-                    "Jeryl Harte"
-                ]
-            }
-        },
-        {
-            "person_id": "61947156",
-            "domains": {
-                "phone": [
-                    "+15867732982",
-                    "+19892921489",
-                    "+19892246655"
-                ],
-                "address": [
-                    "1033 Bills Ln, Saint Johns, MI 48879-1183"
-                ],
-                "name": [
-                    "Allison Harte"
-                ]
-            }
+        "Prepaid": {
+            "LocatorCostperlead": "0.5",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
         }
-    ],
-    "workflow_id": "2768d057-ce66-4f7d-a887-040a9f4c94e8",
-    "tool_trace_id": "742301db7f37a8e1ec846bcf7fb01dd8"
+    },
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "1.3"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0.5",
+            "EnhanceMinCostMonth": "0.8",
+            "EnhancePlatformFee": "0.4"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0.5",
+            "EnhanceMinCostMonth": "0.8",
+            "EnhancePlatformFee": "0.5"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.5",
+            "EnhanceMinCostMonth": "0.5",
+            "EnhancePlatformFee": "0.5"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "2.00",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "0.5",
+        "CleanCostperleadAdvanced": "1"
+    }
 }
 
-// list bobot = ['email' => 5, 'phone' => 2, 'address' => 2, 'name' => 1];
 
-// 5 
-/*
-    email = (5) * 1 = 5
-    phone = (2) * 2 = 4
-    address = (2) * 1 = 2
-    name = (1) * 1 = 1
-    total = 5 + 4 + 2 + 1 = 12
-*/
+
 {
-    "email": [
-        "ptrhrt57@gmail.com"
-    ],
-    "phone": [
-        "+15867732982",
-        "+19892246655"
-    ],
-    "address": [
-        "1033 Bills Ln, Saint Johns, MI 48879-1183"
-    ],
-    "name": [
-        "Diane Harte"
-    ],
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "2.1",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "2.59"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "2.2",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "locatorlead": {
+        "FirstName_LastName": "1",
+        "FirstName_LastName_MailingAddress": "1",
+        "FirstName_LastName_MailingAddress_Phone": "0"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "3.2",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.3",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "3.1",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "3.3",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "4.1",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "4.2",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "4.3",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "simplifi": {
+        "Prepaid": {
+            "SimplifiMaxBid": "10",
+            "SimplifiDailyBudget": "5",
+            "SimplifiAgencyMarkup": 40
+        }
+    }
 }
 
-// 7
-/*
-    email = (5) * 2 = 10
-    phone = (2) * 3 = 6
-    address = (2) * 1 = 2
-    name = (1) * 1 = 1
-    total = 10 + 6 + 2 + 1 = 19
-*/
 {
-    "email": [
-        "emilyh4575@hotmail.com",
-        "jharte@chartermi.net"
-    ],
-    "phone": [
-        "+15867732982",
-        "+19892246655",
-        "+19896664407"
-    ],
-    "address": [
-        "1033 Bills Ln, Saint Johns, MI 48879-1183"
-    ],
-    "name": [
-        "Jeryl Harte"
-    ],
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "1.2",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekLeadsPerday": "2",
+            "LeadspeekCostperleadAdvanced": "2.39"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "2.1",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekLeadsPerday": "10",
+            "LeadspeekCostperleadAdvanced": "2.59"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "1.1",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekLeadsPerday": "1",
+            "LeadspeekCostperleadAdvanced": "2.29"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "1.3",
+            "LeadspeekMinCostMonth": "1",
+            "LeadspeekPlatformFee": "1",
+            "LeadspeekLeadsPerday": "3",
+            "LeadspeekCostperleadAdvanced": "2.49"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "2.2",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "10"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "2.2",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "10"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "2.1",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "10"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "2.3",
+            "LocatorMinCostMonth": "1",
+            "LocatorPlatformFee": "1",
+            "LocatorLeadsPerday": "10"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "locatorlead": {
+        "FirstName_LastName": "1",
+        "FirstName_LastName_MailingAddress": "1",
+        "FirstName_LastName_MailingAddress_Phone": "2.3"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "3.2",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "10"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.3",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "10"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "3.1",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "10"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "3.3",
+            "EnhanceMinCostMonth": "1",
+            "EnhancePlatformFee": "1",
+            "EnhanceLeadsPerday": "10"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "4.1",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "10"
+        },
+        "Monthly": {
+            "B2bCostperlead": "4.2",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "10"
+        },
+        "OneTime": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "10"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "4.3",
+            "B2bMinCostMonth": "1",
+            "B2bPlatformFee": "1",
+            "B2bLeadsPerday": "10"
+        },
+        "EnableMinimumLeadsPerday": false
+    },
+    "simplifi": {
+        "Prepaid": {
+            "SimplifiMaxBid": "10",
+            "SimplifiDailyBudget": "15",
+            "SimplifiAgencyMarkup": 50
+        }
+    }
 }
 
-/*
-CARA SAYA PEMBAGIAN KUE
-12 + 19 = 31
-(12/31) * 100 = 38.71%
-(19/31) * 100 = 61.29%
-*/
-
-/*
-CARA CHATGPT GAP
-A = 12
-B = 19
-(19 - 12) / 19 = 36.84%
-*/
 
 
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "2.1",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "2.59"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0",
+            "LeadspeekLeadsPerday": "10"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "1"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "2.2",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "1"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0",
+            "LocatorLeadsPerday": "1"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "1",
+        "FirstName_LastName_MailingAddress": "1",
+        "FirstName_LastName_MailingAddress_Phone": "0"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "3.2",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "1"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.3",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "3.1",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "1"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "3.3",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0",
+            "EnhanceLeadsPerday": "1"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "4.1",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "1"
+        },
+        "Monthly": {
+            "B2bCostperlead": "4.2",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "1"
+        },
+        "OneTime": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "4.3",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0",
+            "B2bLeadsPerday": "1"
+        }
+    },
+    "simplifi": {
+        "Prepaid": {
+            "SimplifiMaxBid": "10",
+            "SimplifiDailyBudget": "5",
+            "SimplifiAgencyMarkup": 40
+        }
+    }
+}
 
 
-
-/*
-CARA SAYA PEMBAGIAN KUE
-19 + 18 = 37
-(19/37) * 100 = 51.35%
-(18/37) * 100 = 48.65%
-*/
-
-/*
-CARA CHATGPT GAP
-A = 19
-B = 18
-(18 - 19) / 19 = 5.26%
-*/
+{
+    "status": "success",
+    "message": "success get campaign",
+    "status_code": 200,
+    "data": {
+        "campaign_id": "12345670",
+        "campaign_type": "b2b",
+        "status_campaign": "Stopped",
+        "company_name": "Jhon Doe",
+        "client_name": "Jhon Doe",
+        "campaign_name": "Campaign Jhon Doe",
+        "email": "jhondoe@example.com",
+        "phonenum": "(201) 222-2222",
+        "phoneenabled": true,
+        "homeaddressenabled": true,
+        "require_email": true,
+        "applyreidentificationall": true,
+        "reidentification_type": "1 month",
+        "national_targeting": true,
+        "zipcodes": "",
+        "states": "",
+        "cities": "",
+        "keyword": "keyword1, keyword2, keyword3",
+        "admin_approve_googlesheet": "Agency Jhon Doe, Admin Agency Jhon Doe",
+        "contacts": {
+            "total": 5,
+            "yesterday": 2
+        },
+        "financials": {
+            "payment_term": "prepaid",
+            "prepaid_options": "continual",
+            "stop_continual_topup": false,
+            "continual_buy_options": "weekly",
+            "treshold": 10,
+            "remaining_balance": 70,
+            "lead_per_day": 10,
+            "client": {
+                "setup_fee": 0,
+                "campaign_fee": 1,
+                "cost_per_lead": 5
+            },
+            "agency": {
+                "setup_fee": 0,
+                "campaign_fee": 0,
+                "cost_per_lead": 2.5
+            }
+        },
+        "advanced_information": [
+            "company_name",
+            "company_phone",
+            "company_website",
+            "job_title",
+            "level",
+            "job_function",
+            "linkedin",
+            "num_employees",
+            "sales_volume",
+            "year_founded"
+        ]
+    }
+}
