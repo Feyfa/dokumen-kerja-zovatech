@@ -483,3 +483,35 @@ CREATE TABLE `leadspeek_predict_reports` (
 
 php artisan command:predictcheckreport
 php artisan queue:work redis --queue=predictfetchreport
+
+CREATE TABLE `leadspeek_predict_reports` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT UNSIGNED DEFAULT NULL,
+  `leadspeek_api_id` VARCHAR(20) DEFAULT NULL,
+  `file_download` TEXT DEFAULT NULL,
+  `status` ENUM('found', 'not_found') DEFAULT NULL,
+  'start_date' DATETIME NULL DEFAULT NULL,
+  'end_date' DATETIME NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  CONSTRAINT `leadspeek_predict_reports_pk` PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+http://datalocal.emmsandbox.com/api/leadspeek/client/all/predict/164?view=campaign
+
+
+start billing date = 2026-01-11 09:35:39
+
+start date  = January 11, 2026 
+end date    = January 17, 2026
+
+now
+- 2026-01-12 00:00:00 (progress)
+- 2026-01-13 00:00:00 
+- 2026-01-14 00:00:00 
+- 2026-01-15 00:00:00 
+- 2026-01-16 00:00:00 
+- 2026-01-17 00:00:00 
+- 2026-01-18 00:00:00 
