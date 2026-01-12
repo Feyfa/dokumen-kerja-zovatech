@@ -515,3 +515,49 @@ now
 - 2026-01-16 00:00:00 
 - 2026-01-17 00:00:00 
 - 2026-01-18 00:00:00 
+
+
+===== YANG HARUS DI KERJAKAN =====
+1. enable step financials dan hidden step integration saat create campagin predict ✅
+2. feature total lead tiap report dan total lead seluruh report ✅
+3. saat fetch data predict, audience limit dari 50 - 200 data ✅
+4. buat fitur untuk play dan stop campaign, ini hanya ubah status campaign saja belom charge ✅
+
+ALTER TABLE leadspeek_predict_reports
+ADD COLUMN total_leads INT UNSIGNED NULL DEFAULT 0
+AFTER end_date;
+===== YANG HARUS DI KERJAKAN =====
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-790-DEV-SYNC = "
+- show button play and stop campaign
+- show financials step and hide integration step in modal create campaign
+- logic for total_leads campaign
+"
+
+FILE
+FRONT
+* front\src\components\CampaignFinancials.vue
+* front\src\components\Modals\ReportPredictDownloadModal.vue
+* front\src\pages\Modules\Auth\LeedspeekPredict\Client.vue
+
+DATA
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Models\LeadspeekPredictReport.php
+* data\app\Services\PredictService.php
+
+--------------------------------------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-790-DEV-SYNC = "save total lead from mcp mastra"
+
+FILE
+* app\Jobs\PredictFetchReportJob.php
+* app\Services\PredictService.php
+* app\Models\LeadspeekPredictReport.php
+
+--------------------------------------
+
+ALTER TABLE leadspeek_predict_reports
+ADD COLUMN total_leads INT UNSIGNED NULL DEFAULT 0
+AFTER end_date;
