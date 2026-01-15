@@ -585,14 +585,17 @@ AFTER end_date;
     c. jika masuk ke menu predict id itu harus pakai aggreement ✅
 
 * di general setting agency 
-    a. Default Retail Prices (agencydefaultprice) = tambahkan settingan setup fee dan monthly fee (progress)
-    c. Select Your Product Names = tambahkan settingan product name predict id
+    a. Default Retail Prices (agencydefaultprice) = tambahkan settingan setup fee dan monthly fee ✅
+    c. Select Your Product Names = tambahkan settingan product name predict id ✅
 
 * di client management
-    a. saat add atau edit client management, disaled product predict id dan paksa clientsidebar nya menjadi true
-    b. Set Campaign pricing for Client = tambahkan settingan setup fee dan monthly fee
+    a. saat add atau edit client management, disaled product predict id dan paksa clientsidebar nya menjadi true ✅
+    b. saat fetch clientsidebar paksa predictid menjadi true ✅
+    b. Set Campaign pricing for Client = tambahkan settingan setup fee dan monthly fee ✅
 
-* untuk client itu hanya bisa download datanya saja
+* saat create campaign settingan price harus sesuai dengan yang di setting client atau agency default price ✅
+
+* untuk client itu hanya bisa download datanya saja (progress)
 
 * kalau dia stop dikasih pop up dan opsi :
     a. stop langsung, jadi kalau dia baru minggu ke 2 ada dapat report 2 , ke minggu ke 3 dan seterusnya ngk akan jalan lg
@@ -612,6 +615,85 @@ AFTER end_date;
 - jika root ambil dari rootcustomsidebarleadmenu, jika selain root ambil dari rootcustomsidebarleadmenu cuman di filter dengan agencysidebar
 ================ CATATAN UNTUK MASALAH MODULE" AN GITU ================
 
+this.customsidebarleadmenu = this.$global.agencyfilteredmodules;
+<div class="col-6" v-for="(sidebar, key) in customsidebarleadmenu"
+        :key="sidebar.url">
+    <base-checkbox
+        class="mr-3"
+        v-model="selectedModulesCreate[key]"
+        v-show="validateBetaFeature(key) && (sidebar.url != 'simplifiid' || $global.idsys == $global.masteridsys)"
+    >
+    {{ sidebar.name }}
+    </base-checkbox>
+</div>
+<div class="col-6" v-for="(sidebar, key) in customsidebarleadmenu"
+        :key="sidebar.url">
+    <base-checkbox
+        class="mr-3"
+        v-model="selectedModulesCreate[key]"
+        v-show="
+            validateBetaFeature(key) && 
+            (
+                (key == 'predict') ? 
+                (false) : 
+                (!['simplifi', 'predict'].includes(key) || $global.idsys == $global.masteridsys)
+            )
+        "
+    >
+    {{ sidebar.name }}
+    </base-checkbox>
+</div>
+
+
+<base-checkbox
+    v-for="(sidebar, key) in customsidebarleadmenu"
+    :key="sidebar.url"
+    class="mr-3"
+    v-model="selectedModules[key]"
+    v-show="validateBetaFeature(key) && (sidebar.url != 'simplifiid' || $global.idsys == $global.masteridsys)">
+    {{ sidebar.name }}
+</base-checkbox>
+<base-checkbox
+    v-for="(sidebar, key) in customsidebarleadmenu"
+    :key="sidebar.url"
+    class="mr-3"
+    v-model="selectedModules[key]"
+    v-show="
+        validateBetaFeature(key) && 
+        (
+            (key == 'predict') ? 
+            (false) : 
+            (!['simplifi', 'predict'].includes(key) || $global.idsys == $global.masteridsys)
+        )
+    "
+>
+    {{ sidebar.name }}
+</base-checkbox>
+
+v-show="
+    item.name && 
+    validateBetaFeature(item.type) && 
+    (
+        (item.type === 'predict') ? 
+        ($global.systemUser && $global.idsys == $global.masteridsys) : 
+        (!['simplifi', 'predict'].includes(item.type) || $global.idsys == $global.masteridsys)
+    )
+"
+
+v-show="
+    validateBetaFeature(key) && 
+    (
+        key === 'predict' ? 
+        false : 
+        (!['simplifi', 'predict'].includes(key) || $global.idsys == $global.masteridsys)
+    )
+"
+
+campaignCreateActiveStep
+activeClientCompanyID
+
+global.checkModuleRole(response.modules,response.setupcomplete);
+
 @keyup="set_fee('predict','PredictMaxCampaigns');"
 @blur="handleFormatCurrency('predict','PredictMaxCampaigns')"
 
@@ -625,6 +707,9 @@ SELECT
 FROM company_settings
 WHERE company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules';
 
+(campaign.payment_status != 'failed' || $store.getters.userData.manual_bill == 'T') && ( campaign.active_user == 'F' || (campaign.disabled == 'T' && campaign.active_user == 'T'))
+this.$store.getters.userData.user_type != 'client' && (campaign.payment_status != 'failed' || $store.getters.userData.manual_bill == 'T') && ( campaign.active_user == 'F' || (campaign.disabled == 'T' && campaign.active_user == 'T'))
+
 
 SELECT
 	id,
@@ -634,12 +719,12 @@ SELECT
 	setting_name,
 	setting_value
 FROM company_settings
-WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootexistagencymoduleselect';
+WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootexistclientmoduleselect';
 
 
 UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":false},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2'))
-WHERE id = 239 and company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencysidebar';
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false}]}', '8e651522e38256f2'))
+WHERE company_id = 165 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootexistagencymoduleselect';
 
 ================ DATA LAMA EMM ================
 rootcustomsidebarleadmenu
@@ -676,11 +761,11 @@ WHERE id = 16 and company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_na
 - bagian yang ditambahkan = "predict":{"name":"Predict ID","url":"predictid"}
 
 rootdefaultmodules
-- {"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":true}]}
+- {"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false}]}
 - UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":true}]}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false}]}', '8e651522e38256f2'))
 WHERE id = 1827 and company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules';
-- bagian yang ditambahkan = {"type":"predict","status":true}
+- bagian yang ditambahkan = {"type":"predict","status":false}
 
 rootagencydefaultprice
 - {"local":{"Monthly":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"1","FirstName_LastName_MailingAddress":"1","FirstName_LastName_MailingAddress_Phone":"1"},"enhance":{"Monthly":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"simplifi":{"Prepaid":{"SimplifiMaxBid":"12","SimplifiDailyBudget":"5","SimplifiAgencyMarkup":"0"}},"predict":{"Prepaid":{"PredictMinCostMonth":"299","PredictPlatformFee":"0"}}}
@@ -690,11 +775,11 @@ WHERE id = 739 and company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_n
 - bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMinCostMonth":"299","PredictPlatformFee":"0"}}
 
 rootcostagency
-- {"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1.5"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}}
+- {"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1.5"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}}
 - UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1.5"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1.5"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}}', '8e651522e38256f2'))
 WHERE id = 14 and company_id = 22 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency';
-- bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}
+- bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}
 ================ DATA BARU EMM ================
 
 
@@ -739,11 +824,11 @@ WHERE id = 25 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_na
 - bagian yang ditambahkan = "predict":{"name":"Predict ID","url":"predictid"}
 
 rootdefaultmodules
-- {"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":true}]}
+- {"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false}]}
 - UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":true}]}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false}]}', '8e651522e38256f2'))
 WHERE id = 1851 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootdefaultmodules';
-- bagian yang ditambahkan = {"type":"predict","status":true}
+- bagian yang ditambahkan = {"type":"predict","status":false}
 
 rootagencydefaultprice
 - {"local":{"Monthly":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"1.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"1","FirstName_LastName_MailingAddress":"1","FirstName_LastName_MailingAddress_Phone":"1"},"enhance":{"Monthly":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"simplifi":{"Prepaid":{"SimplifiMaxBid":"12","SimplifiDailyBudget":"5","SimplifiAgencyMarkup":"0"}},"predict":{"Prepaid":{"PredictMinCostMonth":"299","PredictPlatformFee":"0"}}}
@@ -753,11 +838,11 @@ WHERE id = 1043 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_
 - bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMinCostMonth":"299","PredictPlatformFee":"0"}}
 
 rootcostagency
-- {"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}}
+- {"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}}
 - UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.22","LeadspeekCostperleadAdvanced":"0.82","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.21","LeadspeekCostperleadAdvanced":"0.81","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.23","LeadspeekCostperleadAdvanced":"0.83","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"0.72","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.71","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.73","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"0.71"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.82","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.81","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.83","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.92","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.91","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.93","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}}', '8e651522e38256f2'))
 WHERE id = 23 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency';
-- bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMaxCampaigns":"10"}}
+- bagian yang ditambahkan = "predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299"}}
 ================ DATA BARU DOM ================
 
 ================ DATABASE YANG DIUBAH ================
@@ -805,3 +890,14 @@ http://datalocal.emmsandbox.com/api/user
 (this.$store.getters.userData.company_root_id == this.$global.masteridsys) -> true
 &&
 (this.validateBetaFeature('predict_module')) -> true
+
+async updateCreateCampaignStep(){
+this.campaignCreateActiveStep
+
+loadDefaultPricingForNewClient()
+this.loadPricingForPaymentTerm();
+
+<div v-if="campaignCreateActiveStep === 2" class="row mt-4">
+<div class="col-12" v-if="selectsAppModule.AppModuleSelect == 'predict' && moduleAgency.predict != undefined && validateBetaFeature('predict_module') && this.$global.idsys == this.$global.masteridsys">
+
+http://datalocal.emmsandbox.com/api/payment/card
