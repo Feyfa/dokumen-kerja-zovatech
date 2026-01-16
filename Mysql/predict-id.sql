@@ -31,20 +31,18 @@ SELECT * FROM `leadspeek_media`;
 
 
 
-select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in ('61749843');
-select * from leadspeek_business where leadspeek_api_id in ('61749843');
-select * from leadspeek_predict_reports where leadspeek_api_id in ('61749843');
+select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in ('14820931');
+select * from leadspeek_business where leadspeek_api_id in ('14820931');
+select * from leadspeek_predict_reports where leadspeek_api_id in ('14820931');
 select * from leadspeek_customers;
-select * from leadspeek_customer_campaigns where leadspeek_api_id in ('61749843');
-
-
+select * from leadspeek_customer_campaigns where leadspeek_api_id in ('14820931');
 
 select 
-	TIMESTAMPDIFF(WEEK, '2026-01-01 00:00:00', '2026-01-08 00:00:00') as result_1,
-	DATEDIFF('2026-01-08','2026-01-01') as result_2, -- di ui 2026-01-01 - 2026-01-07, ke charge nya tanggal 08 
-	DATEDIFF('2026-01-15','2026-01-08') as result_3, -- di ui 2026-01-08 - 2026-01-14,  ke charge nya tanggal 15
-	DATEDIFF('2026-01-22','2026-01-15') as result_4, -- di ui 2026-01-15 - 2026-01-21,  ke charge nya tanggal 22
-	DATEDIFF('2026-01-28','2026-01-22') as result_5; -- di ui 2026-01-22 - 2026-01-28,  ke charge nya tanggal 29
+	DATEDIFF('2026-01-25', '2026-01-18') as result_1;
+-- 	DATEDIFF('2026-01-11','2026-01-11') as result_2, -- di ui 2026-01-01 - 2026-01-07, ke charge nya tanggal 08 
+-- 	DATEDIFF('2026-01-15','2026-01-08') as result_3, -- di ui 2026-01-08 - 2026-01-14,  ke charge nya tanggal 15
+-- 	DATEDIFF('2026-01-22','2026-01-15') as result_4, -- di ui 2026-01-15 - 2026-01-21,  ke charge nya tanggal 22
+-- 	DATEDIFF('2026-01-28','2026-01-22') as result_5; -- di ui 2026-01-22 - 2026-01-28,  ke charge nya tanggal 29
 
 
 
