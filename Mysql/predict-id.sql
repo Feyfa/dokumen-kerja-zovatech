@@ -30,11 +30,20 @@ SELECT * FROM `leadspeek_media`;
 -- from leadspeek_business;
 
 
+set @leadspeek_api_id := 83428362;
+select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in (@leadspeek_api_id);
+select * from leadspeek_business where leadspeek_api_id in (@leadspeek_api_id);
+select * from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id;
 
 select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in ('14820931');
 select * from leadspeek_business where leadspeek_api_id in ('14820931');
 select * from leadspeek_predict_reports where leadspeek_api_id in ('14820931');
 select * from leadspeek_customers;
+select * from leadspeek_customer_campaigns where leadspeek_api_id in (@leadspeek_api_id);
+
+
+select * from user_logs order by id desc limit 10;
+
 select * from leadspeek_customer_campaigns where leadspeek_api_id in ('14820931');
 
 select 

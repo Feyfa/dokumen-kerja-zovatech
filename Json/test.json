@@ -1,136 +1,29 @@
 {
     "local": {
         "Monthly": {
-            "LeadspeekCostperlead": ".10",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": ".10"
-        },
-        "OneTime": {
-            "LeadspeekCostperlead": "0.10",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0.10"
-        },
-        "Weekly": {
-            "LeadspeekCostperlead": ".10",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": ".10"
-        },
-        "Prepaid": {
-            "LeadspeekCostperlead": ".10",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": ".10"
-        }
-    },
-    "locator": {
-        "Monthly": {
-            "LocatorCostperlead": "0.4",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "OneTime": {
-            "LocatorCostperlead": "1.3",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "Weekly": {
-            "LocatorCostperlead": "0.4",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "Prepaid": {
-            "LocatorCostperlead": "0.5",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        }
-    },
-    "locatorlead": {
-        "FirstName_LastName": "5",
-        "FirstName_LastName_MailingAddress": "6",
-        "FirstName_LastName_MailingAddress_Phone": "1.3"
-    },
-    "enhance": {
-        "Monthly": {
-            "EnhanceCostperlead": "0.5",
-            "EnhanceMinCostMonth": "0.8",
-            "EnhancePlatformFee": "0.4"
-        },
-        "OneTime": {
-            "EnhanceCostperlead": "2.00",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        },
-        "Weekly": {
-            "EnhanceCostperlead": "0.5",
-            "EnhanceMinCostMonth": "0.8",
-            "EnhancePlatformFee": "0.5"
-        },
-        "Prepaid": {
-            "EnhanceCostperlead": "0.5",
-            "EnhanceMinCostMonth": "0.5",
-            "EnhancePlatformFee": "0.5"
-        }
-    },
-    "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "Monthly": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "OneTime": {
-            "B2bCostperlead": "2.00",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "Prepaid": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        }
-    },
-    "clean": {
-        "CleanCostperlead": "0.5",
-        "CleanCostperleadAdvanced": "1"
-    }
-}
-
-
-
-{
-    "local": {
-        "Monthly": {
             "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
             "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0"
+            "LeadspeekPlatformFee": "0"
         },
         "OneTime": {
-            "LeadspeekCostperlead": "2.1",
+            "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
             "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "2.59"
+            "LeadspeekPlatformFee": "0"
         },
         "Weekly": {
             "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
             "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0"
+            "LeadspeekPlatformFee": "0"
         },
         "Prepaid": {
             "LeadspeekCostperlead": "0",
+            "LeadspeekCostperleadAdvanced": "1.5",
             "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0"
-        },
-        "EnableMinimumLeadsPerday": false
+            "LeadspeekPlatformFee": "0"
+        }
     },
     "locator": {
         "Monthly": {
@@ -139,7 +32,7 @@
             "LocatorPlatformFee": "0"
         },
         "OneTime": {
-            "LocatorCostperlead": "2.2",
+            "LocatorCostperlead": "0",
             "LocatorMinCostMonth": "0",
             "LocatorPlatformFee": "0"
         },
@@ -152,45 +45,38 @@
             "LocatorCostperlead": "0",
             "LocatorMinCostMonth": "0",
             "LocatorPlatformFee": "0"
-        },
-        "EnableMinimumLeadsPerday": false
+        }
     },
     "locatorlead": {
         "FirstName_LastName": "1",
         "FirstName_LastName_MailingAddress": "1",
-        "FirstName_LastName_MailingAddress_Phone": "0"
+        "FirstName_LastName_MailingAddress_Phone": "1"
     },
     "enhance": {
         "Monthly": {
-            "EnhanceCostperlead": "3.2",
+            "EnhanceCostperlead": "0",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         },
         "OneTime": {
-            "EnhanceCostperlead": "2.3",
+            "EnhanceCostperlead": "0",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         },
         "Weekly": {
-            "EnhanceCostperlead": "3.1",
+            "EnhanceCostperlead": "0",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         },
         "Prepaid": {
-            "EnhanceCostperlead": "3.3",
+            "EnhanceCostperlead": "0",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
-        },
-        "EnableMinimumLeadsPerday": false
+        }
     },
     "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "4.1",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
         "Monthly": {
-            "B2bCostperlead": "4.2",
+            "B2bCostperlead": "1.49",
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         },
@@ -199,543 +85,28 @@
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         },
-        "Prepaid": {
-            "B2bCostperlead": "4.3",
+        "Weekly": {
+            "B2bCostperlead": "1.49",
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         },
-        "EnableMinimumLeadsPerday": false
+        "Prepaid": {
+            "B2bCostperlead": "1.49",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
     },
     "simplifi": {
         "Prepaid": {
-            "SimplifiMaxBid": "10",
+            "SimplifiMaxBid": "12",
             "SimplifiDailyBudget": "5",
-            "SimplifiAgencyMarkup": 40
-        }
-    }
-}
-
-{
-    "local": {
-        "Monthly": {
-            "LeadspeekCostperlead": "1.2",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekLeadsPerday": "2",
-            "LeadspeekCostperleadAdvanced": "2.39"
-        },
-        "OneTime": {
-            "LeadspeekCostperlead": "2.1",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekLeadsPerday": "10",
-            "LeadspeekCostperleadAdvanced": "2.59"
-        },
-        "Weekly": {
-            "LeadspeekCostperlead": "1.1",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekLeadsPerday": "1",
-            "LeadspeekCostperleadAdvanced": "2.29"
-        },
-        "Prepaid": {
-            "LeadspeekCostperlead": "1.3",
-            "LeadspeekMinCostMonth": "1",
-            "LeadspeekPlatformFee": "1",
-            "LeadspeekLeadsPerday": "3",
-            "LeadspeekCostperleadAdvanced": "2.49"
-        },
-        "EnableMinimumLeadsPerday": false
-    },
-    "locator": {
-        "Monthly": {
-            "LocatorCostperlead": "2.2",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "10"
-        },
-        "OneTime": {
-            "LocatorCostperlead": "2.2",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "10"
-        },
-        "Weekly": {
-            "LocatorCostperlead": "2.1",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "10"
-        },
-        "Prepaid": {
-            "LocatorCostperlead": "2.3",
-            "LocatorMinCostMonth": "1",
-            "LocatorPlatformFee": "1",
-            "LocatorLeadsPerday": "10"
-        },
-        "EnableMinimumLeadsPerday": false
-    },
-    "locatorlead": {
-        "FirstName_LastName": "1",
-        "FirstName_LastName_MailingAddress": "1",
-        "FirstName_LastName_MailingAddress_Phone": "2.3"
-    },
-    "enhance": {
-        "Monthly": {
-            "EnhanceCostperlead": "3.2",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "10"
-        },
-        "OneTime": {
-            "EnhanceCostperlead": "2.3",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "10"
-        },
-        "Weekly": {
-            "EnhanceCostperlead": "3.1",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "10"
-        },
-        "Prepaid": {
-            "EnhanceCostperlead": "3.3",
-            "EnhanceMinCostMonth": "1",
-            "EnhancePlatformFee": "1",
-            "EnhanceLeadsPerday": "10"
-        },
-        "EnableMinimumLeadsPerday": false
-    },
-    "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "4.1",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "10"
-        },
-        "Monthly": {
-            "B2bCostperlead": "4.2",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "10"
-        },
-        "OneTime": {
-            "B2bCostperlead": "1.49",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "10"
-        },
-        "Prepaid": {
-            "B2bCostperlead": "4.3",
-            "B2bMinCostMonth": "1",
-            "B2bPlatformFee": "1",
-            "B2bLeadsPerday": "10"
-        },
-        "EnableMinimumLeadsPerday": false
-    },
-    "simplifi": {
-        "Prepaid": {
-            "SimplifiMaxBid": "10",
-            "SimplifiDailyBudget": "15",
-            "SimplifiAgencyMarkup": 50
-        }
-    }
-}
-
-
-
-{
-    "local": {
-        "Monthly": {
-            "LeadspeekCostperlead": "0",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0"
-        },
-        "OneTime": {
-            "LeadspeekCostperlead": "2.1",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "2.59"
-        },
-        "Weekly": {
-            "LeadspeekCostperlead": "0",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0",
-            "LeadspeekLeadsPerday": "10"
-        },
-        "Prepaid": {
-            "LeadspeekCostperlead": "0",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0"
+            "SimplifiAgencyMarkup": "0"
         }
     },
-    "locator": {
-        "Monthly": {
-            "LocatorCostperlead": "0",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "1"
-        },
-        "OneTime": {
-            "LocatorCostperlead": "2.2",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "Weekly": {
-            "LocatorCostperlead": "0",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "1"
-        },
+    "predict": {
         "Prepaid": {
-            "LocatorCostperlead": "0",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0",
-            "LocatorLeadsPerday": "1"
+            "PredictMinCostMonth": "200",
+            "PredictPlatformFee": "5"
         }
-    },
-    "locatorlead": {
-        "FirstName_LastName": "1",
-        "FirstName_LastName_MailingAddress": "1",
-        "FirstName_LastName_MailingAddress_Phone": "0"
-    },
-    "enhance": {
-        "Monthly": {
-            "EnhanceCostperlead": "3.2",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "1"
-        },
-        "OneTime": {
-            "EnhanceCostperlead": "2.3",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        },
-        "Weekly": {
-            "EnhanceCostperlead": "3.1",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "1"
-        },
-        "Prepaid": {
-            "EnhanceCostperlead": "3.3",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0",
-            "EnhanceLeadsPerday": "1"
-        }
-    },
-    "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "4.1",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "1"
-        },
-        "Monthly": {
-            "B2bCostperlead": "4.2",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "1"
-        },
-        "OneTime": {
-            "B2bCostperlead": "1.49",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "Prepaid": {
-            "B2bCostperlead": "4.3",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0",
-            "B2bLeadsPerday": "1"
-        }
-    },
-    "simplifi": {
-        "Prepaid": {
-            "SimplifiMaxBid": "10",
-            "SimplifiDailyBudget": "5",
-            "SimplifiAgencyMarkup": 40
-        }
-    }
-}
-
-
-{
-    "status": "success",
-    "message": "success get campaign",
-    "status_code": 200,
-    "data": {
-        "campaign_id": "12345670",
-        "campaign_type": "b2b",
-        "status_campaign": "Stopped",
-        "company_name": "Jhon Doe",
-        "client_name": "Jhon Doe",
-        "campaign_name": "Campaign Jhon Doe",
-        "email": "jhondoe@example.com",
-        "phonenum": "(201) 222-2222",
-        "phoneenabled": true,
-        "homeaddressenabled": true,
-        "require_email": true,
-        "applyreidentificationall": true,
-        "reidentification_type": "1 month",
-        "national_targeting": true,
-        "zipcodes": "",
-        "states": "",
-        "cities": "",
-        "keyword": "keyword1, keyword2, keyword3",
-        "admin_approve_googlesheet": "Agency Jhon Doe, Admin Agency Jhon Doe",
-        "contacts": {
-            "total": 5,
-            "yesterday": 2
-        },
-        "financials": {
-            "payment_term": "prepaid",
-            "prepaid_options": "continual",
-            "stop_continual_topup": false,
-            "continual_buy_options": "weekly",
-            "treshold": 10,
-            "remaining_balance": 70,
-            "lead_per_day": 10,
-            "client": {
-                "setup_fee": 0,
-                "campaign_fee": 1,
-                "cost_per_lead": 5
-            },
-            "agency": {
-                "setup_fee": 0,
-                "campaign_fee": 0,
-                "cost_per_lead": 2.5
-            }
-        },
-        "advanced_information": [
-            "company_name",
-            "company_phone",
-            "company_website",
-            "job_title",
-            "level",
-            "job_function",
-            "linkedin",
-            "num_employees",
-            "sales_volume",
-            "year_founded"
-        ]
-    }
-}
-
-
-
-{
-    "total_matches": "2181334",
-    "returned_count": 1,
-    "has_more": true,
-    "workflow_id": "f8a194e1-1c4a-4ca0-87f6-1fe0a126f75e",
-    "next_offset": 1,
-    "profiles": [
-        {
-            "person_id": "546",
-            "domains": {
-                "address": [
-                    "194 Mannaseh Dr W, Granville, OH 43023-7506"
-                ],
-                "email": [
-                    "jstasiowski@yahoo.com",
-                    "jstasiowski@gmail.com",
-                    "stasiowski@msn.com"
-                ],
-                "name": [
-                    "James Stasiowski"
-                ],
-                "demographic": {
-                    "education": {
-                        "value": "Completed Graduate School",
-                        "cluster_id": 2
-                    },
-                    "ethnic_group": {
-                        "value": "White",
-                        "cluster_id": 12
-                    },
-                    "gender": {
-                        "value": "Male",
-                        "cluster_id": 14
-                    },
-                    "generation": {
-                        "value": "3. Baby Boomers (1943-1960)",
-                        "cluster_id": 17
-                    },
-                    "is_multilingual": {
-                        "value": false,
-                        "cluster_id": 29
-                    },
-                    "is_speaks_english": {
-                        "value": true,
-                        "cluster_id": 32
-                    },
-                    "marital_status": {
-                        "value": "Married",
-                        "cluster_id": 19
-                    },
-                    "religion": {
-                        "value": "Catholic",
-                        "cluster_id": 22
-                    },
-                    "language_spoken": "English",
-                    "ethnic_detail": "Polish"
-                }
-            }
-        }
-    ],
-    "export": {
-        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1767954038919-2aac3a5a-6587-454f-b3e9-d6350daad64a.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SU6SWBKKX%2F20260109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260109T102038Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAfg2C8jJsPcsdOb1WXBY614%2BRkHjGIrhL7ZPmimj%2BKuAiEAsEiemJ3dJmrjPjlxIC0HdrioC3lH1q1AKDybdNrkj7IqtAQIn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDFliskzv1yHqbh3tcCqIBFOTE8WvxtkQtoqAQkr6BZX8ObLaEAFx%2BGokSirEoXsRNLOiBxXMvvhvqerhuTC2Fxhvm6ny%2FrorU7PtxrK0U37IYdX4VCzhr3r5DK9OP%2FODz4RDB9DP6YMDCwdrpFnFiMt8gam3cajeiLixC1jOhb3yCJcMIF4jFIsSoDDxk4hAjDFYuIM%2B6f4j65U8vpGEN%2F2T0KQMngmawZZ23UPSgCEhENfV65zHg6ZMsWR%2BLvYVcQ1TcT69E7BvlHIQKzx1yqjFewZXLOsbw%2FijISFWnWeFYHb6mOY6O1vrdNg0jYEfic%2FzCC5g7Jf43HSJLoBcUFv6zpLaKXbk3on6T8GsPcHn%2FXWd5QTZvDuhSVThJGa%2BdY4Eu8eED5fiRnLGYde8pWA0GwsESmBLAgPZpQgFShEYtuaqc42gUegP0sxylAMxGC5rQlSHBl6q8a4JvpypRTH2W%2FSgqxhPIgklhsq%2FeJEm9r7xUKglR8%2FAZJzlcANc4Sek79eIQi%2FrtJVg0Qq4N2c9Xv0cZQgpWcqb%2FL34wMy1l3o0K5cBx8M0ZeeRrvZTeOztwXsaGJkChToFYYBcDMwfbS2xsZHFCeMGGATPrWO2gwg32Y71YzNwq8NsIv1KB8c89kMnxXHfLfmrWQWeickqjSuq48fX1tZSfKNW1IBdI7ioAdCdRIJhtZHLU7%2BqHempt1IwG6EwqKSCywY6pgHYko0j47Qx55Luz3GZIFfMJzw4%2FpYVO2%2FcA%2ByVinUuN30ICYwbYEhoKUOgQdhpb0XVQ9dtcYJ8xIPGGlmhnosAaRWH9j7tNGrz%2B7gf2cPYmMuvFuQETDKlL%2Bbg6WuH85OJQ3F%2F0%2BCthh%2FXoOaKP2o27t8TisdG5rX3mNEEc%2BHhjjBAC0Sv8lrBzN3rOmhbHaP1iENFJgjIbT0nlxadRQVYu5ymOag9&X-Amz-Signature=539a71c9915b6b37f40813e7d5834992f7f1883453df6da7657ca6a6834f8abe&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-        "format": "csv",
-        "rows": 1,
-        "size_bytes": 0,
-        "expires_at": "2026-01-09T11:20:38.953Z"
-    },
-    "domains_retrieved": [
-        "name",
-        "email",
-        "demographic",
-        "address"
-    ],
-    "search_criteria": {
-        "expression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
-        "location": {
-            "latitude": 40,
-            "longitude": -83,
-            "radius": 100,
-            "unit": "km"
-        },
-        "audience_limit": 1
-    }
-}
-
-
-{
-    "total_matches": "2181334",
-    "returned_count": 2,
-    "has_more": true,
-    "workflow_id": "ef6a0f10-2658-44f0-9a22-633a3213703b",
-    "next_offset": 2,
-    "profiles": [
-        {
-            "person_id": "546",
-            "domains": {
-                "address": [
-                    "194 Mannaseh Dr W, Granville, OH 43023-7506"
-                ],
-                "email": [
-                    "jstasiowski@yahoo.com",
-                    "jstasiowski@gmail.com",
-                    "stasiowski@msn.com"
-                ],
-                "name": [
-                    "James Stasiowski"
-                ],
-                "demographic": {
-                    "education": {
-                        "value": "Completed Graduate School",
-                        "cluster_id": 2
-                    },
-                    "ethnic_group": {
-                        "value": "White",
-                        "cluster_id": 12
-                    },
-                    "gender": {
-                        "value": "Male",
-                        "cluster_id": 14
-                    },
-                    "generation": {
-                        "value": "3. Baby Boomers (1943-1960)",
-                        "cluster_id": 17
-                    },
-                    "is_multilingual": {
-                        "value": false,
-                        "cluster_id": 29
-                    },
-                    "is_speaks_english": {
-                        "value": true,
-                        "cluster_id": 32
-                    },
-                    "marital_status": {
-                        "value": "Married",
-                        "cluster_id": 19
-                    },
-                    "religion": {
-                        "value": "Catholic",
-                        "cluster_id": 22
-                    },
-                    "language_spoken": "English",
-                    "ethnic_detail": "Polish"
-                }
-            }
-        },
-        {
-            "person_id": "798",
-            "domains": {
-                "address": [
-                    "7573 Mount Hood, Dayton, OH 45424-6911"
-                ],
-                "email": [
-                    "h.kimberly53@yahoo.com",
-                    "kymart1205@gmail.com",
-                    "kimberlyco@aol.com"
-                ],
-                "name": [
-                    "Kimberly Cofield"
-                ],
-                "demographic": {
-                    "education": {
-                        "value": "Completed High School",
-                        "cluster_id": 3
-                    },
-                    "gender": {
-                        "value": "Female",
-                        "cluster_id": 13
-                    },
-                    "generation": {
-                        "value": "2. Generation X (1961-1981)",
-                        "cluster_id": 16
-                    },
-                    "is_multilingual": {
-                        "value": false,
-                        "cluster_id": 29
-                    },
-                    "is_speaks_english": {
-                        "value": true,
-                        "cluster_id": 32
-                    },
-                    "marital_status": {
-                        "value": "Married",
-                        "cluster_id": 19
-                    },
-                    "language_spoken": "English"
-                }
-            }
-        }
-    ],
-    "export": {
-        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1767953963137-3dc239ce-72e6-43d0-b73b-73cb20493010.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SU6SWBKKX%2F20260109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260109T101923Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIAfg2C8jJsPcsdOb1WXBY614%2BRkHjGIrhL7ZPmimj%2BKuAiEAsEiemJ3dJmrjPjlxIC0HdrioC3lH1q1AKDybdNrkj7IqtAQIn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDFliskzv1yHqbh3tcCqIBFOTE8WvxtkQtoqAQkr6BZX8ObLaEAFx%2BGokSirEoXsRNLOiBxXMvvhvqerhuTC2Fxhvm6ny%2FrorU7PtxrK0U37IYdX4VCzhr3r5DK9OP%2FODz4RDB9DP6YMDCwdrpFnFiMt8gam3cajeiLixC1jOhb3yCJcMIF4jFIsSoDDxk4hAjDFYuIM%2B6f4j65U8vpGEN%2F2T0KQMngmawZZ23UPSgCEhENfV65zHg6ZMsWR%2BLvYVcQ1TcT69E7BvlHIQKzx1yqjFewZXLOsbw%2FijISFWnWeFYHb6mOY6O1vrdNg0jYEfic%2FzCC5g7Jf43HSJLoBcUFv6zpLaKXbk3on6T8GsPcHn%2FXWd5QTZvDuhSVThJGa%2BdY4Eu8eED5fiRnLGYde8pWA0GwsESmBLAgPZpQgFShEYtuaqc42gUegP0sxylAMxGC5rQlSHBl6q8a4JvpypRTH2W%2FSgqxhPIgklhsq%2FeJEm9r7xUKglR8%2FAZJzlcANc4Sek79eIQi%2FrtJVg0Qq4N2c9Xv0cZQgpWcqb%2FL34wMy1l3o0K5cBx8M0ZeeRrvZTeOztwXsaGJkChToFYYBcDMwfbS2xsZHFCeMGGATPrWO2gwg32Y71YzNwq8NsIv1KB8c89kMnxXHfLfmrWQWeickqjSuq48fX1tZSfKNW1IBdI7ioAdCdRIJhtZHLU7%2BqHempt1IwG6EwqKSCywY6pgHYko0j47Qx55Luz3GZIFfMJzw4%2FpYVO2%2FcA%2ByVinUuN30ICYwbYEhoKUOgQdhpb0XVQ9dtcYJ8xIPGGlmhnosAaRWH9j7tNGrz%2B7gf2cPYmMuvFuQETDKlL%2Bbg6WuH85OJQ3F%2F0%2BCthh%2FXoOaKP2o27t8TisdG5rX3mNEEc%2BHhjjBAC0Sv8lrBzN3rOmhbHaP1iENFJgjIbT0nlxadRQVYu5ymOag9&X-Amz-Signature=cdcaf42e3a7738b03dabc23933edbbc856b99eea6ad71f7e6240704328b55c90&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-        "format": "csv",
-        "rows": 2,
-        "size_bytes": 0,
-        "expires_at": "2026-01-09T11:19:23.166Z"
-    },
-    "domains_retrieved": [
-        "name",
-        "email",
-        "demographic",
-        "address"
-    ],
-    "search_criteria": {
-        "expression": "(900000002) AND (900000023) AND (1800000051) AND (900000021)",
-        "location": {
-            "latitude": 40,
-            "longitude": -83,
-            "radius": 100,
-            "unit": "km"
-        },
-        "audience_limit": 2
     }
 }
