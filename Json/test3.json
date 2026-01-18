@@ -1,0 +1,109 @@
+{
+    "audience": {
+        "sample": [
+            {
+                "person_id": 3100,
+                "identifiers": {
+                    "email": [
+                        "dleocopoulos@cs.com",
+                        "gleocopoulos@aol.com",
+                        "gleocopoulos@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 3847,
+                "identifiers": {
+                    "email": [
+                        "braulia9@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 31744,
+                "identifiers": {
+                    "email": [
+                        "teshapapik@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 32046,
+                "identifiers": {
+                    "email": [
+                        "apawson@msn.com",
+                        "booie630@aol.com",
+                        "brobbins@baynetworks.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 35340,
+                "identifiers": {
+                    "email": [
+                        "mbonilla3078@frontiernet.net",
+                        "maria.barroso@hotmail.com",
+                        "scottgrunder@outlook.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 35959,
+                "identifiers": {
+                    "email": [
+                        "lynnell1985@yahoo.com",
+                        "lashunda.hodson@yahoo.com",
+                        "lynnell1985@adelphia.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 39799,
+                "identifiers": {
+                    "email": [
+                        "widorrenee503@gmail.com",
+                        "awidor@msn.com",
+                        "poohlashorty82@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 39847,
+                "identifiers": {
+                    "email": [
+                        "bolagh@msn.com",
+                        "jsocha@go.com",
+                        "eqsorayda_romero9@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 41497,
+                "identifiers": {
+                    "email": [
+                        "jossram@att.net",
+                        "jeramirez30@comcast.net",
+                        "jossram43@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 42141,
+                "identifiers": {
+                    "email": [
+                        "gloriatorresdu77@gmail.com",
+                        "diego892@aol.com"
+                    ]
+                }
+            }
+        ],
+        "total": "4803929"
+    },
+    "csvKey": "uploads\/5d97e1ce-69ee-4796-a38c-c0ab4a720ded\/customer_282_customer_2_1768152160086.csv",
+    "workflowId": "afd5e174-e080-4a42-b3d4-f8e6908a1c1b",
+    "expressionUsed": "900000002 AND 900000023 AND 900000021 AND 1800000051",
+    "finalExpression": "900000002 AND 900000023 AND 900000021 AND 1800000051",
+    "originalExpression": "900000002 AND 900000023 AND 900000021 AND 1800000051",
+    "addedCluster": "none",
+    "summary": "### Audience Build Summary\n\n- **Selected Persona:** Modern Homeowner Segment  \n- **Selected Strategy:** precision  \n- **Total Audience Size:** 4,803,929  \n- **Warnings:** None  \n- **Location:** 34.048051, -118.254187 within 25 miles  \n\nYou can add in other characteristics via chatting to the agent."
+}

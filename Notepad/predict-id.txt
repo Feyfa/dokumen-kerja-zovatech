@@ -847,13 +847,43 @@ WHERE id = 23 and company_id = 39 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_na
 
 ================ DATABASE YANG DIUBAH ================
 INSERT INTO `master_features` (`id`, `slug`, `name`, `is_beta`, `apply_to_all_agency`, `created_at`, `updated_at`) VALUES (NULL, 'predict_module', 'Predict Module', 'T', 'T', '2025-09-18 00:00:00', '2025-09-18 00:00:00');
+
+ALTER TABLE leadspeek_users
+ADD COLUMN leadspeek_latitude DOUBLE NULL AFTER retargeting_audience_simplifi_id,
+ADD COLUMN leadspeek_longitude DOUBLE NULL AFTER leadspeek_latitude,
+ADD COLUMN leadspeek_radius DOUBLE NULL AFTER leadspeek_longitude,
+ADD COLUMN leadspeek_radius_unit ENUM('mi','km') NULL AFTER leadspeek_radius;
+
+ALTER TABLE `leadspeek_business` ADD `final_expression` TEXT NULL DEFAULT NULL AFTER `fetch_report_status`;
+ALTER TABLE `leadspeek_business` ADD `final_analyze_customers` TEXT NULL DEFAULT NULL AFTER `fetch_report_status`;
 ================ DATABASE YANG DIUBAH ================
 
+<div v-if="newcampaign.geo" class="border-box mt-2">
+    <GeoRadiusSelector
+        :lat.sync="newcampaign.target_lat"
+        :lng.sync="newcampaign.target_lng"
+        :radius-miles.sync="newcampaign.target_radius_miles"
+        :default-center="usDefaultCenter"
+        :default-radius="newcampaign.target_radius_miles || 25"
+    />
+    <small style="color:#942434 !important;" v-if="err_campaignCustomersFrom">* Please drop a pin inside the United States and set a radius.</small>
+</div>
+
+campaignCreateActiveStep
+
+async updateCreateCampaignStep(){
+validationCreateCampaignStep(step) {
+
+handleOptionSelect()
+handlePanelProceed()
 
 global.globalModulNameLink.simplifi.name
 
 leadsimplifiname
 leadsimplifiname
+
+http://datalocal.emmsandbox.com/api/audience/from-csv-url
+http://datalocal.emmsandbox.com/api/audience/from-csv-key
 
 http://datalocal.emmsandbox.com/api/user
 
@@ -901,3 +931,81 @@ this.loadPricingForPaymentTerm();
 <div class="col-12" v-if="selectsAppModule.AppModuleSelect == 'predict' && moduleAgency.predict != undefined && validateBetaFeature('predict_module') && this.$global.idsys == this.$global.masteridsys">
 
 http://datalocal.emmsandbox.com/api/payment/card
+
+
+hai saya mau tau sebenarnya di balik layar itu bagaimana sih karena ini yang buat orang lain bukan saya saya. jadi saya jelaskan dulu step by step alur yang sekarang ini.
+
+yang pertama saat buat campaign itu isi infomrasi bisnis dan lain lain
+nah saat klik next dari bisnis information itu masuk ke url ini http://datalocal.emmsandbox.com/api/audience/from-csv-url. dengan response seperti di gambar. nanti dapat response seperti analysis, icp_description, metadata, personas, upload, query_params
+disini saat saya mendapatkan jawabn saya klik lagi jawaban yang dikasih, dan mengarahkan ke url ini http://datalocal.emmsandbox.com/api/audience/from-csv-key. dengan hasil parameter addedCluster, finalExpression, dan lain lain
+setelah jawab dari pilihan yang dikasih, itu masuk ke url ini lagi http://datalocal.emmsandbox.com/api/audience/from-csv-key. dengan hasil parameter addedCluster, finalExpression, dan lain lain
+nah setelah step akhir pilihan yang diberikan, nanti final expression nya saya simpan, dan saya hit ke MCP-WATT. ini project tim saya menggunakan mastra. dan yang saya perlajari saat hit ini itu menjalankan find_person milik wattdata
+
+
+
+
+========================================================================================
+Morning semuanya, sorry ini kalau sempat aja ya ada update untuk predict ID:
+
+Update Predict ID
+
+ROOT:
+1. Seperti module lain, PredictID dapat di enable per Agency, defaultnya tidak enable ✅
+2. General Setting ada default price untuk set agency monthly fee dan max campaign created ✅
+3. Per agency bisa setting price untuk agency monthly fee dan max campaign created ✅
+4. Jika predictID di uncheck make ada pop up warning jika module akan di disabled dan semua campaign dibawahnya akan di stop langsung 
+5. Monthly Fee Agency akan start ketika dia enable dan agree dari agreement yg muncul pas klik menu link 
+6. Agreement bisa diupdate => attached updatenya (sekarang ini kayanya nak ya) 
+
+AGENCY:
+1. Tidak ada default price untuk setup fee dan monthly fee predictID untuk client (jika sudah dibuat saya rasa di hide aja), untuk setup fee dan monthly fee step 4 akan selalu $0 waktu create campaign ✅
+2. Campaign saat dibuat, nanti cluster nya dan final analyze customer nya disimpan di database, jadi ngga pakai dummy lagi ✅
+3. untuk hasilnya pakai result dari step 3 finalexpression variable, jika error ataupun apapun ada tombol retry atau gimana (progress 3)
+4. Campaign tidak bisa diedit tapi bisa dilihat detailnya, dan khusus "root" bisa liat final expression atau clusternya dari hasil campaign itu? Ex. 100201 AND 202000 OR 13 ✅
+5. Campaign ada tombol play dan stop, dimana kalau stop ada 2 opsi : (progress 4) 
+    a. Akan langsung berhenti 
+    b. Akan lanjut repotnya sampai next billing 
+
+CLIENT:
+1. Client hanya bisa download ✅
+2. Client tidak bisa play dan stop (tidak muncul) ✅
+3. Client tetep bisa liat detilnya 
+
+TAMBAHAN:
+1. Ada email yang ke send jika quota melebihi 80% (ini untuk cleanID and AudienceID nanti) 
+2. Scenario untuk module agreement pop up 
+    Untuk pertama kali Module di create ketika agency klik module terse but ada pop up agreement ada 2 opsi button: 
+        a. Agree and Decline 
+        b. Kalau agree otomatis akan charge monthly feenya, jika tidak / decline akan tetap seperti ini jika di klik 
+
+    Jika Root tiba tiba ganti harga ataupun setting yg berubah dengan financial untuk module tersebut, maka ketika agency klik module tersebut akan ada pop up again dengan agreement yg baru, tapi pilihannya berbeda: 
+        a. "Agree" berarti dia setuju dengan harga baru dan segala perubahannya 
+        b. "Remain at Current Subscription" semua perubahan di balikan ke aslinya dan module tetep jalan 
+
+    Jadi dia mau jawab agree atau tidak dua2nya tidak akan mendisabled menu yg sudah jalan 
+
+UPDATE CARD SETTING
+1.⁠ ⁠Rename "Card Settings" menjadi "Billing Settings" dan didalamnya ada informasi: 
+    a. Semua biaya untuk agency dari monthly cost, root fee untuk module2 Site, Search,B2B dan yg lainnya (seperti di general setting default Price setting) 
+    b. Termasuk biaya subscription (PredictID, Audience,CleanID) 
+    c. Agreement terakhir yang di agree. 
+========================================================================================
+
+1. const analyzeTool = tools['watt_analyze_customers'];
+2. const findPersonsTool = tools['watt_find_persons'];
+3. const findPersonsTool = tools['watt_find_persons'];
+
+
+(1) generate_url_for_upload ✅
+        ↓
+(2) PUT CSV ke upload_url ✅
+        ↓
+(3) analyze_customers (awal) ✅
+        ↓
+(4) analyze_customers (refinement 1) ✅ step ini hanya melalui ui ux saja, di postman ngga usah melakukan ini
+        ↓
+(5) analyze_customers (refinement 2, dst) ✅ step ini hanya melalui ui ux saja, di postman ngga usah melakukan ini
+        ↓
+(6) ambil expression final
+        ↓
+(7) find_persons (expression + optional location)

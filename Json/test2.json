@@ -1,0 +1,122 @@
+{
+    "audience": {
+        "sample": [
+            {
+                "person_id": 2427,
+                "identifiers": {
+                    "email": [
+                        "bette.goldsmith@msn.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 3100,
+                "identifiers": {
+                    "email": [
+                        "dleocopoulos@cs.com",
+                        "gleocopoulos@aol.com",
+                        "gleocopoulos@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 3847,
+                "identifiers": {
+                    "email": [
+                        "braulia9@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 6533,
+                "identifiers": {
+                    "email": [
+                        "tmariani@altavista.com",
+                        "pkwmariani60@ameritrade.com",
+                        "wmariani@earthlink.net"
+                    ]
+                }
+            },
+            {
+                "person_id": 6931,
+                "identifiers": {
+                    "email": [
+                        "ebellis@bellsouth.net",
+                        "marciviviano@aaroe.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 12071,
+                "identifiers": {
+                    "email": [
+                        "elaine.goulet@sbcglobal.net",
+                        "joeg18@prodigy.net",
+                        "egoulet47@gmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 14296,
+                "identifiers": {
+                    "email": [
+                        "adieno48@hotmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 18786,
+                "identifiers": {
+                    "email": [
+                        "chrisryan46@aol.com",
+                        "cryan@teamrubiconusa.org",
+                        "goodacoustics@hotmail.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 23847,
+                "identifiers": {
+                    "email": [
+                        "chris.perry@tbwachiat.com",
+                        "emarantz@yahoo.com"
+                    ]
+                }
+            },
+            {
+                "person_id": 26143,
+                "identifiers": {
+                    "email": [
+                        "jonathan.zaleski@msn.com",
+                        "ejzaleskiv57@excite.com",
+                        "jzaleski@excite.com"
+                    ]
+                }
+            }
+        ],
+        "total": "5570961"
+    },
+    "csvKey": "uploads\/5d97e1ce-69ee-4796-a38c-c0ab4a720ded\/customer_282_customer_2_1768152160086.csv",
+    "workflowId": "12d5297f-3951-4d1a-97da-2d8a1f55ec6f",
+    "expressionUsed": "900000002 AND 900000023 AND 900000021",
+    "finalExpression": "900000002 AND 900000023 AND 900000021",
+    "originalExpression": "900000002 AND 900000023 AND 900000021",
+    "addedCluster": "none",
+    "overview": [
+        {
+            "name": "Modern Homeowner Segment",
+            "strategy": "precision",
+            "total": 4803929
+        },
+        {
+            "name": "Modern Homeowner Segment",
+            "strategy": "balanced",
+            "total": 5570961
+        },
+        {
+            "name": "Modern Homeowner Segment",
+            "strategy": "reach",
+            "total": 6396911
+        }
+    ]
+}

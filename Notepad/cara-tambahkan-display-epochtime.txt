@@ -1,0 +1,19 @@
+====== Di EMM-SANDBOX/front/src/pages/Layout/DashboardNavbar.vue ======
+<div class="navbar__tablet__desktop" style="padding: 10px 30px;">
+    <EpochTimeDisplay class="mr-2"></EpochTimeDisplay>
+    <ThemeButton class="mr-2"></ThemeButton>
+    <el-avatar size="small" v-if="this.$global.globalviewmode" @click.native="revertViewMode" icon="far fa-eye" class="cursor-pointer" style="font-size: 14px; background: #fff; color: #000;"></el-avatar>
+</div>
+
+<script>
+import EpochTimeDisplay from '@/components/EpochTimeDisplay';
+export default {
+    components: {
+        EpochTimeDisplay,
+    }
+}
+</script>
+====== Di EMM-SANDBOX/front/src/pages/Layout/DashboardNavbar.vue ======
+
+====== copy dari DOKUMEN KERJA ZOVATECH/Vue/EpochTimeDisplay.vue ke EMM-SANDBOX/front/src/components/EpochTimeDisplay.vue  ======
+====== copy dari DOKUMEN KERJA ZOVATECH/Vue/EpochTimeDisplay.vue ke EMM-SANDBOX/front/src/components/EpochTimeDisplay.vue  ======
