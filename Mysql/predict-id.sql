@@ -78,4 +78,10 @@ select active,disabled,active_user, CONVERT(AES_DECRYPT(FROM_bASE64(campaign_nam
 select * from leadspeek_business where leadspeek_api_id = 10122196;
 
 
+set @leadspeek_api_id_delete := 71419634;
+delete from leadspeek_users where leadspeek_api_id = @leadspeek_api_id_delete;
+delete from leadspeek_business where leadspeek_api_id = @leadspeek_api_id_delete;
+delete from leadspeek_customer_campaigns where leadspeek_api_id = @leadspeek_api_id_delete;
+delete from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id_delete;
+
 
