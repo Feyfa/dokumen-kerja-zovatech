@@ -1839,6 +1839,26 @@ WORKER
 php artisan queue:work redis --queue=predict_fetch_report_offset
 php artisan queue:work redis --queue=predict_fetch_report_merge
 
+tls://private-db-caching-redis-do-user-8589910-0.k.db.ondigitalocean.com
+AVNS_HuFT0xUPIkopOrI3DLN
+25061
+
+==== YANG HARUS DIKERJAKAN ==== 
+2. tentang play stop campaign
+    - jika play harus check dulu apakah sudah 1 bulan dari awal dia buat campaign nya atau terakhir kali di charge
+3. untuk di price agency list, untuk predict buat kaya gini 
+    - input biaya bulanan
+    - input quota jumlah campaign dalam perbulan / input maximum jumlah campaign dalam perbulan
+    - checkbox untuk enable atau disable / input jumlah campaign overage yang telah dibuat
+4. di price agency list
+    - tambahkan parameter "PredictQuotaCampaigns", "PredictOverageEnable", "PredictOverageCost" di dalam object "predict"
+    - untuk layout nya jadi seperti ini 
+
+
+
+==== YANG HARUS DIKERJAKAN ====
+
+
 {
     -- 100 --
     "18006"
