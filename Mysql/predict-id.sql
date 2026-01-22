@@ -47,7 +47,7 @@ select * from user_logs order by id desc limit 10;
 select * from leadspeek_customer_campaigns where leadspeek_api_id in ('14820931');
 
 select 
-	DATEDIFF('2026-01-27', '2026-01-26') as result_1;
+	DATEDIFF('2026-02-02', '2026-01-26') as result_1;
 -- 	DATEDIFF('2026-01-11','2026-01-11') as result_2, -- di ui 2026-01-01 - 2026-01-07, ke charge nya tanggal 08 
 -- 	DATEDIFF('2026-01-15','2026-01-08') as result_3, -- di ui 2026-01-08 - 2026-01-14,  ke charge nya tanggal 15
 -- 	DATEDIFF('2026-01-22','2026-01-15') as result_4, -- di ui 2026-01-15 - 2026-01-21,  ke charge nya tanggal 22

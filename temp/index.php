@@ -1,29 +1,30 @@
-foreach ($csvFiles as $index => $file) {
-    if (!isset($file['url'])) {
-        continue;
+/**
+    * Calculate optimal batch size based on audience limit
+    * @param int $audienceLimit
+    * @return int
+    */
+public function calculateOptimalBatchSize(int $audience)
+{
+    // Case 1: audience kecil → 1 batch
+    if($audience <= 100){
+        return 100;
     }
 
-    // Buka stream dari URL (tidak download penuh ke memory)
-    $csvStream = fopen($file['url'], 'r');
-    if (!$csvStream) {
-        Log::warning('Gagal buka stream CSV', ['url' => $file['url']]);
-        continue;
-    }
+    // Boundary
+    $minAudience = 100;
+    $maxAudience = 4000;
 
-    // Simpan stream ke file temp sementara (chunk by chunk, tidak load penuh)
-    $tempCsvPath = storage_path('app/tmp_csv_' . uniqid() . '.csv');
-    $tempCsvFile = fopen($tempCsvPath, 'w');
-    
-    // Copy stream chunk by chunk (efisien memory)
-    stream_copy_to_stream($csvStream, $tempCsvFile);
-    
-    fclose($csvStream);
-    fclose($tempCsvFile);
+    $minBatch = 100;
+    $maxBatch = 400;
 
-    // Tambahkan file ke ZIP (lebih efisien daripada addFromString)
-    $fileName = 'csv_' . ($index + 1) . '.csv';
-    $zip->addFile($tempCsvPath, $fileName);
+    // Clamp audience supaya aman
+    $audience = max($minAudience, min($maxAudience, $audience));
 
-    // Simpan path untuk cleanup nanti
-    $tempCsvFiles[] = $tempCsvPath;
+    // Linear scaling
+    $batchSize = $minBatch + (($audience - $minAudience) * ($maxBatch - $minBatch) / ($maxAudience - $minAudience));
+
+    // Optional: bulatkan ke kelipatan 50 biar rapi
+    $batchSize = round($batchSize / 50) * 50;
+
+    return (int) $batchSize;
 }

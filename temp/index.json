@@ -1,487 +1,152 @@
+Request Ke 1
 {
-    "result": {
-        "content": [
-            {
-                "type": "text",
-                "text": {
-                    "detected_schema": {
-                        "email_column": "Email1",
-                        "phone_column": "Phone1",
-                        "address_column": "Address1",
-                        "confidence": {
-                            "email": 1,
-                            "phone": 1,
-                            "address": 1
-                        },
-                        "all_columns": [
-                            "Click Date",
-                            "Firstname",
-                            "Lastname",
-                            "Email1",
-                            "Email2",
-                            "Phone1",
-                            "Phone2",
-                            "Address1",
-                            "Address2",
-                            "City",
-                            "State",
-                            "Zip"
-                        ],
-                        "sample_data": [
-                            {
-                                "Click Date": "6\/5\/2023 13:45",
-                                "Firstname": "Tanya",
-                                "Lastname": "Blair",
-                                "Email1": "tanyaleadingstars@gmail.com",
-                                "Email2": "jeremyblair403@gmail.com",
-                                "Phone1": "(937) 214-0427",
-                                "Phone2": "(937) 214-3003",
-                                "Address1": "17579 Kirkwood Rd",
-                                "Address2": "",
-                                "City": "Sidney",
-                                "State": "OH",
-                                "Zip": ""
-                            },
-                            {
-                                "Click Date": "6\/9\/2023 12:56",
-                                "Firstname": "Jonathan",
-                                "Lastname": "Degennaro",
-                                "Email1": "jon.degennaro@hotmail.com",
-                                "Email2": "jondege@hotmail.com",
-                                "Phone1": "(917) 543-8397",
-                                "Phone2": "(973) 707-2611",
-                                "Address1": "101 Clark St",
-                                "Address2": "",
-                                "City": "Glen Ridge",
-                                "State": "NJ",
-                                "Zip": ""
-                            },
-                            {
-                                "Click Date": "6\/7\/2023 7:25",
-                                "Firstname": "Donaldo",
-                                "Lastname": "Romero",
-                                "Email1": "royce.a504@gmail.com",
-                                "Email2": "a.d.romers@gmail.com",
-                                "Phone1": "(813) 351-0746",
-                                "Phone2": "(813) 935-6332",
-                                "Address1": "4307 E Grove View Ave",
-                                "Address2": "",
-                                "City": "Tampa",
-                                "State": "FL",
-                                "Zip": ""
-                            }
-                        ]
-                    },
-                    "resolution": {
-                        "total_identifiers": 10,
-                        "resolved": 645,
-                        "resolution_rate": 215
-                    },
-                    "clusters": [
-                        {
-                            "cluster_id": "900000021",
-                            "cluster_name": "is_rv_owner",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.95,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 22,
-                            "is_inverted": false,
-                            "weighted_score": 13.321661558028962
-                        },
-                        {
-                            "cluster_id": "900000023",
-                            "cluster_name": "is_truck_owner",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.95,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 22,
-                            "is_inverted": false,
-                            "weighted_score": 13.321661558028962
-                        },
-                        {
-                            "cluster_id": "1800000035",
-                            "cluster_name": "donated_veterans_cause",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.9333333333333333,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 21.625,
-                            "is_inverted": false,
-                            "weighted_score": 12.982506509161343
-                        },
-                        {
-                            "cluster_id": "1800000029",
-                            "cluster_name": "donated_environmental_cause",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.9166666666666666,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 21.249999999999996,
-                            "is_inverted": false,
-                            "weighted_score": 12.646279508877962
-                        },
-                        {
-                            "cluster_id": "900000002",
-                            "cluster_name": "is_renter",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.8833333333333333,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 20.5,
-                            "is_inverted": false,
-                            "weighted_score": 11.982713243112626
-                        },
-                        {
-                            "cluster_id": "1800000033",
-                            "cluster_name": "donated_religious_cause",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.8666666666666667,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 20.125,
-                            "is_inverted": false,
-                            "weighted_score": 11.655427529070593
-                        },
-                        {
-                            "cluster_id": "1800000051",
-                            "cluster_name": "owns_premium_credit_card",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.85,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 19.75,
-                            "is_inverted": false,
-                            "weighted_score": 11.331177031388515
-                        },
-                        {
-                            "cluster_id": "1800000027",
-                            "cluster_name": "donated_childrens_cause",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.8,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 18.625,
-                            "is_inverted": false,
-                            "weighted_score": 10.37692784548571
-                        },
-                        {
-                            "cluster_id": "900000019",
-                            "cluster_name": "is_pet_owner",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.7166666666666667,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 16.75,
-                            "is_inverted": false,
-                            "weighted_score": 8.850067678648943
-                        },
-                        {
-                            "cluster_id": "900000027",
-                            "cluster_name": "owns_swimming_pool",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.9166666666666666,
-                            "world_prevalence": 0.025527,
-                            "lift": 14.091133897441924,
-                            "is_inverted": false,
-                            "weighted_score": 8.451208215960195
-                        },
-                        {
-                            "cluster_id": "900000029",
-                            "cluster_name": "practices_diy",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.9333333333333333,
-                            "world_prevalence": 0.02948972,
-                            "lift": 12.493542665037172,
-                            "is_inverted": false,
-                            "weighted_score": 7.583395925291992
-                        },
-                        {
-                            "cluster_id": "1800000041",
-                            "cluster_name": "owns_amex_card",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.9666666666666667,
-                            "world_prevalence": 0.03413252,
-                            "lift": 11.245370251009888,
-                            "is_inverted": false,
-                            "weighted_score": 6.966984033611182
-                        },
-                        {
-                            "cluster_id": "900000025",
-                            "cluster_name": "is_vacation_traveler",
-                            "cluster_value": "false",
-                            "domain": "lifestyle",
-                            "audience_prevalence": 0.6,
-                            "world_prevalence": 0.01731372,
-                            "lift": 13.620474109550113,
-                            "is_inverted": false,
-                            "weighted_score": 6.614294569119632
-                        },
-                        {
-                            "cluster_id": "1800000039",
-                            "cluster_name": "is_charitable_donor",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.5833333333333334,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 13.75,
-                            "is_inverted": false,
-                            "weighted_score": 6.5823113658248245
-                        },
-                        {
-                            "cluster_id": "1800000045",
-                            "cluster_name": "owns_credit_card",
-                            "cluster_value": "false",
-                            "domain": "financial",
-                            "audience_prevalence": 0.5333333333333333,
-                            "world_prevalence": 0.016666666666666666,
-                            "lift": 12.624999999999998,
-                            "is_inverted": false,
-                            "weighted_score": 5.791238555820047
-                        }
-                    ],
-                    "icp_synthesis": {
-                        "personas": [
-                            {
-                                "name": "Pragmatic Homeowner",
-                                "description": "Established homeowners who prioritize practical value over traditional luxury markers. They avoid conventional vehicle types like RVs and trucks, preferring innovative alternatives. Despite financial stability through homeownership, they maintain a frugal approach, avoiding premium credit cards and discretionary charitable donations. This persona represents the core Tesla buyer: financially secure but value-conscious, seeking modern solutions over traditional status symbols.",
-                                "key_traits": [
-                                    {
-                                        "cluster_id": "900000002",
-                                        "domain": "lifestyle",
-                                        "name": "is_renter",
-                                        "value": "false",
-                                        "lift": 20.5,
-                                        "insight": "88.3% are homeowners, indicating established financial stability and long-term planning mindset essential for EV adoption"
-                                    },
-                                    {
-                                        "cluster_id": "900000023",
-                                        "domain": "lifestyle",
-                                        "name": "is_truck_owner",
-                                        "value": "false",
-                                        "lift": 22,
-                                        "insight": "95% do not own trucks, showing preference for non-traditional automotive segments and openness to alternative vehicle types"
-                                    },
-                                    {
-                                        "cluster_id": "1800000051",
-                                        "domain": "financial",
-                                        "name": "owns_premium_credit_card",
-                                        "value": "false",
-                                        "lift": 19.75,
-                                        "insight": "85% avoid premium credit cards despite financial means, demonstrating value-conscious purchasing behavior over status signaling"
-                                    },
-                                    {
-                                        "cluster_id": "1800000039",
-                                        "domain": "financial",
-                                        "name": "is_charitable_donor",
-                                        "value": "false",
-                                        "lift": 13.75,
-                                        "insight": "58.3% are not regular charitable donors, suggesting discretionary spending focused on tangible personal value rather than philanthropic causes"
-                                    }
-                                ],
-                                "expressions": {
-                                    "precision": "900000002 AND 900000023 AND 1800000051 AND 1800000039",
-                                    "balanced": "900000002 AND 900000023 AND 1800000051",
-                                    "reach": "900000002 AND 900000023"
-                                }
-                            },
-                            {
-                                "name": "Modern Minimalist",
-                                "description": "A lifestyle-conscious segment that deliberately avoids traditional ownership burdens and maintenance-intensive assets. They eschew RVs, trucks, swimming pools, and DIY projects, preferring streamlined, low-maintenance solutions. Their rejection of pet ownership and vacation travel patterns suggests time-optimized lifestyles focused on efficiency. This persona values Tesla's proposition of simplified, tech-forward transportation without the complexity of traditional vehicle maintenance.",
-                                "key_traits": [
-                                    {
-                                        "cluster_id": "900000021",
-                                        "domain": "lifestyle",
-                                        "name": "is_rv_owner",
-                                        "value": "false",
-                                        "lift": 22,
-                                        "insight": "95% do not own RVs, indicating preference for efficient, unburdened lifestyle free from recreational vehicle maintenance"
-                                    },
-                                    {
-                                        "cluster_id": "900000019",
-                                        "domain": "lifestyle",
-                                        "name": "is_pet_owner",
-                                        "value": "false",
-                                        "lift": 16.75,
-                                        "insight": "71.7% are not pet owners, suggesting minimal domestic responsibilities and maintenance-free lifestyle preferences"
-                                    },
-                                    {
-                                        "cluster_id": "900000029",
-                                        "domain": "lifestyle",
-                                        "name": "practices_diy",
-                                        "value": "false",
-                                        "lift": 12.49,
-                                        "insight": "93.3% do not practice DIY, preferring turnkey solutions and professional services over hands-on maintenance"
-                                    },
-                                    {
-                                        "cluster_id": "900000027",
-                                        "domain": "lifestyle",
-                                        "name": "owns_swimming_pool",
-                                        "value": "false",
-                                        "lift": 14.09,
-                                        "insight": "91.7% do not own pools, avoiding high-maintenance home features in favor of simplified living"
-                                    }
-                                ],
-                                "expressions": {
-                                    "precision": "900000021 AND 900000019 AND 900000029 AND 900000027",
-                                    "balanced": "900000021 AND 900000019 AND 900000029",
-                                    "reach": "900000021 AND 900000019"
-                                }
-                            },
-                            {
-                                "name": "Non-Traditional Affluent",
-                                "description": "Financially established individuals who reject conventional markers of wealth and traditional charitable engagement. They avoid premium financial products like Amex and high-tier credit cards while steering clear of typical donation patterns to veterans, environmental, religious, and children's causes. This counter-intuitive profile suggests educated, financially secure individuals who make independent purchasing decisions based on innovation and practicality rather than social expectations or traditional affluence signaling.",
-                                "key_traits": [
-                                    {
-                                        "cluster_id": "1800000029",
-                                        "domain": "financial",
-                                        "name": "donated_environmental_cause",
-                                        "value": "false",
-                                        "lift": 21.25,
-                                        "insight": "91.7% have not donated to environmental causes, paradoxically choosing environmental action through product purchase (EVs) over charitable giving"
-                                    },
-                                    {
-                                        "cluster_id": "1800000035",
-                                        "domain": "financial",
-                                        "name": "donated_veterans_cause",
-                                        "value": "false",
-                                        "lift": 21.625,
-                                        "insight": "93.3% do not donate to veterans causes, indicating selective engagement with social causes outside traditional charitable frameworks"
-                                    },
-                                    {
-                                        "cluster_id": "1800000041",
-                                        "domain": "financial",
-                                        "name": "owns_amex_card",
-                                        "value": "false",
-                                        "lift": 11.25,
-                                        "insight": "96.7% do not own Amex cards, rejecting traditional premium financial products despite likely qualifying for them"
-                                    },
-                                    {
-                                        "cluster_id": "1800000033",
-                                        "domain": "financial",
-                                        "name": "donated_religious_cause",
-                                        "value": "false",
-                                        "lift": 20.125,
-                                        "insight": "86.7% do not donate to religious causes, suggesting secular or non-traditional value systems"
-                                    }
-                                ],
-                                "expressions": {
-                                    "precision": "1800000029 AND 1800000035 AND 1800000041 AND 1800000033",
-                                    "balanced": "1800000029 AND 1800000035 AND 1800000041",
-                                    "reach": "1800000029 AND 1800000035"
-                                }
-                            }
-                        ],
-                        "icp_analysis": {
-                            "summary": "Tesla's ideal customer profile reveals a distinct demographic characterized by homeownership and financial stability, with notably low adoption of traditional lifestyle markers. The strongest signals show customers who do NOT own RVs (lift: 22.0, cluster 900000021) or trucks (lift: 22.0, cluster 900000023), indicating a departure from traditional automotive preferences. High homeownership rates (88.3% non-renters, lift: 20.5, cluster 900000002) suggest established, financially stable individuals. Interestingly, these customers show low charitable donation patterns across multiple causes - veterans (lift: 21.6, cluster 1800000035), environmental (lift: 21.2, cluster 1800000029), and religious causes (lift: 20.1, cluster 1800000033) - and do not own premium credit cards (lift: 19.8, cluster 1800000051), suggesting a pragmatic, value-conscious approach despite their financial stability.",
-                            "top_distinctive_traits": [
-                                {
-                                    "cluster_id": "900000021",
-                                    "domain": "lifestyle",
-                                    "name": "is_rv_owner",
-                                    "value": "false",
-                                    "audience_percent": 0.95,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 22
-                                },
-                                {
-                                    "cluster_id": "900000023",
-                                    "domain": "lifestyle",
-                                    "name": "is_truck_owner",
-                                    "value": "false",
-                                    "audience_percent": 0.95,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 22
-                                },
-                                {
-                                    "cluster_id": "1800000035",
-                                    "domain": "financial",
-                                    "name": "donated_veterans_cause",
-                                    "value": "false",
-                                    "audience_percent": 0.9333333333333333,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 21.625
-                                },
-                                {
-                                    "cluster_id": "1800000029",
-                                    "domain": "financial",
-                                    "name": "donated_environmental_cause",
-                                    "value": "false",
-                                    "audience_percent": 0.9166666666666666,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 21.25
-                                },
-                                {
-                                    "cluster_id": "900000002",
-                                    "domain": "lifestyle",
-                                    "name": "is_renter",
-                                    "value": "false",
-                                    "audience_percent": 0.8833333333333333,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 20.5
-                                },
-                                {
-                                    "cluster_id": "1800000033",
-                                    "domain": "financial",
-                                    "name": "donated_religious_cause",
-                                    "value": "false",
-                                    "audience_percent": 0.8666666666666667,
-                                    "world_percent": 0.016666666666666666,
-                                    "lift": 20.125
-                                }
-                            ],
-                            "exclusion_signals": [
-                                {
-                                    "cluster_id": "900000021",
-                                    "domain": "lifestyle",
-                                    "name": "is_rv_owner",
-                                    "value": "false",
-                                    "inverse_lift": 22
-                                },
-                                {
-                                    "cluster_id": "900000023",
-                                    "domain": "lifestyle",
-                                    "name": "is_truck_owner",
-                                    "value": "false",
-                                    "inverse_lift": 22
-                                },
-                                {
-                                    "cluster_id": "900000019",
-                                    "domain": "lifestyle",
-                                    "name": "is_pet_owner",
-                                    "value": "false",
-                                    "inverse_lift": 16.75
-                                }
-                            ]
-                        }
-                    },
-                    "cluster_lookup_warning": {
-                        "code": "CLUSTER_LOOKUP_FAILURES",
-                        "message": "152 of 317 cluster lookups failed. Analysis results may be incomplete.",
-                        "failed_count": 152,
-                        "total_count": 317
-                    },
-                    "domain_selection": {
-                        "domains": [
-                            "demographic",
-                            "affinity",
-                            "financial",
-                            "lifestyle",
-                            "purchase",
-                            "intent"
-                        ],
-                        "reasoning": "For Tesla's electric vehicle market: 1) Affinity reveals brand preferences and automotive category interests to identify customers aligned with premium\/innovative brands vs competitors like BYD. 2) Financial indicates income ranges critical for luxury EV purchase capability. 3) Lifestyle identifies early adopters, environmentally-conscious, and tech-forward segments that match EV buyer profiles. 4) Purchase shows spending patterns and online shopping behavior relevant to high-ticket automotive purchases. 5) Intent captures active purchase signals for automotive category and EV consideration."
-                    },
-                    "workflow_id": "9e487c92-5f43-402a-9aef-4da7a7abb6e8",
-                    "tool_trace_id": "158907bd523373ad0302c0891fa97a9d"
-                }
-            }
-        ]
-    },
-    "jsonrpc": "2.0",
-    "id": 1
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
+    ,"export_format": "csv"
+    ,"domains": ["name", "email", "demographic","address"]
+    ,"location": {
+        "latitude": 39.707186656827,
+        "longitude": -104.8994491161,
+        "radius": 251.28,
+        "unit": "miles"
+    }
+    ,"audience_limit": 10
+    ,"offset": 0
+    // ,"workflow_id": "8ded3cee-4153-431b-94a4-29a1ec53cfa4"
+}
+Response Ke 1
+{
+    "total_matches": "13357",
+    "returned_count": 10,
+    "has_more": true,
+    "workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2",
+    "next_offset": 10,
+    "export": [
+        {
+            "url": "https://watt-mcp-exports-experimental.s3.us-east-2.amazonaws.com/exports/1768985465874-3053a2ce-c68c-4027-8573-f95e38ed9f14.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S2GYJGXVW%2F20260121%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20260121T085105Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJGMEQCICuLkMyKJB36VxUkj17tc87SNMwt2m%2BnKZQAQOfDvDosAiAc8husBsUJWZ2VRoLR2vx2rwuAdCsOMM1kMo1W4SzWYirOBAi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDQ4MTY2NTA4NzE0MSIMo3NpJ2F18ld7mznvKqIEeNjgd%2BVFFDVlU%2B0r5NlCygclG5VlukF94hmRgUMMWrfTncTFHSte%2F39p8sJkNya1wx9Mq4IG9rKTBPS8iXorS2DtbiJVHp7cpWphdWE655YSzALtDqwYXdBAMmJTxr8OvXTA60aRm22Db7wHExqIVts%2Btfw9gCnHCNHL80YJhUzKS1KEzxYeY6Ng%2Be%2FjDid%2FLTN9zLHFAiuOiEcPNR3vcSNMslDrmoLW4%2FEkuCGGO3jOkwn%2FJ7uKUS6q8HqHbnm%2Fzgv767Gk%2FAcQ4DvEykL0%2BY2MujCLKQ7v565O8ApI4tW9KP38cOAQzDVkSQ%2FXEdQpqV4zzMSlu9NZ6qh3HoaANEwaitqHbsOQiUN0PS1fusJJMfkz%2BCHQcAN6YhB86ZHGCGd%2BaV77KNuKDpX0OeMDXRORWNpNHBo7%2Fj%2F%2FwIA4lRTCHGbCp7zrfjoZvp4%2FUcIecWbaQg4gILx5frbmEJ%2FGvR3E4a2IumJ3sK9kJtmYxEiS4bpg7Gso0%2BFqh9RfmjzJJ53%2B%2BF8NoGEHWHi%2BDhTbodCiI0%2ByJAAXpGgzg%2FXC1rXNl%2Fr3BCq3Abb7prtVw0FDYSrObDoCxBd5bUOwjiv4bugFeSZOAg2MigAh3sEP0HA73ulC9OCVxJVmaRnq7%2F9W7GppIzZoXwAe2WCS2i%2BkTvI%2FqvJDkb6Wp7DMsJp1AFiyXNpXqg9bAWfVJlh6W5G4WUlWUevZjn2V11RWUwWHTMG4MPvfwcsGOqgBcb%2FmhVz6N%2Fbryj9r9Qn7IG0v0JOk3z4CQIofZUwC816vgytfIng%2Faw7w2d9W02EtugGsDg48j2U91Qpy19YuWqzqlnyopNfrpHYhoCYcfuV9MVYKF59UiqpJzXP6q1%2FrNNgyz5bFz0EgWSxYCxG5ZhvKFdAWthGnyBmn3KS8wT%2FrxoLi4HcFcX%2BVzLJCYJ0tY4Slrc5082r1xsHjpODhmTIbiBXsTfXP&X-Amz-Signature=27a09df5c48e8d20c62529e6048440805cc7edf9c1315a45ebb52f944b4007ec&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "format": "csv",
+            "rows": 10,
+            "size_bytes": 0,
+            "expires_at": "2026-01-21T09:51:05.907Z"
+        }
+    ],
+    "domains_retrieved": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "search_criteria": {
+        "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+        "location": {
+            "latitude": 39.707186656827,
+            "longitude": -104.8994491161,
+            "radius": 251.28,
+            "unit": "miles"
+        },
+        "audience_limit": 10,
+        "offset": 0
+    }
+}
+
+--------
+
+Request Ke 2
+{
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
+    ,"export_format": "csv"
+    ,"domains": ["name", "email", "demographic","address"]
+    ,"location": {
+        "latitude": 39.707186656827,
+        "longitude": -104.8994491161,
+        "radius": 251.28,
+        "unit": "miles"
+    }
+    ,"audience_limit": 10
+    ,"offset": 10
+    ,"workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
+}
+Response Ke 2
+{
+    "total_matches": "13357",
+    "returned_count": 10,
+    "has_more": true,
+    "workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2",
+    "next_offset": 20,
+    "export": [
+        {
+            "url": "https://watt-mcp-exports-experimental.s3.us-east-2.amazonaws.com/exports/1768985552422-ee9412f6-d48e-4a30-b6a2-aca46c800c9a.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S2GYJGXVW%2F20260121%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20260121T085232Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJGMEQCICuLkMyKJB36VxUkj17tc87SNMwt2m%2BnKZQAQOfDvDosAiAc8husBsUJWZ2VRoLR2vx2rwuAdCsOMM1kMo1W4SzWYirOBAi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDQ4MTY2NTA4NzE0MSIMo3NpJ2F18ld7mznvKqIEeNjgd%2BVFFDVlU%2B0r5NlCygclG5VlukF94hmRgUMMWrfTncTFHSte%2F39p8sJkNya1wx9Mq4IG9rKTBPS8iXorS2DtbiJVHp7cpWphdWE655YSzALtDqwYXdBAMmJTxr8OvXTA60aRm22Db7wHExqIVts%2Btfw9gCnHCNHL80YJhUzKS1KEzxYeY6Ng%2Be%2FjDid%2FLTN9zLHFAiuOiEcPNR3vcSNMslDrmoLW4%2FEkuCGGO3jOkwn%2FJ7uKUS6q8HqHbnm%2Fzgv767Gk%2FAcQ4DvEykL0%2BY2MujCLKQ7v565O8ApI4tW9KP38cOAQzDVkSQ%2FXEdQpqV4zzMSlu9NZ6qh3HoaANEwaitqHbsOQiUN0PS1fusJJMfkz%2BCHQcAN6YhB86ZHGCGd%2BaV77KNuKDpX0OeMDXRORWNpNHBo7%2Fj%2F%2FwIA4lRTCHGbCp7zrfjoZvp4%2FUcIecWbaQg4gILx5frbmEJ%2FGvR3E4a2IumJ3sK9kJtmYxEiS4bpg7Gso0%2BFqh9RfmjzJJ53%2B%2BF8NoGEHWHi%2BDhTbodCiI0%2ByJAAXpGgzg%2FXC1rXNl%2Fr3BCq3Abb7prtVw0FDYSrObDoCxBd5bUOwjiv4bugFeSZOAg2MigAh3sEP0HA73ulC9OCVxJVmaRnq7%2F9W7GppIzZoXwAe2WCS2i%2BkTvI%2FqvJDkb6Wp7DMsJp1AFiyXNpXqg9bAWfVJlh6W5G4WUlWUevZjn2V11RWUwWHTMG4MPvfwcsGOqgBcb%2FmhVz6N%2Fbryj9r9Qn7IG0v0JOk3z4CQIofZUwC816vgytfIng%2Faw7w2d9W02EtugGsDg48j2U91Qpy19YuWqzqlnyopNfrpHYhoCYcfuV9MVYKF59UiqpJzXP6q1%2FrNNgyz5bFz0EgWSxYCxG5ZhvKFdAWthGnyBmn3KS8wT%2FrxoLi4HcFcX%2BVzLJCYJ0tY4Slrc5082r1xsHjpODhmTIbiBXsTfXP&X-Amz-Signature=c6bcef4659c9cfe64d6474aecd2276e042733be77a85618735cbe6a7953c8673&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "format": "csv",
+            "rows": 10,
+            "size_bytes": 0,
+            "expires_at": "2026-01-21T09:52:32.453Z"
+        }
+    ],
+    "domains_retrieved": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "search_criteria": {
+        "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+        "location": {
+            "latitude": 39.707186656827,
+            "longitude": -104.8994491161,
+            "radius": 251.28,
+            "unit": "miles"
+        },
+        "audience_limit": 10,
+        "offset": 10
+    }
+}
+
+--------
+
+{
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
+    ,"export_format": "csv"
+    ,"domains": ["name", "email", "demographic","address"]
+    ,"location": {
+        "latitude": 39.707186656827,
+        "longitude": -104.8994491161,
+        "radius": 251.28,
+        "unit": "miles"
+    }
+    ,"audience_limit": 10
+    ,"offset": 20
+    ,"workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
+}
+Response Ke 3
+{
+    "total_matches": "13357",
+    "returned_count": 10,
+    "has_more": true,
+    "workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2",
+    "next_offset": 30,
+    "export": [
+        {
+            "url": "https://watt-mcp-exports-experimental.s3.us-east-2.amazonaws.com/exports/1768985620698-5da76d3e-aad3-4f00-94b1-273e8b3fc6d4.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S2GYJGXVW%2F20260121%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20260121T085340Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJGMEQCICuLkMyKJB36VxUkj17tc87SNMwt2m%2BnKZQAQOfDvDosAiAc8husBsUJWZ2VRoLR2vx2rwuAdCsOMM1kMo1W4SzWYirOBAi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDQ4MTY2NTA4NzE0MSIMo3NpJ2F18ld7mznvKqIEeNjgd%2BVFFDVlU%2B0r5NlCygclG5VlukF94hmRgUMMWrfTncTFHSte%2F39p8sJkNya1wx9Mq4IG9rKTBPS8iXorS2DtbiJVHp7cpWphdWE655YSzALtDqwYXdBAMmJTxr8OvXTA60aRm22Db7wHExqIVts%2Btfw9gCnHCNHL80YJhUzKS1KEzxYeY6Ng%2Be%2FjDid%2FLTN9zLHFAiuOiEcPNR3vcSNMslDrmoLW4%2FEkuCGGO3jOkwn%2FJ7uKUS6q8HqHbnm%2Fzgv767Gk%2FAcQ4DvEykL0%2BY2MujCLKQ7v565O8ApI4tW9KP38cOAQzDVkSQ%2FXEdQpqV4zzMSlu9NZ6qh3HoaANEwaitqHbsOQiUN0PS1fusJJMfkz%2BCHQcAN6YhB86ZHGCGd%2BaV77KNuKDpX0OeMDXRORWNpNHBo7%2Fj%2F%2FwIA4lRTCHGbCp7zrfjoZvp4%2FUcIecWbaQg4gILx5frbmEJ%2FGvR3E4a2IumJ3sK9kJtmYxEiS4bpg7Gso0%2BFqh9RfmjzJJ53%2B%2BF8NoGEHWHi%2BDhTbodCiI0%2ByJAAXpGgzg%2FXC1rXNl%2Fr3BCq3Abb7prtVw0FDYSrObDoCxBd5bUOwjiv4bugFeSZOAg2MigAh3sEP0HA73ulC9OCVxJVmaRnq7%2F9W7GppIzZoXwAe2WCS2i%2BkTvI%2FqvJDkb6Wp7DMsJp1AFiyXNpXqg9bAWfVJlh6W5G4WUlWUevZjn2V11RWUwWHTMG4MPvfwcsGOqgBcb%2FmhVz6N%2Fbryj9r9Qn7IG0v0JOk3z4CQIofZUwC816vgytfIng%2Faw7w2d9W02EtugGsDg48j2U91Qpy19YuWqzqlnyopNfrpHYhoCYcfuV9MVYKF59UiqpJzXP6q1%2FrNNgyz5bFz0EgWSxYCxG5ZhvKFdAWthGnyBmn3KS8wT%2FrxoLi4HcFcX%2BVzLJCYJ0tY4Slrc5082r1xsHjpODhmTIbiBXsTfXP&X-Amz-Signature=dbe0ca4da5510c5617cfb1ddb7c121b428a9969c0e7343aab042919a1f2c21fe&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "format": "csv",
+            "rows": 10,
+            "size_bytes": 0,
+            "expires_at": "2026-01-21T09:53:40.727Z"
+        }
+    ],
+    "domains_retrieved": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "search_criteria": {
+        "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+        "location": {
+            "latitude": 39.707186656827,
+            "longitude": -104.8994491161,
+            "radius": 251.28,
+            "unit": "miles"
+        },
+        "audience_limit": 10,
+        "offset": 20
+    }
 }

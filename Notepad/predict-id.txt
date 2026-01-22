@@ -1750,3 +1750,11 @@ DATABASE YANG DIUBAH
 ALTER TABLE `leadspeek_business`
 ADD COLUMN `available_contacts` bigint UNSIGNED NULL DEFAULT 0
 AFTER `final_expression`;
+
+Top Up Prepaid failed for campaign ID #30594638
+
+
+Invoice for Local Lead Capture #30594638
+
+
+ip zova hostpot 114.124.173.169
