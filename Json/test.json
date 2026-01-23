@@ -1,33 +1,33 @@
 {
     "local": {
         "Monthly": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "0.5",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
+            "LeadspeekCostperlead": "0.22",
+            "LeadspeekCostperleadAdvanced": "0.82",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         },
         "OneTime": {
             "LeadspeekCostperlead": "0.10",
+            "LeadspeekCostperleadAdvanced": "0.10",
             "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0.10"
+            "LeadspeekPlatformFee": "0"
         },
         "Weekly": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "0.5",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
+            "LeadspeekCostperlead": "0.21",
+            "LeadspeekCostperleadAdvanced": "0.81",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         },
         "Prepaid": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "2",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
+            "LeadspeekCostperlead": "0.23",
+            "LeadspeekCostperleadAdvanced": "0.83",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         }
     },
     "locator": {
         "Monthly": {
-            "LocatorCostperlead": "0.4",
+            "LocatorCostperlead": "0.72",
             "LocatorMinCostMonth": "0",
             "LocatorPlatformFee": "0"
         },
@@ -37,12 +37,12 @@
             "LocatorPlatformFee": "0"
         },
         "Weekly": {
-            "LocatorCostperlead": "0.4",
+            "LocatorCostperlead": "0.71",
             "LocatorMinCostMonth": "0",
             "LocatorPlatformFee": "0"
         },
         "Prepaid": {
-            "LocatorCostperlead": "0.5",
+            "LocatorCostperlead": "0.73",
             "LocatorMinCostMonth": "0",
             "LocatorPlatformFee": "0"
         }
@@ -50,11 +50,11 @@
     "locatorlead": {
         "FirstName_LastName": "5",
         "FirstName_LastName_MailingAddress": "6",
-        "FirstName_LastName_MailingAddress_Phone": "1.3"
+        "FirstName_LastName_MailingAddress_Phone": "0.71"
     },
     "enhance": {
         "Monthly": {
-            "EnhanceCostperlead": "0.45",
+            "EnhanceCostperlead": "0.82",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         },
@@ -64,24 +64,19 @@
             "EnhancePlatformFee": "0"
         },
         "Weekly": {
-            "EnhanceCostperlead": "0.45",
+            "EnhanceCostperlead": "0.81",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         },
         "Prepaid": {
-            "EnhanceCostperlead": "0.45",
+            "EnhanceCostperlead": "0.83",
             "EnhanceMinCostMonth": "0",
             "EnhancePlatformFee": "0"
         }
     },
     "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
         "Monthly": {
-            "B2bCostperlead": "0.5",
+            "B2bCostperlead": "0.92",
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         },
@@ -90,8 +85,13 @@
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         },
+        "Weekly": {
+            "B2bCostperlead": "0.91",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
         "Prepaid": {
-            "B2bCostperlead": "0.5",
+            "B2bCostperlead": "0.93",
             "B2bMinCostMonth": "0",
             "B2bPlatformFee": "0"
         }
@@ -102,41 +102,12 @@
     },
     "predict": {
         "Prepaid": {
-            "PredictMinCostMonth": "100",
-            
-            "PredictQuotaCampaigns": "100",
-            "PredictMaxCampaigns": "100",
-
-            "PredictOverageEnable": true,
+            "PredictMaxCampaigns": "10",
+            "PredictMinCostMonth": "299",
             "PredictOverageRate": "10",
-            "PredictOverageCost": "10"
+            "PredictQuotaCampaigns": "0",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0"
         }
     }
 }
-
-"predict": {
-    "Prepaid": {
-        "PredictMinCostMonth": "100",
-        
-        "PredictQuotaCampaigns": "100",
-        "PredictMaxCampaigns": "100",
-
-        "PredictOverageEnable": true,
-        "PredictOverageCampaignsUsed": "10",
-        "PredictOverageRate": "10"
-    }
-}
-
-tambahkan settingan
-
-- input price bulanan 
-- PredictMinCostMonth
-
-- input quota jumlah campaign dalam perbulan | input maximum jumlah campaign dalam perbulan 
-- PredictQuotaCampaigns                      | PredictMaxCampaigns
-
-- checkbox untuk enable atau disable | input jumlah campaign overage yang telah dibuat | input price overage yang telah dibuat 
-- PredictOverageEnable               | PredictOverageCampaignsUsed                     | PredictOverageRate 
-
-
-

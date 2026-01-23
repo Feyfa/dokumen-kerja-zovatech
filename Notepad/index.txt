@@ -1,3 +1,25 @@
+VUE_APP_DATASERVER_URL = http://datalocal.emmsandbox.com
+# VUE_APP_DATASERVER_URL = http://127.0.0.1:8000
+# VUE_APP_DATASERVER_URL = https://data.emmsandbox.com
+#VUE_APP_DATASERVER_URL = http://datalocal.exactmatchmarketing.com
+
+#VUE_APP_CDNQUESTIONNAIRE = https://emmspaces.nyc3.cdn.digitaloceanspaces.com/users/questionnaire/
+#VUE_APP_CDN =  https://emmspaces.nyc3.cdn.digitaloceanspaces.com
+VUE_APP_CDNQUESTIONNAIRE = https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com/users/questionnaire/
+VUE_APP_CDN = https://emmbetaspaces.nyc3.cdn.digitaloceanspaces.com
+
+#VUE_APP_APISERVER_URL = https://api.emmsandbox.com
+VUE_APP_APISERVER_URL = http://apilocal.emmsandbox.com
+
+VUE_APP_DEVMODE = true
+# Security Configuration - DO NOT COMMIT THESE TO VERSION CONTROL
+VUE_APP_ENCRYPTION_KEY=aB7fD9kL2mXcQ1eZ
+VUE_APP_ENCRYPTION_IV=pT6rY8vB0wNqJ4sM
+VUE_APP_GOOGLE_MAPS_KEY=AIzaSyCV2s4dDQivQr1rp8dC0f4BE1kG5Qh7zJ0
+VUE_APP_GTOKEN=R88918C28759C85A6D114B44F295F21843F4AA0E7FA1481EDB085749FC136A9EE1AC4598AE9BC96BD20264ABDB823774E93381F8CAC093FF02A341C4C91571E1F
+
+VUE_APP_MAPBOX_ACCESS_TOKEN=pk.eyJ1IjoiYWdpZXN3YWh5dWRpIiwiYSI6ImNtaW9kbHlwdjAwbmUzZXNjb2lkMG1nYTQifQ.HzTWxdf1c_fuPHLQjB0grw
+
 <?php
 
 $ids = [
