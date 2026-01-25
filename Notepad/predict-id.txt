@@ -1202,6 +1202,10 @@ rootcostagency
 - {"local":{"Weekly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0.2","LeadspeekCostperleadAdvanced":"0.2","LeadspeekMinCostMonth":"0"},"Monthly":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0.2","LeadspeekCostperleadAdvanced":"0.2","LeadspeekMinCostMonth":"0"},"OneTime":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0","LeadspeekCostperleadAdvanced":"0","LeadspeekMinCostMonth":"0"},"Prepaid":{"LeadspeekPlatformFee":"0","LeadspeekCostperlead":"0.2","LeadspeekCostperleadAdvanced":"0.2","LeadspeekMinCostMonth":"0"}},"locator":{"Weekly":{"LocatorPlatformFee":"0","LocatorCostperlead":"0.2","LocatorMinCostMonth":"0"},"Monthly":{"LocatorPlatformFee":"0","LocatorCostperlead":"0.2","LocatorMinCostMonth":"0"},"OneTime":{"LocatorPlatformFee":"0","LocatorCostperlead":"0","LocatorMinCostMonth":"0"},"Prepaid":{"LocatorPlatformFee":"0","LocatorCostperlead":"0.2","LocatorMinCostMonth":"0"}},"enhance":{"Weekly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0.2","EnhanceMinCostMonth":"0"},"Monthly":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0.2","EnhanceMinCostMonth":"0"},"OneTime":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0","EnhanceMinCostMonth":"0"},"Prepaid":{"EnhancePlatformFee":"0","EnhanceCostperlead":"0.2","EnhanceMinCostMonth":"0"}},"b2b":{"Weekly":{"B2bPlatformFee":"0","B2bCostperlead":"0.2","B2bMinCostMonth":"0"},"Monthly":{"B2bPlatformFee":"0","B2bCostperlead":"0.2","B2bMinCostMonth":"0"},"OneTime":{"B2bPlatformFee":"0","B2bCostperlead":"0","B2bMinCostMonth":"0"},"Prepaid":{"B2bPlatformFee":"0","B2bCostperlead":"0.2","B2bMinCostMonth":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"0"},"locatorlead":{"FirstName_LastName":"0","FirstName_LastName_MailingAddress":"0","FirstName_LastName_MailingAddress_Phone":"0.2"}}
 ================ DATA LAMA EMM (22) ================
 
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"predict","status":true},{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 and company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencysidebar';
+
 ================ DATA BARU EMM (22) ================
 rootcustomsidebarleadmenu
 - {"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"},"enhance":{"name":"Enhance ID","url":"enhanceid"},"b2b":{"name":"B2B ID","url":"b2bid"},"simplifi":{"name":"Simplifi ID","url":"simplifiid"},"predict":{"name":"Predict ID","url":"predictid"}}
@@ -1844,36 +1848,49 @@ AVNS_HuFT0xUPIkopOrI3DLN
 25061
 
 ==== YANG HARUS DIKERJAKAN ==== 
-* di price agency predict, tambahkan validasi di input nya (progress)
-    - validasi ui PredictMinCostMonth tidak boleh dibawah atau sama dengan 0
+* di price agency predict, tambahkan validasi di input nya ✅
+    - validasi ui PredictMinCostMonth tidak boleh dibawah atau sama dengan 0 ✅
+    - validasi ui PredictMaxCampaigns tidak boleh dibawah atau sama dengan 0 ✅
+* di price agency, tambahkan user logs setelah save ✅
 
-    - validasi ui PredictQuotaCampaigns tidak boleh dibawah atau sama dengan 0
-    - validasi ui PredictQuotaCampaigns tidak boleh lebih dari PredictMaxCampaigns
+* tentang agreement
+    - kalo misalnya agency belum aggre, maka di client muncul namun button create campaign nya tersembunyi ✅
+    - BUG saat agency belom agree predict_id dan clean_id, dan ketika agency inject, maka stuck, seharus kembali lagi ke next(from.fullPath); (nanti saja ini ngga begitu penting)
+    - jadi untuk aggrement hanya per agency saja, walaupun admin yang klik, maka di db yang terdaftar harus user id dari agency nya bukan admin nya ✅
+    - kalo misalnya agency ngga milih subscription, maka jadikan seolah" module agency disable ✅
+    - BUG kalo misalnya agency ngga milih subscription, kan module nya jadi disable, tapi dia masih bisa masuk ke dalam module nya ✅
+    - kalo ada yang bisa dibikin dinamis untuk informasi harga, bikin dinamis, kalo ada yang belum jelas cuekin aja ✅
+    - pindahkan logic di DashboardLayout yang duplikate menjadi 1 cara dan membuat nya seperti swal.fire gitu deh ✅
+    - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa, kalo gagal charge maka batal agree namun ngga menghapus modul (progress)
 
-    - validasi ui PredictMaxCampaigns tidak boleh dibawah atau sama dengan 0
-    - validasi ui PredictMaxCampaigns tidak boleh kurang dari PredictQuotaCampaigns
+* yang bisa archive campaign hanya root saja ✅
+* jika create campaign maka langsung play ✅
 
-    - validasi ui PredictOverageRate tidak boleh dibawah atau sama dengan 0
-* di price agency, tambahkan user logs setelah save
+* jika menekan tombol stop maka muncul 2 pilihan
+    - mau berhenti sekarang juga
+        # ini akan mereset tanggal lp_invoice_date, sehingga ketika di play lagi akan langsung charge client dan memperbarui lp_invoice_date nya
+    - mau berhenti, namun masih mendapatkan report sampai ulang tahun campaign tersebut
+        # ini tidak akan mereset tanggal lp_invoice_date, sehingga ketika mau di play ada logic yang check, apakah sekarang sudah lewat dari tanggal ulang tahun selanjutnya, jika belom lewat maka ubah status doang, jika sudah lewat maka akan charge dan memperbarui lp_invoice_date nya
+        # report masih berjalan sampai tanggal ulang tahun selanjutnya
 
-* di price general setting root predict, tambahkan validasi di input nya
-    - validasi ui PredictMinCostMonth tidak boleh dibawah atau sama dengan 0
+* tentang overage campaign
+    - misal gini agency agree tanggal 01Jan26 dengan (price_month = $10 dan max_campaigns = 1), dan langsung membuat 1 campaign. nah di tanggal 15Jan26 agency request ke emm, dia mau minta untuk max_campaigns nya jadi 2 dong. nah di posisi seperti ini agency tinggal ubah (price_month = $20 dan max_campaigns = 2), nah maka cara hitung nya gini, agency yang sudah dibuat kan 1, nah sisanya berarti (2 - 1 = 1). berarti harga yang dia bayar untuk penambahan campaign tersebut adalah $10. nah namun karena dia mulai dari tanggal 15Jan26, maka 15Jan26 sampai 01Feb26 kira" kalo kita pakai persentase durasi nya hanya 50% saja. maka dalam case ini dia membayar ($10 * 50% = $5)
 
-    - validasi ui PredictQuotaCampaigns tidak boleh dibawah atau sama dengan 0
-    - validasi ui PredictQuotaCampaigns tidak boleh lebih dari PredictMaxCampaigns
-
-    - validasi ui PredictMaxCampaigns tidak boleh dibawah atau sama dengan 0
-    - validasi ui PredictMaxCampaigns tidak boleh kurang dari PredictQuotaCampaigns
-
-    - validasi ui PredictOverageRate tidak boleh dibawah atau sama dengan 0
-* di price general setting root, tambahkan user logs setelah save
+* kondisi ketika agency gagal bayar (ini hold dulu nanti dipertanyakan)
+    - misal gini agency agree tanggal 01Jan26, kemudian dia buat campaign #123456 di tanggal 15Jan26, kemudian saat memperbarui pembayaran di 01Feb2026 dia gagal charge, nah otomatis campaign #123456 akan di stop.
+    - nah di tanggal misal 05Feb26, agency mulai melakukan memperbarui pembayaran, dan tanggal subscription dimulai dari tanggal 05Feb2026. nah disini lah inti topiknya, menurut saya campaign #123456 stop dari tanggal 01Feb26, seharusnya campaign bukan stop dalam mode (stop sekarang) ataupun (stop namun masih mendapatkan report sampai tanggal ulang tahun berikutnya), namun ketika agency play campaign #123456 lagi maka melakukan check, jika campaign di start belum lewat dari tanggal 15Feb26 maka jangan di charge, namun kalo misalnya sudah lewat dari 15Feb26 maka di charge.
+    - dilemanya adalah ketika kita stop campaign #123456 dengan mode (stop namun masih mendapatkan report sampai tanggal ulang tahun berikutnya), itu ngga enak di emm, namun enak di client, sedangkan agency nya saja gagal bayar. menurut saya gapapa melakukan langkah tersebut, dan kalo seandainya client nya marah, maka yang pertama kali disalahkan pasti agency nya bukan emm. karena agency nya gagal bayar
 ==== YANG HARUS DIKERJAKAN ====
 
 
 ==== DATABASE YANG DIUBAH ====
-tambahkan parameter "PredictQuotaCampaigns", "PredictOverageEnable", "PredictOverageCost" di dalam object "predict" di semua root
+- tambahkan parameter "PredictQuotaCampaigns", "PredictOverageEnable", "PredictOverageCost" di dalam object "predict" di semua root (ini ngga jadi kayanya)
 ==== DATABASE YANG DIUBAH ====
-0.23
+
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"predict","status":true},{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2'))
+WHERE id = 239 and company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencysidebar';
 
 
 
@@ -3015,3 +3032,67 @@ Invoice for Local Lead Capture #30594638
 
 
 ip zova hostpot 114.124.173.169
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

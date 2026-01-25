@@ -78,10 +78,64 @@ select active,disabled,active_user, CONVERT(AES_DECRYPT(FROM_bASE64(campaign_nam
 select * from leadspeek_business where leadspeek_api_id = 10122196;
 
 
-set @leadspeek_api_id_delete := 71419634;
-delete from leadspeek_users where leadspeek_api_id = @leadspeek_api_id_delete;
-delete from leadspeek_business where leadspeek_api_id = @leadspeek_api_id_delete;
-delete from leadspeek_customer_campaigns where leadspeek_api_id = @leadspeek_api_id_delete;
-delete from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id_delete;
+set @leadspeek_api_id_delete := '71419634,12345678';
+delete from leadspeek_users where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
+delete from leadspeek_business where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
+delete from leadspeek_customer_campaigns where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
+delete from leadspeek_predict_reports where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
+
+
+
+select * from master_features;
+
+select * from services_agreement
+where 
+	feature_id in (4,5) and 
+	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
+
+select * from user_logs order by created_at desc;
+
+select * from user_logs where action like '%marketing service%';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
