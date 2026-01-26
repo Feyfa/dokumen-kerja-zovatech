@@ -1,122 +1,113 @@
 {
-    "audience": {
-        "sample": [
-            {
-                "person_id": 2427,
-                "identifiers": {
-                    "email": [
-                        "bette.goldsmith@msn.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 3100,
-                "identifiers": {
-                    "email": [
-                        "dleocopoulos@cs.com",
-                        "gleocopoulos@aol.com",
-                        "gleocopoulos@yahoo.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 3847,
-                "identifiers": {
-                    "email": [
-                        "braulia9@gmail.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 6533,
-                "identifiers": {
-                    "email": [
-                        "tmariani@altavista.com",
-                        "pkwmariani60@ameritrade.com",
-                        "wmariani@earthlink.net"
-                    ]
-                }
-            },
-            {
-                "person_id": 6931,
-                "identifiers": {
-                    "email": [
-                        "ebellis@bellsouth.net",
-                        "marciviviano@aaroe.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 12071,
-                "identifiers": {
-                    "email": [
-                        "elaine.goulet@sbcglobal.net",
-                        "joeg18@prodigy.net",
-                        "egoulet47@gmail.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 14296,
-                "identifiers": {
-                    "email": [
-                        "adieno48@hotmail.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 18786,
-                "identifiers": {
-                    "email": [
-                        "chrisryan46@aol.com",
-                        "cryan@teamrubiconusa.org",
-                        "goodacoustics@hotmail.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 23847,
-                "identifiers": {
-                    "email": [
-                        "chris.perry@tbwachiat.com",
-                        "emarantz@yahoo.com"
-                    ]
-                }
-            },
-            {
-                "person_id": 26143,
-                "identifiers": {
-                    "email": [
-                        "jonathan.zaleski@msn.com",
-                        "ejzaleskiv57@excite.com",
-                        "jzaleski@excite.com"
-                    ]
-                }
-            }
-        ],
-        "total": "5570961"
-    },
-    "csvKey": "uploads\/5d97e1ce-69ee-4796-a38c-c0ab4a720ded\/customer_282_customer_2_1768152160086.csv",
-    "workflowId": "12d5297f-3951-4d1a-97da-2d8a1f55ec6f",
-    "expressionUsed": "900000002 AND 900000023 AND 900000021",
-    "finalExpression": "900000002 AND 900000023 AND 900000021",
-    "originalExpression": "900000002 AND 900000023 AND 900000021",
-    "addedCluster": "none",
-    "overview": [
-        {
-            "name": "Modern Homeowner Segment",
-            "strategy": "precision",
-            "total": 4803929
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0.22",
+            "LeadspeekCostperleadAdvanced": "0.82",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         },
-        {
-            "name": "Modern Homeowner Segment",
-            "strategy": "balanced",
-            "total": 5570961
+        "OneTime": {
+            "LeadspeekCostperlead": "0.10",
+            "LeadspeekCostperleadAdvanced": "0.10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         },
-        {
-            "name": "Modern Homeowner Segment",
-            "strategy": "reach",
-            "total": 6396911
+        "Weekly": {
+            "LeadspeekCostperlead": "0.21",
+            "LeadspeekCostperleadAdvanced": "0.81",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0.23",
+            "LeadspeekCostperleadAdvanced": "0.83",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0"
         }
-    ]
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.72",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "1.3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0.71",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0.73",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "0.71"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0.82",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0.81",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.83",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Monthly": {
+            "B2bCostperlead": "0.92",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "2.00",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Weekly": {
+            "B2bCostperlead": "0.91",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.93",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "0.5",
+        "CleanCostperleadAdvanced": "1.5"
+    },
+    "predict": {
+        "Prepaid": {
+            "PredictMaxCampaigns": "10",
+            "PredictMinCostMonth": "300",
+            "PredictOverageRate": "10",
+            "PredictQuotaCampaigns": "0",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0"
+        }
+    }
 }

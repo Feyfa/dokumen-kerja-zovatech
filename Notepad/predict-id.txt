@@ -1847,6 +1847,31 @@ tls://private-db-caching-redis-do-user-8589910-0.k.db.ondigitalocean.com
 AVNS_HuFT0xUPIkopOrI3DLN
 25061
 
+EMM-SANDBOX-APP
+JD-TASK-EMM-790-DEV-SYNC = "progress modal subscription and list detail subscription in billing settings - not charged yet"
+
+FILE
+FRONT
+- front\src\pages\Modules\Auth\LeedspeekPredict\Client.vue
+- front\src\pages\Modules\Auth\User\CardSetting.vue
+- front\src\store\store.js
+- front\src\main.js
+- front\src\components\Modals\SubscriptionConfirmationModal.vue
+- front\src\pages\Layout\DashboardLayout.vue
+- front\src\utils\agreementModal.js
+- front\src\components\Tree\Tree.vue
+- front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+- front\src\plugins\global.js
+- front\src\components\BaseSwitch.vue
+
+DATA
+- data\app\Http\Controllers\GeneralController.php
+- data\routes\api.php
+- data\app\Http\Controllers\ConfigurationController.php
+
+DATABASE YANG DIUBAH
+- tambahkan parameter "PredictQuotaCampaigns", "PredictOverageEnable", "PredictOverageCost" di dalam object "predict" di semua root (ini ngga jadi kayanya, tapi tetep di tambahin)
+
 ==== YANG HARUS DIKERJAKAN ==== 
 * di price agency predict, tambahkan validasi di input nya ✅
     - validasi ui PredictMinCostMonth tidak boleh dibawah atau sama dengan 0 ✅
@@ -1882,15 +1907,23 @@ AVNS_HuFT0xUPIkopOrI3DLN
     - dilemanya adalah ketika kita stop campaign #123456 dengan mode (stop namun masih mendapatkan report sampai tanggal ulang tahun berikutnya), itu ngga enak di emm, namun enak di client, sedangkan agency nya saja gagal bayar. menurut saya gapapa melakukan langkah tersebut, dan kalo seandainya client nya marah, maka yang pertama kali disalahkan pasti agency nya bukan emm. karena agency nya gagal bayar
 ==== YANG HARUS DIKERJAKAN ====
 
-
-==== DATABASE YANG DIUBAH ====
-- tambahkan parameter "PredictQuotaCampaigns", "PredictOverageEnable", "PredictOverageCost" di dalam object "predict" di semua root (ini ngga jadi kayanya)
-==== DATABASE YANG DIUBAH ====
-
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 164;
 
 UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"predict","status":true},{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true}]}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":true}]}', '8e651522e38256f2'))
 WHERE id = 239 and company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencysidebar';
+
+UPDATE company_settings
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekCostperleadAdvanced":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Weekly":{"LeadspeekCostperlead":"0.30","LeadspeekCostperleadAdvanced":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"},"Prepaid":{"LeadspeekCostperlead":"0.30","LeadspeekCostperleadAdvanced":"0.4","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0"}},"locator":{"Monthly":{"LocatorCostperlead":"2.99","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"2.99","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"2.99","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"2.99","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"enhance":{"Monthly":{"EnhanceCostperlead":"0.40","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"0.40","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.40","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.50","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Monthly":{"B2bCostperlead":"0.40","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"0.40","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Weekly":{"B2bCostperlead":"0.40","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.40","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1.25"},"predict":{"Prepaid":{"PredictMaxCampaigns":"10","PredictMinCostMonth":"299","PredictOverageRate":"10","PredictQuotaCampaigns":"0","PredictOverageEnable":false,"PredictOverageCampaignsUsed":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"2.99"}}', '8e651522e38256f2'))
+WHERE id = 118 and company_id = 131 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'rootcostagency';
 
 
 

@@ -87,15 +87,27 @@ delete from leadspeek_predict_reports where FIND_IN_SET(leadspeek_api_id, @leads
 
 
 select * from master_features;
+select * from feature_users;
 
 select * from services_agreement
 where 
-	feature_id in (4,5) and 
+	feature_id in (4,5,6) and 
 	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
 
-select * from user_logs order by created_at desc;
+select * from user_logs where created_at > '2026-01-26 00:45:45' order by id desc;
 
 select * from user_logs where action like '%marketing service%';
+
+
+select 
+	sa.id,
+	sa.user_id,
+	sa.status,
+from services_agreement as sa
+join master_features as mf on mf.id = sa.feature_id
+where 
+	feature_id in (4,5,6) and 
+	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
 
 
 
