@@ -78,13 +78,11 @@ select active,disabled,active_user, CONVERT(AES_DECRYPT(FROM_bASE64(campaign_nam
 select * from leadspeek_business where leadspeek_api_id = 10122196;
 
 
-set @leadspeek_api_id_delete := '71419634,12345678';
+set @leadspeek_api_id_delete := '9585489606,7087376074';
 delete from leadspeek_users where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
 delete from leadspeek_business where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
 delete from leadspeek_customer_campaigns where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
-delete from leadspeek_predict_reports where FIND_IN_SET(leadspeek_api_id, @leadspeek_api_id_delete);
-
-
+delete from leadspeek_predict_reports WHERE FIND_IN_SET(leadspeek_api_id COLLATE utf8mb4_general_ci, @leadspeek_api_id_delete COLLATE utf8mb4_general_ci);
 
 select * from master_features;
 select * from feature_users;
@@ -94,32 +92,9 @@ where
 	feature_id in (4,5,6) and 
 	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
 
-select * from user_logs where created_at > '2026-01-26 00:45:45' order by id desc;
+select * from user_logs where created_at > '2026-01-26 23:33:33' order by id desc;
 
-select * from user_logs where action like '%marketing service%';
-
-
-select 
-	sa.id,
-	sa.user_id,
-	sa.status,
-from services_agreement as sa
-join master_features as mf on mf.id = sa.feature_id
-where 
-	feature_id in (4,5,6) and 
-	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
-
-
-
-
-
-
-
-
-
-
-
-
+select * from user_logs where action like '%marketing service%' order by id desc;
 
 
 
