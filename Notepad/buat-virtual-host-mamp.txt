@@ -1,0 +1,31 @@
+1. Settingan port, Apache = 80. Mysql = 3306
+
+2. Masuk sudo nano /private/etc/hosts, lalu tambahkan ini
+127.0.0.1 ecommerce.backend.com
+127.0.0.1 jidanagencyemm33.emmsandbox.com
+
+3. Buka file “/Applications/MAMP/conf/apache/httpd.conf”, lalu enable “Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf”.
+
+4. Buka file “/Applications/MAMP/conf/apache/extra/httpd-vhosts.conf” , lalu masukan dengan format seperti ini
+<VirtualHost *:80>
+    DocumentRoot "/Users/jidan/Documents/CODE EMM/EMM-SANDBOX/data/public"
+    <Directory "/Users/jidan/Documents/CODE EMM/EMM-SANDBOX/data/public">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ServerName jidanagencyemm3.emmsandbox.com
+    ServerAlias www.jidanagencyemm3.emmsandbox.com	
+</VirtualHost>
+
+5. Restart mamp
+
+
+
+
+
+===untuk setting nvm default===
+1. nvm alias default 22.20.0
+===untuk setting nvm default===
+
+buat user nama=nama1 email=email1@gmail.com address=1 phone=1
