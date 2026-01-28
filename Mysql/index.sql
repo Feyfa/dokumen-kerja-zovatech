@@ -17,3 +17,15 @@ where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4)
 );
 
 SELECT users.* FROM users WHERE CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'fisikamodern00@gmail.com';
+
+CREATE TABLE subscription_modules (
+	id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	company_id BIGINT UNSIGNED DEFAULT NULL,
+	module ENUM('predict','clean','audience') DEFAULT NULL,
+	status ENUM('active','canceled') DEFAULT NULL,
+	first_billing_date DATETIME DEFAULT NULL,
+	start_date DATETIME DEFAULT NULL,
+	next_billing_date DATETIME DEFAULT NULL,
+	created_at TIMESTAMP DEFAULT NULL,
+	updated_at TIMESTAMP DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

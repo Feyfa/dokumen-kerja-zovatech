@@ -1890,8 +1890,11 @@ DATABASE YANG DIUBAH
     - jika terjadi perubahan financial untuk predict, disimpan dalam user logs ✅
     - sekarang ini untuk update service agreement itu kan looping 3 kali, bisakah dijadikan 1 process saja, jadi hanya 1 hit api saja ✅
     - untuk saat agree pastikan harus charge dulu, kalo dari awal gagal maka agreement seluruh nya bakal gagal ✅
-    - buat konsep untuk subscription nya dengan cara membuat table khusus untuk tanggal subscription nya, jangan buat field di users ataupun companies
-    - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa 
+    - buat konsep untuk subscription nya dengan cara membuat table khusus untuk tanggal subscription nya, jangan buat field di users ataupun companies ✅
+    - force clean_id and audience_id di function checksetupcomplete sama di save_step_two ✅
+    - di client management, hide module clean and audience ✅
+    - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa (progress)
+    - user_logs saat agreement, tambahkan charge nya berapa, dan kalau gagal juga
 
 * yang bisa archive campaign hanya root saja ✅
 * jika create campaign maka langsung play ✅
@@ -1925,6 +1928,28 @@ DATABASE YANG DIUBAH
 * tentang overage campaign
     - misal gini agency agree tanggal 01Jan26 dengan (price_month = $10 dan max_campaigns = 1), dan langsung membuat 1 campaign. nah di tanggal 15Jan26 agency request ke emm, dia mau minta untuk max_campaigns nya jadi 2 dong. nah di posisi seperti ini agency tinggal ubah (price_month = $20 dan max_campaigns = 2), nah maka cara hitung nya gini, agency yang sudah dibuat kan 1, nah sisanya berarti (2 - 1 = 1). berarti harga yang dia bayar untuk penambahan campaign tersebut adalah $10. nah namun karena dia mulai dari tanggal 15Jan26, maka 15Jan26 sampai 01Feb26 kira" kalo kita pakai persentase durasi nya hanya 50% saja. maka dalam case ini dia membayar ($10 * 50% = $5)
 ==== YANG HARUS DIKERJAKAN ====
+
+==== DATABASE YANG DITAMBAH ====
+- CREATE TABLE subscription_modules (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  company_id BIGINT UNSIGNED DEFAULT NULL,
+  module ENUM('predict','clean','audience') DEFAULT NULL,
+  status ENUM('active','canceled') DEFAULT NULL,
+  first_billing_date DATETIME DEFAULT NULL,
+  start_date DATETIME DEFAULT NULL,
+  next_billing_date DATETIME DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT NULL,
+  updated_at TIMESTAMP DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+- ALTER TABLE `leadspeek_invoices` ADD `subscription_details` TEXT NULL DEFAULT NULL AFTER `leadspeek_api_id`;
+- ALTER TABLE `leadspeek_invoices` ADD `subscription_type` ENUM('initial','renewal') DEFAULT NULL AFTER `leadspeek_api_id`;
+- tambahkan enum ('agency_subscription') di field `invoice_type` di table `leadspeek_invoices`
+==== DATABASE YANG DITAMBAH ====
+
+Charge Payment For  Subscription (Predict,Clean,Audience) With Invoice #3576
+Charge Prepaid Payment For Subscription Module Predict With Invoice #3573
+Charge Prepaid Payment For Subscription Module Clean With Invoice #3574
+Charge Prepaid Payment For Subscription Module Audience With Invoice #3575
 
 SELECT
 	id,
