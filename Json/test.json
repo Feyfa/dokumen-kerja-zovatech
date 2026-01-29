@@ -99,15 +99,5 @@
     "clean": {
         "CleanCostperlead": "0.5",
         "CleanCostperleadAdvanced": "1"
-    },
-    "predict": {
-        "Prepaid": {
-            "PredictMinCostMonth": "299",
-            "PredictQuotaCampaigns": "0",
-            "PredictMaxCampaigns": "10",
-            "PredictOverageEnable": false,
-            "PredictOverageCampaignsUsed": "0",
-            "PredictOverageRate": "10"
-        }
     }
 }
