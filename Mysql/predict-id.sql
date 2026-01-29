@@ -92,6 +92,8 @@ where
 	feature_id in (4,5,6) and 
 	user_id in (select id from users where company_id in (164) and user_type in ('user','userdownline'));
 
+select * from subscription_modules;
+
 select * from user_logs where created_at > '2026-01-27 21:28:11' order by id desc;
 
 select * from user_logs where action like '%marketing service%' order by id desc;

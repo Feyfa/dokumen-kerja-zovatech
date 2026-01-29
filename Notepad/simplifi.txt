@@ -1505,6 +1505,60 @@ secret_key = 2f285b1a229add8de6d73fe10f381dd274f3e8994d4150a9db7d86a28375e5e8ac0
 }
 
 
+Client Monthly Cost :
+(Monthly Budget) : $150
+
+Agency Profit :
+(Monthly Budget x Agency Profit Margin%) :
+($150 x 15%) : $22.50
+
+
+Client Monthly Ad Budget :
+(Monthly Budget - Agency Profit) :
+($150 - 22.50) : $127.50
+
+2026-01-28 - 2026-02-26
+2026-02-27 - 2026-03-28
+
+saya udah simulasi pak di local untuk campaign simplifi, overal aman sih pak
+- mulai dari nge charge pertama kali (aman)
+- kalo di tengah jalan increase daily budget (aman)
+- cronjob untuk auto topup budget tiap bulan (aman)
+
+now         |   startdate   |   endate
+2026-02-25  |   2026-01-28  | 2026-02-26
+            |   2026-02-27  | 2026-03-28
+
+checkcampaignended mencurigakan
+getmatchlist mencurigakan
+matcheslist mencurigakan
+
+1/27/2026
+2026-01-27
+
+
+#202601128-15463
+#202601127-15463
+#202601126-15463
+*/2 * * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checkembededcode >~/cron/checkembededcode.log 2>&1 ❌
+* * * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checkcampaignend >~/cron/checkcampaignend.log 2>&1 ❌ (tidak digunakan)
+* 9 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checkstartpauseleads >~/cron/trysera-checkstartpauseleads.log 2>&1 ❌
+0 7 * * * curl -H "Authorization: Bearer base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY=" https://api.exactmatchmarketing.com/api/marketing/tsr/processinvoicemonthly >~/cron/trysera-processinvoicemonthly.log 2>&1 ❌
+0 3 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checknewbudgetsimplifi >~/cron/checknewbudgetsimplifi.log 2>&1 ❌
+0 4 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:synccampaignstatus >~/cron/sync-campaign-status.log 2>&1 ❌
+0 6 * * * curl -H "Authorization: Bearer base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY="  https://api.exactmatchmarketing.com/api/marketing/tsr/processinvoice >~/cron/trysera-processinvoice.log 2>&1 ❌
+*/5 * * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:notactiveuser >~/cron/notactiveuser.log 2>&1 ❌
+*/15 * * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:notactiveagency >~/cron/notactiveagency.log 2>&1 ❌
+*/30 * * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checkincominglead >~/cron/checkincominglead.log 2>&1 ❌
+30 3 */28 * * find ~/emmbackupdb -type f -name "*.sql.gz" -mtime +28 -delete >~/cron/cron_remove28daydb.log 2>&1 ❌
+0 8 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/minimum-spend-invoice >~/cron/minspend.log 2>&1 ❌
+30 8 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/minimum-spend-notification >~/cron/minspendnotification.log 2>&1 ❌
+0 10 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/processchargeprepaidcostmonth >~/cron/processchargeprepaidcostmonth.log 2>&1 ❌
+20 4 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checknoleadsevendays >~/cron/check_nolead_sevendays.log 2>&1 ❌
+0 0 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:checkwhitelabellingexistdaily >~/cron/checkwhitelabellingexistdaily.log 2>&1 ❌
+35 7 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:failedpaymentreminder >~/cron/failedpaymentreminder 2>&1 ❌
+30 5 * * * /usr/local/bin/fix-storage-permissions.sh >~/cron/fix_storage_permissions.log 2>&1 ❌
+30 3 * * * cd /var/www/api.exactmatchmarketing.com/html && /usr/bin/php artisan command:simplifidailyimpressions >~/cron/simplifidailyimpressions.log 2>&1 ❌
 
 
 
@@ -1520,6 +1574,18 @@ secret_key = 2f285b1a229add8de6d73fe10f381dd274f3e8994d4150a9db7d86a28375e5e8ac0
 
 
 
+#58 0 * * * curl https://api.exactmatchmarketing.com/api/marketing/tsr/matcheslist/ >~/cron/trysera-matcheslist.log 2>&1
+#* * * * * curl https://api.exactmatchmarketing.com/api/marketing/tsr/getmatchlist >~/cron/trysera-getmatchlist.log 2>&1
+#*/2 * * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/checkembededcode >~/cron/checkembededcode.log 2>&1
+#* * * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/checkcampaignend >~/cron/checkcampaignend.log 2>&1
+#* 9 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/checkstartpauseleads >~/cron/trysera-checkstartpauseleads.log 2>&1
+#0 2 * * * mysqldump -u dbemmuser ExMatMarketing | gzip  > ~/emmbackupdb/emmdb-$(date +\%Y\%m\%d).sql.gz 2>~/cron/cron_dbbackup.log
+#0 */5 * * * curl https://api.exactmatchmarketing.com/api/marketing/tsr/dailyleadsnotification >~/cron/dailyleadsnotification.log 2>&1
+#0 4 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/sync-campaign-status >~/cron/sync-campaign-status.log 2>&1
+#*/5 * * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/notactiveuser >~/cron/notactiveuser.log 2>&1
+#*/15 * * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/notactiveagency >~/cron/notactiveagency.log 2>&1
+#*/30 * * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/marketing/tsr/checkincominglead >~/cron/checkincominglead.log 2>&1
+#20 4 * * * curl -H "Authorization: Bearer 5a7f242a1e50010ba9edb11b05feddac9159be3b2cf9639a50789032d2f2c20b" https://api.exactmatchmarketing.com/api/webhook/bigdbm/check-nolead-sevendays >~/cron/check_nolead_sevendays.log 2>&1
 
 
 
@@ -1529,8 +1595,108 @@ secret_key = 2f285b1a229add8de6d73fe10f381dd274f3e8994d4150a9db7d86a28375e5e8ac0
 
 
 
+hai jadi gini si EMM-SANDBOX-API, bukan di project ini, saya membawa sebuah cronjob dengan command, contohnya di file itu.
+
+jadi gini saya kan punya campaign simplifi, nah jadi setiap charge maka akan buat budget, yang ada startdate dan endddate nya, nah setiap charge enddate nya bakal disimpan di dalalm field leadspeek_users lp_enddate. nah yang normal, ketika charge maka lp_enddate nya akan menjadi 2026-02-03
+
+nah sekarang ini di live terdapat masalah double charge, karena di live lp_enddate nya berubah menjadi 2026-01-27. jadi hanya masalah itu lah yang menyebabkan simplifi double charge, bisa investigasi kenapa lp_enddate nya berubah
+
+dan yang bikin aneh nya lagi adalah saat cronjob tersebut jalan, dan berhasil charge campaign dengan invoice 
+#202601128-15463
+#202601127-15463
+#202601126-15463
+itu kan ngecharge sampai 3 kali ya, dan berhasil charge, cuman yang aneh adalah masa di budget simplifi nya hanya 1 budget saja, seharus nya kalo skenario yang normal itu budget nya jadi nambah, tiap kena renew budget
+
+bisa tolong saya kira" hal ini kenapa ya?
 
 
 
 
 
+
+
+effect
+1. saat play campaign pertama kali ✅ (seharusnya sudah aman sih, hubungan dengan lp_enddate tidak terlalu berpengaruh di bagian sini)
+2. saat play increase_budget ✅ (disini juga aman tidak ada hubungan nya dengan lp_enddate)
+3. saat stop increase_budget, lalu setelah itu langsung play ✅ (disini juga aman tidak ada hubungan nya dengan lp_enddate)
+4. saat renew budget di emm-sandbox-api
+
+startdate   | enddate
+2026-01-01  | 2026-01-31
+
+-------
+now_date    | one_day_after_new_date    | check
+2026-01-29  | 2026-01-30                | (end_date > now_date) , (2026-01-31 >= 2026-01-29)
+
+lp_enddate = 2026-01-31
+
+(one_day_after_new_date) >= (lp_enddate)
+2026-01-30 >= 2026-01-31 (belom di charge)
+-------
+
+
+-------
+now_date    | one_day_after_new_date    | check
+2026-01-30  | 2026-01-31                | (end_date > now_date) , (2026-01-31 >= 2026-01-30)
+
+lp_enddate = 2026-01-31
+
+(one_day_after_new_date) >= (lp_enddate)
+2026-01-31 >= 2026-01-31 (sudah di charge)
+
+(two_day_after_new_date) = 2026-02-01
+
+di simplifi nambah budget lagi sebesar
+startdate   | enddate
+2026-01-01  | 2026-01-31
+2026-02-01  | 2026-02-28
+-------
+
+
+
+
+
+
+
+
+
+startdate   | enddate
+2026-01-01  | 2026-01-31
+2026-02-01  | 2026-02-28
+
+
+-------
+now_date    | one_day_after_new_date    | check
+2026-01-31  | 2026-02-01                | (end_date > now_date) , (2026-01-31 >= 2026-01-31) ✅
+2026-01-31  | 2026-02-01                | (end_date > now_date) , (2026-02-28 >= 2026-01-31) ✅
+
+lp_enddate = 2026-01-31
+
+(one_day_after_new_date) >= (lp_enddate)
+2026-02-01 >= 2026-01-31 (di charge lagi)
+
+di simplifi nambah budget lagi 
+startdate   | enddate
+2026-01-01  | 2026-01-31
+2026-02-01  | 2026-02-28
+2026-02-02  | 2026-03-01 (yang sebenarnya di simplifi ini bakal error karena ngga bungkin kaya gini, namun client berhasil di charge)
+-------
+
+
+
+// filter active budget berdasarkan $now_carbon
+$budget_plan_first = collect($budget_plans_all['budget_plans'] ?? [])->filter(function($p) use ($now_carbon) {
+    $s = Carbon::parse($p['start_date']);
+    $e = Carbon::parse($p['end_date']);
+    return $s->lte($now_carbon) && $e->gte($now_carbon);
+})->sortByDesc('end_date')->first();
+
+
+Start Date:2026-01-29
+End Date:2026-02-27
+Kena Charge:2026-02-26
+
+|   Start Date  |   End Date    |   Kena charge |
+|   2026-01-29  |   2026-02-27  |   2026-02-26  | -> di tanggal 2026-02-27, coba jalanin lagi cronjobnya, kita lihat apakah dia ambil yang budget 1 atau budget ke 2
+|   2026-02-28  |   2026-03-29  |   2026-03-28  | -> di tanggal 2026-02-29, coba jalanin lagi cronjobnya, kita lihat apakah dia ambil yang budget 2 atau budget ke
+|   2026-03-30  |   2026-04-28  |   2026-04-27  | 

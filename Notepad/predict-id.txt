@@ -1988,7 +1988,8 @@ First check the active / play campaign Second check created campaign that month
 This more quota per month
 
 agency1769485754_2
-
+sama download userLogs untuk campaign itu
+select * from leadspeek_invoices where leadspeek_api_id = '16611764' order by id desc;
 {
     -- 100 --
     "18006"
