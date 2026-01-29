@@ -1,103 +1,17 @@
-{
-    "local": {
-        "Monthly": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "0.5",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
-        },
-        "OneTime": {
-            "LeadspeekCostperlead": "0.10",
-            "LeadspeekMinCostMonth": "0",
-            "LeadspeekPlatformFee": "0",
-            "LeadspeekCostperleadAdvanced": "0.10"
-        },
-        "Weekly": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "0.5",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
-        },
-        "Prepaid": {
-            "LeadspeekCostperlead": "0.1",
-            "LeadspeekMinCostMonth": "2",
-            "LeadspeekPlatformFee": "0.5",
-            "LeadspeekCostperleadAdvanced": "0.1"
-        }
+[
+    {
+        "module": "predict",
+        "price": 300,
+        "quota": 1000
     },
-    "locator": {
-        "Monthly": {
-            "LocatorCostperlead": "0.4",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "OneTime": {
-            "LocatorCostperlead": "1.3",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "Weekly": {
-            "LocatorCostperlead": "0.4",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        },
-        "Prepaid": {
-            "LocatorCostperlead": "0.5",
-            "LocatorMinCostMonth": "0",
-            "LocatorPlatformFee": "0"
-        }
+    {
+        "module": "clean",
+        "price": 149,
+        "quota": 1000
     },
-    "locatorlead": {
-        "FirstName_LastName": "5",
-        "FirstName_LastName_MailingAddress": "6",
-        "FirstName_LastName_MailingAddress_Phone": "1.3"
-    },
-    "enhance": {
-        "Monthly": {
-            "EnhanceCostperlead": "0.45",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        },
-        "OneTime": {
-            "EnhanceCostperlead": "2.00",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        },
-        "Weekly": {
-            "EnhanceCostperlead": "0.45",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        },
-        "Prepaid": {
-            "EnhanceCostperlead": "0.45",
-            "EnhanceMinCostMonth": "0",
-            "EnhancePlatformFee": "0"
-        }
-    },
-    "b2b": {
-        "Weekly": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "Monthly": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "OneTime": {
-            "B2bCostperlead": "2.00",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        },
-        "Prepaid": {
-            "B2bCostperlead": "0.5",
-            "B2bMinCostMonth": "0",
-            "B2bPlatformFee": "0"
-        }
-    },
-    "clean": {
-        "CleanCostperlead": "0.5",
-        "CleanCostperleadAdvanced": "1"
+    {
+        "module": "audience",
+        "price": 149,
+        "quota": 1000
     }
-}
+]

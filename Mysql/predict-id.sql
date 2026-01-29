@@ -96,8 +96,17 @@ select * from subscription_modules;
 
 select * from user_logs where created_at > '2026-01-27 21:28:11' order by id desc;
 select * from user_logs order by id desc;
-
 select * from user_logs where action like '%marketing service%' order by id desc;
+
+select * from topup_agencies where company_id = 164;
+
+select * from leadspeek_invoices 
+where (invoice_type in ('agency','agency_subscription') and company_id = 164)
+order by id desc;
+
+select * from leadspeek_invoices where (invoice_type in ('campaign') and leadspeek_api_id = '26778152');
+
+select * from topup_campaigns where leadspeek_api_id = '26778152';
 
 
 

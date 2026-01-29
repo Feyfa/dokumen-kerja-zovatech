@@ -1895,6 +1895,7 @@ DATABASE YANG DIUBAH
     - di client management, hide module clean and audience ✅
     - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa (progress)
     - user_logs saat agreement, tambahkan charge nya berapa, dan kalau gagal juga
+    - sync logic get history data wallet dengan export data nya
 
 * yang bisa archive campaign hanya root saja ✅
 * jika create campaign maka langsung play ✅
