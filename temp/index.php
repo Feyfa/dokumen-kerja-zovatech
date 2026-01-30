@@ -1,14 +1,31 @@
 <?php
 
-var_dump("000000000000" < "202601290133");
+$animals = array('a' => 'dog', 'b' => 'cat', 'c' => 'cow');
 
-// public function getTransactionHistoryDirectPayment(Request $request)
-// {
-//     $company_id = (isset($request->company_id)) ? $request->company_id : '';
-//     $date = (isset($request->date)) ? $request->date : '';
-$_leadspeek_api_id = "123";
-$data = implode("|", array_filter([$_leadspeek_api_id])); 
-var_dump($data);
+// Check if 'cat' exists as a value
+if (in_array('cat', $animals)) {
+    echo "Value 'cat' found.\n";
+}
+
+// Get the key for 'dog'
+$key = array_search('dog', $animals);
+if ($key !== false) {
+    echo "Value 'dog' found with key: " . $key . "\n"; // Output: a
+}
+
+// $invoice_number_array = array_filter(["", "1234"]);
+// $result = implode("-", $invoice_number_array);
+// var_dump([
+//     'result' => $result,
+// ]);
+
+// $parts = explode("|", "");
+// var_dump($parts);
+
+// $_leadspeek_api_id = "";
+// $leadspeek_invoices_id_buffer = "123456";
+// $leadspeek_api_id_data_wallet = implode("|", array_filter([$_leadspeek_api_id, $leadspeek_invoices_id_buffer]));
+// var_dump($leadspeek_api_id_data_wallet);
 
 // public function getTransactionHistoryDirectPayment(Request $request)
 // {

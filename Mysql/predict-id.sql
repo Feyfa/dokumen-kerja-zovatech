@@ -94,7 +94,7 @@ where
 
 select * from subscription_modules;
 
-select * from user_logs where created_at > '2026-01-27 21:28:11' order by id desc;
+select * from user_logs where created_at > '2026-01-29 06:01:05' order by id desc;
 select * from user_logs order by id desc;
 select * from user_logs where action like '%marketing service%' order by id desc;
 

@@ -1893,13 +1893,16 @@ DATABASE YANG DIUBAH
     - buat konsep untuk subscription nya dengan cara membuat table khusus untuk tanggal subscription nya, jangan buat field di users ataupun companies ✅
     - force clean_id and audience_id di function checksetupcomplete sama di save_step_two ✅
     - di client management, hide module clean and audience ✅
-    - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa (progress)
-    - user_logs saat agreement, tambahkan charge nya berapa, dan kalau gagal juga
+    - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa ✅
+    - user_logs saat agreement, tambahkan charge nya berapa, dan kalau gagal juga ✅
     - sync logic get history data wallet dengan export data nya
+    - buat logic ketika add campaign, maka langsung charge, ketika gagal charge maka jangan tutup modalnya tahu saja error nya (progres)
+    - buat logic untuk cronjob anniversary agency
+    - buat logic untuk cronjob aniversary campaign
 
 * yang bisa archive campaign hanya root saja ✅
 * jika create campaign maka langsung play ✅
-* button add campaign hanya muncul di agency
+* button add campaign hanya muncul di agency ✅
 
 * untuk financials konsep sepertinya pada gambar ini Img\WhatsApp Image 2026-01-27 at 10.38.37.jpeg
     - di backend saat create agency itu kalo bisa di pasangin lock redis agar ngga terjadi race condition ✅
@@ -1929,6 +1932,8 @@ DATABASE YANG DIUBAH
 * tentang overage campaign
     - misal gini agency agree tanggal 01Jan26 dengan (price_month = $10 dan max_campaigns = 1), dan langsung membuat 1 campaign. nah di tanggal 15Jan26 agency request ke emm, dia mau minta untuk max_campaigns nya jadi 2 dong. nah di posisi seperti ini agency tinggal ubah (price_month = $20 dan max_campaigns = 2), nah maka cara hitung nya gini, agency yang sudah dibuat kan 1, nah sisanya berarti (2 - 1 = 1). berarti harga yang dia bayar untuk penambahan campaign tersebut adalah $10. nah namun karena dia mulai dari tanggal 15Jan26, maka 15Jan26 sampai 01Feb26 kira" kalo kita pakai persentase durasi nya hanya 50% saja. maka dalam case ini dia membayar ($10 * 50% = $5)
 ==== YANG HARUS DIKERJAKAN ====
+
+The user has agreed to the Marketing Services Agreement Predict Module . Name: Jidan ACH 164 Personal | Email: fisikamodern00+jidanach@gmail.com | Company Name: Jidan ACH 164 Businnes | Company Id: 164 | menu: Campaign Management | Monthly Fee: $260 | Maximum Campaign: 10
 
 ==== DATABASE YANG DITAMBAH ====
 - CREATE TABLE subscription_modules (
@@ -1987,6 +1992,14 @@ Campaign C x
 Logic
 First check the active / play campaign Second check created campaign that month
 This more quota per month
+
+balance : 20
+harga : 260
+auto topup : 250
+total_balance : 20 + 250 = 270
+sisa_balance : 270 - 260 = 10
+topup_lagi : 250
+total_balance : 10 + 250 = 260
 
 agency1769485754_2
 sama download userLogs untuk campaign itu
