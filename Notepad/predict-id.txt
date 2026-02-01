@@ -1896,9 +1896,12 @@ DATABASE YANG DIUBAH
     - kalo misalnya agency agree, maka buat logic untuk charge agency, pokonya kalo ada data wallet pake data wallet, kalo belum pake cc kaya biasa ✅
     - user_logs saat agreement, tambahkan charge nya berapa, dan kalau gagal juga ✅
     - sync logic get history data wallet dengan export data nya
-    - buat logic ketika add campaign, maka langsung charge, ketika gagal charge maka jangan tutup modalnya tahu saja error nya (progres)
-    - buat logic untuk cronjob anniversary agency
-    - buat logic untuk cronjob aniversary campaign
+    - buat logic ketika add campaign, maka langsung charge, ketika gagal charge maka jangan tutup modalnya tahu saja error nya ✅
+    - buat logic untuk cronjob anniversary agency ✅
+    - buat logic untuk cronjob aniversary campaign ✅
+    - buat logic untuk stop campaig, apakah langsung stop sekarang atau stop namun masih mendapatkan report sampai anniversary campaign nya ✅
+    - buat logic jika predict harga agency berubah di tengah jalan dan perubahannya harga lebih besar, maka charge prorate, jika turun maka jangan di charge (progress)
+    - buat email untuk semua yang berhubungan dengan charge subscription dan campaign nya (progress)
 
 * yang bisa archive campaign hanya root saja ✅
 * jika create campaign maka langsung play ✅
@@ -1952,6 +1955,12 @@ The user has agreed to the Marketing Services Agreement Predict Module . Name: J
 - tambahkan enum ('agency_subscription') di field `invoice_type` di table `leadspeek_invoices`
 ==== DATABASE YANG DITAMBAH ====
 
+==== COMMAND YANG DITAMBAH ====
+php artisan command:agency_module_subscription_renew | AgencyModuleSubscriptionRenewCommand
+php artisan command:campaign_module_subscription_renew | CampaignModuleSubscriptionRenewCommand
+ALTER TABLE `leadspeek_users` ADD `stop_after_billing_period` ENUM('T','F') NULL DEFAULT 'F' AFTER `leadspeek_radius_unit`;
+==== COMMAND YANG DITAMBAH ====
+
 Charge Payment For  Subscription (Predict,Clean,Audience) With Invoice #3576
 Charge Prepaid Payment For Subscription Module Predict With Invoice #3573
 Charge Prepaid Payment For Subscription Module Clean With Invoice #3574
@@ -1972,7 +1981,7 @@ SET setting_value = TO_BASE64(AES_ENCRYPT('{"SelectedModules":[{"type":"local","
 WHERE id = 239 and company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencysidebar';
 
 UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"0.5","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.10"},"Weekly":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"0.5","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"},"Prepaid":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"2","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.5","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.3"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Weekly":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}}', '8e651522e38256f2'))
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.10"},"Weekly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.5","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.3"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.4","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Weekly":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.4","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"1","CleanCostperleadAdvanced":"0"},"predict":{"Prepaid":{"PredictMinCostMonth":"100","PredictQuotaCampaigns":"1","PredictMaxCampaigns":"10","PredictOverageEnable":false,"PredictOverageCampaignsUsed":"0","PredictOverageRate":"10"}}}', '8e651522e38256f2'))
 WHERE company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'costagency';
 
 Predict ID
@@ -2000,6 +2009,104 @@ total_balance : 20 + 250 = 270
 sisa_balance : 270 - 260 = 10
 topup_lagi : 250
 total_balance : 10 + 250 = 260
+
+days_diff = now − agree_date
+weeks_passed = floor(days_diff / 7)
+remaining_ratio = max(0, (4 − weeks_passed) / 4)
+
+--------------------------------------------
+| Price | Campaign | Charge?  | Keterangan |
+| ----- | -------- | -------  | ---------- |
+| ↑     | =        | ✅       | Prorated   |
+| ↑     | ↑        | ✅       | Prorated   |
+| ↑     | ↓        | ❌       | Invalid    |
+| ↓     | =        | ❌       | Next cycle |
+| ↓     | ↓        | ❌       | Next cycle |
+| ↓     | ↑        | ❌       | Promo      |
+| =     | ↑        | ❌       | Bonus      |
+| =     | ↓        | ❌       | Restrict   |
+| =     | =        | ❌       | No change  |
+--------------------------------------------
+
+
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 1
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 1) = $20
+- sudah jalan 1 minggu (75%)
+- yang harus dibayar = $20 * 75% = $15
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = $10 * 50% = $5
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 3
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 3) = $6.67
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = $6.67 * 50% = $3.33
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 4
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 4) = $5
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = $5 * 50% = $2.5
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 5
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 5) = $4
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = $4 * 50% = $2
+
+------------------------------------------------
+
 
 agency1769485754_2
 sama download userLogs untuk campaign itu
@@ -3145,6 +3252,67 @@ ip zova hostpot 114.124.173.169
 
 
 
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sudah jalan 3 hari / 0 minggu (2026-01-01) - (2026-01-03) (100%)
+- yang harus dibayar = $10 * 100% = $10
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sudah jalan 10 hari / 1 minggu (2026-01-01) - (2026-01-10) (75%)
+- yang harus dibayar = $10 * 75% = $7.5
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sudah jalan 2 minggu (2026-01-01) - (2026-01-16) (50%)
+- yang harus dibayar = $10 * 50% = $5
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sudah jalan 3 minggu (25%)
+- yang harus dibayar = $10 * 25% = $2.5
+
+------------------------------------------------
 
 
 
@@ -3205,4 +3373,126 @@ ip zova hostpot 114.124.173.169
 
 
 
+------------------------------------------------
 
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 1
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 1) = $20
+- sisa campaign yang belum dibayar = 1 - 1 = 0 (special case, jika 0 maka akan tetep 1) -> 1
+- persentase sudah jalan 2 minggu (50%)
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($20) * (1) *  (50%)
+                     = $10
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $20
+- Max campaign: 2
+
+Perhitungan
+- harga per campaign nya jadi ($20 / 2) = $10
+- sisa campaign yang belum dibayar = 2 - 1 = 1
+- persentase sudah jalan 2 minggu (50%)
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($10) * (1) *  (50%)
+                     = $5
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $30
+- Max campaign: 3
+
+Perhitungan
+- harga per campaign nya jadi ($30 / 3) = $10
+- sisa campaign yang belum dibayar = 3 - 1 = 2
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($10) * (2) *  (50%)
+                     = $10
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $40
+- Max campaign: 4
+
+Perhitungan
+- harga per campaign nya jadi ($40 / 4) = $10
+- sisa campaign yang belum dibayar = 4 - 1 = 3
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($10) * (3) *  (50%)
+                     = $15
+
+------------------------------------------------
+
+Sebelum
+- Monthly fee: $10
+- Max campaign: 1
+
+Sesudah
+- Monthly fee: $50
+- Max campaign: 5
+
+Perhitungan
+- harga per campaign nya jadi ($50 / 5) = $10
+- sisa campaign yang belum dibayar = 5 - 1 = 4
+- sudah jalan 2 minggu (50%)
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($10) * (4) *  (50%)
+                     = $20
+
+------------------------------------------------
+
+agency start = 2026-01-01
+agency next = 2026-02-01
+
+1 - 7
+8 - 14
+15 - 21
+22 - 28
+
+misal agency agree di tanggal 5, maka sisanya kan 3 siklus (75%)
+misal agency agree di tanggal 10, maka sisanya kan 2 siklus (50%)
+misal agency agree di tanggal 18, maka sisanya kan 1 siklus (25%)
+misal agency agree di tanggal 25, maka sisanya kan 0 siklus (0%)
+
+misal agency agree 1 hari sebelum charge di tanggal 31, maka sisanya kan 0 siklus (0%)
+
+
+Calculations
+1. harga per campaign nya jadi ($50 / 5) = $10
+2. sisa campaign yang belum dibayar = 5 - 1 = 4
+3. sudah jalan 2 minggu (50%)
+4. yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                      = ($10) * (4) *  (50%)
+                      = $20
+
+Calculations
+1. The new price per campaign is ($50 / 5) = $10
+2. Number of campaigns not yet paid for: 5 - 1 = 4
+3. Time remaining in the billing period: 2 weeks (50%)
+4. Amount to be paid = (price per campaign) × (remaining campaigns) × (percentage of time left)
+                     = ($10) × (4) × (50%)
+                     = $20   
