@@ -1,16 +1,21 @@
 Request Ke 1
 {
-    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
-    ,"export_format": "csv"
-    ,"domains": ["name", "email", "demographic","address"]
-    ,"location": {
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+    "export_format": "csv",
+    "domains": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "location": {
         "latitude": 39.707186656827,
         "longitude": -104.8994491161,
         "radius": 251.28,
         "unit": "miles"
-    }
-    ,"audience_limit": 10
-    ,"offset": 0
+    },
+    "audience_limit": 10,
+    "offset": 0
     // ,"workflow_id": "8ded3cee-4153-431b-94a4-29a1ec53cfa4"
 }
 Response Ke 1
@@ -52,18 +57,23 @@ Response Ke 1
 
 Request Ke 2
 {
-    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
-    ,"export_format": "csv"
-    ,"domains": ["name", "email", "demographic","address"]
-    ,"location": {
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+    "export_format": "csv",
+    "domains": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "location": {
         "latitude": 39.707186656827,
         "longitude": -104.8994491161,
         "radius": 251.28,
         "unit": "miles"
-    }
-    ,"audience_limit": 10
-    ,"offset": 10
-    ,"workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
+    },
+    "audience_limit": 10,
+    "offset": 10,
+    "workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
 }
 Response Ke 2
 {
@@ -103,18 +113,23 @@ Response Ke 2
 --------
 
 {
-    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04"
-    ,"export_format": "csv"
-    ,"domains": ["name", "email", "demographic","address"]
-    ,"location": {
+    "expression": "1f6087248f98fa962e890993d5c75ad0 AND cdd85f20528e4ab6cd68083be6bd7b04",
+    "export_format": "csv",
+    "domains": [
+        "name",
+        "email",
+        "demographic",
+        "address"
+    ],
+    "location": {
         "latitude": 39.707186656827,
         "longitude": -104.8994491161,
         "radius": 251.28,
         "unit": "miles"
-    }
-    ,"audience_limit": 10
-    ,"offset": 20
-    ,"workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
+    },
+    "audience_limit": 10,
+    "offset": 20,
+    "workflow_id": "1c669f32-10c6-4813-a464-067117ad0dc2"
 }
 Response Ke 3
 {
@@ -148,5 +163,122 @@ Response Ke 3
         },
         "audience_limit": 10,
         "offset": 20
+    }
+}
+
+
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.5"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0.10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.10"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.5"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.5"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "1.3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0.5",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "1.3"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0.4",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0.4",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.4",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "0.4",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "0.4",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "2.00",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.4",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "1",
+        "CleanCostperleadAdvanced": "0"
+    },
+    "predict": {
+        "Prepaid": {
+            "PredictMinCostMonth": "100",
+            "PredictQuotaCampaigns": "2",
+            "PredictMaxCampaigns": "10",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0",
+            "PredictOverageRate": "10",
+            "PredictMaxCampaignsPrev": "5",
+            "PredictMinCostMonthPrev": "50"
+        }
     }
 }

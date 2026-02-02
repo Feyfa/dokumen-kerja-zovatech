@@ -1901,7 +1901,9 @@ DATABASE YANG DIUBAH
     - buat logic untuk cronjob aniversary campaign ✅
     - buat logic untuk stop campaig, apakah langsung stop sekarang atau stop namun masih mendapatkan report sampai anniversary campaign nya ✅
     - buat logic jika predict harga agency berubah di tengah jalan dan perubahannya harga lebih besar, maka charge prorate, jika turun maka jangan di charge ✅
-    - buat logic saat mau active campaign, check dulu tipe stop nya apa dan aniversary campaign nya (progress)
+    - buat logic untuk reset campaign after periode yang digabung di CampaignModuleSubscriptionRenewCommand ✅
+    - buat logic saat mau active campaign, check dulu bahwa yang active maximam dari maximum campaign max agency ✅
+    - buat logic saat mau active campaign, check dulu tipe stop nya apa dan aniversary campaign nya ✅
     - buat email untuk semua yang berhubungan dengan charge subscription dan campaign nya (progress)
 
 * yang bisa archive campaign hanya root saja ✅
