@@ -1,17 +1,292 @@
-[
-    {
-        "module": "predict",
-        "price": 300,
-        "quota": 1000
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "0.5",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0.10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.10"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "0.5",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "2",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        }
     },
-    {
-        "module": "clean",
-        "price": 149,
-        "quota": 1000
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "1.3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0.5",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
     },
-    {
-        "module": "audience",
-        "price": 149,
-        "quota": 1000
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "1.3"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "2.00",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "0.5",
+        "CleanCostperleadAdvanced": "1"
+    },
+    "predict": {
+        "Prepaid": {
+            "PredictMinCostMonth": "50",
+            "PredictQuotaCampaigns": "0",
+            "PredictMaxCampaigns": "5",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0",
+            "PredictOverageRate": "10",
+            "PredictMaxCampaignsPrev": "1",
+            "PredictMinCostMonthPrev": "10"
+        }
     }
-]
+}
+
+start date agency charge
+2026-01-30
+
+siklus campaign
+2026-01-30 - 2026-02-05 
+2026-02-06 - 2026-02-12 
+2026-02-13 - 2026-02-19
+2026-02-20 - 2026-02-26
+
+kalo sekarang tangggal 2026-02-02, maka remaining weeks nya berarti 75%
+kalo sekarang tangggal 2026-02-08, maka remaining weeks nya berarti 50%
+kalo sekarang tangggal 2026-02-16, maka remaining weeks nya berarti 25%
+kalo sekarang tangggal 2026-02-23, maka remaining weeks nya berarti 0%
+
+
+start date agency agree
+2026-01-30
+
+siklus campaign
+2026-01-30 - 2026-02-05
+2026-02-06 - 2026-02-12
+2026-02-13 - 2026-02-19
+2026-02-20 - 2026-02-26
+
+HASIL PERHITUNGAN 1
+- kalo sekarang tangggal 2026-02-02, maka remaining 3 weeks nya berarti remaining ratio percent nya 75%
+- kalo sekarang tangggal 2026-02-08, maka remaining 2 weeks nya berarti remaining ratio percent nya 50%
+- kalo sekarang tangggal 2026-02-16, maka remaining 1 weeks nya berarti remaining ratio percent nya 25%
+- kalo sekarang tangggal 2026-02-23, maka remaining 0 weeks nya berarti remaining ratio percent nya 0%
+
+HASIL PERHITUNGAN 2
+- kalo sekarang tangggal 2026-02-02, maka remaining 4 weeks nya berarti 100%
+- kalo sekarang tangggal 2026-02-08, maka remaining 3 weeks nya berarti 75%
+- kalo sekarang tangggal 2026-02-16, maka remaining 2 weeks nya berarti 50%
+- kalo sekarang tangggal 2026-02-23, maka remaining 1 weeks nya berarti 25%
+
+
+kalo pake hasil perhitungan 2 kayanya masih oke ngga sih
+
+misal awal
+monthlyfee = $10
+campaigns = 1
+
+di tanggal 2026-02-23 ada perubahan
+misal awal
+monthlyfee = $30
+campaigns = 3
+
+Perhitungan
+- harga per campaign nya jadi ($30 / 3) = $10
+- sisa campaign yang belum dibayar = 3 - 1 = 2
+- sisa minggu agency dama 1 bulan =
+    * karena di tanggal 2-26-02-23 itu masuk di siklus ini 2026-02-20 - 2026-02-26.
+    * maka sisa minggu agency = 1 minggu
+    * kalo di persentase jadi 25%
+- yang harus dibayar = (price per campaign) * (sisa campaign) *  (persentase)
+                     = ($10) * (2) *  (25%)
+                     = $5
+
+Kalo pakai perhitungan 1, maka persentase mingguan nya jadi 0% yang menyebabkan agency ngga di charge, namun dia punya 2 quota yang langsung bisa digunakan di hari itu juga.
+
+
+
+{
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "0.5",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0.10",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0.10"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "0.5",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        },
+        "Prepaid": {
+            "LeadspeekCostperlead": "0.1",
+            "LeadspeekMinCostMonth": "2",
+            "LeadspeekPlatformFee": "0.5",
+            "LeadspeekCostperleadAdvanced": "0.1"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "1.3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "0.4",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorCostperlead": "0.5",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "1.3"
+    },
+    "enhance": {
+        "Monthly": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Weekly": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.45",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "2.00",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.5",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "0.5",
+        "CleanCostperleadAdvanced": "1"
+    },
+    "predict": {
+        "Prepaid": {
+            "PredictMinCostMonth": "10",
+            "PredictQuotaCampaigns": "0",
+            "PredictMaxCampaigns": "1",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0",
+            "PredictOverageRate": "10"
+        }
+    }
+}
