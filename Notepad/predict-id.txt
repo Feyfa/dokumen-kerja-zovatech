@@ -3370,10 +3370,36 @@ Perhitungan
 
 
 
+->orWhere(function ($query) {
+    /* STOP */
+    $query->where('leadspeek_users.active', 'F')
+        ->where('leadspeek_users.disabled', 'T')
+        ->where('leadspeek_users.active_user', 'F')
+        ->where('leadspeek_users.stop_after_billing_period', 'T');
+    /* STOP */
+});
+
+$active = $campaign->active ?? '';
+$disabled = $campaign->disabled ?? '';
+$active_user = $campaign->active_user ?? '';
+$leadspeek_type = $campaign->leadspeek_type ?? '';
+
+ ->whereNotNull('lp_invoice_date')
+->whereRaw('DATE(DATE_ADD(lp_invoice_date, INTERVAL 1 MONTH)) > ?', [$now_date]); // tambahkan 1 bulan dari lp_invoice_date, baru di cek apakah sudah 1 bulan atau belum
 
 
+// if campaign stop after billing period, reset stop_after_billing_period to F
+if($active == 'F' && $disabled == 'T' && $active_user == 'F' && $leadspeek_type == 'predict'){
+    Log::info("CampaignModuleSubscriptionRenewCommand Reset Stop After Billing Period", ['campaign_id' => $campaign_id,'campaign_name'  $campaign_name,'company_parent' => $company_parent]);
+    $campaign->stop_after_billing_period = 'F';
+    $campaign->save();
+    continue;
+}
+// if campaign stop after billing period, reset stop_after_billing_period to F
 
 
+agencysubscriptionmodule.blade.php
+campaignpredictcharge.blade.php
 
 
 
@@ -3504,3 +3530,41 @@ Calculations
 4. Amount to be paid = (price per campaign) × (remaining campaigns) × (percentage of time left)
                      = ($10) × (4) × (50%)
                      = $20   
+
+Thank you for your business with Exact Match Marketing!
+
+Your has successfully agreed to and activated the following modules with the associated pricing and usage limits:
+
+---
+
+**Predict Module**
+Monthly Fee : ${{predict_monthly_fee}}
+Maximum Campaigns : {{predict_max_campaigns}}
+Status : Active
+
+---
+
+**Clean Module**
+Monthly Fee : ${{clean_monthly_fee}}
+Maximum Contacts : {{clean_max_contacts}}
+Status : Active
+
+---
+
+**Audience Module**
+Monthly Fee : ${{audience_monthly_fee}}
+Maximum Contacts : {{audience_max_contacts}}
+Status : Active
+
+---
+
+Activation Date : {{activation_date}}
+Agency Name : {{agency_name}}
+
+---
+
+You may begin using these modules immediately based on the limits outlined above. Any future usage or billing adjustments will follow your agreed pricing and billing terms.
+
+Please do not respond to this email address as it is not monitored. If you have any questions, please reach out to fisikamodern00@gmail.com..
+
+Thank you

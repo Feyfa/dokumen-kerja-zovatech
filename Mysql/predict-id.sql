@@ -94,7 +94,7 @@ where
 
 select * from subscription_modules;
 
-select * from user_logs where created_at > '2026-02-02 07:55:03' order by id desc;
+select * from user_logs where created_at > '2026-02-02 21:36:25' order by id desc;
 select * from user_logs order by id desc;
 select * from user_logs where action like '%marketing service%' order by id desc;
 
@@ -116,11 +116,9 @@ DELETE from leadspeek_predict_reports where leadspeek_api_id in (SELECT leadspee
 DELETE from leadspeek_invoices where leadspeek_api_id in (SELECT leadspeek_api_id FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164);
 DELETE FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164;
 
+select DATE_ADD('2026-02-02', INTERVAL 1 MONTH) as test;
 
-
-
-
-
+select * from jobs order by id desc;
 
 
 
