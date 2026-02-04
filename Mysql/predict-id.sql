@@ -30,18 +30,6 @@ SELECT * FROM `leadspeek_media`;
 -- from leadspeek_business;
 
 
-set @leadspeek_api_id := 83428362;
-select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in (@leadspeek_api_id);
-select * from leadspeek_business where leadspeek_api_id in (@leadspeek_api_id);
-select * from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id;
-
-select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in ('14820931');
-select * from leadspeek_business where leadspeek_api_id in ('14820931');
-select * from leadspeek_predict_reports where leadspeek_api_id in ('14820931');
-select * from leadspeek_customers;
-select * from leadspeek_customer_campaigns where leadspeek_api_id in (@leadspeek_api_id);
-
-
 select * from user_logs order by id desc limit 10;
 
 select * from leadspeek_customer_campaigns where leadspeek_api_id in ('14820931');
@@ -94,7 +82,7 @@ where
 
 select * from subscription_modules;
 
-select * from user_logs where created_at > '2026-02-02 21:36:25' order by id desc;
+select * from user_logs where created_at > '2026-02-03 22:12:16' order by id desc;
 select * from user_logs order by id desc;
 select * from user_logs where action like '%marketing service%' order by id desc;
 
@@ -104,11 +92,12 @@ select * from leadspeek_invoices
 where (invoice_type in ('agency','agency_subscription') and company_id = 164)
 order by id desc;
 
-select * from leadspeek_invoices where (invoice_type in ('campaign') and leadspeek_api_id = '26778152');
-
-select * from topup_campaigns where leadspeek_api_id = '26778152';
-
-
+set @leadspeek_api_id := 83428362;
+select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in (@leadspeek_api_id);
+select * from leadspeek_business where leadspeek_api_id in (@leadspeek_api_id);
+select * from leadspeek_customer_campaigns where leadspeek_api_id in (@leadspeek_api_id);
+select * from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id;
+select * from leadspeek_customers;
 
 DELETE from leadspeek_business where leadspeek_api_id in (SELECT leadspeek_api_id FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164);
 DELETE from leadspeek_customer_campaigns where leadspeek_api_id in (SELECT leadspeek_api_id FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164);
@@ -116,7 +105,7 @@ DELETE from leadspeek_predict_reports where leadspeek_api_id in (SELECT leadspee
 DELETE from leadspeek_invoices where leadspeek_api_id in (SELECT leadspeek_api_id FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164);
 DELETE FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164;
 
-select DATE_ADD('2026-02-02', INTERVAL 1 MONTH) as test;
+select DATE_ADD('2026-02-03', INTERVAL 1 MONTH) as test;
 
 select * from jobs order by id desc;
 

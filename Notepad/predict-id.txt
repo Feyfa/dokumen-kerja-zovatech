@@ -723,8 +723,8 @@ WHERE CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING u
 
 
 UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"},"OneTime":{"LeadspeekCostperlead":"2.1","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"2.59"},"Weekly":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"},"Prepaid":{"LeadspeekCostperlead":"0.5","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.5"}},"locator":{"Monthly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"2.2","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"1","FirstName_LastName_MailingAddress":"1","FirstName_LastName_MailingAddress_Phone":"0"},"enhance":{"Monthly":{"EnhanceCostperlead":"3.2","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.3","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"3.1","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"3.3","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Weekly":{"B2bCostperlead":"4.1","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"4.2","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"1.49","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"4.3","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"simplifi":{"Prepaid":{"SimplifiMaxBid":"10","SimplifiDailyBudget":"5","SimplifiAgencyMarkup":40}},"predict":{"Prepaid":{"PredictPlatformFee":"5","PredictMinCostMonth":"200"}}}', '8e651522e38256f2'))
-WHERE company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'agencydefaultprice';
+SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"Monthly":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"0.5","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"},"OneTime":{"LeadspeekCostperlead":"0.10","LeadspeekMinCostMonth":"0","LeadspeekPlatformFee":"0","LeadspeekCostperleadAdvanced":"0.10"},"Weekly":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"0.5","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"},"Prepaid":{"LeadspeekCostperlead":"0.1","LeadspeekMinCostMonth":"2","LeadspeekPlatformFee":"0.5","LeadspeekCostperleadAdvanced":"0.1"}},"locator":{"Monthly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"OneTime":{"LocatorCostperlead":"1.3","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Weekly":{"LocatorCostperlead":"0.4","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"},"Prepaid":{"LocatorCostperlead":"0.5","LocatorMinCostMonth":"0","LocatorPlatformFee":"0"}},"locatorlead":{"FirstName_LastName":"5","FirstName_LastName_MailingAddress":"6","FirstName_LastName_MailingAddress_Phone":"1.3"},"enhance":{"Monthly":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"OneTime":{"EnhanceCostperlead":"2.00","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Weekly":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"},"Prepaid":{"EnhanceCostperlead":"0.45","EnhanceMinCostMonth":"0","EnhancePlatformFee":"0"}},"b2b":{"Weekly":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Monthly":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"OneTime":{"B2bCostperlead":"2.00","B2bMinCostMonth":"0","B2bPlatformFee":"0"},"Prepaid":{"B2bCostperlead":"0.5","B2bMinCostMonth":"0","B2bPlatformFee":"0"}},"clean":{"CleanCostperlead":"0.5","CleanCostperleadAdvanced":"1"}}', '8e651522e38256f2'))
+WHERE company_id = 164 and CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) = 'costagency';
 
 ================ DATA LAMA EMM ================
 rootcustomsidebarleadmenu
@@ -1782,9 +1782,9 @@ ALTER TABLE `leadspeek_predict_reports` ADD `merge_job_dispatched` TINYINT NULL 
 
 
 ====== WORKEY YANG DITAMBAH ======
-php artisan queue:work redis --queue=predict_fetch_report
-php artisan queue:work redis --queue=predict_fetch_report_offset
-php artisan queue:work redis --queue=predict_fetch_report_merge
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report_offset
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report_merge
 ====== WORKEY YANG DITAMBAH ======
 
 
@@ -1904,7 +1904,8 @@ DATABASE YANG DIUBAH
     - buat logic untuk reset campaign after periode yang digabung di CampaignModuleSubscriptionRenewCommand ✅
     - buat logic saat mau active campaign, check dulu bahwa yang active maximam dari maximum campaign max agency ✅
     - buat logic saat mau active campaign, check dulu tipe stop nya apa dan aniversary campaign nya ✅
-    - buat email untuk semua yang berhubungan dengan charge subscription dan campaign nya (progress)
+    - buat email untuk semua yang berhubungan dengan charge subscription dan campaign nya ✅
+    - buat logic jika uncheck (T -> F) module predict, maka muncul notifikasi bahwa semua campaign dibawah agency akan di stop now, namun ada pilihan yes atau cancel tidak nge block ✅
 
 * yang bisa archive campaign hanya root saja ✅
 * jika create campaign maka langsung play ✅
@@ -1937,6 +1938,10 @@ DATABASE YANG DIUBAH
 
 * tentang overage campaign
     - misal gini agency agree tanggal 01Jan26 dengan (price_month = $10 dan max_campaigns = 1), dan langsung membuat 1 campaign. nah di tanggal 15Jan26 agency request ke emm, dia mau minta untuk max_campaigns nya jadi 2 dong. nah di posisi seperti ini agency tinggal ubah (price_month = $20 dan max_campaigns = 2), nah maka cara hitung nya gini, agency yang sudah dibuat kan 1, nah sisanya berarti (2 - 1 = 1). berarti harga yang dia bayar untuk penambahan campaign tersebut adalah $10. nah namun karena dia mulai dari tanggal 15Jan26, maka 15Jan26 sampai 01Feb26 kira" kalo kita pakai persentase durasi nya hanya 50% saja. maka dalam case ini dia membayar ($10 * 50% = $5)
+
+* tentang coloumn predict
+    - tambahkan persentase saat process fetch report data
+    - buat 4 type csv saat process fetch data (original, google, meta, simplifi)
 ==== YANG HARUS DIKERJAKAN ====
 
 The user has agreed to the Marketing Services Agreement Predict Module . Name: Jidan ACH 164 Personal | Email: fisikamodern00+jidanach@gmail.com | Company Name: Jidan ACH 164 Businnes | Company Id: 164 | menu: Campaign Management | Monthly Fee: $260 | Maximum Campaign: 10
@@ -3568,3 +3573,191 @@ You may begin using these modules immediately based on the limits outlined above
 Please do not respond to this email address as it is not monitored. If you have any questions, please reach out to fisikamodern00@gmail.com..
 
 Thank you
+
+-----------------------------------------
+leadspeek_predict_reports
+            |
+            |
+            |
+            |
+            |
+leadspeek_predict_report_files
+-----------------------------------------
+
+-----------------------------------------
+leadspeek_predict_report_bundles
+            |
+            |
+            |
+            |
+            |
+leadspeek_predict_reports_bundle_items
+-----------------------------------------
+
+leadspeek_predict_reports
+ ├── leadspeek_predict_report_files
+ └── leadspeek_predict_report_bundles
+       └── leadspeek_predict_reports_bundle_items
+
+
+
+ohhhhh saya baru paham
+
+jadi  leadspeek_predict_export_chunks itu bukan berarti 1 report punya 4 opsi, maka  leadspeek_predict_export_chunks juga ada 4, bukan.
+
+jadi di  leadspeek_predict_export_chunks tetep 1 saja, soalnya ini seperti jalan paralel gitu, jadi yang disimpan process chunk nya bukan tiap  csv type nya
+
+jadi saya harus ngebayangin seolah  leadspeek_predict_export_chunks itu hanya 1 csv_type saja, namun sebenarnya 1 row  leadspeek_predict_export_chunks menjalankan beberapa csv_type
+
+
+=========== DATABASE YANG DITAMBAH ===========
+- ALTER TABLE leadspeek_predict_export_chunks
+ADD COLUMN owner_type ENUM('report_file','bundle') NULL AFTER leadspeek_api_id,
+ADD COLUMN owner_id BIGINT UNSIGNED NULL AFTER owner_type;
+
+- CREATE TABLE leadspeek_predict_report_files (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    report_id BIGINT UNSIGNED NULL DEFAULT NULL,
+    csv_type ENUM('original','google','meta','simplifi','custom') NULL DEFAULT 'original',
+    custom_name VARCHAR(100) NULL DEFAULT NULL,
+    columns_schema TEXT NULL DEFAULT NULL,
+    file_download TEXT NULL DEFAULT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+- CREATE TABLE leadspeek_predict_report_bundles (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    leadspeek_api_id VARCHAR(20) NULL DEFAULT NULL,
+    csv_type ENUM('original','google','meta','simplifi') NULL DEFAULT 'original',
+    custom_name VARCHAR(100) NULL DEFAULT NULL,
+    columns_schema TEXT NULL DEFAULT NULL,
+    file_download TEXT NULL DEFAULT NULL,
+    total_leads BIGINT UNSIGNED NULL DEFAULT NULL,
+    job_status ENUM('pending','processing','done') NULL DEFAULT NULL,
+    job_total INT UNSIGNED NULL DEFAULT NULL,
+    job_completed INT UNSIGNED NULL DEFAULT NULL,
+    merge_job_dispatched INT UNSIGNED NULL DEFAULT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+- CREATE TABLE leadspeek_predict_reports_bundle_items (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    bundle_id BIGINT UNSIGNED NULL DEFAULT NULL,
+    report_id BIGINT UNSIGNED NULL DEFAULT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=========== DATABASE YANG DITAMBAH ===========
+
+
+di bagian Download Reports For Campaign saya mau ada fitur untuk bisa download all, saat download all itu 
+- bisa select report mana saya yang mau digabungin, ini harus lebih dari 1 ya
+- setelah select reports, saya ingin dia mau download opsi apa, apakah opsi (original CSV, google CSV, Meta CSV, Simplifi CSV) atau pilih custom fields
+- nah saya ngga tau history untuk saat bundle semua ini itu enaknya ditaruh mana? apakah di antara title "Download Reports For Campaign" dan sebelum "Choose a report to download"
+
+4. jadi ada fitur yang bisa digunakan seperti download all dan csv type nya apa
+4. jadi ada fitur yang bisa digunakan seperti download all dan csv type nya apa
+    misalnya
+    - saya mau select report harus lebih dari 1 report. dan bisa pakai csv_type atau custom column
+
+Selected order           Report Name: [     input      ]
+
+[  1. item1                                            ]
+[  2. item2                                            ]
+[  3. item3                                            ]
+
+first_name	
+last_name	
+email_1	
+email_2	
+email_3	
+email_4	
+email_5	
+email_6	
+email_7	
+email_8	
+email_9	
+email_10	
+phone_1	
+phone_2	
+phone_3	
+address_line_1	
+address_line_2	
+full_address 
+city
+state
+zip	
+country	
+latitude	
+longitude	
+county	
+gender	
+age_group	
+marital_status	
+education_level	
+language	
+source_vendor
+
+
+
+---------------------------------------
+leadspeek_predict_report_files  
+---------------------------------------
+id BIGINT UNSIGNED PK AI
+report_id BIGINT UNSIGNED NULL DEFAULT NULL
+csv_type ENUM('original','google','meta','simplifi','custom') NULL DEFAULT 'original'
+custom_name varchar(100) NULL DEFAULT NULL
+file_download TEXT NULL DEFAULT NULL
+columns_schema TEXT NULL DEFAULT NULL
+created_at TIMESTAMP NULL DEFAULT NULL
+updated_at TIMESTAMP NULL DEFAULT NULL
+---------------------------------------
+
+
+---------------------------------------
+leadspeek_predict_report_bundles
+---------------------------------------
+id BIGINT UNSIGNED PK AI
+leadspeek_api_id varchar(20)
+csv_type ENUM('original','google','meta','simplifi') NULL DEFAULT 'original'
+file_download TEXT NULL DEFAULT NULL
+total_leads UNSIGNED bigint NULL DEFAULT NULL
+job_status ENUM('pending', 'processing', 'done')
+job_total UNSIGNED INT NULL DEFAULT NULL
+job_completed UNSIGNED INT NULL DEFAULT NULL
+merge_job_dispatched UNSIGNED INT NULL DEFAULT NULL
+created_at TIMESTAMP NULL DEFAULT NULL
+updated_at TIMESTAMP NULL DEFAULT NULL
+---------------------------------------
+
+
+---------------------------------------
+leadspeek_predict_reports_bundle_items
+---------------------------------------
+id BIGINT UNSIGNED PK AI
+bundle_id BIGINT UNSIGNED NULL DEFAULT NULL
+report_id BIGINT UNSIGNED NULL DEFAULT NULL
+created_at TIMESTAMP NULL DEFAULT NULL
+updated_at TIMESTAMP NULL DEFAULT NULL
+---------------------------------------
+
+
+ohh saya baru nangkep, jadi di leadspeek_predict_export_chunks itu untuk 4 type csv (original, google, meta, simplifi) dulu ya kita bicara, itu mainnya di field ini ya owner_id 
+
+jadi gini saya mulai nangkep nih
+
+untuk download yang 4 type csv (original, google, meta, simplifi). saya harus buat  owner_type dan owner_id nya jadi seperti ini
+
+owner_type = ini harus jadi 'report'
+owner_id  = ini id dari leadspeek_predict_report_files, bukan dari leadspeek_predict_report. karena saya sebelumnya mikirnya leadspeek_predict_report
+
+-----
+
+untuk download yang bundles itu, ini seharusnya malah lebih gampang. saya harus buat  owner_type dan owner_id nya jadi seperti ini
+
+owner_type = ini harus jadi 'bundle'
+owner_id = ini id dari leadspeek_predict_report_bundles
+
+benar kan ya
