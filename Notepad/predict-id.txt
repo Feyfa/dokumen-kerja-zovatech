@@ -3591,13 +3591,13 @@ leadspeek_predict_report_bundles
             |
             |
             |
-leadspeek_predict_reports_bundle_items
+leadspeek_predict_report_bundle_items
 -----------------------------------------
 
 leadspeek_predict_reports
  ├── leadspeek_predict_report_files
  └── leadspeek_predict_report_bundles
-       └── leadspeek_predict_reports_bundle_items
+       └── leadspeek_predict_report_bundle_items
 
 
 
@@ -3642,7 +3642,7 @@ ADD COLUMN owner_id BIGINT UNSIGNED NULL AFTER owner_type;
     updated_at TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-- CREATE TABLE leadspeek_predict_reports_bundle_items (
+- CREATE TABLE leadspeek_predict_report_bundle_items (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     bundle_id BIGINT UNSIGNED NULL DEFAULT NULL,
     report_id BIGINT UNSIGNED NULL DEFAULT NULL,
@@ -3734,7 +3734,7 @@ updated_at TIMESTAMP NULL DEFAULT NULL
 
 
 ---------------------------------------
-leadspeek_predict_reports_bundle_items
+leadspeek_predict_report_bundle_items
 ---------------------------------------
 id BIGINT UNSIGNED PK AI
 bundle_id BIGINT UNSIGNED NULL DEFAULT NULL
@@ -3761,3 +3761,191 @@ owner_type = ini harus jadi 'bundle'
 owner_id = ini id dari leadspeek_predict_report_bundles
 
 benar kan ya
+
+
+oke sebelumnya saya akan jelasin dulu, jadi sekarang ini saya dapat data dari provider watt nah hasil yang dihasilkan watt itu COLUM CSV KOTOR, nah nanti kedepan saya mau ada beberapa type csv, berikut list nya:
+1. original_csv
+2. google_csv
+3. meta_csv
+4. simplifi_csv
+
+jadi saat process data dari watt maka saya langsung bikin untuk 4 type file csv ini
+
+------- COLUM CSV KOTOR -------
+domains_addresses_0_address_primary,
+domains_addresses_0_address_secondary,
+domains_addresses_0_carrier_route,
+domains_addresses_0_cbsa,
+domains_addresses_0_city,
+domains_addresses_0_congressional_district,
+domains_addresses_0_county,
+domains_addresses_0_dma,
+domains_addresses_0_latitude,
+domains_addresses_0_longitude,
+domains_addresses_0_msa,
+domains_addresses_0_property_type,
+domains_addresses_0_state,
+domains_addresses_0_urbanicity_code,
+domains_addresses_0_zip,
+domains_demographic_attribute_data_type,
+domains_demographic_attribute_domain,
+domains_demographic_attribute_name,
+domains_demographic_attribute_value,
+domains_demographic_education_cluster_id,
+domains_demographic_education_value,
+domains_demographic_ethnic_group_cluster_id,
+domains_demographic_ethnic_group_value,
+domains_demographic_gender_cluster_id,
+domains_demographic_gender_value,
+domains_demographic_generation_cluster_id,
+domains_demographic_generation_value,
+domains_demographic_is_multilingual_cluster_id,
+domains_demographic_is_multilingual_value,
+domains_demographic_is_speaks_english_cluster_id,
+domains_demographic_is_speaks_english_value,
+domains_demographic_marital_status_cluster_id,
+domains_demographic_marital_status_value,
+domains_demographic_religion_cluster_id,
+domains_demographic_religion_value,
+domains_demographic_source_date,
+domains_demographic_vendor,
+domains_emails_0_email_address,
+domains_emails_0_opted_in,
+domains_emails_1_email_address,
+domains_emails_1_opted_in,
+domains_emails_2_email_address,
+domains_emails_2_opted_in,
+domains_emails_3_email_address,
+domains_emails_3_opted_in,
+domains_emails_4_email_address,
+domains_emails_4_opted_in,
+domains_emails_5_email_address,
+domains_emails_5_opted_in,
+domains_emails_6_email_address,
+domains_emails_6_opted_in,
+domains_emails_7_email_address,
+domains_emails_7_opted_in,
+domains_emails_8_email_address,
+domains_emails_8_opted_in,
+domains_emails_9_email_address,
+domains_emails_9_opted_in,
+domains_names_0_first_name,
+domains_names_0_last_name,
+person_id
+------- COLUM CSV KOTOR -------
+
+------- COLUM ORIGINAL CSV -------
+first_name,
+last_name,
+email_1,
+email_2,
+email_3,
+email_4,
+email_5,
+email_6,
+email_7,
+email_8,
+email_9,
+email_10,
+phone_1,
+phone_2,
+phone_3,
+address_line_1,
+address_line_2,
+full_address, -> ({address_line_1}, {address_line_2}, {city}, {state} {zip})
+city,
+state,
+zip,
+country,
+latitude,
+longitude,
+county,
+gender,
+age_group,
+marital_status,
+education_level,
+language,
+source_vendor
+------- COLUM ORIGINAL CSV -------
+
+------- COLUM GOOGLE CSV -------
+email,
+first_name,
+last_name,
+country,
+zip,
+state,
+city
+------- COLUM GOOGLE CSV -------
+
+------- COLUM META CSV -------
+email,
+first_name,
+last_name,
+city,
+state,
+zip,
+country,
+address,
+latitude,
+longitude
+------- COLUM META CSV -------
+
+------- COLUM SIMPLIFI CSV -------
+address,
+city,
+state,
+zip,
+country,
+latitude,
+longitude,
+email
+------- COLUM SIMPLIFI CSV -------
+
+!!!CATATAN PENTING!!!
+1. oke bagian unik hanya untuk colum google dan meta. jadi gini misal hasil yang didapat untuk original_csv 1 data bisa punya banyak email. nah maka untuk meta dan google itu kita ngga simpan 1 row juga, kalo di meta dan google kita nyimpan sebenyak jumlah email dalam 1 row tersebut
+
+example
+- data original
+first_name | last_name | email_1 | email_2 | email_3 | email_4 | email_5 | ...nanti ada email 6-10, kita anggap itu kosong, ...data lainnya
+muhammad | jidan | jidan1@gmail.com | jidan2@gmail.com | jidan3@gmail.com | jidan4@gmail.com | jidan5@gmail.com 
+
+nah maka di data meta atau google akan jadi 5 row dari 1 row original csv
+- data meta
+email | first_name | last_name | city | state | zip | country | address | latitude | longitude
+jidan1@gmail.com | muhammad | jidan | city | state | zip | country | address | latitude | longitude
+jidan2@gmail.com | muhammad | jidan | city | state | zip | country | address | latitude | longitude
+jidan3@gmail.com | muhammad | jidan | city | state | zip | country | address | latitude | longitude
+jidan4@gmail.com | muhammad | jidan | city | state | zip | country | address | latitude | longitude
+jidan5@gmail.com | muhammad | jidan | city | state | zip | country | address | latitude | longitude
+
+- data gogle
+email | first_name | last_name | country | zip | state | city
+jidan1@gmail.com | muhammad | jidan | country | zip | state | city
+jidan2@gmail.com | muhammad | jidan | country | zip | state | city
+jidan3@gmail.com | muhammad | jidan | country | zip | state | city
+jidan4@gmail.com | muhammad | jidan | country | zip | state | city
+jidan5@gmail.com | muhammad | jidan | country | zip | state | city
+
+nah dari semua penjelasan semua itu, apakah bisa saya melakukan hal itu? dan sebaiknya logic" ini apakah disimpan di dalam service Predict?
+
+
+hmm kok saya merasa kalo itu boros memory ya, anda langsung ambil LeadspeekPredictExportChunk dengan 4 type sekaligus, coba anda bayangkan jika 1 type itu bisa menghasilkan 1000 data, maka anda bisa langsung 4000 data, kayanya ngga efesien memory
+
+nanti kalo kedepan tiba" mau nambah csv_type, maka total data dari LeadspeekPredictExportChunk bisa selalu meningkat drastis
+
+jadi kayanya setiap looping di bagian foreach($csvTypes as $csvType){ itu selalu query lagi
+
+
+---
+
+oke next nya saya mau bikin kaya gini
+
+INTI BESARNYA
+- saya mau bikin kalo misalnya masih ada yang job_status yang masih processing, itu buat check lagi tiap 1 menit
+
+DETAIL YANG HARUS DI PERHATIKA
+- saya ingin pastikan check nya ini ketika job_status nya ada yang masih processing saja, kalo misalnya done semua maka ngga hit tiap 1 menit
+- kalo misalnya user tutup modalnya maka di clear interval nya
+- nanti di destroy apa gitu, jangan lupa di clear
+- nanti saat pertama kali buka modal maka di clear interval nya juga

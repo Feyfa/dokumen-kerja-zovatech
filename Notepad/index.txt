@@ -1,9 +1,0 @@
-- rootcustomsidebarleadmenu
-UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"local":{"name":"Site ID","url":"siteid"},"locator":{"name":"Search ID","url":"searchid"},"enhance":{"name":"Enhance ID","url":"enhanceid"},"b2b":{"name":"B2B ID","url":"b2bid"},"simplifi":{"name":"Simplifi ID","url":"simplifiid"},"predict":{"name":"Predict ID","url":"predictid"},"clean":{"name":"Clean ID","url":"cleanid"},"audience":{"name":"Audience ID","url":"audienceid"}}', '8e651522e38256f2'))
-WHERE id = 25 and company_id = 22;
-
-- rootdefaultmodules
-UPDATE company_settings
-SET setting_value = TO_BASE64(AES_ENCRYPT('{"DefaultModules":[{"type":"local","status":true},{"type":"locator","status":true},{"type":"enhance","status":true},{"type":"b2b","status":true},{"type":"simplifi","status":true},{"type":"predict","status":false},{"type":"clean","status":false},{"type":"audience","status":false}]}', '8e651522e38256f2'))
-WHERE id = 1660 and company_id = 22;

@@ -1655,9 +1655,12 @@ startdate   | enddate
 
 
 
+https://app.agencyzoom.com/v1/api/lead/webhook/687f98b2accfbd92c1ddfe058b9064103ba6978b6d807
 
+ugh saya nemu pak masalah nya, salah di where nya pak, seharusnya agencyzoom_is_active, bukan zap_is_active
+makanya ngga ngejalanin process agencyzoom.
 
-
+tapi process saat nembak webhook agencyzoom nya itu berhasil pak
 
 
 startdate   | enddate

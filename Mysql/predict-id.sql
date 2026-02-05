@@ -93,10 +93,13 @@ where (invoice_type in ('agency','agency_subscription') and company_id = 164)
 order by id desc;
 
 set @leadspeek_api_id := 83428362;
-select start_billing_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in (@leadspeek_api_id);
+select start_billing_date,lp_invoice_date,lu.* from leadspeek_users as lu where leadspeek_type = 'predict' and leadspeek_api_id in (@leadspeek_api_id);
 select * from leadspeek_business where leadspeek_api_id in (@leadspeek_api_id);
 select * from leadspeek_customer_campaigns where leadspeek_api_id in (@leadspeek_api_id);
 select * from leadspeek_predict_reports where leadspeek_api_id = @leadspeek_api_id;
+select * from leadspeek_predict_report_files where report_id = '';
+select * from leadspeek_predict_report_bundles;
+select * from leadspeek_predict_reports_bundle_items;
 select * from leadspeek_customers;
 
 DELETE from leadspeek_business where leadspeek_api_id in (SELECT leadspeek_api_id FROM leadspeek_users where leadspeek_type = 'predict' and company_id = 164);
@@ -109,8 +112,15 @@ select DATE_ADD('2026-02-03', INTERVAL 1 MONTH) as test;
 
 select * from jobs order by id desc;
 
-
-
+SELECT
+	id,
+	company_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_name), '8e651522e38256f2') USING utf8mb4) as setting_name,
+	CONVERT(AES_DECRYPT(FROM_bASE64(setting_value), '8e651522e38256f2') USING utf8mb4) as setting_value,
+	setting_name,
+	setting_value
+FROM company_settings
+WHERE company_id = 164;
 
 
 
