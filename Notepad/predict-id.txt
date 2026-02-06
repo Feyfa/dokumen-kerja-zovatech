@@ -3626,6 +3626,67 @@ ADD COLUMN owner_id BIGINT UNSIGNED NULL AFTER owner_type;
     updated_at TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `leadspeek_predict_field_masters` (
+    `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `field_slug` VARCHAR(255) NULL DEFAULT NULL,
+    `field_name` VARCHAR(255) NULL DEFAULT NULL,
+    `active` ENUM('T', 'F') NULL DEFAULT NULL,
+    `created_at` TIMESTAMP NULL DEFAULT NULL,
+    `updated_at` TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `leadspeek_predict_field_masters` (`field_slug`, `field_name`, `active`, `created_at`, `updated_at`) VALUES
+('first_name', 'First Name', 'T', NOW(), NOW()),
+('last_name', 'Last Name', 'T', NOW(), NOW()),
+('email_1', 'Email 1', 'T', NOW(), NOW()),
+('email_2', 'Email 2', 'T', NOW(), NOW()),
+('email_3', 'Email 3', 'T', NOW(), NOW()),
+('email_4', 'Email 4', 'T', NOW(), NOW()),
+('email_5', 'Email 5', 'T', NOW(), NOW()),
+('email_6', 'Email 6', 'T', NOW(), NOW()),
+('email_7', 'Email 7', 'T', NOW(), NOW()),
+('email_8', 'Email 8', 'T', NOW(), NOW()),
+('email_9', 'Email 9', 'T', NOW(), NOW()),
+('email_10', 'Email 10', 'T', NOW(), NOW()),
+('phone_1', 'Phone 1', 'T', NOW(), NOW()),
+('phone_2', 'Phone 2', 'T', NOW(), NOW()),
+('phone_3', 'Phone 3', 'T', NOW(), NOW()),
+('address_line_1', 'Address Line 1', 'T', NOW(), NOW()),
+('address_line_2', 'Address Line 2', 'T', NOW(), NOW()),
+('full_address', 'Full Address', 'T', NOW(), NOW()),
+('city', 'City', 'T', NOW(), NOW()),
+('state', 'State', 'T', NOW(), NOW()),
+('zip', 'Zip', 'T', NOW(), NOW()),
+('country', 'Country', 'T', NOW(), NOW()),
+('latitude', 'Latitude', 'T', NOW(), NOW()),
+('longitude', 'Longitude', 'T', NOW(), NOW()),
+('county', 'County', 'T', NOW(), NOW()),
+('gender', 'Gender', 'T', NOW(), NOW()),
+('age_group', 'Age Group', 'T', NOW(), NOW()),
+('marital_status', 'Marital Status', 'T', NOW(), NOW()),
+('education_level', 'Education Level', 'T', NOW(), NOW()),
+('language', 'Language', 'T', NOW(), NOW()),
+('source_vendor', 'Source Vendor', 'T', NOW(), NOW());
+
+CREATE TABLE `leadspeek_predict_field_companies` (
+    `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `company_id` BIGINT UNSIGNED NULL DEFAULT NULL,
+    `field_name` VARCHAR(255) NULL DEFAULT NULL,
+    `field_order` TEXT NULL DEFAULT NULL,
+    `is_default` ENUM('T', 'F') NULL DEFAULT NULL,
+    `active` ENUM('T', 'F') NULL DEFAULT NULL,
+    `created_at` TIMESTAMP NULL DEFAULT NULL,
+    `updated_at` TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `leadspeek_predict_field_campaigns` (
+    `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `leadspeek_api_id` VARCHAR(20) NULL DEFAULT NULL,
+    `field_id` BIGINT UNSIGNED NULL DEFAULT NULL,
+    `field_order` TEXT NULL DEFAULT NULL,
+    `created_at` TIMESTAMP NULL DEFAULT NULL,
+    `updated_at` TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 - CREATE TABLE leadspeek_predict_report_bundles (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     leadspeek_api_id VARCHAR(20) NULL DEFAULT NULL,
@@ -3949,3 +4010,33 @@ DETAIL YANG HARUS DI PERHATIKA
 - kalo misalnya user tutup modalnya maka di clear interval nya
 - nanti di destroy apa gitu, jangan lupa di clear
 - nanti saat pertama kali buka modal maka di clear interval nya juga
+
+gimana kalo saya nambah 3 table lagi
+1. leadspeek_predict_master_fields -> ini tujuannya untuk menyimpan list" dari custom field yang ada itu apa saja, jadi semacam master nya gitu lah
+2. leadspeek_predict_user_fields -> ini tujuannya untuk menyimpan bentuk custom fields yang sudah dibuat oleh agency, nanti ini ditempatkan di dalam general setting agency
+3. leadspeek_predict_campaign_fields -> ini tujuaanya untuk membuat custom fields sendiri di campaign itu saja, jadi kayanya nanti di campaign itu disuguhkan mau pakai settingan default dari general setting, atau anda rakit 1 custom field di campaign ini, jadi nanti ada 1 untuk benar" custom untuk campaign itu sendiri atau mau pakai dari general settings
+
+leadspeek_predict_master_fields
+id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+field_slug VARCHAR(255) NULL DEFAULT NULL, -- untuk slug
+field_name VARCHAR(255) NULL DEFAULT NULL, -- untuk name
+active ENUM('T', 'F') NULL DEFAULT NULL, -- untuk soft delete gitu lah
+created_at TIMESTAMP NULL DEFAULT NULL,
+updated_at TIMESTAMP NULL DEFAULT NULL
+
+leadspeek_predict_company_fields -- saya ubah nama jadi ini, karena dari company_id kita bisa tau ini agency atau client, jadi ngga perlu user_type
+id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+company_id BIGINT UNSIGNED NULL DEFAULT NULL, -- untuk simpan company_id agency atau client
+field_order TEXT NULL DEFAULT NULL, -- untuk order [1,2,3,4] id nya dari leadspeek_predict_master_fields, nanti bentuknya JSON String
+is_default ENUM('T', 'F') NULL DEFAULT NULL, -- untuk default nanti saat di campaign dan agency buat campaign, maka defaultnya pakai ini
+active ENUM('T', 'F') NULL DEFAULT NULL, -- untuk soft delete gitu lah
+created_at TIMESTAMP NULL DEFAULT NULL,
+updated_at TIMESTAMP NULL DEFAULT NULL
+
+leadspeek_predict_campaign_fields
+id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+leadspeek_api_id VARCHAR(20) NULL DEFAULT NULL, -- ini id dari leadspeek_users, leadspeek_api_id id nya yang di tampilkan di ui
+field_id BIGINT UNSIGNED NULL DEFAULT NULL, -- ini nanti digunakan untuk menampung id leadspeek_predict_company_fields
+field_order TEXT NULL DEFAULT NULL, -- jika mau bikin custom lagi untuk campaign ini, maka field_id kosong, dan ini diisi
+created_at TIMESTAMP NULL DEFAULT NULL,
+updated_at TIMESTAMP NULL DEFAULT NULL
