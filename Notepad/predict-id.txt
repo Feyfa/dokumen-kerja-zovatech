@@ -3630,42 +3630,59 @@ CREATE TABLE `leadspeek_predict_field_masters` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `field_slug` VARCHAR(255) NULL DEFAULT NULL,
     `field_name` VARCHAR(255) NULL DEFAULT NULL,
+    `field_watt` VARCHAR(255) NULL DEFAULT NULL,
     `active` ENUM('T', 'F') NULL DEFAULT NULL,
     `created_at` TIMESTAMP NULL DEFAULT NULL,
     `updated_at` TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO `leadspeek_predict_field_masters` (`field_slug`, `field_name`, `active`, `created_at`, `updated_at`) VALUES
-('first_name', 'First Name', 'T', NOW(), NOW()),
-('last_name', 'Last Name', 'T', NOW(), NOW()),
-('email_1', 'Email 1', 'T', NOW(), NOW()),
-('email_2', 'Email 2', 'T', NOW(), NOW()),
-('email_3', 'Email 3', 'T', NOW(), NOW()),
-('email_4', 'Email 4', 'T', NOW(), NOW()),
-('email_5', 'Email 5', 'T', NOW(), NOW()),
-('email_6', 'Email 6', 'T', NOW(), NOW()),
-('email_7', 'Email 7', 'T', NOW(), NOW()),
-('email_8', 'Email 8', 'T', NOW(), NOW()),
-('email_9', 'Email 9', 'T', NOW(), NOW()),
-('email_10', 'Email 10', 'T', NOW(), NOW()),
-('phone_1', 'Phone 1', 'T', NOW(), NOW()),
-('phone_2', 'Phone 2', 'T', NOW(), NOW()),
-('phone_3', 'Phone 3', 'T', NOW(), NOW()),
-('address_line_1', 'Address Line 1', 'T', NOW(), NOW()),
-('address_line_2', 'Address Line 2', 'T', NOW(), NOW()),
-('full_address', 'Full Address', 'T', NOW(), NOW()),
-('city', 'City', 'T', NOW(), NOW()),
-('state', 'State', 'T', NOW(), NOW()),
-('zip', 'Zip', 'T', NOW(), NOW()),
-('country', 'Country', 'T', NOW(), NOW()),
-('latitude', 'Latitude', 'T', NOW(), NOW()),
-('longitude', 'Longitude', 'T', NOW(), NOW()),
-('county', 'County', 'T', NOW(), NOW()),
-('gender', 'Gender', 'T', NOW(), NOW()),
-('age_group', 'Age Group', 'T', NOW(), NOW()),
-('marital_status', 'Marital Status', 'T', NOW(), NOW()),
-('education_level', 'Education Level', 'T', NOW(), NOW()),
-('language', 'Language', 'T', NOW(), NOW()),
-('source_vendor', 'Source Vendor', 'T', NOW(), NOW());
+INSERT INTO `leadspeek_predict_field_masters` (`field_slug`, `field_name`, `field_watt`, `active`, `created_at`, `updated_at`) VALUES
+('first_name', 'First Name', 'domains_names_0_first_name', 'T', NOW(), NOW()),
+('last_name', 'Last Name', 'domains_names_0_last_name', 'T', NOW(), NOW()),
+('email_1', 'Email 1', 'domains_emails_0_email_address', 'T', NOW(), NOW()),
+('email_2', 'Email 2', 'domains_emails_1_email_address', 'T', NOW(), NOW()),
+('email_3', 'Email 3', 'domains_emails_2_email_address', 'T', NOW(), NOW()),
+('email_4', 'Email 4', 'domains_emails_3_email_address', 'T', NOW(), NOW()),
+('email_5', 'Email 5', 'domains_emails_4_email_address', 'T', NOW(), NOW()),
+('email_6', 'Email 6', 'domains_emails_5_email_address', 'T', NOW(), NOW()),
+('email_7', 'Email 7', 'domains_emails_6_email_address', 'T', NOW(), NOW()),
+('email_8', 'Email 8', 'domains_emails_7_email_address', 'T', NOW(), NOW()),
+('email_9', 'Email 9', 'domains_emails_8_email_address', 'T', NOW(), NOW()),
+('email_10', 'Email 10', 'domains_emails_9_email_address', 'T', NOW(), NOW()),
+('phone_1', 'Phone 1', 'domains_phones_0_phone_number', 'T', NOW(), NOW()),
+('phone_2', 'Phone 2', NULL, 'T', NOW(), NOW()),
+('phone_3', 'Phone 3', NULL, 'T', NOW(), NOW()),
+('address_line_1', 'Address Line 1', 'domains_addresses_0_address_primary', 'T', NOW(), NOW()),
+('address_line_2', 'Address Line 2', 'domains_addresses_0_address_secondary', 'T', NOW(), NOW()),
+('full_address', 'Full Address', NULL, 'T', NOW(), NOW()),
+('city', 'City', 'domains_addresses_0_city', 'T', NOW(), NOW()),
+('state', 'State', 'domains_addresses_0_state', 'T', NOW(), NOW()),
+('zip', 'Zip', 'domains_addresses_0_zip', 'T', NOW(), NOW()),
+('country', 'Country', NULL, 'T', NOW(), NOW()),
+('latitude', 'Latitude', 'domains_addresses_0_latitude', 'T', NOW(), NOW()),
+('longitude', 'Longitude', 'domains_addresses_0_longitude', 'T', NOW(), NOW()),
+('county', 'County', 'domains_addresses_0_county', 'T', NOW(), NOW()),
+('gender', 'Gender', 'domains_demographic_gender_value', 'T', NOW(), NOW()),
+('age_group', 'Age Group', 'domains_demographic_generation_value', 'T', NOW(), NOW()),
+('marital_status', 'Marital Status', 'domains_demographic_marital_status_value', 'T', NOW(), NOW()),
+('education_level', 'Education Level', 'domains_demographic_education_value', 'T', NOW(), NOW()),
+('language', 'Language', 'domains_demographic_attribute_value', 'T', NOW(), NOW()),
+('source_vendor', 'Source Vendor', 'domains_demographic_vendor', 'T', NOW(), NOW());
+
+CREATE TABLE `leadspeek_predict_field_internals` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `csv_type` VARCHAR(64) NULL DEFAULT NULL,
+    `name` VARCHAR(64) NULL DEFAULT NULL,
+    `field_order` TEXT NULL DEFAULT NULL,
+    `row_mode` ENUM('single', 'per_email') NULL DEFAULT 'single',
+    `active` ENUM('T', 'F') NULL DEFAULT 'T',
+    `created_at` TIMESTAMP NULL DEFAULT NULL,
+    `updated_at` TIMESTAMP NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `leadspeek_predict_field_internals` (`csv_type`, `name`, `field_order`, `row_mode`, `active`, `created_at`, `updated_at`) VALUES
+('original', 'Original CSV', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]', 'single', 'T', NOW(), NOW()),
+('google', 'Google CSV', '[3,1,2,22,21,20,19]', 'per_email', 'T', NOW(), NOW()),
+('meta', 'Meta CSV', '[3,1,2,19,20,21,22,16,23,24]', 'per_email', 'T', NOW(), NOW()),
+('simplifi', 'SimpliFi CSV', '[18,19,20,21,22,23,24,3]', 'single', 'T', NOW(), NOW());
 
 CREATE TABLE `leadspeek_predict_field_companies` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -3682,6 +3699,7 @@ CREATE TABLE `leadspeek_predict_field_campaigns` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `leadspeek_api_id` VARCHAR(20) NULL DEFAULT NULL,
     `field_id` BIGINT UNSIGNED NULL DEFAULT NULL,
+    `field_name` VARCHAR(255) NULL DEFAULT NULL,
     `field_order` TEXT NULL DEFAULT NULL,
     `created_at` TIMESTAMP NULL DEFAULT NULL,
     `updated_at` TIMESTAMP NULL DEFAULT NULL
@@ -3711,7 +3729,11 @@ CREATE TABLE `leadspeek_predict_field_campaigns` (
     updated_at TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 =========== DATABASE YANG DITAMBAH ===========
-
+{
+    "field_master_ids": [1,2,3,4,5,6]
+    "slugs": ["first_name", "last_name", "email_1", "email_2", "email_3", "email_4"],
+    "watts": ["domains_names_0_first_name", "domains_names_0_last_name", "domains_emails_0_email_address", "domains_emails_1_email_address", "domains_emails_2_email_address", "domains_emails_3_email_address"]
+}
 
 di bagian Download Reports For Campaign saya mau ada fitur untuk bisa download all, saat download all itu 
 - bisa select report mana saya yang mau digabungin, ini harus lebih dari 1 ya

@@ -1,7 +1,25 @@
 <?php
 
-$data = "";
-var_dump(isset($data->hello));
+
+$datas = [
+    'original' => [
+        'csv_type'                  => 'original',
+        'name'                      => 'Original CSV',
+        'ordered_field_master_ids'  => [1, 2, 3, 4, 5],  // urutan id di leadspeek_predict_field_masters
+        'ordered_field_slugs'       => ['first_name', 'last_name', 'email_1'],
+        'ordered_field_watts'       => ['domains_names_0_first_name', 'domains_names_0_last_name'],
+        'row_mode'                  => 'single',
+    ],
+    'google' => [
+        'csv_type'                  => 'google',
+        'name'                      => 'Google CSV',
+        'ordered_field_master_ids'  => [3, 1, 2, 22, 21, 20, 19],
+        'ordered_field_slugs'       => ['email_1', 'first_name', 'last_name', 'country', 'zip', 'state', 'city'],
+        'ordered_field_watts'       => ['domains_emails_0_email_address', 'domains_names_0_first_name'],
+        'row_mode'                  => 'per_email',
+    ],
+];
+var_dump(json_encode($datas));
 
 // $animals = array('a' => 'dog', 'b' => 'cat', 'c' => 'cow');
 
