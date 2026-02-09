@@ -1,32 +1,113 @@
 {
-    "uuid": "ef115bde-3beb-49ff-aaaa-8d6f222e27ce",
-    "displayName": "App\\Jobs\\BigDBMCheckFilterStatusJob",
-    "job": "Illuminate\\Queue\\CallQueuedHandler@call",
-    "maxTries": null,
-    "maxExceptions": null,
-    "failOnTimeout": false,
-    "backoff": null,
-    "timeout": null,
-    "retryUntil": null,
-    "data": {
-        "commandName": "App\\Jobs\\BigDBMCheckFilterStatusJob",
-        "command": "O:35:\"App\\Jobs\\BigDBMCheckFilterStatusJob\":14:{s:13:\"list_queue_id\";i:340257;s:4:\"data\";O:8:\"stdClass\":14:{s:10:\"company_id\";i:164;s:5:\"email\";s:24:\"fisikamodern00@gmail.com\";s:7:\"keyword\";s:6:\"amazon\";s:11:\"campaign_id\";i:1283;s:14:\"leadspeek_type\";s:7:\"enhance\";s:16:\"leadspeek_api_id\";s:8:\"42574839\";s:15:\"target_location\";s:5:\"State\";s:4:\"type\";s:4:\"test\";s:13:\"campaign_link\";s:117:\"https:\/\/jidanach.ap.ngrok.io\/enhanceach\/campaign-management?campaign_id=26056ffd-9ecb-4527-b2f1-4bc5726d90aa&type=alc\";s:14:\"total_keywords\";i:2;s:14:\"request_api_id\";d:1770293089365;s:11:\"api_version\";i:2;s:6:\"states\";s:2:\"NY\";s:8:\"zip_code\";s:0:\"\";}s:10:\"history_id\";i:13;s:8:\"is_retry\";b:0;s:3:\"job\";N;s:10:\"connection\";N;s:5:\"queue\";N;s:15:\"chainConnection\";N;s:10:\"chainQueue\";N;s:19:\"chainCatchCallbacks\";N;s:5:\"delay\";O:25:\"Illuminate\\Support\\Carbon\":3:{s:4:\"date\";s:26:\"2026-02-05 06:06:14.713664\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:15:\"America\/Chicago\";}s:11:\"afterCommit\";N;s:10:\"middleware\";a:0:{}s:7:\"chained\";a:0:{}}"
-    }
-}
-
-
-{
-    "uuid": "b6eb1cba-9615-4c21-8ef4-c3cecfd3d297",
-    "displayName": "App\\Jobs\\BigDBMCheckFilterStatusJob",
-    "job": "Illuminate\\Queue\\CallQueuedHandler@call",
-    "maxTries": null,
-    "maxExceptions": null,
-    "failOnTimeout": false,
-    "backoff": null,
-    "timeout": null,
-    "retryUntil": null,
-    "data": {
-        "commandName": "App\\Jobs\\BigDBMCheckFilterStatusJob",
-        "command": "O:35:\"App\\Jobs\\BigDBMCheckFilterStatusJob\":14:{s:13:\"list_queue_id\";i:340256;s:4:\"data\";O:8:\"stdClass\":14:{s:10:\"company_id\";i:164;s:5:\"email\";s:24:\"fisikamodern00@gmail.com\";s:7:\"keyword\";s:6:\"google\";s:11:\"campaign_id\";i:1283;s:14:\"leadspeek_type\";s:7:\"enhance\";s:16:\"leadspeek_api_id\";s:8:\"42574839\";s:15:\"target_location\";s:5:\"State\";s:4:\"type\";s:4:\"test\";s:13:\"campaign_link\";s:117:\"https:\/\/jidanach.ap.ngrok.io\/enhanceach\/campaign-management?campaign_id=26056ffd-9ecb-4527-b2f1-4bc5726d90aa&type=alc\";s:14:\"total_keywords\";i:2;s:14:\"request_api_id\";d:1770293089365;s:11:\"api_version\";i:2;s:6:\"states\";s:2:\"NY\";s:8:\"zip_code\";s:0:\"\";}s:10:\"history_id\";i:12;s:8:\"is_retry\";b:0;s:3:\"job\";N;s:10:\"connection\";N;s:5:\"queue\";N;s:15:\"chainConnection\";N;s:10:\"chainQueue\";N;s:19:\"chainCatchCallbacks\";N;s:5:\"delay\";O:25:\"Illuminate\\Support\\Carbon\":3:{s:4:\"date\";s:26:\"2026-02-05 06:06:12.710353\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:15:\"America\/Chicago\";}s:11:\"afterCommit\";N;s:10:\"middleware\";a:0:{}s:7:\"chained\";a:0:{}}"
+    "local": {
+        "Monthly": {
+            "LeadspeekCostperlead": "0.65",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "1"
+        },
+        "OneTime": {
+            "LeadspeekCostperlead": "0.65",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "0"
+        },
+        "Weekly": {
+            "LeadspeekCostperlead": "0.65",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperleadAdvanced": "1"
+        },
+        "Prepaid": {
+            "LeadspeekPlatformFee": "0",
+            "LeadspeekCostperlead": "0.5",
+            "LeadspeekMinCostMonth": "0",
+            "LeadspeekCostperleadAdvanced": "1"
+        }
+    },
+    "locator": {
+        "Monthly": {
+            "LocatorCostperlead": "0.95",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "OneTime": {
+            "LocatorCostperlead": "0.95",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Weekly": {
+            "LocatorCostperlead": "3",
+            "LocatorMinCostMonth": "0",
+            "LocatorPlatformFee": "0"
+        },
+        "Prepaid": {
+            "LocatorPlatformFee": "0.5",
+            "LocatorCostperlead": "1",
+            "LocatorMinCostMonth": "0"
+        }
+    },
+    "locatorlead": {
+        "FirstName_LastName": "5",
+        "FirstName_LastName_MailingAddress": "6",
+        "FirstName_LastName_MailingAddress_Phone": "0.95"
+    },
+    "enhance": {
+        "Weekly": {
+            "EnhanceCostperlead": "0.40",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Monthly": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "OneTime": {
+            "EnhanceCostperlead": "2.00",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        },
+        "Prepaid": {
+            "EnhanceCostperlead": "0.35",
+            "EnhanceMinCostMonth": "0",
+            "EnhancePlatformFee": "0"
+        }
+    },
+    "b2b": {
+        "Weekly": {
+            "B2bCostperlead": "0.40",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Monthly": {
+            "B2bCostperlead": "0.40",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "OneTime": {
+            "B2bCostperlead": "0.40",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        },
+        "Prepaid": {
+            "B2bCostperlead": "0.50",
+            "B2bMinCostMonth": "0",
+            "B2bPlatformFee": "0"
+        }
+    },
+    "clean": {
+        "CleanCostperlead": "0.5",
+        "CleanCostperleadAdvanced": "0"
+    },
+    "predict": {
+        "Prepaid": {
+            "PredictMaxCampaigns": "200",
+            "PredictMinCostMonth": "299",
+            "PredictOverageRate": "5",
+            "PredictQuotaCampaigns": "0",
+            "PredictOverageEnable": false,
+            "PredictOverageCampaignsUsed": "0"
+        }
     }
 }

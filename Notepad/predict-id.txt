@@ -1785,6 +1785,7 @@ ALTER TABLE `leadspeek_predict_reports` ADD `merge_job_dispatched` TINYINT NULL 
 cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report
 cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report_offset
 cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=predict_fetch_report_merge
+cd /d C:\wamp64\www\EMM-SANDBOX-API && php artisan queue:work redis --queue=send_email
 ====== WORKEY YANG DITAMBAH ======
 
 
@@ -1967,6 +1968,7 @@ The user has agreed to the Marketing Services Agreement Predict Module . Name: J
 ==== COMMAND YANG DITAMBAH ====
 php artisan command:agency_module_subscription_renew | AgencyModuleSubscriptionRenewCommand
 php artisan command:campaign_module_subscription_renew | CampaignModuleSubscriptionRenewCommand
+php artisan command:predict_reset_stop_after_billing| PredictResetStopAfterBillingCommand
 ==== COMMAND YANG DITAMBAH ====
 
 3681717027 = Tesla Stop Now
@@ -3611,6 +3613,8 @@ jadi saya harus ngebayangin seolah  leadspeek_predict_export_chunks itu hanya 1 
 
 
 =========== DATABASE YANG DITAMBAH ===========
+- ALTER TABLE `leadspeek_predict_reports` CHANGE `job_status` `job_status` ENUM('pending','processing','done','error') NULL DEFAULT NULL;
+
 - ALTER TABLE leadspeek_predict_export_chunks
 ADD COLUMN owner_type ENUM('report_file','bundle') NULL AFTER leadspeek_api_id,
 ADD COLUMN owner_id BIGINT UNSIGNED NULL AFTER owner_type;
@@ -3626,8 +3630,9 @@ ADD COLUMN owner_id BIGINT UNSIGNED NULL AFTER owner_type;
     updated_at TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `leadspeek_predict_field_masters` (
+CREATE TABLE `leadspeek_watt_field_masters` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `leadspeek_type` ENUM('predict', 'audience') NULL DEFAULT 'predict',
     `field_slug` VARCHAR(255) NULL DEFAULT NULL,
     `field_name` VARCHAR(255) NULL DEFAULT NULL,
     `field_watt` VARCHAR(255) NULL DEFAULT NULL,
@@ -3635,41 +3640,42 @@ CREATE TABLE `leadspeek_predict_field_masters` (
     `created_at` TIMESTAMP NULL DEFAULT NULL,
     `updated_at` TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO `leadspeek_predict_field_masters` (`field_slug`, `field_name`, `field_watt`, `active`, `created_at`, `updated_at`) VALUES
-('first_name', 'First Name', 'domains_names_0_first_name', 'T', NOW(), NOW()),
-('last_name', 'Last Name', 'domains_names_0_last_name', 'T', NOW(), NOW()),
-('email_1', 'Email 1', 'domains_emails_0_email_address', 'T', NOW(), NOW()),
-('email_2', 'Email 2', 'domains_emails_1_email_address', 'T', NOW(), NOW()),
-('email_3', 'Email 3', 'domains_emails_2_email_address', 'T', NOW(), NOW()),
-('email_4', 'Email 4', 'domains_emails_3_email_address', 'T', NOW(), NOW()),
-('email_5', 'Email 5', 'domains_emails_4_email_address', 'T', NOW(), NOW()),
-('email_6', 'Email 6', 'domains_emails_5_email_address', 'T', NOW(), NOW()),
-('email_7', 'Email 7', 'domains_emails_6_email_address', 'T', NOW(), NOW()),
-('email_8', 'Email 8', 'domains_emails_7_email_address', 'T', NOW(), NOW()),
-('email_9', 'Email 9', 'domains_emails_8_email_address', 'T', NOW(), NOW()),
-('email_10', 'Email 10', 'domains_emails_9_email_address', 'T', NOW(), NOW()),
-('phone_1', 'Phone 1', 'domains_phones_0_phone_number', 'T', NOW(), NOW()),
-('phone_2', 'Phone 2', NULL, 'T', NOW(), NOW()),
-('phone_3', 'Phone 3', NULL, 'T', NOW(), NOW()),
-('address_line_1', 'Address Line 1', 'domains_addresses_0_address_primary', 'T', NOW(), NOW()),
-('address_line_2', 'Address Line 2', 'domains_addresses_0_address_secondary', 'T', NOW(), NOW()),
-('full_address', 'Full Address', NULL, 'T', NOW(), NOW()),
-('city', 'City', 'domains_addresses_0_city', 'T', NOW(), NOW()),
-('state', 'State', 'domains_addresses_0_state', 'T', NOW(), NOW()),
-('zip', 'Zip', 'domains_addresses_0_zip', 'T', NOW(), NOW()),
-('country', 'Country', NULL, 'T', NOW(), NOW()),
-('latitude', 'Latitude', 'domains_addresses_0_latitude', 'T', NOW(), NOW()),
-('longitude', 'Longitude', 'domains_addresses_0_longitude', 'T', NOW(), NOW()),
-('county', 'County', 'domains_addresses_0_county', 'T', NOW(), NOW()),
-('gender', 'Gender', 'domains_demographic_gender_value', 'T', NOW(), NOW()),
-('age_group', 'Age Group', 'domains_demographic_generation_value', 'T', NOW(), NOW()),
-('marital_status', 'Marital Status', 'domains_demographic_marital_status_value', 'T', NOW(), NOW()),
-('education_level', 'Education Level', 'domains_demographic_education_value', 'T', NOW(), NOW()),
-('language', 'Language', 'domains_demographic_attribute_value', 'T', NOW(), NOW()),
-('source_vendor', 'Source Vendor', 'domains_demographic_vendor', 'T', NOW(), NOW());
+INSERT INTO `leadspeek_watt_field_masters` (`leadspeek_type`, `field_slug`, `field_name`, `field_watt`, `active`, `created_at`, `updated_at`) VALUES
+('predict', 'first_name', 'First Name', 'domains_names_0_first_name', 'T', NOW(), NOW()),
+('predict', 'last_name', 'Last Name', 'domains_names_0_last_name', 'T', NOW(), NOW()),
+('predict', 'email_1', 'Email 1', 'domains_emails_0_email_address', 'T', NOW(), NOW()),
+('predict', 'email_2', 'Email 2', 'domains_emails_1_email_address', 'T', NOW(), NOW()),
+('predict', 'email_3', 'Email 3', 'domains_emails_2_email_address', 'T', NOW(), NOW()),
+('predict', 'email_4', 'Email 4', 'domains_emails_3_email_address', 'T', NOW(), NOW()),
+('predict', 'email_5', 'Email 5', 'domains_emails_4_email_address', 'T', NOW(), NOW()),
+('predict', 'email_6', 'Email 6', 'domains_emails_5_email_address', 'T', NOW(), NOW()),
+('predict', 'email_7', 'Email 7', 'domains_emails_6_email_address', 'T', NOW(), NOW()),
+('predict', 'email_8', 'Email 8', 'domains_emails_7_email_address', 'T', NOW(), NOW()),
+('predict', 'email_9', 'Email 9', 'domains_emails_8_email_address', 'T', NOW(), NOW()),
+('predict', 'email_10', 'Email 10', 'domains_emails_9_email_address', 'T', NOW(), NOW()),
+('predict', 'phone_1', 'Phone 1', 'domains_phones_0_phone_number', 'T', NOW(), NOW()),
+('predict', 'phone_2', 'Phone 2', NULL, 'T', NOW(), NOW()),
+('predict', 'phone_3', 'Phone 3', NULL, 'T', NOW(), NOW()),
+('predict', 'address_line_1', 'Address Line 1', 'domains_addresses_0_address_primary', 'T', NOW(), NOW()),
+('predict', 'address_line_2', 'Address Line 2', 'domains_addresses_0_address_secondary', 'T', NOW(), NOW()),
+('predict', 'full_address', 'Full Address', 'full_address', 'T', NOW(), NOW()),
+('predict', 'city', 'City', 'domains_addresses_0_city', 'T', NOW(), NOW()),
+('predict', 'state', 'State', 'domains_addresses_0_state', 'T', NOW(), NOW()),
+('predict', 'zip', 'Zip', 'domains_addresses_0_zip', 'T', NOW(), NOW()),
+('predict', 'country', 'Country', 'country', 'T', NOW(), NOW()),
+('predict', 'latitude', 'Latitude', 'domains_addresses_0_latitude', 'T', NOW(), NOW()),
+('predict', 'longitude', 'Longitude', 'domains_addresses_0_longitude', 'T', NOW(), NOW()),
+('predict', 'county', 'County', 'domains_addresses_0_county', 'T', NOW(), NOW()),
+('predict', 'gender', 'Gender', 'domains_demographic_gender_value', 'T', NOW(), NOW()),
+('predict', 'age_group', 'Age Group', 'domains_demographic_generation_value', 'T', NOW(), NOW()),
+('predict', 'marital_status', 'Marital Status', 'domains_demographic_marital_status_value', 'T', NOW(), NOW()),
+('predict', 'education_level', 'Education Level', 'domains_demographic_education_value', 'T', NOW(), NOW()),
+('predict', 'language', 'Language', 'domains_demographic_attribute_value', 'T', NOW(), NOW()),
+('predict', 'source_vendor', 'Source Vendor', 'domains_demographic_vendor', 'T', NOW(), NOW());
 
-CREATE TABLE `leadspeek_predict_field_internals` (
+CREATE TABLE `leadspeek_watt_field_internals` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `leadspeek_type` ENUM('predict', 'audience') NULL DEFAULT 'predict',
     `csv_type` VARCHAR(64) NULL DEFAULT NULL,
     `name` VARCHAR(64) NULL DEFAULT NULL,
     `field_order` TEXT NULL DEFAULT NULL,
@@ -3678,14 +3684,15 @@ CREATE TABLE `leadspeek_predict_field_internals` (
     `created_at` TIMESTAMP NULL DEFAULT NULL,
     `updated_at` TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-INSERT INTO `leadspeek_predict_field_internals` (`csv_type`, `name`, `field_order`, `row_mode`, `active`, `created_at`, `updated_at`) VALUES
-('original', 'Original CSV', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]', 'single', 'T', NOW(), NOW()),
-('google', 'Google CSV', '[3,1,2,22,21,20,19]', 'per_email', 'T', NOW(), NOW()),
-('meta', 'Meta CSV', '[3,1,2,19,20,21,22,16,23,24]', 'per_email', 'T', NOW(), NOW()),
-('simplifi', 'SimpliFi CSV', '[18,19,20,21,22,23,24,3]', 'single', 'T', NOW(), NOW());
+INSERT INTO `leadspeek_watt_field_internals` (`leadspeek_type`,`csv_type`, `name`, `field_order`, `row_mode`, `active`, `created_at`, `updated_at`) VALUES
+('predict', 'original', 'Original CSV', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]', 'single', 'T', NOW(), NOW()),
+('predict', 'google', 'Google CSV', '[3,1,2,22,21,20,19]', 'per_email', 'T', NOW(), NOW()),
+('predict', 'meta', 'Meta CSV', '[3,1,2,19,20,21,22,16,23,24]', 'per_email', 'T', NOW(), NOW()),
+('predict', 'simplifi', 'SimpliFi CSV', '[18,19,20,21,22,23,24,3]', 'single', 'T', NOW(), NOW());
 
-CREATE TABLE `leadspeek_predict_field_companies` (
+CREATE TABLE `leadspeek_watt_field_companies` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `leadspeek_type` ENUM('predict', 'audience') NULL DEFAULT 'predict',
     `company_id` BIGINT UNSIGNED NULL DEFAULT NULL,
     `field_name` VARCHAR(255) NULL DEFAULT NULL,
     `field_order` TEXT NULL DEFAULT NULL,
@@ -3695,8 +3702,9 @@ CREATE TABLE `leadspeek_predict_field_companies` (
     `updated_at` TIMESTAMP NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `leadspeek_predict_field_campaigns` (
+CREATE TABLE `leadspeek_watt_field_campaigns` (
     `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `leadspeek_type` ENUM('predict', 'audience') NULL DEFAULT 'predict',
     `leadspeek_api_id` VARCHAR(20) NULL DEFAULT NULL,
     `field_id` BIGINT UNSIGNED NULL DEFAULT NULL,
     `field_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -4062,3 +4070,61 @@ field_id BIGINT UNSIGNED NULL DEFAULT NULL, -- ini nanti digunakan untuk menampu
 field_order TEXT NULL DEFAULT NULL, -- jika mau bikin custom lagi untuk campaign ini, maka field_id kosong, dan ini diisi
 created_at TIMESTAMP NULL DEFAULT NULL,
 updated_at TIMESTAMP NULL DEFAULT NULL
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-790-DEV-SYNC = "feature for custom column report predict"
+
+FILE
+FRONT
+* front\src\components\Modals\ReportPredictDownloadModal.vue
+* front\src\components\PredictCustomFields\PredictCustomFieldsManager.vue
+* front\src\pages\Modules\Auth\LeedspeekPredict\Client.vue
+* front\src\store\store.js
+* front\src\pages\Modules\Auth\ConfigApp\GeneralSetting.vue
+* front\src\components\Tree\NodeTree.vue
+* front\src\components\Tree\Tree.vue
+* front\src\utils\agreementModal.js
+* front\src\utils\predictPriceChangeModal.js
+* front\src\main.js
+* front\src\components\Modals\StopCampaignModal.vue
+* front\src\utils\stopCampaignModal.js
+* front\src\components\SidebarPlugin\SideBar.vue
+* front\src\pages\Modules\Auth\ConfigApp\Client.vue
+* front\src\pages\Modules\NoAuth\Login.vue
+* front\src\pages\Modules\Auth\LeedspeekClean\index.vue
+* front\src\pages\Modules\Auth\User\CardSetting.vue
+
+DATA
+* data\app\Http\Controllers\PredictController.php
+* data\app\Services\PredictService.php
+* front\src\components\Modals\ReportPredictDownloadModal.vue
+* front\src\components\PredictCustomFields\PredictCustomFieldsManager.vue
+* data\app\Models\LeadspeekWattFieldCampaign.php
+* data\app\Models\LeadspeekWattFieldCompany.php
+* data\app\Models\LeadspeekWattFieldInternal.php
+* data\app\Models\LeadspeekWattFieldMaster.php
+* data\app\Models\LeadspeekPredictReportFile.php
+* data\routes\api.php
+* data\routes\web.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Http\Controllers\GeneralController.php
+* data\app\Services\General\AgencySubscriptionService.php
+* data\resources\views\emails\agencychangesubscriptionmodule.blade.php
+* data\resources\views\emails\agencysubscriptionmodule.blade.php
+* data\resources\views\emails\campaignpredictcharge.blade.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Services\Configuration\DataWalletHistoryService.php
+* data\app\Models\LeadspeekUser.php
+* data\app\Http\Controllers\UserController.php
+* data\app\Models\LeadspeekInvoice.php
+* data\app\Models\SubscriptionModule.php
+
+
+
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.cpa_view_thru_per','leadspeek_users.cpa_click_thru_per','leadspeek_users.view_attribution_window','leadspeek_users.click_attribution_window','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.agency_covers_cost','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url',
+'leadspeek_business.business_type_id','leadspeek_business.fetch_report_status',DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_name), '$salt') USING utf8mb4) as business_name"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.website), '$salt') USING utf8mb4) as website"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_description), '$salt') USING utf8mb4) as business_description"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_competitors), '$salt') USING utf8mb4) as business_competitors"),'leadspeek_business.final_analyze_customers','leadspeek_business.final_expression','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_longitude','leadspeek_users.leadspeek_radius','leadspeek_business.business_industry_id',
+'audience_limit'
+
+'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.cpa_view_thru_per','leadspeek_users.cpa_click_thru_per','leadspeek_users.view_attribution_window','leadspeek_users.click_attribution_window','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.agency_covers_cost','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url','leadspeek_users.stop_after_billing_period',
+'leadspeek_business.business_type_id','leadspeek_business.fetch_report_status',DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_name), '$salt') USING utf8mb4) as business_name"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.website), '$salt') USING utf8mb4) as website"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_description), '$salt') USING utf8mb4) as business_description"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_competitors), '$salt') USING utf8mb4) as business_competitors"),'leadspeek_business.final_analyze_customers','leadspeek_business.final_expression','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_longitude','leadspeek_users.leadspeek_radius','leadspeek_business.business_industry_id'
