@@ -1,0 +1,9 @@
+pengecekan stop continual camapign
+- di WebhookCOntroller Client Bayar ✅
+- di Controller Agency Bayar ✅
+- di Campaign Yang Cost Client nya 0, dan Agency Nya lebih besar dari 0, dan campaign fee monthly client ada nilainya ✅
+
+pengecekan process clear saat terjadi error
+- di WebhookCOntroller Client Bayar (ngga mungkin terjadi, karena untuk merubah payment_status nya menjadi "", maka harus update dari ui nya)
+- di Controller Agency Bayar ✅
+- di Campaign Yang Cost Client nya 0, dan Agency Nya lebih besar dari 0, dan campaign fee monthly client ada nilainya (progress)
