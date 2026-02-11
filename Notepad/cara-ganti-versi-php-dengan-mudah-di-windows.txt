@@ -1,0 +1,68 @@
+-----------------------------------
+STEP 1 — PASTIKAN PATH PHP WAMP
+-----------------------------------
+Pastikan folder ini ADA:
+C:\wamp64\bin\php\php7.4.33
+C:\wamp64\bin\php\php8.4.15
+-----------------------------------
+
+
+-----------------------------------
+STEP 2 — BUAT SCRIPT POWERSHELL
+-----------------------------------
+File 1: use-php74.ps1
+$phpPath = "C:\wamp64\bin\php\php7.4.33"
+$oldPath = [Environment]::GetEnvironmentVariable("Path", "User")
+$paths = $oldPath -split ";"
+# remove all php paths
+$filtered = $paths | Where-Object { $_ -notmatch "\\php\\" }
+# add selected php to top
+$newPath = "$phpPath;" + ($filtered -join ";")
+[Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+Write-Host "✅ PHP 7.4.33 activated"
+Write-Host "➡ reopen CMD to apply"
+
+
+📄 File 2: use-php84.ps1
+$phpPath = "C:\wamp64\bin\php\php8.4.15"
+$oldPath = [Environment]::GetEnvironmentVariable("Path", "User")
+$paths = $oldPath -split ";"
+$filtered = $paths | Where-Object { $_ -notmatch "\\php\\" }
+$newPath = "$phpPath;" + ($filtered -join ";")
+[Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+Write-Host "✅ PHP 8.4.15 activated"
+Write-Host "➡ reopen CMD to apply"
+
+Simpan di: C:\wamp64\scripts\
+-----------------------------------
+
+
+
+-----------------------------------
+STEP 3 — IZINKAN SCRIPT (SEKALI SAJA)
+-----------------------------------
+Buka PowerShell as Administrator:
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+pilih: 
+Y
+-----------------------------------
+
+
+-----------------------------------
+🛠️ STEP 4 — CARA PAKAI (ENAK BANGET)
+-----------------------------------
+cd C:\wamp64\scripts; .\use-php7_4_33.ps1
+cd C:\wamp64\scripts; .\use-php8_4_15.ps1
+
+Lalu:
+Tutup CMD
+Buka CMD baru
+
+Test:
+php -v
+-----------------------------------
+
+
+php 8.4.15
+composer 2.7.7

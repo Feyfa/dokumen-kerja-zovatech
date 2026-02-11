@@ -4128,3 +4128,33 @@ DATA
 
 'latest_list_queue.list_queue_id','leadspeek_users.frequency_capping_impressions','leadspeek_users.frequency_capping_hours','leadspeek_users.max_bid','leadspeek_users.monthly_budget','leadspeek_users.daily_budget','leadspeek_users.goal_type','leadspeek_users.goal_value','leadspeek_users.cpa_view_thru_per','leadspeek_users.cpa_click_thru_per','leadspeek_users.view_attribution_window','leadspeek_users.click_attribution_window','leadspeek_users.device_type','leadspeek_users.simplifi_selected_campaign','leadspeek_users.simplifi_selected_audience','leadspeek_users.agency_markup','leadspeek_users.agency_covers_cost','leadspeek_users.simplifi_selected_media','leadspeek_users.audience_status','leadspeek_users.ads_upload_status','leadspeek_users.media_type','leadspeek_users.destination_url','leadspeek_users.stop_after_billing_period',
 'leadspeek_business.business_type_id','leadspeek_business.fetch_report_status',DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_name), '$salt') USING utf8mb4) as business_name"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.website), '$salt') USING utf8mb4) as website"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_description), '$salt') USING utf8mb4) as business_description"),DB::raw("CONVERT(AES_DECRYPT(FROM_bASE64(leadspeek_business.business_competitors), '$salt') USING utf8mb4) as business_competitors"),'leadspeek_business.final_analyze_customers','leadspeek_business.final_expression','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_latitude','leadspeek_users.leadspeek_longitude','leadspeek_users.leadspeek_radius','leadspeek_business.business_industry_id'
+
+
+Monitor Samsung S24C310
+- Panel: IPS
+- Resolusi: 1920 × 1080 (Full HD / 1080p)
+- Refresh rate: 75 Hz
+- Ukuran: 24 inch
+- Harga: 900K (bisa nego)
+- beli di tanggal december 2024
+
+
+Hai, saya mau cerita. Jadi di kantor saya itu kan sebelumnya pakai framework Vue2 + Laravel 8. Nah setelah sekian lamanya dari tahun 2020, saya sekarang upgrade ke Vue3 + Laravel 12.
+
+Nah, Vue3 itu sedang di develop oleh developer lain, karena ada orang yang lebih jago Vue.js, jadinya develop Vue3 itu dikerjakan oleh orang lain. Nah saya disini mau coba untuk develop Laravel 12, saya mau tanya beberapa hal ini:
+
+1. Versi PHP berapa yang cocok?
+2. Versi MySQL berapa yang cocok?
+3. Sistem autentikasi di Laravel 8 saya pakai Laravel Passport, apakah Laravel Passport bisa digunakan di Laravel 12?
+4. Nah sebelumnya di Laravel 8 itu belum ada sistem login dengan Facebook, Google, LinkedIn. Nah apakah mudah mempelajari hal itu?
+5. Salah satu developer saya bilang katanya pakai Sentry untuk logging itu bagus, apakah benar begitu?
+6. Di Laravel 8 ini, kan sebelumnya .env itu di push ke server Digital Ocean langsung, apakah di Laravel 12 sebaiknya jangan?
+7. Di Vue2 + Laravel 8 ini, saya kan pakai Laravel Passport ya, nah saya simpan access_token dan refresh_token itu di localStorage, trus selain itu simpan userData (ini semacam data detail dari root atau agency tersebut) dan itu disimpan juga di dalam localStorage. Nah katanya simpan di localStorage itu kurang bagus ya? Lalu solusi terbaiknya gimana ya ketika nanti saya pakai Vue3 + Laravel 12?
+8. Ohh iya, paling saya mau tanya juga di Vue3 nya itu pakai Node berapa ya?
+
+php 8.4.15 -> ke php 7.4.33
+mysql 8.4.7 -> mysql 8.3.0
+
+
+$key1 = md5(env('APP_KEY'));
+$key2 = substr(hash('sha256', env('APP_KEY')), 0, 32);

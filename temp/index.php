@@ -1,25 +1,18 @@
 <?php
 
+// $APP_KEY = "base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY=";
+// $key1 = md5($APP_KEY);
+// $key2 = substr(hash('sha256', $APP_KEY), 0, 16);
+// var_dump($key1);
+// var_dump($key2);
 
-$datas = [
-    'original' => [
-        'csv_type'                  => 'original',
-        'name'                      => 'Original CSV',
-        'ordered_field_master_ids'  => [1, 2, 3, 4, 5],  // urutan id di leadspeek_predict_field_masters
-        'ordered_field_slugs'       => ['first_name', 'last_name', 'email_1'],
-        'ordered_field_watts'       => ['domains_names_0_first_name', 'domains_names_0_last_name'],
-        'row_mode'                  => 'single',
-    ],
-    'google' => [
-        'csv_type'                  => 'google',
-        'name'                      => 'Google CSV',
-        'ordered_field_master_ids'  => [3, 1, 2, 22, 21, 20, 19],
-        'ordered_field_slugs'       => ['email_1', 'first_name', 'last_name', 'country', 'zip', 'state', 'city'],
-        'ordered_field_watts'       => ['domains_emails_0_email_address', 'domains_names_0_first_name'],
-        'row_mode'                  => 'per_email',
-    ],
-];
-var_dump(json_encode($datas));
+// APP_KEY yang benar
+$key = "F6nf+ubRyo50AVJUOOPr/ZNqAT2Yfmk9BFGT/psAKS4=";
+$decoded = base64_decode($key);
+
+// Hasil decode = 32 bytes binary data
+var_dump(strlen($decoded)); // int(32)
+var_dump(bin2hex($decoded)); // Hex representation (lebih readable)
 
 // $animals = array('a' => 'dog', 'b' => 'cat', 'c' => 'cow');
 
