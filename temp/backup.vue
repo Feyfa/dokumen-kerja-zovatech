@@ -1,119 +1,20 @@
 <template>
-  <div>
-    sdsa
+  <div class="payment-alert-container" v-if="hasPrepaidFailed">
+    <div class="payment-alert-card payment-alert-card--prepaid">
+      <div class="payment-alert-card__header" @click="toggleSection('prepaid')">
+        <i class="fas fa-pause-circle payment-alert-card__icon"></i>
+        <h4 class="payment-alert-card__title">Failed Auto Top-up for Prepaid Campaigns</h4>
+        <i class="fas payment-alert-card__chevron" :class="sectionsExpanded.prepaid ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      </div>
+      <div class="payment-alert-card__body" v-show="sectionsExpanded.prepaid">
+        <p class="payment-alert-card__description">The following campaigns were paused due to failed auto top-up. Continuous top-up has been stopped for these campaigns:</p>
+        <div class="payment-alert-card__list">
+          <div class="payment-alert-card__item payment-alert-card__item--prepaid" v-for="(campaignId, index) in failedPrepaidCampaignIds" :key="index">
+            <span class="payment-alert-card__campaign-id">Campaign #{{ campaignId }}</span>
+          </div>
+        </div>
+        <p class="payment-alert-card__message">Please update your credit card information to reactivate these campaigns and resume continuous top-up.</p>
+      </div>
+    </div>
   </div>
 </template>
-
-
-<script>
-export default {
-  method: {
-    createDeleteIframeGhlv2() {
-      if(!this.ghlV2CreatedIframe) { // create iframe
-        this.createIframeGhlv2Client();
-      } else { // delete iframe
-        this.deleteIframeGhlv2Client();
-      }
-    },
-    
-    createIframeGhlv2Client() {
-      if(!this.selects.ghlv2SubAccount) {
-        this.$notify({
-          type: 'danger',
-          message: 'Please select sub accounts',
-          icon: 'fas fa-bug'
-        });
-        return;
-      }
-
-      MessageBox.prompt('Enter the text that you want to display as your single sign on custom menu link. (30 Characters Max)', 'Enter Your Custom Menu Link Text.', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        inputPattern: /^$|^[a-zA-Z0-9\s]{1,30}$/,
-        inputErrorMessage: 'Only letters, numbers, and spaces, max 30 characters',
-        inputPlaceholder: '[Client-Name]',
-        inputValue: this.$store.getters.userData.company_name,
-        customClass: 'message-general-ghl'
-      })
-      .then(({ value }) => {
-        this.isLoadingCreateDeleteIframeGhlV2 = true;
-        this
-        .$store
-        .dispatch('createIframeGhlv2Client', {
-          company_id: this.$store.getters.userData.company_id,
-          company_parent: this.$store.getters.userData.company_parent,
-          custom_menu_name: value,
-          user_ip: this.$store.getters.userData.ip_login,
-          location_id: this.selects.ghlv2SubAccount,
-        })
-        .then(response => {
-          // console.log(response);
-          this.isLoadingCreateDeleteIframeGhlV2 = false;
-          this.ghlV2CreatedIframe = true;
-          this.btnCreateDeleteIframeGhlv2Text = 'Remove SSO Link';
-          
-          this.ghlv2ResetListSubAccounts();
-          this.ghlv2GetListSubAccounts();
-
-          this.$notify({
-            type: 'success',
-            icon: 'fas fa-save',
-            message: 'create sso link successfully'
-          });
-        })
-        .catch(error => {
-          console.error(error);
-          this.isLoadingCreateDeleteIframeGhlV2 = false;
-          const message = typeof(error.response.data.message) != 'undefined' ? error.response.data.message : 'Something Wrong';
-          this.$notify({
-            type: 'danger',
-            icon: 'fas fa-bug',
-            message: message
-          });
-        })
-      });
-    },
-
-    deleteIframeGhlv2Client() {
-      MessageBox.confirm('Are you sure you want to remove SSO link?', 'Warning', {
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'Cancel',
-        type: 'warning',
-      })
-      .then(result => {
-        this.isLoadingCreateDeleteIframeGhlV2 = true;
-        this
-        .$store
-        .dispatch('deleteIframeGhlv2Client', {
-          company_id: this.$store.getters.userData.company_id,
-          company_parent: this.$store.getters.userData.company_parent,
-          user_ip: this.$store.getters.userData.ip_login
-        })
-        .then(response => {
-          this.isLoadingCreateDeleteIframeGhlV2 = false;
-          this.ghlV2CreatedIframe = false;
-          this.btnCreateDeleteIframeGhlv2Text = 'Create SSO Link';
-          
-          this.ghlv2ResetListSubAccounts();
-          this.ghlv2GetListSubAccounts();
-          
-          this.$notify({
-            type: 'success',
-            icon: 'fas fa-save',
-            message: 'Custom Menu Link Successfully Removed'
-          });
-        })
-        .catch(error => {
-          this.isLoadingCreateDeleteIframeGhlV2 = false;
-          const message = typeof(error.response.data.message) != 'undefined' ? error.response.data.message : 'Something Wrong';
-          this.$notify({
-            type: 'danger',
-            icon: 'fas fa-bug',
-            message: message
-          });
-        });
-      })
-    },
-  }
-}
-</script>
