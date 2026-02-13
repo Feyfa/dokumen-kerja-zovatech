@@ -1,0 +1,12 @@
+4000000000003220 3D SECURITY
+
+tambahkan ENUM('cancelled') di field `status` di table `leadspeek_invoices`
+ALTER TABLE leadspeek_invoices ADD COLUMN pending_charge_data TEXT NULL DEFAULT NULL;
+ALTER TABLE leadspeek_users ADD COLUMN payment_3ds_status VARCHAR(50) NULL DEFAULT NULL;
+
+SKENARIO DIA BAKA MUNCUL UI MODAL YANG BISA KLIK 
+1. complete (masih error)
+2. fail
+3. cancel 
+
+

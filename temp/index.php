@@ -1,5 +1,7 @@
 <?php
 
+var_dump(strlen("requires_action"));
+
 // $APP_KEY = "base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY=";
 // $key1 = md5($APP_KEY);
 // $key2 = substr(hash('sha256', $APP_KEY), 0, 16);
@@ -7,12 +9,12 @@
 // var_dump($key2);
 
 // APP_KEY yang benar
-$key = "F6nf+ubRyo50AVJUOOPr/ZNqAT2Yfmk9BFGT/psAKS4=";
-$decoded = base64_decode($key);
+// $key = "F6nf+ubRyo50AVJUOOPr/ZNqAT2Yfmk9BFGT/psAKS4=";
+// $decoded = base64_decode($key);
 
 // Hasil decode = 32 bytes binary data
-var_dump(strlen($decoded)); // int(32)
-var_dump(bin2hex($decoded)); // Hex representation (lebih readable)
+// var_dump(strlen($decoded)); // int(32)
+// var_dump(bin2hex($decoded)); // Hex representation (lebih readable)
 
 // $animals = array('a' => 'dog', 'b' => 'cat', 'c' => 'cow');
 

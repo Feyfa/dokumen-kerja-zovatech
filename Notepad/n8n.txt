@@ -29,4 +29,82 @@ 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
 
 
 
+/** CREATE NEW CARD */
+try 
+{
+    $newCard = $stripe->customers->createSource(
+        $user[0]['customer_payment_id'],
+        ['source' => $tokenid], 
+        ['stripe_account' => $accConID]
+    );
+} 
+catch (Exception $th) 
+{
+    return response()->json(array('result'=>'failed','params'=>'','title'=>'Oh No!','msg'=> $th->getMessage()));
+}
+$newCardID = $newCard->id;
+/** CREATE NEW CARD */
 
+/** REMOVE OLD CARD */
+try 
+{
+    $removeOldCard = $stripe->customers->deleteSource(
+        $user[0]['customer_payment_id'],
+        $user[0]['customer_card_id'],
+        [],['stripe_account' => $accConID]
+    );
+} 
+catch (Exception $e) 
+{
+    //return response()->json(array('result'=>'failed','params'=>'','title'=>$e->getMessage(),'msg'=> $e->getMessage()));
+}
+/** REMOVE OLD CARD */
+
+/** ATTACHED NEW CARD INTO CUSTOMER */
+try 
+{
+    $updateCC = $stripe->customers->updateSource($user[0]['customer_payment_id'],$newCardID,[
+        'name' => $cardholder,
+        'address_line1' => $address,
+        'address_city' => $city,
+        'address_state' => $state,
+        'address_country' => $country,
+        'address_zip' => $zip,
+    ],['stripe_account' => $accConID]);
+} 
+catch (Exception $e) 
+{
+    return response()->json(array('result'=>'failed','params'=>'','title'=>'Oh No!','msg'=> $e->getMessage()));
+}
+/** ATTACHED NEW CARD INTO CUSTOMER */
+
+/** UPDATE CUSTOMER INFORMATION STRIPE */
+try 
+{
+    $customerupdateStripe = $stripe->customers->update($user[0]['customer_payment_id'],[
+        'name' => $name . ' (' . $company_name . ')',
+        'description' =>  $company_name,
+    ],['stripe_account' => $accConID]);
+} 
+catch (Exception $e) 
+{
+    return response()->json(array('result'=>'failed','params'=>'','title'=>'Oh No!','msg'=> $e->getMessage()));
+}
+/** UPDATE CUSTOMER INFORMATION STRIPE */
+
+
+initstripelib() {
+    var chkload = this.$global.stripescriptload;
+    if (chkload === false) {
+        this.$global.initStripeScriptLoad(true);
+        $.getScript( "https://js.stripe.com/v3/" )
+        .done(function( script, textStatus ) {
+            initcreditcard();
+        })
+        .fail(function( jqxhr, settings, exception ) {
+            //$( "div.log" ).text( "Triggered ajaxError handler." );
+        });
+    }else{
+        initcreditcard();
+    }
+},
