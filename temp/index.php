@@ -1,6 +1,6 @@
 <?php
 
-var_dump(strlen("requires_action"));
+var_dump(strlen("emaillloremipsumdolorsitametssaasdasdasjdnjkasndajksdnasjkdn10000@gmail.com"));
 
 // $APP_KEY = "base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY=";
 // $key1 = md5($APP_KEY);

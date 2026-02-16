@@ -24,3 +24,104 @@ Contoh teknologinya:
 👉 Data diubah ke format biner lalu dikompres sehingga tidak terbaca manusia
 
 action¤like§videoId«hzOQ9loV-Kc¦userId§user123©timestampËByÅgç¨metadata©userAgent«Mozilla/5.0©sessionId©abc123xyz«preferences§quality¢hd¨autoplayÃ¥array¦nested¦level1¦level2¦level3ªdeep value
+
+
+----- docker-entrypoint.sh -----
+#!/bin/sh
+
+# Cek apakah node_modules sudah ada
+if [ ! -d "node_modules" ]; then
+  echo "node_modules tidak ditemukan, menjalankan npm install..."
+  npm install
+else
+  echo "node_modules sudah ada, melewati npm install"
+fi
+
+# Jalankan dev server
+exec npm run dev
+----- docker-entrypoint.sh -----
+
+----- docker-compose.dev.yml -----
+# Vue 3 — Development (Vite dev server, hot reload). Tanpa Nginx.
+# Jalankan: docker compose -f docker-compose.dev.yml up
+name: emm_sandbox_app_front
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: emm_sandbox_app_front_app
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh docker-entrypoint.sh
+    ports:
+      - "8001:8001"
+----- docker-compose.dev.yml -----
+
+
+guys ini infrastructure yg kita pakai ya:
+- Frontend => Vue3 or the latest version
+  - Backend =>  Laravel 12 or the latest version                                                                                                                                       
+  - Database => Mysql or still considering using PostgreeSQL
+  - Cache/Queue => Redis                                                                                                                                                 
+  - Search => Meilisearch (optional, if we have really huge data this make more fast)
+  - Storage => AWS s3 bucket
+  - Containerization => Docker
+  - Infrastructure => XCP-ng + XO, UniFi networking
+
+  - Logging => Sentry.io (we will use free one first, and might be will upgrade once need it)
+  - Code management => Git / considering GitHub
+
+hai bisa jelaskan semua ini apa? saya sudah tau beberapa, cuman ada yang belum tau lebih dalam
+
+yang saya belum tau 
+1. Meilisearch (optional, if we have really huge data this make more fast)
+2. XCP-ng + XO, UniFi networking
+
+SETTINGAN DI WSL WINDOWS
+--- untuk masalah clrf untuk docker-entrypoint.sh di wsl folder front ---
+cd "projects/emm-sandbox-app-new/front"
+dos2unix docker-entrypoint.sh
+--- untuk masalah clrf untuk docker-entrypoint.sh di wsl folder front ---
+
+--- setting permission di wsl ubuntu ---
+cd "projects/emm-sandbox-app-new/data"
+sudo chown -R $USER:$USER .
+chmod -R u+rwX,g+rwX .
+chmod -R 2775 storage bootstrap/cache
+--- setting permission di wsl ubuntu ---
+
+--- setting permission di wsl docker container nya ---
+docker exec -it emm_sandbox_app_data_app bash
+
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
+chmod 666 storage/logs/laravel.log
+chmod -R 777 storage/logs
+--- setting permission di wsl docker container nya ---
+
+
+SETTINGA MEILISEARCH
+----- SOLUSI CEPAT (URUTAN AMAN) meilisearch Attribute 'xxx' is not filterable -----
+php artisan scout:sync-index-settings
+php artisan scout:import "App\Models\User"
+----- SOLUSI CEPAT (URUTAN AMAN) meilisearch Attribute 'xxx' is not filterable -----
+
+php artisan db:seed --class=UserSeeder
+
+kita remove .env ya, nanti kalau merged backup dulu yang front, tambahin ini :
+VUE_APP_ENCRYPTION_KEY_256=56bd5034a664dc9d9eaec874c4fe3af62496fcf4041231ccc61dee749e0f9a0a
+
+sama di /data/.env tambahin :
+WEBHOOK_SSL_VERIFY=false
+CSP_ENABLED=true
+CSP_REPORT_ONLY=false
+SESSION_SECURE_COOKIE=false
+#KARTRA_WEBHOOK_SECRET=
+#GHL_WEBHOOK_SECRET=
+#TRUSTED_PROXIES=*
+
+
