@@ -125,3 +125,47 @@ SESSION_SECURE_COOKIE=false
 #TRUSTED_PROXIES=*
 
 
+
+Isi Utama Dokumen
+1. Team Roles and Permissions (Peran dan Izin Tim)
+Definisi peran (Tech Lead, Senior Developer, Developer, QA, DevOps)
+Izin GitHub per peran
+Aturan perlindungan branch
+2. Feature Development (Pengembangan Fitur)
+Contoh lengkap: membangun fitur login
+Langkah: planning → development → testing → commit → PR → review → merge → deploy
+3. Bug Fix Workflow (Alur Perbaikan Bug)
+Contoh: perbaikan bug registrasi email
+Proses investigasi, perbaikan, dan verifikasi
+4. Hotfix Workflow (Alur Hotfix Darurat)
+Penanganan bug kritis di produksi
+Proses cepat tanpa melalui staging
+5. Code Review Guidelines (Panduan Review Kode)
+Checklist keamanan, fungsionalitas, tes, kualitas kode
+Etika review
+6. Database Migration Workflow (Alur Migrasi Database)
+Praktik migrasi Laravel
+Migrasi berisiko dan cara menanganinya
+7. Release Versioning (Versi Rilis)
+Semantic Versioning (SemVer)
+Proses rilis dan changelog
+8. Conflict Resolution (Penyelesaian Konflik)
+Cara menyelesaikan konflik Git
+Pencegahan konflik
+9. Environment-Specific Considerations (Pertimbangan Per Lingkungan)
+Perbedaan local, staging, dan production
+Manajemen file .env
+10. Quick Reference Card (Kartu Referensi Cepat)
+Command Git, branch naming, deployment flow
+Kontak darurat
+11. API Documentation (Dokumentasi API)
+Strategi dokumentasi API dengan Scramble
+Integrasi Postman dan portal developer
+
+
+main -> live
+develop -> sandbox
+
+
+feat/jd-blabla
+fix/jd-blabla
