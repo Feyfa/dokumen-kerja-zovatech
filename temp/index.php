@@ -1,5 +1,11 @@
 <?php
 
+$user = User::select(['users.*', 'companies.name as company_name'])
+            ->join('companies', 'companies.id', '=', 'users.company_id')
+            ->where('companies.name', 'LIKE', '%'.request('keyword').'%')
+            ->orWhere('users.name', 'LIKE', '%'.request('keyword').'%')
+            ->first();
+
 var_dump(strlen("emaillloremipsumdolorsitametssaasdasdasjdnjkasndajksdnasjkdn10000@gmail.com"));
 
 // $APP_KEY = "base64:mFZb5ZQi4VUXEZXv+GY8GSjA74zqfaBBaIV01KMAijY=";

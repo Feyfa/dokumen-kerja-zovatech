@@ -78,7 +78,9 @@ hai bisa jelaskan semua ini apa? saya sudah tau beberapa, cuman ada yang belum t
 
 yang saya belum tau 
 1. Meilisearch (optional, if we have really huge data this make more fast)
+- ini untuk search sesuatu di query sederhana bisa, cuman kekurangannya adalah kalo query nya komples atau butuh join banyak table ini sulit, karena Meilisearch tidak mendukung join
 2. XCP-ng + XO, UniFi networking
+3. https://scramble.dedoc.co/
 
 SETTINGAN DI WSL WINDOWS
 --- untuk masalah clrf untuk docker-entrypoint.sh di wsl folder front ---
