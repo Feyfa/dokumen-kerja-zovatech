@@ -1,355 +1,65 @@
-<?php
+﻿<?php
 
-public function getleadwebhook(Request $request) 
+// Paste raw response dari Insomnia/Postman langsung ke sini
+$rawResponseResolveIdentities = 'event: message
+data: {"result":{"content":[{"type":"text","text":"{\"identities\":[{\"person_id\":12921488,\"matches\":[{\"criterion_type\":\"email_md5\",\"criterion_value\":\"8bc64c9c289d18a05dd9652422208f05\",\"quality_score\":1}],\"overall_quality_score\":1,\"identifiers\":{\"emails\":[{\"email_address\":\"ptrhrt57@gmail.com\",\"opted_in\":true}]}}],\"stats\":{\"requested\":1,\"resolved\":1,\"rate\":1},\"workflow_id\":\"16b88f0e-16da-4c15-b7f2-41e2b8326908\",\"tool_trace_id\":\"c538f45892cb4f3c7de4fc54039163d9\"}"}]},"jsonrpc":"2.0","id":1}';
+
+$rawResponseGetPerson = 'event: message
+data: {"result":{"content":[{"type":"text","text":"{\"profiles\":[{\"person_id\":\"12921488\",\"domains\":{\"phones\":[{\"phone_number\":\"+15867732982\",\"phone_type\":\"work\",\"carrier\":\"Michigan Bell Tel Co\",\"do_not_call\":true},{\"phone_number\":\"+19892246655\",\"phone_type\":\"work\",\"carrier\":\"Frontier Communications\",\"do_not_call\":true}],\"emails\":[{\"email_address\":\"ptrhrt57@gmail.com\",\"opted_in\":true}],\"names\":[{\"first_name\":\"Diane\",\"last_name\":\"Harte\"}],\"addresses\":[{\"address_primary\":\"1033 Bills Ln\",\"address_secondary\":null,\"city\":\"Saint Johns\",\"state\":\"MI\",\"zip\":\"48879-1183\",\"county\":\"Clinton\",\"carrier_route\":\"R008\",\"latitude\":43.012516,\"longitude\":-84.548706,\"dma\":551,\"cbsa\":29620,\"msa\":4040,\"congressional_district\":4,\"urbanicity_code\":\"R\",\"property_type\":null}],\"affinity\":{\"home_decorating_affinity\":{\"value\":\"medium\",\"cluster_id\":81},\"gambling_affinity\":{\"value\":\"medium\",\"cluster_id\":64},\"tv_movies_affinity\":{\"value\":\"medium\",\"cluster_id\":132},\"home_office_affinity\":{\"value\":\"high\",\"cluster_id\":82},\"womens_home_living_affinity\":{\"value\":\"high\",\"cluster_id\":139},\"family_affinity\":{\"value\":\"high\",\"cluster_id\":57},\"gardening_affinity\":{\"value\":\"medium\",\"cluster_id\":68},\"fitness_affinity\":{\"value\":\"medium\",\"cluster_id\":61},\"mens_apparel_affinity\":{\"value\":\"medium\",\"cluster_id\":95},\"womens_apparel_affinity\":{\"value\":\"medium\",\"cluster_id\":136},\"high_tech_affinity\":{\"value\":\"medium\",\"cluster_id\":76},\"catalog_affinity\":{\"value\":\"high\",\"cluster_id\":26},\"collectibles_affinity\":{\"value\":\"medium\",\"cluster_id\":29}},\"content\":{\"catalog_total_spend\":{\"value\":\"high_spend\",\"cluster_id\":1000009},\"reads_avid_reader\":{\"value\":true,\"cluster_id\":1000083},\"reads_medical_health\":{\"value\":false,\"cluster_id\":1000111},\"reads_world_news_politics\":{\"value\":false,\"cluster_id\":1000121},\"number_housewares_catalogs\":{\"value\":\"single_catalog\",\"cluster_id\":1000052},\"reads_military\":{\"value\":false,\"cluster_id\":1000113},\"reads_computer_it\":{\"value\":false,\"cluster_id\":1000089},\"reads_country_lifestyle\":{\"value\":false,\"cluster_id\":1000093},\"reads_science_fiction\":{\"value\":false,\"cluster_id\":1000115},\"reads_bible_devotional\":{\"value\":false,\"cluster_id\":1000084},\"reads_childrens\":{\"value\":true,\"cluster_id\":1000088},\"reads_cooking_culinary\":{\"value\":false,\"cluster_id\":1000091},\"reads_entertainment\":{\"value\":false,\"cluster_id\":1000095},\"catalog_avg_spend\":{\"value\":\"low_volume\",\"cluster_id\":1000001},\"reads_science_technology\":{\"value\":false,\"cluster_id\":1000117},\"reads_magazines\":{\"value\":true,\"cluster_id\":1000110},\"subscribes_magazines\":{\"value\":false,\"cluster_id\":1000123},\"catalog_total_orders\":{\"value\":\"low_volume\",\"cluster_id\":1000007},\"catalog_total_items\":{\"value\":\"low_volume\",\"cluster_id\":1000004},\"reads_books_on_tape\":{\"value\":false,\"cluster_id\":1000085},\"reads_health_remedies\":{\"value\":false,\"cluster_id\":1000103},\"reads_history\":{\"value\":false,\"cluster_id\":1000105},\"number_family_related_catalogs\":{\"value\":\"single_catalog\",\"cluster_id\":1000028},\"reads_finance\":{\"value\":false,\"cluster_id\":1000101},\"reads_fashion\":{\"value\":false,\"cluster_id\":1000097},\"reads_interior_decorating\":{\"value\":false,\"cluster_id\":1000107},\"number_catalogs\":{\"value\":\"dual_catalog\",\"cluster_id\":1000017},\"reads_sports\":{\"value\":false,\"cluster_id\":1000119},\"reads_fiction\":{\"value\":false,\"cluster_id\":1000099},\"number_home_living_catalogs\":{\"value\":\"single_catalog\",\"cluster_id\":1000046}},\"demographic\":{\"attribute_domain\":\"demographic\",\"attribute_name\":\"language_spoken\",\"attribute_value\":\"English\",\"attribute_data_type\":\"CHARACTER VARYING\",\"source_date\":\"2025-12-16\",\"vendor\":\"datashopper\",\"ethnic_group\":{\"value\":\"White\",\"cluster_id\":2000012},\"marital_status\":{\"value\":\"Married\",\"cluster_id\":2000023},\"generation\":{\"value\":\"3. Baby Boomers (1943-1960)\",\"cluster_id\":2000017},\"gender\":{\"value\":\"Female\",\"cluster_id\":2000013},\"religion\":{\"value\":\"Catholic\",\"cluster_id\":2000026},\"is_multilingual\":{\"value\":false,\"cluster_id\":2000019},\"is_speaks_english\":{\"value\":true,\"cluster_id\":2000022},\"education\":{\"value\":\"Completed High School\",\"cluster_id\":2000003}},\"employment\":{\"occupation_category\":{\"value\":\"Professional\",\"cluster_id\":3000004},\"attribute_domain\":\"employment\",\"attribute_name\":\"occupation_detail\",\"attribute_value\":\"Professional\",\"attribute_data_type\":\"CHARACTER VARYING\",\"source_date\":\"2025-12-16\",\"vendor\":\"datashopper\"},\"financial\":{\"donated_childrens_cause\":{\"value\":false,\"cluster_id\":4000015},\"owns_amex_card\":{\"value\":false,\"cluster_id\":4000041},\"owns_bank_credit_card\":{\"value\":true,\"cluster_id\":4000044},\"owns_premium_amex_card\":{\"value\":false,\"cluster_id\":4000049},\"has_investments\":{\"value\":false,\"cluster_id\":4000025},\"donated_arts_cultural_cause\":{\"value\":false,\"cluster_id\":4000013},\"owns_stocks_and_bonds\":{\"value\":false,\"cluster_id\":4000053},\"individual_income_range\":{\"value\":\"GT_150K\",\"cluster_id\":4000031},\"credit_rating_range\":{\"value\":\"B. 750-799\",\"cluster_id\":4000004},\"donated_veterans_cause\":{\"value\":false,\"cluster_id\":4000023},\"owns_investments\":{\"value\":false,\"cluster_id\":4000047},\"owns_premium_credit_card\":{\"value\":false,\"cluster_id\":4000051},\"is_charitable_donor\":{\"value\":true,\"cluster_id\":4000034},\"donated_animal_cause\":{\"value\":false,\"cluster_id\":4000011},\"donated_religious_cause\":{\"value\":false,\"cluster_id\":4000021},\"owns_credit_card\":{\"value\":true,\"cluster_id\":4000046},\"donated_environmental_cause\":{\"value\":false,\"cluster_id\":4000017},\"donated_health_cause\":{\"value\":false,\"cluster_id\":4000019}},\"household\":{\"residence_duration\":{\"value\":\"long_term\",\"cluster_id\":5000094},\"has_child_aged_13_18_in_household\":{\"value\":true,\"cluster_id\":5000010},\"household_net_worth_range\":{\"value\":\"G. $50,000 - $99,999\",\"cluster_id\":5000070},\"number_credit_lines_in_household\":{\"value\":\"significant\",\"cluster_id\":5000082},\"number_adults_in_household\":{\"value\":\"multi_adult\",\"cluster_id\":5000075},\"has_veteran_in_household\":{\"value\":false,\"cluster_id\":5000017},\"has_child_aged_4_6_in_household\":{\"value\":false,\"cluster_id\":5000011},\"has_child_aged_0_3_in_household\":{\"value\":false,\"cluster_id\":5000005},\"number_vehicles_in_household\":{\"value\":\"multi_vehicle\",\"cluster_id\":5000091},\"number_persons_in_household\":{\"value\":\"multi_person\",\"cluster_id\":5000088},\"credit_offered_to_household\":{\"value\":\"sizeable\",\"cluster_id\":5000004},\"has_child_aged_10_12_in_household\":{\"value\":true,\"cluster_id\":5000008},\"number_generations_in_household\":{\"value\":\"multi_generations\",\"cluster_id\":5000085},\"has_child_aged_7_9_in_household\":{\"value\":false,\"cluster_id\":5000013},\"household_income_range\":{\"value\":\"E. $60K-$70K\",\"cluster_id\":5000030},\"has_children_in_household\":{\"value\":false,\"cluster_id\":5000015}},\"interest\":{\"interested_hunting\":{\"value\":false,\"cluster_id\":7000058},\"interested_cruise_travel\":{\"value\":false,\"cluster_id\":7000026},\"interested_fitness\":{\"value\":true,\"cluster_id\":7000039},\"interested_cooking\":{\"value\":true,\"cluster_id\":7000025},\"interested_fishing\":{\"value\":false,\"cluster_id\":7000036},\"interested_music\":{\"value\":false,\"cluster_id\":7000066},\"interested_knitting_quilting_sewing\":{\"value\":false,\"cluster_id\":7000060},\"interested_home_improvement\":{\"value\":true,\"cluster_id\":7000055},\"interested_baseball\":{\"value\":false,\"cluster_id\":7000006},\"interested_snow_skiing\":{\"value\":false,\"cluster_id\":7000082},\"interested_antiques_collector\":{\"value\":true,\"cluster_id\":7000003},\"interested_sports_memorabilia_collector\":{\"value\":false,\"cluster_id\":7000086},\"interested_arts_and_crafts\":{\"value\":false,\"cluster_id\":7000004},\"interested_outdoors_hunting\":{\"value\":false,\"cluster_id\":7000074},\"interested_scuba\":{\"value\":false,\"cluster_id\":7000078},\"interested_outdoors\":{\"value\":true,\"cluster_id\":7000073},\"interested_hockey\":{\"value\":false,\"cluster_id\":7000050},\"interested_soccer\":{\"value\":false,\"cluster_id\":7000084},\"interested_gardening\":{\"value\":true,\"cluster_id\":7000045},\"interested_home_decor\":{\"value\":true,\"cluster_id\":7000053},\"interested_gambling\":{\"value\":false,\"cluster_id\":7000042},\"interested_photography\":{\"value\":false,\"cluster_id\":7000076},\"interested_musical_instruments\":{\"value\":false,\"cluster_id\":7000068},\"interested_epicurean\":{\"value\":false,\"cluster_id\":7000032},\"interested_cars\":{\"value\":true,\"cluster_id\":7000017},\"interested_motor_racing\":{\"value\":false,\"cluster_id\":7000062},\"interested_aerobics\":{\"value\":false,\"cluster_id\":7000000},\"interested_fine_arts_collector\":{\"value\":false,\"cluster_id\":7000034},\"interested_charity\":{\"value\":true,\"cluster_id\":7000019},\"interested_entertainment\":{\"value\":false,\"cluster_id\":7000030},\"interested_woodworking\":{\"value\":false,\"cluster_id\":7000094},\"interested_healthy_living\":{\"value\":true,\"cluster_id\":7000049},\"interested_tennis\":{\"value\":false,\"cluster_id\":7000090},\"interested_movies\":{\"value\":true,\"cluster_id\":7000065},\"interested_boating_sailing\":{\"value\":false,\"cluster_id\":7000012},\"interested_camping_hiking\":{\"value\":false,\"cluster_id\":7000014},\"interested_nascar\":{\"value\":false,\"cluster_id\":7000070},\"interested_stamps_collector\":{\"value\":false,\"cluster_id\":7000088},\"interested_dieting\":{\"value\":false,\"cluster_id\":7000028},\"interested_basketball\":{\"value\":false,\"cluster_id\":7000008},\"interested_coins_collector\":{\"value\":false,\"cluster_id\":7000022},\"interested_golf\":{\"value\":false,\"cluster_id\":7000046},\"interested_bird_watching\":{\"value\":false,\"cluster_id\":7000010},\"interested_walking\":{\"value\":false,\"cluster_id\":7000092},\"interested_self_improvement\":{\"value\":false,\"cluster_id\":7000080},\"interested_football\":{\"value\":false,\"cluster_id\":7000040},\"interested_home_study\":{\"value\":false,\"cluster_id\":7000056},\"interested_cigars\":{\"value\":false,\"cluster_id\":7000020}},\"lifestyle\":{\"is_pet_owner\":{\"value\":false,\"cluster_id\":8000017},\"is_health_conscious\":{\"value\":true,\"cluster_id\":8000009},\"is_dog_owner\":{\"value\":false,\"cluster_id\":8000006},\"has_luxury_lifestyle\":{\"value\":false,\"cluster_id\":8000002},\"is_home_owner\":{\"value\":true,\"cluster_id\":8000011},\"practices_diy\":{\"value\":false,\"cluster_id\":8000029},\"owns_swimming_pool\":{\"value\":false,\"cluster_id\":8000027},\"is_cat_owner\":{\"value\":false,\"cluster_id\":8000004},\"is_truck_owner\":{\"value\":false,\"cluster_id\":8000023},\"has_home_business\":{\"value\":false,\"cluster_id\":8000000},\"is_renter\":{\"value\":false,\"cluster_id\":8000019},\"is_rv_owner\":{\"value\":false,\"cluster_id\":8000021},\"is_vacation_traveler\":{\"value\":true,\"cluster_id\":8000026},\"is_international_traveler\":{\"value\":false,\"cluster_id\":8000012},\"is_motorcycle_owner\":{\"value\":false,\"cluster_id\":8000015}},\"political\":{\"donated_political_social_cause_recently\":{\"value\":false,\"cluster_id\":9000006},\"donated_conservative_cause_recently\":{\"value\":false,\"cluster_id\":9000000},\"donated_liberal_cause_recently\":{\"value\":false,\"cluster_id\":9000002},\"donated_political_cause_recently\":{\"value\":true,\"cluster_id\":9000005},\"is_political_contributor\":{\"value\":false,\"cluster_id\":9000008}},\"purchase\":{\"purchased_cosmetics\":{\"value\":false,\"cluster_id\":10000202},\"purchased_jewelry\":{\"value\":true,\"cluster_id\":10000213},\"family_purchases_avg_spend\":{\"value\":\"low_volume\",\"cluster_id\":10000075},\"tv_movies_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000232},\"computer_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000046},\"general_merchandise_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000102},\"family_purchases_total_orders\":{\"value\":\"low_volume\",\"cluster_id\":10000081},\"purchased_clothing\":{\"value\":true,\"cluster_id\":10000201},\"purchased_books\":{\"value\":false,\"cluster_id\":10000196},\"gift_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000105},\"family_purchases_total_items\":{\"value\":\"low_volume\",\"cluster_id\":10000078},\"purchased_home_improvement\":{\"value\":true,\"cluster_id\":10000211},\"travel_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000229},\"holiday_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000128},\"continuity_purchases_num_companies\":{\"value\":\"multi_company\",\"cluster_id\":10000051},\"health_purchases_total_items\":{\"value\":\"medium_volume\",\"cluster_id\":10000114},\"purchased_gifts\":{\"value\":true,\"cluster_id\":10000205},\"purchased_home_furnishing\":{\"value\":true,\"cluster_id\":10000209},\"purchased_health_beauty_products\":{\"value\":false,\"cluster_id\":10000206},\"home_goods_purchases_total_items\":{\"value\":\"low_volume\",\"cluster_id\":10000136},\"purchased_auto_parts\":{\"value\":true,\"cluster_id\":10000195},\"purchased_musical_instruments\":{\"value\":false,\"cluster_id\":10000214},\"culture_arts_purchases_num_companies\":{\"value\":\"single_company\",\"cluster_id\":10000064},\"purchased_plus_size_clothing\":{\"value\":false,\"cluster_id\":10000216},\"home_goods_purchases_total_orders\":{\"value\":\"low_volume\",\"cluster_id\":10000139},\"home_goods_purchases_total_spend\":{\"value\":\"medium_spend\",\"cluster_id\":10000143},\"family_purchases_total_spend\":{\"value\":\"low_spend\",\"cluster_id\":10000084},\"home_goods_purchases_avg_spend\":{\"value\":\"low_volume\",\"cluster_id\":10000133},\"purchased_childrens_products\":{\"value\":true,\"cluster_id\":10000199}}}}],\"export\":{\"url\":\"https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1771476164170-b8a8f8d9-283b-4ef5-b0ab-48b318e17742.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S262D3DQV%2F20260219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260219T044244Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCTOss8RFVCDjr9jRWloEWrA0AGtCNmdk3fOGuQU5UjHQIgD6MPcFLkhvqLywgeU5B0WeThU1yomtep3KxBaH5r4xYqqwQIdBAAGgw0ODE2NjUwODcxNDEiDFEwLRMQiETJu%2FEYjSqIBNADBnCjsHoU92nRLJ5tbko21qk0P0tSTz5d64N8gXE5rZ2yqG1l7bNXCQ2Oj8ygOiICXwnzB7x%2BuguZ0O%2F1TYRm%2B0GSLHo2wdjEllGD1jYyzY4PVDeS4eWk9xrINUZcCWs2erEQiYCoehBpzxs91x3UG9pkZJ6%2BUb%2BGcV67E%2BeHtfgry%2FdOVCimRT47c9%2BkAiVjmS6vjjy3BD8fBT57bT2VfOv8sOAhgCrC0OQrMbf4Ac4hiOJOKdiMQn0afIZ7lZJrXVMcLVvt3SEy1vKeOV50I85gMfJzA49ONUN7BMM9ZAXraD5BAF8frk9KJdmK84quz%2BRAkQ55dMHdOBr7Mjll1NYUeP58SZr2V%2FBxzOHpm2H6cO35%2F0uf1MMdGDt4h8lIhlIUvxVM0MT5YYqaKwiAn6GBe%2BpJToegqLhvkmRyxjxZe9vjdofE2iYAzl1D%2FcVwICGoNrQ68vbdZjbK6YO20o5WP782aCDvAiHGORq7IlHKJdscBchWGQ7Yzkzz3RmHdDUbUyS9riDuCdvgTMYPuvmpxvrZg2J4AqL6TgMQUINT4sGSEWQcl0E%2BSuDA9gRcixSLO%2BHpHrEPmzuQpnEZjt%2F%2FD%2FplwAz818I8KK18C%2BzYCSRkYJNVtP7Kqhyhn36miOGAaLQXB2tjcrXna3VtF7ALxG%2BrxLuRz3pdOMe2ujjm66uyfSww6%2FzZzAY6pgHGb9wrpVVQoscDBjNcZ62iNqyHOJk4fIApZ5WFxKOWhc%2FCNipQ8Xki63911nqP%2BNfAMSlCvGC%2BTqG14mKz3k39HoUVTi%2FbSa8OptnhKN8C%2BQZjL5lUXUYhdEtWqMb%2FPPsq1d6Y0fUwWXCHElAhbJiHsOG7Y8O0SZtzgJjfX4Osg3Ah0QOJEXY7X4mxM7ptxo7QZk89I9rtdU2TnNwi3Zh%2F52OGJl2c&X-Amz-Signature=4eaa9cbdc45a95aa8319168f458469d8ddbc62af2a1e49d8ec5101e8512d80c5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject\",\"format\":\"csv\",\"rows\":1,\"size_bytes\":0,\"expires_at\":\"2026-02-19T05:42:44.255Z\"},\"workflow_id\":\"668c66c5-e740-4760-80df-a5776db4f047\",\"tool_trace_id\":\"a3e4e1a9f78a274840ed362917f86d41\"}"},{"type":"resource","resource":{"uri":"https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1771476164170-b8a8f8d9-283b-4ef5-b0ab-48b318e17742.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S262D3DQV%2F20260219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260219T044244Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCTOss8RFVCDjr9jRWloEWrA0AGtCNmdk3fOGuQU5UjHQIgD6MPcFLkhvqLywgeU5B0WeThU1yomtep3KxBaH5r4xYqqwQIdBAAGgw0ODE2NjUwODcxNDEiDFEwLRMQiETJu%2FEYjSqIBNADBnCjsHoU92nRLJ5tbko21qk0P0tSTz5d64N8gXE5rZ2yqG1l7bNXCQ2Oj8ygOiICXwnzB7x%2BuguZ0O%2F1TYRm%2B0GSLHo2wdjEllGD1jYyzY4PVDeS4eWk9xrINUZcCWs2erEQiYCoehBpzxs91x3UG9pkZJ6%2BUb%2BGcV67E%2BeHtfgry%2FdOVCimRT47c9%2BkAiVjmS6vjjy3BD8fBT57bT2VfOv8sOAhgCrC0OQrMbf4Ac4hiOJOKdiMQn0afIZ7lZJrXVMcLVvt3SEy1vKeOV50I85gMfJzA49ONUN7BMM9ZAXraD5BAF8frk9KJdmK84quz%2BRAkQ55dMHdOBr7Mjll1NYUeP58SZr2V%2FBxzOHpm2H6cO35%2F0uf1MMdGDt4h8lIhlIUvxVM0MT5YYqaKwiAn6GBe%2BpJToegqLhvkmRyxjxZe9vjdofE2iYAzl1D%2FcVwICGoNrQ68vbdZjbK6YO20o5WP782aCDvAiHGORq7IlHKJdscBchWGQ7Yzkzz3RmHdDUbUyS9riDuCdvgTMYPuvmpxvrZg2J4AqL6TgMQUINT4sGSEWQcl0E%2BSuDA9gRcixSLO%2BHpHrEPmzuQpnEZjt%2F%2FD%2FplwAz818I8KK18C%2BzYCSRkYJNVtP7Kqhyhn36miOGAaLQXB2tjcrXna3VtF7ALxG%2BrxLuRz3pdOMe2ujjm66uyfSww6%2FzZzAY6pgHGb9wrpVVQoscDBjNcZ62iNqyHOJk4fIApZ5WFxKOWhc%2FCNipQ8Xki63911nqP%2BNfAMSlCvGC%2BTqG14mKz3k39HoUVTi%2FbSa8OptnhKN8C%2BQZjL5lUXUYhdEtWqMb%2FPPsq1d6Y0fUwWXCHElAhbJiHsOG7Y8O0SZtzgJjfX4Osg3Ah0QOJEXY7X4mxM7ptxo7QZk89I9rtdU2TnNwi3Zh%2F52OGJl2c&X-Amz-Signature=4eaa9cbdc45a95aa8319168f458469d8ddbc62af2a1e49d8ec5101e8512d80c5&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject","mimeType":"text/csv","text":"Export file: 1 rows in CSV format. Expires at 2/19/2026, 5:42:44 AM."}}]},"jsonrpc":"2.0","id":2}';
+
+/**
+ * Mem-parse raw SSE response dari Wattdata API dan mengembalikan
+ * inner JSON (isi field "text") dalam bentuk pretty-print string.
+ *
+ * Struktur response SSE:
+ *   event: message
+ *   data: {"result":{"content":[{"type":"text","text":"{...escaped json...}"},...]},...}
+ *
+ * @param  string $rawResponse  Raw string response (boleh termasuk prefix "event: message\ndata: ")
+ * @return string               Pretty-printed JSON atau pesan error
+ */
+function parseWattdataResponse(string $rawResponse): string
 {
-    info('getleadwebhook');
-    $startTime = microtime(true);
-    set_time_limit(0);
-    $atdataEqsValue = "";
-
-    /** CHECK IF URL ENCRYPT THEN DECRYPT URL PIXEL FIRE */
-    if (isset($_GET['eqs']) && $_GET['eqs'] != '') {
-        Log::info("GET IN EQS");
-        $key = "164fa2202b52e7f67dd53767ab02c321"; // 128-bit key
-        //$key = "d6c60c8e688e0afa7f49416897aadc1f";
-        //$atdataEqsValue = "AeZFhZnm_ytYdj06wE5ikO4vPv302-SG9Osx_itiNbxF4gIY3CHdBpvpxd6Jaxvx%20%207i8-_fTb5Ib06zH-K2I1vEXiAhjcId0Gm-nF3olrG_HuLz799NvkhvTrMf4rYjW8%20%20rJmJDtsRTiTCWYfZfF6SDcHuTfwpOhubzIEAFNIeJRoOtRe-zev31MASpLRr2A_g%20%20wGPEJDvSZnokppAKPaWe2w";
-        //$atdataEqsValue = "a0dBOP_RYgAncnExb4V-Y6ptSbaSaOq0iDoEsZY6oqJJfJHpTLf_i59couFGlbk5%20%20vK3ZJuSvVV57-no5V5r1C0VMBI0ebVc5_IhJcN9n678";
-        $atdataEqsValue = $_GET['eqs'];
-
-        // Initialize the AES cipher service
-        $aesCipher = new AESCipher($key);
-
-        // Standardize the base64 string
-        $b64CipherText = $aesCipher->standardizeBase64($atdataEqsValue);
-
-        // Decrypt the message
-        $clearText = $aesCipher->decrypt($b64CipherText);
-
-        /** DECRYPT URL PIXEL FIRE */
-        
-        // Parse the query string into an associative array
-        parse_str($clearText, $output);
-
-        $_GET = [];
-        // Merge the parsed array into $_GET
-        $_GET = array_merge($_GET, $output);
-        
-        $request->merge($_GET);
-    }
-    /** CHECK IF URL ENCRYPT THEN DECRYPT URL PIXEL FIRE */
-
-    $params = $_GET;
-    $md5email = (isset($request->md5email))?$request->md5email:'';
-    $md5param = (isset($request->md5_email))?$request->md5_email:'';
-    $label = (isset($request->label))?$request->label:'';
-    Log::info("Original Label : " . $label);
-    Log::info("MD5_EMAIL : " . $md5param);
-    Log::info("GET :");
-    Log::info($params);
-    Log::info("Request : ");
-    Log::info($request);
-
-    $replaceURL = $request->url() . '?label=';
-    $fullURL = $request->fullUrl();
-
-    $resultProcessData = [
-        'leadspeekReportID' => '',
-        'executionTimeList' => []
-    ];
-    $leadspeekReportID = "";
-    $executionTimeListGetDataMatch = [];
-    $executionTimeListProcessDataMatch = [];
-    $executionTimeList = [];
-    //$label = urldecode(str_replace(array($replaceURL,"&script=true","&md5_email=",$md5param),array("","","",""),$fullURL));
-
-    /** CONVERT ANY LABEL FORMAT INTO LEGACY $data ARRAY FOR CAMPAIGN LOCAL */
-    /*
-        format = [
-            0 => leadspeek_api_id,
-            1 => keyword,
-            2 => pixelLeadRecordID,
-            3 => customParams (optional),
-        ]
-    */
-    // info('label before', ['label' => $label]);
-    $data = $this->buildLegacyLabelArray($label);
-    // info('date after', ['data' => $data]);
-    /** CONVERT ANY LABEL FORMAT INTO LEGACY $data ARRAY FOR CAMPAIGN LOCAL */
-
-    /** PARSE LABEL FOR GET ID, KEYWORD,etc */
-    /** LABEL PATTERN campaignID|keyword **/
-    // $data = explode("|",$label);
-    $leadspeek_api_id = (isset($data[0]))?trim($data[0]):'';
-    $keyword = (isset($data[1]))?trim($data[1]):'';
-    
-    $param = [];
-    foreach ($params as $key => $value) {
-        if ($key != "label" && $key != "md5_email") {
-            //$param = $param . '&'. $key . '=' . $value;
-            $param[$key] = $value;
-        }
-    }
-    $finalparam = "";
-    if (count($param) > 0) {
-        $finalparam = '&' . http_build_query($param);
-    }
-    $keyword = $keyword . $finalparam;
-    $keyword = preg_replace("/[^a-zA-Z0-9\-._~:\/?#\[\]@!$&'()*+,;= ]/", "",$keyword);
-
-    $pixelLeadRecordID = isset($data[2])?$data[2]:null; // ini hanya ada digunakan di campaign local saja
-    $customParams = isset($data[3])?$data[3]:null; // ini hanya ada digunakan di campaign local saja
-    /** LABEL PATTERN campaignID|keyword **/
-    /** PARSE LABEL FOR GET ID, KEYWORD,etc */
-
-    if ($leadspeek_api_id != "") {
-        /** CHECK AGAIN IF THE LEADSPEEK API ID ACTIVE */
-        $campaign = LeadspeekUser::select('leadspeek_users.id','leadspeek_users.require_email','leadspeek_users.leadspeek_type','leadspeek_users.location_target','leadspeek_users.leadspeek_locator_zip','leadspeek_users.leadspeek_locator_state','leadspeek_users.leadspeek_locator_state_exclude','leadspeek_users.leadspeek_locator_state_simplifi','leadspeek_users.leadspeek_locator_city','leadspeek_users.leadspeek_locator_city_simplifi','leadspeek_users.national_targeting','leadspeek_users.company_id','users.company_id as clientcompany_id','users.company_root_id as clientcompany_root_id','leadspeek_users.paymentterm','leadspeek_users.advance_information','leadspeek_users.lp_limit_freq','leadspeek_users.stopcontinual','leadspeek_users.topupoptions','leadspeek_users.applyreidentificationall','leadspeek_users.user_id')
-                        ->join('users','leadspeek_users.user_id','=','users.id')
-                        ->where('leadspeek_users.leadspeek_api_id','=',$leadspeek_api_id)
-                        ->where('leadspeek_users.active','=','T')
-                        ->where('leadspeek_users.disabled','=','F')
-                        ->where('leadspeek_users.active_user','=','T')
-                        ->first();
-        /** CHECK AGAIN IF THE LEADSPEEK API ID ACTIVE */
-        //if (count($campaign) > 0) {
-        if ($campaign) {
-            /* VALIDATION LEADS ZERO, IN LOCAL, PREPAID, CONTINUAL, LIMIT MONTH */
-            $leadspeek_type = isset($campaign->leadspeek_type)?$campaign->leadspeek_type:'';
-            $paymentterm = isset($campaign->paymentterm)?$campaign->paymentterm:'';
-            $topupoptions = isset($campaign->topupoptions)?$campaign->topupoptions:'';
-            $lp_limit_freq = isset($campaign->lp_limit_freq)?$campaign->lp_limit_freq:'';
-            $stopcontinual = isset($campaign->stopcontinual)?$campaign->stopcontinual:'';
-            
-            // info([
-            //     'action' => 'VALIDATION LEADS ZERO, IN LOCAL, PREPAID, CONTINUAL, LIMIT MONTH',
-            //     'leadspeek_type' => $leadspeek_type,
-            //     'paymentterm' => $paymentterm,
-            //     'topupoptions' => $topupoptions,
-            //     'lp_limit_freq' => $lp_limit_freq,
-            //     'stopcontinual' => $stopcontinual,
-            // ]);
-            
-            if($leadspeek_type == 'local' && $paymentterm == 'Prepaid' && $topupoptions == 'continual' && $stopcontinual == 'F' && $lp_limit_freq == 'month')
-            {
-                $idTopups = Topup::select(['id'])
-                                    ->where('leadspeek_api_id','=', $leadspeek_api_id)
-                                    ->where('topup_status','<>','done')
-                                    ->get();
-
-                $remainingBalanceLeads = Topup::where('leadspeek_api_id','=', $leadspeek_api_id)
-                                                ->where('topup_status','<>','done')
-                                                ->sum('total_leads') - DB::table('leadspeek_reports')
-                                                ->where('leadspeek_api_id','=',$leadspeek_api_id)
-                                                ->whereIn('topup_id', $idTopups)
-                                                ->count();
-
-                // info('', [
-                //     'action' => 'check remainingbalance',
-                //     'idTopups' => $idTopups,
-                //     'totalLeadsTopup' => Topup::where('leadspeek_api_id','=', $leadspeek_api_id)->where('topup_status','<>','done')->sum('total_leads'),
-                //     'totalLeadsReport' => DB::table('leadspeek_reports')->where('leadspeek_api_id','=',$leadspeek_api_id)->whereIn('topup_id', $idTopups)->count(),
-                //     'remainingBalanceLeads' => $remainingBalanceLeads,
-                // ]);
-
-                if($remainingBalanceLeads <= 0)
-                {
-                    // karena remaining leads 0 dan status nya running, maka berubah menjadi paused on run
-                    $campaign->active = 'F';
-                    $campaign->disabled = 'F';
-                    $campaign->active_user = 'T';
-                    $campaign->save();
-                    // karena remaining leads 0 dan status nya running, maka berubah menjadi paused on run
-
-                    // info("PREPAID CONTINUAL LIMIT MONTH IN WILL ALREADY FULL, REMAININGLEADS : {$remainingBalanceLeads}");
-                    return;
-                }
-            }
-            /* VALIDATION LEADS ZERO, IN LOCAL, PREPAID, CONTINUAL, LIMIT MONTH */
-
-            /* VARIABLES */
-            $loctarget = $campaign->location_target;
-            $leadspeektype = $campaign->leadspeek_type;
-            $nationaltargeting = $campaign->national_targeting;
-            $loczip = "";
-            $locstate = "";
-            $locstateexclude = "";
-            $locstatesifi = "";
-            $loccity = "";
-            $loccitysifi = "";
-            $compleadID = (isset($campaign->company_id) && trim($campaign->company_id) != "")?trim($campaign->company_id):"";
-            $clientCompanyID = (isset($campaign->clientcompany_id) && trim($campaign->clientcompany_id) != "")?trim($campaign->clientcompany_id):"";
-            $clientCompanyRootId = (isset($campaign->clientcompany_root_id) && trim($campaign->clientcompany_root_id) != "")?trim($campaign->clientcompany_root_id):"";
-
-            if ($leadspeektype == "locator" || $leadspeektype == 'enhance' || $leadspeektype == 'b2b') {
-                $loctarget = "Lock";
-                $loczip = (isset($campaign->leadspeek_locator_zip) && trim($campaign->leadspeek_locator_zip) != "")?trim($campaign->leadspeek_locator_zip):"";
-                $locstate = (isset($campaign->leadspeek_locator_state) && trim($campaign->leadspeek_locator_state) != "")?trim($campaign->leadspeek_locator_state):"";
-                $locstatesifi = (isset($campaign->leadspeek_locator_state_simplifi) && trim($campaign->leadspeek_locator_state_simplifi) != "")?trim($campaign->leadspeek_locator_state_simplifi):"";
-                //$loccity =  (isset($campaign[0]['leadspeek_locator_city']) && trim($campaign[0]['leadspeek_locator_city']) != "")?trim($campaign[0]['leadspeek_locator_city']):"";
-                // $loccity = "";
-                if($leadspeektype == 'enhance' || $leadspeektype == 'b2b') {
-                    $loccity =  (isset($campaign->leadspeek_locator_city) && trim($campaign->leadspeek_locator_city) != "")?trim($campaign->leadspeek_locator_city):"";
-                }
-                //$loccitysifi =  (isset($campaign[0]['leadspeek_locator_city_simplifi']) && trim($campaign[0]['leadspeek_locator_city_simplifi']) != "")?trim($campaign[0]['leadspeek_locator_city_simplifi']):"";
-                $loccitysifi = "";
-            }else{
-                $loctarget = "Focus";
-                $locstate = (isset($campaign->leadspeek_locator_state) && trim($campaign->leadspeek_locator_state) != "")?trim($campaign->leadspeek_locator_state):"";
-                $locstateexclude = (isset($campaign->leadspeek_locator_state_exclude) && trim($campaign->leadspeek_locator_state_exclude) != "")?trim($campaign->leadspeek_locator_state_exclude):"";
-            }
-            /* VARIABLES */
-
-            /* LOCK EMAIL PROCESS */
-            $applyreidentificationall = (isset($campaign->applyreidentificationall) && $campaign->applyreidentificationall == 'T');
-            $userId = (isset($campaign->user_id))?$campaign->user_id:null;
-            $developemode = env('DEVELOPEMODE', false) ? 'sandbox' : 'production';
-            $leadEmailLockKey = "{$developemode}:lock:lead_client:{$userId}:{$md5param}";
-            if ($applyreidentificationall)
-            {
-                while (!$this->acquireLock($leadEmailLockKey))
-                {
-                    Log::info("Lead Email Lock Key : {$leadEmailLockKey} , Campaign ID : #{$leadspeek_api_id}");
-                    sleep(1); // Wait before trying again
-                }
-            }
-            /* LOCK EMAIL PROCESS */
-
-            try
-            {
-                /* GET DATA */
-                $resultGetData = $this->getDataMatch($md5param,$leadspeek_api_id,$data,$keyword,$loctarget,$loczip,$locstate,$locstateexclude,$locstatesifi,$loccity,$loccitysifi,$nationaltargeting,$leadspeektype,$compleadID,$clientCompanyID,$clientCompanyRootId);
-                $dataMatch = isset($resultGetData['matches'])?$resultGetData['matches']:[];
-                $executionTimeListGetDataMatch = isset($resultGetData['executionTimeList'])?$resultGetData['executionTimeList']:[];
-                info('dataMatch', ['dataMatch' => $dataMatch]);
-                /* GET DATA */
-                
-                /* PROCESS DATA */
-                if (is_array($dataMatch) || is_object($dataMatch)) {
-                    if (count($dataMatch) > 0) {
-                        Log::info("Start serve leads campaign ID #" . $leadspeek_api_id);
-                        if (($campaign->require_email == 'T' && trim($dataMatch[0]['Email']) != '') || ($campaign->require_email == 'F')) {
-                            if (count($dataMatch) > 0) {
-                                // /** REPORT ANALYTIC */
-                                //     $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'serveclient');
-                                // /** REPORT ANALYTIC */
-                                $filterEmail = true;
-                                if(trim($dataMatch[0]['Email']) != '') {
-                                    $filterEmail = $this->filterEmailInLeadspeekReport($leadspeek_api_id, $dataMatch[0]['Email'], $dataMatch[0]['PersonID'], $clientCompanyID, $leadspeektype, $md5param);
-                                }
-                                info('', ['filterEmail' => $filterEmail]);
-
-                                if($filterEmail) {
-                                    $dataMatch[0]['CustomParams'] = ($leadspeektype == 'local') ? $customParams : "";
-                                    $matches = json_decode(json_encode($dataMatch), false);
-                                    $resultProcessData = $this->processDataMatch($leadspeek_api_id,$matches,$data,$campaign->paymentterm,$leadspeektype,$md5param);
-                                }
-                            }
-                        }
-                    }else{
-                        Log::info("Not serve leads 1 campaign ID #" . $leadspeek_api_id);
-                        /** REPORT ANALYTIC NOT SERVE AND BIGBDMREMAININGLEADS IF LEADSPEEK_TYPE ENHANCE */
-                            $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'notserve');
-                            if($leadspeektype == 'enhance' || $leadspeektype == 'b2b') {
-                                $bigbdmremainingleads = BigDBMLeads::where('leadspeek_api_id', $leadspeek_api_id)
-                                                                    ->whereDate('created_at', date('Y-m-d'))
-                                                                    ->count() - 1;
-                                $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'bigbdmremainingleads',$bigbdmremainingleads);
-                            }
-                        /** REPORT ANALYTIC NOT SERVE AND BIGBDMREMAININGLEADS IF LEADSPEEK_TYPE ENHANCE */
-                    }
-                }else{
-                    Log::info("Not serve leads 2 campaign ID #" . $leadspeek_api_id);
-                    /** REPORT ANALYTIC NOT SERVE AND BIGBDMREMAININGLEADS IF LEADSPEEK_TYPE ENHANCE */
-                        $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'notserve');
-                        if($leadspeektype == 'enhance' || $leadspeektype == 'b2b') {
-                            $bigbdmremainingleads = BigDBMLeads::where('leadspeek_api_id', $leadspeek_api_id)
-                                                                ->whereDate('created_at', date('Y-m-d'))
-                                                                ->count() - 1;
-                            $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'bigbdmremainingleads',$bigbdmremainingleads);
-                        }
-                    /** REPORT ANALYTIC NOT SERVE AND BIGBDMREMAININGLEADS IF LEADSPEEK_TYPE ENHANCE */
-                }
-                /* PROCESS DATA */
-            }
-            catch(\Throwable $th)
-            {
-                Log::error("Error Process Data In Getleadwebhook Campaign ID: #{$leadspeek_api_id} Email MD5: {$md5param}", [
-                    'error' => $th->getMessage(),
-                    'trace' => $th->getTraceAsString(),
-                ]);
-            }
-            finally
-            {
-                /* RELEASE LOCK EMAIL PROCESS */
-                if ($applyreidentificationall)
-                {
-                    $this->releaseLock($leadEmailLockKey);
-                }
-                /* RELEASE LOCK EMAIL PROCESS */
-            }
-
-            /** REPORT ANALYTIC */
-            if($leadspeektype == 'local')
-            {
-                $this->UpsertReportAnalytics($leadspeek_api_id,$leadspeektype,'pixelfire');    
-                // insert pixel lead record
-                // info('insert pixel lead record', ['pixelLeadRecordID' => $pixelLeadRecordID, 'label' => $label]);
-                $this->UpdateFeedbackPixelLeadRecord($pixelLeadRecordID, $leadspeek_api_id, $md5param, $label);
-            }
-            /** REPORT ANALYTIC */
-
-            /** COUNT WEBHOOK BEEN FIRE FOR SPECIFIC LEADSPEEK ID */
-                $updatewebhook = LeadspeekUser::find($campaign->id);
-                $updatewebhook->webhookfire =  $updatewebhook->webhookfire + 1;
-                $updatewebhook->save();
-            /** COUNT WEBHOOK BEEN FIRE FOR SPECIFIC LEADSPEEK ID */
-        }
+    // 1. Ambil bagian setelah "data: " jika ada prefix SSE
+    if (strpos($rawResponse, 'data:') !== false) {
+        $parts = explode('data:', $rawResponse, 2);
+        $rawResponse = trim($parts[1]);
     }
 
-    $details = [
-        'params' => $keyword . '==>' . $leadspeek_api_id,
-        'paramsUrl'  => json_encode($params) . '<br>Label : ' . $label . '<br>MD5 Email : ' . $md5param . '<br>Full URL : ' . $fullURL,
-    ];
-    $attachement = array();
-
-    $from = [
-        'address' => 'newleads@leadspeek.com',
-        'name' => 'webhook',
-        'replyto' => 'newleads@leadspeek.com',
-    ];
-
-    //$this->send_email(array('serverlogs@sitesettingsapi.com'),'SANBOX-GET WEBHOOK FROM TOWER DATA',$details,$attachement,'emails.webhookleadnotification',$from,'');
-
-    /* SAVE TO EXECUTION TIME PROCESS TO LEADSPEEK_REPORT IF DATA MATCH */
-    $leadspeekReportID = isset($resultProcessData['leadspeekReportID'])?$resultProcessData['leadspeekReportID']:"";
-    $executionTimeListProcessDataMatch = isset($resultProcessData['executionTimeList'])?$resultProcessData['executionTimeList']:[];
-    if(!empty($leadspeekReportID) && trim($leadspeekReportID) != '') {
-        $executionTimeList = array_merge($executionTimeList, $executionTimeListGetDataMatch);
-        $executionTimeList = array_merge($executionTimeList, $executionTimeListProcessDataMatch);
-
-        $endTime = microtime(true);
-        
-        // convert epochtime to date format ('Y-m-d H:i:s')
-        $startDate = Carbon::createFromTimestamp($startTime)->setTimezone('America/Chicago')->format('Y-m-d H:i:s');
-        $endDate = Carbon::createFromTimestamp($endTime)->setTimezone('America/Chicago')->format('Y-m-d H:i:s');
-        // convert epochtime to date format ('Y-m-d H:i:s') 
-        
-        $executionTime = $endTime - $startTime;
-        $executionTime = number_format($executionTime,2,'.','');
-
-        $executionTimeList['all_process'] = [
-            'start_execution_time' => $startDate,
-            'end_execution_time' => $endDate,
-            'total_execution_time' => $executionTime
-        ];
-
-        LeadspeekReport::where('id', $leadspeekReportID)
-                        ->update([
-                        'start_execution_time' => $startDate,
-                        'end_execution_time' => $endDate,
-                        'total_execution_time' => $executionTime,
-                        'list_execution_time' => json_encode($executionTimeList)
-                        ]);
+    // 2. Decode outer JSON
+    $outer = json_decode($rawResponse, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return 'ERROR decode outer JSON: ' . json_last_error_msg();
     }
-    /* SAVE TO EXECUTION TIME PROCESS TO LEADSPEEK_REPORT IF DATA MATCH */
+
+    // 3. Ambil inner JSON string dari result.content[0].text
+    $innerJsonString = $outer['result']['content'][0]['text'] ?? null;
+    if ($innerJsonString === null) {
+        return 'ERROR: path result.content[0].text tidak ditemukan';
+    }
+
+    // 4. Decode inner JSON
+    $inner = json_decode($innerJsonString, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return 'ERROR decode inner JSON: ' . json_last_error_msg();
+    }
+
+    // 5. Kembalikan sebagai pretty-print JSON
+    return json_encode($inner, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
+
+// Simpan result ke file JSON
+function saveToJson(string $jsonString, string $filePath): void
+{
+    file_put_contents($filePath, $jsonString);
+    echo "Tersimpan ke: " . $filePath . PHP_EOL;
+}
+
+
+$resultResolveIdentities = parseWattdataResponse($rawResponseResolveIdentities);
+$resultGetPerson = parseWattdataResponse($rawResponseGetPerson);
+
+$jsonDir = __DIR__ . '/../Json/';
+saveToJson($resultResolveIdentities, $jsonDir . 'resolve-identities.json');
+saveToJson($resultGetPerson,         $jsonDir . 'get-person.json');
+

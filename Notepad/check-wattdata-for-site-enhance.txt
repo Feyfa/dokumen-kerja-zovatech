@@ -1,0 +1,34 @@
+- wattdata
+    - bigdbmmd5
+        - towerdata
+        - wattdata
+        - pii
+
+1. awal check wattdata, jika ada maka ambil data
+2. jika wattdata tidak ada, maka check bigdbmmd5, jika ada maka ambil data
+3. jika bigdbmmd5 tidak ada, maka check ke towerdata (ini kalo ngga salah hanya mendapatkan beberapa data saja, sebelum masuk ke detail datanya)
+        - jika ada maka check dulu ke wattdata,  jika ada maka ambil data
+        - jika wattdata tidak ada maka check di pii,  jika ada maka ambil data
+
+
+---- DATABASE YANG DITAMBAH ----
+INSERT INTO `global_settings` (`company_id`, `setting_name`, `setting_value`, `created_at`, `updated_at`)
+VALUES (NULL,'wattdata_credentials','{"token":"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=","base_url":"https://api.wattdata.ai/v1/mcp/m2m"}',NOW(),NOW());
+
+ALTER TABLE `persons` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `id`;
+ALTER TABLE `person_emails` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_addresses` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_names` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_phones` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_1` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_2` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_advance_3` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+ALTER TABLE `person_b2b` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+---- DATABASE YANG DITAMBAH ----
+
+
+process_BDM_TowerDATA
+process_BDM_advance
+process_BDM_local_custom
+
+coba sekarang check, jika email dapet dari bigdbmmd5, lalu ke2 emailnya ke trus list, apakah dia ambil lagi ke towerdata+pii
