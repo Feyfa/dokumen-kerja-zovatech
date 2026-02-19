@@ -232,3 +232,46 @@
         }
     }
 }
+
+
+users_index
+[
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john@mail.com",
+    company_id: 10,
+    user_type: "agency"
+  }
+]
+
+🎯 campaigns_index
+[
+  {
+    id: 100,
+    name: "Campaign A",
+    company_id: 10,
+    user_id: 1,
+    status: "active"
+  }
+]
+
+📈 leads_index
+[
+  {
+    id: 500,
+    campaign_id: 100,
+    company_id: 10,
+    email: "lead@mail.com"
+  }
+]
+
+💰 invoice_index
+[
+  {
+    id: 900,
+    company_id: 10,
+    amount: 200,
+    status: "paid"
+  }
+]

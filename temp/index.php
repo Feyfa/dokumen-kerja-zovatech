@@ -1,5 +1,12 @@
 <?php
 
+$user = User::select(['users.*', 'companies.name as company_name'])
+            ->join('companies', 'companies.id', '=', 'users.company_id')
+            ->where('companies.name', 'LIKE', '%'.request('keyword').'%')
+            ->orWhere('users.name', 'LIKE', '%'.request('keyword').'%')
+            ->first();
+
+var_dump(strlen("emaillloremipsumdolorsitametssaasdasdasjdnjkasndajksdnasjkdn10000@gmail.com"));
 echo uniqid();
 
 // var_dump(strlen("emaillloremipsumdolorsitametssaasdasdasjdnjkasndajksdnasjkdn10000@gmail.com"));
