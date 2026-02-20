@@ -171,3 +171,9 @@ develop -> sandbox
 
 feat/jd-blabla
 fix/jd-blabla
+
+tailscale ip -4
+100.123.90.41
+auth-key = tskey-auth-kLGfANdw2L11CNTRL-ECKQ1SDXDG4ZHouBMThWG48G6XL6wdhXe
+ssh jidan@100.123.90.41
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYj44i1yergFB6r9JETCDHxQk4SNCLQgcZqFQRbnY6r “fisikamodern00@gmail.com”
