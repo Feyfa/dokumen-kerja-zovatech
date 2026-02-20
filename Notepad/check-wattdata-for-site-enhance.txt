@@ -1,14 +1,14 @@
 - wattdata
     - bigdbmmd5
-        - towerdata
+        - getTowerData
         - wattdata
-        - pii
+        - bigBDM_PII
 
 1. awal check wattdata, jika ada maka ambil data
 2. jika wattdata tidak ada, maka check bigdbmmd5, jika ada maka ambil data
-3. jika bigdbmmd5 tidak ada, maka check ke towerdata (ini kalo ngga salah hanya mendapatkan beberapa data saja, sebelum masuk ke detail datanya)
+3. jika bigdbmmd5 tidak ada, maka check ke getTowerData (ini kalo ngga salah hanya mendapatkan beberapa data saja, sebelum masuk ke detail datanya)
         - jika ada maka check dulu ke wattdata,  jika ada maka ambil data
-        - jika wattdata tidak ada maka check di pii,  jika ada maka ambil data
+        - jika wattdata tidak ada maka check di bigBDM_PII,  jika ada maka ambil data
 
 
 ---- DATABASE YANG DITAMBAH ----
@@ -20,15 +20,977 @@ ALTER TABLE `person_emails` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 
 ALTER TABLE `person_addresses` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 ALTER TABLE `person_names` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 ALTER TABLE `person_phones` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
-ALTER TABLE `person_advance_1` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
-ALTER TABLE `person_advance_2` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
-ALTER TABLE `person_advance_3` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
-ALTER TABLE `person_b2b` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 ---- DATABASE YANG DITAMBAH ----
 
 
-process_BDM_TowerDATA
-process_BDM_advance
+process_BDM_TowerDATA 
 process_BDM_local_custom
+process_BDM_advance
+dataNotExistOnDBBIG
 
-coba sekarang check, jika email dapet dari bigdbmmd5, lalu ke2 emailnya ke trus list, apakah dia ambil lagi ke towerdata+pii
+bigBDM_MD5
+getTowerData
+bigBDM_PII
+
+coba sekarang check, jika email dapet dari bigdbmmd5, lalu ke2 emailnya ke trus list, apakah dia ambil lagi ke getTowerData+bigBDM_PII
+
+hai saya penasaran sama di function dataNotExistOnDBBIG, function ini kan bakal dijalankan ketika data sudah ada nih di database, cuman sudah expired melebihi 120 hari. kayanya di function ini itu dia ngehapus data lama dan menyimpan data baru, nah dia kan bakal ambil ke bigdbm kan sekarang ini
+di dalam function dataNotExistOnDBBIG itu alurnya juga sama 
+1. check bigBDM_MD5, jika ada pakai itu
+2. jika tidak ada pakai getTowerData + bigBDM_PII
+
+nah pertanyaan saya adalah, apakah perlu di tambahin logic untuk check ke wattdata dulu baru ke bigdbm di function ini untuk yang basic nya saja? dan untuk data seperti advanced, b2b, is_local_custom['advanced'] itu biarkan saja pakai bigdbm kaya sekarang ini dan tidak di utak atik
+
+menurut anda bagaimana
+
+============ Alur yang ada sekarang di dataNotExistOnDBBIG: ============
+1. Call WattData MD5     ← line 16249-16264
+2. Call bigBDM_MD5 (selalu dipanggil) ← line 16270
+
+IF bigBDM_MD5 ada data:
+   → pakai data bigBDM_MD5
+   → override basic fields dengan WattData MD5 jika ada
+
+ELSE (bigBDM_MD5 tidak ada data):
+   → Check WattData by ADDRESS, tapi HANYA jika WattData MD5 JUGA gagal ← line 16758
+   → $wattBasicFallback = watt MD5 result ATAU watt address result
+   → Call bigBDM_PII
+   IF bigBDM_PII ada data:
+      → pakai data bigBDM_PII
+      → override basic fields dengan $wattBasicFallback jika ada
+============ Alur yang ada sekarang di dataNotExistOnDBBIG: ============
+
+
+
+============ TESTING ============
+1. process_BDM_TowerDATA
+- watt ada
+- watt tidak ada, bigBDM_MD5 ada
+- watt tidak ada, bigBDM_MD5 tidak ada, getTowerData tidak ada
+- watt tidak ada, bigBDM_MD5 tidak ada, getTowerData ada, watt ada
+- watt tidak ada, bigBDM_MD5 tidak ada, getTowerData ada, watt tidak ada, bigBDM_PII ada
+- watt tidak ada, bigBDM_MD5 tidak ada, getTowerData ada, watt tidak ada, bigBDM_PII tidak ada
+============ TESTING ============
+
+
+
+
+
+
+
+============ TESTING ============
+catatan: WattData hanya dipanggil untuk leadspeektype 'local' dan 'enhance'
+lis md5 yang digunakan: 
+- 8bc64c9c289d18a05dd9652422208f05
+
+============================================
+1. process_BDM_TowerDATA
+catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
+============================================
+
+1. (SUDAH ✅✅✅)
+* status
+        - watt: ✅
+        - bigBDM_MD5: (tidak dipanggil)
+        - getTowerData: (tidak dipanggil)
+        - watt_address: (tidak dipanggil)
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        lead ada, data dari watt
+* md5: 
+        8bc64c9c289d18a05dd9652422208f05
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "2229831771575918",
+                "Email": "ptrhrt57@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "8bc64c9c289d18a05dd9652422208f05",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 02:25:12",
+                "ClickDate": "2026-02-20 02:25:12",
+                "Referer": "",
+                "Phone": "+15867732982",
+                "Phone2": "+19892246655",
+                "FirstName": "Diane",
+                "LastName": "Harte",
+                "Address1": "1033 Bills Ln",
+                "Address2": "",
+                "City": "Saint Johns",
+                "State": "MI",
+                "Zipcode": "48879-1183",
+                "PersonID": 8039,
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12357",
+                "LeadFrom": "wattdata"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 02:25:12",
+                "end_execution_time": "2026-02-20 02:25:15",
+                "total_execution_time": "2.55"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 02:25:15",
+                "end_execution_time": "2026-02-20 02:25:18",
+                "total_execution_time": "3.19"
+            }
+        }
+    }
+}
+
+2. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ✅
+        - getTowerData: (tidak dipanggil)
+        - watt_address: (tidak dipanggil)
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        lead ada, data dari bigBDM_MD5
+* md5: 
+        8bc64c9c289d18a05dd9652422208f05
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "8177281771578902",
+                "Email": "dh5310@att.net",
+                "Email2": "ptrhrt57@gmail.com",
+                "OriginalMD5": "8bc64c9c289d18a05dd9652422208f05",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 03:14:30",
+                "ClickDate": "2026-02-20 03:14:30",
+                "Referer": "",
+                "Phone": "9892920155",
+                "Phone2": "9896664407",
+                "FirstName": "Diane",
+                "LastName": "Harte",
+                "Address1": "1033 Bills Ln",
+                "Address2": "",
+                "City": "Saint Johns",
+                "State": "MI",
+                "Zipcode": "48879",
+                "PersonID": 8042,
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12360",
+                "LeadFrom": "bigbdmmd5"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 03:14:30",
+                "end_execution_time": "2026-02-20 03:14:30",
+                "total_execution_time": "0.00"
+            },
+            "bigBDM_MD5": {
+                "start_execution_time": "2026-02-20 03:14:30",
+                "end_execution_time": "2026-02-20 03:14:32",
+                "total_execution_time": "2.34"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 03:14:45",
+                "end_execution_time": "2026-02-20 03:15:01",
+                "total_execution_time": "16.03"
+            }
+        }
+    }
+}
+
+3. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - getTowerData: ❌
+        - watt_address: (tidak dipanggil)
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        tidak ada lead
+* md5: 
+        8bc64c9c289d18a05dd9652422208f05
+* response:
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+
+4. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - getTowerData: ✅
+        - watt_address: ✅
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        lead ada, data dari watt_address
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "8052951771580491",
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 03:41:25",
+                "ClickDate": "2026-02-20 03:41:25",
+                "Referer": "",
+                "Phone": "+16512463339",
+                "Phone2": "+16514501533",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118-4254",
+                "PersonID": 8044,
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12363",
+                "LeadFrom": "wattdata"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 03:41:25",
+                "end_execution_time": "2026-02-20 03:41:25",
+                "total_execution_time": "0.00"
+            },
+            "bigBDM_MD5": {
+                "start_execution_time": "2026-02-20 03:41:25",
+                "end_execution_time": "2026-02-20 03:41:25",
+                "total_execution_time": "0.00"
+            },
+            "wattData_pii": {
+                "start_execution_time": "2026-02-20 03:41:26",
+                "end_execution_time": "2026-02-20 03:41:28",
+                "total_execution_time": "2.22"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 03:41:28",
+                "end_execution_time": "2026-02-20 03:41:31",
+                "total_execution_time": "2.59"
+            }
+        }
+    }
+}
+
+5. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - getTowerData: ✅
+        - watt_address: ❌
+        - bigBDM_PII: ✅
+* hasilnya:
+        lead ada, data dari bigBDM_PII
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "8819111771581166",
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 03:52:42",
+                "ClickDate": "2026-02-20 03:52:42",
+                "Referer": "",
+                "Phone": "6512463339",
+                "Phone2": "6517343449",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118",
+                "PersonID": 8047,
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12366",
+                "LeadFrom": "gettowerdata"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 03:52:42",
+                "end_execution_time": "2026-02-20 03:52:42",
+                "total_execution_time": "0.00"
+            },
+            "bigBDM_MD5": {
+                "start_execution_time": "2026-02-20 03:52:42",
+                "end_execution_time": "2026-02-20 03:52:42",
+                "total_execution_time": "0.00"
+            },
+            "wattData_pii": {
+                "start_execution_time": "2026-02-20 03:52:43",
+                "end_execution_time": "2026-02-20 03:52:43",
+                "total_execution_time": "0.00"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 03:52:44",
+                "end_execution_time": "2026-02-20 03:52:46",
+                "total_execution_time": "1.88"
+            }
+        }
+    }
+}
+
+6. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - getTowerData: ✅
+        - watt_address: ❌
+        - bigBDM_PII: ❌
+* hasilnya:
+        tidak ada lead
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+============================================
+2. process_BDM_local_custom
+catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk advanced data).
+         Jika BigDBM tidak ada, tidak ada lead meskipun WattData ada.
+============================================
+
+1. (SUDAH ✅✅✅)
+* status
+        - watt: ✅
+        - bigBDM_MD5: ✅
+* hasilnya:
+        lead ada, basic dari watt, advanced dari bigdbm
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response:
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "5177951771582187",
+                "PersonID": 8048,
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 04:09:40",
+                "ClickDate": "2026-02-20 04:09:40",
+                "Referer": "",
+                "Phone": "+16512463339",
+                "Phone2": "+16514501533",
+                "Phone3": "+16516879388",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118-4254",
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12369",
+                "LeadFrom": "bigbdmmd5",
+                "GenderAux": "Female",
+                "Generation": "2. Generation X (1961-1981)",
+                "MaritalStatus": "Married",
+                "IncomeHousehold": "K. $100,000-$149,999",
+                "IncomeMidptsHousehold": "125000",
+                "NetWorthHousehold": "H. $100,000 - $249,999",
+                "NetWorthMidptHousehold": "175000",
+                "DiscretionaryIncome": "G. $60,000-$74,999",
+                "CreditMidpts": "775",
+                "CreditRange": "B. 750-799",
+                "OccupationCategory": "",
+                "OccupationDetail": "",
+                "OccupationType": "",
+                "Voter": "",
+                "Urbanicity": "4. Urban",
+                "TaxBillInformation": "1870 Eagle Ridge Dr Apt 10, Saint Paul, Dakota County, MN, 55118-4254",
+                "NumAdultsHousehold": "3",
+                "NumChildrenHousehold": "1",
+                "NumPersonsHousehold": "3",
+                "ChildAged03Household": "",
+                "ChildAged46Household": "",
+                "ChildAged79Household": "",
+                "ChildAged1012Household": "",
+                "ChildAged1318Household": "",
+                "ChildrenHousehold": "1",
+                "MagazineSubscriber": "1",
+                "CharityInterest": "1",
+                "LikelyCharitableDonor": "1",
+                "DwellingType": "Multi Family Dwelling/Apartment",
+                "HomeOwner": "Home Owner",
+                "HomeOwnerOrdinal": "4",
+                "LengthOfResidence": "9",
+                "HomePrice": "229000",
+                "HomeValue": "403500",
+                "MedianHomeValue": "436100",
+                "LivingSqft": "2259",
+                "YrBuiltOrig": "1977",
+                "YrBuiltRange": "9",
+                "LotNumber": "2",
+                "LegalDescription": "2 2 LOT 2 BLK 2 & INTEREST ATTRIBUTABLE TO COMMON AREA KNOWN AS LOT 1 BLK 3 EAGLE RIDGE PLAT NO 5",
+                "LandSqft": "871",
+                "GarageSqft": "342",
+                "Subdivision": "EAGLE RIDGE PLAT NO 5",
+                "ZoningCode": "R",
+                "Cooking": "1",
+                "Gardening": "",
+                "Music": "",
+                "Diy": "",
+                "Books": "1",
+                "TravelVacation": "",
+                "HealthBeautyProducts": "1",
+                "PetOwner": "",
+                "Photography": "",
+                "Fitness": "1",
+                "Epicurean": "",
+                "Cbsa": "33460",
+                "CensusBlock": "2023",
+                "CensusBlockGroup": "2",
+                "CensusTract": "060604"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 04:09:40",
+                "end_execution_time": "2026-02-20 04:09:43",
+                "total_execution_time": "2.51"
+            },
+            "bigBDM_MD5_advance": {
+                "start_execution_time": "2026-02-20 04:09:43",
+                "end_execution_time": "2026-02-20 04:09:45",
+                "total_execution_time": "1.62"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 04:09:45",
+                "end_execution_time": "2026-02-20 04:09:47",
+                "total_execution_time": "2.02"
+            }
+        }
+    }
+}
+
+
+2. (SUDAH ✅✅✅)
+* status
+        - watt: ✅
+        - bigBDM_MD5: ❌
+* hasilnya:
+        tidak ada lead (advanced required)
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+
+
+3. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ✅
+* hasilnya:
+        lead ada, basic dari bigdbm, advanced dari bigdbm
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "5574971771582804",
+                "PersonID": 8049,
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 04:20:00",
+                "ClickDate": "2026-02-20 04:20:00",
+                "Referer": "",
+                "Phone": "6512463339",
+                "Phone2": "6517343449",
+                "Phone3": "6519999492",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118",
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12371",
+                "LeadFrom": "bigbdmmd5",
+                "GenderAux": "Female",
+                "Generation": "2. Generation X (1961-1981)",
+                "MaritalStatus": "Married",
+                "IncomeHousehold": "K. $100,000-$149,999",
+                "IncomeMidptsHousehold": "125000",
+                "NetWorthHousehold": "H. $100,000 - $249,999",
+                "NetWorthMidptHousehold": "175000",
+                "DiscretionaryIncome": "G. $60,000-$74,999",
+                "CreditMidpts": "775",
+                "CreditRange": "B. 750-799",
+                "OccupationCategory": "",
+                "OccupationDetail": "",
+                "OccupationType": "",
+                "Voter": "",
+                "Urbanicity": "4. Urban",
+                "TaxBillInformation": "1870 Eagle Ridge Dr Apt 10, Saint Paul, Dakota County, MN, 55118-4254",
+                "NumAdultsHousehold": "3",
+                "NumChildrenHousehold": "1",
+                "NumPersonsHousehold": "3",
+                "ChildAged03Household": "",
+                "ChildAged46Household": "",
+                "ChildAged79Household": "",
+                "ChildAged1012Household": "",
+                "ChildAged1318Household": "",
+                "ChildrenHousehold": "1",
+                "MagazineSubscriber": "1",
+                "CharityInterest": "1",
+                "LikelyCharitableDonor": "1",
+                "DwellingType": "Multi Family Dwelling/Apartment",
+                "HomeOwner": "Home Owner",
+                "HomeOwnerOrdinal": "4",
+                "LengthOfResidence": "9",
+                "HomePrice": "229000",
+                "HomeValue": "403500",
+                "MedianHomeValue": "436100",
+                "LivingSqft": "2259",
+                "YrBuiltOrig": "1977",
+                "YrBuiltRange": "9",
+                "LotNumber": "2",
+                "LegalDescription": "2 2 LOT 2 BLK 2 & INTEREST ATTRIBUTABLE TO COMMON AREA KNOWN AS LOT 1 BLK 3 EAGLE RIDGE PLAT NO 5",
+                "LandSqft": "871",
+                "GarageSqft": "342",
+                "Subdivision": "EAGLE RIDGE PLAT NO 5",
+                "ZoningCode": "R",
+                "Cooking": "1",
+                "Gardening": "",
+                "Music": "",
+                "Diy": "",
+                "Books": "1",
+                "TravelVacation": "",
+                "HealthBeautyProducts": "1",
+                "PetOwner": "",
+                "Photography": "",
+                "Fitness": "1",
+                "Epicurean": "",
+                "Cbsa": "33460",
+                "CensusBlock": "2023",
+                "CensusBlockGroup": "2",
+                "CensusTract": "060604"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 04:20:00",
+                "end_execution_time": "2026-02-20 04:20:00",
+                "total_execution_time": "0.00"
+            },
+            "bigBDM_MD5_advance": {
+                "start_execution_time": "2026-02-20 04:20:00",
+                "end_execution_time": "2026-02-20 04:20:02",
+                "total_execution_time": "1.54"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 04:20:02",
+                "end_execution_time": "2026-02-20 04:20:04",
+                "total_execution_time": "1.97"
+            }
+        }
+    }
+}
+
+4. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+* hasilnya:
+        tidak ada lead
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+
+============================================
+3. process_BDM_advance
+catatan: Sama persis dengan process_BDM_local_custom.
+         WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk advanced data).
+============================================
+
+1. (SUDAH ✅✅✅)
+* status
+        - watt: ✅
+        - bigdbm: ✅
+* hasilnya:
+        lead ada, basic dari watt, advanced dari bigdbm
+* md5: 
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response:
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "6148481771583452",
+                "PersonID": 8051,
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 04:30:46",
+                "ClickDate": "2026-02-20 04:30:46",
+                "Referer": "",
+                "Phone": "+16512463339",
+                "Phone2": "+16514501533",
+                "Phone3": "+16516879388",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118-4254",
+                "GenderAux": "Female",
+                "Generation": "2. Generation X (1961-1981)",
+                "MaritalStatus": "Married",
+                "IncomeHousehold": "K. $100,000-$149,999",
+                "IncomeMidptsHousehold": "125000",
+                "NetWorthHousehold": "H. $100,000 - $249,999",
+                "NetWorthMidptHousehold": "175000",
+                "DiscretionaryIncome": "G. $60,000-$74,999",
+                "CreditMidpts": "775",
+                "CreditRange": "B. 750-799",
+                "OccupationCategory": "",
+                "OccupationDetail": "",
+                "OccupationType": "",
+                "Voter": "",
+                "Urbanicity": "4. Urban",
+                "TaxBillInformation": "1870 Eagle Ridge Dr Apt 10, Saint Paul, Dakota County, MN, 55118-4254",
+                "NumAdultsHousehold": "3",
+                "NumChildrenHousehold": "1",
+                "NumPersonsHousehold": "3",
+                "ChildAged03Household": "",
+                "ChildAged46Household": "",
+                "ChildAged79Household": "",
+                "ChildAged1012Household": "",
+                "ChildAged1318Household": "",
+                "ChildrenHousehold": "1",
+                "MagazineSubscriber": "1",
+                "CharityInterest": "1",
+                "LikelyCharitableDonor": "1",
+                "DwellingType": "Multi Family Dwelling/Apartment",
+                "HomeOwner": "Home Owner",
+                "HomeOwnerOrdinal": "4",
+                "LengthOfResidence": "9",
+                "HomePrice": "229000",
+                "HomeValue": "403500",
+                "MedianHomeValue": "436100",
+                "LivingSqft": "2259",
+                "YrBuiltOrig": "1977",
+                "YrBuiltRange": "9",
+                "LotNumber": "2",
+                "LegalDescription": "2 2 LOT 2 BLK 2 & INTEREST ATTRIBUTABLE TO COMMON AREA KNOWN AS LOT 1 BLK 3 EAGLE RIDGE PLAT NO 5",
+                "LandSqft": "871",
+                "GarageSqft": "342",
+                "Subdivision": "EAGLE RIDGE PLAT NO 5",
+                "ZoningCode": "R",
+                "Cooking": "1",
+                "Gardening": "",
+                "Music": "",
+                "Diy": "",
+                "Books": "1",
+                "TravelVacation": "",
+                "HealthBeautyProducts": "1",
+                "PetOwner": "",
+                "Photography": "",
+                "Fitness": "1",
+                "Epicurean": "",
+                "Cbsa": "33460",
+                "CensusBlock": "2023",
+                "CensusBlockGroup": "2",
+                "CensusTract": "060604",
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12374",
+                "LeadFrom": "bigbdmmd5"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 04:30:46",
+                "end_execution_time": "2026-02-20 04:30:49",
+                "total_execution_time": "2.63"
+            },
+            "bigBDM_MD5_advance": {
+                "start_execution_time": "2026-02-20 04:30:49",
+                "end_execution_time": "2026-02-20 04:30:50",
+                "total_execution_time": "1.56"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 04:30:50",
+                "end_execution_time": "2026-02-20 04:30:52",
+                "total_execution_time": "2.04"
+            }
+        }
+    }
+}
+
+
+2. (SUDAH ✅✅✅)
+* status
+        - watt: ✅
+        - bigdbm: ❌
+* hasilnya:
+        tidak ada lead (advanced required)
+* md5:
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+
+3. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigdbm: ✅
+* hasilnya:
+        lead ada, basic dari bigdbm, advanced dari bigdbm
+* md5:
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response:
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": {
+        "matches": [
+            {
+                "ID": "5770791771584191",
+                "PersonID": 8052,
+                "Email": "kitkatkatie1870@gmail.com",
+                "Email2": "",
+                "OriginalMD5": "d7fbcb2bc68876df8f0cc41659e7d352",
+                "IP": "",
+                "Source": "",
+                "OptInDate": "2026-02-20 04:43:07",
+                "ClickDate": "2026-02-20 04:43:07",
+                "Referer": "",
+                "Phone": "6512463339",
+                "Phone2": "6517343449",
+                "Phone3": "6519999492",
+                "FirstName": "Kathleen",
+                "LastName": "Schultz",
+                "Address1": "1870 Eagle Ridge Dr",
+                "Address2": "Apt 10",
+                "City": "Saint Paul",
+                "State": "MN",
+                "Zipcode": "55118",
+                "GenderAux": "Female",
+                "Generation": "2. Generation X (1961-1981)",
+                "MaritalStatus": "Married",
+                "IncomeHousehold": "K. $100,000-$149,999",
+                "IncomeMidptsHousehold": "125000",
+                "NetWorthHousehold": "H. $100,000 - $249,999",
+                "NetWorthMidptHousehold": "175000",
+                "DiscretionaryIncome": "G. $60,000-$74,999",
+                "CreditMidpts": "775",
+                "CreditRange": "B. 750-799",
+                "OccupationCategory": "",
+                "OccupationDetail": "",
+                "OccupationType": "",
+                "Voter": "",
+                "Urbanicity": "4. Urban",
+                "TaxBillInformation": "1870 Eagle Ridge Dr Apt 10, Saint Paul, Dakota County, MN, 55118-4254",
+                "NumAdultsHousehold": "3",
+                "NumChildrenHousehold": "1",
+                "NumPersonsHousehold": "3",
+                "ChildAged03Household": "",
+                "ChildAged46Household": "",
+                "ChildAged79Household": "",
+                "ChildAged1012Household": "",
+                "ChildAged1318Household": "",
+                "ChildrenHousehold": "1",
+                "MagazineSubscriber": "1",
+                "CharityInterest": "1",
+                "LikelyCharitableDonor": "1",
+                "DwellingType": "Multi Family Dwelling/Apartment",
+                "HomeOwner": "Home Owner",
+                "HomeOwnerOrdinal": "4",
+                "LengthOfResidence": "9",
+                "HomePrice": "229000",
+                "HomeValue": "403500",
+                "MedianHomeValue": "436100",
+                "LivingSqft": "2259",
+                "YrBuiltOrig": "1977",
+                "YrBuiltRange": "9",
+                "LotNumber": "2",
+                "LegalDescription": "2 2 LOT 2 BLK 2 & INTEREST ATTRIBUTABLE TO COMMON AREA KNOWN AS LOT 1 BLK 3 EAGLE RIDGE PLAT NO 5",
+                "LandSqft": "871",
+                "GarageSqft": "342",
+                "Subdivision": "EAGLE RIDGE PLAT NO 5",
+                "ZoningCode": "R",
+                "Cooking": "1",
+                "Gardening": "",
+                "Music": "",
+                "Diy": "",
+                "Books": "1",
+                "TravelVacation": "",
+                "HealthBeautyProducts": "1",
+                "PetOwner": "",
+                "Photography": "",
+                "Fitness": "1",
+                "Epicurean": "",
+                "Cbsa": "33460",
+                "CensusBlock": "2023",
+                "CensusBlockGroup": "2",
+                "CensusTract": "060604",
+                "Keyword": "google",
+                "Description": "dataNotExistOnDBBDMTD|12376",
+                "LeadFrom": "bigbdmmd5"
+            }
+        ],
+        "executionTimeList": {
+            "wattData": {
+                "start_execution_time": "2026-02-20 04:43:08",
+                "end_execution_time": "2026-02-20 04:43:08",
+                "total_execution_time": "0.00"
+            },
+            "bigBDM_MD5_advance": {
+                "start_execution_time": "2026-02-20 04:43:08",
+                "end_execution_time": "2026-02-20 04:43:09",
+                "total_execution_time": "1.60"
+            },
+            "zb_validation": {
+                "start_execution_time": "2026-02-20 04:43:09",
+                "end_execution_time": "2026-02-20 04:43:11",
+                "total_execution_time": "2.12"
+            }
+        }
+    }
+}
+
+4. (SUDAH ✅✅✅)
+* status
+        - watt: ❌
+        - bigdbm: ❌
+* hasilnya:
+        tidak ada lead
+* md5:
+        d7fbcb2bc68876df8f0cc41659e7d352
+* response: 
+{
+    "test": "ini masih di tahap development",
+    "resultGetData": []
+}
+
+
+============================================
+4. dataNotExistOnDBBIG - mode advanced ($isBasicOnly = false)
+catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattData ada.
+         WattData address TIDAK dicoba karena isBasicOnly = false (tidak masuk OR condition).
+============================================
+
+1.
+* status
+        - watt: ✅
+        - bigBDM_MD5: ✅
+        - watt_address: (tidak dipanggil)
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        lead ada, basic dari watt, advanced dari bigBDM_MD5
+
+2.
+* status
+        - watt: ✅
+        - bigBDM_MD5: ❌
+        - watt_address: ✅ (dipanggil jika watt MD5 kosong, tapi watt MD5 ada → tidak dipanggil)
+        - bigBDM_PII: ✅
+* hasilnya:
+        lead ada, basic dari watt, advanced dari bigBDM_PII
+
+3.
+* status
+        - watt: ✅
+        - bigBDM_MD5: ❌
+        - watt_address: (tidak dipanggil, watt MD5 sudah ada)
+        - bigBDM_PII: ❌
+* hasilnya:
+        tidak ada lead (advanced required, bigdbm tidak ada)
+
+4.
+* status
+        - watt: ❌
+        - bigBDM_MD5: ✅
+        - watt_address: (tidak dipanggil)
+        - bigBDM_PII: (tidak dipanggil)
+* hasilnya:
+        lead ada, basic dari bigBDM_MD5, advanced dari bigBDM_MD5
+
+5.
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - watt_address: ❌
+        - bigBDM_PII: ✅
+* hasilnya:
+        lead ada, basic dari bigBDM_PII, advanced dari bigBDM_PII
+
+6.
+* status
+        - watt: ❌
+        - bigBDM_MD5: ❌
+        - watt_address: ❌
+        - bigBDM_PII: ❌
+* hasilnya:
+        tidak ada lead
+============ TESTING ============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

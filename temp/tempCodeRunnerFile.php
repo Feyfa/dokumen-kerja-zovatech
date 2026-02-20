@@ -1,5 +1,2 @@
 <?php
-([
-//     'resultResolveIdentities' => $resultResolveIdentities,
-//     'resultGetPerson' => $resultGetPerson,
-// ]);
+resolve-identities
