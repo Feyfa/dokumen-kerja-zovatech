@@ -1,13 +1,4 @@
-select * from jobs;
-
-select * from leadspeek_reports order by created_at desc limit 1000;
-
-select * from failed_lead_records
-where `function` = 'getWattBasicInfo'
-order by created_at desc
-limit 20;
-
-set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352';
+set @md5 := '945d6638b11614b19a0fc79683eee4ff';
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 set @key := '8e651522e38256f2';
 
@@ -114,9 +105,12 @@ select
 	CONVERT(AES_DECRYPT(FROM_BASE64(email), @key) USING utf8mb4) as email,
 	flr.* 
 from failed_lead_records as flr 
-where created_at > '2026-02-19 02:27:58' order by created_at desc limit 100; 
+where created_at > '2026-02-22 18:00:15' order by created_at desc limit 10;
 
-select * from leadspeek_reports where leadspeek_api_id =53620540;
-select * from jobs order by id desc;
+select * from leadspeek_reports where leadspeek_api_id = 78902092;
+
+select * from leadspeek_users where leadspeek_api_id = 79229250;
+
+select * from jobs order by created_at desc limit 100;
 
 

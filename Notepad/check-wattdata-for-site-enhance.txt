@@ -20,6 +20,8 @@ ALTER TABLE `person_emails` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 
 ALTER TABLE `person_addresses` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 ALTER TABLE `person_names` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 ALTER TABLE `person_phones` ADD `source` ENUM('bigdbm','wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+
+tambahkan enum('wattdata') di field `lead_from` di table `leadspeek_reports`
 ---- DATABASE YANG DITAMBAH ----
 
 
@@ -978,19 +980,24 @@ catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattDa
 
 
 
+EMM-SANDBOX-API
+JD-TASK-EMM-854 = "feat: integrate WattData as primary provider for basic person data"
+JD-TASK-EMM-854-DEV-SYNC
+
+FILE
+* app\Http\Controllers\WebhookController.php
+* app\Services\WattData.php
+* app\Models\Person.php
+* app\Models\PersonAddress.php
+* app\Models\PersonEmail.php
+* app\Models\PersonName.php
+* app\Models\PersonPhone.php
 
 
+ini yang db dev-sync lama
+{"token":"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=","base_url":"https://api.wattdata.ai/mcp"}
 
-
-
-
-
-
-
-
-
-
-
-
+ini yang baru
+{"token":"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=","base_url":"https://api.wattdata.ai/v1/mcp/m2m"}
 
 
