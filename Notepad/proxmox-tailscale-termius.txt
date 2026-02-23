@@ -1,0 +1,60 @@
+========================================
+PROXMOX → TAILSCALE → TERMIUS SETUP
+========================================
+
+=== 1. INSTALL TAILSCALE DI VM ===
+Jalankan di VM (console Proxmox atau SSH):
+
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+
+Login via browser jika diminta.
+
+
+=== 2. CEK IP TAILSCALE VM ===
+
+tailscale ip -4
+
+Contoh hasil:
+100.xx.xx.xx
+
+Gunakan IP ini di Termius.
+
+
+=== 3. SETUP SSH KEY (AGAR TANPA PASSWORD) ===
+
+# Buat folder ssh jika belum ada
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+# Edit authorized_keys
+nano ~/.ssh/authorized_keys
+
+Paste PUBLIC KEY dari Termius (bukan private key!)
+
+Contoh format:
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... user@device
+
+Simpan nano:
+CTRL + O → Enter → CTRL + X
+
+Set permission:
+chmod 600 ~/.ssh/authorized_keys
+
+
+=== 4. BUAT HOST DI TERMIUS ===
+
+Address   : IP Tailscale VM (contoh 100.xx.xx.xx)
+Port      : 22
+Username  : username VM (contoh vm100 / ubuntu / root)
+Key       : pilih SSH key yang sesuai
+
+
+=== 5. CONNECT ===
+
+Klik Connect → harus langsung masuk tanpa password.
+
+
+========================================
+SELESAI
+========================================
