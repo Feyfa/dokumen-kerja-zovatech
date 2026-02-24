@@ -51,6 +51,33 @@
                         "opted_in": false
                     }
                 ],
+                "maids": [
+                    {
+                        "device_id": "a1908de8-5eae-4c24-829f-abf1d8a2c2db",
+                        "id_type": "IDFA",
+                        "opted_out": false
+                    },
+                    {
+                        "device_id": "be30a107-e84b-40f9-bb79-2a479a2c7dd1",
+                        "id_type": "IDFA",
+                        "opted_out": false
+                    },
+                    {
+                        "device_id": "d369d5c7-3a29-51c4-9f15-f7c9c805e464",
+                        "id_type": "IDFA",
+                        "opted_out": false
+                    },
+                    {
+                        "device_id": "f243a2fa-8d06-4982-a8ed-fed37ee20118",
+                        "id_type": "IDFA",
+                        "opted_out": false
+                    },
+                    {
+                        "device_id": "fe40eb63-b992-5a71-b8ae-cb2533e9c79c",
+                        "id_type": "IDFA",
+                        "opted_out": false
+                    }
+                ],
                 "names": [
                     {
                         "first_name": "Kathleen",
@@ -75,17 +102,1719 @@
                         "urbanicity_code": "U",
                         "property_type": null
                     }
-                ]
+                ],
+                "affinity": {
+                    "fitness_affinity": {
+                        "value": "medium",
+                        "cluster_id": 61
+                    },
+                    "health_affinity": {
+                        "value": "medium",
+                        "cluster_id": 74
+                    },
+                    "family_affinity": {
+                        "value": "medium",
+                        "cluster_id": 58
+                    },
+                    "gardening_affinity": {
+                        "value": "medium",
+                        "cluster_id": 68
+                    },
+                    "crafts_affinity": {
+                        "value": "high",
+                        "cluster_id": 37
+                    },
+                    "womens_apparel_affinity": {
+                        "value": "medium",
+                        "cluster_id": 136
+                    },
+                    "collectibles_affinity": {
+                        "value": "medium",
+                        "cluster_id": 29
+                    },
+                    "womens_home_living_affinity": {
+                        "value": "medium",
+                        "cluster_id": 140
+                    },
+                    "womens_fashion_affinity": {
+                        "value": "high",
+                        "cluster_id": 137
+                    },
+                    "high_tech_affinity": {
+                        "value": "medium",
+                        "cluster_id": 76
+                    },
+                    "beauty_affinity": {
+                        "value": "medium",
+                        "cluster_id": 18
+                    },
+                    "cooking_affinity": {
+                        "value": "medium",
+                        "cluster_id": 36
+                    },
+                    "apparel_affinity": {
+                        "value": "high",
+                        "cluster_id": 5
+                    }
+                },
+                "financial": {
+                    "owns_credit_card": {
+                        "value": true,
+                        "cluster_id": 4000046
+                    },
+                    "credit_rating_range": {
+                        "value": "B. 750-799",
+                        "cluster_id": 4000004
+                    },
+                    "owns_premium_amex_card": {
+                        "value": false,
+                        "cluster_id": 4000049
+                    },
+                    "owns_premium_credit_card": {
+                        "value": false,
+                        "cluster_id": 4000051
+                    },
+                    "donated_religious_cause": {
+                        "value": false,
+                        "cluster_id": 4000021
+                    },
+                    "donated_veterans_cause": {
+                        "value": false,
+                        "cluster_id": 4000023
+                    },
+                    "donated_environmental_cause": {
+                        "value": false,
+                        "cluster_id": 4000017
+                    },
+                    "has_investments": {
+                        "value": false,
+                        "cluster_id": 4000025
+                    },
+                    "donated_animal_cause": {
+                        "value": false,
+                        "cluster_id": 4000011
+                    },
+                    "donated_arts_cultural_cause": {
+                        "value": false,
+                        "cluster_id": 4000013
+                    },
+                    "owns_stocks_and_bonds": {
+                        "value": false,
+                        "cluster_id": 4000053
+                    },
+                    "is_charitable_donor": {
+                        "value": true,
+                        "cluster_id": 4000034
+                    },
+                    "donated_health_cause": {
+                        "value": false,
+                        "cluster_id": 4000019
+                    },
+                    "individual_income_range": {
+                        "value": "100K_150K",
+                        "cluster_id": 4000027
+                    },
+                    "owns_bank_credit_card": {
+                        "value": true,
+                        "cluster_id": 4000044
+                    },
+                    "owns_investments": {
+                        "value": false,
+                        "cluster_id": 4000047
+                    },
+                    "donated_childrens_cause": {
+                        "value": false,
+                        "cluster_id": 4000015
+                    },
+                    "owns_amex_card": {
+                        "value": true,
+                        "cluster_id": 4000042
+                    }
+                },
+                "household": {
+                    "number_vehicles_in_household": {
+                        "value": "multi_vehicle",
+                        "cluster_id": 5000091
+                    },
+                    "has_child_aged_10_12_in_household": {
+                        "value": false,
+                        "cluster_id": 5000007
+                    },
+                    "has_child_aged_7_9_in_household": {
+                        "value": false,
+                        "cluster_id": 5000013
+                    },
+                    "has_child_aged_4_6_in_household": {
+                        "value": false,
+                        "cluster_id": 5000011
+                    },
+                    "residence_duration": {
+                        "value": "established",
+                        "cluster_id": 5000093
+                    },
+                    "number_persons_in_household": {
+                        "value": "multi_person",
+                        "cluster_id": 5000088
+                    },
+                    "number_children_in_household": {
+                        "value": "single_child",
+                        "cluster_id": 5000079
+                    },
+                    "household_net_worth_range": {
+                        "value": "H. $100,000 - $249,999",
+                        "cluster_id": 5000071
+                    },
+                    "has_veteran_in_household": {
+                        "value": false,
+                        "cluster_id": 5000017
+                    },
+                    "number_credit_lines_in_household": {
+                        "value": "minimal",
+                        "cluster_id": 5000080
+                    },
+                    "household_income_range": {
+                        "value": "K. $100,000-$149,999",
+                        "cluster_id": 5000039
+                    },
+                    "has_child_aged_0_3_in_household": {
+                        "value": false,
+                        "cluster_id": 5000005
+                    },
+                    "number_generations_in_household": {
+                        "value": "dual_generations",
+                        "cluster_id": 5000084
+                    },
+                    "has_children_in_household": {
+                        "value": true,
+                        "cluster_id": 5000016
+                    },
+                    "number_adults_in_household": {
+                        "value": "multi_adult",
+                        "cluster_id": 5000075
+                    },
+                    "has_child_aged_13_18_in_household": {
+                        "value": false,
+                        "cluster_id": 5000009
+                    }
+                },
+                "intent": {
+                    "topics": [
+                        {
+                            "value": "Agriculture & Food Technology > Agricultural Products & Commodities > Produce Specialist",
+                            "cluster_id": 6002492
+                        },
+                        {
+                            "value": "Agriculture & Food Technology > Farm Management Software > Consumer Products from Farms",
+                            "cluster_id": 6002531
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Finger Foods Like Rice Cakes, Puffs, Crackers, And Teething Biscuits",
+                            "cluster_id": 6004496
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Gerber Graduates Lil' Crunchies",
+                            "cluster_id": 6004497
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Gerber Graduates Lil' Snacks",
+                            "cluster_id": 6004503
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Gerber Graduates Lil' Wafers",
+                            "cluster_id": 6004504
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Pouches Of Pureed Food",
+                            "cluster_id": 6004511
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Snack Bars",
+                            "cluster_id": 6004514
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products > Soft-cooked Eggs",
+                            "cluster_id": 6004515
+                        },
+                        {
+                            "value": "Business Operations Software > Office Equipment & Supplies > Breakroom supplies",
+                            "cluster_id": 6006153
+                        },
+                        {
+                            "value": "Business Services > Health & Wellness Services > Nutrition Services",
+                            "cluster_id": 6007157
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Chairs",
+                            "cluster_id": 6012115
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Coffee Tables",
+                            "cluster_id": 6012121
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Furniture",
+                            "cluster_id": 6012155
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Home & Garden Supplies",
+                            "cluster_id": 6012179
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Kitchen & Dining Room Tables",
+                            "cluster_id": 6012208
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden > Storage Furnishings",
+                            "cluster_id": 6012292
+                        },
+                        {
+                            "value": "Food & Beverage > Cooking > Baking",
+                            "cluster_id": 6023751
+                        },
+                        {
+                            "value": "Food & Beverage > Cooking > Cuisines",
+                            "cluster_id": 6023755
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Confectioneries",
+                            "cluster_id": 6023770
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Food Delivery",
+                            "cluster_id": 6023777
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Healthy Food",
+                            "cluster_id": 6023784
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Meal Kit Delivery",
+                            "cluster_id": 6023789
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Meats",
+                            "cluster_id": 6023790
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Restaurants",
+                            "cluster_id": 6023801
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Snacks",
+                            "cluster_id": 6023802
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products > Trader Joe's",
+                            "cluster_id": 6023809
+                        },
+                        {
+                            "value": "Food & Beverage > Houseware > Cutlery",
+                            "cluster_id": 6023819
+                        },
+                        {
+                            "value": "Food & Beverage > Houseware > Food",
+                            "cluster_id": 6023820
+                        },
+                        {
+                            "value": "Gifting & Occasions > Bar Mitzvah Planning > Chuppah",
+                            "cluster_id": 6023844
+                        },
+                        {
+                            "value": "Gifting & Occasions > Bar Mitzvah Planning > Opportunities",
+                            "cluster_id": 6023856
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Art Prints And Posters",
+                            "cluster_id": 6023869
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Automotive And Transportation",
+                            "cluster_id": 6023870
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Books And Stationery",
+                            "cluster_id": 6023876
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Camping And Hiking Gear",
+                            "cluster_id": 6023877
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Candles And Aromatherapy",
+                            "cluster_id": 6023878
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Cooking And Baking Supplies",
+                            "cluster_id": 6023880
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Experiences",
+                            "cluster_id": 6023884
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Fitness Equipment And Gear",
+                            "cluster_id": 6023886
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Gardening And Plants",
+                            "cluster_id": 6023889
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Home Appliances And Tools",
+                            "cluster_id": 6023893
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Home Theater And Audio Equipment",
+                            "cluster_id": 6023894
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting > Pets And Animals",
+                            "cluster_id": 6023905
+                        },
+                        {
+                            "value": "Gifting & Occasions > Family Gifting > Brother And Sister Gifts",
+                            "cluster_id": 6023976
+                        },
+                        {
+                            "value": "Gifting & Occasions > Family Gifting > Flowers",
+                            "cluster_id": 6023983
+                        },
+                        {
+                            "value": "Gifting & Occasions > Family Gifting > Home Decor Gifts",
+                            "cluster_id": 6023989
+                        },
+                        {
+                            "value": "Gifting & Occasions > Family Gifting > Kids Gifts",
+                            "cluster_id": 6023991
+                        },
+                        {
+                            "value": "Gifting & Occasions > Honeymoon Planning > Choosing A Destination",
+                            "cluster_id": 6024003
+                        },
+                        {
+                            "value": "Gifting & Occasions > Honeymoon Planning > Planning A Surprise Or Special Event",
+                            "cluster_id": 6024015
+                        },
+                        {
+                            "value": "Gifting & Occasions > Seasonal > Thanksgiving Decorations",
+                            "cluster_id": 6024075
+                        },
+                        {
+                            "value": "Gifting & Occasions > Seasonal > Thanksgiving Grocery Shopping & Recipes",
+                            "cluster_id": 6024076
+                        },
+                        {
+                            "value": "Gifting & Occasions > Wedding Planning > Rentals",
+                            "cluster_id": 6024102
+                        },
+                        {
+                            "value": "Gifting & Occasions > Wedding Planning > Venue Selection",
+                            "cluster_id": 6024106
+                        },
+                        {
+                            "value": "Gifting & Occasions > Wedding Planning > Wedding Reception Details",
+                            "cluster_id": 6024113
+                        },
+                        {
+                            "value": "Gifting & Occasions > Wedding Planning > Wedding Stationery",
+                            "cluster_id": 6024116
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Engagement > Employee Merchandise",
+                            "cluster_id": 6027266
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Onboarding Software > New Hire Gifts",
+                            "cluster_id": 6027344
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Recognition Software > Employee Gifting",
+                            "cluster_id": 6027356
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Recognition Software > WeGift",
+                            "cluster_id": 6027378
+                        },
+                        {
+                            "value": "Human Resources Technology > Remote Work Solutions > Remote Worker Gifts",
+                            "cluster_id": 6028187
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Fulfillment Services > Shared Fulfillment Centers",
+                            "cluster_id": 6030953
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Last Mile Delivery > Deliveroo",
+                            "cluster_id": 6031059
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Last Mile Delivery > Delivery.com",
+                            "cluster_id": 6031062
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Last Mile Delivery > Postmates",
+                            "cluster_id": 6031070
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Packaging Solutions > Return Packaging",
+                            "cluster_id": 6031273
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Shipping & Freight > Destination",
+                            "cluster_id": 6031433
+                        },
+                        {
+                            "value": "Manufacturing & Industrial > Packaging Solutions > Specialized Packaging",
+                            "cluster_id": 6033432
+                        },
+                        {
+                            "value": "Marketing Technology > Marketing Automation & Campaigns > Gift With Purchase",
+                            "cluster_id": 6036121
+                        },
+                        {
+                            "value": "Marketing Technology > Promotional Products > Corporate Giveaways",
+                            "cluster_id": 6036560
+                        },
+                        {
+                            "value": "Retail & eCommerce Technology > Order Management Systems > Forkable",
+                            "cluster_id": 6040881
+                        },
+                        {
+                            "value": "Retail & eCommerce Technology > Specialty Retail Software > Grocery Delivery Software",
+                            "cluster_id": 6041277
+                        },
+                        {
+                            "value": "Retail & eCommerce Technology > Specialty Retail Software > Seamless",
+                            "cluster_id": 6041338
+                        },
+                        {
+                            "value": "Sports & Fitness > Camping, Hiking, & Backpacking > Cookware and utensils",
+                            "cluster_id": 6043474
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Food Delivery Platforms > Eat24",
+                            "cluster_id": 6045774
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Food Delivery Platforms > FoodHub",
+                            "cluster_id": 6045776
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Food Delivery Platforms > Foodpanda for Business",
+                            "cluster_id": 6045778
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Restaurant Management Software > Food Service",
+                            "cluster_id": 6045987
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Restaurant Management Software > US Foods",
+                            "cluster_id": 6046043
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Travel Management Software > First Class",
+                            "cluster_id": 6046143
+                        },
+                        {
+                            "value": "Travel > International Travel > Local Cuisine",
+                            "cluster_id": 6046408
+                        },
+                        {
+                            "value": "Travel > International Travel > Souvenirs",
+                            "cluster_id": 6046421
+                        }
+                    ],
+                    "categories": [
+                        {
+                            "value": "Agriculture & Food Technology > Agricultural Products & Commodities",
+                            "cluster_id": 6000001
+                        },
+                        {
+                            "value": "Agriculture & Food Technology > Farm Management Software",
+                            "cluster_id": 6000004
+                        },
+                        {
+                            "value": "Agriculture & Food Technology > Food Processing Technology",
+                            "cluster_id": 6000005
+                        },
+                        {
+                            "value": "Agriculture & Food Technology > Food Safety & Compliance",
+                            "cluster_id": 6000006
+                        },
+                        {
+                            "value": "Agriculture & Food Technology > Sustainable Agriculture Solutions",
+                            "cluster_id": 6000013
+                        },
+                        {
+                            "value": "Apparel & Accessories > Bargain Hunters",
+                            "cluster_id": 6000021
+                        },
+                        {
+                            "value": "Apparel & Accessories > Brand Conscious",
+                            "cluster_id": 6000022
+                        },
+                        {
+                            "value": "Apparel & Accessories > Clothing",
+                            "cluster_id": 6000023
+                        },
+                        {
+                            "value": "Apparel & Accessories > High End",
+                            "cluster_id": 6000027
+                        },
+                        {
+                            "value": "Apparel & Accessories > Jewelry",
+                            "cluster_id": 6000028
+                        },
+                        {
+                            "value": "Arts & Entertainment > Books & Literature",
+                            "cluster_id": 6000032
+                        },
+                        {
+                            "value": "Arts & Entertainment > TV & Film",
+                            "cluster_id": 6000035
+                        },
+                        {
+                            "value": "Babies & Children > Food & Nutrition Products",
+                            "cluster_id": 6000061
+                        },
+                        {
+                            "value": "Babies & Children > Furniture & Accessories",
+                            "cluster_id": 6000062
+                        },
+                        {
+                            "value": "Beauty Products & Services > Beauty Services",
+                            "cluster_id": 6000066
+                        },
+                        {
+                            "value": "Beauty Products & Services > Cosmetic Services",
+                            "cluster_id": 6000067
+                        },
+                        {
+                            "value": "Beauty Products & Services > Cosmetics & Fragrances",
+                            "cluster_id": 6000068
+                        },
+                        {
+                            "value": "Beauty Products & Services > Personal Care Products",
+                            "cluster_id": 6000069
+                        },
+                        {
+                            "value": "Business Operations Software > Office Equipment & Supplies",
+                            "cluster_id": 6000214
+                        },
+                        {
+                            "value": "Business Operations Software > Visitor Management Systems",
+                            "cluster_id": 6000306
+                        },
+                        {
+                            "value": "Business Services > Dating Services",
+                            "cluster_id": 6000324
+                        },
+                        {
+                            "value": "Business Services > Employment & Personal Development Services",
+                            "cluster_id": 6000325
+                        },
+                        {
+                            "value": "Business Services > Health & Wellness Services",
+                            "cluster_id": 6000326
+                        },
+                        {
+                            "value": "Business Services > Landscape, Hardscape & Lawncare Services",
+                            "cluster_id": 6000330
+                        },
+                        {
+                            "value": "Business Services > Legal Services",
+                            "cluster_id": 6000331
+                        },
+                        {
+                            "value": "Business Services > Remodeling & Construction Services",
+                            "cluster_id": 6000336
+                        },
+                        {
+                            "value": "Communications & Collaboration > Communication APIs",
+                            "cluster_id": 6000567
+                        },
+                        {
+                            "value": "Communications & Collaboration > Community Platforms",
+                            "cluster_id": 6000568
+                        },
+                        {
+                            "value": "Communications & Collaboration > Email Management",
+                            "cluster_id": 6000572
+                        },
+                        {
+                            "value": "Communications & Collaboration > Internal Communications",
+                            "cluster_id": 6000578
+                        },
+                        {
+                            "value": "Construction & Real Estate Technology > Architecture & Design Software",
+                            "cluster_id": 6000594
+                        },
+                        {
+                            "value": "Construction & Real Estate Technology > Construction Services",
+                            "cluster_id": 6000602
+                        },
+                        {
+                            "value": "Construction & Real Estate Technology > Facility Management Software",
+                            "cluster_id": 6000604
+                        },
+                        {
+                            "value": "Construction & Real Estate Technology > Property Management Software",
+                            "cluster_id": 6000611
+                        },
+                        {
+                            "value": "Construction & Real Estate Technology > Real Estate Platforms",
+                            "cluster_id": 6000615
+                        },
+                        {
+                            "value": "Consumer Electronics > Computers, Software & Peripherals",
+                            "cluster_id": 6000623
+                        },
+                        {
+                            "value": "Consumer Goods > Discount & Big Box Stores",
+                            "cluster_id": 6000642
+                        },
+                        {
+                            "value": "Consumer Goods > Graduation Gift Buyers",
+                            "cluster_id": 6000643
+                        },
+                        {
+                            "value": "Consumer Goods > Home & Garden",
+                            "cluster_id": 6000644
+                        },
+                        {
+                            "value": "Consumer Goods > Luxury Buyers",
+                            "cluster_id": 6000645
+                        },
+                        {
+                            "value": "Consumer Goods > Remodeling & Construction Services",
+                            "cluster_id": 6000648
+                        },
+                        {
+                            "value": "Consumer Goods > Seasonal Shopping",
+                            "cluster_id": 6000649
+                        },
+                        {
+                            "value": "Cybersecurity > Data Protection",
+                            "cluster_id": 6000679
+                        },
+                        {
+                            "value": "Cybersecurity > Email Security",
+                            "cluster_id": 6000686
+                        },
+                        {
+                            "value": "Cybersecurity > Security Monitoring & Analytics",
+                            "cluster_id": 6000731
+                        },
+                        {
+                            "value": "Education & Schools > College",
+                            "cluster_id": 6000976
+                        },
+                        {
+                            "value": "Entertainment > Activities & Events",
+                            "cluster_id": 6001042
+                        },
+                        {
+                            "value": "Food & Beverage > Cooking",
+                            "cluster_id": 6001153
+                        },
+                        {
+                            "value": "Food & Beverage > Food Products",
+                            "cluster_id": 6001154
+                        },
+                        {
+                            "value": "Food & Beverage > Food Services",
+                            "cluster_id": 6001155
+                        },
+                        {
+                            "value": "Food & Beverage > Houseware",
+                            "cluster_id": 6001156
+                        },
+                        {
+                            "value": "Food & Beverage > Spirits",
+                            "cluster_id": 6001157
+                        },
+                        {
+                            "value": "Gifting & Occasions > Bar Mitzvah Planning",
+                            "cluster_id": 6001158
+                        },
+                        {
+                            "value": "Gifting & Occasions > Birthday Gifting",
+                            "cluster_id": 6001159
+                        },
+                        {
+                            "value": "Gifting & Occasions > Charities & Nonprofits",
+                            "cluster_id": 6001160
+                        },
+                        {
+                            "value": "Gifting & Occasions > Family Gifting",
+                            "cluster_id": 6001161
+                        },
+                        {
+                            "value": "Gifting & Occasions > Honeymoon Planning",
+                            "cluster_id": 6001162
+                        },
+                        {
+                            "value": "Gifting & Occasions > Seasonal",
+                            "cluster_id": 6001164
+                        },
+                        {
+                            "value": "Gifting & Occasions > Wedding Planning",
+                            "cluster_id": 6001165
+                        },
+                        {
+                            "value": "Government & Public Sector > Regulatory & Compliance Systems",
+                            "cluster_id": 6001185
+                        },
+                        {
+                            "value": "Health & Wellness > Diet & Weight Loss",
+                            "cluster_id": 6001190
+                        },
+                        {
+                            "value": "Health & Wellness > Injuries",
+                            "cluster_id": 6001192
+                        },
+                        {
+                            "value": "Health & Wellness > Services",
+                            "cluster_id": 6001195
+                        },
+                        {
+                            "value": "Healthcare Technology > Chronic Disease Management",
+                            "cluster_id": 6001210
+                        },
+                        {
+                            "value": "Healthcare Technology > Clinical Decision Support",
+                            "cluster_id": 6001217
+                        },
+                        {
+                            "value": "Healthcare Technology > Clinical Support Services",
+                            "cluster_id": 6001225
+                        },
+                        {
+                            "value": "Healthcare Technology > Clinical Systems",
+                            "cluster_id": 6001226
+                        },
+                        {
+                            "value": "Healthcare Technology > Healthcare Analytics & Diagnostics",
+                            "cluster_id": 6001263
+                        },
+                        {
+                            "value": "Healthcare Technology > Medical Devices & Equipment",
+                            "cluster_id": 6001339
+                        },
+                        {
+                            "value": "Healthcare Technology > Medical Devices",
+                            "cluster_id": 6001338
+                        },
+                        {
+                            "value": "Healthcare Technology > Medical Specialties",
+                            "cluster_id": 6001352
+                        },
+                        {
+                            "value": "Healthcare Technology > Patient Engagement Platforms",
+                            "cluster_id": 6001370
+                        },
+                        {
+                            "value": "Healthcare Technology > Practice Management Software",
+                            "cluster_id": 6001391
+                        },
+                        {
+                            "value": "Healthcare Technology > Rehabilitation Software",
+                            "cluster_id": 6001405
+                        },
+                        {
+                            "value": "Healthcare Technology > Remote Patient Monitoring",
+                            "cluster_id": 6001407
+                        },
+                        {
+                            "value": "Healthcare Technology > Senior Care Management",
+                            "cluster_id": 6001411
+                        },
+                        {
+                            "value": "Healthcare Technology > Sleep Disorder Solutions",
+                            "cluster_id": 6001412
+                        },
+                        {
+                            "value": "Healthcare Technology > Surgical Services",
+                            "cluster_id": 6001418
+                        },
+                        {
+                            "value": "Healthcare Technology > Telehealth Platforms",
+                            "cluster_id": 6001420
+                        },
+                        {
+                            "value": "Human Resources Technology > Benefits Administration",
+                            "cluster_id": 6001435
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Engagement",
+                            "cluster_id": 6001442
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Onboarding Software",
+                            "cluster_id": 6001447
+                        },
+                        {
+                            "value": "Human Resources Technology > Employee Recognition Software",
+                            "cluster_id": 6001448
+                        },
+                        {
+                            "value": "Human Resources Technology > Remote Work Solutions",
+                            "cluster_id": 6001475
+                        },
+                        {
+                            "value": "Interest > Hobbies & Leisure",
+                            "cluster_id": 6001507
+                        },
+                        {
+                            "value": "Legal & Compliance > Criminal Law",
+                            "cluster_id": 6001527
+                        },
+                        {
+                            "value": "Lifestyle > Bohemian",
+                            "cluster_id": 6001580
+                        },
+                        {
+                            "value": "Lifestyle > Gift Giving",
+                            "cluster_id": 6001585
+                        },
+                        {
+                            "value": "Lifestyle > Luxury Pursuits",
+                            "cluster_id": 6001588
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Delivery Management",
+                            "cluster_id": 6001605
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Foodservice Supply Chain",
+                            "cluster_id": 6001617
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Fulfillment Services",
+                            "cluster_id": 6001620
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Last Mile Delivery",
+                            "cluster_id": 6001628
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Packaging Solutions",
+                            "cluster_id": 6001634
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Shipping & Freight",
+                            "cluster_id": 6001648
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Trade & Customs Management",
+                            "cluster_id": 6001657
+                        },
+                        {
+                            "value": "Logistics & Supply Chain > Warehouse Management",
+                            "cluster_id": 6001660
+                        },
+                        {
+                            "value": "Manufacturing & Industrial > Industrial Equipment",
+                            "cluster_id": 6001726
+                        },
+                        {
+                            "value": "Manufacturing & Industrial > Kitchen Equipment",
+                            "cluster_id": 6001749
+                        },
+                        {
+                            "value": "Manufacturing & Industrial > Laboratory & Testing Equipment",
+                            "cluster_id": 6001751
+                        },
+                        {
+                            "value": "Manufacturing & Industrial > Packaging Solutions",
+                            "cluster_id": 6001786
+                        },
+                        {
+                            "value": "Marketing Technology > Ad Networks & Programmatic Platforms",
+                            "cluster_id": 6001846
+                        },
+                        {
+                            "value": "Marketing Technology > Content Creation Tools",
+                            "cluster_id": 6001866
+                        },
+                        {
+                            "value": "Marketing Technology > Content Management Systems",
+                            "cluster_id": 6001869
+                        },
+                        {
+                            "value": "Marketing Technology > Conversion Optimization",
+                            "cluster_id": 6001877
+                        },
+                        {
+                            "value": "Marketing Technology > Email Marketing",
+                            "cluster_id": 6001910
+                        },
+                        {
+                            "value": "Marketing Technology > Employee Advocacy Software",
+                            "cluster_id": 6001915
+                        },
+                        {
+                            "value": "Marketing Technology > Lead Generation",
+                            "cluster_id": 6001925
+                        },
+                        {
+                            "value": "Marketing Technology > Marketing Analytics",
+                            "cluster_id": 6001942
+                        },
+                        {
+                            "value": "Marketing Technology > Marketing Automation & Campaigns",
+                            "cluster_id": 6001947
+                        },
+                        {
+                            "value": "Marketing Technology > PR & Communications Software",
+                            "cluster_id": 6001959
+                        },
+                        {
+                            "value": "Marketing Technology > Promotional & Contest Marketing",
+                            "cluster_id": 6001970
+                        },
+                        {
+                            "value": "Marketing Technology > Promotional Products",
+                            "cluster_id": 6001971
+                        },
+                        {
+                            "value": "Marketing Technology > Public Relations Software",
+                            "cluster_id": 6001974
+                        },
+                        {
+                            "value": "Marketing Technology > Social Media Management",
+                            "cluster_id": 6001987
+                        },
+                        {
+                            "value": "Media & Entertainment Technology > Content Distribution Platforms",
+                            "cluster_id": 6002026
+                        },
+                        {
+                            "value": "Media & Entertainment Technology > Event Management Software",
+                            "cluster_id": 6002037
+                        },
+                        {
+                            "value": "Media & Entertainment Technology > Photo Editing Software",
+                            "cluster_id": 6002049
+                        },
+                        {
+                            "value": "Media & Entertainment Technology > Podcast Platforms",
+                            "cluster_id": 6002051
+                        },
+                        {
+                            "value": "Media & Entertainment Technology > Professional News Services",
+                            "cluster_id": 6002053
+                        },
+                        {
+                            "value": "News > TV & Film",
+                            "cluster_id": 6002068
+                        },
+                        {
+                            "value": "News > US",
+                            "cluster_id": 6002069
+                        },
+                        {
+                            "value": "Politics & Society > Politics",
+                            "cluster_id": 6002092
+                        },
+                        {
+                            "value": "Professional Services > Creative Services",
+                            "cluster_id": 6002107
+                        },
+                        {
+                            "value": "Real Estate > Property Type",
+                            "cluster_id": 6002198
+                        },
+                        {
+                            "value": "Real Estate > Purchasing Land",
+                            "cluster_id": 6002199
+                        },
+                        {
+                            "value": "Real Estate > Purchasing a Home",
+                            "cluster_id": 6002200
+                        },
+                        {
+                            "value": "Real Estate > Purchasing a Vacation Home",
+                            "cluster_id": 6002201
+                        },
+                        {
+                            "value": "Real Estate > Selling a Home",
+                            "cluster_id": 6002203
+                        },
+                        {
+                            "value": "Recreational Vehicles > RVs, Campers & Motorhome",
+                            "cluster_id": 6002205
+                        },
+                        {
+                            "value": "Retail & eCommerce Technology > Order Management Systems",
+                            "cluster_id": 6002210
+                        },
+                        {
+                            "value": "Retail & eCommerce Technology > Specialty Retail Software",
+                            "cluster_id": 6002219
+                        },
+                        {
+                            "value": "Spiritual > TV & Film",
+                            "cluster_id": 6002375
+                        },
+                        {
+                            "value": "Sports & Fitness > Camping, Hiking, & Backpacking",
+                            "cluster_id": 6002382
+                        },
+                        {
+                            "value": "Sports & Fitness > Football",
+                            "cluster_id": 6002388
+                        },
+                        {
+                            "value": "Sports & Fitness > Golf Clubs",
+                            "cluster_id": 6002391
+                        },
+                        {
+                            "value": "Sports & Fitness > Golf",
+                            "cluster_id": 6002389
+                        },
+                        {
+                            "value": "Sports & Fitness > Gym Membership",
+                            "cluster_id": 6002392
+                        },
+                        {
+                            "value": "Sports & Fitness > Hunting",
+                            "cluster_id": 6002396
+                        },
+                        {
+                            "value": "Sports & Fitness > Scuba Equipment",
+                            "cluster_id": 6002408
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Food Delivery Platforms",
+                            "cluster_id": 6002439
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Restaurant Management Software",
+                            "cluster_id": 6002444
+                        },
+                        {
+                            "value": "Travel & Hospitality Technology > Travel Management Software",
+                            "cluster_id": 6002450
+                        },
+                        {
+                            "value": "Travel > Cruises",
+                            "cluster_id": 6002453
+                        },
+                        {
+                            "value": "Travel > Domestic Travel",
+                            "cluster_id": 6002454
+                        },
+                        {
+                            "value": "Travel > Expeditions",
+                            "cluster_id": 6002455
+                        },
+                        {
+                            "value": "Travel > General Travel",
+                            "cluster_id": 6002456
+                        },
+                        {
+                            "value": "Travel > International Travel",
+                            "cluster_id": 6002457
+                        },
+                        {
+                            "value": "Travel > Island Getaways",
+                            "cluster_id": 6002458
+                        },
+                        {
+                            "value": "Travel > Luxury Hotels & Resorts",
+                            "cluster_id": 6002460
+                        },
+                        {
+                            "value": "Travel > Popular Destinations",
+                            "cluster_id": 6002461
+                        },
+                        {
+                            "value": "Travel > Rental Cars",
+                            "cluster_id": 6002463
+                        },
+                        {
+                            "value": "Travel > Romantic Getaways",
+                            "cluster_id": 6002465
+                        }
+                    ]
+                },
+                "interest": {
+                    "interested_sports_memorabilia_collector": {
+                        "value": false,
+                        "cluster_id": 7000086
+                    },
+                    "interested_antiques_collector": {
+                        "value": true,
+                        "cluster_id": 7000003
+                    },
+                    "interested_outdoors": {
+                        "value": true,
+                        "cluster_id": 7000073
+                    },
+                    "interested_entertainment": {
+                        "value": false,
+                        "cluster_id": 7000030
+                    },
+                    "interested_walking": {
+                        "value": false,
+                        "cluster_id": 7000092
+                    },
+                    "interested_bird_watching": {
+                        "value": false,
+                        "cluster_id": 7000010
+                    },
+                    "interested_cigars": {
+                        "value": false,
+                        "cluster_id": 7000020
+                    },
+                    "interested_home_study": {
+                        "value": false,
+                        "cluster_id": 7000056
+                    },
+                    "interested_scuba": {
+                        "value": false,
+                        "cluster_id": 7000078
+                    },
+                    "interested_snow_skiing": {
+                        "value": false,
+                        "cluster_id": 7000082
+                    },
+                    "interested_gardening": {
+                        "value": false,
+                        "cluster_id": 7000044
+                    },
+                    "interested_soccer": {
+                        "value": false,
+                        "cluster_id": 7000084
+                    },
+                    "interested_movies": {
+                        "value": false,
+                        "cluster_id": 7000064
+                    },
+                    "interested_dieting": {
+                        "value": false,
+                        "cluster_id": 7000028
+                    },
+                    "interested_healthy_living": {
+                        "value": true,
+                        "cluster_id": 7000049
+                    },
+                    "interested_tennis": {
+                        "value": false,
+                        "cluster_id": 7000090
+                    },
+                    "interested_arts_and_crafts": {
+                        "value": true,
+                        "cluster_id": 7000005
+                    },
+                    "interested_boating_sailing": {
+                        "value": false,
+                        "cluster_id": 7000012
+                    },
+                    "interested_fishing": {
+                        "value": false,
+                        "cluster_id": 7000036
+                    },
+                    "interested_fitness": {
+                        "value": true,
+                        "cluster_id": 7000039
+                    },
+                    "interested_football": {
+                        "value": false,
+                        "cluster_id": 7000040
+                    },
+                    "interested_basketball": {
+                        "value": false,
+                        "cluster_id": 7000008
+                    },
+                    "interested_woodworking": {
+                        "value": false,
+                        "cluster_id": 7000094
+                    },
+                    "interested_fine_arts_collector": {
+                        "value": false,
+                        "cluster_id": 7000034
+                    },
+                    "interested_golf": {
+                        "value": false,
+                        "cluster_id": 7000046
+                    },
+                    "interested_outdoors_hunting": {
+                        "value": false,
+                        "cluster_id": 7000074
+                    },
+                    "interested_aerobics": {
+                        "value": false,
+                        "cluster_id": 7000000
+                    },
+                    "interested_music": {
+                        "value": false,
+                        "cluster_id": 7000066
+                    },
+                    "interested_knitting_quilting_sewing": {
+                        "value": false,
+                        "cluster_id": 7000060
+                    },
+                    "interested_coins_collector": {
+                        "value": false,
+                        "cluster_id": 7000022
+                    },
+                    "interested_musical_instruments": {
+                        "value": false,
+                        "cluster_id": 7000068
+                    },
+                    "interested_baseball": {
+                        "value": false,
+                        "cluster_id": 7000006
+                    },
+                    "interested_cooking": {
+                        "value": true,
+                        "cluster_id": 7000025
+                    },
+                    "interested_home_decor": {
+                        "value": true,
+                        "cluster_id": 7000053
+                    },
+                    "interested_charity": {
+                        "value": true,
+                        "cluster_id": 7000019
+                    },
+                    "interested_epicurean": {
+                        "value": false,
+                        "cluster_id": 7000032
+                    },
+                    "interested_motor_racing": {
+                        "value": false,
+                        "cluster_id": 7000062
+                    },
+                    "interested_hockey": {
+                        "value": false,
+                        "cluster_id": 7000050
+                    },
+                    "interested_photography": {
+                        "value": false,
+                        "cluster_id": 7000076
+                    },
+                    "interested_nascar": {
+                        "value": false,
+                        "cluster_id": 7000070
+                    },
+                    "interested_home_improvement": {
+                        "value": true,
+                        "cluster_id": 7000055
+                    },
+                    "interested_stamps_collector": {
+                        "value": false,
+                        "cluster_id": 7000088
+                    },
+                    "interested_hunting": {
+                        "value": false,
+                        "cluster_id": 7000058
+                    },
+                    "interested_cruise_travel": {
+                        "value": false,
+                        "cluster_id": 7000026
+                    },
+                    "interested_camping_hiking": {
+                        "value": false,
+                        "cluster_id": 7000014
+                    },
+                    "interested_gambling": {
+                        "value": false,
+                        "cluster_id": 7000042
+                    },
+                    "interested_self_improvement": {
+                        "value": false,
+                        "cluster_id": 7000080
+                    },
+                    "interested_cars": {
+                        "value": false,
+                        "cluster_id": 7000016
+                    }
+                },
+                "lifestyle": {
+                    "is_pet_owner": {
+                        "value": false,
+                        "cluster_id": 8000017
+                    },
+                    "is_dog_owner": {
+                        "value": false,
+                        "cluster_id": 8000006
+                    },
+                    "is_rv_owner": {
+                        "value": false,
+                        "cluster_id": 8000021
+                    },
+                    "has_luxury_lifestyle": {
+                        "value": false,
+                        "cluster_id": 8000002
+                    },
+                    "has_home_business": {
+                        "value": true,
+                        "cluster_id": 8000001
+                    },
+                    "is_motorcycle_owner": {
+                        "value": false,
+                        "cluster_id": 8000015
+                    },
+                    "practices_diy": {
+                        "value": false,
+                        "cluster_id": 8000029
+                    },
+                    "is_home_owner": {
+                        "value": true,
+                        "cluster_id": 8000011
+                    },
+                    "is_truck_owner": {
+                        "value": false,
+                        "cluster_id": 8000023
+                    },
+                    "is_international_traveler": {
+                        "value": false,
+                        "cluster_id": 8000012
+                    },
+                    "is_renter": {
+                        "value": false,
+                        "cluster_id": 8000019
+                    },
+                    "is_cat_owner": {
+                        "value": false,
+                        "cluster_id": 8000004
+                    },
+                    "is_vacation_traveler": {
+                        "value": false,
+                        "cluster_id": 8000025
+                    },
+                    "is_health_conscious": {
+                        "value": true,
+                        "cluster_id": 8000009
+                    },
+                    "owns_swimming_pool": {
+                        "value": false,
+                        "cluster_id": 8000027
+                    }
+                },
+                "content": {
+                    "number_cooking_catalogs": {
+                        "value": "single_catalog",
+                        "cluster_id": 1000022
+                    },
+                    "reads_childrens": {
+                        "value": false,
+                        "cluster_id": 1000087
+                    },
+                    "number_cooking_publishers": {
+                        "value": "single_publisher",
+                        "cluster_id": 1000025
+                    },
+                    "reads_fiction": {
+                        "value": false,
+                        "cluster_id": 1000099
+                    },
+                    "reads_military": {
+                        "value": false,
+                        "cluster_id": 1000113
+                    },
+                    "reads_cooking_culinary": {
+                        "value": true,
+                        "cluster_id": 1000092
+                    },
+                    "reads_computer_it": {
+                        "value": false,
+                        "cluster_id": 1000089
+                    },
+                    "number_family_related_publishers": {
+                        "value": "single_publisher",
+                        "cluster_id": 1000031
+                    },
+                    "reads_bible_devotional": {
+                        "value": false,
+                        "cluster_id": 1000084
+                    },
+                    "reads_books_on_tape": {
+                        "value": false,
+                        "cluster_id": 1000085
+                    },
+                    "number_housewares_publishers": {
+                        "value": "single_publisher",
+                        "cluster_id": 1000055
+                    },
+                    "reads_fashion": {
+                        "value": true,
+                        "cluster_id": 1000098
+                    },
+                    "reads_medical_health": {
+                        "value": false,
+                        "cluster_id": 1000111
+                    },
+                    "reads_history": {
+                        "value": false,
+                        "cluster_id": 1000105
+                    },
+                    "reads_interior_decorating": {
+                        "value": false,
+                        "cluster_id": 1000107
+                    },
+                    "reads_finance": {
+                        "value": false,
+                        "cluster_id": 1000101
+                    },
+                    "number_publishier_titles": {
+                        "value": "low_volume",
+                        "cluster_id": 1000075
+                    },
+                    "reads_sports": {
+                        "value": false,
+                        "cluster_id": 1000119
+                    },
+                    "reads_health_remedies": {
+                        "value": false,
+                        "cluster_id": 1000103
+                    },
+                    "reads_entertainment": {
+                        "value": false,
+                        "cluster_id": 1000095
+                    },
+                    "reads_science_technology": {
+                        "value": false,
+                        "cluster_id": 1000117
+                    },
+                    "reads_science_fiction": {
+                        "value": false,
+                        "cluster_id": 1000115
+                    },
+                    "reads_avid_reader": {
+                        "value": true,
+                        "cluster_id": 1000083
+                    },
+                    "reads_world_news_politics": {
+                        "value": false,
+                        "cluster_id": 1000121
+                    },
+                    "number_magazine_subscriptions": {
+                        "value": "dual_magazine",
+                        "cluster_id": 1000062
+                    },
+                    "subscribes_magazines": {
+                        "value": true,
+                        "cluster_id": 1000124
+                    },
+                    "reads_magazines": {
+                        "value": true,
+                        "cluster_id": 1000110
+                    },
+                    "number_home_living_publishers": {
+                        "value": "single_publisher",
+                        "cluster_id": 1000049
+                    },
+                    "number_publishers": {
+                        "value": "dual_publisher",
+                        "cluster_id": 1000071
+                    },
+                    "publisher_total_spend": {
+                        "value": "very_low_spend",
+                        "cluster_id": 1000081
+                    },
+                    "number_magazine_expirations": {
+                        "value": "low_volume",
+                        "cluster_id": 1000060
+                    },
+                    "reads_country_lifestyle": {
+                        "value": false,
+                        "cluster_id": 1000093
+                    }
+                },
+                "demographic": {
+                    "attribute_domain": "demographic",
+                    "attribute_name": "language_spoken",
+                    "attribute_value": "English",
+                    "attribute_data_type": "CHARACTER VARYING",
+                    "source_date": "2025-12-16",
+                    "vendor": "datashopper",
+                    "gender": {
+                        "value": "Female",
+                        "cluster_id": 2000013
+                    },
+                    "is_speaks_english": {
+                        "value": true,
+                        "cluster_id": 2000022
+                    },
+                    "education": {
+                        "value": "Completed College",
+                        "cluster_id": 2000001
+                    },
+                    "is_multilingual": {
+                        "value": false,
+                        "cluster_id": 2000019
+                    },
+                    "marital_status": {
+                        "value": "Married",
+                        "cluster_id": 2000023
+                    },
+                    "generation": {
+                        "value": "2. Generation X (1961-1981)",
+                        "cluster_id": 2000016
+                    }
+                },
+                "political": {
+                    "donated_political_social_cause_recently": {
+                        "value": false,
+                        "cluster_id": 9000006
+                    },
+                    "donated_conservative_cause_recently": {
+                        "value": false,
+                        "cluster_id": 9000000
+                    },
+                    "is_political_contributor": {
+                        "value": false,
+                        "cluster_id": 9000008
+                    },
+                    "donated_political_cause_recently": {
+                        "value": false,
+                        "cluster_id": 9000004
+                    },
+                    "donated_liberal_cause_recently": {
+                        "value": false,
+                        "cluster_id": 9000002
+                    }
+                },
+                "purchase": {
+                    "purchased_jewelry": {
+                        "value": true,
+                        "cluster_id": 10000213
+                    },
+                    "womens_fashion_purchases_total_spend": {
+                        "value": "low_spend",
+                        "cluster_id": 10000249
+                    },
+                    "family_purchases_total_orders": {
+                        "value": "low_volume",
+                        "cluster_id": 10000081
+                    },
+                    "purchased_musical_instruments": {
+                        "value": false,
+                        "cluster_id": 10000214
+                    },
+                    "womens_fashion_purchases_num_companies": {
+                        "value": "single_company",
+                        "cluster_id": 10000244
+                    },
+                    "family_purchases_total_spend": {
+                        "value": "very_low_spend",
+                        "cluster_id": 10000087
+                    },
+                    "purchased_health_beauty_products": {
+                        "value": true,
+                        "cluster_id": 10000207
+                    },
+                    "home_goods_purchases_total_spend": {
+                        "value": "very_low_spend",
+                        "cluster_id": 10000145
+                    },
+                    "womens_related_purchases_num_companies": {
+                        "value": "single_company",
+                        "cluster_id": 10000253
+                    },
+                    "purchased_gifts": {
+                        "value": false,
+                        "cluster_id": 10000204
+                    },
+                    "health_purchases_total_orders": {
+                        "value": "low_volume",
+                        "cluster_id": 10000116
+                    },
+                    "health_purchases_num_companies": {
+                        "value": "single_company",
+                        "cluster_id": 10000111
+                    },
+                    "purchased_home_furnishing": {
+                        "value": true,
+                        "cluster_id": 10000209
+                    },
+                    "purchased_plus_size_clothing": {
+                        "value": false,
+                        "cluster_id": 10000216
+                    },
+                    "purchased_clothing": {
+                        "value": true,
+                        "cluster_id": 10000201
+                    },
+                    "womens_fashion_purchases_avg_spend": {
+                        "value": "low_volume",
+                        "cluster_id": 10000240
+                    },
+                    "beauty_product_purchases_num_companies": {
+                        "value": "single_company",
+                        "cluster_id": 10000028
+                    },
+                    "purchased_childrens_products": {
+                        "value": true,
+                        "cluster_id": 10000199
+                    },
+                    "health_purchases_total_spend": {
+                        "value": "very_low_spend",
+                        "cluster_id": 10000122
+                    },
+                    "purchased_home_improvement": {
+                        "value": true,
+                        "cluster_id": 10000211
+                    },
+                    "home_goods_purchases_total_orders": {
+                        "value": "low_volume",
+                        "cluster_id": 10000139
+                    },
+                    "family_purchases_total_items": {
+                        "value": "low_volume",
+                        "cluster_id": 10000078
+                    },
+                    "home_goods_purchases_total_items": {
+                        "value": "low_volume",
+                        "cluster_id": 10000136
+                    },
+                    "family_purchases_avg_spend": {
+                        "value": "low_volume",
+                        "cluster_id": 10000075
+                    },
+                    "womens_fashion_purchases_total_orders": {
+                        "value": "low_volume",
+                        "cluster_id": 10000246
+                    },
+                    "home_goods_purchases_avg_spend": {
+                        "value": "low_volume",
+                        "cluster_id": 10000133
+                    },
+                    "purchased_books": {
+                        "value": true,
+                        "cluster_id": 10000197
+                    },
+                    "purchased_cosmetics": {
+                        "value": true,
+                        "cluster_id": 10000203
+                    },
+                    "health_purchases_total_items": {
+                        "value": "low_volume",
+                        "cluster_id": 10000113
+                    },
+                    "purchased_auto_parts": {
+                        "value": false,
+                        "cluster_id": 10000194
+                    },
+                    "craft_purchases_num_companies": {
+                        "value": "single_company",
+                        "cluster_id": 10000061
+                    }
+                }
             }
         }
     ],
     "export": {
-        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1771675329563-222e0108-39ba-497a-980c-b03822597218.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SUEGSTK5C%2F20260221%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260221T120209Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCID5VjsjbWXR8g6DXp7d5Kkok6Ymng1rwVfiu%2FMIjAIv0AiEAhE70MZd3bVRBGtQL%2FX3JKtOaTgrjbhikg85pND5vNocqtAQIq%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDIJnvp11GFrSjY3lECqIBBMzb835wOMAb%2Fn97bPig%2F7r9XudzTr7%2Fx7HdkB7Iu7p1xFQuN27FEy0lLRlm9hOhYOiiolQCvaOVN8yvUHmB3BlIKU4QnSfjq6efhUFszSr1bNdakwq9i%2BmPpr0s2qduRWkr1uGw%2FqplYhFyzB1JR44gFuZTWaALp51I0d%2BfeM%2BqzrB%2F1h7cmztXwV0xq3OWfNKBAYPjgWjEdnY1z2UGQBhQm9fKFQkUvY1uzxFLlTw29j6MNPBVrR3v7%2BZnme8g0xpFSqOTKRt1kwpQ6sqgWtPygODFB6wHP3vYqhAkYtmnXYPk6ZLXrCjtN5T2yFaO5yY%2FRi71KM3H2VwNJhvAZ0lcqGV5%2BsUbfM4O1eqqZr%2BWeGs6lmcfvScGVDx86TFkojj%2BB6YKIQnx1iAL%2FE%2FTCaIss2LUBcS29AlQx5GNhRLNv1GSrrrL9B5MRyqmqNybnvVqv8y2g3034O20OxKrF%2FvQ%2BM6DpcHeQ6owRDGGebNoeiiDvT0IyJCRFN%2B8QyX33DtDgyIwO8Ii59hO%2FivYe0Nw0fubwAcSgUOMDm9DT7DQNCrUtxsMx%2FTEefGCe39M088qFetYyjlnWwAMy4sJJ1O6K9hOQhiXu1it3SDbFOzlul7lpHcCgwINj%2BHBQ3zvXWvYZKAzhji8INDWTBi1qgQVEclhUWGSZitDKLj9ixe5S6%2B3Vm3ongwyoPmzAY6pgFbnMeiScJdDLYHU7Of%2FFNxetTBHQceGV2ewGElPGqRXT5NgigHGuSORpu2UugYB97MBNgI6NcyhpY7rT21gCuhhaxqb7a79xZtiCOfZ7u%2B4sxXyQGT2ckQgAEjPT8swIm7c6tQF%2BI2mVbPvBgstaaf2ahxhZcWsXBbHMeypJnCG3IJGKl54gAY8eShYZmxyHNtB%2B4%2BJTs2uT17WGdk9xgJcZVwB%2FL6&X-Amz-Signature=443410036e1cfc92e636d9ff6d8f44c9b86903ba9b199e729d8061688a8d8913&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1771581959514-b3d9b33e-4330-46ac-acc0-e55fd5fcc7d1.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62S6E3VNZLM%2F20260220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260220T100559Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQDENv9dc0UUigzA1%2FZc034aGS8Ek1sZ%2FvQGTKK6xr%2Ff%2BgIhAM0Hnaq5W%2BdxEDDDg%2BsgQeQ5Et8ESENKZSr%2FX7Zxz8ztKrQECJD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNDgxNjY1MDg3MTQxIgyuIJUmc1v0U4C5RlkqiAS7fcpwfTefLj7Q%2BPMozp%2BUGY3dTBuZ4%2B1T4QMfxepuZ%2BlxbmNSYG1WUaijxPlMBZ3AePlolu3VNu3S1qi8PPY5952E06trtUS%2BURlt%2FK3scuTbCX6H22%2F6j5VCbpb9HqYee5ehGFwegjpCkEw8oq5Fr9JuBr%2BvehjdtFu6lYH85vcBB1wOMtnZt6Gtba9reZVqFQAHzNPBeHNnYiBzebFFu6Nh9hscG1Z2gZP%2BGPs0JEESuvvY5sMadMsFRQ%2FiWLQ6FSWcszAN0%2BYjMJEpOu23NRpSakVdx8%2FdIKIYSF8xwDDfKZTSNfMnv5bjT5FrJqeyeywzabW8buhCtoVLeRQuRKWPyjiouKfK9s3SY7BNIq6d4JqScvE5KgvaYDxnRJQMDtSyx664NXfa%2BGwSdWAqMtF53Nzy2VNxlviAgXT77s5C1eoslk20XH5W0q4Jn%2F1f1Sr7j%2BYvZH0e7yuxtrkq8TY%2BWOYgLkQ%2BuFdZRavcGsW2catn4m3p2SSIeu%2BsgbuFX2Cf6BandszwMxUUCWwPiwQ4RU736laDvWwh3ZdMSqu4Mni%2FMlU7bSaGq3psOHgSVvxjUWVQdDuLnOwG3cZXdTu56jrbhXoPMFWskYiGqRGkH9RDHRrpIM1sEUQqXNFBuZBcVaepiIpImxW9a%2FBI2df%2FiECOKmbhDPYP3UTGL7tkYTzFXAfLMIqQ4MwGOqUBrmsqQa8Ep08SemVCm7G9%2FRjOptWJrK%2BoXcQKyQlVRTACvZKmfEMI7EChfhP4yReyxErvZ39dd4RAKlthc9ElimaDiS4NXC%2FArmzr39G2vQzoSWLhQ%2BQ5zbX8GuZuoLzi5Yu4%2FvIN45Sh2r%2B31tem8M%2BJ3WJGwUf5w%2B7pBSYdU6QHLgYRjuEcdOU7mtNDI5yWWc2nx5lh59sLkQd0MEiJJWzH1IQ%2F&X-Amz-Signature=08d2419ce32ee2acb45090a5195021b9c814deff23d35c56cd5f3081734fcfac&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
         "format": "csv",
         "rows": 1,
         "size_bytes": 0,
-        "expires_at": "2026-02-21T13:02:09.642Z"
+        "expires_at": "2026-02-20T11:05:59.589Z"
     },
-    "workflow_id": "bca24f7e-889e-4504-a1a6-9b51eab82737",
-    "tool_trace_id": "a7d7a1282500e646bfc10c7a9587641e"
+    "workflow_id": "63af2bbb-eb61-4358-be36-331b2282ab3b",
+    "tool_trace_id": "f2ff455fa586599be8d62d7f7d231e60"
 }
