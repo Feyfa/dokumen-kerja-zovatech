@@ -7,7 +7,8 @@ where `function` = 'getWattBasicInfo'
 order by created_at desc
 limit 20;
 
-set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352';
+set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
+-- set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 set @key := '8e651522e38256f2';
 
@@ -114,7 +115,7 @@ select
 	CONVERT(AES_DECRYPT(FROM_BASE64(email), @key) USING utf8mb4) as email,
 	flr.* 
 from failed_lead_records as flr 
-where created_at > '2026-02-20 23:18:00' order by created_at desc limit 100;
+where created_at > '2026-02-23 00:29:29' order by created_at desc limit 100;
 
 
 UPDATE person_addresses
@@ -122,7 +123,7 @@ set street = TO_BASE64(AES_ENCRYPT('1870 Eagle Ridge Dr Apt 10', '8e651522e38256
 where id = 14654;
 
 
-select * from leadspeek_reports where leadspeek_api_id =53620540;
+select * from leadspeek_reports where leadspeek_api_id = 84140504;
 select * from jobs order by id desc;
 
 

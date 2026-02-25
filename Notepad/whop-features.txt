@@ -1,0 +1,8 @@
+Fitur yang didukung oleh Whop:
+1. Whop mendukung penagihan berulang otomatis untuk subscription plan sesuai periode yang ditentukan, dan proses pembayaran mengharuskan pengguna memiliki akun Whop.
+2. Whop menyediakan mekanisme webhook untuk integrasi sistem eksternal melalui event pembayaran, langganan, dan aktivitas pengguna.
+3. Whop menyediakan fitur Embed Checkout yang memungkinkan proses pembayaran dilakukan langsung di dalam website kita tanpa perlu mengalihkan pengguna ke halaman Whop.
+4. Whop menyediakan API untuk membatalkan langganan (subscription), baik melalui website kita sendiri maupun langsung dari platform Whop.
+
+Fitur yang tidak didukung oleh Whop
+1. Whop menggunakan sistem berbasis produk dengan harga tetap, sehingga kurang cocok untuk penagihan dengan harga yang dinamis atau ditentukan saat checkout.

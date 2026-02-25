@@ -410,3 +410,16 @@ FILE
 * public\px.min.js
 * app\Models\LeadspeekReport.php
 
+
+
+
+Route::put('/developer/update/campaign/{campaignType}', 'OpenApiController@updateCampaignOpenApi'); // update campaign
+Route::put('/developer/price/campaign/{campaignid}/{paymentterm}/{prepaidtype?}', 'OpenApiController@UpdatePriceCampaignOpenApi'); // update price campaign
+Route::put('/developer/status/campaign/{campaignid}/{campaignstatus}', 'OpenApiController@UpdateStatusCampaignOpenApi'); // update status campaign
+Route::put('/developer/embedded-custom-params/campaign/{campaignid}', 'OpenApiController@updateEmbeddedCustomParamsOpenApi'); // update status campaign
+
+nanti parameter saat create campaign di open api
+- embedded_custom_params: string
+
+nanti parameter saat update custom param di open api
+- embedded_custom_params: string

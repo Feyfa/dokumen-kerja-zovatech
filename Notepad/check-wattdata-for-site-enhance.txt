@@ -1506,3 +1506,33 @@ ini yang baru
 {"token":"bXRfYjRiYzNlNjdiYmU1YzU4N2Q3NTJiY2I5ZjU4NTcwNTQ6bXRfOFpTSDVUTjk0M1BUUlpDU0RSRUs1M0NBSlo4NUpYU1g=","base_url":"https://api.wattdata.ai/v1/mcp/m2m"}
 
 
+TEST CEPAT
+1. site id local (basic) (progress)
+    - belum ada data ✅
+    - sudah ada data ✅
+    - sudah ada data namun expired ✅
+
+2. site id local (advanced)
+    - belum ada data
+    - sudah ada data
+    - sudah ada data namun expired
+
+3. site id enhance (basic)
+    - belum ada data ✅
+    - sudah ada data ✅
+    - sudah ada data namun expired ✅
+
+4. site id enhance (advanced)
+    - belum ada data
+    - sudah ada data
+    - sudah ada data namun expired
+
+5. site id b2b (basic)
+    - belum ada data
+    - sudah ada data
+    - sudah ada data namun expired
+
+6. site id b2b (advanced)
+    - belum ada data
+    - sudah ada data
+    - sudah ada data namun expired
