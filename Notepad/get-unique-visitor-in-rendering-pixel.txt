@@ -423,3 +423,27 @@ nanti parameter saat create campaign di open api
 
 nanti parameter saat update custom param di open api
 - embedded_custom_params: string
+
+
+
+4243136449-upsertpixelleadrecord-fisikamodern00@gmail.com|muhammadjidan703@gmail.com|agieswahyudi@gmail.com|google
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-862 = "feat(integrations): add local-only customParams in Zapier and AgencyZoom test payload"
+JD-TASK-EMM-862-DEV-SYNC
+
+FILE
+FRONT
+* front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+* front\src\store\store.js
+
+DATA
+* data\app\Http\Controllers\Controller.php
+* data\app\Http\Controllers\IntegrationController.php
+* data\app\Http\Controllers\LeadspeekController.php
+* data\app\Http\Controllers\OpenApiController.php
+* data\app\Services\Leadspeek\LeadspeekEmbeddedCodeService.php
+* data\app\Services\Leadspeek\LeadspeekGetCampaignService.php
+* data\app\Services\OpenApi\OpenApiCampaignEmbededCodeService.php
+* data\app\Models\LeadspeekUser.php
+* data\routes\api.php

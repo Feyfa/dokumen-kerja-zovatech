@@ -1,2 +1,2 @@
 <?php
-resolve-identities
+. PHP_EOL
