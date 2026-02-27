@@ -113,4 +113,6 @@ select * from leadspeek_users where leadspeek_api_id = 79229250;
 
 select * from jobs order by created_at desc limit 100;
 
+select * from failed_lead_records order by id desc limit 10;
+
 

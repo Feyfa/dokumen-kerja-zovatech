@@ -123,7 +123,16 @@ set street = TO_BASE64(AES_ENCRYPT('1870 Eagle Ridge Dr Apt 10', '8e651522e38256
 where id = 14654;
 
 
-select * from leadspeek_reports where leadspeek_api_id = 84140504;
+select * from leadspeek_reports where leadspeek_api_id = 53620540;
 select * from jobs order by id desc;
+
+
+
+
+select * from report_analytics where leadspeek_api_id = 53620540 and date >= '2026-02-27';
+
+
+
+
 
 

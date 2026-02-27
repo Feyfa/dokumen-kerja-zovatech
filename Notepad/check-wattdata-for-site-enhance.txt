@@ -30,9 +30,9 @@ process_BDM_local_custom
 process_BDM_advance
 dataNotExistOnDBBIG
 
-bigBDM_MD5
-getTowerData
-bigBDM_PII
+bigBDM_MD5 throw new Exception('test');
+getTowerData throw new Exception('test');
+bigBDM_PII throw new Exception('test');
 
 coba sekarang check, jika email dapet dari bigdbmmd5, lalu ke2 emailnya ke trus list, apakah dia ambil lagi ke getTowerData+bigBDM_PII
 
@@ -1536,3 +1536,68 @@ TEST CEPAT
     - belum ada data
     - sudah ada data
     - sudah ada data namun expired
+
+
+
+
+
+
+
+@app/Http/Controllers/WebhookController.php:9661 @app/Http/Controllers/WebhookController.php:10212 
+
+hai jadi gini saya kan sebelumnya pernah ada provider bigbdm, yaitu function bigBDM_MD5, getTowerData, bigBDM_PII
+
+itu kalo anda lihat dia kan masukin ke dalalm report analytic ya, ambil contoh di function bigBDM_MD5 saja, di report analytic itu di record untuk 
+- bigbdmemail (ini memberi tahu bahwa manggil api ini)
+- getleadfailed, getleadfailed_bigbdmmd5 (ini memberi tahu bahwa saat pemanggilang itu error kena catch)
+
+nah sekarang saya punya provider namanya watt yaitu pakai function ini 
+base md5 @app/Http/Controllers/WebhookController.php:9276-9280 
+base address/PII @app/Http/Controllers/WebhookController.php:10259-10263 
+
+nah menurut anda apakah saat ingin menambahkan report analytic itu saya harus menambahkan field ini
+- wattdatamd5
+- wattdatapii
+- getleadfailed_wattdatamd5
+- getleadfailed_wattdatapii
+
+menurut anda sendiri bagaimana apakah field yang saya sarankan sudah pas atau ada yang kurang ?
+
+
+Custom Params (optional)
+[ muhammad jidan                  ]  [ Update ]
+
+Allowed: letters, numbers, spaces, and - _ . /
+Changing Custom Params will not update existing embeds. Please copy and replace the embed code on your website manually.
+Updating the custom parameter field will not automatically update your existing embedded code. Please replace it with the newly generated code.
+Updating the custom parameter field value will not automatically update your existing embedded code. You will need to replace or update the current embedded code with the newly generated version.
+
+
+EMM-SANDBOX-APP
+JD-TASK-EMM-854 = "feat: Add WattData report analytics tracking"
+JD-TASK-EMM-854-DEV-SYNC
+
+FILE
+FRONT
+* front\src\pages\Modules\Auth\ConfigApp\ReportAnalytic.vue
+DATA
+* data\app\Exports\AnalyticExport.php
+* data\app\Http\Controllers\ConfigurationController.php
+* data\app\Models\ReportAnalytic.php
+
+-------
+
+EMM-SANDBOX-API
+JD-TASK-EMM-854 = "feat: Add WattData report analytics tracking"
+JD-TASK-EMM-854-DEV-SYNC
+
+FILE
+* app\Http\Controllers\Controller.php
+* app\Http\Controllers\WebhookController.php
+* app\Services\WattData.php
+
+
+========= DATABASE YANG DITAMBAH =========
+- ALTER TABLE `report_analytics` ADD `wattdatamd5` INT NOT NULL DEFAULT '0' AFTER `bigbdmpii`, ADD `wattdatapii` INT NOT NULL DEFAULT '0' AFTER `wattdatamd5`;
+- ALTER TABLE `report_analytics` ADD `getleadfailed_wattdatamd5` INT NOT NULL DEFAULT '0' AFTER `getleadfailed_bigbdmpii`, ADD `getleadfailed_wattdatapii` INT NOT NULL DEFAULT '0' AFTER `getleadfailed_wattdatamd5`;
+========= DATABASE YANG DITAMBAH =========

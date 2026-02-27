@@ -1,5 +1,5 @@
-set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
--- set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
+-- set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
+set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 select * from person_emails where email_encrypt = @md5;
 delete from person_emails where email_encrypt = @md5;
