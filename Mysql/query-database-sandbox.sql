@@ -116,3 +116,12 @@ select * from jobs order by created_at desc limit 100;
 select * from failed_lead_records order by id desc limit 10;
 
 
+
+select tfa_active, users.* from users where id = 65;
+
+select * from module_settings where company_id = 581;
+
+
+
+
+

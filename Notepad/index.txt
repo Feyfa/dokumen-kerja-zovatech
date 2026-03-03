@@ -53,3 +53,23 @@ Morning Guys, ada beberapa bug dan update ya:
 3. developer API enabled tanpa charge (ini nanti bareng) ✅
 4. Data wallet perlu penyesuaian dia refund langsung dari stripe ngk dr system kita ✅
 5. Technical meeting tentang sistem baru (progress)
+
+
+- manual bill
+- di table companies field is_whitelabeling nilainya null
+- di local storage ngga ada "parentsColor"
+- agency tersebut bisa merubah warnanya
+- cuman pas view as client itu jadi merah sendiri warnanya
+
+
+backup package_id 464 (jidan agency emm3) = price_1R29gaRwyPH0xNSi9OIW1KDY
+backup package_id 164 (jidan ach) = price_1MBJvXCm8XcQag44tsbir3Fj
+
+SELECT CONVERT(AES_DECRYPT(FROM_bASE64(package_id), '8e651522e38256f2') USING utf8mb4) as package_id_dec, company_stripes.* FROM `company_stripes` where company_id = 164;
+
+UPDATE company_stripes
+SET package_id = TO_BASE64(AES_ENCRYPT('price_1MBJvXCm8XcQag44tsbir3Fj', '8e651522e38256f2'))
+WHERE company_id = 464
+
+
+-----

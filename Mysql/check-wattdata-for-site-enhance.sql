@@ -131,6 +131,8 @@ select * from jobs order by id desc;
 
 select * from report_analytics where leadspeek_api_id = 53620540 and date >= '2026-02-27';
 
+select * from module_settings;
+
 
 
 

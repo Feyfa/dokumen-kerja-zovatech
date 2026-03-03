@@ -447,3 +447,5 @@ DATA
 * data\app\Services\OpenApi\OpenApiCampaignEmbededCodeService.php
 * data\app\Models\LeadspeekUser.php
 * data\routes\api.php
+
+untuk pembayaran one time dengan custom value itu ternyata bisa pak, cuman caranya lewat api + payment_method user tersebut harus udah terdaftar di whop nya pak

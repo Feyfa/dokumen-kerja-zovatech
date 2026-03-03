@@ -90,7 +90,7 @@ lis md5 yang digunakan:
 catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (SUDAH ✅✅✅)
+1. (PROGRESS)
 * status
         - watt: ✅
         - bigBDM_MD5: (tidak dipanggil)
@@ -146,7 +146,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-2. (SUDAH ✅✅✅)
+2. 
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -207,7 +207,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-3. (SUDAH ✅✅✅)
+3. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -224,7 +224,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     "resultGetData": []
 }
 
-4. (SUDAH ✅✅✅)
+4. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -290,7 +290,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-5. (SUDAH ✅✅✅)
+5. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -356,7 +356,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-6. (SUDAH ✅✅✅)
+6. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -374,11 +374,10 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 }
 ============================================
 2. process_BDM_local_custom
-catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk advanced data).
-         Jika BigDBM tidak ada, tidak ada lead meskipun WattData ada.
+catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (SUDAH ✅✅✅)
+1. 
 * status
         - watt: ✅
         - bigBDM_MD5: ✅
@@ -497,7 +496,7 @@ catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk ad
 }
 
 
-2. (SUDAH ✅✅✅)
+2. 
 * status
         - watt: ✅
         - bigBDM_MD5: ❌
@@ -512,7 +511,7 @@ catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk ad
 }
 
 
-3. (SUDAH ✅✅✅)
+3. 
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -630,7 +629,7 @@ catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk ad
     }
 }
 
-4. (SUDAH ✅✅✅)
+4. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -646,11 +645,10 @@ catatan: WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk ad
 
 ============================================
 3. process_BDM_advance
-catatan: Sama persis dengan process_BDM_local_custom.
-         WattData + BigDBM selalu dipanggil keduanya. BigDBM WAJIB ada (untuk advanced data).
+catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (SUDAH ✅✅✅)
+1. 
 * status
         - watt: ✅
         - bigdbm: ✅
@@ -769,7 +767,7 @@ catatan: Sama persis dengan process_BDM_local_custom.
 }
 
 
-2. (SUDAH ✅✅✅)
+2. 
 * status
         - watt: ✅
         - bigdbm: ❌
@@ -783,7 +781,7 @@ catatan: Sama persis dengan process_BDM_local_custom.
     "resultGetData": []
 }
 
-3. (SUDAH ✅✅✅)
+3. 
 * status
         - watt: ❌
         - bigdbm: ✅
@@ -901,7 +899,7 @@ catatan: Sama persis dengan process_BDM_local_custom.
     }
 }
 
-4. (SUDAH ✅✅✅)
+4. 
 * status
         - watt: ❌
         - bigdbm: ❌
@@ -917,10 +915,10 @@ catatan: Sama persis dengan process_BDM_local_custom.
 
 ============================================
 4. dataNotExistOnDBBIG - mode basic ($isBasicOnly = true)
-catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka pakai dari wattdata.
+catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (SUDAH ✅✅✅)
+1. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -937,7 +935,7 @@ catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka p
 }
 
 
-2. (SUDAH ✅✅✅)
+2. 
 * status
         - watt: ✅
         - bigBDM_MD5: ❌
@@ -987,7 +985,7 @@ catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka p
     }
 }
 
-3. (SUDAH ✅✅✅)
+3. 
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -1038,7 +1036,7 @@ catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka p
 }
 
 
-4. (SUDAH ✅✅✅)
+4. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -1088,7 +1086,7 @@ catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka p
     }
 }
 
-5. (SUDAH ✅✅✅)
+5. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -1104,7 +1102,7 @@ catatan: BigDBM tidak WAJIB ada. Jika BigDBM tidak ada, dan wattdata ada, maka p
     "resultGetData": []
 }
 
-6. (SUDAH ✅✅✅)
+6. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -1158,11 +1156,10 @@ ada yang kurang, saat di dataNotExistOnDBBIG, saat mengambil address untuk persi
 
 ============================================
 5. dataNotExistOnDBBIG - mode advanced ($isBasicOnly = false)
-catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattData ada.
-         WattData address TIDAK dicoba karena isBasicOnly = false (tidak masuk OR condition).
+catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (SUDAH ✅✅✅)
+1. 
 * status
         - watt: ✅
         - bigBDM_MD5: ✅
@@ -1277,7 +1274,7 @@ catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattDa
     }
 }
 
-2. (SUDAH ✅✅✅)
+2. 
 * status
         - watt: ✅
         - bigBDM_MD5: ❌
@@ -1332,7 +1329,7 @@ catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattDa
     }
 }
 
-3. (SUDAH ✅✅✅)
+3. 
 * status
         - watt: ✅
         - bigBDM_MD5: ❌
@@ -1343,7 +1340,7 @@ catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattDa
 * md5:
         d7fbcb2bc68876df8f0cc41659e7d352
 
-4. (SUDAH ✅✅✅)
+4. 
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -1463,7 +1460,7 @@ catatan: BigDBM WAJIB ada. Jika BigDBM tidak ada, tidak ada lead meskipun WattDa
     }
 }
 
-5. (PROGRESS)
+5. 
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -1507,7 +1504,7 @@ ini yang baru
 
 
 TEST CEPAT
-1. site id local (basic) (progress)
+1. site id local (basic)
     - belum ada data ✅
     - sudah ada data ✅
     - sudah ada data namun expired ✅
@@ -1601,3 +1598,76 @@ FILE
 - ALTER TABLE `report_analytics` ADD `wattdatamd5` INT NOT NULL DEFAULT '0' AFTER `bigbdmpii`, ADD `wattdatapii` INT NOT NULL DEFAULT '0' AFTER `wattdatamd5`;
 - ALTER TABLE `report_analytics` ADD `getleadfailed_wattdatamd5` INT NOT NULL DEFAULT '0' AFTER `getleadfailed_bigbdmpii`, ADD `getleadfailed_wattdatapii` INT NOT NULL DEFAULT '0' AFTER `getleadfailed_wattdatamd5`;
 ========= DATABASE YANG DITAMBAH =========
+
+
+
+
+hai saya mau anda memahami dulu code nya seperti apa
+
+sekarang ini saya untuk mendapatkan data itu bisa melalui 2 provider, bigdbm dan wattdata
+
+jadi saya bisa mendapatkan data basic atau data advaced di beberapa function ini
+basic
+- process_BDM_TowerDATA
+advanced
+- process_BDM_advance
+- process_BDM_local_custom
+
+nah saya ingin jelasin struktur nya di process_BDM_TowerDATA dulu
+jadi disini itu untuk mendapatkan data basic, disini datanya benar" terisolasi antara provider bigdbm dan wattdata, jadi prioritasnya adalah wattdata, jadi jika wattdata ada, maka jangan lagi tuh check ke bigdbm nya juga
+
+nah saya ingin jelasin struktur nya di process_BDM_advance dan process_BDM_local_custom juga
+jadi disini itu untuk mendapatkan data advanced, disini satanya tidak benar" terisolasi, jadi masih semi" gitu lah. jadi kaya data basic itu dari watt dan data advanced itu dari bigdbm.
+
+nah yang saya ingin kan adalah, bisa ngga jika campaign advanced, itu benar" terisolasi gitu jadi kalo data dari watt maka ambil dari watt saja, jika dari watt tidak ada maka ambil dari bigdbm, jadi tidak saling melengkapi
+
+tapi ada satu hal penting nih, kan untuk ambil data ke watt itu pakai 
+$wattBasicInfo = $wattDataService->getWattBasicInfo(
+    [['id_type' => 'email', 'hash_type' => 'md5', 'value' => [$md5param]]],
+    $leadspeek_api_id,
+    $leadspeektype
+);
+nah kalo anda lihat, di getperson ini saya pakai domain ['id', 'email', 'name', 'phone', 'address'], nah padahal domain ini digunakan jika campaign basic saja, nah untuk advanced saya ingin domainnya lebih dari itu, kalo di watt sih domain nya kaya gini ["address", "affinity", "content", "demographic", "email", "employment", "financial", "household", "id", "intent", "interest", "lifestyle", "maid", "name", "phone", "political", "purchase"]. nah saya ngga tau nih pasti ngga semua domain di watt bisa dipakai dong, makanya saya juga ingin anda membandingkan data dari bigdbm advanced ini, mana yang bisa dipakai di wattdata nya
+
+ini adalah contoh data yang di pakai, dari bigdbm, dan dari wattdata
+data yang di pakai = WebhookController.php:11997-12408
+data dari bigdbm = test.json
+data dari wattdata = test2.json
+
+nah nanti dari data itu anda bandingkan saja dengan bigdbm ya, jadi kalo watt ada datanya maka disipakai data watt, nah kalo ngga salah ada data yang nilainya itu pakai angka 1 dan string kosong gitu, dan di watt itu pakai true false, nah itu kalo bisa di convert juga nanti ke format bigdbm juga. nanti kalo anda sudah ketemu data mana saja yang bisa dipakai, dan ada domain yang tidak dipakai anda bisa persempit lagi domain nya
+
+nah sekarang saya juga ada pertanyaan untuk di function dataNotExistOnDBBIG, function ini kan digunakan untuk refresh data setelah telah disimpan di db selama lebih 120 hari, nah pertanyaan saya apakah di function dataNotExistOnDBBIG ini, itu juga ada yang perlu dirubah?
+
+jadi kurang lebih di dataNotExistOnDBBIG untuk local basic, local advanced, enhance basic, enhance advaced. itu kaya gini
+
+if(jika data dari watt ada pakai watt, nah nanti saat menggunakan domain watt itu di check dulu jika basic pakai domain basic saja, jika advanced pakai domain advanced, sehingga pada saat masuk ke if ini ngga ada lagi tuh berhubungan dengan bigdbm lagi)
+{
+
+}
+else(jika watt data tidak ada baru deh pakai cara kaya sekarang ini, check bigdbm untuk data basic, baru ambil lagi ke data advanced) 
+{
+
+}
+
+nah untuk campaign b2b, itu kaya biasa aja, kaya sekarang sebelum implementasi perubahan ini
+
+
+=============================================================================================
+EMM-SANDBOX-API
+JD-TASK-EMM-869 = "feat: advanced campaign — isolate provider fetch logic (do not merge wattdata & bigdbm)"
+JD-TASK-EMM-869-DEV-SYNC
+
+FILE
+* app\Services\WattData.php
+* app\Http\Controllers\WebhookController.php
+
+DATABASE YANG PERLU DITAMBAH
+ALTER TABLE person_advance_1
+ADD COLUMN `source` ENUM('bigdbm', 'wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+
+ALTER TABLE person_advance_2
+ADD COLUMN `source` ENUM('bigdbm', 'wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+
+ALTER TABLE person_advance_3
+ADD COLUMN `source` ENUM('bigdbm', 'wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
+=============================================================================================
