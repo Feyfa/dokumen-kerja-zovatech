@@ -84,6 +84,79 @@
                         "last_name": "Schultz"
                     }
                 ],
+                "addresses": [
+                    {
+                        "address_primary": "1870 Eagle Ridge Dr",
+                        "address_secondary": "Apt 10",
+                        "city": "Saint Paul",
+                        "state": "MN",
+                        "zip": "55118-4254",
+                        "county": "Dakota",
+                        "carrier_route": "C010",
+                        "latitude": 44.887646,
+                        "longitude": -93.1361,
+                        "dma": 613,
+                        "cbsa": 33460,
+                        "msa": 5120,
+                        "congressional_district": 2,
+                        "urbanicity_code": "U",
+                        "property_type": null
+                    }
+                ],
+                "affinity": {
+                    "fitness_affinity": {
+                        "value": "medium",
+                        "cluster_id": 61
+                    },
+                    "health_affinity": {
+                        "value": "medium",
+                        "cluster_id": 74
+                    },
+                    "family_affinity": {
+                        "value": "medium",
+                        "cluster_id": 58
+                    },
+                    "gardening_affinity": {
+                        "value": "medium",
+                        "cluster_id": 68
+                    },
+                    "crafts_affinity": {
+                        "value": "high",
+                        "cluster_id": 37
+                    },
+                    "womens_apparel_affinity": {
+                        "value": "medium",
+                        "cluster_id": 136
+                    },
+                    "collectibles_affinity": {
+                        "value": "medium",
+                        "cluster_id": 29
+                    },
+                    "womens_home_living_affinity": {
+                        "value": "medium",
+                        "cluster_id": 140
+                    },
+                    "womens_fashion_affinity": {
+                        "value": "high",
+                        "cluster_id": 137
+                    },
+                    "high_tech_affinity": {
+                        "value": "medium",
+                        "cluster_id": 76
+                    },
+                    "beauty_affinity": {
+                        "value": "medium",
+                        "cluster_id": 18
+                    },
+                    "cooking_affinity": {
+                        "value": "medium",
+                        "cluster_id": 36
+                    },
+                    "apparel_affinity": {
+                        "value": "high",
+                        "cluster_id": 5
+                    }
+                },
                 "financial": {
                     "owns_credit_card": {
                         "value": true,
@@ -222,60 +295,6 @@
                     "has_child_aged_13_18_in_household": {
                         "value": false,
                         "cluster_id": 5000009
-                    }
-                },
-                "affinity": {
-                    "fitness_affinity": {
-                        "value": "medium",
-                        "cluster_id": 61
-                    },
-                    "health_affinity": {
-                        "value": "medium",
-                        "cluster_id": 74
-                    },
-                    "family_affinity": {
-                        "value": "medium",
-                        "cluster_id": 58
-                    },
-                    "gardening_affinity": {
-                        "value": "medium",
-                        "cluster_id": 68
-                    },
-                    "crafts_affinity": {
-                        "value": "high",
-                        "cluster_id": 37
-                    },
-                    "womens_apparel_affinity": {
-                        "value": "medium",
-                        "cluster_id": 136
-                    },
-                    "collectibles_affinity": {
-                        "value": "medium",
-                        "cluster_id": 29
-                    },
-                    "womens_home_living_affinity": {
-                        "value": "medium",
-                        "cluster_id": 140
-                    },
-                    "womens_fashion_affinity": {
-                        "value": "high",
-                        "cluster_id": 137
-                    },
-                    "high_tech_affinity": {
-                        "value": "medium",
-                        "cluster_id": 76
-                    },
-                    "beauty_affinity": {
-                        "value": "medium",
-                        "cluster_id": 18
-                    },
-                    "cooking_affinity": {
-                        "value": "medium",
-                        "cluster_id": 36
-                    },
-                    "apparel_affinity": {
-                        "value": "high",
-                        "cluster_id": 5
                     }
                 },
                 "intent": {
@@ -1414,68 +1433,6 @@
                         "cluster_id": 7000016
                     }
                 },
-                "lifestyle": {
-                    "is_pet_owner": {
-                        "value": false,
-                        "cluster_id": 8000017
-                    },
-                    "is_dog_owner": {
-                        "value": false,
-                        "cluster_id": 8000006
-                    },
-                    "is_rv_owner": {
-                        "value": false,
-                        "cluster_id": 8000021
-                    },
-                    "has_luxury_lifestyle": {
-                        "value": false,
-                        "cluster_id": 8000002
-                    },
-                    "has_home_business": {
-                        "value": true,
-                        "cluster_id": 8000001
-                    },
-                    "is_motorcycle_owner": {
-                        "value": false,
-                        "cluster_id": 8000015
-                    },
-                    "practices_diy": {
-                        "value": false,
-                        "cluster_id": 8000029
-                    },
-                    "is_home_owner": {
-                        "value": true,
-                        "cluster_id": 8000011
-                    },
-                    "is_truck_owner": {
-                        "value": false,
-                        "cluster_id": 8000023
-                    },
-                    "is_international_traveler": {
-                        "value": false,
-                        "cluster_id": 8000012
-                    },
-                    "is_renter": {
-                        "value": false,
-                        "cluster_id": 8000019
-                    },
-                    "is_cat_owner": {
-                        "value": false,
-                        "cluster_id": 8000004
-                    },
-                    "is_vacation_traveler": {
-                        "value": false,
-                        "cluster_id": 8000025
-                    },
-                    "is_health_conscious": {
-                        "value": true,
-                        "cluster_id": 8000009
-                    },
-                    "owns_swimming_pool": {
-                        "value": false,
-                        "cluster_id": 8000027
-                    }
-                },
                 "content": {
                     "number_cooking_catalogs": {
                         "value": "single_catalog",
@@ -1638,6 +1595,68 @@
                         "cluster_id": 2000016
                     }
                 },
+                "lifestyle": {
+                    "is_pet_owner": {
+                        "value": false,
+                        "cluster_id": 8000017
+                    },
+                    "is_dog_owner": {
+                        "value": false,
+                        "cluster_id": 8000006
+                    },
+                    "is_rv_owner": {
+                        "value": false,
+                        "cluster_id": 8000021
+                    },
+                    "has_luxury_lifestyle": {
+                        "value": false,
+                        "cluster_id": 8000002
+                    },
+                    "has_home_business": {
+                        "value": true,
+                        "cluster_id": 8000001
+                    },
+                    "is_motorcycle_owner": {
+                        "value": false,
+                        "cluster_id": 8000015
+                    },
+                    "practices_diy": {
+                        "value": false,
+                        "cluster_id": 8000029
+                    },
+                    "is_home_owner": {
+                        "value": true,
+                        "cluster_id": 8000011
+                    },
+                    "is_truck_owner": {
+                        "value": false,
+                        "cluster_id": 8000023
+                    },
+                    "is_international_traveler": {
+                        "value": false,
+                        "cluster_id": 8000012
+                    },
+                    "is_renter": {
+                        "value": false,
+                        "cluster_id": 8000019
+                    },
+                    "is_cat_owner": {
+                        "value": false,
+                        "cluster_id": 8000004
+                    },
+                    "is_vacation_traveler": {
+                        "value": false,
+                        "cluster_id": 8000025
+                    },
+                    "is_health_conscious": {
+                        "value": true,
+                        "cluster_id": 8000009
+                    },
+                    "owns_swimming_pool": {
+                        "value": false,
+                        "cluster_id": 8000027
+                    }
+                },
                 "political": {
                     "donated_political_social_cause_recently": {
                         "value": false,
@@ -1790,12 +1809,12 @@
         }
     ],
     "export": {
-        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1771993227099-9838146b-09d8-4ddf-a8e0-62a9d1080ea4.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SQLX433WC%2F20260225%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260225T042027Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLWVhc3QtMSJFMEMCH3ezt3J3kG5K3yp9RUqR3ZWCn9fkS72twppFKrpGqqECICo2%2B%2FnNRrxOMXmOltMvHcwLpCKne8VsAqmhAKiB%2F%2Fa2KqsECAUQABoMNDgxNjY1MDg3MTQxIgwvo1YPf7wDbkN9m2kqiATLt8Fv3BaHba2ta75a7kz2ANAE%2FhDsNBQytp78kvFGZ0NJIa6Nx0iOhiL6td7Frk0G7dYifSGIrBOG7%2F6X9PpPHfXjrf%2B5tEed4HFdivJJx7N07swdlZueKq3Xuic1wHaYzMwTsnaRyWuVHPv5I5tY6K4LTuG2SNPUC2V3RgfjlMe3fzsdG%2B2akZ2euoCaV8czPMHYsUNVT4f0rKdPB29ol9HymIirTEC8ailpPyrTB5poaSw%2BvZcx7kAhN3C5MAQkEnDwu2MESLF8gDewd1%2FMxA2udrKPSR4HVu1aXZNP3E7SoERwekMKEvjxvnxHgOQTiY9kn7fIqLv6GNd%2BjXHqPp5SkBe0StXMgv1MGxJwu3cfjedSol7SWRGG828E65E4cVwrl%2FHAEzJRp4SBqe4xbKve%2FGB9AvhQ1sTvt%2F8P5E8rU7HE7K4uNv5x%2BzCSNE0uXIlVRQnQmb1%2F5rE%2BsK2oabnnpFhGJPMojxt66Sv1RPJYpWbiKM0SjjFc%2FzzeBbTnQSzh1s8BHY7BJnGx7%2Bfuw8c%2FQQP5mrypDjJZEj%2Bu5cZ8XN%2Fxb8u2%2FgayFugRY6UfCBd8dZaQKtIfFpzHnRslkvnfDK0trjnqKgACbJRlegfkMWEucpIlqLFFjMfm5j%2BZZ1qu8tJ3BAwCWnIvWQt4qxkqXwgKpqPYzlOVarktVgA2pZdgIWfDMM3d%2BcwGOqgBh%2FVofOP8UG%2Fod0K9eu4Jgff0udr6chWd%2FdhneuaU07gbPGbBP9ejJ6hFaVgzpNlLWNDk%2FkgW46Jf3cfMDi4vZZygfj3jZwuME54SP7cLu%2Bi1ZeFx7kfT8ju7SVhHUQBkiKeer087IOUR1adEuNGBahiJmjXE3GnxGcofKa%2BnjXb%2FO4ziPOlxD7E4xncPlcaQnl4%2FhtP5YlHpHK6Q7qP%2B3%2FSSmciDKDfc&X-Amz-Signature=9132106c2164102a335ed3ad6d1b3a9da5a2709dc568e867774e371abcabea4b&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+        "url": "https://watt-mcp-exports-dev.s3.us-east-1.amazonaws.com/exports/1772561789397-163cd18e-e518-46e0-bdc9-4fde1508f013.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXAJLZ62SVCS7R46C%2F20260303%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260303T181629Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDfA7S1Re7GPSXHMBFEskGP0qi6ZC%2FTxASv8W1KWFYo8gIgOFWPU3OZcDozzV273SAEDckUdk0ILcSP3lcL8CTD8h0qtAQInv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0ODE2NjUwODcxNDEiDP2ruUwG0kFha0tu%2BSqIBO57pI%2BG1eUueviLQPDOTkqhyYj9ynEx9G2m56bbjR0%2BaOmXxxFr4XypxPUCfkozS5LO3h61DjMlTlAML8O%2BNS8mFUv4QlsCyPngfYpxr5mIsuOnhWYmClR01%2FdjEjW9qu4bFRaRfx0vFtX%2BEDcvextsF8UrZL1vrMFnW73IhidvNrxraHMdasxaySbOr6xI4QhSZJH13CenZCQKMErzc4WtTcssYEoAiPJjTREc2gM5s6xZzszeqrR8RYKsHCTkN4vVnmr8j363DSzthVV2j02ZRe3qgiGHQbUqrEhCYYCGAYmEIF4Jtx%2BPZQFrkXSz1OD3dnv1lYrIfRnn1lVjmI8dg86RRXBpCBjTkE4VRl%2BPmNTjgukOb7r6wjiOmDhSuD1OAON5cDSKxcHwkuMQdvlr7FFS0AILcxNfcH2o9qGBr11H3BMv37pCrl86OpdvC591Aw7Uxkvqq2YsZ1dT4aaIfYgWYt4g9%2FQX6QyfP%2FjhhKCDNkwNGY5bRYiHMbGpMiN9PQ3UFBLU3SJdS35iXrSbSN5ySXYsONhC8hDMLRYwJTwdav23nVr15ugnqPujS4jWELxe%2BQoAMks0fQbjO5x%2BV%2FmjvoxMDOB2p1Xaf4b688q0%2FIDAb7aH9cphrOfeuxfig6NErYSutBCi67aA%2BHCgTkLnrC0Kcf8erl9YO1o5rMrMRDTXTWkwnL%2BbzQY6pgHnCNZtwBqHOdALkBdHaN32rqnl0Fr3pkUkxoLZe9%2BjpVQiqycRWwQUTJ2aXLBSO1D%2FWZnt6J%2F2V%2B3hCvfqZ6Fw03nAeC%2FJHayRsDUdQbRuV0Ue%2FN9Ed4kudbUTzmlAj0vcDokD3d0pWqmyPNphGM8Mn6aJUcLnhrxlpkJ%2FKDuLGvFOMM%2BbWkRD2IQmiHQPU3Qa8tGCWHqFZiPDRMZU2ESXEc%2FIGEIs&X-Amz-Signature=9118b685341c0d1effcf786780c9b8eab8d039b0be30b6e5fb0743a3dc6907a8&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
         "format": "csv",
         "rows": 1,
         "size_bytes": 0,
-        "expires_at": "2026-02-25T05:20:27.186Z"
+        "expires_at": "2026-03-03T19:16:29.488Z"
     },
-    "workflow_id": "1ceb04e9-8278-4d38-9d5c-dc19748b0d57",
-    "tool_trace_id": "f7ebfac71aa5032a04001bd2c4c82db4"
+    "workflow_id": "32e1f471-17d2-4703-b48f-4e99804933e3",
+    "tool_trace_id": "5cfac593c2f78b4848b3d5ad78b12de5"
 }

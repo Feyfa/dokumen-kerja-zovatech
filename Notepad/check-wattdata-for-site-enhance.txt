@@ -76,7 +76,9 @@ ELSE (bigBDM_MD5 tidak ada data):
 
 
 
-
+UPDATE company_stripes
+SET setting_value = TO_BASE64(AES_ENCRYPT('price_1MBJvXCm8XcQag44tsbir3Fj', '8e651522e38256f2'))
+WHERE company_id = 783;
 
 
 
@@ -90,7 +92,7 @@ lis md5 yang digunakan:
 catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. (PROGRESS)
+1. (SUDAH ✅✅✅)
 * status
         - watt: ✅
         - bigBDM_MD5: (tidak dipanggil)
@@ -146,7 +148,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-2. 
+2. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -207,7 +209,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-3. 
+3. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -224,7 +226,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     "resultGetData": []
 }
 
-4. 
+4. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -290,7 +292,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-5. 
+5. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -356,7 +358,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-6. 
+6. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -377,7 +379,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. 
+1. (SUDAH ✅✅✅)
 * status
         - watt: ✅
         - bigBDM_MD5: ✅
@@ -496,7 +498,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 }
 
 
-2. 
+2. (SUDAH ✅✅✅)
 * status
         - watt: ✅
         - bigBDM_MD5: ❌
@@ -511,7 +513,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 }
 
 
-3. 
+3. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ✅
@@ -629,7 +631,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-4. 
+4. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigBDM_MD5: ❌
@@ -648,7 +650,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK dipanggil)
 ============================================
 
-1. 
+1. (SUDAH ✅✅✅)
 * status
         - watt: ✅
         - bigdbm: ✅
@@ -767,7 +769,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
 }
 
 
-2. 
+2. (SUDAH ✅✅✅)
 * status
         - watt: ✅
         - bigdbm: ❌
@@ -781,7 +783,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     "resultGetData": []
 }
 
-3. 
+3. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigdbm: ✅
@@ -899,7 +901,7 @@ catatan: WattData MD5 bersifat short-circuit (jika watt ada, bigBDM_MD5 TIDAK di
     }
 }
 
-4. 
+4. (SUDAH ✅✅✅)
 * status
         - watt: ❌
         - bigdbm: ❌
