@@ -1,4 +1,8 @@
-set @md5 := '945d6638b11614b19a0fc79683eee4ff';
+-- set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
+-- set @md5 := '8bc64c9c289d18a05dd9652422208f05'; -- b2c
+-- set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
+-- set @md5 := '6ccbb5fa86ef8c1abb84f20314b322b0'; -- b2c
+set @md5 := '5cd7ecd20f0247a3a008b5b60eab4683'; -- b2c
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 set @key := '8e651522e38256f2';
 
@@ -105,9 +109,11 @@ select
 	CONVERT(AES_DECRYPT(FROM_BASE64(email), @key) USING utf8mb4) as email,
 	flr.* 
 from failed_lead_records as flr 
-where created_at > '2026-02-22 18:00:15' order by created_at desc limit 10;
+where created_at > '2026-03-03 22:19:56' order by created_at desc limit 10;
 
-select * from leadspeek_reports where leadspeek_api_id = 50758584;
+select * from report_analytics where leadspeek_api_id = 88834454;
+
+select * from leadspeek_reports where leadspeek_api_id = 88834454;
 
 select * from leadspeek_users where leadspeek_api_id = 79229250;
 
@@ -115,13 +121,6 @@ select * from jobs order by created_at desc limit 100;
 
 select * from failed_lead_records order by id desc limit 10;
 
-
-
-select tfa_active, users.* from users where id = 65;
-
-select * from module_settings where company_id = 581;
-
-
-
+select * from module_settings;
 
 

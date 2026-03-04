@@ -28,6 +28,7 @@ tambahkan enum('wattdata') di field `lead_from` di table `leadspeek_reports`
 process_BDM_TowerDATA 
 process_BDM_local_custom
 process_BDM_advance
+dataExistOnDB -> (process_BDM_advance_exist, process_WATT_advance_exist)
 dataNotExistOnDBBIG
 
 bigBDM_MD5 throw new Exception('test');
@@ -1507,19 +1508,20 @@ ini yang baru
 
 TEST CEPAT
 1. site id local (basic)
-    - belum ada data ✅
-    - sudah ada data ✅
-    - sudah ada data namun expired ✅
+    - belum ada data 
+    - sudah ada data 
+    - sudah ada data namun expired 
 
 2. site id local (advanced)
-    - belum ada data
-    - sudah ada data
+    - belum ada data ✅
+    - sudah ada data (progress)
+    - sudah ada data namun advanced belum ada
     - sudah ada data namun expired
 
 3. site id enhance (basic)
-    - belum ada data ✅
-    - sudah ada data ✅
-    - sudah ada data namun expired ✅
+    - belum ada data 
+    - sudah ada data 
+    - sudah ada data namun expired 
 
 4. site id enhance (advanced)
     - belum ada data
@@ -1535,6 +1537,16 @@ TEST CEPAT
     - belum ada data
     - sudah ada data
     - sudah ada data namun expired
+
+
+deegookin79@gmail.com -> 6ccbb5fa86ef8c1abb84f20314b322b0 [bigdbm: found, wattdata: notfound] ✅
+initefox@gmail.com -> 5cd7ecd20f0247a3a008b5b60eab4683 [bigdbm: found, wattdata: found] ()
+lalpert517@yahoo.com -> eb0efc2e8c18c7af2f921950c828f335
+blandry0922@gmail.com -> fb9654e55a4bcf67902ac3dd884e4b91
+arltor2@yahoo.com -> 300caaa8d3fd3c674fb36b96c43496d6
+lc206lg@gmail.com -> e239c8bf2757f7476477ff416c9454d0
+jimeasaw@msn.com -> 967e46abab9c1b13f30a3fc5008d3032
+vmaywalt@gmail.com ->  4ca54451c1a6b6e496d6ccba7181a69f
 
 
 
