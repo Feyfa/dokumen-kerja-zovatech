@@ -2,7 +2,7 @@
 -- set @md5 := '8bc64c9c289d18a05dd9652422208f05'; -- b2c
 -- set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
 -- set @md5 := '6ccbb5fa86ef8c1abb84f20314b322b0'; -- b2c
-set @md5 := '5cd7ecd20f0247a3a008b5b60eab4683'; -- b2c
+set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 set @key := '8e651522e38256f2';
 
@@ -122,5 +122,7 @@ select * from jobs order by created_at desc limit 100;
 select * from failed_lead_records order by id desc limit 10;
 
 select * from module_settings;
+
+select tfa_active, tfa_type, users.* from users where id = 65;
 
 
