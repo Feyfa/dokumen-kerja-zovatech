@@ -1,0 +1,132 @@
+process_BDM_TowerDATA (progress)
+process_BDM_local_custom
+process_BDM_advance
+process_BDM_B2B
+dataNotExistOnDBBIG
+
+getWattPersonInfo
+bigBDM_MD5
+
+======= CHECK ======= 
+1. process_BDM_TowerDATA
+- watt ✅
+- bigdbm ✅
+
+2. process_BDM_local_custom
+- watt ✅
+- bigdbm ✅
+
+2. process_BDM_advance
+- watt ✅
+- bigdbm ✅
+
+2. process_BDM_B2B
+- bigdbm ✅
+
+2. dataNotExistOnDBBIG
+- watt ✅
+- bigdbm (progress)
+======= CHECK =======  
+
+
+SUPRESSION_LIST
+| plaintext                     | md5                               | encrypt
+| FISIKAMODERN00@GMAIL.COM      | 893439634d9c0f2f4d701f9bbc451154  | ORtWDGEhwOH0sSeEGT6/F20ERLD2chlOkVz4Obsii3A= (use encrypt)
+| muhammadjidan703@gmail.com    | d18fa68148cf6bdb08db8c8228d0616d  | eL/+zgI2pzoEhsRQzt+bnIbsOjm6QmTH+M+JFerNn8U= (use plaintext)
+
+
+OPTOUTLITS
+| plaintext                     | md5                               | encrypt
+| FISIKAMODERN01@GMAIL.COM      | 4c2f26ac6e24f56ace2985eed8819c68  | inJ90ove/qdfajyn+owUYm0ERLD2chlOkVz4Obsii3A= (use encrypt)
+| muhammadjidan704@gmail.com    | 655dd46aab4d0a1461236ed7f1a88a27  | Z2w3mLcgugliyBqe2T4zKIbsOjm6QmTH+M+JFerNn8U= (use plaintext)
+
+
+feat: add email blocking validation with dual-check support
+
+- Add checkSuppressionListByEmailPlaintext() and checkOptoutListByEmailPlaintext()
+- Support both plaintext and encrypted email checking (2-step validation)
+- Implement environment-aware caching (sandbox/production)
+- Integrate across all email validation flows
+- Fix timing measurement for accurate performance tracking
+
+
+EMM-SANDBOX-API
+JD-TASK-EMM-876 = "feat: add checkSuppressionListByEmailPlaintext and checkOptoutListByEmailPlaintext with dual-check support (plaintext + encrypted) and environment-aware caching"
+JD-TASK-EMM-876-DEV-SYNC
+
+FILE
+* app\Http\Controllers\WebhookController.php
+* app\Http\Controllers\Controller.php
+
+INSERT INTO suppression_lists
+(
+    lead_userid,
+    company_id,
+    leadspeek_api_id,
+    suppression_type,
+    email,
+    emailmd5,
+    reidentification_date,
+    updated_at,
+    created_at
+)
+VALUES
+(
+    '',
+    1086,
+    '',
+    'client',
+    'joeyb2012@msn.com',
+    '1e6d2642571626508e3bf4adc8c5f175'
+    '2026-03-08',
+    NOW(),
+    NOW()
+);
+
+
+
+field yang berubah
+- Q
+- R
+- S
+- T
+- U
+- V
+- W
+- X
+- Y
+- Z
+- AA
+- AB
+- AC
+
+Jadi yang perlu dipindah:
+"Enhance ID serve revenue" (id: 20) → setelah "Enhance ID Data Serve Total" (id: 17)
+"Successful Enhance ID Serve Data BIG DBM" (id: 18) → setelah "Enhance ID BIG BDM Identified" (id: 27)
+"Enhance ID WattData Identified" (id: 28) → setelah "Enhance ID Data Serve BigDBM" (setelah id: 18 dipindah)
+"Successful Enhance ID Serve Data WATT DATA" (id: 19) → setelah "Enhance ID WattData Identified" (setelah id: 28 dipindah)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+api.exactmatchmarketing.io
+c:/wamp64/www/emm-sandbox-app-new-data/public/
