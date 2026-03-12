@@ -1685,3 +1685,11 @@ ADD COLUMN `source` ENUM('bigdbm', 'wattdata') NULL DEFAULT 'bigdbm' AFTER `pers
 ALTER TABLE person_advance_3
 ADD COLUMN `source` ENUM('bigdbm', 'wattdata') NULL DEFAULT 'bigdbm' AFTER `person_id`;
 =============================================================================================
+
+
+
+process_BDM_TowerDATA ✅
+process_BDM_local_custom ✅
+process_BDM_advance ✅
+process_BDM_B2B ✅
+dataNotExistOnDBBIG ✅

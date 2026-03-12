@@ -142,6 +142,55 @@ select CONVERT(AES_DECRYPT(FROM_BASE64(token), '8e651522e38256f2') USING utf8mb4
 
 
 
+SELECT 
+	id,
+	company_root_id,
+	email,
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email_dec,
+	emailmd5,
+	filename,
+	blockedcategory,
+	description,
+	updated_at,
+	created_at
+FROM `optout_lists` 
+order by id desc limit 100;
+
+SELECT
+	* 
+FROM `suppression_lists` 
+where suppression_type = 'agency'
+order by id desc limit 100;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
