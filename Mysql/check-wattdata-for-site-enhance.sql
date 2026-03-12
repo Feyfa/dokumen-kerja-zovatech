@@ -26,7 +26,7 @@ select
     updated_at,
     created_at
 from person_emails
-order by created_at desc limit 5;
+order by created_at desc limit 50;
 
 -- person_emails
 select
@@ -116,7 +116,7 @@ select
 	CONVERT(AES_DECRYPT(FROM_BASE64(email), @key) USING utf8mb4) as email,
 	flr.* 
 from failed_lead_records as flr 
-where created_at > '2026-03-03 12:15:26' order by created_at desc limit 100;
+where created_at > '2026-03-06 05:07:00' order by created_at desc limit 100;
 
 
 UPDATE person_addresses
@@ -124,7 +124,7 @@ set street = TO_BASE64(AES_ENCRYPT('1870 Eagle Ridge Dr Apt 10', '8e651522e38256
 where id = 14654;
 
 
-select * from leadspeek_reports where leadspeek_api_id = 54373403 order by created_at desc;
+select * from leadspeek_reports where leadspeek_api_id = 84191214 order by created_at desc;
 select * from jobs order by id desc;
 
 select * from module_settings;
@@ -132,11 +132,46 @@ select * from module_settings;
 
 select * from report_analytics order by id desc limit 5;
 
-
-
-
-
 select CONVERT(AES_DECRYPT(FROM_BASE64(token), '8e651522e38256f2') USING utf8mb4) as token, oat.* from open_api_tokens oat where company_id = 164;
+
+select 
+	id,
+	company_root_id,
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email_decrypt,
+	email,
+	emailmd5,
+	filename,
+	blockedcategory,
+	description,
+	updated_at,
+	created_at
+from optout_lists
+order by id desc limit 100;
+
+
+
+select  
+	id,
+	lead_userid,
+	company_id,
+	leadspeek_api_id,
+	suppression_type,
+	CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) as email_decrypt,
+	email,
+	emailmd5,
+	reidentification_date,
+	updated_at,
+	created_at
+from suppression_lists
+order by id desc limit 100;
+
+
+
+
+
+
+
+
 
 
 
