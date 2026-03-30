@@ -130,3 +130,46 @@ Jadi yang perlu dipindah:
 
 api.exactmatchmarketing.io
 c:/wamp64/www/emm-sandbox-app-new-data/public/
+
+
+<VirtualHost *:80>
+    ServerName applocal.emmsandbox.com
+    DocumentRoot "/Applications/MAMP/htdocs/emm-sandbox-app/front/dist"
+
+    <Directory "/Applications/MAMP/htdocs/emm-sandbox-app/front/dist">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+<FilesMatch \.php$>
+    SetHandler "proxy:unix:/Applications/MAMP/bin/php/php7.4.33/bin/php-cgi|fcgi://localhost/"
+</FilesMatch>
+
+<VirtualHost *:80>
+    ServerName laravel7.local
+    DocumentRoot "/Applications/MAMP/htdocs/laravel7/public"
+
+    <Directory "/Applications/MAMP/htdocs/laravel7/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <FilesMatch \.php$>
+        SetHandler "proxy:unix:/Applications/MAMP/bin/php/php7.4.33/bin/php-cgi|fcgi://localhost/"
+    </FilesMatch>
+</VirtualHost>
+
+1. Publishable Key (Frontend - WAJIB)
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_b3B0aW1hbC1oaXBwby0yMS5jbGVyay5hY2NvdW50cy5kZXYk
+
+2. Secret Key (Backend - Opsional)
+sk_test_oquIvoH4GGJjsGQJzLQ4Z3yFt5vUaOzjXwD6D1Bjpg
+
+3. JWT Public Key (Backend - WAJIB untuk verify token)
+CLERK_JWKS_ENDPOINT=https://optimal-hippo-21.clerk.accounts.dev/.well-known/jwks
+CLERK_ISSUER=https://optimal-hippo-21.clerk.accounts.dev
+
+4. Webhook Secret (Backend - Opsional)
+

@@ -7,8 +7,8 @@ where `function` = 'getWattBasicInfo'
 order by created_at desc
 limit 20;
 
--- set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
-set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
+set @md5 := '7724702c27ec7ef274dceb2de46ca5e7'; -- b2b
+-- set @md5 := 'd7fbcb2bc68876df8f0cc41659e7d352'; -- b2c
 -- set @md5 := '8bc64c9c289d18a05dd9652422208f05'; -- b2c
 set @person_id := (select person_id from person_emails where email_encrypt = @md5);
 set @key := '8e651522e38256f2';
@@ -124,13 +124,12 @@ set street = TO_BASE64(AES_ENCRYPT('1870 Eagle Ridge Dr Apt 10', '8e651522e38256
 where id = 14654;
 
 
-select * from leadspeek_reports where leadspeek_api_id = 84191214 order by created_at desc;
+select * from leadspeek_reports where leadspeek_api_id = 84140504 order by created_at desc;
 select * from jobs order by id desc;
 
 select * from module_settings;
 
-
-select * from report_analytics order by id desc limit 5;
+select * from report_analytics where created_at > '2026-03-09 00:02:58' order by id desc limit 5;
 
 select CONVERT(AES_DECRYPT(FROM_BASE64(token), '8e651522e38256f2') USING utf8mb4) as token, oat.* from open_api_tokens oat where company_id = 164;
 

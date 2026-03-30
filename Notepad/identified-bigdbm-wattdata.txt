@@ -1,0 +1,109 @@
+BIGDBM IDENTIFIED   (bigbdmemail + bigbdmpii)           |           BIGDBM DATALOCAL IDENTIFIED (bigbdm_local)
+WATTDATA IDENTIFIED (wattdatamd5 + wattdatapii)         |           WATTDATA DATALOCAL IDENTIFIED (wattdata_local)
+
+---------------------------------------------------------------------------------------
+
+BIGDBM SERVE (serveclient_bigdbm)                       |               BIGDBM DATALOCAL SERVE (serveclient_bigdbm_local)
+WATTDATA SERVE (serveclient_wattdata)                   |               WATTDATA DATALOCAL SERVE (serveclient_wattdata_local)
+
+
+@app/Http/Controllers/WebhookController.php:9509 
+@app/Http/Controllers/WebhookController.php:11107 
+@app/Http/Controllers/WebhookController.php:719 
+@app/Http/Controllers/WebhookController.php:711
+
+hai jadi gini saya mau cerita, saya itu kan ada yang namanya 2 hal secara garis besar, IDENTIFIED dan SERVE
+
+1. IDENTIFIED
+ini adalah count untuk menghitung, seberapa banyak dapat data dari 2 provider, yaitu bigdbm dan wattdata
+- provider bigdbm itu dihitung dari = (bigbdmemail + bigbdmpii)
+- provider wattdata itu dihitung dari  = (wattdatamd5 + wattdatapii)
+
+2. SERVE
+ini adalah count untuk menghitung, seberapa banyak data yang telah di save ke table LeadspeekReport dari 2 provider
+- BIGDBM SERVE (serveclient_bigdbm)
+- WATTDATA SERVE (serveclient_wattdata)
+
+nah dari case yang sekarang ini ada problem, inti problem nya adalah bisa terjadi  BIGDBM SERVE > IDENTIFIED BIGDBM. nah secara logika kan ini kayanya ngga masuk akal ngga sih, kok bisa kita misalnya minta hanya 5, lalu serve nya jadi 10 gitu misalnya.
+
+nah setelah saya check yang jadi masalah itu ada di code ini @WebhookController.php (712-718) , jadi logic untuk mendapatkan data itu kan ada disini ya @app/Http/Controllers/WebhookController.php:5959-6410 , pokoknya ada deh pengecekan jika md5 ini sudah ada di database personEmail, maka ambil dari personEmail, intinya kaya gitu.
+
+nah dari kejadian itu maka field bigbdmemail dan bigbdmpii itu constant, sedangkan field serveclient_bigdbm itu jadi nambah terus
+
+nah saya akhirnya kepikiran solusi, gimana kalo seandinya di ReportAnalytic itu saya tambahin field begini
+1. IDENTIFIED
+- bigdbm =  bigbdmemail_local + bigbdmpii_local
+- wattdata = wattdatamd5_local + wattdatapii_local
+
+2. SERVE
+bigdbm = serveclient_bigdbm_local
+wattdata = serveclient_wattdata_local
+
+
+=============================================
+ALTER TABLE `report_analytics` 
+ADD `bigbdm_local` INT NULL DEFAULT NULL AFTER `wattdatapii`, 
+ADD `wattdata_local` INT NULL DEFAULT NULL AFTER `bigbdm_local`;
+
+ALTER TABLE `report_analytics` 
+ADD `serveclient_bigdbm_local` INT NULL DEFAULT NULL AFTER `serveclient_wattdata`, 
+ADD `serveclient_wattdata_local` INT NULL DEFAULT NULL AFTER `serveclient_bigdbm_local`;
+=============================================
+
+
+- Site ID BIG BDM Identified
+
+- Site ID WattData Identified
+
+- Site ID BIG BDM Local Identified (new)
+
+- Site ID WattData Local Identified (new)
+
+- Successful Site ID Serve Data Total
+
+- Successful Site ID Serve Data BIG DBM
+
+- Successful Site ID Serve Data WATT DATA
+
+- Successful Site ID Serve Data BIG DBM Local (new)
+
+- Successful Site ID Serve Data WATT DATA Local (new)
+
+
+==================================================================
+
+
+- BIG BDM MD5 Requested Enhance
+
+- BIG BDM MD5 Delivered Enhance
+
+- Enhance ID BIG BDM Identified
+
+- Successful Enhance ID Serve Data BIG DBM
+
+- Enhance ID BIG BDM Local Identified (new)
+
+- Successful Enhance ID Serve Data BIG DBM Local (new)
+
+- Enhance ID WattData Identified
+
+- Successful Enhance ID Serve Data WATT DATA
+
+- Enhance ID WattData Local Identified (new)
+
+- Successful Enhance ID Serve Data WATT DATA Local (new)
+
+- BIG BDM MD5 Remaining Leads Enhance
+
+
+hai saya mau tanya, saya kan punya project vue 3 di dalam folder C:\wamp64\www\EMM-SANDBOX-APP-NEW\front
+
+nah saya di windows 11 menggunakan wamp, saya sudah membuat virtual host di wamp nya. jadi ini karena untuk vue js, ngga perlu attach file project ke front, jadi hanya buat virtual host + etc nya.
+
+cuman ketika saya jalankan front nya, hasilnya error gini. karena sebelumnya bos saya mendesain project ini harus pakai https walaupun di local, ini butuh semacam pem atau apa lah gitu.
+
+gimana cara handle ini ya?
+
+
+Rename-Item "applocal.exactmatchmarketing.io-key.pem" "exactmatch-dev.pem"
+Rename-Item "applocal.exactmatchmarketing.io.pem" "exactmatch-dev-key.pem"
