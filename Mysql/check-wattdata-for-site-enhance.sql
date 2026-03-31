@@ -198,9 +198,11 @@ order by id desc limit 100;
 
 
 
+select * from jobs;
+select * from clean_id_md5 where md5 in ('meghankelsey@gmail.com', 'ec76c246b9602f11fec9a29b5addaa9c') order by id desc;
+select * from failed_lead_records order by id desc limit 10;
 
-
-
+select * from person_emails where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'meghankelsey@gmail.com' order by id desc;
 
 
 
