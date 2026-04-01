@@ -1,15 +1,10 @@
 MASIH ADA BUG
-1. ketika create campaign atau update campaign dan saya isi spasi string kosong saja campaign name nya, maka ketika submit itu error
+1. ketika create campaign atau update campaign dan saya isi spasi string kosong saja campaign name nya, maka ketika submit itu error ✅
 
 MASIH KURANG OKE
 1. untuk audit logs nya di field nya belom di tambahin campaign_id, sebelumnya itu ngga ada karena predict, audience, clean itu bukan campaign. makanya sekarang itu perlu
 
 YANG BELOM DI IMPLEMENTASIKAN
-1. buat logic di backend nya untuk softdelete campaign + audit logs 
-2. buat logic di backend nya untuk update campaign status + audit logs
-
-
-
-
-
-
+1. buat logic di backend nya untuk softdelete campaign + audit logs ✅
+2. buat logic di backend nya untuk update campaign status + audit logs ✅
+3. buat logic untuk paginate list campaign site id ✅
