@@ -1,0 +1,12 @@
+1. 
+ENGLISH = "All of them making April Fool jokes meanwhile teewon:
+            We already are a joke. Every single day."
+INDONESIA = "Semua orang itu membuat lelucon April Fool sementara teewon:
+            Kita sudah menjadi lelucon. Setiap hari."
+
+kata yang belom diketahui
+- them = itu artinya mereka, pikirkan they
+- Fool = orang bodoh / orang yang gampang ditipu
+- jokes = lelucon / candaan
+- meanwhile = sementara itu
+- teewon = nama tempat di korea selatan
