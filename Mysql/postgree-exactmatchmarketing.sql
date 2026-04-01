@@ -4,3 +4,5 @@ select * from migrations;
 
 select  * from contacts;
 select  * from contact_lists;
+
+SELECT * FROM campaigns
