@@ -10,3 +10,17 @@ kata yang belom diketahui
 - jokes = lelucon / candaan
 - meanwhile = sementara itu
 - teewon = nama tempat di korea selatan
+
+
+
+2.
+ENGLISH = "POV: Your laptop decides to update 5 minutes before the assignment is due"
+INDONESIA = "POV: Laptopmu memutuskan untuk update 5 menit sebelum tugas harus dikumpulkan"
+
+kata yang belom diketahui
+- Decides = memutuskan
+- assignment = tugas
+- due = jatuh tempo / harus dikumpulkan
+
+
+

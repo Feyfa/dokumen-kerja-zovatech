@@ -5,3 +5,38 @@
 5. Flatten
 6. Fully Connected
 7. Output
+
+
+oke sekarang saya mau fokus membahas cara embed code lagi, nah sebelumnya <script src="https://emmsandbox.com/px/97614219.js"></script>
+
+nah saya kepikiran, bos saya kan berharap katanya ingin kalo bisa mirip seperti .gif dari alocdn.
+
+nah sebelum bicara .gif, anggap ajalah sama dengan .png. nah saya punya ide begini
+
+bisa ngga di embed code itu pakai <img> yang src nya awalnya itu ke laravel. nanti setelah laravel mengembalikan semacam
+
+
+1. Input credit saat create campaign — minimal 1 ✅
+2. Status saat create — active atau stopped? ✅
+3. Icon manage credits — tambah & refund
+
+----
+
+4. refactor ubah nama controller SiteController dan service SiteService menjadi SitePixelController dan SitePixelService, soalnya menekan kan bahwa ini tuh untuk urusan pixel
+5. manambahkan file SiteCampaignService. nanti urutannya itu seperti ini lah pokoknya
+CampaignController 
+    |
+    |
+    |
+CampaignService 
+    -------> (SiteCampaignService, SitePixelService)
+    -------> (EnhanceCampaignService) (ini nanti kedepannya)
+    -------> (B2BCampaignService) (ini nanti kedepannya)
+
+----
+
+6. Re-validasi saat webhook alocdn masuk'
+
+1. saat create campaign harus alokasi kan credits ke campaign nya
+2. ada icons coin untuk memunculkan modal untuk manage credts campaign nya
+3. modal manage credits, section pertama untuk tambah credits, section kedua untuk refund credits.
