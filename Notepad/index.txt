@@ -40,3 +40,68 @@ CampaignService
 1. saat create campaign harus alokasi kan credits ke campaign nya
 2. ada icons coin untuk memunculkan modal untuk manage credts campaign nya
 3. modal manage credits, section pertama untuk tambah credits, section kedua untuk refund credits.
+
+saya ada push an pak yang bisa merged di new emm
+
+EMM-SANDBOX-APP-NEW
+front: JD-SITE-ID-CAMPAIGN
+data: JD-SITE-ID-CAMPAIGN
+
+TAMBAH .env DI FOLDER DATA (untuk sekarang saya pakai url gif testing)
+# --- Site ID (alocdn pixel) ---
+ALOCDN_PIXEL_URL=https://placehold.co/1x1.gif
+
+DATABASE ADA PERUBAHAN
+
+
+Non-unlimited — lead masuk:
+
+campaign.credits_used++
+org.lifetime_credits_consumed++
+org.available_credits → tidak berubah (sudah pre-allocated)
+
+Hasil: Used naik, In Campaigns turun, Available tetap
+Plan=100, Used=3, In Campaigns=7, Available=90 → 100 ✓
+
+------------------------------------------------------------------------
+
+Unlimited — lead masuk:
+
+campaign.credits_used++
+org.lifetime_credits_consumed++
+org.available_credits--
+
+Hasil: Used naik, Available turun, In Campaigns=0 (tidak relevan)
+Plan=100, Used=3, In Campaigns=0, Available=97 → 100 ✓
+
+ohh iya sama ini (walaupun ini untuk nanti, cuman saya mau tanya saja) pada saat data masuk di pixel untuk site id. behavior di campaign non unlimited dan unlimited itu jadi gimana ya?
+saya lupa apa saja yang di ++ dan apa saja yang -- tadi? dan apakah hal ini sudah di update di markdown nya
+
+1. unlimited -> fixed budget
+2. fixed budget -> unlimited
+
+3. refund campaign
+4. delete campaign
+
+
+Ada beberapa yang mungkin belum terpikirkan:
+1. Kapan persisnya reset terjadi?
+Tanggal 1 tiap bulan (fixed calendar) atau 1 bulan dari tanggal campaign dibuat (rolling)? Misal dibuat 15 Jan → reset 15 Feb, 15 Mar, dst. Keduanya valid tapi beda implementasi.
+
+2. Saat campaign di-pause manual di tengah bulan, lalu di-aktifkan lagi
+Apakah reset timer-nya ikut pause juga, atau tetap jalan? Misal pause 2 minggu — apakah bulan berikutnya mundur 2 minggu?
+jawaban: seharus nya saat perubahan dari pause ke active, time reset nya tetep tidak berubah. cuman saya ngga tau nih kalo di tengah jalan dia stop campaign, lalu aktifin lagi, itu gimana ya?
+
+3. Saat campaign di-stop atau di-delete sebelum reset
+Sisa credits dikembalikan ke org saat itu juga (seperti sekarang), atau tunggu sampai tanggal reset?
+jawaban: untuk delete sih pasti di refund ke org credits, cuman kalo stop saya masih bingung, bagus nya gimana ya?
+
+4. Saat user mengubah credit_budget di tengah bulan
+Misal bulan ini budget 100, sudah pakai 60, lalu user naik ke 150. Apakah langsung potong 50 dari org (selisih), atau refund 40 dulu lalu potong 150? Dan reset timer-nya dari kapan — dari awal bulan atau dari tanggal perubahan?
+jawaban: seharusnya sih langsung potong 50 dari org (selisih), untuk reset timernya saya masih bingung ngga tau, apakah reset timer nya ngga berubah? atau gimana ya enaknya?
+
+5. Apakah ada notifikasi sebelum reset gagal?
+Kalau org balance hampir tidak cukup untuk reset bulan depan, sebaiknya ada warning email/notifikasi beberapa hari sebelumnya agar user sempat top up.
+jawabannya: mungkin iya ada, tapi sepertinya ini nanti ya, jika sistem dari campaign credits itu sudah berjalan dengan baik
+
+Yang paling kritis menurut saya adalah nomor 1 (kapan reset) dan nomor 4 (perubahan budget di tengah bulan) — dua ini paling banyak pengaruhnya ke implementasi.
