@@ -159,6 +159,17 @@ order by id desc limit 10;
 select * from clean_id_md5 where md5 = 'meghankelsey@gmail.com' order by id desc limit 10;
 select * from failed_lead_records where email_encrypt = 'meghankelsey@gmail.com' order by id desc limit 20;
 
+select * from global_settings order by id desc limit 5;
+
+select * from bigdbm_count_history;
+
+
+
+
+
+
+
+
 
 
 

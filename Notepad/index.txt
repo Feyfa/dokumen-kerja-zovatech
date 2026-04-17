@@ -105,3 +105,83 @@ Kalau org balance hampir tidak cukup untuk reset bulan depan, sebaiknya ada warn
 jawabannya: mungkin iya ada, tapi sepertinya ini nanti ya, jika sistem dari campaign credits itu sudah berjalan dengan baik
 
 Yang paling kritis menurut saya adalah nomor 1 (kapan reset) dan nomor 4 (perubahan budget di tengah bulan) — dua ini paling banyak pengaruhnya ke implementasi.
+
+oke jadi saya mau cerita gini.
+
+jadi saya kan punya yang namanya Search Volume Estimate, ini ada di 2 tempat, di UI dan OPEN API
+
+BEHAVIOR DI UI
+di UI misal saya getCount untuk keyword "google", nah nanti tunggu beberapa menit, dia bakal hit ke bigdbm, lalu dapat resultnya. nah setelah itu jika saya getCount lagi dengan keyword yang sama yaitu "google", maka dia ngga ada hit lagi ke bigdbm, dan langsung di anggap selesai.
+
+namun jika saya getCount lagi dengan keyword yang ada perbedaan nya misalnya saya kasih keyword "google", "amazon". maka dibalik layar dia bakal hit ke bigdbm untuk keyword "amazon" saja. yang google nya tidak di hit lagi selama rentang waktu tertentu
+
+BEHAVIOR DI OPEN API
+di OPEN API misal saya melakukan searchvolume dengan keyword "google", (btw searchvolume di OPEN API itu sama saja kaya getCount di UI). lalu setelah saya melakukan searchvolume itu dapat yang namanya request_api_id, example request_api_id: "1234567890". nah dengan request_api_id itu digunakan untuk checkStatus dan getData.
+
+nah masalah baru dimulai disini, misal setelah dapat data, saya menjalankan searchvolume lagi di OPEN API dengan keyword yang sama yaitu "Google". nah nanti response dari searchvolume akan mengembalikan request_api_id berbeda dengan pertama, example request_api_id: "9876543210". nah namun dengan request_api_id "9876543210" jika saya gunakan untuk checkstatus dan getdata itu akan mengembalikan response 404 dan not found gitu. saya berasumsi bahwa di open api pakai function yang sama untuk menjalankan searchvolume seperti di UI. jadi kalo dibayangkan seperti ini
+
+{buat request_api_id}
+{jalankan function laravel yang digunakan untuk searchvolume sama seperti yang dijalankan di ui}
+{response mengembalikan request_api_id, yang padahal bisa saja function yang dijalankan tadi tidak melakukan hit ke bigdbm, jadinya request_api_id nya itu not found ketika dijalankan di checkStatus dan getData OPEN API}
+
+nah saya ingin anda memahami dulu issue ini, jangan rubah apa apa. dan saya ingin tau kira" solusinya gimana ya?
+
+
+
+saya punya scenario begini
+
+di open api saya kan searchvolume pakai keyword ini "google"
+nanti result nya akan disimpan di table bigdbm_count_history
+id | leadspeek_api_id | request_api_id | keyword
+1 | 888888 | 123456 | google
+
+nah misal di open api saya mau searchvolume lagi menggunakan keyword ini "google", "amazon" 
+kan nanti after perbaikan, amazon bakal di hit lagi ke bigdbm, sedangkan google nya ngga di hit lagi ke bigdbm
+nanti result nya akan disimpan di table bigdbm_count_history
+id | leadspeek_api_id | request_api_id | keyword
+1 | 888888 | 123456 | google
+2 | 888888 | 654321 | amazon
+
+nah gimana cara nya ketika dia get data dengan request_api_id "123456" itu hanya mengembalikan data "google" saja, sedangkan ketika dia mau getData dengan request_api_id "654321" itu juga harus mengembalikan "google" dan "amazon" juga tidak? soalnya pas searchvolume kedua di open api keyword yang di input itu ini "google", "amazon". nah saya ngga tau bagus nya gimana, kalo menurut anda bagaimana?
+
+
+
+LAMA
+$api_id = DB::select("
+    SELECT coalesce((select count(1) from bigdbm_count_history where request_api_id = ? and status = 'done'),0) / 
+    (select count(1) from bigdbm_count_history where request_api_id = ?) * 100 as pct", 
+    [$req_api_id, $req_api_id]
+);
+
+BARU
+$api_id = DB::select("
+    SELECT coalesce((select count(1) from bigdbm_count_history where request_api_id = ? and status in ('done','error','pending')),0) / 
+    (select count(1) from bigdbm_count_history where request_api_id = ?) * 100 as pct", 
+    [$req_api_id, $req_api_id]
+);
+
+
+BigDBMCheckFilterJob.php
+  -> BigDBMCheckFilterStatusJob.php
+      -> BigDBMQueueCountV2Job.php
+          -> BigDBMQueueCountStatusV2Job.php
+
+===== REQUEST DATA =====
+bigdbm_count_test
+===== REQUEST DATA =====
+
+===== STATUS PROSES =====
+bigdbm_count_result
+bigdbm_count_play_status
+===== STATUS PROSES =====
+
+===== TANGGAL PROSES =====
+last_queue_count_test
+last_queue_count_play
+last_queue_count_history
+===== TANGGAL PROSES =====
+
+
+fix-search-volume-request_api_id-for-cached-keywords.md
+
+pak di database live, bisa screenshot indexing untuk table leadspeek_users, leadspeek_reports

@@ -204,10 +204,14 @@ select * from failed_lead_records order by id desc limit 10;
 
 select * from person_emails where CONVERT(AES_DECRYPT(FROM_bASE64(email), '8e651522e38256f2') USING utf8mb4) = 'meghankelsey@gmail.com' order by id desc;
 
+select * from jobs;
+select last_queue_count_test, bigdbm_count_result, last_queue_count_play, bigdbm_count_play_status, last_queue_count_history, bigdbm_count_test, leadspeek_users.* from leadspeek_users where leadspeek_api_id = 45628859;
+select * from bigdbm_count_history where leadspeek_api_id = 45628859 order by id desc;
+select * from failed_jobs;
+select * from bigdbm_errors order by id desc;
 
 
-
-
+-- last id = 283
 
 
 

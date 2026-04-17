@@ -1,5 +1,9 @@
 <?php
 
-$value = base64_decode("eyJjYW1wYWlnbkNvZGUiOiI2MzYyMTE3MCIsImN1c3RvbVBhcmFtcyI6ImFnaWVzX2JhaWsiLCJwYWdlVXJsIjoiaHR0cDovL2xvY2FsaG9zdC90ZXN0LXBpeGVsLyJ9");
-
-var_dump($value);
+$payload = [
+    'campaignCode' => '52369079',  // ganti dengan campaign_code yang ada di DB
+    'pageUrl'=> 'https://example.com/pricing',
+];
+$label = base64_encode(json_encode($payload));
+echo "label: " . $label . PHP_EOL;
+echo "md5_email: " . md5('alphaomegsa@gmail.com') . PHP_EOL;

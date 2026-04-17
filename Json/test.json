@@ -1,1 +1,126 @@
-
+// TIFFANY IGNITES
+{
+  "companyID": 60,
+  "userType": "userdownline",
+  "ClientCompanyName": "Tiffany Ignites",
+  "ClientFullName": "Tiffany Lymon",
+  "ClientEmail": "tiffany@tiffanyignites.com",
+  "ClientPhone": "(443) 322-6123",
+  "ClientPhoneCountryCode": "US",
+  "ClientPhoneCountryCallingCode": "1",
+  "ClientWhiteLabeling": "T",
+  "ApiMode": "F",
+  "DownlineDomain": null,
+  "DownlineSubDomain": "Tiffanyignites",
+  "DownlineOrganizationID": null,
+  "idsys": null,
+  "salesRep": null,
+  "salesAE": null,
+  "salesRef": null,
+  "selectedterms": [
+    {
+      "term": "Weekly",
+      "status": true
+    },
+    {
+      "term": "Monthly",
+      "status": true
+    },
+    {
+      "term": "Prepaid",
+      "status": true
+    }
+  ],
+  "selectedmodules": [
+    {
+      "type": "local",
+      "status": true
+    },
+    {
+      "type": "locator",
+      "status": false
+    },
+    {
+      "type": "enhance",
+      "status": true
+    },
+    {
+      "type": "b2b",
+      "status": true
+    },
+    {
+      "type": "simplifi",
+      "status": true
+    }
+  ],
+  "planMinSpendId": 1
+}
+// LOCAL
+{
+    "companyID": 22,
+    "userType": "userdownline",
+    "ClientCompanyName": "agency1776139731",
+    "ClientFullName": "agency1776139731",
+    "ClientEmail": "fisikamodern00+agency1776139731@gmail.com",
+    "ClientPhone": "(201) 222-2222",
+    "ClientPhoneCountryCode": "US",
+    "ClientPhoneCountryCallingCode": "1",
+    "ClientWhiteLabeling": "T",
+    "ApiMode": "F",
+    "DownlineDomain": null,
+    "DownlineSubDomain": "agency1776139731",
+    "DownlineOrganizationID": null,
+    "idsys": 22,
+    "salesRep": null,
+    "salesAE": null,
+    "salesRef": null,
+    "selectedterms": [
+        {
+            "term": "Weekly",
+            "status": false
+        },
+        {
+            "term": "Monthly",
+            "status": false
+        },
+        {
+            "term": "Prepaid",
+            "status": true
+        }
+    ],
+    "selectedmodules": [
+        {
+            "type": "local",
+            "status": true
+        },
+        {
+            "type": "locator",
+            "status": true
+        },
+        {
+            "type": "enhance",
+            "status": true
+        },
+        {
+            "type": "b2b",
+            "status": true
+        },
+        {
+            "type": "simplifi",
+            "status": true
+        },
+        {
+            "type": "predict",
+            "status": false
+        },
+        {
+            "type": "clean",
+            "status": false
+        },
+        {
+            "type": "audience",
+            "status": false
+        }
+    ],
+    "planMinSpendId": 5
+}

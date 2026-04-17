@@ -22,5 +22,34 @@ kata yang belom diketahui
 - assignment = tugas
 - due = jatuh tempo / harus dikumpulkan
 
+aplikasi marketplace gohighlevel yang dipakai di emm
+1. di tempat ketika client connect untuk buat contact (biasa disebut contact)
+2. di tempat ketika agency connect untuk buat iframe (biasa disebut EMM Private)
+3. di tempat untuk menampilkan aplikasi gohighlevel di app marketplace gohighlevel (biasa disebut EMM Public)
 
 
+
+hai saya mau tanya deh. apakah di laravel saat menggunakan DB::transaction dan lockForUpdate, itu sebaiknya hanya dipakai 1 model, karena kalo 2 model untuk apa gitu. analoginya kaya gini
+
+------------      ------------------------
+|  lorong  |------|        RUMAH         |
+|          |      |                      |
+------------      |                      |
+                  ------------------------
+
+buat apa anda membuat 2 pintu yang terkunci untuk melindungi rumah, jika 1 pintu yang dikunci saja bisa melindungi rumah?
+
+
+
+SVL DI UI
+1. pertama saya getcount di dengan keyword google
+2. kemudian setelah di tunggu dapat lah hasil dari getcount google
+3. setelah itu saya getcount lagi dengan keyword yang sama yaitu "google"
+4. nah kita tunggu hasilnya
+
+SVL DI OPEN API
+1. pertama saya getcount di dengan keyword google
+2. kemudian dapat request_api_id nya, dan setelah selesai dapat lah hasil dari getcount google
+3. setelah itu saya getcount lagi dengan keyword yang sama yaitu "google"
+4. kemudian dapat request_api_id nya, value nya berbeda dengan request_api_id yang pertama
+5. kemudian saat saya checkStatus dan getData dengan request_api_id kedua, masa hasilnya jadi not found
