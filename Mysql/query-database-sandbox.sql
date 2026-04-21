@@ -163,6 +163,32 @@ select * from global_settings order by id desc limit 5;
 
 select * from bigdbm_count_history;
 
+select * from job_progress where company_id = 22;
+
+
+
+
+
+select * from job_progress where created_at > '2026-04-16 03:14:54' order by created_at desc;
+select * from job_progress_chunks order by id asc;
+
+select * from suppression_lists where leadspeek_api_id = 2599288139 and suppression_type = 'campaign' order by id desc; -- campaign
+select * from suppression_lists where company_id = 582 and suppression_type = 'client' order by id desc; -- client
+select * from suppression_lists where company_id = 581 and suppression_type = 'agency' order by id desc; -- agency
+select * from optout_lists where company_root_id = 22 order by id desc; 
+
+select * from jobs;
+select * from failed_jobs where failed_at > '2026-03-16 03:27:04' order by failed_at desc;
+
+select * from open_api_tokens where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e651522e38256f2') USING utf8mb4) in (
+	'c0fd5529d91f518e911540f3316b2cf7c85e9a4cef9c9bcf28bc260f106fbd02950672d97fc1a1a983f630c5eafe8b3a72854b4180384ba1e46a0e5b890099bbb87dea71a5ae54eeec11e1d374e2d5e03b490bc5486adcdb7845c4b20a5a',
+	'd0cff02e56ac1ec2d0a2ae8c998dc1d8d1f7a9ce0c90fd1291da56605d8e37ee95bd2edb7742100518a36732ec8f9252a369e848f284710b857b9d037a614ffc0050e89098fc235f918f77c3c36968b73cd1b729bbb411e1d3a36914'
+);
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 # OpenAPI Exclusion List Root, Agency, Client, Campaign
 
-Tanggal update: 2026-04-20
+Tanggal update: 2026-04-21
 
 Dokumen ini merangkum perubahan final untuk fitur OpenAPI Exclusion List di:
 
@@ -32,7 +32,12 @@ Endpoint create Exclusion List sekarang menerima salah satu dari dua input:
 
 Kedua input tidak boleh dikirim bersamaan.
 
-Batas maksimum tetap 10,000 email.
+Batas maksimum dibedakan berdasarkan metode input:
+
+- CSV file: maksimal 10,000 row non-empty.
+- JSON `emails`: maksimal 1,000 item.
+
+Alasan business rule: JSON `emails` dipakai untuk payload kecil. Untuk bulk upload, developer harus memakai CSV file.
 
 ## Endpoint OpenAPI
 
@@ -116,7 +121,9 @@ Catatan:
 
 - `csv_file` harus benar-benar file upload, bukan URL/path.
 - file harus `.csv`.
-- maksimum 10,000 row.
+- file harus berisi minimal satu row non-empty. CSV kosong atau hanya row kosong akan langsung ditolak API dengan `422`.
+- maksimum 10,000 row non-empty. Validasi maksimum CSV dilakukan langsung oleh API controller sebelum dispatch queue.
+- invalid email di CSV tidak menolak upload. Row invalid akan di-skip saat insert job.
 - jangan kirim `csv_file` bersamaan dengan `emails`.
 
 ### Send Emails Array
@@ -171,8 +178,13 @@ Campaign:
 
 Catatan:
 
-- `emails` harus array.
-- maksimum 10,000 item.
+- key `emails` wajib ada dan harus list array JSON.
+- JSON object/associative array seperti `"emails": {"a": "john@example.com"}` ditolak dengan `422`.
+- setiap item `emails` harus scalar/string-like. Nested object/array di dalam `emails` ditolak dengan `422`.
+- maksimum 1,000 item.
+- untuk list lebih besar, gunakan upload CSV.
+- `emails: []` atau semua item kosong akan ditolak oleh EMM-SANDBOX-API dengan `422`.
+- invalid email di array tidak menolak request. Item invalid akan di-skip saat insert job.
 - jangan kirim `emails` bersamaan dengan `csv_file`.
 - raw `emails` dihapus dari request sebelum log supaya log tidak penuh dan tidak menyimpan data email mentah.
 
@@ -194,7 +206,7 @@ error
 done
 ```
 
-Jika job gagal permanen setelah retry habis, response status dapat memuat:
+Jika job gagal permanen setelah retry habis, database `job_progress` menyimpan:
 
 ```json
 {
@@ -206,14 +218,15 @@ Jika job gagal permanen setelah retry habis, response status dapat memuat:
 Catatan:
 
 - top-level response status endpoint tetap `success` jika request status berhasil.
-- detail gagal job ada di `data.jobProgress[*].status` dan `data.jobProgress[*].error_message`.
+- response `suppressionprogress()` APP saat ini menampilkan `data.jobProgress[*].status = error`, tetapi belum menyertakan `error_message` karena field tersebut belum dipilih di query status APP.
+- detail gagal job tetap tersimpan di database `job_progress.error_message`.
 
 ## EMM-SANDBOX-APP
 
 Project lokal:
 
 ```text
-/Users/jidan/Documents/CODE EMM/EMM-SANDBOX
+C:\wamp64\www\EMM-SANDBOX-APP
 ```
 
 File yang berubah atau dibuat:
@@ -226,6 +239,14 @@ data/app/Services/OpenApi/OpenApiAgencyExclusionListService.php
 data/app/Services/OpenApi/OpenApiRootExclusionListService.php
 data/app/Services/OpenApi/OpenApiCampaignExclusionListService.php
 data/app/Services/OpenApi/OpenApiClientExclusionListService.php
+data/app/Models/JobProgressChunk.php
+front/src/components/SidebarPlugin/SideBar.vue
+front/src/components/Tree/NodeTree.vue
+front/src/pages/Modules/Auth/ConfigApp/Client.vue
+front/src/pages/Modules/Auth/ConfigApp/OptOutList.vue
+front/src/pages/Modules/Auth/Leedspeek/V1Client.vue
+front/src/pages/Modules/Auth/LeedspeekB2b/ClientV1.vue
+front/src/pages/Modules/Auth/LeedspeekEnhance/ClientV1.vue
 ```
 
 ### OpenApiController
@@ -281,6 +302,7 @@ Tanggung jawab:
 - purge agency exclusion list
 - validasi input create
 - validasi CSV
+- validasi JSON `emails` sebagai `present`, `array`, dan maksimal 1,000 item
 - forward request ke EMM-SANDBOX-API
 - format error response dari API
 - hapus raw `emails` dari request sebelum log
@@ -297,6 +319,7 @@ Tanggung jawab:
 - purge root exclusion list melalui `ToolController::purgeOptout()`
 - validasi input create
 - validasi CSV
+- validasi JSON `emails` sebagai `present`, `array`, dan maksimal 1,000 item
 - format error response dari API
 - hapus raw `emails` dari request sebelum log
 
@@ -313,6 +336,7 @@ Tanggung jawab:
 - purge campaign exclusion list melalui `suppressionpurge`
 - validasi input create
 - validasi CSV
+- validasi JSON `emails` sebagai `present`, `array`, dan maksimal 1,000 item
 - format error response dari API
 - hapus raw `emails` dari request sebelum log
 
@@ -341,6 +365,7 @@ Tanggung jawab:
 - purge client exclusion list melalui `suppressionpurge`
 - validasi input create
 - validasi CSV
+- validasi JSON `emails` sebagai `present`, `array`, dan maksimal 1,000 item
 - format error response dari API
 - hapus raw `emails` dari request sebelum log
 
@@ -366,18 +391,41 @@ Jika client ada tetapi bukan milik agency token tersebut, response tetap diangga
 
 Perubahan penting:
 
-- select `error_message`
 - `jobProgress` berisi status `queue`, `progress`, dan `error`
 - `jobDone` tetap berisi status `done`
+- response status APP saat ini tidak men-select `error_message`, sehingga detail error job masih tersimpan di database/API tetapi belum ikut tampil di response `suppressionprogress()`.
 
 Ini mencegah status upload yang masih queue atau gagal permanen terlihat seperti `File Upload not found`.
+
+### Purge Exclusion List
+
+Purge root, agency, client, dan campaign sekarang ikut membersihkan tracking upload:
+
+- hapus data exclusion/optout yang sesuai scope.
+- hapus `job_progress` dengan status `done` dan `error`.
+- hapus child rows di `job_progress_chunks`.
+- jika job progress berstatus `error` dan masih punya `path`, file source di Spaces ikut dicoba dihapus.
+- jika tidak ada record untuk dipurge, response tetap `success` dengan title `No Records to Purge`.
+
+Model `data/app/Models/JobProgressChunk.php` ditambahkan di APP supaya controller dapat membersihkan child rows saat purge.
+
+### UI Exclusion List
+
+Beberapa UI upload exclusion list ikut disesuaikan:
+
+- polling `checkStatusFileUpload()` yang sebelumnya 5 detik dibuat menjadi 3 detik pada UI terkait.
+- polling status dipanggil langsung setelah upload success, bukan menunggu delay manual.
+- jika upload gagal, UI menampilkan message error dari response API jika tersedia.
+- teks bantuan upload diposisikan sebelum area progress/done agar progress list tetap mudah dibaca.
+- separator antara progress dan done dibuat conditional agar tidak dobel saat progress sudah kosong.
+- tombol konfirmasi purge memakai `customClass` SweetAlert agar styling konsisten.
 
 ## EMM-SANDBOX-API
 
 Project lokal:
 
 ```text
-/Users/jidan/Documents/CODE EMM/EMM-SANDBOX-API
+C:\wamp64\www\EMM-SANDBOX-API
 ```
 
 File yang berubah atau dibuat:
@@ -390,7 +438,7 @@ app/Jobs/ChunCsvOptoutJob.php
 app/Jobs/InsertCsvJob.php
 app/Jobs/InsertCsvClientJob.php
 app/Jobs/InsertCsvOptoutJob.php
-app/Jobs/Concerns/MarksExclusionJobProgressFailed.php
+app/Jobs/Concerns/MarksExclusionJob.php
 app/Models/JobProgress.php
 app/Models/JobProgressChunk.php
 config/queue.php
@@ -403,12 +451,20 @@ Di API, input create dinormalisasi menjadi file sebelum masuk ke flow chunk job.
 Jika request membawa file CSV:
 
 - API memakai file upload yang dikirim.
-- API validasi file CSV dan limit row.
+- API validasi file upload, extension `.csv`, dan minimal satu row non-empty.
+- CSV kosong atau hanya row kosong langsung return `422` sebelum dispatch queue.
+- CSV lebih dari 10,000 row non-empty langsung return `422` sebelum dispatch queue.
+- API tidak validasi format email per-row di controller.
+- chunk job tetap melakukan cleanup row kosong dan unique row sebelum dispatch insert jobs.
 
 Jika request membawa `emails` array:
 
+- API validasi `emails` sebagai required list array maksimal 1,000 item.
+- API menolak JSON object/associative array dan nested object/array di dalam `emails`.
 - API membuat temporary CSV.
-- isi `emails` ditulis line-by-line ke file.
+- isi `emails` non-empty ditulis line-by-line ke file.
+- jika array kosong atau semua item kosong setelah trim, API return `422`.
+- API tidak validasi format email per-item di controller.
 - setelah upload ke Spaces selesai, temporary file dihapus.
 
 Helper di `UploadController.php`:
@@ -418,16 +474,160 @@ resolveExclusionUploadInput()
 resolveUploadedExclusionFile()
 resolveEmailArrayExclusionFile()
 removeEmailsFromRequest()
-validateExclusionCsvFile()
 ```
 
 Tujuan helper:
 
 - menerima satu sumber input saja, CSV atau `emails`
-- validasi batas maksimum 10,000 records
-- validasi format email untuk `emails` array
+- validasi file upload CSV dan extension `.csv`
+- validasi CSV punya minimal satu row non-empty sebelum dispatch queue
+- validasi CSV maksimal 10,000 row non-empty sebelum dispatch queue
+- validasi `emails` sebagai required list array maksimal 1,000 item
+- menolak JSON object/associative array untuk `emails`
+- menolak nested object/array di dalam `emails`
+- menolak `emails` array kosong atau semua item kosong
 - membuat temporary CSV untuk `emails` array
 - menghapus raw `emails` dari request setelah dinormalisasi
+
+Validasi format email sengaja dipindah ke insert job. Invalid email tidak lagi membuat upload gagal total.
+
+### Validasi dan Skip Invalid Email
+
+Insert job yang melakukan validasi email:
+
+```text
+InsertCsvJob
+InsertCsvClientJob
+InsertCsvOptoutJob
+```
+
+Behavior insert:
+
+- trim dan lowercase row sebelum validasi.
+- validasi memakai `FILTER_VALIDATE_EMAIL`.
+- row invalid, row kosong, dan header seperti `email` akan di-skip.
+- hanya valid email yang masuk ke `suppression_lists` atau `optout_lists`.
+- `markChunkExclusionAsDone()` memakai jumlah row valid yang berhasil diproses.
+- status akhir tetap `done` dan `percentage = 100` ketika semua chunk selesai, walaupun `current_row < total_row`.
+- setelah semua chunk selesai, insert job terakhir mencoba menghapus file source di Spaces memakai `job_progress.path`.
+
+Contoh CSV:
+
+```csv
+email
+valid@example.com
+salah-email
+other@example.com
+```
+
+Expected result:
+
+```text
+total_row = 4
+current_row = 2
+status = done
+percentage = 100
+```
+
+Jika semua row non-empty invalid, job tetap bisa selesai:
+
+```text
+current_row = 0
+total_row > 0
+status = done
+percentage = 100
+```
+
+### Empty Input Handling
+
+CSV kosong:
+
+```text
+POST upload CSV kosong
+=> 422
+=> The file must contain at least one non-empty row.
+```
+
+JSON `emails` kosong:
+
+```json
+{
+    "emails": []
+}
+```
+
+Response:
+
+```text
+422
+The emails field must contain at least one non-empty value.
+```
+
+JSON `emails` lebih dari 1,000 item:
+
+```text
+422
+Maximum 1000 records are allowed via emails array. For larger lists, please use CSV file upload.
+```
+
+CSV lebih dari 10,000 row non-empty:
+
+```text
+422
+Maximum 10000 records are allowed.
+```
+
+JSON `emails` berisi item kosong semua:
+
+```json
+{
+    "emails": ["", "   "]
+}
+```
+
+Response:
+
+```text
+422
+The emails field must contain at least one non-empty value.
+```
+
+JSON `emails` berbentuk object/associative array:
+
+```json
+{
+    "emails": {
+        "a": "john@example.com"
+    }
+}
+```
+
+Response:
+
+```text
+422
+The emails field must be a list array.
+```
+
+JSON `emails` berisi nested object/array:
+
+```json
+{
+    "emails": [
+        "john@example.com",
+        {
+            "a": "jane@example.com"
+        }
+    ]
+}
+```
+
+Response:
+
+```text
+422
+Each emails item must be a string.
+```
 
 ### Redis Queue
 
@@ -494,8 +694,13 @@ Perbaikan:
 - field legacy `job_id` diisi `0`
 - tracking per chunk memakai table `job_progress_chunks`
 - unique key: `(job_progress_id, chunk_index)`
+- chunk rows dibuat lebih dulu dengan status `queue`, lalu insert job mengubahnya menjadi `progress` saat mulai insert dan menjadi `done` atau `error` saat terminal.
 - completion dihitung dari jumlah chunk yang benar-benar selesai
 - update parent progress memakai `lockForUpdate()`
+- parent `job_progress` disinkronkan ulang dari `job_progress_chunks` pada setiap update chunk terminal, bukan lagi hanya memakai increment `current_chunk + 1`.
+- jika insert job terpanggil ulang untuk chunk yang sudah `done` atau `error`, parent tetap disinkronkan ulang dari child chunks supaya progress tidak drift.
+- `current_row` menghitung row valid yang diproses insert job, sehingga bisa lebih kecil dari `total_row` jika ada invalid row yang di-skip.
+- `percentage` tetap `100` saat semua chunk selesai dan status menjadi `done`.
 
 ### Table job_progress
 
@@ -509,6 +714,7 @@ company_id
 leadspeek_api_id
 suppression_type
 filename
+path
 status
 error_message
 percentage
@@ -534,6 +740,7 @@ Catatan:
 - `job_id` adalah legacy field.
 - Untuk tracking queue baru, gunakan `job_progress.id`.
 - Upload baru dibuat dengan `job_id = 0`.
+- `path` menyimpan lokasi file source di Spaces agar file bisa dihapus setelah semua chunk selesai atau saat purge job error.
 
 ### Table job_progress_chunks
 
@@ -547,7 +754,7 @@ CREATE TABLE job_progress_chunks (
     job_progress_id BIGINT UNSIGNED NOT NULL,
     chunk_index INT UNSIGNED NOT NULL,
     row_count INT NOT NULL DEFAULT 0,
-    status VARCHAR(32) NOT NULL DEFAULT 'done',
+    status VARCHAR(32) NOT NULL DEFAULT 'queue',
     started_at INT UNSIGNED NULL,
     finished_at INT UNSIGNED NULL,
     error_message TEXT NULL,
@@ -559,20 +766,62 @@ CREATE TABLE job_progress_chunks (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
 
-### Failed Queue Handling
+Catatan:
+
+- default `job_progress_chunks.status` harus `queue`, bukan `done`.
+- table sebaiknya memakai InnoDB agar transaction dan `lockForUpdate()` efektif saat worker insert berjalan paralel.
+
+### Exclusion Queue Progress Trait
 
 Trait baru:
 
 ```text
-app/Jobs/Concerns/MarksExclusionJobProgressFailed.php
+app/Jobs/Concerns/MarksExclusionJob.php
 ```
 
-Tanggung jawab:
+Helper utama:
 
-- update `job_progress.status = error`
-- isi `job_progress.error_message`
-- isi `job_progress.done_at`
-- untuk insert job, simpan detail gagal ke `job_progress_chunks`
+```text
+markChunkExclusionAsDone()
+markChunkExclusionAsFailed()
+markInsertExclusionAsProgress()
+markInsertExclusionAsFailed()
+```
+
+Tanggung jawab `markInsertExclusionAsProgress()`:
+
+- dipakai oleh insert job sebelum proses insert email ke database.
+- update chunk terkait di `job_progress_chunks` dari `queue` menjadi `progress`.
+- isi `started_at` agar chunk yang sedang diproses bisa dibedakan dari chunk yang belum diambil worker.
+- tidak mengubah chunk yang sudah terminal (`done` atau `error`).
+- tidak menghitung chunk sebagai selesai dan tidak mengubah counter parent `job_progress`.
+
+Tanggung jawab `markChunkExclusionAsDone()`:
+
+- dipakai oleh insert job ketika chunk berhasil diproses.
+- update chunk terkait di `job_progress_chunks` menjadi `done`.
+- lock chunk terkait dengan `lockForUpdate()`.
+- sinkronisasi ulang `job_progress.current_chunk` dari jumlah child chunk berstatus `done` atau `error`.
+- sinkronisasi ulang `job_progress.current_row` dari jumlah row valid pada child chunk berstatus `done`.
+- jika semua chunk sudah selesai, parent `job_progress` menjadi `done` dan `percentage = 100`.
+- menghapus file source di Spaces saat chunk terminal terakhir selesai.
+
+Tanggung jawab `markChunkExclusionAsFailed()`:
+
+- dipakai oleh chunk job.
+- update `job_progress.status = error`.
+- isi `job_progress.error_message`.
+- isi `job_progress.done_at`.
+- tidak menyentuh `job_progress_chunks`.
+
+Tanggung jawab `markInsertExclusionAsFailed()`:
+
+- dipakai oleh insert job.
+- update chunk terkait di `job_progress_chunks` menjadi `error`.
+- simpan error detail di `job_progress_chunks.error_message`.
+- tidak membuat parent `job_progress` menjadi `error`.
+- sinkronisasi ulang parent `job_progress` dari child chunks karena chunk tersebut sudah terminal.
+- jika semua chunk sudah terminal, parent `job_progress` menjadi `done` dan `percentage = 100`.
 
 Semua job exclusion sudah punya `failed()` handler:
 
@@ -589,25 +838,38 @@ Jika insert DB gagal:
 
 - exception dilempar ulang
 - queue retry berjalan
-- chunk tidak ditandai done
+- chunk tidak ditandai `done`
 
-Jika job gagal permanen setelah retry habis:
+Jika chunk job gagal permanen setelah retry habis:
 
 - parent job progress menjadi `error`
-- error message disimpan
-- status endpoint dapat menampilkan detail error
+- error message disimpan di `job_progress.error_message`
+
+Jika insert job gagal permanen setelah retry habis:
+
+- parent job progress tetap berjalan sebagai best-effort process.
+- chunk terkait menjadi `error` di `job_progress_chunks`.
+- error message insert disimpan di `job_progress_chunks.error_message`.
+- parent job progress tetap dapat selesai `done` jika semua chunk sudah terminal (`done` atau `error`).
 
 ### Cleanup File Spaces
 
-Jika delete file di Spaces gagal setelah insert jobs sudah didispatch:
+File source di Spaces tidak lagi dihapus oleh chunk job setelah insert jobs didispatch.
+
+Cleanup dilakukan pada dua titik:
+
+1. Insert job terminal terakhir menghapus file setelah semua chunk selesai dan parent job menjadi `done`.
+2. Purge menghapus file source untuk `job_progress` berstatus `error` yang masih menyimpan `path`.
+
+Jika delete file di Spaces gagal:
 
 - error tetap dikirim/log
 - job tidak dilempar ulang
 
 Alasan:
 
-- insert jobs sudah telanjur didispatch
-- retry chunk job pada titik ini bisa menyebabkan dispatch ulang insert jobs
+- kegagalan cleanup file tidak boleh mengubah status job yang sudah selesai
+- retry cleanup dapat menyebabkan efek samping yang tidak diperlukan
 
 ## sitesettings-api-docs
 
@@ -638,10 +900,10 @@ Catatan:
 
 ### PHP Syntax Check
 
-Menggunakan PHP 7.4:
+Menggunakan PHP lokal WAMP:
 
 ```text
-/opt/homebrew/opt/php@7.4/bin/php
+php
 ```
 
 APP:
@@ -649,11 +911,13 @@ APP:
 ```text
 php -l data/app/Http/Controllers/OpenApiController.php
 php -l data/app/Http/Controllers/LeadspeekController.php
+php -l data/app/Http/Controllers/ToolController.php
 php -l data/app/Services/OpenApi/OpenApiValidationService.php
 php -l data/app/Services/OpenApi/OpenApiAgencyExclusionListService.php
 php -l data/app/Services/OpenApi/OpenApiRootExclusionListService.php
 php -l data/app/Services/OpenApi/OpenApiCampaignExclusionListService.php
 php -l data/app/Services/OpenApi/OpenApiClientExclusionListService.php
+php -l data/app/Models/JobProgressChunk.php
 ```
 
 API:
@@ -666,7 +930,7 @@ php -l app/Jobs/ChunCsvOptoutJob.php
 php -l app/Jobs/InsertCsvJob.php
 php -l app/Jobs/InsertCsvClientJob.php
 php -l app/Jobs/InsertCsvOptoutJob.php
-php -l app/Jobs/Concerns/MarksExclusionJobProgressFailed.php
+php -l app/Jobs/Concerns/MarksExclusionJob.php
 php -l app/Models/JobProgress.php
 php -l app/Models/JobProgressChunk.php
 ```
@@ -694,8 +958,8 @@ Tidak menjalankan build Vue setelah perubahan terbaru.
 
 Alasan:
 
-- perubahan terbaru tidak menyentuh Vue
-- user meminta jangan build jika ada perubahan Vue
+- perubahan terbaru menyentuh Vue, tetapi request saat review dokumentasi tidak meminta build.
+- belum ada build ulang frontend setelah perubahan polling/UI exclusion list.
 
 ## Catatan Belum Dilakukan
 
@@ -720,10 +984,16 @@ Test manual yang disarankan:
 15. Campaign status.
 16. Campaign purge.
 17. Request yang mengirim `csv_file` dan `emails` bersamaan harus ditolak.
-18. Request lebih dari 10,000 records/items harus ditolak.
-19. Invalid CSV email harus ditolak.
-20. Agency token mencoba akses client milik agency lain harus `Client Not Found`.
-21. Agency token mencoba akses campaign milik agency lain harus `Campaign Not Found`.
+18. JSON `emails` lebih dari 1,000 item harus ditolak langsung oleh APP/API dengan arahan memakai CSV.
+19. CSV lebih dari 10,000 row non-empty harus ditolak langsung oleh API dengan `422`.
+20. CSV kosong atau hanya row kosong harus ditolak langsung dengan `422`.
+21. JSON `emails: []` atau semua item kosong harus ditolak langsung dengan `422`.
+22. Invalid CSV email harus di-skip saat insert, bukan menolak upload.
+23. Invalid JSON email harus di-skip saat insert, bukan menolak request.
+24. JSON `emails` berbentuk object/associative array harus ditolak dengan `422`.
+25. JSON `emails` berisi nested object/array harus ditolak dengan `422`.
+26. Agency token mencoba akses client milik agency lain harus `Client Not Found`.
+27. Agency token mencoba akses campaign milik agency lain harus `Campaign Not Found`.
 
 ## Commit Message Rekomendasi
 

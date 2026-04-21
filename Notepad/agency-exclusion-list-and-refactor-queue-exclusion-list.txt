@@ -1,0 +1,67 @@
+php artisan queue:work redis --queue=exclusion-list-chunk
+php artisan queue:work redis --queue=exclusion-list-insert
+
+
+TESTING SKENARIO EXCLUSION LIST
+1. CAMPAIGN
+* UI ✅
+* OPEN API [emails file csv] ✅
+* OPEN API [emails array of string] ✅ 
+
+2. CLIENT
+* UI ✅
+* OPEN API [emails file csv] ✅
+* OPEN API [emails array of string] ✅
+
+3. AGENCY
+* UI ✅
+* OPEN API [emails file csv] ✅
+* OPEN API [emails array of string] ✅
+
+4. ROOT
+* UI ✅
+* OPEN API [emails file csv] ✅
+* OPEN API [emails array of string] ✅
+
+AGENCY -> c0fd5529d91f518e911540f3316b2cf7c85e9a4cef9c9bcf28bc260f106fbd02950672d97fc1a1a983f630c5eafe8b3a72854b4180384ba1e46a0e5b890099bbb87dea71a5ae54eeec11e1d374e2d5e03b490bc5486adcdb7845c4b20a5a
+ROOT -> d0cff02e56ac1ec2d0a2ae8c998dc1d8d1f7a9ce0c90fd1291da56605d8e37ee95bd2edb7742100518a36732ec8f9252a369e848f284710b857b9d037a614ffc0050e89098fc235f918f77c3c36968b73cd1b729bbb411e1d3a36914
+
+EMM-SANDBOX-API
+
+BRANCH
+* JD-TASK-EMM-923-QUEUE
+* JD-TASK-EMM-923-QUEUE-DEV-SYNC
+
+COMMIT
+fix: harden queued exclusion list upload processing
+- Normalize CSV and JSON emails inputs before dispatching exclusion queue jobs.
+- Reject empty CSV files and CSV files over 10,000 non-empty rows before queue dispatch.
+- Limit JSON emails payloads to 1,000 items.
+- Require JSON emails to be a list array and reject nested object or array items.
+- Move invalid email handling to insert jobs so invalid rows are skipped instead of failing upload.
+- Track queued insert chunks with job_progress_chunks.
+- Count only valid inserted rows toward current_row while allowing completion to reach 100 percent.
+- Replace duplicated insert progress logic with the MarksExclusionJob trait.
+- Mark parent job_progress as error only when chunk jobs fail.
+- Mark failed insert chunks in job_progress_chunks while keeping parent progress best-effort.
+- Store uploaded file paths on job_progress for cleanup after all chunks finish.
+- Remove temporary memory/debug logs from exclusion upload processing.
+
+FILE
+* app\Http\Controllers\UploadController.php
+* app\Jobs\ChunCsvOptoutJob.php
+* app\Jobs\ChunkCsvClientJob.php
+* app\Jobs\ChunkCsvJob.php
+* app\Jobs\InsertCsvClientJob.php
+* app\Jobs\InsertCsvJob.php
+* app\Jobs\InsertCsvOptoutJob.php
+* app\Models\JobProgress.php
+* app\Models\JobProgressChunk.php
+* app\Jobs\Concerns\MarksExclusionJob.php
+* config\queue.php
+
+
+{
+    "client_id": "20afd8972da5b1f",
+    "secret_key": "3f57c0982b9f657cb61b027b254db9d8f927b6e1c6745cf38cf8"
+}
