@@ -17,9 +17,12 @@ select * from organization_credit_balances;
 select * from campaigns;
 select * from contacts;
 select * from credit_transactions;
-select * from webhook_events;
+select * from webhook_events we ;
 
-select * from integrations;
+select * from integrations_field_mappings;
+
+select * from organization_integrations;
+select * from campaign_integrations;
 select * from modules;
 
 select * from module_jobs;
