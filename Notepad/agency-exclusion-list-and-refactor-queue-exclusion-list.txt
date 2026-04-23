@@ -1,6 +1,7 @@
 php artisan queue:work redis --queue=exclusion-list-chunk
 php artisan queue:work redis --queue=exclusion-list-insert
 
+exclusion-list-chunk-dev,exclusion-list-insert-dev
 
 TESTING SKENARIO EXCLUSION LIST
 1. CAMPAIGN
@@ -65,3 +66,9 @@ FILE
     "client_id": "20afd8972da5b1f",
     "secret_key": "3f57c0982b9f657cb61b027b254db9d8f927b6e1c6745cf38cf8"
 }
+
+redis-cli --tls -h tls://private-db-caching-redis-do-user-8589910-0.k.db.ondigitalocean.com -p 25061 --user default -a "AVNS_HuFT0xUPIkopOrI3DLN"
+
+pit-9dd21182-9284-4b7b-a031-ef52c4447053
+
+DEVELOPEMODE=true

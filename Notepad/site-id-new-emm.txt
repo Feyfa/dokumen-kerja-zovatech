@@ -5,6 +5,117 @@ MASIH KURANG OKE
 1. untuk audit logs nya di field nya belom di tambahin campaign_id, sebelumnya itu ngga ada karena predict, audience, clean itu bukan campaign. makanya sekarang itu perlu
 
 YANG BELOM DI IMPLEMENTASIKAN
-1. buat logic di backend nya untuk softdelete campaign + audit logs ✅
-2. buat logic di backend nya untuk update campaign status + audit logs ✅
-3. buat logic untuk paginate list campaign site id ✅
+1. BUAT UI UNTUK CRUD DI CAMPAIGN INTEGRATIONS (progress)
+1. BUAT SERVE INTEGRATION SAAT LEAD MASUK DI WEBHOOK
+2. BUAT LOGIC UNTUK EXPORT LEAD
+
+REDIS_HOST=tls://private-db-caching-redis-do-user-8589910-0.k.db.ondigitalocean.com
+REDIS_PASSWORD=xxxxx
+REDIS_PORT=25061
+
+Private Integration Token GHL : pit-9dd21182-9284-4b7b-a031-ef52c4447053
+
+php artisan migrate:fresh
+php artisan db:seed --class=PackageSeeder
+php artisan db:seed --class=ExportTemplateSeeder
+php artisan db:seed --class=ModulePricingSeeder
+php artisan db:seed --class=ModuleSeeder
+php artisan db:seed --class=IntegrationSeeder
+
+CARA UPGRADE PLAN MANUAL LEWAT QUERY
+Step 1 — cari org_id:
+SELECT u.id AS user_id, o.id AS org_id, o.name AS org_name
+FROM users u
+JOIN organizations o ON o.owner_id = u.id AND o.is_personal = true
+WHERE u.email = 'your-email@example.com';
+
+Step 2 — update organization:
+UPDATE organizations
+SET package_id = (SELECT id FROM packages WHERE slug = 'business'),
+    updated_at = NOW()
+WHERE id = '<org_id dari step 1>';
+
+Step 3 — update subscription:
+UPDATE organization_subscriptions
+SET package_id = (SELECT id FROM packages WHERE slug = 'business'),
+    status     = 'active',
+    updated_at = NOW()
+WHERE organization_id = '<org_id dari step 1>'
+  AND status = 'active';
+
+Step 4 — set credit balance ke 17,000:
+UPDATE organization_credit_balances
+SET available_credits        = 17000,
+    lifetime_credits_granted = lifetime_credits_granted + 17000,
+    last_replenished_at      = NOW(),
+    updated_at               = NOW()
+WHERE organization_id = '<org_id dari step 1>';
+
+hai sama ini, ada revisi di bagian "Enable On Campaign" di User Integrations
+
+1. Kata Bos Saya
+
+jadi katanya chekbox "Enable On Campaign" itu duplicate, soalnya konsep dia itu sebenarnya Set as default connection itu adalah pilihan dari salah satu banyak nya koneksi. nah jadi dia bilang seperti ini saja. bisa ngga untuk site id kita tetep pakai 2 element, yaitu "Set as default connection" dan sesuatu hal yang mirip dengan "Automatically push contacts after each export". mungkin nama lain dari ini "Automatically push contacts after each export" untuk sekarang ini kita bisa namain "Enable After Create Campaign"
+
+jadi nanti casenya gini, di UserSetting misal saya ada 1 integration dengan 3 connection katakanlah label nya 
+- jidan-webhook-1 (set as default connection: ✅, Enable After Create Campaign[Site ID]: ✅)
+- jidan-webhook-2 (set as default connection: ❌, Enable After Create Campaign[Site ID]: ✅)
+- jidan-webhook-3 (set as default connection: ❌, Enable After Create Campaign[Site ID]: ❌)
+- jidan-webhook-4 (set as default connection: ❌, Enable After Create Campaign[Site ID]: ❌)
+
+nah dengan case seperti ini, seharusnya ketika after create campaig, maka di Campaign Integration Khusus Webhook, yang muncul itu hanya jidan-webhook-1 dan jidan-webhook-2 saja, karena 2 koneksi ini yang sudah di set untuk Enable After Create Campaign[Site ID]. sedangkan untuk jidan-webhook-3 dan jidan-webhook-4 itu tidak muncul karena belum di set untuk Enable After Create Campaign[Site ID]. dan yang enable itu hanya satu saja yaitu jidan-webhook-1
+
+2. Setelah Bos Saya Bilang Seperti Itu Saya Jadi Punya Ide
+
+oke dengan cerita yang sama kaya tadi: "jadi katanya chekbox "Enable On Campaign" itu duplicate, soalnya konsep dia itu sebenarnya Set as default connection itu adalah pilihan dari salah satu banyak nya koneksi. nah jadi dia bilang seperti ini saja. bisa ngga untuk site id kita tetep pakai 2 element, yaitu "Set as default connection" dan sesuatu hal yang mirip dengan  push contacts after each export". mungkin nama lain dari ini  push contacts after each export" untuk sekarang ini kita bisa namain "Enable At Create Campaign""
+
+nah saya jadi saya kepikiran gini, titik besar nya adalah
+- "Enable At Create Campaign"
+- pada saat create campaign, manage credit saja bisa diatur saat create campaign, kenapa integrations tidak?
+
+jadi nanti casenya gini, di UserSetting misal saya ada 1 integration dengan 3 connection katakanlah label nya 
+- jidan-webhook-1 (set as default connection: ✅, Enable At Create Campaign[Site ID]: ✅)
+- jidan-webhook-2 (set as default connection: ❌, Enable At Create Campaign[Site ID]: ✅)
+- jidan-webhook-3 (set as default connection: ❌, Enable At Create Campaign[Site ID]: ❌)
+- jidan-webhook-4 (set as default connection: ❌, Enable At Create Campaign[Site ID]: ❌)
+
+nah saat buka modal create campaign. maka akan muncul intagrasi dari list User Integrations, yang mana nanti yang muncul itu hanya jidan-webhook-1 dan jidan-webhook-2 saja, karena 2 koneksi ini yang sudah di set untuk Enable At Create Campaign[Site ID]. sedangkan untuk jidan-webhook-3 dan jidan-webhook-4 itu tidak muncul karena belum di set untuk Enable At Create Campaign[Site ID]. dan yang enable itu hanya satu saja yaitu jidan-webhook-1
+
+namun saat create campaign dia juga bisa ubah ubah lagi, jadi misal dia mau ubah yang enable hanya jidan-webhook-2 saja itu bisa.
+
+jangan rubah apa apa saya ingin denger dulu nih pendapat anda, bagaimana menurut anda?
+
+---------------------------------
+
+"""""""ini untuk nanti jika claude setuju dengan ide ke 2""""""
+oke karena anda setuju dengan ide saya, nanti kan ide nya adalah saat create campaign di modal nya kan ada section utama (dimana mengisi nama campaign, Custom Params , url, dan Contact Re-identification Time Limit), section masalah budget, dan section masalah integration. nah itu apakah digabung jadi 1 saja kebawah? atau nanti nanti ada semacam step nya gitu?
+
+
+
+feat(integrations): include_in_campaigns + campaign_modules + site-id campaign 2-step flow
+
+- Rename enable_on_new_campaign → include_in_campaigns, add campaign_modules[]
+  validation in ConnectIntegrationRequest & UpdateIntegrationSettingsRequest
+- Update IntegrationController (connect, oauth-authorize, oauth-callback) to
+  persist include_in_campaigns + campaign_modules in org integration settings
+- Add StoreCampaignRequest validation for integrations[] (orgIntegrationId, isEnabled)
+- Extract attachCampaignIntegrations() private method in CampaignService;
+  validate org ownership before creating CampaignIntegration records
+
+feat(integrations): include_in_campaigns + campaign_modules + site-id campaign 2-step flow
+
+- Add include_in_campaigns + campaign_modules to IntegrationSettings type
+- Add integrations[] to CreateCampaignPayload; pass through createCampaign API call
+- IntegrationConnectDialog / IntegrationSettingsDialog:
+  - Add campaignSiteId checkbox nested under "Include in campaign setup"
+  - Move "Include in campaign setup" below auto-push section
+  - Move "Set as default connection" just above auto-push
+  - Fix double-click: submitting stays true until dialog closes (reset on close)
+- SiteIdCampaignDialog: 2-step flow for Growth+ users on create mode
+  - Step 1: campaign settings (re-identification before budget)
+  - Step 2: integration candidates filtered by include_in_campaigns + site_id module
+  - Step indicator styled to match old system (circles on line, checkmark on complete)
+  - Card style and modal width (max-w-xl) match SiteIdIntegrationDialog
+- Remove icons from all campaign modal titles (Campaign, EmbedCode, Credits, Integrations)
+- IntegrationsSettingsView: show webhook URL below connection name, add "site id" badge
+  alongside push module badges when campaign_modules includes site_id

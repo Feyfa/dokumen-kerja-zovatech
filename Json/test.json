@@ -1,126 +1,57 @@
-// TIFFANY IGNITES
 {
-  "companyID": 60,
-  "userType": "userdownline",
-  "ClientCompanyName": "Tiffany Ignites",
-  "ClientFullName": "Tiffany Lymon",
-  "ClientEmail": "tiffany@tiffanyignites.com",
-  "ClientPhone": "(443) 322-6123",
-  "ClientPhoneCountryCode": "US",
-  "ClientPhoneCountryCallingCode": "1",
-  "ClientWhiteLabeling": "T",
-  "ApiMode": "F",
-  "DownlineDomain": null,
-  "DownlineSubDomain": "Tiffanyignites",
-  "DownlineOrganizationID": null,
-  "idsys": null,
-  "salesRep": null,
-  "salesAE": null,
-  "salesRef": null,
-  "selectedterms": [
-    {
-      "term": "Weekly",
-      "status": true
-    },
-    {
-      "term": "Monthly",
-      "status": true
-    },
-    {
-      "term": "Prepaid",
-      "status": true
-    }
+  "tags": [
+    "jidan-tags"
   ],
-  "selectedmodules": [
-    {
-      "type": "local",
-      "status": true
-    },
-    {
-      "type": "locator",
-      "status": false
-    },
-    {
-      "type": "enhance",
-      "status": true
-    },
-    {
-      "type": "b2b",
-      "status": true
-    },
-    {
-      "type": "simplifi",
-      "status": true
-    }
+  "is_default": true,
+  "webhook_url": null,
+  "company_name": null,
+  "push_modules": [
+    "audience_id",
+    "predict_id",
+    "clean_id"
   ],
-  "planMinSpendId": 1
+  "location_name": "Sandbox Example ",
+  "auto_push_on_export": false
 }
-// LOCAL
+
+
 {
-    "companyID": 22,
-    "userType": "userdownline",
-    "ClientCompanyName": "agency1776139731",
-    "ClientFullName": "agency1776139731",
-    "ClientEmail": "fisikamodern00+agency1776139731@gmail.com",
-    "ClientPhone": "(201) 222-2222",
-    "ClientPhoneCountryCode": "US",
-    "ClientPhoneCountryCallingCode": "1",
-    "ClientWhiteLabeling": "T",
-    "ApiMode": "F",
-    "DownlineDomain": null,
-    "DownlineSubDomain": "agency1776139731",
-    "DownlineOrganizationID": null,
-    "idsys": 22,
-    "salesRep": null,
-    "salesAE": null,
-    "salesRef": null,
-    "selectedterms": [
-        {
-            "term": "Weekly",
-            "status": false
-        },
-        {
-            "term": "Monthly",
-            "status": false
-        },
-        {
-            "term": "Prepaid",
-            "status": true
-        }
-    ],
-    "selectedmodules": [
-        {
-            "type": "local",
-            "status": true
-        },
-        {
-            "type": "locator",
-            "status": true
-        },
-        {
-            "type": "enhance",
-            "status": true
-        },
-        {
-            "type": "b2b",
-            "status": true
-        },
-        {
-            "type": "simplifi",
-            "status": true
-        },
-        {
-            "type": "predict",
-            "status": false
-        },
-        {
-            "type": "clean",
-            "status": false
-        },
-        {
-            "type": "audience",
-            "status": false
-        }
-    ],
-    "planMinSpendId": 5
+  "tags": [
+    "jidan-tags"
+  ],
+  "is_default": true,
+  "webhook_url": null,
+  "company_name": null,
+  "push_modules": [
+    "audience_id",
+    "predict_id",
+    "clean_id"
+  ],
+  "location_name": "Sandbox Example ",
+  "auto_push_on_export": false
 }
+
+
+{
+  "tags": [],
+  "webhook_url": "https://chatgpt.com",
+  "push_modules": [
+    "audience_id",
+    "predict_id",
+    "clean_id"
+  ],
+  "auto_push_on_export": false,
+  "enable_on_new_campaign": false
+}
+
+{
+  "tags": [],
+  "is_default": true,
+  "webhook_url": "https://chatgpt.com",
+  "push_modules": [
+    "clean_id"
+  ],
+  "auto_push_on_export": true,
+  "enable_on_new_campaign": false
+}
+

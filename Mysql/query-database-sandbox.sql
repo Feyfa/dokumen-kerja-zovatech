@@ -185,6 +185,17 @@ select * from open_api_tokens where CONVERT(AES_DECRYPT(FROM_bASE64(token), '8e6
 	'd0cff02e56ac1ec2d0a2ae8c998dc1d8d1f7a9ce0c90fd1291da56605d8e37ee95bd2edb7742100518a36732ec8f9252a369e848f284710b857b9d037a614ffc0050e89098fc235f918f77c3c36968b73cd1b729bbb411e1d3a36914'
 );
 
+select * from job_progress
+where status <> 'done' 
+order by id desc;
+
+select * from job_progress jp 
+left join job_progress_chunks jpc on jp.id = jpc.job_progress_id
+where jp.status <> 'done' and YEAR(jp.created_at) = '2026'
+order by jp.id asc;
+
+select * from failed_jobs order by failed_at desc limit 10;
+
 
 
 

@@ -19,4 +19,13 @@ select * from contacts;
 select * from credit_transactions;
 select * from webhook_events;
 
+select * from integrations;
+select * from modules;
+
+select * from module_jobs;
+
+
+
+select * from campaign_integrations;
+
 -- user_3CJ3sadWfYOORa4sQc3XjdBILit
