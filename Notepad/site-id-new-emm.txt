@@ -45,7 +45,7 @@ WHERE organization_id = '<org_id dari step 1>'
 
 Step 4 — set credit balance ke 17,000:
 UPDATE organization_credit_balances
-SET available_credits        = 17000,
+SET available_credits        = lifetime_credits_granted + 17000,
     lifetime_credits_granted = lifetime_credits_granted + 17000,
     last_replenished_at      = NOW(),
     updated_at               = NOW()
@@ -119,3 +119,8 @@ feat(integrations): include_in_campaigns + campaign_modules + site-id campaign 2
 - Remove icons from all campaign modal titles (Campaign, EmbedCode, Credits, Integrations)
 - IntegrationsSettingsView: show webhook URL below connection name, add "site id" badge
   alongside push module badges when campaign_modules includes site_id
+
+pit-9dd21182-9284-4b7b-a031-ef52c4447053
+noFzNQNpn5cu6Pkuk08A
+
+php artisan queue:listen --queue=default,integrations --tries=1 --timeout=0

@@ -25,10 +25,13 @@ select * from organization_integrations;
 select * from campaign_integrations;
 select * from modules;
 
+select * from modules;
 select * from module_jobs;
 
 
-
+select * from integration_push_logs;
 select * from campaign_integrations;
+
+select * from integration_field_mappings;
 
 -- user_3CJ3sadWfYOORa4sQc3XjdBILit

@@ -1,8 +1,7 @@
 {
   "tags": [
-    "jidan-tags"
+    "gohighlevel-jidan-1"
   ],
-  "is_default": true,
   "webhook_url": null,
   "company_name": null,
   "push_modules": [
@@ -11,47 +10,9 @@
     "clean_id"
   ],
   "location_name": "Sandbox Example ",
-  "auto_push_on_export": false
-}
-
-
-{
-  "tags": [
-    "jidan-tags"
-  ],
-  "is_default": true,
-  "webhook_url": null,
-  "company_name": null,
-  "push_modules": [
-    "audience_id",
-    "predict_id",
-    "clean_id"
-  ],
-  "location_name": "Sandbox Example ",
-  "auto_push_on_export": false
-}
-
-
-{
-  "tags": [],
-  "webhook_url": "https://chatgpt.com",
-  "push_modules": [
-    "audience_id",
-    "predict_id",
-    "clean_id"
-  ],
-  "auto_push_on_export": false,
-  "enable_on_new_campaign": false
-}
-
-{
-  "tags": [],
-  "is_default": true,
-  "webhook_url": "https://chatgpt.com",
-  "push_modules": [
-    "clean_id"
+  "campaign_modules": [
+    "site_id"
   ],
   "auto_push_on_export": true,
-  "enable_on_new_campaign": false
+  "include_in_campaigns": true
 }
-

@@ -1,8 +1,8 @@
 <?php
 
 $payload = [
-    'campaignCode' => '52369079',  // ganti dengan campaign_code yang ada di DB
-    'pageUrl'=> 'https://example.com/pricing',
+    'campaignCode' => '84632251',  // ganti dengan campaign_code yang ada di DB
+    'pageUrl'=> 'https://chatgpt.com',
 ];
 $label = base64_encode(json_encode($payload));
 echo "label: " . $label . PHP_EOL;
