@@ -124,3 +124,52 @@ pit-9dd21182-9284-4b7b-a031-ef52c4447053
 noFzNQNpn5cu6Pkuk08A
 
 php artisan queue:listen --queue=default,integrations --tries=1 --timeout=0
+
+
+
+
+SAYA ADA BEBERAPA PEMBERITAHUAN SAJA
+
+1. tadi saya nambahin ini, hanya untuk testing, ini supaya email pakai epoch time
+/* INI HANYA TESTING, NANTI PADA SAAT MAU COMMIT INI DIHAPUS */
+if (isset($profiles[0]['domains']['emails'])) {
+    $testing_now_epoch = now()->timestamp;
+    $testing_emails = $profiles[0]['domains']['emails'] ?? [];
+    foreach ($testing_emails as $index => $email) {
+        $profiles[0]['domains']['emails'][$index]['email_address'] = "jhondoe{$index}+$testing_now_epoch@gmail.com";
+    }
+}
+/* INI HANYA TESTING, NANTI PADA SAAT MAU COMMIT INI DIHAPUS */
+
+-----------------------------------------------
+
+SAYA ADA BEBERAPA BUG
+
+1. jadi ketika saya ingin menjalankan export, itu muncul error seperti itu
+
+2. jadi ada case begini, kondisi nya ketika after refresh atau saat pertama kali banget, saya kan klik button export, dan memilih list "+ Create New Format", lalu muncul dong modal Create Template, nah ketika saya cancel, entah kenapa checklist nya masih nyangkut di "+ Create New Format", dan ketika saya klik list "+ Create New Format" lagi, itu tidak muncul modal "Create Template" nya. namun masih bisa untuk pilih template selain "+ Create New Format".
+
+nah dalam kondisi seperti ini, ketika saya close modal nya, tidak melakukan refresh, lalu saya buka modal export nya lagi, bug di "+ Create New Format" tidak terjadi lagi. dia terjadi ketika after di refresh
+
+
+WHOP_API_KEY=apik_YbM66sP49lDO8_C7244_C_35d5fb4b2db671d4142394470ca39d4ccda9de93abfd4711d3a3f940b2c5a3 # JIDAN
+WHOP_COMPANY_ID=biz_fwPEdL9u81G2vf # JIDAN
+WHOP_WEBHOOK_SECRET=ws_c73803d31abef889048fdabbc646e54d17c4dca4c39f4264f6f500c2a06949c7 # JIDAN
+#WHOP_BASE_URL=https://api.whop.com/api/v1 # JIDAN
+#WHOP_FRONTEND_URL=https://whop.com # JIDAN
+WHOP_BASE_URL=https://sandbox-api.whop.com/api/v1 # JIDAN
+WHOP_FRONTEND_URL=https://sandbox.whop.com # JIDAN
+
+
+issue bug yang ditemukan oleh codex
+
+Issue 2: hardening backend route site-id
+Di data/app/Http/Controllers/SiteIdController.php, endpoint jobStatus, download, downloadBranded, dan reexport baru cek organization_id, belum cek bahwa moduleJob benar-benar milik flow site_id atau reexport_type=site_id.
+Untuk alur UI normal ini kecil kemungkinan kena, jadi aman ditunda. Ini lebih ke guard backend / anti tamper.
+
+Issue 3: branded download di campaign export list belum full wired
+Di front/src/views/SiteIdExportListView.vue, ExportListTable belum dipasangi :is-business-or-above dan @download-branded.
+Jadi untuk saat ini:
+- CSV biasa jalan
+- re-export template jalan
+- branded Excel untuk site-id export list belum dianggap selesai

@@ -1,7 +1,84 @@
 {
-    "email": "fisikamodern00@gmail.com",
-    "keyword": "marketing agency, marketing company",
-    "zip_codes": "48005, 48007, 48009, 48012, 48015, 48017, 48021, 48025, 48026, 48030, 48033, 48034, 48035, 48036, 48037, 48038, 48042, 48043, 48044, 48045, 48047, 48048, 48050, 48051, 48054, 48062, 48065, 48066, 48067, 48068, 48069, 48070, 48071, 48072, 48073, 48075, 48076, 48080, 48081, 48082, 48083, 48084, 48085, 48086, 48088, 48089, 48090, 48091, 48092, 48093, 48094, 48095, 48096, 48097, 48098, 48099, 48165, 48167, 48168, 48178, 48220, 48237, 48301, 48302, 48303, 48304, 48306, 48307, 48308, 48309, 48310, 48312, 48313, 48314, 48315, 48316, 48320, 48321, 48322, 48323, 48324, 48325, 48326, 48327, 48328, 48329, 48330, 48331, 48332, 48333, 48334, 48335, 48336, 48340, 48341, 48342, 48343, 48346, 48347, 48348, 48350, 48353, 48356, 48357, 48359, 48360, 48361, 48362, 48363, 48366, 48367, 48370, 48371, 48374, 48375, 48376, 48377, 48380, 48381, 48382, 48383, 48386, 48387, 48390, 48391, 48393, 48442, 48462",
-    "campaign_id": "58936395",
-    "target_location": 3
+    "profiles": [
+        {
+            "person_id": "143930670",
+            "domains": {
+                "emails": [
+                    {
+                        "email_address": "jhondoe0+1777015114@gmail.com",
+                        "opted_in": false
+                    },
+                    {
+                        "email_address": "jhondoe1+1777015114@gmail.com",
+                        "opted_in": true
+                    }
+                ],
+                "names": [
+                    {
+                        "first_name": "Meghan",
+                        "last_name": "Reek"
+                    }
+                ],
+                "addresses": [
+                    {
+                        "address_primary": "353 Bradford Ln",
+                        "address_secondary": null,
+                        "city": "Lansdale",
+                        "state": "PA",
+                        "zip": "19446-6623",
+                        "county": "Montgomery",
+                        "carrier_route": "R004",
+                        "latitude": 40.2244,
+                        "longitude": -75.2915,
+                        "dma": 504,
+                        "cbsa": 37980,
+                        "msa": 6162,
+                        "congressional_district": 4,
+                        "urbanicity_code": "S",
+                        "property_type": null
+                    }
+                ],
+                "demographic": {
+                    "attribute_domain": "demographic",
+                    "attribute_name": "ethnic_detail",
+                    "attribute_value": "Dutch",
+                    "attribute_data_type": "CHARACTER VARYING",
+                    "source_date": "2025-12-16",
+                    "vendor": "datashopper",
+                    "religion": {
+                        "value": "Catholic",
+                        "cluster_id": 2000026
+                    },
+                    "gender": {
+                        "value": "Female",
+                        "cluster_id": 2000013
+                    },
+                    "education": {
+                        "value": "Attended Vocational/Technical",
+                        "cluster_id": 2000000
+                    },
+                    "generation": {
+                        "value": "1. Millennials and Gen Z (1982 and after)",
+                        "cluster_id": 2000015
+                    },
+                    "marital_status": {
+                        "value": "Married",
+                        "cluster_id": 2000023
+                    },
+                    "is_multilingual": {
+                        "value": false,
+                        "cluster_id": 2000019
+                    },
+                    "is_speaks_english": {
+                        "value": true,
+                        "cluster_id": 2000022
+                    },
+                    "ethnic_group": {
+                        "value": "White",
+                        "cluster_id": 2000012
+                    }
+                }
+            }
+        }
+    ]
 }

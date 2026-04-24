@@ -72,3 +72,271 @@ redis-cli --tls -h tls://private-db-caching-redis-do-user-8589910-0.k.db.ondigit
 pit-9dd21182-9284-4b7b-a031-ef52c4447053
 
 DEVELOPEMODE=true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Site ID Export Feature — Implementation Plan
+Context
+Site ID Contact List sudah berjalan dengan data real dari API. Yang belum: tombol Export masih dummy, Export List masih mock data. Tujuan: implementasi full export flow untuk Site ID — dari user klik Export hingga bisa download CSV/Excel dengan berbagai template, termasuk re-export.
+
+Site ID berbeda dari Audience/Clean/Predict:
+
+Data kontak sudah ada di tabel contacts (masuk via webhook, bukan query ke Wattdata saat export)
+Tidak ada kredit dipotong saat export (sudah dipotong saat webhook masuk)
+Tidak perlu raw.jsonl — sumber data selalu bisa di-query ulang dari DB
+Re-export menggunakan actual_start/actual_end (timestamp eksak dari MIN/MAX created_at hasil query original) untuk mencegah data drift
+Urutan Implementasi
+STEP 1 — Migration (Backend)
+Buat: data/database/migrations/2026_04_25_000001_add_site_id_to_module_jobs_chk_module.php
+
+Drop dan recreate chk_module CHECK constraint untuk tambah site_id:
+
+-- up
+ALTER TABLE module_jobs DROP CONSTRAINT IF EXISTS chk_module;
+ALTER TABLE module_jobs ADD CONSTRAINT chk_module CHECK (
+    module IN ('audience_id', 'predict_id', 'reexport', 'clean_id', 'mcp_proxy', 'site_id')
+);
+-- down: restore tanpa site_id
+Ikuti pola migration: data/database/migrations/2026_03_29_000003_add_clean_id_to_module_jobs_chk_module.php
+
+STEP 2 — SiteIdExportJob (Backend)
+Buat: data/app/Jobs/SiteIdExportJob.php
+
+public int $tries = 1, public int $timeout = 300
+Baca dari metadata: campaign_id, start_date, end_date, search, template_fields, export_name
+Query contacts (mirror CampaignController::contacts()) dengan chunkById(500)
+Track actual_start = created_at kontak pertama, actual_end = created_at kontak terakhir
+Tulis CSV ke tmpfile dengan fputcsv(), header dari template labels
+Upload ke R2: exports/{org_id}/{job_id}/export.csv
+Update metadata dengan actual_start dan actual_end setelah selesai
+Update job: status=completed, output_file_path, total_rows, processed_rows, completed_at
+failed(): set status=failed, error_message
+Field mapping (template key → kolom contacts):
+
+Template key	DB column
+first_name	first_name
+last_name	last_name
+email_1	email
+phone_1	phone
+address_line_1	address_line1
+city	city
+state	state
+zip	postal_code
+country	country
+Private helper: resolveField(Contact $contact, string $key): string
+
+STEP 3 — SiteIdReexportJob (Backend)
+Buat: data/app/Jobs/SiteIdReexportJob.php
+
+Baca actual_start, actual_end, campaign_id, search, template_fields dari metadata
+Query contacts dengan whereBetween('contacts.created_at', [$actualStart, $actualEnd]) (bukan whereDate) — ini yang menjamin data persis sama dengan export original
+Jika actual_start/actual_end null (export original kosong): gunakan start_date/end_date fallback
+Reuse field mapping yang sama dengan SiteIdExportJob
+Upload CSV ke R2, update job ke completed
+STEP 4 — SiteIdController (Backend)
+Buat: data/app/Http/Controllers/SiteIdController.php
+
+Ikuti pola AudienceController. Tujuh method:
+
+export(Request $request) — POST /site-id/export
+
+Validate: export_name (required), template_id (required, uuid, exists), campaign_id (nullable, uuid, milik org), start_date (nullable, date), end_date (nullable, date), search (nullable, string)
+Buat ModuleJob dengan module='site_id', metadata (lihat struktur di bawah)
+Dispatch SiteIdExportJob
+Return {job_id, status: 'pending'} 201
+listJobs(Request $request) — GET /site-id/jobs
+
+Paginate module_jobs milik org, module=site_id, order by created_at DESC
+Return ModuleJobResource::collection()
+jobStatus(Request $request, ModuleJob $moduleJob) — GET /site-id/jobs/{id}
+
+IDOR check
+Return new ModuleJobResource($moduleJob)
+download(Request $request, ModuleJob $moduleJob) — GET /site-id/jobs/{id}/download
+
+IDOR check, status check
+Stream dari R2 via Storage::disk('r2')->readStream() — identik dengan AudienceController::download()
+downloadBranded(Request $request, ModuleJob $moduleJob) — GET /site-id/jobs/{id}/download/branded
+
+Plan gate (Business+)
+Re-query contacts dari DB menggunakan actual_start/actual_end dari metadata (tidak pakai raw.jsonl)
+Pass rows ke BrandedExportService — identik dengan AudienceController::downloadBranded() tapi data dari DB bukan R2
+Cache XLSX di R2 dengan pattern yang sama
+reexport(Request $request, ModuleJob $moduleJob) — POST /site-id/jobs/{id}/reexport
+
+Validate template_id
+IDOR + status check (completed only)
+Rate limit: max 5 concurrent re-exports per org
+Dedup: cek tidak ada reexport job pending dengan parent_job_id + template_id yang sama
+Buat ModuleJob dengan module='reexport', metadata dengan reexport_type='site_id', salin actual_start/actual_end, campaign_id, search dari parent
+Dispatch SiteIdReexportJob
+Return {job_id, status: 'pending'} 201
+STEP 5 — Routes & Resource Fix (Backend)
+Modifikasi: data/routes/api.php
+
+Route::post('/site-id/export', [SiteIdController::class, 'export']);
+Route::get('/site-id/jobs', [SiteIdController::class, 'listJobs']);
+Route::get('/site-id/jobs/{moduleJob}', [SiteIdController::class, 'jobStatus']);
+Route::get('/site-id/jobs/{moduleJob}/download', [SiteIdController::class, 'download']);
+Route::get('/site-id/jobs/{moduleJob}/download/branded', [SiteIdController::class, 'downloadBranded']);
+Route::post('/site-id/jobs/{moduleJob}/reexport', [SiteIdController::class, 'reexport']);
+Modifikasi: data/app/Http/Resources/ModuleJobResource.php — getDownloadUrl()
+
+$isSiteId = $this->module === 'site_id'
+    || ($this->module === 'reexport' && ($this->metadata['reexport_type'] ?? null) === 'site_id');
+$prefix = $isSiteId ? 'site-id' : 'audience';
+return "/api/{$prefix}/jobs/{$this->id}/download";
+Modifikasi: data/app/Services/BrandedExportService.php
+
+Tambah 'site_id' => 'Site ID' pada moduleLabel() match expression
+STEP 6 — Frontend API (Frontend)
+Buat: front/src/services/api/site-id-export.api.ts
+
+Enam fungsi:
+
+initiateSiteIdExport(payload) → POST /site-id/export
+getSiteIdJobs(page?) → GET /site-id/jobs
+getSiteIdJobStatus(jobId) → GET /site-id/jobs/{id}
+downloadSiteIdExportFile(jobId) → GET /site-id/jobs/{id}/download (returns Blob)
+initiateSiteIdReexport(jobId, templateId) → POST /site-id/jobs/{id}/reexport
+downloadSiteIdBrandedExport(jobId, preparedFor?) → GET /site-id/jobs/{id}/download/branded (returns Blob)
+STEP 7 — Types Update (Frontend)
+Modifikasi: front/src/types/export.ts — tambah ke ExportDialogOptions:
+
+campaignId?: string     // UUID campaign atau undefined = "all campaigns"
+campaignName?: string   // untuk generate default export name
+startDate?: string      // YYYY-MM-DD
+endDate?: string        // YYYY-MM-DD
+search?: string         // search query aktif saat export diklik
+STEP 8 — Exports Store (Frontend)
+Modifikasi: front/src/stores/exports.ts
+
+Tambah:
+
+startSiteIdExport(payload, templateName?) — call API, buat local record, mulai polling
+startSiteIdPolling(jobId) — polling ke getSiteIdJobStatus() bukan getJobStatus()
+startSiteIdReexport(originalId, templateId, exportName, templateName) — identik startReexport tapi pakai site-id endpoints + auto-download via downloadSiteIdExportFile
+Pada fetchExports('site-id') — gunakan getSiteIdJobs() bukan getContactListsPaginated()
+Update moduleToProductId dan productIdToModule untuk handle site_id
+STEP 9 — ExportDialog (Frontend)
+Modifikasi: front/src/components/export/ExportDialog.vue
+
+Tambah const isSiteId = computed(() => options?.productId === 'site-id')
+
+Sembunyikan untuk site-id (v-if="!isSiteId"):
+
+Field "Number of contacts"
+Credit balance / cost breakdown
+Integrations section
+Update generateDefaultName():
+
+site-id + campaignName → "{campaignName} — {Month} {Year}"
+site-id + no campaignName → "All Campaigns — {Month} {Year}"
+Update handleSubmit():
+
+isSiteId → exportsStore.startSiteIdExport(...)
+else     → exportsStore.startExport(...) + creditsStore.refreshBalance()
+Update submit button :disabled — hapus credit/count check untuk site-id
+
+STEP 10 — SiteIdContactListView (Frontend)
+Modifikasi: front/src/views/SiteIdContactListView.vue
+
+Update handleOpenExport() untuk pass filter state:
+
+exportDialog.open({
+  productId: 'site-id',
+  campaignId: selectedCampaignId.value === 'all' ? undefined : selectedCampaignId.value,
+  campaignName: /* nama campaign yang dipilih */,
+  startDate: dateRange.value.start,
+  endDate: dateRange.value.end,
+  search: searchQuery.value || undefined,
+  totalResults: total.value,
+  source: 'site-id',
+})
+STEP 11 — SiteIdExportListView (Frontend)
+Modifikasi: front/src/views/SiteIdExportListView.vue
+
+Hapus seluruh mock data injection di onMounted
+Ganti dengan await exportsStore.fetchExports('site-id', 1)
+Update handleDownload → gunakan downloadSiteIdExportFile
+Update startReexport → gunakan exportsStore.startSiteIdReexport
+Tambah pagination (sudah ada di store: currentPage, lastPage, goToPage)
+Metadata Structure
+module_jobs.metadata untuk Site ID export job (saat dibuat):
+{
+  "campaign_id": "uuid-or-null",
+  "start_date": "2026-03-01",
+  "end_date": "2026-04-23",
+  "search": "john",
+  "template_id": "uuid",
+  "template_name": "Full Contact (Default)",
+  "template_fields": [{"key": "first_name", "label": "First Name"}, ...],
+  "export_name": "Main Website — Apr 2026"
+}
+Ditambahkan oleh SiteIdExportJob setelah selesai:
+{
+  "actual_start": "2026-03-01T08:14:22+00:00",
+  "actual_end":   "2026-04-22T17:45:03+00:00"
+}
+module_jobs.metadata untuk re-export job (module='reexport'):
+{
+  "parent_job_id": "original-job-uuid",
+  "actual_start": "2026-03-01T08:14:22+00:00",
+  "actual_end":   "2026-04-22T17:45:03+00:00",
+  "campaign_id": "uuid-or-null",
+  "search": "john",
+  "template_id": "new-template-uuid",
+  "template_name": "Address Only",
+  "template_fields": [...],
+  "export_name": "Main Website — Apr 2026",
+  "reexport_type": "site_id"
+}
+File Kritis
+File	Status	Catatan
+data/database/migrations/2026_04_25_000001_add_site_id_to_module_jobs_chk_module.php	Baru	Step 1
+data/app/Jobs/SiteIdExportJob.php	Baru	Step 2
+data/app/Jobs/SiteIdReexportJob.php	Baru	Step 3
+data/app/Http/Controllers/SiteIdController.php	Baru	Step 4
+data/routes/api.php	Modifikasi	Step 5
+data/app/Http/Resources/ModuleJobResource.php	Modifikasi	Step 5
+data/app/Services/BrandedExportService.php	Modifikasi minor	Step 5
+front/src/services/api/site-id-export.api.ts	Baru	Step 6
+front/src/types/export.ts	Modifikasi	Step 7
+front/src/stores/exports.ts	Modifikasi	Step 8
+front/src/components/export/ExportDialog.vue	Modifikasi	Step 9
+front/src/views/SiteIdContactListView.vue	Modifikasi	Step 10
+front/src/views/SiteIdExportListView.vue	Modifikasi	Step 11
+Verifikasi End-to-End
+Jalankan migration: php artisan migrate
+Buka Contact List Site ID, set filter tanggal + campaign
+Klik Export → pastikan modal tidak tampilkan "Number of contacts" dan credit section
+Pilih template, isi nama, klik Start Export
+Buka Export List → entry muncul dengan status Processing → berubah ke Completed
+Klik Download CSV → file ter-download dengan kolom sesuai template
+Klik Download dengan template lain → re-export berjalan, auto-download saat selesai
+Klik Details → modal menampilkan info export
+Test Branded Excel (akun Business+)
+Verifikasi di DB: SELECT metadata FROM module_jobs WHERE module = 'site_id' — pastikan actual_start/actual_end terisi setelah completed
