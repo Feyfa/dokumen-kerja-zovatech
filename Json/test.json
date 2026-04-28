@@ -1,46 +1,121 @@
 {
-  "search": "k",
-  "end_date": "2026-04-25",
-  "actual_end": "2026-04-25 15:14:27+07",
-  "start_date": "2026-03-26",
-  "campaign_id": null,
-  "export_name": "All Campaigns — Apr 2026",
-  "template_id": "019dc3c8-e743-715c-b165-d09c9cbf578b",
-  "actual_start": "2026-04-25 12:15:10+07",
-  "campaign_name": "All Campaigns",
-  "template_name": "Full Contact (Default)",
-  "template_fields": [
-    {
-      "key": "first_name",
-      "label": "First Name"
+  "page_url": "https://jakarta.com",
+  "wattdata": {
+    "domains": {
+      "names": [
+        {
+          "last_name": "Huang",
+          "first_name": "Jude"
+        }
+      ],
+      "emails": [
+        {
+          "opted_in": false,
+          "email_address": "huang-jude@hotmail.com"
+        },
+        {
+          "opted_in": true,
+          "email_address": "jude@nettheory.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judehuang@mac.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judehuang@netzero.net"
+        },
+        {
+          "opted_in": true,
+          "email_address": "judexhuang@hotmail.com"
+        },
+        {
+          "opted_in": true,
+          "email_address": "judexhuang@yahoo.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judexhuang@ymail.com"
+        }
+      ],
+      "phones": [
+        {
+          "carrier": "New Cingular Wireless",
+          "phone_type": "work",
+          "do_not_call": false,
+          "phone_number": "+12013039212"
+        },
+        {
+          "carrier": "Mcimetro Access",
+          "phone_type": "work",
+          "do_not_call": false,
+          "phone_number": "+12014994649"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+12016268968"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+19732181045"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+19734672414"
+        }
+      ],
+      "addresses": [
+        {
+          "dma": 501,
+          "msa": 5602,
+          "zip": "7041-1506",
+          "cbsa": 35620,
+          "city": "Millburn",
+          "state": "NJ",
+          "county": "Essex",
+          "latitude": 40.722115,
+          "longitude": -74.299355,
+          "carrier_route": "C003",
+          "property_type": null,
+          "address_primary": "18 S Mountain Rd",
+          "urbanicity_code": "U",
+          "address_secondary": null,
+          "congressional_district": 11
+        }
+      ],
+      "demographic": {
+        "gender": {
+          "value": "Male",
+          "cluster_id": 2000014
+        },
+        "education": {
+          "value": "Completed College",
+          "cluster_id": 2000001
+        },
+        "generation": {
+          "value": "2. Generation X (1961-1981)",
+          "cluster_id": 2000016
+        },
+        "marital_status": {
+          "value": "Married",
+          "cluster_id": 2000023
+        },
+        "is_speaks_english": {
+          "value": false,
+          "cluster_id": 2000021
+        }
+      }
     },
-    {
-      "key": "last_name",
-      "label": "Last Name"
-    },
-    {
-      "key": "email_1",
-      "label": "Email 1"
-    },
-    {
-      "key": "phone_1",
-      "label": "Phone 1"
-    },
-    {
-      "key": "address_line_1",
-      "label": "Address Line 1"
-    },
-    {
-      "key": "city",
-      "label": "City"
-    },
-    {
-      "key": "state",
-      "label": "State"
-    },
-    {
-      "key": "zip",
-      "label": "Zip"
-    }
-  ]
+    "person_id": "1343883"
+  },
+  "custom_params": "jakarta_barat",
+  "watt_person_id": "1343883"
 }
+
+standardizing-invoice-descriptions-in-stripe

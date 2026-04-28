@@ -176,6 +176,9 @@ Jadi untuk saat ini:
 - re-export template jalan
 - branded Excel untuk site-id export list belum dianggap selesai
 
+ngrok http https://localhost:443 --host-header="api.exactmatch.dev"
+
+
 ============================ ✅
 kalo saya lihat width di table campaign export list, itu sedikit lebih lebar dibandingkan width table campaign contact list, sama campaign list. bisakah di campaign contact list dan campaign list, width nya di samain dengan campaign export list
 ============================
