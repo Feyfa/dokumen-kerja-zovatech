@@ -118,10 +118,23 @@ PLACE
     - prepaid continual limit monthly ✅
     - prepaid onetime ✅
     - simplifi budget ✅
-2. AGENCY DATA WALLET
-3. AGENCY OPEN API
-4. AGENCY ONBOARDING CHARGE
-5. AGENCY MINIMUM SPEND
+2. AGENCY DATA WALLET ✅
+3. AGENCY OPEN API ✅
+4. AGENCY ONBOARDING CHARGE ✅
+5. AGENCY MINIMUM SPEND ✅
+
+TESTING
+1. CAMPAIGN
+    - weekly 
+    - monthly 
+    - prepaid continual limit day 
+    - prepaid continual limit monthly 
+    - prepaid onetime 
+    - simplifi budget 
+2. AGENCY DATA WALLET ✅
+3. AGENCY OPEN API ✅
+4. AGENCY ONBOARDING CHARGE ✅
+5. AGENCY MINIMUM SPEND 
 
 
 
