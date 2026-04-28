@@ -1,54 +1,15 @@
 {
-  "search": null,
-  "end_date": "2026-04-24",
-  "actual_end": "2026-04-24 07:28:28+07",
-  "start_date": "2026-03-25",
+  "search": "k",
+  "end_date": "2026-04-25",
+  "actual_end": "2026-04-25 15:14:27+07",
+  "start_date": "2026-03-26",
   "campaign_id": null,
-  "export_name": "All Campaigns — Apr 2026 — Template Jidan",
-  "template_id": "019dbebe-fc1b-7066-b719-107011f0f972",
-  "actual_start": "2026-04-22 07:25:10+07",
-  "template_name": "Template Jidan",
+  "export_name": "All Campaigns — Apr 2026",
+  "template_id": "019dc3c8-e743-715c-b165-d09c9cbf578b",
+  "actual_start": "2026-04-25 12:15:10+07",
+  "campaign_name": "All Campaigns",
+  "template_name": "Full Contact (Default)",
   "template_fields": [
-    {
-      "key": "email_1",
-      "label": "Email 1"
-    },
-    {
-      "key": "email_2",
-      "label": "Email 2"
-    },
-    {
-      "key": "email_3",
-      "label": "Email 3"
-    },
-    {
-      "key": "email_4",
-      "label": "Email 4"
-    },
-    {
-      "key": "email_5",
-      "label": "Email 5"
-    },
-    {
-      "key": "email_6",
-      "label": "Email 6"
-    },
-    {
-      "key": "email_7",
-      "label": "Email 7"
-    },
-    {
-      "key": "email_8",
-      "label": "Email 8"
-    },
-    {
-      "key": "email_9",
-      "label": "Email 9"
-    },
-    {
-      "key": "email_10",
-      "label": "Email 10"
-    },
     {
       "key": "first_name",
       "label": "First Name"
@@ -58,16 +19,28 @@
       "label": "Last Name"
     },
     {
+      "key": "email_1",
+      "label": "Email 1"
+    },
+    {
       "key": "phone_1",
       "label": "Phone 1"
     },
     {
-      "key": "phone_2",
-      "label": "Phone 2"
+      "key": "address_line_1",
+      "label": "Address Line 1"
     },
     {
-      "key": "phone_3",
-      "label": "Phone 3"
+      "key": "city",
+      "label": "City"
+    },
+    {
+      "key": "state",
+      "label": "State"
+    },
+    {
+      "key": "zip",
+      "label": "Zip"
     }
   ]
 }

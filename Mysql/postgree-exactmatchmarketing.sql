@@ -22,7 +22,7 @@ select * from webhook_events we ;
 select * from integrations_field_mappings;
 
 select * from organization_integrations;
-select * from campaign_integrations;
+select * from campaign_integrations where campaign_id = '019dc558-4a17-7033-bac8-2ae12150e101';
 select * from modules;
 
 select * from modules;

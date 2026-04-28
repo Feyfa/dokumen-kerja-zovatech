@@ -123,6 +123,8 @@ feat(integrations): include_in_campaigns + campaign_modules + site-id campaign 2
 pit-9dd21182-9284-4b7b-a031-ef52c4447053
 noFzNQNpn5cu6Pkuk08A
 
+https://hooks.zapier.com/hooks/catch/19112281/ujl8siq/
+
 php artisan queue:listen --queue=default,integrations --tries=1 --timeout=0
 
 
@@ -173,3 +175,44 @@ Jadi untuk saat ini:
 - CSV biasa jalan
 - re-export template jalan
 - branded Excel untuk site-id export list belum dianggap selesai
+
+============================ ✅
+kalo saya lihat width di table campaign export list, itu sedikit lebih lebar dibandingkan width table campaign contact list, sama campaign list. bisakah di campaign contact list dan campaign list, width nya di samain dengan campaign export list
+============================
+
+============================ ✅
+[foto ui reidentification]
+
+truss sama ini, di site id ketika webhook masuk, kan ada pengecekan ini reidentification di function isRecentlyIdentified.
+
+nah jadi ketika awal webhook masuk, itu sudah benar ada pengecekan md5 ke contact list secara langsung.
+
+tapi yang jadi problem gini, mungkin tidak misal awal pengecekan md5 nya itu ngga ada di contact list
+
+example contact list isinya
+email | md5
+a@gmail.com | aaaaa
+
+nah saat webhook masuk, md5 nya adalah bbbbb, maka lolos dong dari pengecekan ini isRecentlyIdentified.
+
+nah yang saya takutkan adalah, kan provider WATTDATA bisa menghasilkan lebih dari 1 email ya. mungkin tidak hasil dari md5 bbbbb itu dapat menghasilkan email a@gmail.com. kalo seandainya sampai mendapatkan email a@gmail.com, maka sudah dipastikan itu bisa masuk ke dalam table contact_lists. dan user berfikir, kok saya masih tetep dapat a@gmail.com ya? padahal reidentification nya misalnya never gitu
+
+nah kalo menurut anda ini bagaimana, apakah ini suatu bug atau tidak?
+============================
+
+
+============================ ✅
+[foto campaign list di sistem lama] [foto campaign list di sistem baru]
+
+hai di sistem lama itu, campaign list nya ada filter seperti campaign status, campaign searching, dan client filter(cuman untuk di sistem baru karena ngga ada sistem client, jadinya tidak relevan dengan sistem baru).
+
+nah apakah nanti di sistem baru ini perlu di tambahkan juga untuk filter campaign status dan campaign searching?
+============================
+
+============================
+oke jadi img 1 dan 2 adalah perubahan saat ini, dan img 3 adalah table campaign export list sebelumnya. menurut anda dari segi warna, itu bagusan sekarang transparant gitu, atau berwarna putih tebal ya?
+============================
+
+ngrok http https://localhost:443 --host-header=api.exactmatch.dev
+
+https://5af8-180-243-4-160.ngrok-free.app/api/webhooks/whop
