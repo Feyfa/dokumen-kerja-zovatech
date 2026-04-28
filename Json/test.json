@@ -1,73 +1,121 @@
 {
-  "search": null,
-  "end_date": "2026-04-24",
-  "actual_end": "2026-04-24 07:28:28+07",
-  "start_date": "2026-03-25",
-  "campaign_id": null,
-  "export_name": "All Campaigns — Apr 2026 — Template Jidan",
-  "template_id": "019dbebe-fc1b-7066-b719-107011f0f972",
-  "actual_start": "2026-04-22 07:25:10+07",
-  "template_name": "Template Jidan",
-  "template_fields": [
-    {
-      "key": "email_1",
-      "label": "Email 1"
+  "page_url": "https://jakarta.com",
+  "wattdata": {
+    "domains": {
+      "names": [
+        {
+          "last_name": "Huang",
+          "first_name": "Jude"
+        }
+      ],
+      "emails": [
+        {
+          "opted_in": false,
+          "email_address": "huang-jude@hotmail.com"
+        },
+        {
+          "opted_in": true,
+          "email_address": "jude@nettheory.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judehuang@mac.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judehuang@netzero.net"
+        },
+        {
+          "opted_in": true,
+          "email_address": "judexhuang@hotmail.com"
+        },
+        {
+          "opted_in": true,
+          "email_address": "judexhuang@yahoo.com"
+        },
+        {
+          "opted_in": false,
+          "email_address": "judexhuang@ymail.com"
+        }
+      ],
+      "phones": [
+        {
+          "carrier": "New Cingular Wireless",
+          "phone_type": "work",
+          "do_not_call": false,
+          "phone_number": "+12013039212"
+        },
+        {
+          "carrier": "Mcimetro Access",
+          "phone_type": "work",
+          "do_not_call": false,
+          "phone_number": "+12014994649"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+12016268968"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+19732181045"
+        },
+        {
+          "carrier": "Verizon",
+          "phone_type": "work",
+          "do_not_call": true,
+          "phone_number": "+19734672414"
+        }
+      ],
+      "addresses": [
+        {
+          "dma": 501,
+          "msa": 5602,
+          "zip": "7041-1506",
+          "cbsa": 35620,
+          "city": "Millburn",
+          "state": "NJ",
+          "county": "Essex",
+          "latitude": 40.722115,
+          "longitude": -74.299355,
+          "carrier_route": "C003",
+          "property_type": null,
+          "address_primary": "18 S Mountain Rd",
+          "urbanicity_code": "U",
+          "address_secondary": null,
+          "congressional_district": 11
+        }
+      ],
+      "demographic": {
+        "gender": {
+          "value": "Male",
+          "cluster_id": 2000014
+        },
+        "education": {
+          "value": "Completed College",
+          "cluster_id": 2000001
+        },
+        "generation": {
+          "value": "2. Generation X (1961-1981)",
+          "cluster_id": 2000016
+        },
+        "marital_status": {
+          "value": "Married",
+          "cluster_id": 2000023
+        },
+        "is_speaks_english": {
+          "value": false,
+          "cluster_id": 2000021
+        }
+      }
     },
-    {
-      "key": "email_2",
-      "label": "Email 2"
-    },
-    {
-      "key": "email_3",
-      "label": "Email 3"
-    },
-    {
-      "key": "email_4",
-      "label": "Email 4"
-    },
-    {
-      "key": "email_5",
-      "label": "Email 5"
-    },
-    {
-      "key": "email_6",
-      "label": "Email 6"
-    },
-    {
-      "key": "email_7",
-      "label": "Email 7"
-    },
-    {
-      "key": "email_8",
-      "label": "Email 8"
-    },
-    {
-      "key": "email_9",
-      "label": "Email 9"
-    },
-    {
-      "key": "email_10",
-      "label": "Email 10"
-    },
-    {
-      "key": "first_name",
-      "label": "First Name"
-    },
-    {
-      "key": "last_name",
-      "label": "Last Name"
-    },
-    {
-      "key": "phone_1",
-      "label": "Phone 1"
-    },
-    {
-      "key": "phone_2",
-      "label": "Phone 2"
-    },
-    {
-      "key": "phone_3",
-      "label": "Phone 3"
-    }
-  ]
+    "person_id": "1343883"
+  },
+  "custom_params": "jakarta_barat",
+  "watt_person_id": "1343883"
 }
+
+standardizing-invoice-descriptions-in-stripe

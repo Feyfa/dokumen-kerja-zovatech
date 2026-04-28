@@ -1,0 +1,160 @@
+hai jadi saya punya issue di trello begini Standardizing Invoice Descriptions in Stripe
+
+===========
+PROJECT
+
+jadi saya kan punya 2 project ya, yang pertama EMM-SANDBOX-APP dan EMM-SANDBOX-API, jadi path nya berada disini
+- EMM-SANDBOX-APP (vue2 + laravel2, ini sebagai frontend dan backend)
+    - vue2 = C:\wamp64\www\EMM-SANDBOX-APP\front
+    - laravel8 = C:\wamp64\www\EMM-SANDBOX-APP\data
+- EMMM-SANDBOX-API (laravel8, ini sebagai tempat cronjob dan tempat queue)
+    - laravel8 = C:\wamp64\www\EMM-SANDBOX-API
+
+ohh iya biar anda ngga kaget, karena ini sistem lama, jadi dulu bos saya untuk node_module dan vendor itu dia tidak di git ignore. 
+===========
+
+===========
+ROLE USER
+
+jadi di project ini saya itu sistem nya seperti ini
+- ROOT
+- AGENCY
+- CLIENT 
+===========
+
+===========
+SISTEM PAYMENT GATEWAY DAN DATA WALLET
+
+PAYMENT GATEWAY
+jadi di project ini, saya itu punya payment gateway menggunakan STRIPE. nah stripe ini bisa digunakan di agency itu sendiri + client itu sendiri. nah nanti hubungan antara root ke agency, itu langsung menggunakan cc nya agency, jadi sebutannya root punya customer namanya agency itu. nah kalo hubungan agency ke client itu sama juga sebagai customer, cuman bedanya agency harus membuat connected account stripe nya terlebih dahulu.
+
+DATA WALLET
+data wallet hanya ada di agency, singkatnya adalah data wallet ini digunakan untuk pengganti stripe, supaya hubungan antara root ke agency, itu tidak perlu lagi menggunakan stripe, melainkan hanya dipotong dari wallet nya
+
+CONTOH SKENARIO
+misalnya agency di datawallet punya balance $250, nah lalu client ingin membeli misalnya campaign seharga $10 ke agency, dan agency bayar ke root sebesar $5. nah yang terjadi adalah, client memberikan uangnya $10 ke connected account stripe, lalu $5 dipotong dari data wallet
+===========
+
+===========
+SISTEM MANUAL BILL ON DAN MANUAL BILL OFF
+
+MANUAL BILL OFF
+jadi di sistem project ini, ada yang namanya manual bill off, nah jika off maka hubungan billing antara agency dan client, itu agency harus membuat connected account, supaya bisa membuat customer dari client tersebut. intinya "HUBUNGAN BILLING ANTARA AGENCY DAN CLIENT, ITU MASIH DI HANDLE OLEH SISTEM KITA". cc + data wallet untuk agency saja itu tetep ada disini
+
+MANUAL BILL ON
+jika manual bill ON, intinya "HUBUNGAN BILLING ANTARA AGENCY DAN CLIENT, ITU MASIH DI TIDAK HANDLE OLEH SISTEM KITA, JADI SISTEM KITA TIDAK PEDULI HUBUNGAN BILLING ANTARA AGENCY DAN CLIENT, MEREKA HANYA PEDULI HUBUNGAN BILLING ANTARA ROOT DAN AGENCY SAJA". jadi nanti yang punya credit card itu hanya agency saja, dan client tidak punya setting billing apa apa. cc + data wallet untuk agency saja itu tetep ada disini
+===========
+
+===========
+SISTEM CAMPAIGN + TYPE PRICE CAMPAIGN
+
+jadi di project saya itu saya punya beberapa campaign. 
+- site ach 
+    - campaign type = local
+    - path campaign management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\Leedspeek\V1Client.vue
+    - path dashboard management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\Leedspeek\Dashboard.vue
+    - type price yang tersedia = (weekly, monthly, prepaid continual limit day, prepaid continual limit monthly, prepaid one time)
+    - apakah masih beroperasi = ya
+- search ach
+    - campaign type = locator
+    - path campaign management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekLocator\V1Client.vue
+    - path dashboard management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekLocator\Dashboard.vue
+    - type price yang tersedia = (weekly, monthly, prepaid continual limit day, prepaid one time)
+    - apakah masih beroperasi = tidak
+- enhance ach
+    - campaign type = enhance
+    - path campaign management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekEnhance\ClientV1.vue
+    - path dashboard management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekEnhance\Dashboard.vue
+    - type price yang tersedia = (weekly, monthly, prepaid continual limit day, prepaid one time)
+    - apakah masih beroperasi = ya
+- b2b ach
+    - campaign type = b2b
+    - path campaign management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekB2b\ClientV1.vue
+    - path dashboard management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekB2b\Dashboard.vue
+    - type price yang tersedia = (weekly, monthly, prepaid continual limit day, prepaid one time)
+    - apakah masih beroperasi = ya
+- simplifi 
+    - campaign type = simplifi
+    - path campaign management = C:\wamp64\www\EMM-SANDBOX-APP\front\src\pages\Modules\Auth\LeedspeekSimplifi\Client.vue
+    - path dashboard management = tidak ada dashboard
+    - type price yang tersedia = ini benar benar seperti prepaid, sekali bayar saja, nanti sistem nya ada auto topup gitu tiap 1 hari sebelum end date budget simplifi habis
+    - apakah masih beroperasi = ya
+
+SEDIKIT CATATAN
+prepaid continual limit monthly, itu hanya di site id saja
+
+TYPE PRICE CAMPAIGN
+- weekly = ini seperti kita beli misal dalam 1 hari misal saya mau mendapatkan 10 contact dengan per contact nya $1, nah nanti tiap minggu ada cronjob untuk charge billing mingguan
+- monthly = ini mirip seperti weekly, cuman bedanya ini bulanan
+- prepaid continual limit day = ini seperti bayar di depan, misal saya mau beli campaign dengan sehari 10 contact dengan per contact $1, nah kan ada toogle ya weekly atau monthly itu sebenarnya digunakan untuk estimasi saja. nanti juga ada button mau continual atau tidak, jika tidak renewal contacts nya, jika active maka akan renewal jika balance < treshold
+- prepaid continual limit monthly = ini seperti bayar di depan, ini berbeda dengan continual limit day, tidak ada konsep toogle weekly atau monthly, namun tetep ada konsep button continual, nah jadi kaya gini, misal saya beli contact perbulan 100 contact dengan per contact nya $1, nah maka campaign langsugn charge $100 untuk campaign (konsep nya sama ini client ke agency, nanti dari agency ke root ada lagi harga). nah misal dia beli di tanggal 01-01-2026. maka yang terjadi adalah tidak peduli jika campaign itu sudah habis sebelum 1 bulan, maka campaign itu tetep stay running. yang terpenting adalah 1 bulan kedepan itu akan di renewal lagi gitu
+- prepaid one time = ini seperti bayar di depan, namun bedanya ini kita beli satu waktu, tidak ada konsep renewal, jadi kalo habis campaign bakal stopped
+===========
+
+===========
+PENJELASAN TASK YANG ADA DI TRELLO
+
+jadi inti utama nya itu sebenarnya simple saja, yaitu hanya description di stripe nya. 
+
+nah saat ini kan description stripe di client, itu melihat description nya begini kan #20260312-1306-Dimas #89729342, nah cuman mereka mengeluhkan begini 
+"kok bentulk description nya aneh ya, ini semua angka apa sih? kalo saya mau filter by campaign id gimana? dan kalo saya mau filter by campaign name gimana. saya tidak bisa filter jika bentuk aneh seperti ini"
+
+nah saya ingin tanya dulu kepada anda kira" hanya untuk masalah billing di campaign saja dulu. itu format terbaiknya gimana ya?
+
+jangan rubah apa apa, saya hanya ingin tanya dulu
+===========
+
+
+
+
+
+
+
+PLACE
+1. CAMPAIGN
+    - weekly ✅
+    - monthly ✅
+    - prepaid continual limit day ✅
+    - prepaid continual limit monthly ✅
+    - prepaid onetime ✅
+    - simplifi budget ✅
+2. AGENCY DATA WALLET
+3. AGENCY OPEN API
+4. AGENCY ONBOARDING CHARGE
+5. AGENCY MINIMUM SPEND
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

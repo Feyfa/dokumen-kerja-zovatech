@@ -41,11 +41,13 @@ select * from export_templates where id = '019db443-6d71-718c-b785-1c7e07c6b2f5'
 
 
 
+UPDATE users 
+SET admin_role = 'admin' 
+WHERE id = '019dcd2b-494c-7358-9b94-651e5437fc0b';
 
 
 
-
-
+select * from do_not_serve_entries;
 
 select * from module_jobs;
 
@@ -53,3 +55,11 @@ select * from module_jobs;
 select id, metadata->>'campaign_name' as campaign_name 
 from module_jobs 
 where module = 'site_id';
+
+
+select * from suppression_lists;
+select * from suppression_list_entries;
+
+
+
+
