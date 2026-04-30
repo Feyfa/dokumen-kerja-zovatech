@@ -124,17 +124,55 @@ PLACE
 5. AGENCY MINIMUM SPEND ✅
 
 TESTING
-1. CAMPAIGN
+1. AGENCY OPEN API ✅
+2. AGENCY DATA WALLET MANUAL TOPUP UP ✅
+3. AGENCY ONBOARDING CHARGE ✅
+4. AGENCY MINIMUM SPEND ✅
+5. AGENCY DATA WALLET AUTO TOPUP UP ✅
+6. CAMPAIGN
     - weekly 
+        * saat pertama kali charge pakai setup fee atau weekly fee ✅
+        * saat stopped campaign ✅
+        * saat di cronjob ✅
     - monthly 
-    - prepaid continual limit day 
-    - prepaid continual limit monthly 
+        * saat pertama kali charge pakai setup fee atau weekly fee ✅
+        * saat stopped campaign ✅
+        * saat di cronjob ✅
     - prepaid onetime 
+        * saat play campaign ✅
+    - prepaid monthly fee
+        * di cronjob ✅
+    - prepaid continual limit day 
+        * saat play campaign ✅
+        * saat auto topup campaign ✅
+    - prepaid continual limit monthly 
+        * saat play campaign ✅
+        * saat auto topup campaign ✅
     - simplifi budget 
-2. AGENCY DATA WALLET ✅
-3. AGENCY OPEN API ✅
-4. AGENCY ONBOARDING CHARGE ✅
-5. AGENCY MINIMUM SPEND 
+        * saat play campaign ✅
+        * saat increse budget ✅
+        * saat auto topup campaign ✅
+
+
+
+ohh iya untuk AGENCY MinimumSpendNotificationEmail dan minimumspendinvoice di MarketingController EMM-SANDBOX-API, itu juga udah di path belum ya? dan begitupun di tempat agency lainnya
+
+SAYA MASIH ADA BEBERAPA PERTANYAAN
+
+1. saat MarketingController::createInvoice di EMM-SANDBOX-API juga belom pakai StripeBillingEventService dia masih pakai cara yang sebelumnya manggil dari controller. bisakah semuanya yang masih pakai cara lama itu diubah menjadi menggunakan cara baru StripeBillingEventService
+
+2. saat di EMM-SANDBOX-APP LeadspeekController::removeclient kan memanggil Controller::createInvoice, nah itu anda buat $stripeBillingEventData di luar createInvoice. bisakah di serasikan seperti di LeadspeekController::chargeClient, supaya buat $stripeBillingEventData di dalam Controller::createInvoice
+
+
+
+
+oke tadi saya sudah mengetes semua skenario ini, dan berhasil dengan baik.
+
+sebelum saya commit dan push. bisakah anda coba check kembali apakah semua code saya syntax dan logic nya sudah aman? apakah sudah tidak ada bug?
+
+jika semuanya sudah oke. apakah markdown C:\wamp64\www\EMM-SANDBOX-APP\data\storage\app\standardizing-invoice-descriptions-in-stripe.md perlu di update?
+
+bisakah buatkan saya pesan commit nya saja jangan sama perintah git, untuk 2 path project ini, secara lengkap dan menggunakan strip (-) jika banyak
 
 
 
@@ -144,30 +182,97 @@ TESTING
 
 
 
+EMM-SANDBOX-APP
+
+BRANCH
+- JD-TASK-EMM-938
+- JD-TASK-EMM-938-DEV-SYNC
+
+COMMIT
+feat: Standardize Stripe invoice descriptions and metadata
+- Add StripeBillingEventService for shared billing event formatting
+- Standardize campaign activation and stop billing Stripe events
+- Preserve standardized descriptions when stop billing PaymentIntents are updated
+- Standardize agency data wallet, developer setup fee, and onboarding charge metadata
+- Pass campaign billing event context through agency charge flows
+
+FILE
+- data\app\Http\Controllers\ConfigurationController.php
+- data\app\Http\Controllers\Controller.php
+- data\app\Http\Controllers\GeneralController.php
+- data\app\Http\Controllers\LeadspeekController.php
+- data\app\Services\StripeBillingEventService.php
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+EMM-SANDBOX-API
+
+BRANCH
+- JD-TASK-EMM-938
+- JD-TASK-EMM-938-DEV-SYNC
+
+COMMIT
+feat: Standardize Stripe billing events for campaign and agency charges
+- Add StripeBillingEventService for shared billing event formatting
+- Standardize cron campaign billing, prepaid renewal, and prepaid monthly fee events
+- Rename Simplifi auto top-up event to Simplifi budget renewal
+- Standardize agency data wallet and minimum spend charge metadata
+- Pass prepaid renewal context through WebhookController charge flows
+- Remove temporary testing filters from MarketingController
+
+FILE
+- app\Console\Commands\CheckNewBudgetSimplifiCommand.php
+- app\Http\Controllers\Controller.php
+- app\Http\Controllers\MarketingController.php
+- app\Http\Controllers\WebhookController.php
+- app\Services\StripeBillingEventService.php
+
+
+
+
+OLD
+DB::transaction(function () use ($companyParentID, $platformfee, $_campaign_paymentterm, &$topupAgencyExists, &$remainingPlatformfee, &$statusPayment, &$statusPaymentClient, &$errorstripeClient, &$topup_agencies_id, &$leadspeek_invoices_id, &$chargeStatusWithPrepaid, &$applicationFeeAmount, $_agency_stop_continual, $_agency_amount, $_agency_custom_amount, $_agency_payment_type, $_agency_ip_user, $_agency_timezone, $_agency_balance_threshold, $stripeseckey, $chkUser, $defaultInvoice, $transferGroup, $_leadspeek_api_id, $_agency_name, $_client_name, $_campaign_name, $dataChargeClient) {
+
+
+NEW
+DB::transaction(function () use ($companyParentID, $platformfee, $_campaign_paymentterm, &$topupAgencyExists, &$remainingPlatformfee, &$statusPayment, &$statusPaymentClient, &$errorstripeClient, &$topup_agencies_id, &$leadspeek_invoices_id, &$chargeStatusWithPrepaid, &$applicationFeeAmount, $_agency_stop_continual, $_agency_amount, $_agency_custom_amount, $_agency_payment_type, $_agency_ip_user, $_agency_timezone, $_agency_balance_threshold, $stripeseckey, $chkUser, $defaultInvoice, $transferGroup, $_leadspeek_api_id, $_agency_name, $_client_name, $_campaign_name, $dataChargeClient, $stripeCampaignDescription, $stripeCampaignMetadata) {
 
 
 
 
 
 
+Codex is very strong in model quality, pricing, and review workflow, but the UI/UX still has some blockers for real fullstack work.
 
+My main issues are:
 
+1. Multi-repo / nested Git workspaces are not handled well. A common setup is front and data as separate Git repos under one parent folder, but Codex forces you to choose between shared context and reliable Git review.
+2. The “Do you want to make these changes?” approval diff is too small for larger edits. It needs an “Expand review” or “Open full diff” option before applying changes.
+3. Follow-up steering during the approval prompt can be unreliable. When I type a message to cancel or change direction, Codex sometimes still continues the previous proposed change.
 
+Codex is already very close to an ideal AI coding workflow, but these UX issues make it harder to use safely on real projects.
 
+clientLimitLeads
+remainingBalanceLeads
 
+$doubleClientLimitLeads >= $remainingBalanceLeads && $clientLimitLeads < $remainingBalanceLeads
 
+sekarang ini jika aturan ini terpenuhi $doubleClientLimitLeads >= $remainingBalanceLeads, apakah mungkin kejadian dimana $clientLimitLeads < $remainingBalanceLeads itu tidak terpenuhi?
 
+$clientLimitLeads = 10;
+$doubleClientLimitLeads = 20;
+$remainingBalanceLeads = 8;
 
+$doubleClientLimitLeads >= $remainingBalanceLeads && $clientLimitLeads < $remainingBalanceLeads
 
+$clientLimitLeads = 10; | $doubleClientLimitLeads = 20;
+$remainingBalanceLeads = 21; ❌
 
+$clientLimitLeads = 10; | $doubleClientLimitLeads = 20;
+$remainingBalanceLeads = 20; ✅
 
-
-
-
-
-
-
-
-
-
-
+$clientLimitLeads = 10; | $doubleClientLimitLeads = 20;
+$remainingBalanceLeads = 9; ✅

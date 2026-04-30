@@ -21,14 +21,14 @@ select * from leadspeek_invoices where company_id = 164 and invoice_type = 'agen
 
 --
 
-set @now_chicago := '2026-01-29 00:00:00';
+set @now_chicago := '2026-05-05 02:02:39';
 select 
 	@now_chicago as now,
 	DATE_ADD(@now_chicago, INTERVAL 2 MONTH) as last_invoice_minspend_1,
 	DATE_ADD(LAST_DAY(@now_chicago) + INTERVAL 1 DAY, INTERVAL 2 MONTH) as last_invoice_minspend_2;
 --
 
-SET @last_payment_update := '2025-10-30 05:05:06';
+SET @last_payment_update := '2026-07-01 00:00:00';
 SELECT 
 	@last_payment_update as last_payment_update,
 	DATE_ADD(@last_payment_update, INTERVAL 1 MONTH) as last_payment_update_next_1_month,
